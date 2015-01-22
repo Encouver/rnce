@@ -837,14 +837,15 @@ ALTER SEQUENCE cts_pagar_comerciales_id_seq OWNED BY cts_pagar_comerciales.id;
 CREATE TABLE cuentas_cobrar_contrato (
     id integer NOT NULL,
     condiciones character varying(255) NOT NULL,
-    num_contrato character varying(100) NOT NULL,
-    porcentaje_avance character varying(50) NOT NULL,
-    plazo_contrato character varying(100) NOT NULL,
+    num_contrato character varying(100) DEFAULT NULL::character varying,
+    porcentaje_avance numeric(38,6),
+    plazo_contrato integer,
     saldo_cont_corriente numeric(38,6) NOT NULL,
     saldo_cont_ncorriente numeric(38,6) NOT NULL,
     contratista_id integer NOT NULL,
     ano date NOT NULL,
-    cliente_id integer
+    cliente_id integer,
+    contrato boolean DEFAULT true
 );
 
 
@@ -869,6 +870,13 @@ COMMENT ON COLUMN cuentas_cobrar_contrato.num_contrato IS 'Número de contrato';
 --
 
 COMMENT ON COLUMN cuentas_cobrar_contrato.porcentaje_avance IS 'Porcentaje de avance';
+
+
+--
+-- Name: COLUMN cuentas_cobrar_contrato.plazo_contrato; Type: COMMENT; Schema: public; Owner: eureka
+--
+
+COMMENT ON COLUMN cuentas_cobrar_contrato.plazo_contrato IS 'Número de meses del contrato';
 
 
 --
@@ -907,6 +915,13 @@ COMMENT ON COLUMN cuentas_cobrar_contrato.cliente_id IS 'Clave foranea a la tabl
 
 
 --
+-- Name: COLUMN cuentas_cobrar_contrato.contrato; Type: COMMENT; Schema: public; Owner: eureka
+--
+
+COMMENT ON COLUMN cuentas_cobrar_contrato.contrato IS 'Si la c/c tiene o no contrato';
+
+
+--
 -- Name: cuentas_cobrar_contrato_id_seq; Type: SEQUENCE; Schema: public; Owner: eureka
 --
 
@@ -928,79 +943,6 @@ ALTER SEQUENCE cuentas_cobrar_contrato_id_seq OWNED BY cuentas_cobrar_contrato.i
 
 
 --
--- Name: cuentas_cobrar_scontrato; Type: TABLE; Schema: public; Owner: eureka; Tablespace: 
---
-
-CREATE TABLE cuentas_cobrar_scontrato (
-    id integer NOT NULL,
-    condiciones character varying(255) NOT NULL,
-    saldo_conta_corriente numeric(38,6) NOT NULL,
-    saldo_conta_ncorriente numeric(38,6) NOT NULL,
-    contratista_id integer NOT NULL,
-    ano date NOT NULL,
-    cliente_id integer NOT NULL
-);
-
-
-ALTER TABLE public.cuentas_cobrar_scontrato OWNER TO eureka;
-
---
--- Name: COLUMN cuentas_cobrar_scontrato.id; Type: COMMENT; Schema: public; Owner: eureka
---
-
-COMMENT ON COLUMN cuentas_cobrar_scontrato.id IS 'Clave primaria';
-
-
---
--- Name: COLUMN cuentas_cobrar_scontrato.saldo_conta_corriente; Type: COMMENT; Schema: public; Owner: eureka
---
-
-COMMENT ON COLUMN cuentas_cobrar_scontrato.saldo_conta_corriente IS 'Saldo según contabilidad corriente';
-
-
---
--- Name: COLUMN cuentas_cobrar_scontrato.saldo_conta_ncorriente; Type: COMMENT; Schema: public; Owner: eureka
---
-
-COMMENT ON COLUMN cuentas_cobrar_scontrato.saldo_conta_ncorriente IS 'Saldo según contabilidad no corriente';
-
-
---
--- Name: COLUMN cuentas_cobrar_scontrato.contratista_id; Type: COMMENT; Schema: public; Owner: eureka
---
-
-COMMENT ON COLUMN cuentas_cobrar_scontrato.contratista_id IS 'Clave foranea a la tabla Contratistas';
-
-
---
--- Name: COLUMN cuentas_cobrar_scontrato.cliente_id; Type: COMMENT; Schema: public; Owner: eureka
---
-
-COMMENT ON COLUMN cuentas_cobrar_scontrato.cliente_id IS 'Clave foranea a la tabla Clientes';
-
-
---
--- Name: cuentas_cobrar_scontrato_id_seq; Type: SEQUENCE; Schema: public; Owner: eureka
---
-
-CREATE SEQUENCE cuentas_cobrar_scontrato_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE public.cuentas_cobrar_scontrato_id_seq OWNER TO eureka;
-
---
--- Name: cuentas_cobrar_scontrato_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: eureka
---
-
-ALTER SEQUENCE cuentas_cobrar_scontrato_id_seq OWNED BY cuentas_cobrar_scontrato.id;
-
-
---
 -- Name: cuentas_cobro_dudoso; Type: TABLE; Schema: public; Owner: eureka; Tablespace: 
 --
 
@@ -1012,7 +954,7 @@ CREATE TABLE cuentas_cobro_dudoso (
     cta_cobrar60 numeric(38,6) NOT NULL,
     cta_cobrar90 numeric(38,6) NOT NULL,
     cta_cobrar_m numeric(38,6) NOT NULL,
-    estimacion character varying(100) NOT NULL,
+    estimacion numeric(38,6) NOT NULL,
     saldo_conta_corriente numeric(38,6) NOT NULL,
     saldo_conta_ncorriente numeric(38,6) NOT NULL,
     ano date NOT NULL
@@ -1071,6 +1013,13 @@ COMMENT ON COLUMN cuentas_cobro_dudoso.cta_cobrar_m IS 'Saldos cuentas por cobra
 
 
 --
+-- Name: COLUMN cuentas_cobro_dudoso.estimacion; Type: COMMENT; Schema: public; Owner: eureka
+--
+
+COMMENT ON COLUMN cuentas_cobro_dudoso.estimacion IS 'Porcentaje de estimación';
+
+
+--
 -- Name: COLUMN cuentas_cobro_dudoso.saldo_conta_corriente; Type: COMMENT; Schema: public; Owner: eureka
 --
 
@@ -1111,7 +1060,7 @@ ALTER SEQUENCE cuentas_cobro_dudoso_id_seq OWNED BY cuentas_cobro_dudoso.id;
 
 CREATE TABLE otras_cuentas_cobrar (
     id integer NOT NULL,
-    deudor_id integer,
+    tipo_deudor_id integer,
     nombre character varying(255) NOT NULL,
     origen character varying(255) NOT NULL,
     fecha time without time zone NOT NULL,
@@ -1119,7 +1068,8 @@ CREATE TABLE otras_cuentas_cobrar (
     plazo character varying(255) NOT NULL,
     saldo_contabilidad_c numeric(38,6) NOT NULL,
     saldo_contabilidad_nc numeric(38,6) NOT NULL,
-    ano date NOT NULL
+    ano date NOT NULL,
+    contratista_id integer NOT NULL
 );
 
 
@@ -1137,6 +1087,13 @@ COMMENT ON COLUMN otras_cuentas_cobrar.saldo_contabilidad_c IS 'Saldo según Con
 --
 
 COMMENT ON COLUMN otras_cuentas_cobrar.saldo_contabilidad_nc IS 'Saldo según Contabilidad NO CORRIENTE';
+
+
+--
+-- Name: COLUMN otras_cuentas_cobrar.contratista_id; Type: COMMENT; Schema: public; Owner: eureka
+--
+
+COMMENT ON COLUMN otras_cuentas_cobrar.contratista_id IS 'Clave foránea a la tabla Contratistas';
 
 
 --
@@ -1166,7 +1123,7 @@ ALTER SEQUENCE cuentas_por_cobrar_id_seq OWNED BY otras_cuentas_cobrar.id;
 
 CREATE TABLE deudor (
     id integer NOT NULL,
-    otras_cuentas_pagar_id integer NOT NULL
+    otra_cuenta_pagar_id integer NOT NULL
 );
 
 
@@ -1180,10 +1137,10 @@ COMMENT ON COLUMN deudor.id IS 'Clave primaria';
 
 
 --
--- Name: COLUMN deudor.otras_cuentas_pagar_id; Type: COMMENT; Schema: public; Owner: eureka
+-- Name: COLUMN deudor.otra_cuenta_pagar_id; Type: COMMENT; Schema: public; Owner: eureka
 --
 
-COMMENT ON COLUMN deudor.otras_cuentas_pagar_id IS 'Clave foránea a la tabla otras_cuentas_pagar';
+COMMENT ON COLUMN deudor.otra_cuenta_pagar_id IS 'Clave foránea a la tabla otras_cuentas_pagar';
 
 
 --
@@ -1388,14 +1345,10 @@ ALTER SEQUENCE efectivo_banco_id_seq OWNED BY efectivo_banco.id;
 CREATE TABLE efectivo_caja (
     id integer NOT NULL,
     contratista_id integer NOT NULL,
-    principal numeric(38,6) NOT NULL,
-    produccion numeric(38,6) NOT NULL,
-    venta numeric(38,6) NOT NULL,
-    administracion numeric(38,6) NOT NULL,
-    otras numeric(38,6) NOT NULL,
     ano date NOT NULL,
     tipo enum_caja NOT NULL,
-    saldo_contabilidad numeric(38,6) NOT NULL
+    saldo_contabilidad numeric(38,6) NOT NULL,
+    tipo_caja_id integer NOT NULL
 );
 
 
@@ -1427,6 +1380,13 @@ COMMENT ON COLUMN efectivo_caja.tipo IS 'Caja/Caja chica';
 --
 
 COMMENT ON COLUMN efectivo_caja.saldo_contabilidad IS 'Saldo según contabilidad';
+
+
+--
+-- Name: COLUMN efectivo_caja.tipo_caja_id; Type: COMMENT; Schema: public; Owner: eureka
+--
+
+COMMENT ON COLUMN efectivo_caja.tipo_caja_id IS 'Clave foranea a la tabla tipo_caja';
 
 
 --
@@ -2632,6 +2592,69 @@ CREATE TABLE migration (
 ALTER TABLE public.migration OWNER TO eureka;
 
 --
+-- Name: notas_revelatorias; Type: TABLE; Schema: public; Owner: eureka; Tablespace: 
+--
+
+CREATE TABLE notas_revelatorias (
+    id integer NOT NULL,
+    nota text NOT NULL,
+    usuario_id integer NOT NULL,
+    contratista_id integer NOT NULL
+);
+
+
+ALTER TABLE public.notas_revelatorias OWNER TO eureka;
+
+--
+-- Name: COLUMN notas_revelatorias.id; Type: COMMENT; Schema: public; Owner: eureka
+--
+
+COMMENT ON COLUMN notas_revelatorias.id IS 'Clave Primaria';
+
+
+--
+-- Name: COLUMN notas_revelatorias.nota; Type: COMMENT; Schema: public; Owner: eureka
+--
+
+COMMENT ON COLUMN notas_revelatorias.nota IS 'Descripcion de la nota revelataroia';
+
+
+--
+-- Name: COLUMN notas_revelatorias.usuario_id; Type: COMMENT; Schema: public; Owner: eureka
+--
+
+COMMENT ON COLUMN notas_revelatorias.usuario_id IS 'Clave foranea a la tabla Usuarios.';
+
+
+--
+-- Name: COLUMN notas_revelatorias.contratista_id; Type: COMMENT; Schema: public; Owner: eureka
+--
+
+COMMENT ON COLUMN notas_revelatorias.contratista_id IS 'Clave foranea a la tabla Contratistas';
+
+
+--
+-- Name: notas_revelatorias_id_seq; Type: SEQUENCE; Schema: public; Owner: eureka
+--
+
+CREATE SEQUENCE notas_revelatorias_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.notas_revelatorias_id_seq OWNER TO eureka;
+
+--
+-- Name: notas_revelatorias_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: eureka
+--
+
+ALTER SEQUENCE notas_revelatorias_id_seq OWNED BY notas_revelatorias.id;
+
+
+--
 -- Name: obligaciones_bancarias; Type: TABLE; Schema: public; Owner: eureka; Tablespace: 
 --
 
@@ -2794,7 +2817,8 @@ CREATE TABLE otras_cuentas_pagar (
     plazo character varying(255) NOT NULL,
     saldo_contabilidad_c numeric(38,6) NOT NULL,
     saldo_contabilidad_nc numeric(38,6) NOT NULL,
-    tipo_prestamo character varying(255)
+    tipo_prestamo character varying(255),
+    contratista_id integer NOT NULL
 );
 
 
@@ -2847,6 +2871,13 @@ COMMENT ON COLUMN otras_cuentas_pagar.saldo_contabilidad_nc IS 'Saldo según Con
 --
 
 COMMENT ON COLUMN otras_cuentas_pagar.tipo_prestamo IS 'Tipo de Préstamo o origen?';
+
+
+--
+-- Name: COLUMN otras_cuentas_pagar.contratista_id; Type: COMMENT; Schema: public; Owner: eureka
+--
+
+COMMENT ON COLUMN otras_cuentas_pagar.contratista_id IS 'Clave foránea a la tabla contratistas';
 
 
 --
@@ -3484,6 +3515,146 @@ ALTER SEQUENCE resultados_acumulados_id_seq OWNED BY resultados_acumulados.id;
 
 
 --
+-- Name: tipos_cajas; Type: TABLE; Schema: public; Owner: eureka; Tablespace: 
+--
+
+CREATE TABLE tipos_cajas (
+    id integer NOT NULL,
+    nombre character varying(255),
+    contratista_id integer NOT NULL,
+    ano date,
+    activo boolean DEFAULT true NOT NULL
+);
+
+
+ALTER TABLE public.tipos_cajas OWNER TO eureka;
+
+--
+-- Name: TABLE tipos_cajas; Type: COMMENT; Schema: public; Owner: eureka
+--
+
+COMMENT ON TABLE tipos_cajas IS 'Tipo de caja (chica o grande)';
+
+
+--
+-- Name: COLUMN tipos_cajas.id; Type: COMMENT; Schema: public; Owner: eureka
+--
+
+COMMENT ON COLUMN tipos_cajas.id IS 'Clave primaria';
+
+
+--
+-- Name: COLUMN tipos_cajas.nombre; Type: COMMENT; Schema: public; Owner: eureka
+--
+
+COMMENT ON COLUMN tipos_cajas.nombre IS 'Nombre del tipo de caja';
+
+
+--
+-- Name: COLUMN tipos_cajas.contratista_id; Type: COMMENT; Schema: public; Owner: eureka
+--
+
+COMMENT ON COLUMN tipos_cajas.contratista_id IS 'Clave foranea a la tabla de Contratista';
+
+
+--
+-- Name: COLUMN tipos_cajas.ano; Type: COMMENT; Schema: public; Owner: eureka
+--
+
+COMMENT ON COLUMN tipos_cajas.ano IS 'Año de la entrada';
+
+
+--
+-- Name: COLUMN tipos_cajas.activo; Type: COMMENT; Schema: public; Owner: eureka
+--
+
+COMMENT ON COLUMN tipos_cajas.activo IS 'Si la entrada esta o no activa.';
+
+
+--
+-- Name: tipo_caja_id_seq; Type: SEQUENCE; Schema: public; Owner: eureka
+--
+
+CREATE SEQUENCE tipo_caja_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.tipo_caja_id_seq OWNER TO eureka;
+
+--
+-- Name: tipo_caja_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: eureka
+--
+
+ALTER SEQUENCE tipo_caja_id_seq OWNED BY tipos_cajas.id;
+
+
+--
+-- Name: tipos_deudores; Type: TABLE; Schema: public; Owner: eureka; Tablespace: 
+--
+
+CREATE TABLE tipos_deudores (
+    id integer NOT NULL,
+    nombre character varying(255) NOT NULL,
+    "descripción" character varying(255) NOT NULL
+);
+
+
+ALTER TABLE public.tipos_deudores OWNER TO eureka;
+
+--
+-- Name: TABLE tipos_deudores; Type: COMMENT; Schema: public; Owner: eureka
+--
+
+COMMENT ON TABLE tipos_deudores IS 'Tipos de deudores de la empresa';
+
+
+--
+-- Name: COLUMN tipos_deudores.id; Type: COMMENT; Schema: public; Owner: eureka
+--
+
+COMMENT ON COLUMN tipos_deudores.id IS 'Clave primaria';
+
+
+--
+-- Name: COLUMN tipos_deudores.nombre; Type: COMMENT; Schema: public; Owner: eureka
+--
+
+COMMENT ON COLUMN tipos_deudores.nombre IS 'Nombre del tipo de deudor';
+
+
+--
+-- Name: COLUMN tipos_deudores."descripción"; Type: COMMENT; Schema: public; Owner: eureka
+--
+
+COMMENT ON COLUMN tipos_deudores."descripción" IS 'Descripción del tipo de deudor';
+
+
+--
+-- Name: tipos_deudores_id_seq; Type: SEQUENCE; Schema: public; Owner: eureka
+--
+
+CREATE SEQUENCE tipos_deudores_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.tipos_deudores_id_seq OWNER TO eureka;
+
+--
+-- Name: tipos_deudores_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: eureka
+--
+
+ALTER SEQUENCE tipos_deudores_id_seq OWNED BY tipos_deudores.id;
+
+
+--
 -- Name: user; Type: TABLE; Schema: public; Owner: eureka; Tablespace: 
 --
 
@@ -3608,13 +3779,6 @@ ALTER TABLE ONLY cts_pagar_comerciales ALTER COLUMN id SET DEFAULT nextval('cts_
 --
 
 ALTER TABLE ONLY cuentas_cobrar_contrato ALTER COLUMN id SET DEFAULT nextval('cuentas_cobrar_contrato_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: eureka
---
-
-ALTER TABLE ONLY cuentas_cobrar_scontrato ALTER COLUMN id SET DEFAULT nextval('cuentas_cobrar_scontrato_id_seq'::regclass);
 
 
 --
@@ -3761,6 +3925,13 @@ ALTER TABLE ONLY iva_otros_pag_ant ALTER COLUMN id SET DEFAULT nextval('iva_otro
 -- Name: id; Type: DEFAULT; Schema: public; Owner: eureka
 --
 
+ALTER TABLE ONLY notas_revelatorias ALTER COLUMN id SET DEFAULT nextval('notas_revelatorias_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: eureka
+--
+
 ALTER TABLE ONLY obligaciones_bancarias ALTER COLUMN id SET DEFAULT nextval('obligaciones_bancarias_id_seq'::regclass);
 
 
@@ -3853,6 +4024,20 @@ ALTER TABLE ONLY provisiones ALTER COLUMN id SET DEFAULT nextval('provisiones_id
 --
 
 ALTER TABLE ONLY resultados_acumulados ALTER COLUMN id SET DEFAULT nextval('resultados_acumulados_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: eureka
+--
+
+ALTER TABLE ONLY tipos_cajas ALTER COLUMN id SET DEFAULT nextval('tipo_caja_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: eureka
+--
+
+ALTER TABLE ONLY tipos_deudores ALTER COLUMN id SET DEFAULT nextval('tipos_deudores_id_seq'::regclass);
 
 
 --
@@ -4000,7 +4185,7 @@ SELECT pg_catalog.setval('cts_pagar_comerciales_id_seq', 1, false);
 -- Data for Name: cuentas_cobrar_contrato; Type: TABLE DATA; Schema: public; Owner: eureka
 --
 
-COPY cuentas_cobrar_contrato (id, condiciones, num_contrato, porcentaje_avance, plazo_contrato, saldo_cont_corriente, saldo_cont_ncorriente, contratista_id, ano, cliente_id) FROM stdin;
+COPY cuentas_cobrar_contrato (id, condiciones, num_contrato, porcentaje_avance, plazo_contrato, saldo_cont_corriente, saldo_cont_ncorriente, contratista_id, ano, cliente_id, contrato) FROM stdin;
 \.
 
 
@@ -4009,21 +4194,6 @@ COPY cuentas_cobrar_contrato (id, condiciones, num_contrato, porcentaje_avance, 
 --
 
 SELECT pg_catalog.setval('cuentas_cobrar_contrato_id_seq', 1, false);
-
-
---
--- Data for Name: cuentas_cobrar_scontrato; Type: TABLE DATA; Schema: public; Owner: eureka
---
-
-COPY cuentas_cobrar_scontrato (id, condiciones, saldo_conta_corriente, saldo_conta_ncorriente, contratista_id, ano, cliente_id) FROM stdin;
-\.
-
-
---
--- Name: cuentas_cobrar_scontrato_id_seq; Type: SEQUENCE SET; Schema: public; Owner: eureka
---
-
-SELECT pg_catalog.setval('cuentas_cobrar_scontrato_id_seq', 1, false);
 
 
 --
@@ -4052,7 +4222,7 @@ SELECT pg_catalog.setval('cuentas_por_cobrar_id_seq', 1, false);
 -- Data for Name: deudor; Type: TABLE DATA; Schema: public; Owner: eureka
 --
 
-COPY deudor (id, otras_cuentas_pagar_id) FROM stdin;
+COPY deudor (id, otra_cuenta_pagar_id) FROM stdin;
 \.
 
 
@@ -4097,7 +4267,7 @@ SELECT pg_catalog.setval('efectivo_banco_id_seq', 1, false);
 -- Data for Name: efectivo_caja; Type: TABLE DATA; Schema: public; Owner: eureka
 --
 
-COPY efectivo_caja (id, contratista_id, principal, produccion, venta, administracion, otras, ano, tipo, saldo_contabilidad) FROM stdin;
+COPY efectivo_caja (id, contratista_id, ano, tipo, saldo_contabilidad, tipo_caja_id) FROM stdin;
 \.
 
 
@@ -4344,6 +4514,21 @@ m130524_201442_init	1421935677
 
 
 --
+-- Data for Name: notas_revelatorias; Type: TABLE DATA; Schema: public; Owner: eureka
+--
+
+COPY notas_revelatorias (id, nota, usuario_id, contratista_id) FROM stdin;
+\.
+
+
+--
+-- Name: notas_revelatorias_id_seq; Type: SEQUENCE SET; Schema: public; Owner: eureka
+--
+
+SELECT pg_catalog.setval('notas_revelatorias_id_seq', 1, false);
+
+
+--
 -- Data for Name: obligaciones_bancarias; Type: TABLE DATA; Schema: public; Owner: eureka
 --
 
@@ -4377,7 +4562,7 @@ SELECT pg_catalog.setval('otras_cts_pagar_otros_id_seq', 1, false);
 -- Data for Name: otras_cuentas_cobrar; Type: TABLE DATA; Schema: public; Owner: eureka
 --
 
-COPY otras_cuentas_cobrar (id, deudor_id, nombre, origen, fecha, garantia, plazo, saldo_contabilidad_c, saldo_contabilidad_nc, ano) FROM stdin;
+COPY otras_cuentas_cobrar (id, tipo_deudor_id, nombre, origen, fecha, garantia, plazo, saldo_contabilidad_c, saldo_contabilidad_nc, ano, contratista_id) FROM stdin;
 \.
 
 
@@ -4385,7 +4570,7 @@ COPY otras_cuentas_cobrar (id, deudor_id, nombre, origen, fecha, garantia, plazo
 -- Data for Name: otras_cuentas_pagar; Type: TABLE DATA; Schema: public; Owner: eureka
 --
 
-COPY otras_cuentas_pagar (id, fecha, garantia, plazo, saldo_contabilidad_c, saldo_contabilidad_nc, tipo_prestamo) FROM stdin;
+COPY otras_cuentas_pagar (id, fecha, garantia, plazo, saldo_contabilidad_c, saldo_contabilidad_nc, tipo_prestamo, contratista_id) FROM stdin;
 \.
 
 
@@ -4540,6 +4725,36 @@ SELECT pg_catalog.setval('resultados_acumulados_id_seq', 1, false);
 
 
 --
+-- Name: tipo_caja_id_seq; Type: SEQUENCE SET; Schema: public; Owner: eureka
+--
+
+SELECT pg_catalog.setval('tipo_caja_id_seq', 1, false);
+
+
+--
+-- Data for Name: tipos_cajas; Type: TABLE DATA; Schema: public; Owner: eureka
+--
+
+COPY tipos_cajas (id, nombre, contratista_id, ano, activo) FROM stdin;
+\.
+
+
+--
+-- Data for Name: tipos_deudores; Type: TABLE DATA; Schema: public; Owner: eureka
+--
+
+COPY tipos_deudores (id, nombre, "descripción") FROM stdin;
+\.
+
+
+--
+-- Name: tipos_deudores_id_seq; Type: SEQUENCE SET; Schema: public; Owner: eureka
+--
+
+SELECT pg_catalog.setval('tipos_deudores_id_seq', 1, false);
+
+
+--
 -- Data for Name: user; Type: TABLE DATA; Schema: public; Owner: eureka
 --
 
@@ -4650,14 +4865,6 @@ ALTER TABLE ONLY cts_pagar_comerciales
 
 ALTER TABLE ONLY cuentas_cobrar_contrato
     ADD CONSTRAINT cuentas_cobrar_contrato_pkey PRIMARY KEY (id);
-
-
---
--- Name: cuentas_cobrar_scontrato_pkey; Type: CONSTRAINT; Schema: public; Owner: eureka; Tablespace: 
---
-
-ALTER TABLE ONLY cuentas_cobrar_scontrato
-    ADD CONSTRAINT cuentas_cobrar_scontrato_pkey PRIMARY KEY (id);
 
 
 --
@@ -4861,6 +5068,14 @@ ALTER TABLE ONLY migration
 
 
 --
+-- Name: notas_revelatorias_pkey; Type: CONSTRAINT; Schema: public; Owner: eureka; Tablespace: 
+--
+
+ALTER TABLE ONLY notas_revelatorias
+    ADD CONSTRAINT notas_revelatorias_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: obligaciones_bancarias_pkey; Type: CONSTRAINT; Schema: public; Owner: eureka; Tablespace: 
 --
 
@@ -4973,6 +5188,38 @@ ALTER TABLE ONLY resultados_acumulados
 
 
 --
+-- Name: tipo_caja_pkey; Type: CONSTRAINT; Schema: public; Owner: eureka; Tablespace: 
+--
+
+ALTER TABLE ONLY tipos_cajas
+    ADD CONSTRAINT tipo_caja_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: tipos_cajas_nombre_key; Type: CONSTRAINT; Schema: public; Owner: eureka; Tablespace: 
+--
+
+ALTER TABLE ONLY tipos_cajas
+    ADD CONSTRAINT tipos_cajas_nombre_key UNIQUE (nombre);
+
+
+--
+-- Name: tipos_deudores_nombre_key; Type: CONSTRAINT; Schema: public; Owner: eureka; Tablespace: 
+--
+
+ALTER TABLE ONLY tipos_deudores
+    ADD CONSTRAINT tipos_deudores_nombre_key UNIQUE (nombre);
+
+
+--
+-- Name: tipos_deudores_pkey; Type: CONSTRAINT; Schema: public; Owner: eureka; Tablespace: 
+--
+
+ALTER TABLE ONLY tipos_deudores
+    ADD CONSTRAINT tipos_deudores_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: user_pkey; Type: CONSTRAINT; Schema: public; Owner: eureka; Tablespace: 
 --
 
@@ -4997,6 +5244,22 @@ ALTER TABLE ONLY accionistas
 
 
 --
+-- Name: bancos_contratistas_banco_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: eureka
+--
+
+ALTER TABLE ONLY bancos_contratistas
+    ADD CONSTRAINT bancos_contratistas_banco_id_fkey FOREIGN KEY (banco_id) REFERENCES bancos(id);
+
+
+--
+-- Name: bancos_contratistas_contratista_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: eureka
+--
+
+ALTER TABLE ONLY bancos_contratistas
+    ADD CONSTRAINT bancos_contratistas_contratista_id_fkey FOREIGN KEY (contratista_id) REFERENCES contratistas(id);
+
+
+--
 -- Name: contratistas_empresa_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: eureka
 --
 
@@ -5005,11 +5268,43 @@ ALTER TABLE ONLY contratistas
 
 
 --
+-- Name: cuentas_cobrar_contrato_cliente_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: eureka
+--
+
+ALTER TABLE ONLY cuentas_cobrar_contrato
+    ADD CONSTRAINT cuentas_cobrar_contrato_cliente_id_fkey FOREIGN KEY (cliente_id) REFERENCES clientes(id);
+
+
+--
+-- Name: cuentas_cobrar_contrato_contratista_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: eureka
+--
+
+ALTER TABLE ONLY cuentas_cobrar_contrato
+    ADD CONSTRAINT cuentas_cobrar_contrato_contratista_id_fkey FOREIGN KEY (contratista_id) REFERENCES contratistas(id);
+
+
+--
+-- Name: cuentas_cobro_dudoso_cliente_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: eureka
+--
+
+ALTER TABLE ONLY cuentas_cobro_dudoso
+    ADD CONSTRAINT cuentas_cobro_dudoso_cliente_id_fkey FOREIGN KEY (cliente_id) REFERENCES clientes(id);
+
+
+--
+-- Name: cuentas_cobro_dudoso_contratista_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: eureka
+--
+
+ALTER TABLE ONLY cuentas_cobro_dudoso
+    ADD CONSTRAINT cuentas_cobro_dudoso_contratista_id_fkey FOREIGN KEY (contratista_id) REFERENCES contratistas(id);
+
+
+--
 -- Name: deudor_otras_cuentas_pagar_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: eureka
 --
 
 ALTER TABLE ONLY deudor
-    ADD CONSTRAINT deudor_otras_cuentas_pagar_id_fkey FOREIGN KEY (otras_cuentas_pagar_id) REFERENCES otras_cuentas_pagar(id);
+    ADD CONSTRAINT deudor_otras_cuentas_pagar_id_fkey FOREIGN KEY (otra_cuenta_pagar_id) REFERENCES otras_cuentas_pagar(id);
 
 
 --
@@ -5034,6 +5329,38 @@ ALTER TABLE ONLY directores
 
 ALTER TABLE ONLY directores
     ADD CONSTRAINT directores_persona_natural_id_fkey FOREIGN KEY (persona_natural_id) REFERENCES personas_naturales(id);
+
+
+--
+-- Name: efectivo_banco_banco_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: eureka
+--
+
+ALTER TABLE ONLY efectivo_banco
+    ADD CONSTRAINT efectivo_banco_banco_id_fkey FOREIGN KEY (banco_id) REFERENCES bancos(id);
+
+
+--
+-- Name: efectivo_banco_contratista_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: eureka
+--
+
+ALTER TABLE ONLY efectivo_banco
+    ADD CONSTRAINT efectivo_banco_contratista_id_fkey FOREIGN KEY (contratista_id) REFERENCES contratistas(id) ON UPDATE CASCADE;
+
+
+--
+-- Name: efectivo_caja_contratista_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: eureka
+--
+
+ALTER TABLE ONLY efectivo_caja
+    ADD CONSTRAINT efectivo_caja_contratista_id_fkey FOREIGN KEY (contratista_id) REFERENCES contratistas(id) ON UPDATE CASCADE;
+
+
+--
+-- Name: efectivo_caja_tipo_caja_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: eureka
+--
+
+ALTER TABLE ONLY efectivo_caja
+    ADD CONSTRAINT efectivo_caja_tipo_caja_id_fkey FOREIGN KEY (tipo_caja_id) REFERENCES tipos_cajas(id);
 
 
 --
@@ -5085,6 +5412,38 @@ ALTER TABLE ONLY empresas_relacionadas
 
 
 --
+-- Name: inversiones_banco_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: eureka
+--
+
+ALTER TABLE ONLY inversiones
+    ADD CONSTRAINT inversiones_banco_id_fkey FOREIGN KEY (banco_id) REFERENCES bancos(id);
+
+
+--
+-- Name: inversiones_contratista_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: eureka
+--
+
+ALTER TABLE ONLY inversiones
+    ADD CONSTRAINT inversiones_contratista_id_fkey FOREIGN KEY (contratista_id) REFERENCES contratistas(id);
+
+
+--
+-- Name: notas_revelatorias_contratista_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: eureka
+--
+
+ALTER TABLE ONLY notas_revelatorias
+    ADD CONSTRAINT notas_revelatorias_contratista_id_fkey FOREIGN KEY (contratista_id) REFERENCES contratistas(id);
+
+
+--
+-- Name: notas_revelatorias_usuario_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: eureka
+--
+
+ALTER TABLE ONLY notas_revelatorias
+    ADD CONSTRAINT notas_revelatorias_usuario_id_fkey FOREIGN KEY (usuario_id) REFERENCES "user"(id);
+
+
+--
 -- Name: otras_cts_pagar_otros_deudor_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: eureka
 --
 
@@ -5101,11 +5460,27 @@ ALTER TABLE ONLY otras_cts_pagar_otros
 
 
 --
--- Name: otras_cuentas_cobrar_deudor_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: eureka
+-- Name: otras_cuentas_cobrar_contratista_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: eureka
 --
 
 ALTER TABLE ONLY otras_cuentas_cobrar
-    ADD CONSTRAINT otras_cuentas_cobrar_deudor_id_fkey FOREIGN KEY (deudor_id) REFERENCES deudor(id);
+    ADD CONSTRAINT otras_cuentas_cobrar_contratista_id_fkey FOREIGN KEY (contratista_id) REFERENCES contratistas(id);
+
+
+--
+-- Name: otras_cuentas_cobrar_tipo_deudor_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: eureka
+--
+
+ALTER TABLE ONLY otras_cuentas_cobrar
+    ADD CONSTRAINT otras_cuentas_cobrar_tipo_deudor_id_fkey FOREIGN KEY (tipo_deudor_id) REFERENCES tipos_deudores(id);
+
+
+--
+-- Name: otras_cuentas_pagar_contratista_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: eureka
+--
+
+ALTER TABLE ONLY otras_cuentas_pagar
+    ADD CONSTRAINT otras_cuentas_pagar_contratista_id_fkey FOREIGN KEY (contratista_id) REFERENCES contratistas(id);
 
 
 --
@@ -5138,6 +5513,14 @@ ALTER TABLE ONLY proveedor
 
 ALTER TABLE ONLY proveedor
     ADD CONSTRAINT proveedor_empresa_id_fkey FOREIGN KEY (empresa_id) REFERENCES empresas(id);
+
+
+--
+-- Name: tipos_caja_contratista_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: eureka
+--
+
+ALTER TABLE ONLY tipos_cajas
+    ADD CONSTRAINT tipos_caja_contratista_id_fkey FOREIGN KEY (contratista_id) REFERENCES contratistas(id);
 
 
 --
