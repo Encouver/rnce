@@ -23,24 +23,10 @@ CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
 
 
---
--- Name: adminpack; Type: EXTENSION; Schema: -; Owner: 
---
-
-CREATE EXTENSION IF NOT EXISTS adminpack WITH SCHEMA pg_catalog;
-
-
---
--- Name: EXTENSION adminpack; Type: COMMENT; Schema: -; Owner: 
---
-
-COMMENT ON EXTENSION adminpack IS 'administrative functions for PostgreSQL';
-
-
 SET search_path = public, pg_catalog;
 
 --
--- Name: enum_caja; Type: TYPE; Schema: public; Owner: postgres
+-- Name: enum_caja; Type: TYPE; Schema: public; Owner: eureka
 --
 
 CREATE TYPE enum_caja AS ENUM (
@@ -49,10 +35,10 @@ CREATE TYPE enum_caja AS ENUM (
 );
 
 
-ALTER TYPE public.enum_caja OWNER TO postgres;
+ALTER TYPE public.enum_caja OWNER TO eureka;
 
 --
--- Name: enum_gastos; Type: TYPE; Schema: public; Owner: postgres
+-- Name: enum_gastos; Type: TYPE; Schema: public; Owner: eureka
 --
 
 CREATE TYPE enum_gastos AS ENUM (
@@ -69,10 +55,10 @@ CREATE TYPE enum_gastos AS ENUM (
 );
 
 
-ALTER TYPE public.enum_gastos OWNER TO postgres;
+ALTER TYPE public.enum_gastos OWNER TO eureka;
 
 --
--- Name: enum_inventario; Type: TYPE; Schema: public; Owner: postgres
+-- Name: enum_inventario; Type: TYPE; Schema: public; Owner: eureka
 --
 
 CREATE TYPE enum_inventario AS ENUM (
@@ -88,10 +74,10 @@ CREATE TYPE enum_inventario AS ENUM (
 );
 
 
-ALTER TYPE public.enum_inventario OWNER TO postgres;
+ALTER TYPE public.enum_inventario OWNER TO eureka;
 
 --
--- Name: enum_islr; Type: TYPE; Schema: public; Owner: postgres
+-- Name: enum_islr; Type: TYPE; Schema: public; Owner: eureka
 --
 
 CREATE TYPE enum_islr AS ENUM (
@@ -101,10 +87,10 @@ CREATE TYPE enum_islr AS ENUM (
 );
 
 
-ALTER TYPE public.enum_islr OWNER TO postgres;
+ALTER TYPE public.enum_islr OWNER TO eureka;
 
 --
--- Name: enum_iva_otros; Type: TYPE; Schema: public; Owner: postgres
+-- Name: enum_iva_otros; Type: TYPE; Schema: public; Owner: eureka
 --
 
 CREATE TYPE enum_iva_otros AS ENUM (
@@ -115,10 +101,10 @@ CREATE TYPE enum_iva_otros AS ENUM (
 );
 
 
-ALTER TYPE public.enum_iva_otros OWNER TO postgres;
+ALTER TYPE public.enum_iva_otros OWNER TO eureka;
 
 --
--- Name: enum_meses; Type: TYPE; Schema: public; Owner: postgres
+-- Name: enum_meses; Type: TYPE; Schema: public; Owner: eureka
 --
 
 CREATE TYPE enum_meses AS ENUM (
@@ -137,10 +123,10 @@ CREATE TYPE enum_meses AS ENUM (
 );
 
 
-ALTER TYPE public.enum_meses OWNER TO postgres;
+ALTER TYPE public.enum_meses OWNER TO eureka;
 
 --
--- Name: enum_otros_activos; Type: TYPE; Schema: public; Owner: postgres
+-- Name: enum_otros_activos; Type: TYPE; Schema: public; Owner: eureka
 --
 
 CREATE TYPE enum_otros_activos AS ENUM (
@@ -149,10 +135,10 @@ CREATE TYPE enum_otros_activos AS ENUM (
 );
 
 
-ALTER TYPE public.enum_otros_activos OWNER TO postgres;
+ALTER TYPE public.enum_otros_activos OWNER TO eureka;
 
 --
--- Name: enum_sector; Type: TYPE; Schema: public; Owner: postgres
+-- Name: enum_sector; Type: TYPE; Schema: public; Owner: eureka
 --
 
 CREATE TYPE enum_sector AS ENUM (
@@ -161,10 +147,10 @@ CREATE TYPE enum_sector AS ENUM (
 );
 
 
-ALTER TYPE public.enum_sector OWNER TO postgres;
+ALTER TYPE public.enum_sector OWNER TO eureka;
 
 --
--- Name: enum_tipo_propiedad; Type: TYPE; Schema: public; Owner: postgres
+-- Name: enum_tipo_propiedad; Type: TYPE; Schema: public; Owner: eureka
 --
 
 CREATE TYPE enum_tipo_propiedad AS ENUM (
@@ -173,7 +159,7 @@ CREATE TYPE enum_tipo_propiedad AS ENUM (
 );
 
 
-ALTER TYPE public.enum_tipo_propiedad OWNER TO postgres;
+ALTER TYPE public.enum_tipo_propiedad OWNER TO eureka;
 
 SET default_tablespace = '';
 
@@ -639,11 +625,27 @@ ALTER SEQUENCE capital_social_id_seq OWNED BY capital_social.id;
 
 CREATE TABLE clientes (
     id integer NOT NULL,
-    nombre character varying(255)
+    nombre character varying(255),
+    rif character varying(10) NOT NULL,
+    publico boolean NOT NULL
 );
 
 
 ALTER TABLE public.clientes OWNER TO eureka;
+
+--
+-- Name: COLUMN clientes.rif; Type: COMMENT; Schema: public; Owner: eureka
+--
+
+COMMENT ON COLUMN clientes.rif IS 'RIF del cliente';
+
+
+--
+-- Name: COLUMN clientes.publico; Type: COMMENT; Schema: public; Owner: eureka
+--
+
+COMMENT ON COLUMN clientes.publico IS 'Sector público o privado';
+
 
 --
 -- Name: clientes_id_seq; Type: SEQUENCE; Schema: public; Owner: eureka
@@ -838,7 +840,7 @@ CREATE TABLE cuentas_cobrar_contrato (
     id integer NOT NULL,
     condiciones character varying(255) NOT NULL,
     num_contrato character varying(100) DEFAULT NULL::character varying,
-    porcentaje_avance numeric(38,6),
+    porcentaje_avance numeric(38,6) DEFAULT NULL::numeric,
     plazo_contrato integer,
     saldo_cont_corriente numeric(38,6) NOT NULL,
     saldo_cont_ncorriente numeric(38,6) NOT NULL,
@@ -1172,7 +1174,8 @@ CREATE TABLE directores (
     id integer NOT NULL,
     persona_natural_id integer NOT NULL,
     contratista_id integer NOT NULL,
-    otras_cuentas_pagar_id integer NOT NULL
+    otras_cuentas_pagar_id integer NOT NULL,
+    miembro_junta boolean DEFAULT false NOT NULL
 );
 
 
@@ -1211,6 +1214,13 @@ COMMENT ON COLUMN directores.contratista_id IS 'Contratista';
 --
 
 COMMENT ON COLUMN directores.otras_cuentas_pagar_id IS 'Clave foránea a la tabla otras_cuentas_pagar';
+
+
+--
+-- Name: COLUMN directores.miembro_junta; Type: COMMENT; Schema: public; Owner: eureka
+--
+
+COMMENT ON COLUMN directores.miembro_junta IS 'Miembro de junta directiva';
 
 
 --
@@ -1475,17 +1485,24 @@ ALTER SEQUENCE empleado_id_seq OWNED BY empleados.id;
 
 
 --
--- Name: empresas; Type: TABLE; Schema: public; Owner: eureka; Tablespace: 
+-- Name: personas_juridicas; Type: TABLE; Schema: public; Owner: eureka; Tablespace: 
 --
 
-CREATE TABLE empresas (
+CREATE TABLE personas_juridicas (
     id integer NOT NULL,
     nombre character varying(255) NOT NULL,
     rif character varying(255) NOT NULL
 );
 
 
-ALTER TABLE public.empresas OWNER TO eureka;
+ALTER TABLE public.personas_juridicas OWNER TO eureka;
+
+--
+-- Name: TABLE personas_juridicas; Type: COMMENT; Schema: public; Owner: eureka
+--
+
+COMMENT ON TABLE personas_juridicas IS 'Personas Juridicas';
+
 
 --
 -- Name: empresas_id_seq; Type: SEQUENCE; Schema: public; Owner: eureka
@@ -1505,7 +1522,7 @@ ALTER TABLE public.empresas_id_seq OWNER TO eureka;
 -- Name: empresas_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: eureka
 --
 
-ALTER SEQUENCE empresas_id_seq OWNED BY empresas.id;
+ALTER SEQUENCE empresas_id_seq OWNED BY personas_juridicas.id;
 
 
 --
@@ -3827,13 +3844,6 @@ ALTER TABLE ONLY empleados ALTER COLUMN id SET DEFAULT nextval('empleado_id_seq'
 -- Name: id; Type: DEFAULT; Schema: public; Owner: eureka
 --
 
-ALTER TABLE ONLY empresas ALTER COLUMN id SET DEFAULT nextval('empresas_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: eureka
---
-
 ALTER TABLE ONLY empresas_relacionadas ALTER COLUMN id SET DEFAULT nextval('empresas_relacionadas_id_seq'::regclass);
 
 
@@ -3988,6 +3998,13 @@ ALTER TABLE ONLY pasivo_laboral ALTER COLUMN id SET DEFAULT nextval('pasivo_labo
 -- Name: id; Type: DEFAULT; Schema: public; Owner: eureka
 --
 
+ALTER TABLE ONLY personas_juridicas ALTER COLUMN id SET DEFAULT nextval('empresas_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: eureka
+--
+
 ALTER TABLE ONLY personas_naturales ALTER COLUMN id SET DEFAULT nextval('personas_naturales_id_seq'::regclass);
 
 
@@ -4125,7 +4142,7 @@ SELECT pg_catalog.setval('capital_social_id_seq', 1, false);
 -- Data for Name: clientes; Type: TABLE DATA; Schema: public; Owner: eureka
 --
 
-COPY clientes (id, nombre) FROM stdin;
+COPY clientes (id, nombre, rif, publico) FROM stdin;
 \.
 
 
@@ -4237,7 +4254,7 @@ SELECT pg_catalog.setval('deudor_id_seq', 1, false);
 -- Data for Name: directores; Type: TABLE DATA; Schema: public; Owner: eureka
 --
 
-COPY directores (id, persona_natural_id, contratista_id, otras_cuentas_pagar_id) FROM stdin;
+COPY directores (id, persona_natural_id, contratista_id, otras_cuentas_pagar_id, miembro_junta) FROM stdin;
 \.
 
 
@@ -4290,14 +4307,6 @@ SELECT pg_catalog.setval('empleado_id_seq', 1, false);
 --
 
 COPY empleados (id, cargo, contratista_id, persona_natural_id, otras_cuentas_pagar_id) FROM stdin;
-\.
-
-
---
--- Data for Name: empresas; Type: TABLE DATA; Schema: public; Owner: eureka
---
-
-COPY empresas (id, nombre, rif) FROM stdin;
 \.
 
 
@@ -4635,6 +4644,14 @@ SELECT pg_catalog.setval('pasivo_laboral_id_seq', 1, false);
 
 
 --
+-- Data for Name: personas_juridicas; Type: TABLE DATA; Schema: public; Owner: eureka
+--
+
+COPY personas_juridicas (id, nombre, rif) FROM stdin;
+\.
+
+
+--
 -- Data for Name: personas_naturales; Type: TABLE DATA; Schema: public; Owner: eureka
 --
 
@@ -4943,7 +4960,7 @@ ALTER TABLE ONLY empleados
 -- Name: empresas_pkey; Type: CONSTRAINT; Schema: public; Owner: eureka; Tablespace: 
 --
 
-ALTER TABLE ONLY empresas
+ALTER TABLE ONLY personas_juridicas
     ADD CONSTRAINT empresas_pkey PRIMARY KEY (id);
 
 
@@ -5132,6 +5149,14 @@ ALTER TABLE ONLY pasivo_laboral
 
 
 --
+-- Name: personas_juridicas_rif_key; Type: CONSTRAINT; Schema: public; Owner: eureka; Tablespace: 
+--
+
+ALTER TABLE ONLY personas_juridicas
+    ADD CONSTRAINT personas_juridicas_rif_key UNIQUE (rif);
+
+
+--
 -- Name: personas_naturales_pkey; Type: CONSTRAINT; Schema: public; Owner: eureka; Tablespace: 
 --
 
@@ -5264,7 +5289,7 @@ ALTER TABLE ONLY bancos_contratistas
 --
 
 ALTER TABLE ONLY contratistas
-    ADD CONSTRAINT contratistas_empresa_id_fkey FOREIGN KEY (empresa_id) REFERENCES empresas(id);
+    ADD CONSTRAINT contratistas_empresa_id_fkey FOREIGN KEY (empresa_id) REFERENCES personas_juridicas(id);
 
 
 --
@@ -5400,7 +5425,7 @@ ALTER TABLE ONLY empresas_relacionadas
 --
 
 ALTER TABLE ONLY empresas_relacionadas
-    ADD CONSTRAINT empresas_relacionadas_empresa_id_fkey FOREIGN KEY (empresa_id) REFERENCES empresas(id);
+    ADD CONSTRAINT empresas_relacionadas_empresa_id_fkey FOREIGN KEY (empresa_id) REFERENCES personas_juridicas(id);
 
 
 --
@@ -5512,7 +5537,7 @@ ALTER TABLE ONLY proveedor
 --
 
 ALTER TABLE ONLY proveedor
-    ADD CONSTRAINT proveedor_empresa_id_fkey FOREIGN KEY (empresa_id) REFERENCES empresas(id);
+    ADD CONSTRAINT proveedor_empresa_id_fkey FOREIGN KEY (empresa_id) REFERENCES personas_juridicas(id);
 
 
 --

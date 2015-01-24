@@ -117,3 +117,599 @@ $_SERVER = [
     'REQUEST_TIME_FLOAT' => 1421936168.418
     'REQUEST_TIME' => 1421936168
 ]
+2015-01-23 12:39:36 [::1][-][-][error][yii\web\HttpException:404] exception 'yii\base\InvalidRouteException' with message 'Unable to resolve the request "inveresiones".' in C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Module.php:461
+Stack trace:
+#0 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\web\Application.php(83): yii\base\Module->runAction('inveresiones', Array)
+#1 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 C:\Apache24\htdocs\rnce\frontend\web\index.php(18): yii\base\Application->run()
+#3 {main}
+
+Next exception 'yii\web\NotFoundHttpException' with message 'Page not found.' in C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\web\Application.php:95
+Stack trace:
+#0 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 C:\Apache24\htdocs\rnce\frontend\web\index.php(18): yii\base\Application->run()
+#2 {main}
+2015-01-23 12:39:36 [::1][-][-][info][application] $_GET = [
+    'r' => 'inveresiones'
+]
+
+$_COOKIE = [
+    'PHPSESSID' => '01mo2adjjtkauogipt76thki20'
+    '_csrf' => 'e69f026f5b7f0ed5f83f41415b87458cbbdda88fe711bec9733212b579f88d36s:32:\"zzMdjuFcAuEV1y5xK_PQX5ErW_leOO61\";'
+]
+
+$_SESSION = [
+    '__flash' => []
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:36.0) Gecko/20100101 Firefox/36.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_COOKIE' => 'PHPSESSID=01mo2adjjtkauogipt76thki20; _csrf=e69f026f5b7f0ed5f83f41415b87458cbbdda88fe711bec9733212b579f88d36s%3A32%3A%22zzMdjuFcAuEV1y5xK_PQX5ErW_leOO61%22%3B'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => 'C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\:C:\\php\\;C:\\Program Files (x86)\\OpenSSH\\bin;C:\\Program Files (x86)\\MySQL\\MySQL Utilities 1.3.6\\;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\TortoiseSVN\\bin;C:\\php;C:\\Program Files\\PostgreSQL\\9.3\\bin;'
+    'SystemRoot' => 'C:\\WINDOWS'
+    'COMSPEC' => 'C:\\WINDOWS\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\WINDOWS'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win32) PHP/5.6.0'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '::1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '::1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '49811'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=inveresiones'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=inveresiones'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1422032976.528
+    'REQUEST_TIME' => 1422032976
+]
+2015-01-23 12:39:43 [::1][-][-][error][yii\base\UnknownClassException] exception 'yii\base\UnknownClassException' with message 'Unable to find 'frontend\controllers\InversionesController' in file: C:\Apache24\htdocs\rnce/frontend/controllers/InversionesController.php. Namespace missing?' in C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\BaseYii.php:291
+Stack trace:
+#0 [internal function]: yii\BaseYii::autoload('frontend\\contro...')
+#1 [internal function]: spl_autoload_call('frontend\\contro...')
+#2 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Module.php(563): class_exists('frontend\\contro...')
+#3 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Module.php(521): yii\base\Module->createControllerByID('inversiones')
+#4 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Module.php(449): yii\base\Module->createController('inversiones')
+#5 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\web\Application.php(83): yii\base\Module->runAction('inversiones', Array)
+#6 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#7 C:\Apache24\htdocs\rnce\frontend\web\index.php(18): yii\base\Application->run()
+#8 {main}
+2015-01-23 12:39:43 [::1][-][-][info][application] $_GET = [
+    'r' => 'inversiones'
+]
+
+$_COOKIE = [
+    'PHPSESSID' => '01mo2adjjtkauogipt76thki20'
+    '_csrf' => 'e69f026f5b7f0ed5f83f41415b87458cbbdda88fe711bec9733212b579f88d36s:32:\"zzMdjuFcAuEV1y5xK_PQX5ErW_leOO61\";'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:36.0) Gecko/20100101 Firefox/36.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_COOKIE' => 'PHPSESSID=01mo2adjjtkauogipt76thki20; _csrf=e69f026f5b7f0ed5f83f41415b87458cbbdda88fe711bec9733212b579f88d36s%3A32%3A%22zzMdjuFcAuEV1y5xK_PQX5ErW_leOO61%22%3B'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => 'C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\:C:\\php\\;C:\\Program Files (x86)\\OpenSSH\\bin;C:\\Program Files (x86)\\MySQL\\MySQL Utilities 1.3.6\\;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\TortoiseSVN\\bin;C:\\php;C:\\Program Files\\PostgreSQL\\9.3\\bin;'
+    'SystemRoot' => 'C:\\WINDOWS'
+    'COMSPEC' => 'C:\\WINDOWS\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\WINDOWS'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win32) PHP/5.6.0'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '::1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '::1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '49817'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=inversiones'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=inversiones'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1422032983.149
+    'REQUEST_TIME' => 1422032983
+]
+2015-01-23 12:52:53 [::1][-][-][error][yii\web\HttpException:404] exception 'yii\base\InvalidRouteException' with message 'Unable to resolve the request "cuentasCobrar".' in C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Module.php:461
+Stack trace:
+#0 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\web\Application.php(83): yii\base\Module->runAction('cuentasCobrar', Array)
+#1 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 C:\Apache24\htdocs\rnce\frontend\web\index.php(18): yii\base\Application->run()
+#3 {main}
+
+Next exception 'yii\web\NotFoundHttpException' with message 'Page not found.' in C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\web\Application.php:95
+Stack trace:
+#0 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 C:\Apache24\htdocs\rnce\frontend\web\index.php(18): yii\base\Application->run()
+#2 {main}
+2015-01-23 12:52:53 [::1][-][-][info][application] $_GET = [
+    'r' => 'cuentasCobrar'
+]
+
+$_COOKIE = [
+    'PHPSESSID' => '01mo2adjjtkauogipt76thki20'
+    '_csrf' => 'e69f026f5b7f0ed5f83f41415b87458cbbdda88fe711bec9733212b579f88d36s:32:\"zzMdjuFcAuEV1y5xK_PQX5ErW_leOO61\";'
+]
+
+$_SESSION = [
+    '__flash' => []
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:36.0) Gecko/20100101 Firefox/36.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_COOKIE' => 'PHPSESSID=01mo2adjjtkauogipt76thki20; _csrf=e69f026f5b7f0ed5f83f41415b87458cbbdda88fe711bec9733212b579f88d36s%3A32%3A%22zzMdjuFcAuEV1y5xK_PQX5ErW_leOO61%22%3B'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => 'C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\:C:\\php\\;C:\\Program Files (x86)\\OpenSSH\\bin;C:\\Program Files (x86)\\MySQL\\MySQL Utilities 1.3.6\\;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\TortoiseSVN\\bin;C:\\php;C:\\Program Files\\PostgreSQL\\9.3\\bin;'
+    'SystemRoot' => 'C:\\WINDOWS'
+    'COMSPEC' => 'C:\\WINDOWS\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\WINDOWS'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win32) PHP/5.6.0'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '::1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '::1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '49904'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=cuentasCobrar'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=cuentasCobrar'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1422033773.354
+    'REQUEST_TIME' => 1422033773
+]
+2015-01-23 12:53:11 [::1][-][-][error][yii\web\HttpException:404] exception 'yii\base\InvalidRouteException' with message 'Unable to resolve the request "cuentasCobro".' in C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Module.php:461
+Stack trace:
+#0 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\web\Application.php(83): yii\base\Module->runAction('cuentasCobro', Array)
+#1 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 C:\Apache24\htdocs\rnce\frontend\web\index.php(18): yii\base\Application->run()
+#3 {main}
+
+Next exception 'yii\web\NotFoundHttpException' with message 'Page not found.' in C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\web\Application.php:95
+Stack trace:
+#0 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 C:\Apache24\htdocs\rnce\frontend\web\index.php(18): yii\base\Application->run()
+#2 {main}
+2015-01-23 12:53:11 [::1][-][-][info][application] $_GET = [
+    'r' => 'cuentasCobro'
+]
+
+$_COOKIE = [
+    'PHPSESSID' => '01mo2adjjtkauogipt76thki20'
+    '_csrf' => 'e69f026f5b7f0ed5f83f41415b87458cbbdda88fe711bec9733212b579f88d36s:32:\"zzMdjuFcAuEV1y5xK_PQX5ErW_leOO61\";'
+]
+
+$_SESSION = [
+    '__flash' => []
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:36.0) Gecko/20100101 Firefox/36.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_COOKIE' => 'PHPSESSID=01mo2adjjtkauogipt76thki20; _csrf=e69f026f5b7f0ed5f83f41415b87458cbbdda88fe711bec9733212b579f88d36s%3A32%3A%22zzMdjuFcAuEV1y5xK_PQX5ErW_leOO61%22%3B'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => 'C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\:C:\\php\\;C:\\Program Files (x86)\\OpenSSH\\bin;C:\\Program Files (x86)\\MySQL\\MySQL Utilities 1.3.6\\;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\TortoiseSVN\\bin;C:\\php;C:\\Program Files\\PostgreSQL\\9.3\\bin;'
+    'SystemRoot' => 'C:\\WINDOWS'
+    'COMSPEC' => 'C:\\WINDOWS\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\WINDOWS'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win32) PHP/5.6.0'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '::1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '::1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '49909'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=cuentasCobro'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=cuentasCobro'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1422033791.893
+    'REQUEST_TIME' => 1422033791
+]
+2015-01-23 12:55:09 [::1][-][-][error][yii\web\HttpException:404] exception 'yii\base\InvalidRouteException' with message 'Unable to resolve the request "efectivoBanco".' in C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Module.php:461
+Stack trace:
+#0 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\web\Application.php(83): yii\base\Module->runAction('efectivoBanco', Array)
+#1 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 C:\Apache24\htdocs\rnce\frontend\web\index.php(18): yii\base\Application->run()
+#3 {main}
+
+Next exception 'yii\web\NotFoundHttpException' with message 'Page not found.' in C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\web\Application.php:95
+Stack trace:
+#0 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 C:\Apache24\htdocs\rnce\frontend\web\index.php(18): yii\base\Application->run()
+#2 {main}
+2015-01-23 12:55:09 [::1][-][-][info][application] $_GET = [
+    'r' => 'efectivoBanco'
+]
+
+$_COOKIE = [
+    'PHPSESSID' => '01mo2adjjtkauogipt76thki20'
+    '_csrf' => 'e69f026f5b7f0ed5f83f41415b87458cbbdda88fe711bec9733212b579f88d36s:32:\"zzMdjuFcAuEV1y5xK_PQX5ErW_leOO61\";'
+]
+
+$_SESSION = [
+    '__flash' => []
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:36.0) Gecko/20100101 Firefox/36.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_COOKIE' => 'PHPSESSID=01mo2adjjtkauogipt76thki20; _csrf=e69f026f5b7f0ed5f83f41415b87458cbbdda88fe711bec9733212b579f88d36s%3A32%3A%22zzMdjuFcAuEV1y5xK_PQX5ErW_leOO61%22%3B'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => 'C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\:C:\\php\\;C:\\Program Files (x86)\\OpenSSH\\bin;C:\\Program Files (x86)\\MySQL\\MySQL Utilities 1.3.6\\;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\TortoiseSVN\\bin;C:\\php;C:\\Program Files\\PostgreSQL\\9.3\\bin;'
+    'SystemRoot' => 'C:\\WINDOWS'
+    'COMSPEC' => 'C:\\WINDOWS\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\WINDOWS'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win32) PHP/5.6.0'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '::1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '::1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '49919'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=efectivoBanco'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=efectivoBanco'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1422033909.54
+    'REQUEST_TIME' => 1422033909
+]
+2015-01-23 12:55:27 [::1][-][-][error][yii\base\InvalidParamException] exception 'yii\base\InvalidParamException' with message 'The view file does not exist: C:\Apache24\htdocs\rnce\frontend\views\efectivobanco\index.php' in C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\View.php:226
+Stack trace:
+#0 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\View.php(149): yii\base\View->renderFile('C:\\Apache24\\htd...', Array, Object(frontend\controllers\EfectivoBancoController))
+#1 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Controller.php(367): yii\base\View->render('index', Array, Object(frontend\controllers\EfectivoBancoController))
+#2 C:\Apache24\htdocs\rnce\frontend\controllers\EfectivoBancoController.php(41): yii\base\Controller->render('index', Array)
+#3 [internal function]: frontend\controllers\EfectivoBancoController->actionIndex()
+#4 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\InlineAction.php(55): call_user_func_array(Array, Array)
+#5 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Controller.php(151): yii\base\InlineAction->runWithParams(Array)
+#6 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Module.php(455): yii\base\Controller->runAction('', Array)
+#7 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\web\Application.php(83): yii\base\Module->runAction('efectivobanco', Array)
+#8 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#9 C:\Apache24\htdocs\rnce\frontend\web\index.php(18): yii\base\Application->run()
+#10 {main}
+2015-01-23 12:55:27 [::1][-][-][info][application] $_GET = [
+    'r' => 'efectivobanco'
+]
+
+$_COOKIE = [
+    'PHPSESSID' => '01mo2adjjtkauogipt76thki20'
+    '_csrf' => 'e69f026f5b7f0ed5f83f41415b87458cbbdda88fe711bec9733212b579f88d36s:32:\"zzMdjuFcAuEV1y5xK_PQX5ErW_leOO61\";'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:36.0) Gecko/20100101 Firefox/36.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_COOKIE' => 'PHPSESSID=01mo2adjjtkauogipt76thki20; _csrf=e69f026f5b7f0ed5f83f41415b87458cbbdda88fe711bec9733212b579f88d36s%3A32%3A%22zzMdjuFcAuEV1y5xK_PQX5ErW_leOO61%22%3B'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => 'C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\:C:\\php\\;C:\\Program Files (x86)\\OpenSSH\\bin;C:\\Program Files (x86)\\MySQL\\MySQL Utilities 1.3.6\\;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\TortoiseSVN\\bin;C:\\php;C:\\Program Files\\PostgreSQL\\9.3\\bin;'
+    'SystemRoot' => 'C:\\WINDOWS'
+    'COMSPEC' => 'C:\\WINDOWS\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\WINDOWS'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win32) PHP/5.6.0'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '::1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '::1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '49925'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=efectivobanco'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=efectivobanco'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1422033927.188
+    'REQUEST_TIME' => 1422033927
+]
+2015-01-23 13:00:20 [::1][-][-][error][yii\base\InvalidParamException] exception 'yii\base\InvalidParamException' with message 'The view file does not exist: C:\Apache24\htdocs\rnce\frontend\views\efectivocaja\index.php' in C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\View.php:226
+Stack trace:
+#0 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\View.php(149): yii\base\View->renderFile('C:\\Apache24\\htd...', Array, Object(frontend\controllers\EfectivoCajaController))
+#1 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Controller.php(367): yii\base\View->render('index', Array, Object(frontend\controllers\EfectivoCajaController))
+#2 C:\Apache24\htdocs\rnce\frontend\controllers\EfectivoCajaController.php(41): yii\base\Controller->render('index', Array)
+#3 [internal function]: frontend\controllers\EfectivoCajaController->actionIndex()
+#4 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\InlineAction.php(55): call_user_func_array(Array, Array)
+#5 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Controller.php(151): yii\base\InlineAction->runWithParams(Array)
+#6 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Module.php(455): yii\base\Controller->runAction('', Array)
+#7 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\web\Application.php(83): yii\base\Module->runAction('efectivocaja', Array)
+#8 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#9 C:\Apache24\htdocs\rnce\frontend\web\index.php(18): yii\base\Application->run()
+#10 {main}
+2015-01-23 13:00:19 [::1][-][-][info][application] $_GET = [
+    'r' => 'efectivocaja'
+]
+
+$_COOKIE = [
+    'PHPSESSID' => '01mo2adjjtkauogipt76thki20'
+    '_csrf' => 'e69f026f5b7f0ed5f83f41415b87458cbbdda88fe711bec9733212b579f88d36s:32:\"zzMdjuFcAuEV1y5xK_PQX5ErW_leOO61\";'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:36.0) Gecko/20100101 Firefox/36.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_COOKIE' => 'PHPSESSID=01mo2adjjtkauogipt76thki20; _csrf=e69f026f5b7f0ed5f83f41415b87458cbbdda88fe711bec9733212b579f88d36s%3A32%3A%22zzMdjuFcAuEV1y5xK_PQX5ErW_leOO61%22%3B'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => 'C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\:C:\\php\\;C:\\Program Files (x86)\\OpenSSH\\bin;C:\\Program Files (x86)\\MySQL\\MySQL Utilities 1.3.6\\;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\TortoiseSVN\\bin;C:\\php;C:\\Program Files\\PostgreSQL\\9.3\\bin;'
+    'SystemRoot' => 'C:\\WINDOWS'
+    'COMSPEC' => 'C:\\WINDOWS\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\WINDOWS'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win32) PHP/5.6.0'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '::1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '::1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '49946'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=efectivocaja'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=efectivocaja'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1422034219.846
+    'REQUEST_TIME' => 1422034219
+]
+2015-01-23 13:00:24 [::1][-][-][error][yii\web\HttpException:404] exception 'yii\base\InvalidRouteException' with message 'Unable to resolve the request "efectivoCaja".' in C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Module.php:461
+Stack trace:
+#0 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\web\Application.php(83): yii\base\Module->runAction('efectivoCaja', Array)
+#1 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 C:\Apache24\htdocs\rnce\frontend\web\index.php(18): yii\base\Application->run()
+#3 {main}
+
+Next exception 'yii\web\NotFoundHttpException' with message 'Page not found.' in C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\web\Application.php:95
+Stack trace:
+#0 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 C:\Apache24\htdocs\rnce\frontend\web\index.php(18): yii\base\Application->run()
+#2 {main}
+2015-01-23 13:00:24 [::1][-][-][info][application] $_GET = [
+    'r' => 'efectivoCaja'
+]
+
+$_COOKIE = [
+    'PHPSESSID' => '01mo2adjjtkauogipt76thki20'
+    '_csrf' => 'e69f026f5b7f0ed5f83f41415b87458cbbdda88fe711bec9733212b579f88d36s:32:\"zzMdjuFcAuEV1y5xK_PQX5ErW_leOO61\";'
+]
+
+$_SESSION = [
+    '__flash' => []
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:36.0) Gecko/20100101 Firefox/36.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_COOKIE' => 'PHPSESSID=01mo2adjjtkauogipt76thki20; _csrf=e69f026f5b7f0ed5f83f41415b87458cbbdda88fe711bec9733212b579f88d36s%3A32%3A%22zzMdjuFcAuEV1y5xK_PQX5ErW_leOO61%22%3B'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => 'C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\:C:\\php\\;C:\\Program Files (x86)\\OpenSSH\\bin;C:\\Program Files (x86)\\MySQL\\MySQL Utilities 1.3.6\\;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\TortoiseSVN\\bin;C:\\php;C:\\Program Files\\PostgreSQL\\9.3\\bin;'
+    'SystemRoot' => 'C:\\WINDOWS'
+    'COMSPEC' => 'C:\\WINDOWS\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\WINDOWS'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win32) PHP/5.6.0'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '::1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '::1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '49948'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=efectivoCaja'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=efectivoCaja'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1422034224.589
+    'REQUEST_TIME' => 1422034224
+]
+2015-01-23 13:00:51 [::1][-][-][error][yii\base\InvalidParamException] exception 'yii\base\InvalidParamException' with message 'The view file does not exist: C:\Apache24\htdocs\rnce\frontend\views\efectivocaja\index.php' in C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\View.php:226
+Stack trace:
+#0 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\View.php(149): yii\base\View->renderFile('C:\\Apache24\\htd...', Array, Object(frontend\controllers\EfectivoCajaController))
+#1 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Controller.php(367): yii\base\View->render('index', Array, Object(frontend\controllers\EfectivoCajaController))
+#2 C:\Apache24\htdocs\rnce\frontend\controllers\EfectivoCajaController.php(41): yii\base\Controller->render('index', Array)
+#3 [internal function]: frontend\controllers\EfectivoCajaController->actionIndex()
+#4 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\InlineAction.php(55): call_user_func_array(Array, Array)
+#5 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Controller.php(151): yii\base\InlineAction->runWithParams(Array)
+#6 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Module.php(455): yii\base\Controller->runAction('', Array)
+#7 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\web\Application.php(83): yii\base\Module->runAction('efectivocaja', Array)
+#8 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#9 C:\Apache24\htdocs\rnce\frontend\web\index.php(18): yii\base\Application->run()
+#10 {main}
+2015-01-23 13:00:51 [::1][-][-][info][application] $_GET = [
+    'r' => 'efectivocaja'
+]
+
+$_COOKIE = [
+    'PHPSESSID' => '01mo2adjjtkauogipt76thki20'
+    '_csrf' => 'e69f026f5b7f0ed5f83f41415b87458cbbdda88fe711bec9733212b579f88d36s:32:\"zzMdjuFcAuEV1y5xK_PQX5ErW_leOO61\";'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:36.0) Gecko/20100101 Firefox/36.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_COOKIE' => 'PHPSESSID=01mo2adjjtkauogipt76thki20; _csrf=e69f026f5b7f0ed5f83f41415b87458cbbdda88fe711bec9733212b579f88d36s%3A32%3A%22zzMdjuFcAuEV1y5xK_PQX5ErW_leOO61%22%3B'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => 'C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\:C:\\php\\;C:\\Program Files (x86)\\OpenSSH\\bin;C:\\Program Files (x86)\\MySQL\\MySQL Utilities 1.3.6\\;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\TortoiseSVN\\bin;C:\\php;C:\\Program Files\\PostgreSQL\\9.3\\bin;'
+    'SystemRoot' => 'C:\\WINDOWS'
+    'COMSPEC' => 'C:\\WINDOWS\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\WINDOWS'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win32) PHP/5.6.0'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '::1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '::1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '49956'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=efectivocaja'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=efectivocaja'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1422034251.087
+    'REQUEST_TIME' => 1422034251
+]
+2015-01-23 14:21:29 [::1][-][-][error][yii\web\HttpException:404] exception 'yii\base\InvalidRouteException' with message 'Unable to resolve the request "cuentasCobrar".' in C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Module.php:461
+Stack trace:
+#0 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\web\Application.php(83): yii\base\Module->runAction('cuentasCobrar', Array)
+#1 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 C:\Apache24\htdocs\rnce\frontend\web\index.php(18): yii\base\Application->run()
+#3 {main}
+
+Next exception 'yii\web\NotFoundHttpException' with message 'Page not found.' in C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\web\Application.php:95
+Stack trace:
+#0 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 C:\Apache24\htdocs\rnce\frontend\web\index.php(18): yii\base\Application->run()
+#2 {main}
+2015-01-23 14:21:29 [::1][-][-][info][application] $_GET = [
+    'r' => 'cuentasCobrar'
+]
+
+$_COOKIE = [
+    'PHPSESSID' => '2k1nvcefr0md2jc73t7ihkivc4'
+    '_csrf' => '68721fee93da9f9283f36fde30170540815f9d1625de2b65642d6bb5a53ebe67s:32:\"abN_9Z_g5b6Mhuv2Dc4_VjbkmpW-3Di5\";'
+]
+
+$_SESSION = [
+    '__flash' => []
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:36.0) Gecko/20100101 Firefox/36.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_COOKIE' => 'PHPSESSID=2k1nvcefr0md2jc73t7ihkivc4; _csrf=68721fee93da9f9283f36fde30170540815f9d1625de2b65642d6bb5a53ebe67s%3A32%3A%22abN_9Z_g5b6Mhuv2Dc4_VjbkmpW-3Di5%22%3B'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => 'C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\:C:\\php\\;C:\\Program Files (x86)\\OpenSSH\\bin;C:\\Program Files (x86)\\MySQL\\MySQL Utilities 1.3.6\\;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\TortoiseSVN\\bin;C:\\php;C:\\Program Files\\PostgreSQL\\9.3\\bin;'
+    'SystemRoot' => 'C:\\WINDOWS'
+    'COMSPEC' => 'C:\\WINDOWS\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\WINDOWS'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win32) PHP/5.6.0'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '::1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '::1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '50387'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=cuentasCobrar'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=cuentasCobrar'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1422039089.55
+    'REQUEST_TIME' => 1422039089
+]
