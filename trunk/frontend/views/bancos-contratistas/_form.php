@@ -4,27 +4,17 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\EfectivoBanco */
+/* @var $model app\models\BancosContratistas */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="efectivo-banco-form">
+<div class="bancos-contratistas-form">
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'contratista_id')->textInput() ?>
-
     <?= $form->field($model, 'banco_id')->textInput() ?>
 
-    <?= $form->field($model, 'saldo_banco')->textInput() ?>
-
-    <?= $form->field($model, 'depos_transito')->textInput() ?>
-
-    <?= $form->field($model, 'che_transito')->textInput() ?>
-
-    <?= $form->field($model, 'nd_contabilizadas')->textInput() ?>
-
-    <?= $form->field($model, 'nc_contabilizadas')->textInput() ?>
+    <?= $form->field($model, 'num_cuenta')->textInput(['maxlength' => 150]) ?>
 
     <?= $form->field($model, 'ano')->textInput() ?>
 

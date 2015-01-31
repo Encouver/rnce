@@ -30,11 +30,11 @@ $this->params['breadcrumbs'][] = $this->title;
             'banco_id',
             'saldo_banco',
             'depos_transito',
-            // 'saldo_contabilidad',
             // 'che_transito',
             // 'nd_contabilizadas',
             // 'nc_contabilizadas',
             // 'ano',
+            // 'activo:boolean',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

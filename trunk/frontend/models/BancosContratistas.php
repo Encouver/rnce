@@ -12,6 +12,7 @@ use Yii;
  * @property integer $contratista_id
  * @property string $num_cuenta
  * @property string $ano
+ * @property boolean $activo
  *
  * @property Bancos $banco
  * @property Contratistas $contratista
@@ -35,6 +36,7 @@ class BancosContratistas extends \yii\db\ActiveRecord
             [['banco_id'], 'required'],
             [['banco_id'], 'integer'],
             [['ano'], 'safe'],
+            [['activo'], 'boolean'],
             [['num_cuenta'], 'string', 'max' => 150]
         ];
     }
@@ -50,6 +52,7 @@ class BancosContratistas extends \yii\db\ActiveRecord
             'contratista_id' => 'Contratista ID',
             'num_cuenta' => 'Num Cuenta',
             'ano' => 'Ano',
+            'activo' => 'Activo',
         ];
     }
 

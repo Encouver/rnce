@@ -20,7 +20,7 @@ class EfectivoCajaSearch extends EfectivoCaja
         return [
             [['id', 'contratista_id', 'tipo_caja_id'], 'integer'],
             [['ano', 'tipo'], 'safe'],
-            [['saldo_contabilidad'], 'number'],
+            [['activo'], 'boolean'],
         ];
     }
 
@@ -60,8 +60,8 @@ class EfectivoCajaSearch extends EfectivoCaja
             'id' => $this->id,
             'contratista_id' => $this->contratista_id,
             'ano' => $this->ano,
-            'saldo_contabilidad' => $this->saldo_contabilidad,
             'tipo_caja_id' => $this->tipo_caja_id,
+            'activo' => $this->activo,
         ]);
 
         $query->andFilterWhere(['like', 'tipo', $this->tipo]);

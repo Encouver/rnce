@@ -29,8 +29,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'contratista_id',
             'ano',
             'tipo',
-            'saldo_contabilidad',
-            // 'tipo_caja_id',
+            'tipo_caja_id',
+            // 'activo:boolean',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

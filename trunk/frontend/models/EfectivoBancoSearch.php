@@ -19,8 +19,9 @@ class EfectivoBancoSearch extends EfectivoBanco
     {
         return [
             [['id', 'contratista_id', 'banco_id'], 'integer'],
-            [['saldo_banco', 'depos_transito', 'saldo_contabilidad', 'che_transito', 'nd_contabilizadas', 'nc_contabilizadas'], 'number'],
+            [['saldo_banco', 'depos_transito', 'che_transito', 'nd_contabilizadas', 'nc_contabilizadas'], 'number'],
             [['ano'], 'safe'],
+            [['activo'], 'boolean'],
         ];
     }
 
@@ -62,11 +63,11 @@ class EfectivoBancoSearch extends EfectivoBanco
             'banco_id' => $this->banco_id,
             'saldo_banco' => $this->saldo_banco,
             'depos_transito' => $this->depos_transito,
-            'saldo_contabilidad' => $this->saldo_contabilidad,
             'che_transito' => $this->che_transito,
             'nd_contabilizadas' => $this->nd_contabilizadas,
             'nc_contabilizadas' => $this->nc_contabilizadas,
             'ano' => $this->ano,
+            'activo' => $this->activo,
         ]);
 
         return $dataProvider;

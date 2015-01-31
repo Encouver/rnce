@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\EfectivoBancoSearch */
+/* @var $model app\models\BancosContratistasSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="efectivo-banco-search">
+<div class="bancos-contratistas-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
@@ -17,21 +17,13 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'id') ?>
 
-    <?= $form->field($model, 'contratista_id') ?>
-
     <?= $form->field($model, 'banco_id') ?>
 
-    <?= $form->field($model, 'saldo_banco') ?>
+    <?= $form->field($model, 'contratista_id') ?>
 
-    <?= $form->field($model, 'depos_transito') ?>
+    <?= $form->field($model, 'num_cuenta') ?>
 
-    <?php // echo $form->field($model, 'che_transito') ?>
-
-    <?php // echo $form->field($model, 'nd_contabilizadas') ?>
-
-    <?php // echo $form->field($model, 'nc_contabilizadas') ?>
-
-    <?php // echo $form->field($model, 'ano') ?>
+    <?= $form->field($model, 'ano') ?>
 
     <?php // echo $form->field($model, 'activo')->checkbox() ?>
 

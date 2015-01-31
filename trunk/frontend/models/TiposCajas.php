@@ -36,7 +36,8 @@ class TiposCajas extends \yii\db\ActiveRecord
             [['contratista_id'], 'integer'],
             [['ano'], 'safe'],
             [['activo'], 'boolean'],
-            [['nombre'], 'string', 'max' => 255]
+            [['nombre'], 'string', 'max' => 255],
+            [['nombre'], 'unique']
         ];
     }
 

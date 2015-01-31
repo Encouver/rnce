@@ -4,19 +4,19 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\InversionesSearch */
+/* @var $searchModel app\models\TiposInversionesSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Inversiones';
+$this->title = 'Tipos Inversiones';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="inversiones-index">
+<div class="tipos-inversiones-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Inversiones', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Tipos Inversiones', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
@@ -26,15 +26,10 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'banco_id',
-            'costo_adquisicion',
-            'valor_desvalorizacion',
-            'contratista_id',
-            // 'ano',
-            // 'activo:boolean',
-            // 'plazo',
-            // 'tasa_interes',
-            // 'tipo_inversion',
+            'nombre',
+            'activo:boolean',
+            'ano',
+            'descripcion',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

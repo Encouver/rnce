@@ -9,15 +9,18 @@ use Yii;
  *
  * @property integer $id
  * @property integer $banco_id
- * @property string $condiciones
  * @property string $costo_adquisicion
  * @property string $valor_desvalorizacion
- * @property string $saldo_contabilidad
  * @property integer $contratista_id
  * @property string $ano
+ * @property boolean $activo
+ * @property integer $plazo
+ * @property string $tasa_interes
+ * @property integer $tipo_inversion
  *
  * @property Bancos $banco
  * @property Contratistas $contratista
+ * @property TiposInversiones $tipoInversion
  */
 class Inversiones extends \yii\db\ActiveRecord
 {
@@ -35,11 +38,11 @@ class Inversiones extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['banco_id', 'condiciones', 'costo_adquisicion', 'valor_desvalorizacion', 'saldo_contabilidad', 'contratista_id', 'ano'], 'required'],
-            [['banco_id', 'contratista_id'], 'integer'],
-            [['costo_adquisicion', 'valor_desvalorizacion', 'saldo_contabilidad'], 'number'],
+            [['banco_id', 'costo_adquisicion', 'valor_desvalorizacion', 'contratista_id', 'ano', 'plazo', 'tasa_interes', 'tipo_inversion'], 'required'],
+            [['banco_id', 'contratista_id', 'plazo', 'tipo_inversion'], 'integer'],
+            [['costo_adquisicion', 'valor_desvalorizacion', 'tasa_interes'], 'number'],
             [['ano'], 'safe'],
-            [['condiciones'], 'string', 'max' => 250]
+            [['activo'], 'boolean']
         ];
     }
 
@@ -51,12 +54,14 @@ class Inversiones extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'banco_id' => 'Banco ID',
-            'condiciones' => 'Condiciones',
             'costo_adquisicion' => 'Costo Adquisicion',
             'valor_desvalorizacion' => 'Valor Desvalorizacion',
-            'saldo_contabilidad' => 'Saldo Contabilidad',
             'contratista_id' => 'Contratista ID',
             'ano' => 'Ano',
+            'activo' => 'Activo',
+            'plazo' => 'Plazo',
+            'tasa_interes' => 'Tasa Interes',
+            'tipo_inversion' => 'Tipo Inversion',
         ];
     }
 
@@ -74,5 +79,13 @@ class Inversiones extends \yii\db\ActiveRecord
     public function getContratista()
     {
         return $this->hasOne(Contratistas::className(), ['id' => 'contratista_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTipoInversion()
+    {
+        return $this->hasOne(TiposInversiones::className(), ['id' => 'tipo_inversion']);
     }
 }

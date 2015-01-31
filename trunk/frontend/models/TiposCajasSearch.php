@@ -5,12 +5,12 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Inversiones;
+use app\models\TiposCajas;
 
 /**
- * InversionesSearch represents the model behind the search form about `app\models\Inversiones`.
+ * TiposCajasSearch represents the model behind the search form about `app\models\TiposCajas`.
  */
-class InversionesSearch extends Inversiones
+class TiposCajasSearch extends TiposCajas
 {
     /**
      * @inheritdoc
@@ -18,9 +18,8 @@ class InversionesSearch extends Inversiones
     public function rules()
     {
         return [
-            [['id', 'banco_id', 'contratista_id', 'plazo', 'tipo_inversion'], 'integer'],
-            [['costo_adquisicion', 'valor_desvalorizacion', 'tasa_interes'], 'number'],
-            [['ano'], 'safe'],
+            [['id', 'contratista_id'], 'integer'],
+            [['nombre', 'ano'], 'safe'],
             [['activo'], 'boolean'],
         ];
     }
@@ -43,7 +42,7 @@ class InversionesSearch extends Inversiones
      */
     public function search($params)
     {
-        $query = Inversiones::find();
+        $query = TiposCajas::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -59,16 +58,12 @@ class InversionesSearch extends Inversiones
 
         $query->andFilterWhere([
             'id' => $this->id,
-            'banco_id' => $this->banco_id,
-            'costo_adquisicion' => $this->costo_adquisicion,
-            'valor_desvalorizacion' => $this->valor_desvalorizacion,
             'contratista_id' => $this->contratista_id,
             'ano' => $this->ano,
             'activo' => $this->activo,
-            'plazo' => $this->plazo,
-            'tasa_interes' => $this->tasa_interes,
-            'tipo_inversion' => $this->tipo_inversion,
         ]);
+
+        $query->andFilterWhere(['like', 'nombre', $this->nombre]);
 
         return $dataProvider;
     }

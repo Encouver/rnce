@@ -1,19 +1,18 @@
 <?php
 
-namespace frontend\controllers;
+namespace app\models;
 
 use Yii;
-use app\models\Bancos;
-use app\models\BancosSearch;
+use app\models\EfectivoBanco;
+use app\models\EfectivoBancoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
-
 /**
- * BancosController implements the CRUD actions for Bancos model.
+ * EfectivoBancoController implements the CRUD actions for EfectivoBanco model.
  */
-class BancosController extends Controller
+class EfectivoBancoController extends Controller
 {
     public function behaviors()
     {
@@ -28,12 +27,12 @@ class BancosController extends Controller
     }
 
     /**
-     * Lists all Bancos models.
+     * Lists all EfectivoBanco models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new BancosSearch();
+        $searchModel = new EfectivoBancoSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -43,7 +42,7 @@ class BancosController extends Controller
     }
 
     /**
-     * Displays a single Bancos model.
+     * Displays a single EfectivoBanco model.
      * @param integer $id
      * @return mixed
      */
@@ -55,13 +54,13 @@ class BancosController extends Controller
     }
 
     /**
-     * Creates a new Bancos model.
+     * Creates a new EfectivoBanco model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Bancos();
+        $model = new EfectivoBanco();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -73,7 +72,7 @@ class BancosController extends Controller
     }
 
     /**
-     * Updates an existing Bancos model.
+     * Updates an existing EfectivoBanco model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -92,7 +91,7 @@ class BancosController extends Controller
     }
 
     /**
-     * Deletes an existing Bancos model.
+     * Deletes an existing EfectivoBanco model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -105,15 +104,15 @@ class BancosController extends Controller
     }
 
     /**
-     * Finds the Bancos model based on its primary key value.
+     * Finds the EfectivoBanco model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Bancos the loaded model
+     * @return EfectivoBanco the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Bancos::findOne($id)) !== null) {
+        if (($model = EfectivoBanco::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

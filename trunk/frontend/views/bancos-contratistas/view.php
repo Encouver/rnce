@@ -4,13 +4,13 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\EfectivoCaja */
+/* @var $model app\models\BancosContratistas */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Efectivo Cajas', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Bancos Contratistas', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="efectivo-caja-view">
+<div class="bancos-contratistas-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -29,10 +29,10 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
+            'banco_id',
             'contratista_id',
+            'num_cuenta',
             'ano',
-            'tipo',
-            'tipo_caja_id',
             'activo:boolean',
         ],
     ]) ?>

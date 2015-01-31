@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\InversionesSearch */
+/* @var $model app\models\TiposCajasSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="inversiones-search">
+<div class="tipos-cajas-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
@@ -17,23 +17,13 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'id') ?>
 
-    <?= $form->field($model, 'banco_id') ?>
-
-    <?= $form->field($model, 'costo_adquisicion') ?>
-
-    <?= $form->field($model, 'valor_desvalorizacion') ?>
+    <?= $form->field($model, 'nombre') ?>
 
     <?= $form->field($model, 'contratista_id') ?>
 
-    <?php // echo $form->field($model, 'ano') ?>
+    <?= $form->field($model, 'ano') ?>
 
-    <?php // echo $form->field($model, 'activo')->checkbox() ?>
-
-    <?php // echo $form->field($model, 'plazo') ?>
-
-    <?php // echo $form->field($model, 'tasa_interes') ?>
-
-    <?php // echo $form->field($model, 'tipo_inversion') ?>
+    <?= $form->field($model, 'activo')->checkbox() ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

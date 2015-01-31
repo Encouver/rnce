@@ -18,9 +18,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'tipo')->dropDownList([ 'caja' => 'Caja', 'caja chica' => 'Caja chica', ], ['prompt' => '']) ?>
 
-    <?= $form->field($model, 'saldo_contabilidad')->textInput() ?>
-
     <?= $form->field($model, 'tipo_caja_id')->textInput() ?>
+
+    <?= $form->field($model, 'activo')->checkbox() ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

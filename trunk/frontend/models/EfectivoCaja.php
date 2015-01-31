@@ -11,11 +11,11 @@ use Yii;
  * @property integer $contratista_id
  * @property string $ano
  * @property string $tipo
- * @property string $saldo_contabilidad
  * @property integer $tipo_caja_id
+ * @property boolean $activo
  *
- * @property TiposCajas $tipoCaja
  * @property Contratistas $contratista
+ * @property TiposCajas $tipoCaja
  */
 class EfectivoCaja extends \yii\db\ActiveRecord
 {
@@ -33,11 +33,11 @@ class EfectivoCaja extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['contratista_id', 'ano', 'tipo', 'saldo_contabilidad', 'tipo_caja_id'], 'required'],
+            [['contratista_id', 'ano', 'tipo', 'tipo_caja_id'], 'required'],
             [['contratista_id', 'tipo_caja_id'], 'integer'],
             [['ano'], 'safe'],
             [['tipo'], 'string'],
-            [['saldo_contabilidad'], 'number']
+            [['activo'], 'boolean']
         ];
     }
 
@@ -51,17 +51,9 @@ class EfectivoCaja extends \yii\db\ActiveRecord
             'contratista_id' => 'Contratista ID',
             'ano' => 'Ano',
             'tipo' => 'Tipo',
-            'saldo_contabilidad' => 'Saldo Contabilidad',
             'tipo_caja_id' => 'Tipo Caja ID',
+            'activo' => 'Activo',
         ];
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getTipoCaja()
-    {
-        return $this->hasOne(TiposCajas::className(), ['id' => 'tipo_caja_id']);
     }
 
     /**
@@ -70,5 +62,13 @@ class EfectivoCaja extends \yii\db\ActiveRecord
     public function getContratista()
     {
         return $this->hasOne(Contratistas::className(), ['id' => 'contratista_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTipoCaja()
+    {
+        return $this->hasOne(TiposCajas::className(), ['id' => 'tipo_caja_id']);
     }
 }
