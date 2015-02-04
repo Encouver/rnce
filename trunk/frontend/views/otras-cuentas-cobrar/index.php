@@ -32,10 +32,9 @@ $this->params['breadcrumbs'][] = $this->title;
             'fecha',
             // 'garantia',
             // 'plazo',
-            // 'saldo_contabilidad_c',
-            // 'saldo_contabilidad_nc',
             // 'ano',
             // 'contratista_id',
+            // 'activo:boolean',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

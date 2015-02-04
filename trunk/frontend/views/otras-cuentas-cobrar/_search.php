@@ -29,13 +29,11 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'plazo') ?>
 
-    <?php // echo $form->field($model, 'saldo_contabilidad_c') ?>
-
-    <?php // echo $form->field($model, 'saldo_contabilidad_nc') ?>
-
     <?php // echo $form->field($model, 'ano') ?>
 
     <?php // echo $form->field($model, 'contratista_id') ?>
+
+    <?php // echo $form->field($model, 'activo')->checkbox() ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

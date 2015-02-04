@@ -10,6 +10,7 @@ use Yii;
  * @property integer $id
  * @property string $nombre
  * @property string $descripción
+ * @property boolean $activo
  *
  * @property OtrasCuentasCobrar[] $otrasCuentasCobrars
  */
@@ -30,6 +31,7 @@ class TiposDeudores extends \yii\db\ActiveRecord
     {
         return [
             [['nombre', 'descripción'], 'required'],
+            [['activo'], 'boolean'],
             [['nombre', 'descripción'], 'string', 'max' => 255],
             [['nombre'], 'unique']
         ];
@@ -44,6 +46,7 @@ class TiposDeudores extends \yii\db\ActiveRecord
             'id' => 'ID',
             'nombre' => 'Nombre',
             'descripción' => 'Descripción',
+            'activo' => 'Activo',
         ];
     }
 

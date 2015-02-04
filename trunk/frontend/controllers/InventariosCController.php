@@ -1,18 +1,18 @@
 <?php
 
-namespace app\models;
+namespace frontend\controllers;
 
 use Yii;
-use app\models\EfectivoBanco;
-use app\models\EfectivoBancoSearch;
+use app\models\InventariosC;
+use app\models\InventariosCSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * EfectivoBancoController implements the CRUD actions for EfectivoBanco model.
+ * InventariosCController implements the CRUD actions for InventariosC model.
  */
-class EfectivoBancoController extends Controller
+class InventariosCController extends Controller
 {
     public function behaviors()
     {
@@ -27,12 +27,12 @@ class EfectivoBancoController extends Controller
     }
 
     /**
-     * Lists all EfectivoBanco models.
+     * Lists all InventariosC models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new EfectivoBancoSearch();
+        $searchModel = new InventariosCSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -42,7 +42,7 @@ class EfectivoBancoController extends Controller
     }
 
     /**
-     * Displays a single EfectivoBanco model.
+     * Displays a single InventariosC model.
      * @param integer $id
      * @return mixed
      */
@@ -54,13 +54,13 @@ class EfectivoBancoController extends Controller
     }
 
     /**
-     * Creates a new EfectivoBanco model.
+     * Creates a new InventariosC model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new EfectivoBanco();
+        $model = new InventariosC();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -72,7 +72,7 @@ class EfectivoBancoController extends Controller
     }
 
     /**
-     * Updates an existing EfectivoBanco model.
+     * Updates an existing InventariosC model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -91,7 +91,7 @@ class EfectivoBancoController extends Controller
     }
 
     /**
-     * Deletes an existing EfectivoBanco model.
+     * Deletes an existing InventariosC model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -104,15 +104,15 @@ class EfectivoBancoController extends Controller
     }
 
     /**
-     * Finds the EfectivoBanco model based on its primary key value.
+     * Finds the InventariosC model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return EfectivoBanco the loaded model
+     * @return InventariosC the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = EfectivoBanco::findOne($id)) !== null) {
+        if (($model = InventariosC::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

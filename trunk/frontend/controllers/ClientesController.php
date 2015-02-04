@@ -1,18 +1,18 @@
 <?php
 
-namespace app\models;
+namespace frontend\controllers;
 
 use Yii;
-use app\models\TiposCajas;
-use app\models\TiposCajasSearch;
+use app\models\Clientes;
+use app\models\ClientesSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * TiposCajasController implements the CRUD actions for TiposCajas model.
+ * ClientesController implements the CRUD actions for Clientes model.
  */
-class TiposCajasController extends Controller
+class ClientesController extends Controller
 {
     public function behaviors()
     {
@@ -27,12 +27,12 @@ class TiposCajasController extends Controller
     }
 
     /**
-     * Lists all TiposCajas models.
+     * Lists all Clientes models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new TiposCajasSearch();
+        $searchModel = new ClientesSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -42,7 +42,7 @@ class TiposCajasController extends Controller
     }
 
     /**
-     * Displays a single TiposCajas model.
+     * Displays a single Clientes model.
      * @param integer $id
      * @return mixed
      */
@@ -54,13 +54,13 @@ class TiposCajasController extends Controller
     }
 
     /**
-     * Creates a new TiposCajas model.
+     * Creates a new Clientes model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new TiposCajas();
+        $model = new Clientes();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -72,7 +72,7 @@ class TiposCajasController extends Controller
     }
 
     /**
-     * Updates an existing TiposCajas model.
+     * Updates an existing Clientes model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -91,7 +91,7 @@ class TiposCajasController extends Controller
     }
 
     /**
-     * Deletes an existing TiposCajas model.
+     * Deletes an existing Clientes model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -104,15 +104,15 @@ class TiposCajasController extends Controller
     }
 
     /**
-     * Finds the TiposCajas model based on its primary key value.
+     * Finds the Clientes model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return TiposCajas the loaded model
+     * @return Clientes the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = TiposCajas::findOne($id)) !== null) {
+        if (($model = Clientes::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

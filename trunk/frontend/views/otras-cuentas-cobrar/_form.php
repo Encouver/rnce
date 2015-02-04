@@ -24,13 +24,11 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'plazo')->textInput(['maxlength' => 255]) ?>
 
-    <?= $form->field($model, 'saldo_contabilidad_c')->textInput() ?>
-
-    <?= $form->field($model, 'saldo_contabilidad_nc')->textInput() ?>
-
     <?= $form->field($model, 'ano')->textInput() ?>
 
     <?= $form->field($model, 'contratista_id')->textInput() ?>
+
+    <?= $form->field($model, 'activo')->checkbox() ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

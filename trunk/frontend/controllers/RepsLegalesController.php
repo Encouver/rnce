@@ -1,18 +1,18 @@
 <?php
 
-namespace app\models;
+namespace frontend\controllers;
 
 use Yii;
-use app\models\TiposInversiones;
-use app\models\TiposInversionesSearch;
+use app\models\RepsLegales;
+use app\models\RepsLegalesSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * TiposInversionesController implements the CRUD actions for TiposInversiones model.
+ * RepsLegalesController implements the CRUD actions for RepsLegales model.
  */
-class TiposInversionesController extends Controller
+class RepsLegalesController extends Controller
 {
     public function behaviors()
     {
@@ -27,12 +27,12 @@ class TiposInversionesController extends Controller
     }
 
     /**
-     * Lists all TiposInversiones models.
+     * Lists all RepsLegales models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new TiposInversionesSearch();
+        $searchModel = new RepsLegalesSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -42,7 +42,7 @@ class TiposInversionesController extends Controller
     }
 
     /**
-     * Displays a single TiposInversiones model.
+     * Displays a single RepsLegales model.
      * @param integer $id
      * @return mixed
      */
@@ -54,13 +54,13 @@ class TiposInversionesController extends Controller
     }
 
     /**
-     * Creates a new TiposInversiones model.
+     * Creates a new RepsLegales model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new TiposInversiones();
+        $model = new RepsLegales();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -72,7 +72,7 @@ class TiposInversionesController extends Controller
     }
 
     /**
-     * Updates an existing TiposInversiones model.
+     * Updates an existing RepsLegales model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -91,7 +91,7 @@ class TiposInversionesController extends Controller
     }
 
     /**
-     * Deletes an existing TiposInversiones model.
+     * Deletes an existing RepsLegales model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -104,15 +104,15 @@ class TiposInversionesController extends Controller
     }
 
     /**
-     * Finds the TiposInversiones model based on its primary key value.
+     * Finds the RepsLegales model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return TiposInversiones the loaded model
+     * @return RepsLegales the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = TiposInversiones::findOne($id)) !== null) {
+        if (($model = RepsLegales::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

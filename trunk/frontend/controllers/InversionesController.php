@@ -3,14 +3,14 @@
 namespace frontend\controllers;
 
 use Yii;
-use app\models\inversiones;
+use app\models\Inversiones;
 use app\models\InversionesSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * InversionesController implements the CRUD actions for inversiones model.
+ * InversionesController implements the CRUD actions for Inversiones model.
  */
 class InversionesController extends Controller
 {
@@ -27,7 +27,7 @@ class InversionesController extends Controller
     }
 
     /**
-     * Lists all inversiones models.
+     * Lists all Inversiones models.
      * @return mixed
      */
     public function actionIndex()
@@ -42,7 +42,7 @@ class InversionesController extends Controller
     }
 
     /**
-     * Displays a single inversiones model.
+     * Displays a single Inversiones model.
      * @param integer $id
      * @return mixed
      */
@@ -54,13 +54,13 @@ class InversionesController extends Controller
     }
 
     /**
-     * Creates a new inversiones model.
+     * Creates a new Inversiones model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new inversiones();
+        $model = new Inversiones();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -72,7 +72,7 @@ class InversionesController extends Controller
     }
 
     /**
-     * Updates an existing inversiones model.
+     * Updates an existing Inversiones model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -91,7 +91,7 @@ class InversionesController extends Controller
     }
 
     /**
-     * Deletes an existing inversiones model.
+     * Deletes an existing Inversiones model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -104,15 +104,15 @@ class InversionesController extends Controller
     }
 
     /**
-     * Finds the inversiones model based on its primary key value.
+     * Finds the Inversiones model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return inversiones the loaded model
+     * @return Inversiones the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = inversiones::findOne($id)) !== null) {
+        if (($model = Inversiones::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

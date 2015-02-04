@@ -20,6 +20,7 @@ class TiposDeudoresSearch extends TiposDeudores
         return [
             [['id'], 'integer'],
             [['nombre', 'descripción'], 'safe'],
+            [['activo'], 'boolean'],
         ];
     }
 
@@ -57,6 +58,7 @@ class TiposDeudoresSearch extends TiposDeudores
 
         $query->andFilterWhere([
             'id' => $this->id,
+            'activo' => $this->activo,
         ]);
 
         $query->andFilterWhere(['like', 'nombre', $this->nombre])

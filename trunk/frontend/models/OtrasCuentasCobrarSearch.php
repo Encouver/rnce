@@ -20,7 +20,7 @@ class OtrasCuentasCobrarSearch extends OtrasCuentasCobrar
         return [
             [['id', 'tipo_deudor_id', 'contratista_id'], 'integer'],
             [['nombre', 'origen', 'fecha', 'garantia', 'plazo', 'ano'], 'safe'],
-            [['saldo_contabilidad_c', 'saldo_contabilidad_nc'], 'number'],
+            [['activo'], 'boolean'],
         ];
     }
 
@@ -60,10 +60,9 @@ class OtrasCuentasCobrarSearch extends OtrasCuentasCobrar
             'id' => $this->id,
             'tipo_deudor_id' => $this->tipo_deudor_id,
             'fecha' => $this->fecha,
-            'saldo_contabilidad_c' => $this->saldo_contabilidad_c,
-            'saldo_contabilidad_nc' => $this->saldo_contabilidad_nc,
             'ano' => $this->ano,
             'contratista_id' => $this->contratista_id,
+            'activo' => $this->activo,
         ]);
 
         $query->andFilterWhere(['like', 'nombre', $this->nombre])

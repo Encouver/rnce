@@ -14,13 +14,12 @@ use Yii;
  * @property string $fecha
  * @property string $garantia
  * @property string $plazo
- * @property string $saldo_contabilidad_c
- * @property string $saldo_contabilidad_nc
  * @property string $ano
  * @property integer $contratista_id
+ * @property boolean $activo
  *
- * @property TiposDeudores $tipoDeudor
  * @property Contratistas $contratista
+ * @property TiposDeudores $tipoDeudor
  */
 class OtrasCuentasCobrar extends \yii\db\ActiveRecord
 {
@@ -39,9 +38,9 @@ class OtrasCuentasCobrar extends \yii\db\ActiveRecord
     {
         return [
             [['tipo_deudor_id', 'contratista_id'], 'integer'],
-            [['nombre', 'origen', 'fecha', 'garantia', 'plazo', 'saldo_contabilidad_c', 'saldo_contabilidad_nc', 'ano', 'contratista_id'], 'required'],
+            [['nombre', 'origen', 'fecha', 'garantia', 'plazo', 'ano', 'contratista_id'], 'required'],
             [['fecha', 'ano'], 'safe'],
-            [['saldo_contabilidad_c', 'saldo_contabilidad_nc'], 'number'],
+            [['activo'], 'boolean'],
             [['nombre', 'origen', 'garantia', 'plazo'], 'string', 'max' => 255]
         ];
     }
@@ -59,19 +58,10 @@ class OtrasCuentasCobrar extends \yii\db\ActiveRecord
             'fecha' => 'Fecha',
             'garantia' => 'Garantia',
             'plazo' => 'Plazo',
-            'saldo_contabilidad_c' => 'Saldo Contabilidad C',
-            'saldo_contabilidad_nc' => 'Saldo Contabilidad Nc',
             'ano' => 'Ano',
             'contratista_id' => 'Contratista ID',
+            'activo' => 'Activo',
         ];
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getTipoDeudor()
-    {
-        return $this->hasOne(TiposDeudores::className(), ['id' => 'tipo_deudor_id']);
     }
 
     /**
@@ -80,5 +70,13 @@ class OtrasCuentasCobrar extends \yii\db\ActiveRecord
     public function getContratista()
     {
         return $this->hasOne(Contratistas::className(), ['id' => 'contratista_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTipoDeudor()
+    {
+        return $this->hasOne(TiposDeudores::className(), ['id' => 'tipo_deudor_id']);
     }
 }

@@ -1,18 +1,18 @@
 <?php
 
-namespace app\models;
+namespace frontend\controllers;
 
 use Yii;
-use app\models\EfectivoCaja;
-use app\models\EfectivoCajaSearch;
+use app\models\Inpc;
+use app\models\InpcSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * EfectivoCajaController implements the CRUD actions for EfectivoCaja model.
+ * InpcController implements the CRUD actions for Inpc model.
  */
-class EfectivoCajaController extends Controller
+class InpcController extends Controller
 {
     public function behaviors()
     {
@@ -27,12 +27,12 @@ class EfectivoCajaController extends Controller
     }
 
     /**
-     * Lists all EfectivoCaja models.
+     * Lists all Inpc models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new EfectivoCajaSearch();
+        $searchModel = new InpcSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -42,7 +42,7 @@ class EfectivoCajaController extends Controller
     }
 
     /**
-     * Displays a single EfectivoCaja model.
+     * Displays a single Inpc model.
      * @param integer $id
      * @return mixed
      */
@@ -54,13 +54,13 @@ class EfectivoCajaController extends Controller
     }
 
     /**
-     * Creates a new EfectivoCaja model.
+     * Creates a new Inpc model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new EfectivoCaja();
+        $model = new Inpc();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -72,7 +72,7 @@ class EfectivoCajaController extends Controller
     }
 
     /**
-     * Updates an existing EfectivoCaja model.
+     * Updates an existing Inpc model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -91,7 +91,7 @@ class EfectivoCajaController extends Controller
     }
 
     /**
-     * Deletes an existing EfectivoCaja model.
+     * Deletes an existing Inpc model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -104,15 +104,15 @@ class EfectivoCajaController extends Controller
     }
 
     /**
-     * Finds the EfectivoCaja model based on its primary key value.
+     * Finds the Inpc model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return EfectivoCaja the loaded model
+     * @return Inpc the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = EfectivoCaja::findOne($id)) !== null) {
+        if (($model = Inpc::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

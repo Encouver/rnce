@@ -1,18 +1,18 @@
 <?php
 
-namespace app\models;
+namespace frontend\controllers;
 
 use Yii;
-use app\models\Inversiones;
-use app\models\InversionesSearch;
+use app\models\SustentoConts;
+use app\models\SustentoContsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * InversionesController implements the CRUD actions for Inversiones model.
+ * SustentoController implements the CRUD actions for SustentoConts model.
  */
-class InversionesController extends Controller
+class SustentoController extends Controller
 {
     public function behaviors()
     {
@@ -27,12 +27,12 @@ class InversionesController extends Controller
     }
 
     /**
-     * Lists all Inversiones models.
+     * Lists all SustentoConts models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new InversionesSearch();
+        $searchModel = new SustentoContsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -42,7 +42,7 @@ class InversionesController extends Controller
     }
 
     /**
-     * Displays a single Inversiones model.
+     * Displays a single SustentoConts model.
      * @param integer $id
      * @return mixed
      */
@@ -54,13 +54,13 @@ class InversionesController extends Controller
     }
 
     /**
-     * Creates a new Inversiones model.
+     * Creates a new SustentoConts model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Inversiones();
+        $model = new SustentoConts();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -72,7 +72,7 @@ class InversionesController extends Controller
     }
 
     /**
-     * Updates an existing Inversiones model.
+     * Updates an existing SustentoConts model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -91,7 +91,7 @@ class InversionesController extends Controller
     }
 
     /**
-     * Deletes an existing Inversiones model.
+     * Deletes an existing SustentoConts model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -104,15 +104,15 @@ class InversionesController extends Controller
     }
 
     /**
-     * Finds the Inversiones model based on its primary key value.
+     * Finds the SustentoConts model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Inversiones the loaded model
+     * @return SustentoConts the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Inversiones::findOne($id)) !== null) {
+        if (($model = SustentoConts::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
