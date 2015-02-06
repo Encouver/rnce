@@ -1,8 +1,34 @@
 <?php
 /* @var $this yii\web\View */
 $this->title = 'My Yii Application';
+
+use yii\bootstrap\Nav;
+use yii\bootstrap\NavBar;
+use yii\widgets\Menu;
 ?>
 <div class="site-index">
+    <?php 
+        NavBar::begin(['brandLabel' => '']);
+        echo Nav::widget([
+            'items' => [
+                ['label' => 'Efectivo Caja', 'url' => ['/efectivo-caja/index']],
+                ['label' => 'Efectivo Banco', 'url' => ['/efectivo-banco/index']],
+                ['label' => 'Tipo Caja', 'url' => ['/tipos-cajas/index']],
+                ['label' => 'Inversiones', 'url' => ['/inversiones/index']],
+                ['label' => 'Bancos Contratistas', 'url' => ['/bancos-contratistas/index']],
+                ['label' => 'Tipos inversiones', 'url' => ['/tipos-inversiones/index']],
+                ['label' => 'Cuentas por cobrar comerciales', 'url' => ['/cuentas-cobrar-sprivpub/index']],
+                ['label' => 'Otras cuentas cobrar', 'url' => ['/otras-cuentas-cobrar/index']],
+                ['label' => 'Tipos Deudores', 'url' => ['/tipos-deudores/index']],
+                ['label' => 'Representantes legales', 'url' => ['/reps-legales/index']],
+                ['label' => 'Empresas Relacionadas', 'url' => ['/empresas-relacionadas/index']],
+                ['label' => 'Inventarios C', 'url' => ['/inventarios-c/index']],
+                //['label' => 'Tipos inversiones', 'url' => ['/tipos-inversiones/index']],
+            ],
+        ]);
+        NavBar::end();
+
+    ?>
 
     <!-- <div class="jumbotron">
         <h1>Congratulations!</h1>
