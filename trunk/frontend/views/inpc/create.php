@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Inpc */
 
-$this->title = 'Create Inpc';
+$this->title = 'Crear Inpc';
 $this->params['breadcrumbs'][] = ['label' => 'Inpcs', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

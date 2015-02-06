@@ -28,8 +28,7 @@ class Inpc extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['ano'], 'safe'],
-            [['mes', 'indice'], 'required'],
+            [['mes', 'indice', 'ano'], 'required'],
             [['mes'], 'integer'],
             [['indice'], 'number'],
             [['ano', 'mes'], 'unique', 'targetAttribute' => ['ano', 'mes'], 'message' => 'The combination of Ano and Mes has already been taken.']
