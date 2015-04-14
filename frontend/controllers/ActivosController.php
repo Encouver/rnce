@@ -4,6 +4,8 @@ namespace frontend\controllers;
 
 use common\models\Bienes;
 
+use kartik\widgets\DatePicker;
+
 class ActivosController extends \common\components\BaseController
 {
 
@@ -32,7 +34,7 @@ class ActivosController extends \common\components\BaseController
     public function actionOrigen($id)
     {
         $model = new Bienes();
-$form = ActiveForm::begin();
+$form = \kartik\form\ActiveForm::begin();
         switch ($id) {
             case 0:
                 # code...
@@ -40,7 +42,7 @@ $form = ActiveForm::begin();
                 echo '<label>Check Issue Date</label>';
                 echo DatePicker::widget([
                     'model'=>$model,
-                    'attribute'=> 'fecha_asamblea',
+                    'attribute'=> 'origen',
                     'name' => 'check_issue_date', 
                     'value' => date('d-M-Y', strtotime('+2 days')),
                     'options' => ['placeholder' => 'Select issue date ...'],
@@ -59,6 +61,19 @@ $form = ActiveForm::begin();
                 break;
             case 3:
                 # code...
+         // usage without model
+                echo '<label>Check Issue Date</label>';
+                echo DatePicker::widget([
+                    'model'=>$model,
+                    'attribute'=> 'origen',
+                    'name' => 'check_issue_date', 
+                    'value' => date('d-M-Y', strtotime('+2 days')),
+                    'options' => ['placeholder' => 'Select issue date ...'],
+                    'pluginOptions' => [
+                        'format' => 'dd-M-yyyy',
+                        'todayHighlight' => true
+                    ]
+                ]);
                 break;
             case 4:
                 # code...

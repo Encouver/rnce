@@ -70,6 +70,6 @@ class SysTiposBienes extends \common\components\BaseActiveRecord
      */
     public function getSysClasificacionBien()
     {
-        return $this->hasOne(SysClasificacionesBien::className(), ['id' => 'sys_clasificacion_bien_id']);
+        return $this->hasOne(SysClasificacionesBienes::className(), ['id' => 'sys_clasificacion_bien_id']);
     }
 }

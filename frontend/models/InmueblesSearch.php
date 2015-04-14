@@ -5,12 +5,12 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\SysClasificacionesBien;
+use common\models\Inmuebles;
 
 /**
- * SysClasificacionesBienSearch represents the model behind the search form about `common\models\SysClasificacionesBien`.
+ * InmueblesSearch represents the model behind the search form about `common\models\Inmuebles`.
  */
-class SysClasificacionesBienSearch extends SysClasificacionesBien
+class InmueblesSearch extends Inmuebles
 {
     /**
      * @inheritdoc
@@ -18,8 +18,8 @@ class SysClasificacionesBienSearch extends SysClasificacionesBien
     public function rules()
     {
         return [
-            [['id'], 'integer'],
-            [['nombre', 'descripcion', 'sys_fecha'], 'safe'],
+            [['id', 'bien_id'], 'integer'],
+            [['descripcion', 'direccion_ubicacion', 'ficha_catastral', 'zonificacion', 'extension', 'titulo_supletorio', 'sys_fecha'], 'safe'],
             [['sys_status'], 'boolean'],
         ];
     }
@@ -42,7 +42,7 @@ class SysClasificacionesBienSearch extends SysClasificacionesBien
      */
     public function search($params)
     {
-        $query = SysClasificacionesBien::find();
+        $query = Inmuebles::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -58,12 +58,17 @@ class SysClasificacionesBienSearch extends SysClasificacionesBien
 
         $query->andFilterWhere([
             'id' => $this->id,
+            'bien_id' => $this->bien_id,
             'sys_status' => $this->sys_status,
             'sys_fecha' => $this->sys_fecha,
         ]);
 
-        $query->andFilterWhere(['like', 'nombre', $this->nombre])
-            ->andFilterWhere(['like', 'descripcion', $this->descripcion]);
+        $query->andFilterWhere(['like', 'descripcion', $this->descripcion])
+            ->andFilterWhere(['like', 'direccion_ubicacion', $this->direccion_ubicacion])
+            ->andFilterWhere(['like', 'ficha_catastral', $this->ficha_catastral])
+            ->andFilterWhere(['like', 'zonificacion', $this->zonificacion])
+            ->andFilterWhere(['like', 'extension', $this->extension])
+            ->andFilterWhere(['like', 'titulo_supletorio', $this->titulo_supletorio]);
 
         return $dataProvider;
     }

@@ -14136,3 +14136,503 @@ $_SERVER = [
     'REQUEST_TIME_FLOAT' => 1428280920.474
     'REQUEST_TIME' => 1428280920
 ]
+2015-04-05 20:17:05 [127.0.0.1][-][-][error][yii\base\ErrorException:1] exception 'yii\base\ErrorException' with message 'Class 'frontend\controllers\ActiveForm' not found' in C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\rnce\frontend\controllers\ActivosController.php:35
+Stack trace:
+#0 [internal function]: yii\base\ErrorHandler->handleFatalError()
+#1 {main}
+2015-04-05 20:17:05 [127.0.0.1][-][-][info][application] $_GET = [
+    'r' => 'activos/origen'
+    'id' => '0'
+]
+
+$_COOKIE = [
+    'PHPSESSID' => 'uvnong48slk40t1ate2rgquc82'
+    '_csrf' => 'aeba7c51abe84e9e2e8e623ad0212a310fd23e0c9b75cd236416d4d7265079cea:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"GEr7_VQG5BasMuIzkRRjIjB25_BuXkez\";}'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:38.0) Gecko/20100101 Firefox/38.0'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_X_CSRF_TOKEN' => 'Ulo2VlI0eloVH0RhDWIrHWcYVyUfQTMgOQhkPBteOGhnBXQjCl8fIA=='
+    'HTTP_X_REQUESTED_WITH' => 'XMLHttpRequest'
+    'HTTP_REFERER' => 'http://localhost/rnce/frontend/web/index.php?r=activos%2Findex'
+    'HTTP_COOKIE' => 'PHPSESSID=uvnong48slk40t1ate2rgquc82; _csrf=aeba7c51abe84e9e2e8e623ad0212a310fd23e0c9b75cd236416d4d7265079cea%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22GEr7_VQG5BasMuIzkRRjIjB25_BuXkez%22%3B%7D'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_PRAGMA' => 'no-cache'
+    'HTTP_CACHE_CONTROL' => 'no-cache'
+    'CONTENT_LENGTH' => '0'
+    'PATH' => 'C:\\Program Files (x86)\\Intel\\iCLS Client\\;C:\\Program Files\\Intel\\iCLS Client\\;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\Intel\\Intel(R) Management Engine Components\\DAL;C:\\Program Files\\Intel\\Intel(R) Management Engine Components\\IPT;C:\\Program Files (x86)\\Intel\\Intel(R) Management Engine Components\\DAL;C:\\Program Files (x86)\\Intel\\Intel(R) Management Engine Components\\IPT;C:\\Program Files (x86)\\MySQL\\MySQL Server 5.1\\bin;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files (x86)\\Intel\\OpenCL SDK\\2.0\\bin\\x86;C:\\Program Files (x86)\\Intel\\OpenCL SDK\\2.0\\bin\\x64;C:\\Program Files (x86)\\PostgreSQL\\9.3\\bin;C:\\Program Files (x86)\\Common Files\\Roxio Shared\\DLLShared\\;C:\\Program Files (x86)\\Common Files\\Roxio Shared\\DLLShared\\;C:\\Program Files (x86)\\Common Files\\Roxio Shared\\13.0\\DLLShared\\;C:\\dev\\php;C:\\Program Files\\Java\\jdk1.6.0_45\\bin;C:\\Program Files (x86)\\QuickTime\\QTSystem\\;C:\\ProgramData\\ComposerSetup\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.2.22 (Win32) PHP/5.4.15'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Program Files (x86)/Apache Software Foundation/Apache2.2/htdocs'
+    'SERVER_ADMIN' => 'admin@ciens.ucv.ve'
+    'SCRIPT_FILENAME' => 'C:/Program Files (x86)/Apache Software Foundation/Apache2.2/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '61316'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => 'r=activos%2Forigen&id=0'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=activos%2Forigen&id=0'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1428281225.041
+    'REQUEST_TIME' => 1428281225
+]
+2015-04-05 20:17:07 [127.0.0.1][-][-][error][yii\base\ErrorException:1] exception 'yii\base\ErrorException' with message 'Class 'frontend\controllers\ActiveForm' not found' in C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\rnce\frontend\controllers\ActivosController.php:35
+Stack trace:
+#0 [internal function]: yii\base\ErrorHandler->handleFatalError()
+#1 {main}
+2015-04-05 20:17:07 [127.0.0.1][-][-][info][application] $_GET = [
+    'r' => 'activos/origen'
+    'id' => '1'
+]
+
+$_COOKIE = [
+    'PHPSESSID' => 'uvnong48slk40t1ate2rgquc82'
+    '_csrf' => 'aeba7c51abe84e9e2e8e623ad0212a310fd23e0c9b75cd236416d4d7265079cea:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"GEr7_VQG5BasMuIzkRRjIjB25_BuXkez\";}'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:38.0) Gecko/20100101 Firefox/38.0'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_X_CSRF_TOKEN' => 'Ulo2VlI0eloVH0RhDWIrHWcYVyUfQTMgOQhkPBteOGhnBXQjCl8fIA=='
+    'HTTP_X_REQUESTED_WITH' => 'XMLHttpRequest'
+    'HTTP_REFERER' => 'http://localhost/rnce/frontend/web/index.php?r=activos%2Findex'
+    'HTTP_COOKIE' => 'PHPSESSID=uvnong48slk40t1ate2rgquc82; _csrf=aeba7c51abe84e9e2e8e623ad0212a310fd23e0c9b75cd236416d4d7265079cea%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22GEr7_VQG5BasMuIzkRRjIjB25_BuXkez%22%3B%7D'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_PRAGMA' => 'no-cache'
+    'HTTP_CACHE_CONTROL' => 'no-cache'
+    'CONTENT_LENGTH' => '0'
+    'PATH' => 'C:\\Program Files (x86)\\Intel\\iCLS Client\\;C:\\Program Files\\Intel\\iCLS Client\\;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\Intel\\Intel(R) Management Engine Components\\DAL;C:\\Program Files\\Intel\\Intel(R) Management Engine Components\\IPT;C:\\Program Files (x86)\\Intel\\Intel(R) Management Engine Components\\DAL;C:\\Program Files (x86)\\Intel\\Intel(R) Management Engine Components\\IPT;C:\\Program Files (x86)\\MySQL\\MySQL Server 5.1\\bin;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files (x86)\\Intel\\OpenCL SDK\\2.0\\bin\\x86;C:\\Program Files (x86)\\Intel\\OpenCL SDK\\2.0\\bin\\x64;C:\\Program Files (x86)\\PostgreSQL\\9.3\\bin;C:\\Program Files (x86)\\Common Files\\Roxio Shared\\DLLShared\\;C:\\Program Files (x86)\\Common Files\\Roxio Shared\\DLLShared\\;C:\\Program Files (x86)\\Common Files\\Roxio Shared\\13.0\\DLLShared\\;C:\\dev\\php;C:\\Program Files\\Java\\jdk1.6.0_45\\bin;C:\\Program Files (x86)\\QuickTime\\QTSystem\\;C:\\ProgramData\\ComposerSetup\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.2.22 (Win32) PHP/5.4.15'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Program Files (x86)/Apache Software Foundation/Apache2.2/htdocs'
+    'SERVER_ADMIN' => 'admin@ciens.ucv.ve'
+    'SCRIPT_FILENAME' => 'C:/Program Files (x86)/Apache Software Foundation/Apache2.2/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '61319'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => 'r=activos%2Forigen&id=1'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=activos%2Forigen&id=1'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1428281227.668
+    'REQUEST_TIME' => 1428281227
+]
+2015-04-05 20:17:09 [127.0.0.1][-][-][error][yii\base\ErrorException:1] exception 'yii\base\ErrorException' with message 'Class 'frontend\controllers\ActiveForm' not found' in C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\rnce\frontend\controllers\ActivosController.php:35
+Stack trace:
+#0 [internal function]: yii\base\ErrorHandler->handleFatalError()
+#1 {main}
+2015-04-05 20:17:09 [127.0.0.1][-][-][info][application] $_GET = [
+    'r' => 'activos/origen'
+    'id' => '2'
+]
+
+$_COOKIE = [
+    'PHPSESSID' => 'uvnong48slk40t1ate2rgquc82'
+    '_csrf' => 'aeba7c51abe84e9e2e8e623ad0212a310fd23e0c9b75cd236416d4d7265079cea:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"GEr7_VQG5BasMuIzkRRjIjB25_BuXkez\";}'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:38.0) Gecko/20100101 Firefox/38.0'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_X_CSRF_TOKEN' => 'Ulo2VlI0eloVH0RhDWIrHWcYVyUfQTMgOQhkPBteOGhnBXQjCl8fIA=='
+    'HTTP_X_REQUESTED_WITH' => 'XMLHttpRequest'
+    'HTTP_REFERER' => 'http://localhost/rnce/frontend/web/index.php?r=activos%2Findex'
+    'HTTP_COOKIE' => 'PHPSESSID=uvnong48slk40t1ate2rgquc82; _csrf=aeba7c51abe84e9e2e8e623ad0212a310fd23e0c9b75cd236416d4d7265079cea%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22GEr7_VQG5BasMuIzkRRjIjB25_BuXkez%22%3B%7D'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_PRAGMA' => 'no-cache'
+    'HTTP_CACHE_CONTROL' => 'no-cache'
+    'CONTENT_LENGTH' => '0'
+    'PATH' => 'C:\\Program Files (x86)\\Intel\\iCLS Client\\;C:\\Program Files\\Intel\\iCLS Client\\;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\Intel\\Intel(R) Management Engine Components\\DAL;C:\\Program Files\\Intel\\Intel(R) Management Engine Components\\IPT;C:\\Program Files (x86)\\Intel\\Intel(R) Management Engine Components\\DAL;C:\\Program Files (x86)\\Intel\\Intel(R) Management Engine Components\\IPT;C:\\Program Files (x86)\\MySQL\\MySQL Server 5.1\\bin;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files (x86)\\Intel\\OpenCL SDK\\2.0\\bin\\x86;C:\\Program Files (x86)\\Intel\\OpenCL SDK\\2.0\\bin\\x64;C:\\Program Files (x86)\\PostgreSQL\\9.3\\bin;C:\\Program Files (x86)\\Common Files\\Roxio Shared\\DLLShared\\;C:\\Program Files (x86)\\Common Files\\Roxio Shared\\DLLShared\\;C:\\Program Files (x86)\\Common Files\\Roxio Shared\\13.0\\DLLShared\\;C:\\dev\\php;C:\\Program Files\\Java\\jdk1.6.0_45\\bin;C:\\Program Files (x86)\\QuickTime\\QTSystem\\;C:\\ProgramData\\ComposerSetup\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.2.22 (Win32) PHP/5.4.15'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Program Files (x86)/Apache Software Foundation/Apache2.2/htdocs'
+    'SERVER_ADMIN' => 'admin@ciens.ucv.ve'
+    'SCRIPT_FILENAME' => 'C:/Program Files (x86)/Apache Software Foundation/Apache2.2/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '61325'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => 'r=activos%2Forigen&id=2'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=activos%2Forigen&id=2'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1428281229.439
+    'REQUEST_TIME' => 1428281229
+]
+2015-04-05 20:17:10 [127.0.0.1][-][-][error][yii\base\ErrorException:1] exception 'yii\base\ErrorException' with message 'Class 'frontend\controllers\ActiveForm' not found' in C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\rnce\frontend\controllers\ActivosController.php:35
+Stack trace:
+#0 [internal function]: yii\base\ErrorHandler->handleFatalError()
+#1 {main}
+2015-04-05 20:17:10 [127.0.0.1][-][-][info][application] $_GET = [
+    'r' => 'activos/origen'
+    'id' => '3'
+]
+
+$_COOKIE = [
+    'PHPSESSID' => 'uvnong48slk40t1ate2rgquc82'
+    '_csrf' => 'aeba7c51abe84e9e2e8e623ad0212a310fd23e0c9b75cd236416d4d7265079cea:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"GEr7_VQG5BasMuIzkRRjIjB25_BuXkez\";}'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:38.0) Gecko/20100101 Firefox/38.0'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_X_CSRF_TOKEN' => 'Ulo2VlI0eloVH0RhDWIrHWcYVyUfQTMgOQhkPBteOGhnBXQjCl8fIA=='
+    'HTTP_X_REQUESTED_WITH' => 'XMLHttpRequest'
+    'HTTP_REFERER' => 'http://localhost/rnce/frontend/web/index.php?r=activos%2Findex'
+    'HTTP_COOKIE' => 'PHPSESSID=uvnong48slk40t1ate2rgquc82; _csrf=aeba7c51abe84e9e2e8e623ad0212a310fd23e0c9b75cd236416d4d7265079cea%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22GEr7_VQG5BasMuIzkRRjIjB25_BuXkez%22%3B%7D'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_PRAGMA' => 'no-cache'
+    'HTTP_CACHE_CONTROL' => 'no-cache'
+    'CONTENT_LENGTH' => '0'
+    'PATH' => 'C:\\Program Files (x86)\\Intel\\iCLS Client\\;C:\\Program Files\\Intel\\iCLS Client\\;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\Intel\\Intel(R) Management Engine Components\\DAL;C:\\Program Files\\Intel\\Intel(R) Management Engine Components\\IPT;C:\\Program Files (x86)\\Intel\\Intel(R) Management Engine Components\\DAL;C:\\Program Files (x86)\\Intel\\Intel(R) Management Engine Components\\IPT;C:\\Program Files (x86)\\MySQL\\MySQL Server 5.1\\bin;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files (x86)\\Intel\\OpenCL SDK\\2.0\\bin\\x86;C:\\Program Files (x86)\\Intel\\OpenCL SDK\\2.0\\bin\\x64;C:\\Program Files (x86)\\PostgreSQL\\9.3\\bin;C:\\Program Files (x86)\\Common Files\\Roxio Shared\\DLLShared\\;C:\\Program Files (x86)\\Common Files\\Roxio Shared\\DLLShared\\;C:\\Program Files (x86)\\Common Files\\Roxio Shared\\13.0\\DLLShared\\;C:\\dev\\php;C:\\Program Files\\Java\\jdk1.6.0_45\\bin;C:\\Program Files (x86)\\QuickTime\\QTSystem\\;C:\\ProgramData\\ComposerSetup\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.2.22 (Win32) PHP/5.4.15'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Program Files (x86)/Apache Software Foundation/Apache2.2/htdocs'
+    'SERVER_ADMIN' => 'admin@ciens.ucv.ve'
+    'SCRIPT_FILENAME' => 'C:/Program Files (x86)/Apache Software Foundation/Apache2.2/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '61326'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => 'r=activos%2Forigen&id=3'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=activos%2Forigen&id=3'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1428281230.842
+    'REQUEST_TIME' => 1428281230
+]
+2015-04-05 20:17:12 [127.0.0.1][-][-][error][yii\base\ErrorException:1] exception 'yii\base\ErrorException' with message 'Class 'frontend\controllers\ActiveForm' not found' in C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\rnce\frontend\controllers\ActivosController.php:35
+Stack trace:
+#0 [internal function]: yii\base\ErrorHandler->handleFatalError()
+#1 {main}
+2015-04-05 20:17:12 [127.0.0.1][-][-][info][application] $_GET = [
+    'r' => 'activos/origen'
+    'id' => '4'
+]
+
+$_COOKIE = [
+    'PHPSESSID' => 'uvnong48slk40t1ate2rgquc82'
+    '_csrf' => 'aeba7c51abe84e9e2e8e623ad0212a310fd23e0c9b75cd236416d4d7265079cea:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"GEr7_VQG5BasMuIzkRRjIjB25_BuXkez\";}'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:38.0) Gecko/20100101 Firefox/38.0'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_X_CSRF_TOKEN' => 'Ulo2VlI0eloVH0RhDWIrHWcYVyUfQTMgOQhkPBteOGhnBXQjCl8fIA=='
+    'HTTP_X_REQUESTED_WITH' => 'XMLHttpRequest'
+    'HTTP_REFERER' => 'http://localhost/rnce/frontend/web/index.php?r=activos%2Findex'
+    'HTTP_COOKIE' => 'PHPSESSID=uvnong48slk40t1ate2rgquc82; _csrf=aeba7c51abe84e9e2e8e623ad0212a310fd23e0c9b75cd236416d4d7265079cea%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22GEr7_VQG5BasMuIzkRRjIjB25_BuXkez%22%3B%7D'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_PRAGMA' => 'no-cache'
+    'HTTP_CACHE_CONTROL' => 'no-cache'
+    'CONTENT_LENGTH' => '0'
+    'PATH' => 'C:\\Program Files (x86)\\Intel\\iCLS Client\\;C:\\Program Files\\Intel\\iCLS Client\\;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\Intel\\Intel(R) Management Engine Components\\DAL;C:\\Program Files\\Intel\\Intel(R) Management Engine Components\\IPT;C:\\Program Files (x86)\\Intel\\Intel(R) Management Engine Components\\DAL;C:\\Program Files (x86)\\Intel\\Intel(R) Management Engine Components\\IPT;C:\\Program Files (x86)\\MySQL\\MySQL Server 5.1\\bin;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files (x86)\\Intel\\OpenCL SDK\\2.0\\bin\\x86;C:\\Program Files (x86)\\Intel\\OpenCL SDK\\2.0\\bin\\x64;C:\\Program Files (x86)\\PostgreSQL\\9.3\\bin;C:\\Program Files (x86)\\Common Files\\Roxio Shared\\DLLShared\\;C:\\Program Files (x86)\\Common Files\\Roxio Shared\\DLLShared\\;C:\\Program Files (x86)\\Common Files\\Roxio Shared\\13.0\\DLLShared\\;C:\\dev\\php;C:\\Program Files\\Java\\jdk1.6.0_45\\bin;C:\\Program Files (x86)\\QuickTime\\QTSystem\\;C:\\ProgramData\\ComposerSetup\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.2.22 (Win32) PHP/5.4.15'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Program Files (x86)/Apache Software Foundation/Apache2.2/htdocs'
+    'SERVER_ADMIN' => 'admin@ciens.ucv.ve'
+    'SCRIPT_FILENAME' => 'C:/Program Files (x86)/Apache Software Foundation/Apache2.2/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '61327'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => 'r=activos%2Forigen&id=4'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=activos%2Forigen&id=4'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1428281232.437
+    'REQUEST_TIME' => 1428281232
+]
+2015-04-05 20:24:20 [127.0.0.1][-][-][error][yii\db\Exception] exception 'PDOException' with message 'SQLSTATE[42P01]: Undefined table: 7 ERROR:  no existe la relación «activos.sys_clasificaciones_bien»
+LINE 1: SELECT * FROM "activos"."sys_clasificaciones_bien" WHERE "id...
+                      ^' in C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\rnce\vendor\yiisoft\yii2\db\Command.php:822
+Stack trace:
+#0 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\rnce\vendor\yiisoft\yii2\db\Command.php(822): PDOStatement->execute()
+#1 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\rnce\vendor\yiisoft\yii2\db\Command.php(364): yii\db\Command->queryInternal('fetch', NULL)
+#2 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\rnce\vendor\yiisoft\yii2\db\Query.php(243): yii\db\Command->queryOne()
+#3 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\rnce\vendor\yiisoft\yii2\db\ActiveQuery.php(285): yii\db\Query->one(NULL)
+#4 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\rnce\vendor\yiisoft\yii2\db\ActiveRelationTrait.php(157): yii\db\ActiveQuery->one()
+#5 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\rnce\vendor\yiisoft\yii2\db\BaseActiveRecord.php(248): yii\db\ActiveQuery->findFor('sysClasificacio...', Object(common\models\SysTiposBienes))
+#6 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\rnce\frontend\views\activos\_form.php(25): yii\db\BaseActiveRecord->__get('sysClasificacio...')
+#7 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\rnce\vendor\yiisoft\yii2\helpers\BaseArrayHelper.php(177): yii\base\View->{closure}(Object(common\models\SysTiposBienes), NULL)
+#8 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\rnce\vendor\yiisoft\yii2\helpers\BaseArrayHelper.php(363): yii\helpers\BaseArrayHelper::getValue(Object(common\models\SysTiposBienes), Object(Closure))
+#9 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\rnce\frontend\views\activos\_form.php(25): yii\helpers\BaseArrayHelper::map(Array, 'id', 'nombre', Object(Closure))
+#10 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\rnce\vendor\yiisoft\yii2\base\View.php(325): require('C:\Program File...')
+#11 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\rnce\vendor\yiisoft\yii2\base\View.php(247): yii\base\View->renderPhpFile('C:\Program File...', Array)
+#12 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\rnce\vendor\yiisoft\yii2\base\View.php(149): yii\base\View->renderFile('C:\Program File...', Array, NULL)
+#13 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\rnce\frontend\views\activos\index.php(14): yii\base\View->render('_form', Array)
+#14 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\rnce\vendor\yiisoft\yii2\base\View.php(325): require('C:\Program File...')
+#15 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\rnce\vendor\yiisoft\yii2\base\View.php(247): yii\base\View->renderPhpFile('C:\Program File...', Array)
+#16 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\rnce\vendor\yiisoft\yii2\base\View.php(149): yii\base\View->renderFile('C:\Program File...', Array, Object(frontend\controllers\ActivosController))
+#17 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\rnce\vendor\yiisoft\yii2\base\Controller.php(367): yii\base\View->render('index', Array, Object(frontend\controllers\ActivosController))
+#18 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\rnce\frontend\controllers\ActivosController.php(98): yii\base\Controller->render('index', Array)
+#19 [internal function]: frontend\controllers\ActivosController->actionIndex()
+#20 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\rnce\vendor\yiisoft\yii2\base\InlineAction.php(55): call_user_func_array(Array, Array)
+#21 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\rnce\vendor\yiisoft\yii2\base\Controller.php(151): yii\base\InlineAction->runWithParams(Array)
+#22 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\rnce\vendor\yiisoft\yii2\base\Module.php(455): yii\base\Controller->runAction('index', Array)
+#23 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\rnce\vendor\yiisoft\yii2\web\Application.php(83): yii\base\Module->runAction('activos/index', Array)
+#24 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\rnce\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#25 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\rnce\frontend\web\index.php(18): yii\base\Application->run()
+#26 {main}
+
+Next exception 'yii\db\Exception' with message 'SQLSTATE[42P01]: Undefined table: 7 ERROR:  no existe la relación «activos.sys_clasificaciones_bien»
+LINE 1: SELECT * FROM "activos"."sys_clasificaciones_bien" WHERE "id...
+                      ^
+The SQL being executed was: SELECT * FROM "activos"."sys_clasificaciones_bien" WHERE "id"=3' in C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\rnce\vendor\yiisoft\yii2\db\Schema.php:534
+Stack trace:
+#0 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\rnce\vendor\yiisoft\yii2\db\Command.php(837): yii\db\Schema->convertException(Object(PDOException), 'SELECT * FROM "...')
+#1 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\rnce\vendor\yiisoft\yii2\db\Command.php(364): yii\db\Command->queryInternal('fetch', NULL)
+#2 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\rnce\vendor\yiisoft\yii2\db\Query.php(243): yii\db\Command->queryOne()
+#3 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\rnce\vendor\yiisoft\yii2\db\ActiveQuery.php(285): yii\db\Query->one(NULL)
+#4 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\rnce\vendor\yiisoft\yii2\db\ActiveRelationTrait.php(157): yii\db\ActiveQuery->one()
+#5 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\rnce\vendor\yiisoft\yii2\db\BaseActiveRecord.php(248): yii\db\ActiveQuery->findFor('sysClasificacio...', Object(common\models\SysTiposBienes))
+#6 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\rnce\frontend\views\activos\_form.php(25): yii\db\BaseActiveRecord->__get('sysClasificacio...')
+#7 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\rnce\vendor\yiisoft\yii2\helpers\BaseArrayHelper.php(177): yii\base\View->{closure}(Object(common\models\SysTiposBienes), NULL)
+#8 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\rnce\vendor\yiisoft\yii2\helpers\BaseArrayHelper.php(363): yii\helpers\BaseArrayHelper::getValue(Object(common\models\SysTiposBienes), Object(Closure))
+#9 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\rnce\frontend\views\activos\_form.php(25): yii\helpers\BaseArrayHelper::map(Array, 'id', 'nombre', Object(Closure))
+#10 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\rnce\vendor\yiisoft\yii2\base\View.php(325): require('C:\Program File...')
+#11 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\rnce\vendor\yiisoft\yii2\base\View.php(247): yii\base\View->renderPhpFile('C:\Program File...', Array)
+#12 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\rnce\vendor\yiisoft\yii2\base\View.php(149): yii\base\View->renderFile('C:\Program File...', Array, NULL)
+#13 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\rnce\frontend\views\activos\index.php(14): yii\base\View->render('_form', Array)
+#14 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\rnce\vendor\yiisoft\yii2\base\View.php(325): require('C:\Program File...')
+#15 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\rnce\vendor\yiisoft\yii2\base\View.php(247): yii\base\View->renderPhpFile('C:\Program File...', Array)
+#16 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\rnce\vendor\yiisoft\yii2\base\View.php(149): yii\base\View->renderFile('C:\Program File...', Array, Object(frontend\controllers\ActivosController))
+#17 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\rnce\vendor\yiisoft\yii2\base\Controller.php(367): yii\base\View->render('index', Array, Object(frontend\controllers\ActivosController))
+#18 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\rnce\frontend\controllers\ActivosController.php(98): yii\base\Controller->render('index', Array)
+#19 [internal function]: frontend\controllers\ActivosController->actionIndex()
+#20 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\rnce\vendor\yiisoft\yii2\base\InlineAction.php(55): call_user_func_array(Array, Array)
+#21 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\rnce\vendor\yiisoft\yii2\base\Controller.php(151): yii\base\InlineAction->runWithParams(Array)
+#22 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\rnce\vendor\yiisoft\yii2\base\Module.php(455): yii\base\Controller->runAction('index', Array)
+#23 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\rnce\vendor\yiisoft\yii2\web\Application.php(83): yii\base\Module->runAction('activos/index', Array)
+#24 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\rnce\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#25 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\rnce\frontend\web\index.php(18): yii\base\Application->run()
+#26 {main}
+Additional Information:
+Array
+(
+    [0] => 42P01
+    [1] => 7
+    [2] => ERROR:  no existe la relación «activos.sys_clasificaciones_bien»
+LINE 1: SELECT * FROM "activos"."sys_clasificaciones_bien" WHERE "id...
+                      ^
+)
+
+2015-04-05 20:24:20 [127.0.0.1][-][-][info][application] $_GET = [
+    'r' => 'activos/index'
+]
+
+$_COOKIE = [
+    'PHPSESSID' => 'uvnong48slk40t1ate2rgquc82'
+    '_csrf' => '6041451a83229cd3efbf616ddafe7f372a59652998abbfc7928c8e5504ca60c3a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"REc6P-so_ggeNl-qNJ304bJ1JTMPIWkG\";}'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:38.0) Gecko/20100101 Firefox/38.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_COOKIE' => 'PHPSESSID=uvnong48slk40t1ate2rgquc82; _csrf=6041451a83229cd3efbf616ddafe7f372a59652998abbfc7928c8e5504ca60c3a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22REc6P-so_ggeNl-qNJ304bJ1JTMPIWkG%22%3B%7D'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => 'C:\\Program Files (x86)\\Intel\\iCLS Client\\;C:\\Program Files\\Intel\\iCLS Client\\;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\Intel\\Intel(R) Management Engine Components\\DAL;C:\\Program Files\\Intel\\Intel(R) Management Engine Components\\IPT;C:\\Program Files (x86)\\Intel\\Intel(R) Management Engine Components\\DAL;C:\\Program Files (x86)\\Intel\\Intel(R) Management Engine Components\\IPT;C:\\Program Files (x86)\\MySQL\\MySQL Server 5.1\\bin;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files (x86)\\Intel\\OpenCL SDK\\2.0\\bin\\x86;C:\\Program Files (x86)\\Intel\\OpenCL SDK\\2.0\\bin\\x64;C:\\Program Files (x86)\\PostgreSQL\\9.3\\bin;C:\\Program Files (x86)\\Common Files\\Roxio Shared\\DLLShared\\;C:\\Program Files (x86)\\Common Files\\Roxio Shared\\DLLShared\\;C:\\Program Files (x86)\\Common Files\\Roxio Shared\\13.0\\DLLShared\\;C:\\dev\\php;C:\\Program Files\\Java\\jdk1.6.0_45\\bin;C:\\Program Files (x86)\\QuickTime\\QTSystem\\;C:\\ProgramData\\ComposerSetup\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.2.22 (Win32) PHP/5.4.15'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Program Files (x86)/Apache Software Foundation/Apache2.2/htdocs'
+    'SERVER_ADMIN' => 'admin@ciens.ucv.ve'
+    'SCRIPT_FILENAME' => 'C:/Program Files (x86)/Apache Software Foundation/Apache2.2/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '61677'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=activos%2Findex'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=activos%2Findex'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1428281660.589
+    'REQUEST_TIME' => 1428281660
+]
+2015-04-05 20:25:09 [127.0.0.1][-][-][error][yii\base\UnknownPropertyException] exception 'yii\base\UnknownPropertyException' with message 'Getting unknown property: common\models\SysTiposBienes::sysClasificacionBienes' in C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\rnce\vendor\yiisoft\yii2\base\Component.php:143
+Stack trace:
+#0 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\rnce\vendor\yiisoft\yii2\db\BaseActiveRecord.php(246): yii\base\Component->__get('sysClasificacio...')
+#1 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\rnce\frontend\views\activos\_form.php(25): yii\db\BaseActiveRecord->__get('sysClasificacio...')
+#2 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\rnce\vendor\yiisoft\yii2\helpers\BaseArrayHelper.php(177): yii\base\View->{closure}(Object(common\models\SysTiposBienes), NULL)
+#3 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\rnce\vendor\yiisoft\yii2\helpers\BaseArrayHelper.php(363): yii\helpers\BaseArrayHelper::getValue(Object(common\models\SysTiposBienes), Object(Closure))
+#4 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\rnce\frontend\views\activos\_form.php(25): yii\helpers\BaseArrayHelper::map(Array, 'id', 'nombre', Object(Closure))
+#5 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\rnce\vendor\yiisoft\yii2\base\View.php(325): require('C:\Program File...')
+#6 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\rnce\vendor\yiisoft\yii2\base\View.php(247): yii\base\View->renderPhpFile('C:\Program File...', Array)
+#7 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\rnce\vendor\yiisoft\yii2\base\View.php(149): yii\base\View->renderFile('C:\Program File...', Array, NULL)
+#8 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\rnce\frontend\views\activos\index.php(14): yii\base\View->render('_form', Array)
+#9 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\rnce\vendor\yiisoft\yii2\base\View.php(325): require('C:\Program File...')
+#10 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\rnce\vendor\yiisoft\yii2\base\View.php(247): yii\base\View->renderPhpFile('C:\Program File...', Array)
+#11 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\rnce\vendor\yiisoft\yii2\base\View.php(149): yii\base\View->renderFile('C:\Program File...', Array, Object(frontend\controllers\ActivosController))
+#12 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\rnce\vendor\yiisoft\yii2\base\Controller.php(367): yii\base\View->render('index', Array, Object(frontend\controllers\ActivosController))
+#13 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\rnce\frontend\controllers\ActivosController.php(98): yii\base\Controller->render('index', Array)
+#14 [internal function]: frontend\controllers\ActivosController->actionIndex()
+#15 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\rnce\vendor\yiisoft\yii2\base\InlineAction.php(55): call_user_func_array(Array, Array)
+#16 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\rnce\vendor\yiisoft\yii2\base\Controller.php(151): yii\base\InlineAction->runWithParams(Array)
+#17 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\rnce\vendor\yiisoft\yii2\base\Module.php(455): yii\base\Controller->runAction('index', Array)
+#18 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\rnce\vendor\yiisoft\yii2\web\Application.php(83): yii\base\Module->runAction('activos/index', Array)
+#19 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\rnce\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#20 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\rnce\frontend\web\index.php(18): yii\base\Application->run()
+#21 {main}
+2015-04-05 20:25:09 [127.0.0.1][-][-][info][application] $_GET = [
+    'r' => 'activos/index'
+]
+
+$_COOKIE = [
+    'PHPSESSID' => 'uvnong48slk40t1ate2rgquc82'
+    '_csrf' => '174c406806d3ad6a9d33cb06f24260c97c63631cb03eb49bf045940ea4a6e12aa:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"Zx7_W1SsnAYgBWCc9CA-g3U-jyPVwqiD\";}'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:38.0) Gecko/20100101 Firefox/38.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_COOKIE' => 'PHPSESSID=uvnong48slk40t1ate2rgquc82; _csrf=174c406806d3ad6a9d33cb06f24260c97c63631cb03eb49bf045940ea4a6e12aa%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22Zx7_W1SsnAYgBWCc9CA-g3U-jyPVwqiD%22%3B%7D'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => 'C:\\Program Files (x86)\\Intel\\iCLS Client\\;C:\\Program Files\\Intel\\iCLS Client\\;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\Intel\\Intel(R) Management Engine Components\\DAL;C:\\Program Files\\Intel\\Intel(R) Management Engine Components\\IPT;C:\\Program Files (x86)\\Intel\\Intel(R) Management Engine Components\\DAL;C:\\Program Files (x86)\\Intel\\Intel(R) Management Engine Components\\IPT;C:\\Program Files (x86)\\MySQL\\MySQL Server 5.1\\bin;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files (x86)\\Intel\\OpenCL SDK\\2.0\\bin\\x86;C:\\Program Files (x86)\\Intel\\OpenCL SDK\\2.0\\bin\\x64;C:\\Program Files (x86)\\PostgreSQL\\9.3\\bin;C:\\Program Files (x86)\\Common Files\\Roxio Shared\\DLLShared\\;C:\\Program Files (x86)\\Common Files\\Roxio Shared\\DLLShared\\;C:\\Program Files (x86)\\Common Files\\Roxio Shared\\13.0\\DLLShared\\;C:\\dev\\php;C:\\Program Files\\Java\\jdk1.6.0_45\\bin;C:\\Program Files (x86)\\QuickTime\\QTSystem\\;C:\\ProgramData\\ComposerSetup\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.2.22 (Win32) PHP/5.4.15'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Program Files (x86)/Apache Software Foundation/Apache2.2/htdocs'
+    'SERVER_ADMIN' => 'admin@ciens.ucv.ve'
+    'SCRIPT_FILENAME' => 'C:/Program Files (x86)/Apache Software Foundation/Apache2.2/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '61696'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=activos%2Findex'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=activos%2Findex'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1428281709.095
+    'REQUEST_TIME' => 1428281709
+]
+2015-04-05 20:26:18 [127.0.0.1][-][-][error][yii\base\ErrorException:1] exception 'yii\base\ErrorException' with message 'Class 'frontend\controllers\ActiveForm' not found' in C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\rnce\frontend\controllers\ActivosController.php:35
+Stack trace:
+#0 [internal function]: yii\base\ErrorHandler->handleFatalError()
+#1 {main}
+2015-04-05 20:26:18 [127.0.0.1][-][-][info][application] $_GET = [
+    'r' => 'activos/origen'
+    'id' => '1'
+]
+
+$_COOKIE = [
+    'PHPSESSID' => 'uvnong48slk40t1ate2rgquc82'
+    '_csrf' => '174c406806d3ad6a9d33cb06f24260c97c63631cb03eb49bf045940ea4a6e12aa:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"Zx7_W1SsnAYgBWCc9CA-g3U-jyPVwqiD\";}'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:38.0) Gecko/20100101 Firefox/38.0'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_X_CSRF_TOKEN' => 'cHFQSnRSM3YqCWcVI2NgBR4wCS02BXAVSTIRZxNhZlsaCAAcAyNaMg=='
+    'HTTP_X_REQUESTED_WITH' => 'XMLHttpRequest'
+    'HTTP_REFERER' => 'http://localhost/rnce/frontend/web/index.php?r=activos%2Findex'
+    'HTTP_COOKIE' => 'PHPSESSID=uvnong48slk40t1ate2rgquc82; _csrf=174c406806d3ad6a9d33cb06f24260c97c63631cb03eb49bf045940ea4a6e12aa%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22Zx7_W1SsnAYgBWCc9CA-g3U-jyPVwqiD%22%3B%7D'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_PRAGMA' => 'no-cache'
+    'HTTP_CACHE_CONTROL' => 'no-cache'
+    'CONTENT_LENGTH' => '0'
+    'PATH' => 'C:\\Program Files (x86)\\Intel\\iCLS Client\\;C:\\Program Files\\Intel\\iCLS Client\\;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\Intel\\Intel(R) Management Engine Components\\DAL;C:\\Program Files\\Intel\\Intel(R) Management Engine Components\\IPT;C:\\Program Files (x86)\\Intel\\Intel(R) Management Engine Components\\DAL;C:\\Program Files (x86)\\Intel\\Intel(R) Management Engine Components\\IPT;C:\\Program Files (x86)\\MySQL\\MySQL Server 5.1\\bin;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files (x86)\\Intel\\OpenCL SDK\\2.0\\bin\\x86;C:\\Program Files (x86)\\Intel\\OpenCL SDK\\2.0\\bin\\x64;C:\\Program Files (x86)\\PostgreSQL\\9.3\\bin;C:\\Program Files (x86)\\Common Files\\Roxio Shared\\DLLShared\\;C:\\Program Files (x86)\\Common Files\\Roxio Shared\\DLLShared\\;C:\\Program Files (x86)\\Common Files\\Roxio Shared\\13.0\\DLLShared\\;C:\\dev\\php;C:\\Program Files\\Java\\jdk1.6.0_45\\bin;C:\\Program Files (x86)\\QuickTime\\QTSystem\\;C:\\ProgramData\\ComposerSetup\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.2.22 (Win32) PHP/5.4.15'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Program Files (x86)/Apache Software Foundation/Apache2.2/htdocs'
+    'SERVER_ADMIN' => 'admin@ciens.ucv.ve'
+    'SCRIPT_FILENAME' => 'C:/Program Files (x86)/Apache Software Foundation/Apache2.2/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '61743'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => 'r=activos%2Forigen&id=1'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=activos%2Forigen&id=1'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1428281778.181
+    'REQUEST_TIME' => 1428281778
+]

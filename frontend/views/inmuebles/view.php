@@ -4,13 +4,13 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\SysClasificacionesBien */
+/* @var $model common\models\Inmuebles */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Sys Clasificaciones Biens'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Inmuebles'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="sys-clasificaciones-bien-view">
+<div class="inmuebles-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -29,8 +29,13 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'nombre',
-            'descripcion',
+            'bien_id',
+            'descripcion:ntext',
+            'direccion_ubicacion',
+            'ficha_catastral',
+            'zonificacion',
+            'extension',
+            'titulo_supletorio',
             'sys_status:boolean',
             'sys_fecha',
         ],
