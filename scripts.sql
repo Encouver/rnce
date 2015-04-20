@@ -1,6 +1,6 @@
 -- Column: sys_status
 
--- ALTER TABLE sys_bancos DROP COLUMN sys_status;
+ALTER TABLE TABLA DROP COLUMN sys_status;
 
 ALTER TABLE TABLA ADD COLUMN sys_status boolean;
 ALTER TABLE TABLA ALTER COLUMN sys_status SET NOT NULL;
@@ -23,7 +23,7 @@ COMMENT ON COLUMN TABLA.sys_creado_el IS 'Fecha de creación del registro.';
 -- ALTER TABLE TABLA DROP COLUMN sys_actualizado_el;
 
 ALTER TABLE TABLA ADD COLUMN sys_actualizado_el timestamp with time zone;
-ALTER TABLE TABLA ALTER COLUMN sys_actualizado_el SET DEFAULT now();
+--ALTER TABLE TABLA ALTER COLUMN sys_actualizado_el SET DEFAULT now();
 COMMENT ON COLUMN TABLA.sys_actualizado_el IS 'Fecha de última actualización del registro.';
 
 
@@ -32,6 +32,6 @@ COMMENT ON COLUMN TABLA.sys_actualizado_el IS 'Fecha de última actualización d
 -- ALTER TABLE TABLA DROP COLUMN sys_finalizado_el;
 
 ALTER TABLE TABLA ADD COLUMN sys_finalizado_el timestamp with time zone;
-ALTER TABLE TABLA ALTER COLUMN sys_finalizado_el SET DEFAULT now();
+--ALTER TABLE TABLA ALTER COLUMN sys_finalizado_el SET DEFAULT now();
 COMMENT ON COLUMN TABLA.sys_finalizado_el IS 'Fecha de "eliminado" el registro.';
 
