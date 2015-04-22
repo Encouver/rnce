@@ -49,6 +49,7 @@ AppAsset::register($this);
                 ['label' => 'Información general',
                     'items' => [
                          ['label' => 'Crear bien', 'url' => ['#']],
+                        ['label' => 'Crear Contratista', 'url' => ['/contratistas/index']],
                     ],
                 ],
             ];
