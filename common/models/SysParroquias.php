@@ -5,10 +5,10 @@ namespace common\models;
 use Yii;
 
 /**
- * This is the model class for table "sys_estados".
+ * This is the model class for table "sys_parroquias".
  *
  * @property integer $id
- * @property integer $sys_pais_id
+ * @property integer $sys_municipio_id
  * @property string $nombre
  * @property boolean $sys_status
  * @property string $sys_creado_el
@@ -16,18 +16,16 @@ use Yii;
  * @property string $sys_finalizado_el
  *
  * @property Direcciones[] $direcciones
- * @property SysPaises $sysPais
- * @property SysCiudades[] $sysCiudades
- * @property SysMunicipios[] $sysMunicipios
+ * @property SysMunicipios $sysMunicipio
  */
-class SysEstados extends \yii\db\ActiveRecord
+class SysParroquias extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'sys_estados';
+        return 'sys_parroquias';
     }
 
     /**
@@ -36,8 +34,8 @@ class SysEstados extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['sys_pais_id', 'nombre'], 'required'],
-            [['sys_pais_id'], 'integer'],
+            [['sys_municipio_id', 'nombre'], 'required'],
+            [['sys_municipio_id'], 'integer'],
             [['sys_status'], 'boolean'],
             [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['nombre'], 'string', 'max' => 255]
@@ -51,7 +49,7 @@ class SysEstados extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'sys_pais_id' => 'Sys Pais ID',
+            'sys_municipio_id' => 'Sys Municipio ID',
             'nombre' => 'Nombre',
             'sys_status' => 'Sys Status',
             'sys_creado_el' => 'Sys Creado El',
@@ -65,30 +63,14 @@ class SysEstados extends \yii\db\ActiveRecord
      */
     public function getDirecciones()
     {
-        return $this->hasMany(Direcciones::className(), ['sys_estado_id' => 'id']);
+        return $this->hasMany(Direcciones::className(), ['sys_parroquia_id' => 'id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getSysPais()
+    public function getSysMunicipio()
     {
-        return $this->hasOne(SysPaises::className(), ['id' => 'sys_pais_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getSysCiudades()
-    {
-        return $this->hasMany(SysCiudades::className(), ['sys_estado_id' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getSysMunicipios()
-    {
-        return $this->hasMany(SysMunicipios::className(), ['sys_estado_id' => 'id']);
+        return $this->hasOne(SysMunicipios::className(), ['id' => 'sys_municipio_id']);
     }
 }
