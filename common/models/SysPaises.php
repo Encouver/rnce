@@ -5,15 +5,20 @@ namespace common\models;
 use Yii;
 
 /**
- * This is the model class for table "activos.sys_paises".
+ * This is the model class for table "sys_paises".
  *
  * @property integer $id
  * @property string $nombre
  * @property boolean $sys_status
- * @property string $sys_fecha
+ * @property string $sys_creado_el
+ * @property string $sys_actualizado_el
+ * @property string $sys_finalizado_el
  *
- * @property DatosImportacion[] $datosImportacions
+ * @property PersonasNaturales[] $personasNaturales
  * @property SysEstados[] $sysEstados
+ * @property SysBancos[] $sysBancos
+ * @property PolizasContratadas[] $polizasContratadas
+ * @property ObjetosAutorizaciones[] $objetosAutorizaciones
  */
 class SysPaises extends \yii\db\ActiveRecord
 {
@@ -22,7 +27,7 @@ class SysPaises extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'activos.sys_paises';
+        return 'sys_paises';
     }
 
     /**
@@ -33,7 +38,7 @@ class SysPaises extends \yii\db\ActiveRecord
         return [
             [['nombre'], 'required'],
             [['sys_status'], 'boolean'],
-            [['sys_fecha'], 'safe'],
+            [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['nombre'], 'string', 'max' => 255],
             [['nombre'], 'unique']
         ];
@@ -48,16 +53,18 @@ class SysPaises extends \yii\db\ActiveRecord
             'id' => 'ID',
             'nombre' => 'Nombre',
             'sys_status' => 'Sys Status',
-            'sys_fecha' => 'Sys Fecha',
+            'sys_creado_el' => 'Sys Creado El',
+            'sys_actualizado_el' => 'Sys Actualizado El',
+            'sys_finalizado_el' => 'Sys Finalizado El',
         ];
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getDatosImportacions()
+    public function getPersonasNaturales()
     {
-        return $this->hasMany(DatosImportacion::className(), ['pais_origen_id' => 'id']);
+        return $this->hasMany(PersonasNaturales::className(), ['sys_pais_id' => 'id']);
     }
 
     /**
@@ -66,5 +73,29 @@ class SysPaises extends \yii\db\ActiveRecord
     public function getSysEstados()
     {
         return $this->hasMany(SysEstados::className(), ['sys_pais_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getSysBancos()
+    {
+        return $this->hasMany(SysBancos::className(), ['sys_pais_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPolizasContratadas()
+    {
+        return $this->hasMany(PolizasContratadas::className(), ['sys_pais_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getObjetosAutorizaciones()
+    {
+        return $this->hasMany(ObjetosAutorizaciones::className(), ['origen_producto_id' => 'id']);
     }
 }
