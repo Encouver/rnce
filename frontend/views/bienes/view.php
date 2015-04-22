@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Bienes */
+/* @var $model common\models\activos\Bienes */
 
 $this->title = $model->id;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Bienes'), 'url' => ['index']];
@@ -38,6 +38,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'fecha_origen',
             'contratista_id',
             'propio:boolean',
+            'sys_status:boolean',
+            'sys_creado_el',
+            'sys_actualizado_el',
+            'sys_finalizado_el',
         ],
     ]) ?>
 

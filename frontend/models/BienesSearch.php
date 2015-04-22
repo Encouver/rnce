@@ -5,10 +5,10 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\Bienes;
+use common\models\activos\Bienes;
 
 /**
- * BienesSearch represents the model behind the search form about `common\models\Bienes`.
+ * BienesSearch represents the model behind the search form about `common\models\activos\Bienes`.
  */
 class BienesSearch extends Bienes
 {
@@ -19,8 +19,8 @@ class BienesSearch extends Bienes
     {
         return [
             [['id', 'sys_tipo_bien_id', 'principio_contable', 'contratista_id'], 'integer'],
-            [['depreciable', 'deterioro', 'propio'], 'boolean'],
-            [['detalle', 'origen', 'fecha_origen'], 'safe'],
+            [['depreciable', 'deterioro', 'propio', 'sys_status'], 'boolean'],
+            [['detalle', 'origen', 'fecha_origen', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
         ];
     }
 
@@ -65,6 +65,10 @@ class BienesSearch extends Bienes
             'fecha_origen' => $this->fecha_origen,
             'contratista_id' => $this->contratista_id,
             'propio' => $this->propio,
+            'sys_status' => $this->sys_status,
+            'sys_creado_el' => $this->sys_creado_el,
+            'sys_actualizado_el' => $this->sys_actualizado_el,
+            'sys_finalizado_el' => $this->sys_finalizado_el,
         ]);
 
         $query->andFilterWhere(['like', 'detalle', $this->detalle])
