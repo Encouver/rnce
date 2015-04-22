@@ -1,28 +1,30 @@
 <?php
 
-namespace common\models;
+namespace common\models\activos;
 
 use Yii;
 
 /**
- * This is the model class for table "activos.sys_tipo_documento".
+ * This is the model class for table "activos.sys_tipos_documentos".
  *
  * @property integer $id
  * @property string $nombre
  * @property boolean $estado
  * @property boolean $sys_status
- * @property string $sys_fecha
+ * @property string $sys_creado_el
+ * @property string $sys_actualizado_el
+ * @property string $sys_finalizado_el
  *
  * @property DocumentosRegistrados[] $documentosRegistrados
  */
-class SysTipoDocumento extends \yii\db\ActiveRecord
+class SysTiposDocumentos extends \common\components\BaseActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'activos.sys_tipo_documento';
+        return 'activos.sys_tipos_documentos';
     }
 
     /**
@@ -33,7 +35,7 @@ class SysTipoDocumento extends \yii\db\ActiveRecord
         return [
             [['nombre'], 'required'],
             [['estado', 'sys_status'], 'boolean'],
-            [['sys_fecha'], 'safe'],
+            [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['nombre'], 'string', 'max' => 255],
             [['nombre'], 'unique']
         ];
@@ -45,11 +47,13 @@ class SysTipoDocumento extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'nombre' => 'Nombre',
-            'estado' => 'Estado',
-            'sys_status' => 'Sys Status',
-            'sys_fecha' => 'Sys Fecha',
+            'id' => Yii::t('app', 'ID'),
+            'nombre' => Yii::t('app', 'Nombre'),
+            'estado' => Yii::t('app', 'Estado'),
+            'sys_status' => Yii::t('app', 'Sys Status'),
+            'sys_creado_el' => Yii::t('app', 'Sys Creado El'),
+            'sys_actualizado_el' => Yii::t('app', 'Sys Actualizado El'),
+            'sys_finalizado_el' => Yii::t('app', 'Sys Finalizado El'),
         ];
     }
 

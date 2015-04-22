@@ -3,7 +3,7 @@
 namespace frontend\controllers;
 
 use Yii;
-use common\models\Bienes;
+use common\models\activos\Bienes;
 use app\models\BienesSearch;
 use common\components\BaseController;
 use yii\web\NotFoundHttpException;
@@ -61,7 +61,7 @@ class BienesController extends BaseController
     public function actionCreate()
     {
         $model = new Bienes();
-        $model->contratista_id = 1;
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {

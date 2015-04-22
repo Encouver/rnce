@@ -1,0 +1,72 @@
+<?php
+
+namespace common\models\activos;
+
+use Yii;
+
+/**
+ * This is the model class for table "activos.construcciones_inmuebles".
+ *
+ * @property integer $id
+ * @property integer $bien_id
+ * @property string $area_construccion
+ * @property string $porcentaje_ejecucion
+ * @property string $monto_ejecutado
+ * @property boolean $sys_status
+ * @property string $sys_creado_el
+ * @property string $sys_actualizado_el
+ * @property string $sys_finalizado_el
+ *
+ * @property Bienes $bien
+ */
+class ConstruccionesInmuebles extends \common\components\BaseActiveRecord
+{
+    /**
+     * @inheritdoc
+     */
+    public static function tableName()
+    {
+        return 'activos.construcciones_inmuebles';
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        return [
+            [['bien_id', 'area_construccion', 'porcentaje_ejecucion', 'monto_ejecutado'], 'required'],
+            [['bien_id'], 'integer'],
+            [['porcentaje_ejecucion', 'monto_ejecutado'], 'number'],
+            [['sys_status'], 'boolean'],
+            [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
+            [['area_construccion'], 'string', 'max' => 255]
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => Yii::t('app', 'ID'),
+            'bien_id' => Yii::t('app', 'Bien ID'),
+            'area_construccion' => Yii::t('app', 'Area Construccion'),
+            'porcentaje_ejecucion' => Yii::t('app', 'Porcentaje Ejecucion'),
+            'monto_ejecutado' => Yii::t('app', 'Monto Ejecutado'),
+            'sys_status' => Yii::t('app', 'Sys Status'),
+            'sys_creado_el' => Yii::t('app', 'Sys Creado El'),
+            'sys_actualizado_el' => Yii::t('app', 'Sys Actualizado El'),
+            'sys_finalizado_el' => Yii::t('app', 'Sys Finalizado El'),
+        ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getBien()
+    {
+        return $this->hasOne(Bienes::className(), ['id' => 'bien_id']);
+    }
+}

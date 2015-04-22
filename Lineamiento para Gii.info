@@ -1,0 +1,25 @@
+**** Configuración para la creación de modelos:
+
+Namespace: common\models\NOMBREESQUEMA			// Se coloca el nombre del esquema como parte de la ruta del namespace
+Base Class: common\components\BaseActiveRecord	// Modelo Base de todos los modelos (para las funciones compartidas globales)
+
+Enable I18N   // Activar esta opción para la internacionalización y poder traducir todos los cruds al español más fácilmente.
+
+Message Category: app // La defector por Yii
+
+
+
+
+**** Configuración para la creación de CRUDs:
+
+Model Class: common\models\ESQUEMA\Modelo // Nombre del modelo con su ruta respectiva del namespace
+
+Search Model Class: app\models\ModeloSearch // Nombre del modelo de busqueda.
+
+Controller Class: backend\controllers\ModeloController // Este es el nombre del controlador, y se coloca la ruta dependiendo de la aplicación que lo crea si es desde el backend o frontend.
+
+Base Controller Class: common\components\BaseController
+
+Enable I18N   // Activar esta opción
+
+Message Category: app // La categoría por defecto de Yii

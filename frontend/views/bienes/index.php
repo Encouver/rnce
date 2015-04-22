@@ -35,6 +35,10 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'fecha_origen',
             // 'contratista_id',
             // 'propio:boolean',
+            // 'sys_status:boolean',
+            // 'sys_creado_el',
+            // 'sys_actualizado_el',
+            // 'sys_finalizado_el',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
