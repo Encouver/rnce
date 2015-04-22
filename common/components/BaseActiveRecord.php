@@ -10,7 +10,17 @@ class BaseActiveRecord extends ActiveRecord
         parent::init();
     }
 
-    public function probando() {
-        exit();
-    }
+	public function beforeSave($insert){
+		//$this->sys_status = true;
+		if(!$this->isNewRecord)
+			$this->sys_actualizado_el = date('Y-m-d');
+		parent::beforeSave($insert);
+	}
+
+	public function beforeDelete(){
+		$this->sys_status = false;
+		$this->sys_finalizado_el = date('Y-m-d');
+		//parent::beforeDelete();
+	}
+
 }
