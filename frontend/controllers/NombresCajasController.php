@@ -44,7 +44,7 @@ class NombresCajasController extends BaseController
 
     public function actionEfectivos_equivalentes()
     {
-        $this->render("efectivos_equivalentes");
+        return $this->render("efectivos_equivalentes");
     }
 
     /**
