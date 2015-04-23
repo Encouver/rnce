@@ -48,7 +48,7 @@ return [
 	        'on beforeAction'=>function(yii\base\ActionEvent $event) {
 	                if ( $event->action->uniqueId == 'user-management/auth/login' )
 	                {
-	                    $event->action->controller->layout = 'loginLayout.php';
+	                    //$event->action->controller->layout = 'loginLayout.php';
 	                };
 	            },
 	    ],
