@@ -12,7 +12,8 @@
         "irc": "irc://irc.freenode.net/yii",
         "source": "https://github.com/yiisoft/yii2"
     },
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
+    "prefer-stable" : true,
     "require": {
         "php": ">=5.4.0",
         "yiisoft/yii2": "*",
@@ -28,8 +29,8 @@
         "kartik-v/yii2-date-range": "*",
         "kartik-v/yii2-widget-timepicker": "*",
         "kartik-v/yii2-field-range": "*",
-        "kartik-v/yii2-widget-datepicker": "*"
-
+        "kartik-v/yii2-widget-datepicker": "*",
+        "webvimark/module-user-management": "*"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",
