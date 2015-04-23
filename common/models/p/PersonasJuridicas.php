@@ -11,15 +11,15 @@ use Yii;
  * @property string $rif
  * @property string $razon_social
  * @property integer $creado_por
- * @property boolean $nacionalidad
  * @property string $numero_identitifacion
  * @property boolean $sys_status
  * @property string $sys_creado_el
  * @property string $sys_actualizado_el
  * @property string $sys_finalizado_el
+ * @property string $tipo_nacionalidad
  *
  * @property EmpresasRelacionadas[] $empresasRelacionadas
- * @property SysNaturalesJuridicas[] $sysNaturalesJuridicas
+ * @property SysNaturalesJuridicas $rif0
  * @property PolizasContratadas[] $polizasContratadas
  * @property ObjetosAutorizaciones[] $objetosAutorizaciones
  */
@@ -39,10 +39,11 @@ class PersonasJuridicas extends \common\components\BaseActiveRecord
     public function rules()
     {
         return [
-            [['rif', 'creado_por', 'nacionalidad'], 'required'],
+            [['creado_por'], 'required'],
             [['creado_por'], 'integer'],
-            [['nacionalidad', 'sys_status'], 'boolean'],
+            [['sys_status'], 'boolean'],
             [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
+            [['tipo_nacionalidad'], 'string'],
             [['rif'], 'string', 'max' => 20],
             [['razon_social', 'numero_identitifacion'], 'string', 'max' => 255],
             [['rif'], 'unique']
@@ -59,12 +60,12 @@ class PersonasJuridicas extends \common\components\BaseActiveRecord
             'rif' => Yii::t('app', 'Rif'),
             'razon_social' => Yii::t('app', 'Razon Social'),
             'creado_por' => Yii::t('app', 'Creado Por'),
-            'nacionalidad' => Yii::t('app', 'Nacionalidad'),
             'numero_identitifacion' => Yii::t('app', 'Numero Identitifacion'),
             'sys_status' => Yii::t('app', 'Sys Status'),
             'sys_creado_el' => Yii::t('app', 'Sys Creado El'),
             'sys_actualizado_el' => Yii::t('app', 'Sys Actualizado El'),
             'sys_finalizado_el' => Yii::t('app', 'Sys Finalizado El'),
+            'tipo_nacionalidad' => Yii::t('app', 'Tipo Nacionalidad'),
         ];
     }
 
@@ -79,9 +80,9 @@ class PersonasJuridicas extends \common\components\BaseActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getSysNaturalesJuridicas()
+    public function getRif0()
     {
-        return $this->hasMany(SysNaturalesJuridicas::className(), ['rif' => 'rif']);
+        return $this->hasOne(SysNaturalesJuridicas::className(), ['rif' => 'rif']);
     }
 
     /**

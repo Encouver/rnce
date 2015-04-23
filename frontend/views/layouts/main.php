@@ -59,6 +59,11 @@ AppAsset::register($this);
                          ['label' => 'Aqui van las cosas', 'url' => ['#']],
                     ],
                 ],
+                ['label' => 'Contratistas',
+                    'items' => [
+                         ['label' => 'Datos basicos', 'url' => ['/contratistas/index']],
+                    ],
+                ],
             ];
             if (Yii::$app->user->isGuest) {
                 $menuItems[] = ['label' => 'Registrate',  'url' => ['/user-management/auth/registration']];//['/site/signup']];

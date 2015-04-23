@@ -18,9 +18,10 @@ use Yii;
  *
  * @property AccionistasOtros[] $accionistasOtros
  * @property Clientes[] $clientes
- * @property PersonasNaturales $rif0
+ * @property PersonasJuridicas[] $personasJuridicas
  * @property RelacionesContratos[] $relacionesContratos
  * @property Contratistas[] $contratistas
+ * @property PersonasNaturales[] $personasNaturales
  */
 class SysNaturalesJuridicas extends \common\components\BaseActiveRecord
 {
@@ -83,9 +84,9 @@ class SysNaturalesJuridicas extends \common\components\BaseActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getRif0()
+    public function getPersonasJuridicas()
     {
-        return $this->hasOne(PersonasNaturales::className(), ['rif' => 'rif']);
+        return $this->hasMany(PersonasJuridicas::className(), ['rif' => 'rif']);
     }
 
     /**
@@ -102,5 +103,13 @@ class SysNaturalesJuridicas extends \common\components\BaseActiveRecord
     public function getContratistas()
     {
         return $this->hasMany(Contratistas::className(), ['natural_juridica_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPersonasNaturales()
+    {
+        return $this->hasMany(PersonasNaturales::className(), ['rif' => 'rif']);
     }
 }
