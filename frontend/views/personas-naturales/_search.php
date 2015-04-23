@@ -17,23 +17,53 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'id') ?>
 
-    <?= $form->field($model, 'nombre') ?>
+    <?= $form->field($model, 'primer_nombre') ?>
 
-    <?= $form->field($model, 'apellido') ?>
+    <?= $form->field($model, 'segundo_nombre') ?>
 
     <?= $form->field($model, 'rif') ?>
 
     <?= $form->field($model, 'ci') ?>
 
-    <?php // echo $form->field($model, 'sys_status')->checkbox() ?>
-
-    <?php // echo $form->field($model, 'sys_fecha') ?>
-
     <?php // echo $form->field($model, 'creado_por') ?>
 
+    <?php // echo $form->field($model, 'primer_apellido') ?>
+
+    <?php // echo $form->field($model, 'segundo_apellido') ?>
+
+    <?php // echo $form->field($model, 'telefono_local') ?>
+
+    <?php // echo $form->field($model, 'telefono_celular') ?>
+
+    <?php // echo $form->field($model, 'fax') ?>
+
+    <?php // echo $form->field($model, 'correo') ?>
+
+    <?php // echo $form->field($model, 'pagina_web') ?>
+
+    <?php // echo $form->field($model, 'facebook') ?>
+
+    <?php // echo $form->field($model, 'twitter') ?>
+
+    <?php // echo $form->field($model, 'instagram') ?>
+
+    <?php // echo $form->field($model, 'sys_pais_id') ?>
+
+    <?php // echo $form->field($model, 'sys_status')->checkbox() ?>
+
+    <?php // echo $form->field($model, 'sys_creado_el') ?>
+
+    <?php // echo $form->field($model, 'sys_actualizado_el') ?>
+
+    <?php // echo $form->field($model, 'sys_finalizado_el') ?>
+
+    <?php // echo $form->field($model, 'numero_identificacion') ?>
+
+    <?php // echo $form->field($model, 'nacionalidad') ?>
+
     <div class="form-group">
-        <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton('Reset', ['class' => 'btn btn-default']) ?>
+        <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>
+        <?= Html::resetButton(Yii::t('app', 'Reset'), ['class' => 'btn btn-default']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

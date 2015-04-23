@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\PersonasNaturalesSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Personas Naturales';
+$this->title = Yii::t('app', 'Personas Naturales');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="personas-naturales-index">
@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Personas Naturales', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Create Personas Naturales'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
@@ -26,13 +26,28 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'nombre',
-            'apellido',
+            'primer_nombre',
+            'segundo_nombre',
             'rif',
             'ci',
-            // 'sys_status:boolean',
-            // 'sys_fecha',
             // 'creado_por',
+            // 'primer_apellido',
+            // 'segundo_apellido',
+            // 'telefono_local',
+            // 'telefono_celular',
+            // 'fax',
+            // 'correo',
+            // 'pagina_web',
+            // 'facebook',
+            // 'twitter',
+            // 'instagram',
+            // 'sys_pais_id',
+            // 'sys_status:boolean',
+            // 'sys_creado_el',
+            // 'sys_actualizado_el',
+            // 'sys_finalizado_el',
+            // 'numero_identificacion',
+            // 'nacionalidad',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

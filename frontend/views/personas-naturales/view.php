@@ -4,10 +4,10 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\PersonasNaturales */
+/* @var $model common\models\p\PersonasNaturales */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Personas Naturales', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Personas Naturales'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="personas-naturales-view">
@@ -15,11 +15,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+        <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
                 'method' => 'post',
             ],
         ]) ?>
@@ -29,13 +29,28 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'nombre',
-            'apellido',
+            'primer_nombre',
+            'segundo_nombre',
             'rif',
             'ci',
-            'sys_status:boolean',
-            'sys_fecha',
             'creado_por',
+            'primer_apellido',
+            'segundo_apellido',
+            'telefono_local',
+            'telefono_celular',
+            'fax',
+            'correo',
+            'pagina_web',
+            'facebook',
+            'twitter',
+            'instagram',
+            'sys_pais_id',
+            'sys_status:boolean',
+            'sys_creado_el',
+            'sys_actualizado_el',
+            'sys_finalizado_el',
+            'numero_identificacion',
+            'nacionalidad',
         ],
     ]) ?>
 
