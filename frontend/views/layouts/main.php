@@ -12,6 +12,7 @@ use kartik\nav\NavX;
 
 use webvimark\modules\UserManagement\components\GhostMenu;
 use webvimark\modules\UserManagement\components\GhostHtml;
+use webvimark\modules\UserManagement\components\GhostNav;
 use webvimark\modules\UserManagement\UserManagementModule;
 
 /* @var $this \yii\web\View */
@@ -71,7 +72,7 @@ AppAsset::register($this);
                 ],
             ];
             if (Yii::$app->user->isGuest) {
-                $menuItems[] = ['label' => 'Registrate',  'url' => ['/site/signup']];
+                $menuItems[] = ['label' => 'Registrate',  'url' => ['/user-management/auth/registration']];//['/site/signup']];
                 $menuItems[] = ['label' => 'Iniciar sesión', 'url' => ['/user-management/auth/login']];//['/site/login']];
             } else {
                 $menuItems[] = [
@@ -80,33 +81,16 @@ AppAsset::register($this);
                     'linkOptions' => ['data-method' => 'post']
                 ];
             }
-            $menuItems[] = GhostMenu::widget([
-                'encodeLabels'=>false,
-                'activateParents'=>true,
-                'items' => [
-                    [
-                        'label' => 'Backend routes',
-                        'items'=>UserManagementModule::menuItems()
-                    ],
-                    [
-                        'label' => 'Frontend routes',
-                        'items'=>[
-                            ['label'=>'Login', 'url'=>['/user-management/auth/login']],
-                            ['label'=>'Logout', 'url'=>['/user-management/auth/logout']],
-                            ['label'=>'Registration', 'url'=>['/user-management/auth/registration']],
-                            ['label'=>'Change own password', 'url'=>['/user-management/auth/change-own-password']],
-                            ['label'=>'Password recovery', 'url'=>['/user-management/auth/password-recovery']],
-                            ['label'=>'E-mail confirmation', 'url'=>['/user-management/auth/confirm-email']],
-                        ],
-                    ],
-                ],
-            ]);
+
+
     
             echo Nav::widget([
                 'options' => ['class' => 'navbar-nav navbar-right'],
                 'items' => $menuItems,
             ]);
-            NavBar::end();
+            NavBar::end(); 
+
+
         ?>
 
         <div class="container">
@@ -115,16 +99,16 @@ AppAsset::register($this);
         ]) ?>
         <?= Alert::widget() ?>
         <?php 
-             GhostMenu::widget([
+                        echo GhostNav::widget([
                 'encodeLabels'=>false,
-                'activateParents'=>true,
+                'activateParents'=>false,
                 'items' => [
                     [
-                        'label' => 'Backend routes',
+                        'label' => 'Administrar Usuarios',
                         'items'=>UserManagementModule::menuItems()
                     ],
                     [
-                        'label' => 'Frontend routes',
+                        'label' => 'Perfil',
                         'items'=>[
                             ['label'=>'Login', 'url'=>['/user-management/auth/login']],
                             ['label'=>'Logout', 'url'=>['/user-management/auth/logout']],
