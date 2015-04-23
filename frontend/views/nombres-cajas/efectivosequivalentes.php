@@ -17,7 +17,7 @@ $items = [
     [
         'label'=>'<i class="glyphicon glyphicon-user"></i> Profile',
         'content'=>$content2,
-        'linkOptions'=>['data-url'=>\yii\helpers\Url::to(['/nombres-cajas/create'])]
+        'linkOptions'=>['data-url'=>\yii\helpers\Url::to(['/nombres-cajas/raul'])]
     ],
     [
         'label'=>'<i class="glyphicon glyphicon-list-alt"></i> Dropdown',

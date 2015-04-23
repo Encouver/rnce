@@ -4,23 +4,17 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\p\PersonasJuridicas */
+/* @var $model common\models\p\SysCaev */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="personas-juridicas-form">
+<div class="sys-caev-form">
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'rif')->textInput(['maxlength' => 20]) ?>
+    <?= $form->field($model, 'grupo')->textInput(['maxlength' => 255]) ?>
 
-    <?= $form->field($model, 'razon_social')->textInput(['maxlength' => 255]) ?>
-
-    <?= $form->field($model, 'creado_por')->textInput() ?>
-
-    <?= $form->field($model, 'nacionalidad')->checkbox() ?>
-
-    <?= $form->field($model, 'numero_identitifacion')->textInput(['maxlength' => 255]) ?>
+    <?= $form->field($model, 'denominacion')->textarea(['rows' => 6]) ?>
 
     <?= $form->field($model, 'sys_status')->checkbox() ?>
 
