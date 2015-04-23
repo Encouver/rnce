@@ -31,7 +31,7 @@ class BaseController extends Controller
 	    if (parent::beforeAction($action)) {
 	        // If you want to change it only in one or few actions, add additional check
 
-	        Yii::$app->user->loginUrl = ['user-management/auth/login'];
+	        //Yii::$app->user->loginUrl = ['user-management/auth/login'];
 
 	        return true;
 	    } else {

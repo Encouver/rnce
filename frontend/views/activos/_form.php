@@ -5,9 +5,9 @@ use yii\helpers\Html;
 //use yii\jui\DatePicker;
 use kartik\datetime\DateTimePicker;
 use yii\helpers\ArrayHelper;
-use common\models\SysFormasOrg;
-use common\models\SysTiposBienes;
-use common\models\SysClasificacionesBien;
+use common\models\a\SysFormasOrg;
+use common\models\a\SysTiposBienes;
+use common\models\a\SysClasificacionesBien;
 use kartik\form\ActiveForm;
 
 /* @var $this yii\web\View */

@@ -5,8 +5,8 @@ use yii\widgets\ActiveForm;
 //use yii\jui\DatePicker;
 use kartik\datetime\DateTimePicker;
 use yii\helpers\ArrayHelper;
-use common\models\activos\SysFormasOrg;
-use common\models\activos\SysTiposBienes;
+use common\models\a\SysFormasOrg;
+use common\models\a\SysTiposBienes;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\activos\Bienes */
