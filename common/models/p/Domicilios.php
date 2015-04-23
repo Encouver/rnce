@@ -10,18 +10,16 @@ use Yii;
  * @property integer $id
  * @property integer $contratista_id
  * @property integer $documento_registrado_id
- * @property integer $fiscal_id
- * @property integer $principal_id
  * @property boolean $sys_status
  * @property string $sys_creado_el
  * @property string $sys_actualizado_el
  * @property string $sys_finalizado_el
+ * @property boolean $fiscal
+ * @property integer $direccion_id
  *
  * @property ActasConstitutivas[] $actasConstitutivas
  * @property Contratistas $contratista
  * @property DocumentosRegistrados $documentoRegistrado
- * @property Direcciones $fiscal
- * @property Direcciones $principal
  */
 class Domicilios extends \common\components\BaseActiveRecord
 {
@@ -39,9 +37,9 @@ class Domicilios extends \common\components\BaseActiveRecord
     public function rules()
     {
         return [
-            [['contratista_id', 'documento_registrado_id', 'fiscal_id'], 'required'],
-            [['contratista_id', 'documento_registrado_id', 'fiscal_id', 'principal_id'], 'integer'],
-            [['sys_status'], 'boolean'],
+            [['contratista_id', 'fiscal', 'direccion_id'], 'required'],
+            [['contratista_id', 'documento_registrado_id', 'direccion_id'], 'integer'],
+            [['sys_status', 'fiscal'], 'boolean'],
             [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe']
         ];
     }
@@ -55,12 +53,12 @@ class Domicilios extends \common\components\BaseActiveRecord
             'id' => Yii::t('app', 'ID'),
             'contratista_id' => Yii::t('app', 'Contratista ID'),
             'documento_registrado_id' => Yii::t('app', 'Documento Registrado ID'),
-            'fiscal_id' => Yii::t('app', 'Fiscal ID'),
-            'principal_id' => Yii::t('app', 'Principal ID'),
             'sys_status' => Yii::t('app', 'Sys Status'),
             'sys_creado_el' => Yii::t('app', 'Sys Creado El'),
             'sys_actualizado_el' => Yii::t('app', 'Sys Actualizado El'),
             'sys_finalizado_el' => Yii::t('app', 'Sys Finalizado El'),
+            'fiscal' => Yii::t('app', 'Fiscal'),
+            'direccion_id' => Yii::t('app', 'Direccion ID'),
         ];
     }
 
@@ -86,21 +84,5 @@ class Domicilios extends \common\components\BaseActiveRecord
     public function getDocumentoRegistrado()
     {
         return $this->hasOne(DocumentosRegistrados::className(), ['id' => 'documento_registrado_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getFiscal()
-    {
-        return $this->hasOne(Direcciones::className(), ['id' => 'fiscal_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getPrincipal()
-    {
-        return $this->hasOne(Direcciones::className(), ['id' => 'principal_id']);
     }
 }

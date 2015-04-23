@@ -53,7 +53,7 @@ class PersonasNaturales extends \common\components\BaseActiveRecord
     public function rules()
     {
         return [
-            [['primer_nombre', 'segundo_nombre', 'ci', 'creado_por', 'primer_apellido', 'segundo_apellido', 'telefono_local', 'telefono_celular', 'correo', 'sys_pais_id', 'nacionalidad'], 'required'],
+            [['primer_nombre', 'segundo_nombre','creado_por', 'primer_apellido', 'segundo_apellido', 'telefono_local', 'telefono_celular', 'correo', 'sys_pais_id', 'nacionalidad'], 'required'],
             [['ci', 'creado_por', 'sys_pais_id'], 'integer'],
             [['sys_status'], 'boolean'],
             [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],

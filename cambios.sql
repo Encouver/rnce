@@ -238,3 +238,36 @@ COMMENT ON COLUMN personas_naturales.nacionalidad IS 'Tipo de nacionalidad puede
 ALTER TABLE personas_naturales ADD COLUMN numero_identificacion character varying(255);
 COMMENT ON COLUMN personas_naturales.numero_identificacion IS 'Numero de identificacion en caso de ser extranjero';
 
+ALTER TABLE contratistas DROP COLUMN tipo_sector;
+
+ALTER TABLE contratistas ADD COLUMN tipo_sector tipo_sector_mixto;
+ALTER TABLE contratistas ALTER COLUMN tipo_sector SET NOT NULL;
+COMMENT ON COLUMN contratistas.tipo_sector IS 'Tipo sector puede ser publico privado o mixto';
+
+ALTER TABLE domicilios DROP COLUMN fiscal_id;
+ALTER TABLE domicilios DROP COLUMN principal_id;
+
+-- ALTER TABLE domicilios DROP COLUMN fiscal;
+
+ALTER TABLE domicilios ADD COLUMN fiscal boolean;
+ALTER TABLE domicilios ALTER COLUMN fiscal SET NOT NULL;
+COMMENT ON COLUMN domicilios.fiscal IS 'Si es true es una direccion fiscal, si es false es una direccion principal';
+
+
+-- ALTER TABLE domicilios DROP COLUMN direccion_id;
+
+ALTER TABLE domicilios ADD COLUMN direccion_id integer;
+ALTER TABLE domicilios ALTER COLUMN direccion_id SET NOT NULL;
+COMMENT ON COLUMN domicilios.direccion_id IS 'Clave foranea a la tabla de direcciones';
+
+ALTER TABLE domicilios DROP COLUMN documento_registrado_id;
+
+ALTER TABLE domicilios ADD COLUMN documento_registrado_id integer;
+COMMENT ON COLUMN domicilios.documento_registrado_id IS 'Clave foranea a la tabla documentos registrados  en el esquema activos';
+
+
+ALTER TABLE sucursales DROP COLUMN id;
+ALTER TABLE sucursales ADD COLUMN id integer;
+ALTER TABLE sucursales ALTER COLUMN id SET NOT NULL;
+ALTER TABLE sucursales ALTER COLUMN id SET DEFAULT nextval('sucursales_id_seq'::regclass);
+COMMENT ON COLUMN sucursales.id IS 'clave primaria';

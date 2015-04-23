@@ -64,6 +64,13 @@ class ContratistasController extends Controller
         $model = new Contratistas();
         $model2 = new SysNaturalesJuridicas();
         if ($model->load(Yii::$app->request->post()) && $model2->load(Yii::$app->request->post())) {
+            $model2->juridica=true;
+            $model2->sys_status=true;
+            $model2->save();
+            $model->estatus_contratista_id = 1;
+            $model->natural_juridica_id = $model2->id;
+            $model->save();
+            
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
