@@ -11,11 +11,6 @@ use Yii;
  * @property integer $natural_juridica_id
  * @property integer $estatus_contratista_id
  * @property string $sigla
- * @property string $principio_contable
- * @property integer $ppal_caev_id
- * @property integer $comp1_caev_id
- * @property integer $comp2_caev_id
- * @property integer $contacto_id
  * @property boolean $sys_status
  * @property string $sys_creado_el
  * @property string $sys_actualizado_el
@@ -31,20 +26,19 @@ use Yii;
  * @property ComisariosAuditores[] $comisariosAuditores
  * @property DenominacionesComerciales[] $denominacionesComerciales
  * @property Clientes[] $clientes
+ * @property NombresCajas[] $nombresCajas
  * @property NotasRevelatorias[] $notasRevelatorias
  * @property Sucursales[] $sucursales
  * @property ObjetosSociales[] $objetosSociales
- * @property NombresCajas[] $nombresCajas
  * @property PolizasContratadas[] $polizasContratadas
  * @property RazonesSociales[] $razonesSociales
  * @property RelacionesContratos[] $relacionesContratos
  * @property Domicilios[] $domicilios
- * @property SysCaev $comp1Caev
- * @property SysCaev $comp2Caev
- * @property PersonasNaturales $contacto
  * @property EstatusContratistas $estatusContratista
  * @property SysNaturalesJuridicas $naturalJuridica
- * @property SysCaev $ppalCaev
+ * @property PrincipiosContables[] $principiosContables
+ * @property ActividadesEconomicas[] $actividadesEconomicas
+ * @property ContratistasContactos[] $contratistasContactos
  */
 class Contratistas extends \common\components\BaseActiveRecord
 {
@@ -59,14 +53,15 @@ class Contratistas extends \common\components\BaseActiveRecord
     /**
      * @inheritdoc
      */
+    public $rif;
     public function rules()
     {
         return [
-            [['natural_juridica_id', 'estatus_contratista_id', 'principio_contable', 'ppal_caev_id', 'comp1_caev_id', 'comp2_caev_id', 'contacto_id', 'tipo_sector'], 'required'],
-            [['natural_juridica_id', 'estatus_contratista_id', 'ppal_caev_id', 'comp1_caev_id', 'comp2_caev_id', 'contacto_id'], 'integer'],
-            [['principio_contable', 'tipo_sector'], 'string'],
+            [['estatus_contratista_id', 'tipo_sector'], 'required'],
+            [['natural_juridica_id', 'estatus_contratista_id'], 'integer'],
             [['sys_status'], 'boolean'],
             [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
+            [['tipo_sector'], 'string'],
             [['sigla'], 'string', 'max' => 50]
         ];
     }
@@ -81,11 +76,6 @@ class Contratistas extends \common\components\BaseActiveRecord
             'natural_juridica_id' => Yii::t('app', 'Natural Juridica ID'),
             'estatus_contratista_id' => Yii::t('app', 'Estatus Contratista ID'),
             'sigla' => Yii::t('app', 'Sigla'),
-            'principio_contable' => Yii::t('app', 'Principio Contable'),
-            'ppal_caev_id' => Yii::t('app', 'Ppal Caev ID'),
-            'comp1_caev_id' => Yii::t('app', 'Comp1 Caev ID'),
-            'comp2_caev_id' => Yii::t('app', 'Comp2 Caev ID'),
-            'contacto_id' => Yii::t('app', 'Contacto ID'),
             'sys_status' => Yii::t('app', 'Sys Status'),
             'sys_creado_el' => Yii::t('app', 'Sys Creado El'),
             'sys_actualizado_el' => Yii::t('app', 'Sys Actualizado El'),
@@ -169,6 +159,14 @@ class Contratistas extends \common\components\BaseActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
+    public function getNombresCajas()
+    {
+        return $this->hasMany(NombresCajas::className(), ['contratistas_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getNotasRevelatorias()
     {
         return $this->hasMany(NotasRevelatorias::className(), ['contratista_id' => 'id']);
@@ -188,14 +186,6 @@ class Contratistas extends \common\components\BaseActiveRecord
     public function getObjetosSociales()
     {
         return $this->hasMany(ObjetosSociales::className(), ['contratista_id' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getNombresCajas()
-    {
-        return $this->hasMany(NombresCajas::className(), ['contratistas_id' => 'id']);
     }
 
     /**
@@ -233,30 +223,6 @@ class Contratistas extends \common\components\BaseActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getComp1Caev()
-    {
-        return $this->hasOne(SysCaev::className(), ['id' => 'comp1_caev_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getComp2Caev()
-    {
-        return $this->hasOne(SysCaev::className(), ['id' => 'comp2_caev_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getContacto()
-    {
-        return $this->hasOne(PersonasNaturales::className(), ['id' => 'contacto_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
     public function getEstatusContratista()
     {
         return $this->hasOne(EstatusContratistas::className(), ['id' => 'estatus_contratista_id']);
@@ -273,8 +239,24 @@ class Contratistas extends \common\components\BaseActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getPpalCaev()
+    public function getPrincipiosContables()
     {
-        return $this->hasOne(SysCaev::className(), ['id' => 'ppal_caev_id']);
+        return $this->hasMany(PrincipiosContables::className(), ['contratista_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getActividadesEconomicas()
+    {
+        return $this->hasMany(ActividadesEconomicas::className(), ['contratista_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getContratistasContactos()
+    {
+        return $this->hasMany(ContratistasContactos::className(), ['contratista_id' => 'id']);
     }
 }

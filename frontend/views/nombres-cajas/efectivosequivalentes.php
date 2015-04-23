@@ -16,7 +16,7 @@ $items = [
     ],
     [
         'label'=>'<i class="glyphicon glyphicon-user"></i> Profile',
-        'content'=>$content2,
+        'content'=>"",
         'linkOptions'=>['data-url'=>\yii\helpers\Url::to(['/nombres-cajas/raul'])]
     ],
     [
@@ -25,12 +25,12 @@ $items = [
              [
                  'label'=>'<i class="glyphicon glyphicon-chevron-right"></i> Option 1',
                  'encode'=>false,
-                 'content'=>$content3,
+                 'content'=>"",
              ],
              [
                  'label'=>'<i class="glyphicon glyphicon-chevron-right"></i> Option 2',
                  'encode'=>false,
-                 'content'=>$content4,
+                 'content'=>"",
              ],
         ],
     ],

@@ -15,7 +15,6 @@ use Yii;
  * @property integer $creado_por
  * @property string $primer_apellido
  * @property string $segundo_apellido
- * @property string $nacionalidad
  * @property string $telefono_local
  * @property string $telefono_celular
  * @property string $fax
@@ -29,11 +28,14 @@ use Yii;
  * @property string $sys_creado_el
  * @property string $sys_actualizado_el
  * @property string $sys_finalizado_el
+ * @property string $numero_identificacion
+ * @property string $nacionalidad
  *
+ * @property EmpresasRelacionadas[] $empresasRelacionadas
  * @property Sucursales[] $sucursales
- * @property SysNaturalesJuridicas[] $sysNaturalesJuridicas
  * @property SysPaises $sysPais
- * @property Contratistas[] $contratistas
+ * @property SysNaturalesJuridicas $rif0
+ * @property ContratistasContactos[] $contratistasContactos
  */
 class PersonasNaturales extends \common\components\BaseActiveRecord
 {
@@ -51,13 +53,13 @@ class PersonasNaturales extends \common\components\BaseActiveRecord
     public function rules()
     {
         return [
-            [['primer_nombre', 'segundo_nombre', 'rif', 'ci', 'creado_por', 'primer_apellido', 'segundo_apellido', 'nacionalidad', 'telefono_local', 'telefono_celular', 'correo', 'sys_pais_id'], 'required'],
+            [['primer_nombre', 'segundo_nombre', 'ci', 'creado_por', 'primer_apellido', 'segundo_apellido', 'telefono_local', 'telefono_celular', 'correo', 'sys_pais_id', 'nacionalidad'], 'required'],
             [['ci', 'creado_por', 'sys_pais_id'], 'integer'],
             [['sys_status'], 'boolean'],
             [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
-            [['primer_nombre', 'segundo_nombre', 'primer_apellido', 'segundo_apellido', 'pagina_web', 'facebook', 'twitter', 'instagram'], 'string', 'max' => 255],
+            [['nacionalidad'], 'string'],
+            [['primer_nombre', 'segundo_nombre', 'primer_apellido', 'segundo_apellido', 'pagina_web', 'facebook', 'twitter', 'instagram', 'numero_identificacion'], 'string', 'max' => 255],
             [['rif'], 'string', 'max' => 20],
-            [['nacionalidad'], 'string', 'max' => 2],
             [['telefono_local', 'telefono_celular', 'fax'], 'string', 'max' => 50],
             [['correo'], 'string', 'max' => 150],
             [['rif'], 'unique'],
@@ -79,7 +81,6 @@ class PersonasNaturales extends \common\components\BaseActiveRecord
             'creado_por' => Yii::t('app', 'Creado Por'),
             'primer_apellido' => Yii::t('app', 'Primer Apellido'),
             'segundo_apellido' => Yii::t('app', 'Segundo Apellido'),
-            'nacionalidad' => Yii::t('app', 'Nacionalidad'),
             'telefono_local' => Yii::t('app', 'Telefono Local'),
             'telefono_celular' => Yii::t('app', 'Telefono Celular'),
             'fax' => Yii::t('app', 'Fax'),
@@ -93,7 +94,17 @@ class PersonasNaturales extends \common\components\BaseActiveRecord
             'sys_creado_el' => Yii::t('app', 'Sys Creado El'),
             'sys_actualizado_el' => Yii::t('app', 'Sys Actualizado El'),
             'sys_finalizado_el' => Yii::t('app', 'Sys Finalizado El'),
+            'numero_identificacion' => Yii::t('app', 'Numero Identificacion'),
+            'nacionalidad' => Yii::t('app', 'Nacionalidad'),
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getEmpresasRelacionadas()
+    {
+        return $this->hasMany(EmpresasRelacionadas::className(), ['persona_contacto_id' => 'id']);
     }
 
     /**
@@ -107,14 +118,6 @@ class PersonasNaturales extends \common\components\BaseActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getSysNaturalesJuridicas()
-    {
-        return $this->hasMany(SysNaturalesJuridicas::className(), ['rif' => 'rif']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
     public function getSysPais()
     {
         return $this->hasOne(SysPaises::className(), ['id' => 'sys_pais_id']);
@@ -123,8 +126,16 @@ class PersonasNaturales extends \common\components\BaseActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getContratistas()
+    public function getRif0()
     {
-        return $this->hasMany(Contratistas::className(), ['contacto_id' => 'id']);
+        return $this->hasOne(SysNaturalesJuridicas::className(), ['rif' => 'rif']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getContratistasContactos()
+    {
+        return $this->hasMany(ContratistasContactos::className(), ['contacto_id' => 'id']);
     }
 }

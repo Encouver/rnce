@@ -4,15 +4,16 @@ namespace frontend\controllers;
 
 use Yii;
 use common\models\p\Contratistas;
-use frontend\models\ContratistasSearch;
-use common\components\BaseController;
+use common\models\p\SysNaturalesJuridicas;
+use app\models\ContratistasSearch;
+use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
  * ContratistasController implements the CRUD actions for Contratistas model.
  */
-class ContratistasController extends BaseController
+class ContratistasController extends Controller
 {
     public function behaviors()
     {
@@ -61,12 +62,13 @@ class ContratistasController extends BaseController
     public function actionCreate()
     {
         $model = new Contratistas();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        $model2 = new SysNaturalesJuridicas();
+        if ($model->load(Yii::$app->request->post()) && $model2->load(Yii::$app->request->post())) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'model2'=>$model2,
             ]);
         }
     }
