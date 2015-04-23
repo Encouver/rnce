@@ -28176,3 +28176,2930 @@ $_SERVER = [
     'REQUEST_TIME_FLOAT' => 1429807724.275
     'REQUEST_TIME' => 1429807724
 ]
+2015-04-23 13:46:11 [127.0.0.1][1][-][error][yii\web\HttpException:404] exception 'yii\web\NotFoundHttpException' with message 'The requested page does not exist.' in C:\Apache24\htdocs\rnce\vendor\webvimark\components\AdminDefaultController.php:281
+Stack trace:
+#0 C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\controllers\PermissionController.php(159): webvimark\components\AdminDefaultController->findModel('regstroContrati...')
+#1 [internal function]: webvimark\modules\UserManagement\controllers\PermissionController->actionUpdate('regstroContrati...')
+#2 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\InlineAction.php(55): call_user_func_array(Array, Array)
+#3 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Controller.php(151): yii\base\InlineAction->runWithParams(Array)
+#4 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Module.php(455): yii\base\Controller->runAction('update', Array)
+#5 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\web\Application.php(83): yii\base\Module->runAction('user-management...', Array)
+#6 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#7 C:\Apache24\htdocs\rnce\frontend\web\index.php(18): yii\base\Application->run()
+#8 {main}
+2015-04-23 13:46:11 [127.0.0.1][1][-][info][application] $_GET = [
+    'r' => 'user-management/permission/update'
+    'id' => 'regstroContratista'
+]
+
+$_COOKIE = [
+    '_ga' => 'GA1.1.1861192029.1415307511'
+    'language' => '30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s:2:\"en\";'
+    'PHPSESSID' => 'u4vvogbirh48r3lcle8mrh74l7'
+    '_csrf' => '79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"6A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '_um_last_attempt' => 1429807658
+    '_um_attempt_count' => 1
+    '__id' => 1
+    '__auth_last_update' => 1429802132
+    '__userRoles' => []
+    '__userPermissions' => []
+    '__userRoutes' => []
+    '__visitorToken' => '5539222b14050'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://localhost/rnce/frontend/web/index.php?r=user-management%2Fpermission%2Fview&id=regstroContratista'
+    'HTTP_COOKIE' => '_ga=GA1.1.1861192029.1415307511; language=30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s%3A2%3A%22en%22%3B; PHPSESSID=u4vvogbirh48r3lcle8mrh74l7; _csrf=79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%226A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB%22%3B%7D'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => 'C:\\oraclexe\\app\\oracle\\product\\11.2.0\\server\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\php;C:\\Apache24;C:\\Apache24\\bin;C:\\Users\\Marcos\\AppData\\Local\\Android\\android-sdk\\platform-tools;C:\\Program Files\\PostgreSQL\\9.3\\bin;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files\\MySQL\\MySQL Server 5.6\\bin;C:\\Program Files\\TortoiseGit\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win64)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '64247'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=user-management%2Fpermission%2Fupdate&id=regstroContratista'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=user-management%2Fpermission%2Fupdate&id=regstroContratista'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1429812971.506
+    'REQUEST_TIME' => 1429812971
+]
+2015-04-23 13:46:15 [127.0.0.1][1][-][error][yii\i18n\PhpMessageSource::loadMessages] The message file for category 'widgets/GridPageSize/app' does not exist: C:\Apache24\htdocs\rnce\vendor\webvimark\grid-page-size/messages/es-VE/app.php Fallback file does not exist as well: C:\Apache24\htdocs\rnce\vendor\webvimark\grid-page-size/messages/es/app.php
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\grid-page-size\GridPageSize.php:104
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\grid-page-size\GridPageSize.php:75
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\views\permission\index.php:38
+2015-04-23 13:46:15 [127.0.0.1][1][-][info][application] $_GET = [
+    'r' => 'user-management/permission/index'
+]
+
+$_COOKIE = [
+    '_ga' => 'GA1.1.1861192029.1415307511'
+    'language' => '30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s:2:\"en\";'
+    'PHPSESSID' => 'u4vvogbirh48r3lcle8mrh74l7'
+    '_csrf' => '79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"6A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '_um_last_attempt' => 1429807658
+    '_um_attempt_count' => 1
+    '__id' => 1
+    '__auth_last_update' => 1429802132
+    '__userRoles' => []
+    '__userPermissions' => []
+    '__userRoutes' => []
+    '__visitorToken' => '5539222b14050'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://localhost/rnce/frontend/web/index.php?r=user-management%2Fpermission%2Fview&id=registroContratista'
+    'HTTP_COOKIE' => '_ga=GA1.1.1861192029.1415307511; language=30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s%3A2%3A%22en%22%3B; PHPSESSID=u4vvogbirh48r3lcle8mrh74l7; _csrf=79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%226A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB%22%3B%7D'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => 'C:\\oraclexe\\app\\oracle\\product\\11.2.0\\server\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\php;C:\\Apache24;C:\\Apache24\\bin;C:\\Users\\Marcos\\AppData\\Local\\Android\\android-sdk\\platform-tools;C:\\Program Files\\PostgreSQL\\9.3\\bin;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files\\MySQL\\MySQL Server 5.6\\bin;C:\\Program Files\\TortoiseGit\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win64)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '64249'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=user-management%2Fpermission%2Findex'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=user-management%2Fpermission%2Findex'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1429812975.034
+    'REQUEST_TIME' => 1429812975
+]
+2015-04-23 13:48:26 [127.0.0.1][-][-][error][yii\i18n\PhpMessageSource::loadMessages] The message file for category 'modules/user-management/front' does not exist: C:\Apache24\htdocs\rnce/vendor/webvimark/module-user-management/messages/es-VE/front.php Fallback file does not exist as well: C:\Apache24\htdocs\rnce/vendor/webvimark/module-user-management/messages/es/front.php
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\UserManagementModule.php:199
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\views\auth\login.php:18
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\components\BaseController.php:38
+2015-04-23 13:48:26 [127.0.0.1][-][-][info][application] $_GET = [
+    'r' => 'user-management/auth/login'
+]
+
+$_COOKIE = [
+    '_ga' => 'GA1.1.1861192029.1415307511'
+    'language' => '30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s:2:\"en\";'
+    'PHPSESSID' => 'dgeupkgcbd3rrn0bt3k7nua116'
+    '_csrf' => '79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"6A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__returnUrl' => '/rnce/frontend/web/index.php?r=user-management/auth/registration'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_COOKIE' => '_ga=GA1.1.1861192029.1415307511; language=30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s%3A2%3A%22en%22%3B; PHPSESSID=dgeupkgcbd3rrn0bt3k7nua116; _csrf=79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%226A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB%22%3B%7D'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => 'C:\\oraclexe\\app\\oracle\\product\\11.2.0\\server\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\php;C:\\Apache24;C:\\Apache24\\bin;C:\\Users\\Marcos\\AppData\\Local\\Android\\android-sdk\\platform-tools;C:\\Program Files\\PostgreSQL\\9.3\\bin;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files\\MySQL\\MySQL Server 5.6\\bin;C:\\Program Files\\TortoiseGit\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win64)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '64279'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=user-management%2Fauth%2Flogin'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=user-management%2Fauth%2Flogin'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1429813106.888
+    'REQUEST_TIME' => 1429813106
+]
+2015-04-23 13:48:39 [127.0.0.1][1][-][error][yii\i18n\PhpMessageSource::loadMessages] The message file for category 'widgets/GridPageSize/app' does not exist: C:\Apache24\htdocs\rnce\vendor\webvimark\grid-page-size/messages/es-VE/app.php Fallback file does not exist as well: C:\Apache24\htdocs\rnce\vendor\webvimark\grid-page-size/messages/es/app.php
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\grid-page-size\GridPageSize.php:104
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\grid-page-size\GridPageSize.php:75
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\views\auth-item-group\index.php:43
+2015-04-23 13:48:39 [127.0.0.1][1][-][info][application] $_GET = [
+    'r' => 'user-management/auth-item-group/index'
+]
+
+$_COOKIE = [
+    '_ga' => 'GA1.1.1861192029.1415307511'
+    'language' => '30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s:2:\"en\";'
+    'PHPSESSID' => '32q3en8p2lg8ar7qcjkoebd1f3'
+    '_csrf' => '79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"6A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__returnUrl' => '/rnce/frontend/web/index.php?r=user-management/auth/registration'
+    '_um_last_attempt' => 1429813115
+    '_um_attempt_count' => 1
+    '__id' => 1
+    '__auth_last_update' => 1429807850
+    '__userRoles' => []
+    '__userPermissions' => []
+    '__userRoutes' => []
+    '__visitorToken' => '5539377bf3a70'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://localhost/rnce/frontend/web/index.php'
+    'HTTP_COOKIE' => '_ga=GA1.1.1861192029.1415307511; language=30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s%3A2%3A%22en%22%3B; PHPSESSID=32q3en8p2lg8ar7qcjkoebd1f3; _csrf=79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%226A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB%22%3B%7D'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => 'C:\\oraclexe\\app\\oracle\\product\\11.2.0\\server\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\php;C:\\Apache24;C:\\Apache24\\bin;C:\\Users\\Marcos\\AppData\\Local\\Android\\android-sdk\\platform-tools;C:\\Program Files\\PostgreSQL\\9.3\\bin;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files\\MySQL\\MySQL Server 5.6\\bin;C:\\Program Files\\TortoiseGit\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win64)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '64283'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=user-management%2Fauth-item-group%2Findex'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=user-management%2Fauth-item-group%2Findex'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1429813119.353
+    'REQUEST_TIME' => 1429813119
+]
+2015-04-23 13:49:25 [127.0.0.1][1][-][error][yii\i18n\PhpMessageSource::loadMessages] The message file for category 'widgets/GridPageSize/app' does not exist: C:\Apache24\htdocs\rnce\vendor\webvimark\grid-page-size/messages/es-VE/app.php Fallback file does not exist as well: C:\Apache24\htdocs\rnce\vendor\webvimark\grid-page-size/messages/es/app.php
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\grid-page-size\GridPageSize.php:104
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\grid-page-size\GridPageSize.php:75
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\views\auth-item-group\index.php:43
+2015-04-23 13:49:25 [127.0.0.1][1][-][info][application] $_GET = [
+    'r' => 'user-management/auth-item-group/index'
+]
+
+$_COOKIE = [
+    '_ga' => 'GA1.1.1861192029.1415307511'
+    'language' => '30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s:2:\"en\";'
+    'PHPSESSID' => '32q3en8p2lg8ar7qcjkoebd1f3'
+    '_csrf' => '79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"6A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__returnUrl' => '/rnce/frontend/web/index.php?r=user-management/auth/registration'
+    '_um_last_attempt' => 1429813115
+    '_um_attempt_count' => 1
+    '__id' => 1
+    '__auth_last_update' => 1429807850
+    '__userRoles' => []
+    '__userPermissions' => []
+    '__userRoutes' => []
+    '__visitorToken' => '5539377bf3a70'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://localhost/rnce/frontend/web/index.php'
+    'HTTP_COOKIE' => '_ga=GA1.1.1861192029.1415307511; language=30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s%3A2%3A%22en%22%3B; PHPSESSID=32q3en8p2lg8ar7qcjkoebd1f3; _csrf=79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%226A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB%22%3B%7D'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => 'C:\\oraclexe\\app\\oracle\\product\\11.2.0\\server\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\php;C:\\Apache24;C:\\Apache24\\bin;C:\\Users\\Marcos\\AppData\\Local\\Android\\android-sdk\\platform-tools;C:\\Program Files\\PostgreSQL\\9.3\\bin;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files\\MySQL\\MySQL Server 5.6\\bin;C:\\Program Files\\TortoiseGit\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win64)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '64304'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=user-management%2Fauth-item-group%2Findex'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=user-management%2Fauth-item-group%2Findex'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1429813165.161
+    'REQUEST_TIME' => 1429813165
+]
+2015-04-23 13:49:53 [127.0.0.1][1][-][error][yii\i18n\PhpMessageSource::loadMessages] The message file for category 'widgets/GridPageSize/app' does not exist: C:\Apache24\htdocs\rnce\vendor\webvimark\grid-page-size/messages/es-VE/app.php Fallback file does not exist as well: C:\Apache24\htdocs\rnce\vendor\webvimark\grid-page-size/messages/es/app.php
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\grid-page-size\GridPageSize.php:104
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\grid-page-size\GridPageSize.php:75
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\views\permission\index.php:38
+2015-04-23 13:49:53 [127.0.0.1][1][-][info][application] $_GET = [
+    'r' => 'user-management/permission/index'
+]
+
+$_COOKIE = [
+    '_ga' => 'GA1.1.1861192029.1415307511'
+    'language' => '30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s:2:\"en\";'
+    'PHPSESSID' => '32q3en8p2lg8ar7qcjkoebd1f3'
+    '_csrf' => '79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"6A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__returnUrl' => '/rnce/frontend/web/index.php?r=user-management/auth/registration'
+    '_um_last_attempt' => 1429813115
+    '_um_attempt_count' => 1
+    '__id' => 1
+    '__auth_last_update' => 1429807850
+    '__userRoles' => []
+    '__userPermissions' => []
+    '__userRoutes' => []
+    '__visitorToken' => '5539377bf3a70'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://localhost/rnce/frontend/web/index.php'
+    'HTTP_COOKIE' => '_ga=GA1.1.1861192029.1415307511; language=30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s%3A2%3A%22en%22%3B; PHPSESSID=32q3en8p2lg8ar7qcjkoebd1f3; _csrf=79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%226A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB%22%3B%7D'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => 'C:\\oraclexe\\app\\oracle\\product\\11.2.0\\server\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\php;C:\\Apache24;C:\\Apache24\\bin;C:\\Users\\Marcos\\AppData\\Local\\Android\\android-sdk\\platform-tools;C:\\Program Files\\PostgreSQL\\9.3\\bin;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files\\MySQL\\MySQL Server 5.6\\bin;C:\\Program Files\\TortoiseGit\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win64)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '64311'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=user-management%2Fpermission%2Findex'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=user-management%2Fpermission%2Findex'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1429813193.425
+    'REQUEST_TIME' => 1429813193
+]
+2015-04-23 14:02:57 [127.0.0.1][-][-][error][yii\i18n\PhpMessageSource::loadMessages] The message file for category 'modules/user-management/front' does not exist: C:\Apache24\htdocs\rnce/vendor/webvimark/module-user-management/messages/es-VE/front.php Fallback file does not exist as well: C:\Apache24\htdocs\rnce/vendor/webvimark/module-user-management/messages/es/front.php
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\UserManagementModule.php:199
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\views\auth\login.php:18
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\components\BaseController.php:38
+2015-04-23 14:02:57 [127.0.0.1][-][-][info][application] $_GET = [
+    'r' => 'user-management/auth/login'
+]
+
+$_COOKIE = [
+    '_ga' => 'GA1.1.1861192029.1415307511'
+    'language' => '30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s:2:\"en\";'
+    'PHPSESSID' => '4v0pjlprhvpa1dj8uar1qnu6h7'
+    '_csrf' => '79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"6A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://localhost/rnce/frontend/web/index.php'
+    'HTTP_COOKIE' => '_ga=GA1.1.1861192029.1415307511; language=30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s%3A2%3A%22en%22%3B; PHPSESSID=4v0pjlprhvpa1dj8uar1qnu6h7; _csrf=79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%226A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB%22%3B%7D'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => 'C:\\oraclexe\\app\\oracle\\product\\11.2.0\\server\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\php;C:\\Apache24;C:\\Apache24\\bin;C:\\Users\\Marcos\\AppData\\Local\\Android\\android-sdk\\platform-tools;C:\\Program Files\\PostgreSQL\\9.3\\bin;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files\\MySQL\\MySQL Server 5.6\\bin;C:\\Program Files\\TortoiseGit\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win64)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '64392'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=user-management%2Fauth%2Flogin'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=user-management%2Fauth%2Flogin'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1429813977.862
+    'REQUEST_TIME' => 1429813977
+]
+2015-04-23 14:06:21 [127.0.0.1][-][-][error][yii\base\ErrorException:8] exception 'yii\base\ErrorException' with message 'Undefined variable: model2' in C:\Apache24\htdocs\rnce\frontend\views\contratistas\_form.php:15
+Stack trace:
+#0 C:\Apache24\htdocs\rnce\frontend\views\contratistas\_form.php(15): yii\base\ErrorHandler->handleError(8, 'Undefined varia...', 'C:\\Apache24\\htd...', 15, Array)
+#1 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\View.php(325): require('C:\\Apache24\\htd...')
+#2 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\View.php(247): yii\base\View->renderPhpFile('C:\\Apache24\\htd...', Array)
+#3 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\View.php(149): yii\base\View->renderFile('C:\\Apache24\\htd...', Array, NULL)
+#4 C:\Apache24\htdocs\rnce\frontend\views\contratistas\create.php(19): yii\base\View->render('_form', Array)
+#5 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\View.php(325): require('C:\\Apache24\\htd...')
+#6 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\View.php(247): yii\base\View->renderPhpFile('C:\\Apache24\\htd...', Array)
+#7 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\View.php(149): yii\base\View->renderFile('C:\\Apache24\\htd...', Array, Object(frontend\controllers\ContratistasController))
+#8 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Controller.php(367): yii\base\View->render('create', Array, Object(frontend\controllers\ContratistasController))
+#9 C:\Apache24\htdocs\rnce\frontend\controllers\ContratistasController.php(72): yii\base\Controller->render('create', Array)
+#10 [internal function]: frontend\controllers\ContratistasController->actionCreate()
+#11 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\InlineAction.php(55): call_user_func_array(Array, Array)
+#12 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Controller.php(151): yii\base\InlineAction->runWithParams(Array)
+#13 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Module.php(455): yii\base\Controller->runAction('create', Array)
+#14 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\web\Application.php(83): yii\base\Module->runAction('contratistas/cr...', Array)
+#15 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#16 C:\Apache24\htdocs\rnce\frontend\web\index.php(18): yii\base\Application->run()
+#17 {main}
+2015-04-23 14:06:21 [127.0.0.1][-][-][info][application] $_GET = [
+    'r' => 'contratistas/create'
+]
+
+$_COOKIE = [
+    '_ga' => 'GA1.1.1861192029.1415307511'
+    'language' => '30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s:2:\"en\";'
+    'PHPSESSID' => 'g49nvtbfns56d8m6ejcspr4hu1'
+    '_csrf' => '79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"6A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB\";}'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://localhost/rnce/frontend/web/index.php?r=contratistas%2Findex'
+    'HTTP_COOKIE' => '_ga=GA1.1.1861192029.1415307511; language=30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s%3A2%3A%22en%22%3B; PHPSESSID=g49nvtbfns56d8m6ejcspr4hu1; _csrf=79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%226A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB%22%3B%7D'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => 'C:\\oraclexe\\app\\oracle\\product\\11.2.0\\server\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\php;C:\\Apache24;C:\\Apache24\\bin;C:\\Users\\Marcos\\AppData\\Local\\Android\\android-sdk\\platform-tools;C:\\Program Files\\PostgreSQL\\9.3\\bin;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files\\MySQL\\MySQL Server 5.6\\bin;C:\\Program Files\\TortoiseGit\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win64)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '64481'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=contratistas%2Fcreate'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=contratistas%2Fcreate'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1429814181.873
+    'REQUEST_TIME' => 1429814181
+]
+2015-04-23 14:08:38 [127.0.0.1][-][-][error][yii\i18n\PhpMessageSource::loadMessages] The message file for category 'modules/user-management/front' does not exist: C:\Apache24\htdocs\rnce/vendor/webvimark/module-user-management/messages/es-VE/front.php Fallback file does not exist as well: C:\Apache24\htdocs\rnce/vendor/webvimark/module-user-management/messages/es/front.php
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\UserManagementModule.php:199
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\views\auth\login.php:18
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\components\BaseController.php:38
+2015-04-23 14:08:38 [127.0.0.1][-][-][info][application] $_GET = [
+    'r' => 'user-management/auth/login'
+]
+
+$_COOKIE = [
+    '_ga' => 'GA1.1.1861192029.1415307511'
+    'language' => '30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s:2:\"en\";'
+    'PHPSESSID' => 'e3aavl5cum3e0ho3fuue39qne2'
+    '_csrf' => '79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"6A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://localhost/rnce/frontend/web/index.php'
+    'HTTP_COOKIE' => '_ga=GA1.1.1861192029.1415307511; language=30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s%3A2%3A%22en%22%3B; PHPSESSID=e3aavl5cum3e0ho3fuue39qne2; _csrf=79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%226A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB%22%3B%7D'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => 'C:\\oraclexe\\app\\oracle\\product\\11.2.0\\server\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\php;C:\\Apache24;C:\\Apache24\\bin;C:\\Users\\Marcos\\AppData\\Local\\Android\\android-sdk\\platform-tools;C:\\Program Files\\PostgreSQL\\9.3\\bin;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files\\MySQL\\MySQL Server 5.6\\bin;C:\\Program Files\\TortoiseGit\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win64)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '64501'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=user-management%2Fauth%2Flogin'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=user-management%2Fauth%2Flogin'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1429814318.157
+    'REQUEST_TIME' => 1429814318
+]
+2015-04-23 14:08:48 [127.0.0.1][1][-][error][yii\i18n\PhpMessageSource::loadMessages] The message file for category 'widgets/GridPageSize/app' does not exist: C:\Apache24\htdocs\rnce\vendor\webvimark\grid-page-size/messages/es-VE/app.php Fallback file does not exist as well: C:\Apache24\htdocs\rnce\vendor\webvimark\grid-page-size/messages/es/app.php
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\grid-page-size\GridPageSize.php:104
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\grid-page-size\GridPageSize.php:75
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\views\permission\index.php:38
+2015-04-23 14:08:48 [127.0.0.1][1][-][info][application] $_GET = [
+    'r' => 'user-management/permission/index'
+]
+
+$_COOKIE = [
+    '_ga' => 'GA1.1.1861192029.1415307511'
+    'language' => '30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s:2:\"en\";'
+    'PHPSESSID' => '302o6iv5pqfgsh4ad755nmckg1'
+    '_csrf' => '79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"6A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '_um_last_attempt' => 1429814324
+    '_um_attempt_count' => 1
+    '__id' => 1
+    '__auth_last_update' => 1429807850
+    '__userRoles' => []
+    '__userPermissions' => []
+    '__userRoutes' => []
+    '__visitorToken' => '55393c3590880'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://localhost/rnce/frontend/web/index.php'
+    'HTTP_COOKIE' => '_ga=GA1.1.1861192029.1415307511; language=30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s%3A2%3A%22en%22%3B; PHPSESSID=302o6iv5pqfgsh4ad755nmckg1; _csrf=79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%226A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB%22%3B%7D'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => 'C:\\oraclexe\\app\\oracle\\product\\11.2.0\\server\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\php;C:\\Apache24;C:\\Apache24\\bin;C:\\Users\\Marcos\\AppData\\Local\\Android\\android-sdk\\platform-tools;C:\\Program Files\\PostgreSQL\\9.3\\bin;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files\\MySQL\\MySQL Server 5.6\\bin;C:\\Program Files\\TortoiseGit\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win64)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '64507'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=user-management%2Fpermission%2Findex'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=user-management%2Fpermission%2Findex'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1429814328.067
+    'REQUEST_TIME' => 1429814328
+]
+2015-04-23 14:09:18 [127.0.0.1][1][-][error][yii\i18n\PhpMessageSource::loadMessages] The message file for category 'widgets/GridPageSize/app' does not exist: C:\Apache24\htdocs\rnce\vendor\webvimark\grid-page-size/messages/es-VE/app.php Fallback file does not exist as well: C:\Apache24\htdocs\rnce\vendor\webvimark\grid-page-size/messages/es/app.php
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\grid-page-size\GridPageSize.php:104
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\grid-page-size\GridPageSize.php:75
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\views\user-visit-log\index.php:29
+2015-04-23 14:09:18 [127.0.0.1][1][-][error][yii\i18n\PhpMessageSource::loadMessages] The message file for category 'widgets/DateRangePicker/app' does not exist: C:\Apache24\htdocs\rnce\vendor\webvimark\date-range-picker/messages/es-VE/app.php Fallback file does not exist as well: C:\Apache24\htdocs\rnce\vendor\webvimark\date-range-picker/messages/es/app.php
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\date-range-picker\DateRangePicker.php:100
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\date-range-picker\DateRangePicker.php:161
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\date-range-picker\DateRangePicker.php:140
+2015-04-23 14:09:18 [127.0.0.1][1][-][info][application] $_GET = [
+    'r' => 'user-management/user-visit-log/index'
+]
+
+$_COOKIE = [
+    '_ga' => 'GA1.1.1861192029.1415307511'
+    'language' => '30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s:2:\"en\";'
+    'PHPSESSID' => '302o6iv5pqfgsh4ad755nmckg1'
+    '_csrf' => '79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"6A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '_um_last_attempt' => 1429814324
+    '_um_attempt_count' => 1
+    '__id' => 1
+    '__auth_last_update' => 1429807850
+    '__userRoles' => []
+    '__userPermissions' => []
+    '__userRoutes' => []
+    '__visitorToken' => '55393c3590880'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://localhost/rnce/frontend/web/index.php?r=user-management%2Fpermission%2Findex'
+    'HTTP_COOKIE' => '_ga=GA1.1.1861192029.1415307511; language=30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s%3A2%3A%22en%22%3B; PHPSESSID=302o6iv5pqfgsh4ad755nmckg1; _csrf=79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%226A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB%22%3B%7D'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => 'C:\\oraclexe\\app\\oracle\\product\\11.2.0\\server\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\php;C:\\Apache24;C:\\Apache24\\bin;C:\\Users\\Marcos\\AppData\\Local\\Android\\android-sdk\\platform-tools;C:\\Program Files\\PostgreSQL\\9.3\\bin;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files\\MySQL\\MySQL Server 5.6\\bin;C:\\Program Files\\TortoiseGit\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win64)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '64513'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=user-management%2Fuser-visit-log%2Findex'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=user-management%2Fuser-visit-log%2Findex'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1429814358.017
+    'REQUEST_TIME' => 1429814358
+]
+2015-04-23 14:09:23 [127.0.0.1][1][-][error][yii\i18n\PhpMessageSource::loadMessages] The message file for category 'widgets/GridPageSize/app' does not exist: C:\Apache24\htdocs\rnce\vendor\webvimark\grid-page-size/messages/es-VE/app.php Fallback file does not exist as well: C:\Apache24\htdocs\rnce\vendor\webvimark\grid-page-size/messages/es/app.php
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\grid-page-size\GridPageSize.php:104
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\grid-page-size\GridPageSize.php:75
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\views\permission\index.php:38
+2015-04-23 14:09:23 [127.0.0.1][1][-][info][application] $_GET = [
+    'r' => 'user-management/permission/index'
+]
+
+$_COOKIE = [
+    '_ga' => 'GA1.1.1861192029.1415307511'
+    'language' => '30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s:2:\"en\";'
+    'PHPSESSID' => '302o6iv5pqfgsh4ad755nmckg1'
+    '_csrf' => '79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"6A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '_um_last_attempt' => 1429814324
+    '_um_attempt_count' => 1
+    '__id' => 1
+    '__auth_last_update' => 1429807850
+    '__userRoles' => []
+    '__userPermissions' => []
+    '__userRoutes' => []
+    '__visitorToken' => '55393c3590880'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://localhost/rnce/frontend/web/index.php'
+    'HTTP_COOKIE' => '_ga=GA1.1.1861192029.1415307511; language=30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s%3A2%3A%22en%22%3B; PHPSESSID=302o6iv5pqfgsh4ad755nmckg1; _csrf=79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%226A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB%22%3B%7D'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => 'C:\\oraclexe\\app\\oracle\\product\\11.2.0\\server\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\php;C:\\Apache24;C:\\Apache24\\bin;C:\\Users\\Marcos\\AppData\\Local\\Android\\android-sdk\\platform-tools;C:\\Program Files\\PostgreSQL\\9.3\\bin;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files\\MySQL\\MySQL Server 5.6\\bin;C:\\Program Files\\TortoiseGit\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win64)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '64513'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=user-management%2Fpermission%2Findex'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=user-management%2Fpermission%2Findex'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1429814363.562
+    'REQUEST_TIME' => 1429814363
+]
+2015-04-23 14:10:15 [127.0.0.1][1][-][error][yii\i18n\PhpMessageSource::loadMessages] The message file for category 'widgets/GridPageSize/app' does not exist: C:\Apache24\htdocs\rnce\vendor\webvimark\grid-page-size/messages/es-VE/app.php Fallback file does not exist as well: C:\Apache24\htdocs\rnce\vendor\webvimark\grid-page-size/messages/es/app.php
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\grid-page-size\GridPageSize.php:104
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\grid-page-size\GridPageSize.php:75
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\views\permission\index.php:38
+2015-04-23 14:10:15 [127.0.0.1][1][-][info][application] $_GET = [
+    'r' => 'user-management/permission/index'
+]
+
+$_COOKIE = [
+    '_ga' => 'GA1.1.1861192029.1415307511'
+    'language' => '30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s:2:\"en\";'
+    'PHPSESSID' => '302o6iv5pqfgsh4ad755nmckg1'
+    '_csrf' => '79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"6A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '_um_last_attempt' => 1429814324
+    '_um_attempt_count' => 1
+    '__id' => 1
+    '__auth_last_update' => 1429807850
+    '__userRoles' => []
+    '__userPermissions' => []
+    '__userRoutes' => []
+    '__visitorToken' => '55393c3590880'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://localhost/rnce/frontend/web/index.php?r=user-management%2Fpermission%2Findex'
+    'HTTP_COOKIE' => '_ga=GA1.1.1861192029.1415307511; language=30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s%3A2%3A%22en%22%3B; PHPSESSID=302o6iv5pqfgsh4ad755nmckg1; _csrf=79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%226A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB%22%3B%7D'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => 'C:\\oraclexe\\app\\oracle\\product\\11.2.0\\server\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\php;C:\\Apache24;C:\\Apache24\\bin;C:\\Users\\Marcos\\AppData\\Local\\Android\\android-sdk\\platform-tools;C:\\Program Files\\PostgreSQL\\9.3\\bin;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files\\MySQL\\MySQL Server 5.6\\bin;C:\\Program Files\\TortoiseGit\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win64)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '64527'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=user-management%2Fpermission%2Findex'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=user-management%2Fpermission%2Findex'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1429814415.566
+    'REQUEST_TIME' => 1429814415
+]
+2015-04-23 14:10:16 [127.0.0.1][1][-][error][yii\i18n\PhpMessageSource::loadMessages] The message file for category 'widgets/GridPageSize/app' does not exist: C:\Apache24\htdocs\rnce\vendor\webvimark\grid-page-size/messages/es-VE/app.php Fallback file does not exist as well: C:\Apache24\htdocs\rnce\vendor\webvimark\grid-page-size/messages/es/app.php
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\grid-page-size\GridPageSize.php:104
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\grid-page-size\GridPageSize.php:75
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\views\permission\index.php:38
+2015-04-23 14:10:15 [127.0.0.1][1][-][info][application] $_GET = [
+    'r' => 'user-management/permission/index'
+]
+
+$_COOKIE = [
+    '_ga' => 'GA1.1.1861192029.1415307511'
+    'language' => '30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s:2:\"en\";'
+    'PHPSESSID' => '302o6iv5pqfgsh4ad755nmckg1'
+    '_csrf' => '79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"6A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '_um_last_attempt' => 1429814324
+    '_um_attempt_count' => 1
+    '__id' => 1
+    '__auth_last_update' => 1429807850
+    '__userRoles' => []
+    '__userPermissions' => []
+    '__userRoutes' => []
+    '__visitorToken' => '55393c3590880'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://localhost/rnce/frontend/web/index.php?r=user-management%2Fpermission%2Findex'
+    'HTTP_COOKIE' => '_ga=GA1.1.1861192029.1415307511; language=30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s%3A2%3A%22en%22%3B; PHPSESSID=302o6iv5pqfgsh4ad755nmckg1; _csrf=79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%226A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB%22%3B%7D'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => 'C:\\oraclexe\\app\\oracle\\product\\11.2.0\\server\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\php;C:\\Apache24;C:\\Apache24\\bin;C:\\Users\\Marcos\\AppData\\Local\\Android\\android-sdk\\platform-tools;C:\\Program Files\\PostgreSQL\\9.3\\bin;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files\\MySQL\\MySQL Server 5.6\\bin;C:\\Program Files\\TortoiseGit\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win64)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '64529'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=user-management%2Fpermission%2Findex'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=user-management%2Fpermission%2Findex'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1429814415.706
+    'REQUEST_TIME' => 1429814415
+]
+2015-04-23 14:10:16 [127.0.0.1][1][-][error][yii\i18n\PhpMessageSource::loadMessages] The message file for category 'widgets/GridPageSize/app' does not exist: C:\Apache24\htdocs\rnce\vendor\webvimark\grid-page-size/messages/es-VE/app.php Fallback file does not exist as well: C:\Apache24\htdocs\rnce\vendor\webvimark\grid-page-size/messages/es/app.php
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\grid-page-size\GridPageSize.php:104
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\grid-page-size\GridPageSize.php:75
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\views\permission\index.php:38
+2015-04-23 14:10:15 [127.0.0.1][1][-][info][application] $_GET = [
+    'r' => 'user-management/permission/index'
+]
+
+$_COOKIE = [
+    '_ga' => 'GA1.1.1861192029.1415307511'
+    'language' => '30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s:2:\"en\";'
+    'PHPSESSID' => '302o6iv5pqfgsh4ad755nmckg1'
+    '_csrf' => '79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"6A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '_um_last_attempt' => 1429814324
+    '_um_attempt_count' => 1
+    '__id' => 1
+    '__auth_last_update' => 1429807850
+    '__userRoles' => []
+    '__userPermissions' => []
+    '__userRoutes' => []
+    '__visitorToken' => '55393c3590880'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://localhost/rnce/frontend/web/index.php?r=user-management%2Fpermission%2Findex'
+    'HTTP_COOKIE' => '_ga=GA1.1.1861192029.1415307511; language=30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s%3A2%3A%22en%22%3B; PHPSESSID=302o6iv5pqfgsh4ad755nmckg1; _csrf=79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%226A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB%22%3B%7D'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => 'C:\\oraclexe\\app\\oracle\\product\\11.2.0\\server\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\php;C:\\Apache24;C:\\Apache24\\bin;C:\\Users\\Marcos\\AppData\\Local\\Android\\android-sdk\\platform-tools;C:\\Program Files\\PostgreSQL\\9.3\\bin;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files\\MySQL\\MySQL Server 5.6\\bin;C:\\Program Files\\TortoiseGit\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win64)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '64530'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=user-management%2Fpermission%2Findex'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=user-management%2Fpermission%2Findex'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1429814415.845
+    'REQUEST_TIME' => 1429814415
+]
+2015-04-23 14:15:31 [127.0.0.1][1][-][error][yii\i18n\PhpMessageSource::loadMessages] The message file for category 'widgets/GridPageSize/app' does not exist: C:\Apache24\htdocs\rnce\vendor\webvimark\grid-page-size/messages/es-VE/app.php Fallback file does not exist as well: C:\Apache24\htdocs\rnce\vendor\webvimark\grid-page-size/messages/es/app.php
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\grid-page-size\GridPageSize.php:104
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\grid-page-size\GridPageSize.php:75
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\views\permission\index.php:38
+2015-04-23 14:15:31 [127.0.0.1][1][-][info][application] $_GET = [
+    'r' => 'user-management/permission/index'
+]
+
+$_COOKIE = [
+    '_ga' => 'GA1.1.1861192029.1415307511'
+    'language' => '30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s:2:\"en\";'
+    'PHPSESSID' => '302o6iv5pqfgsh4ad755nmckg1'
+    '_csrf' => '79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"6A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '_um_last_attempt' => 1429814324
+    '_um_attempt_count' => 1
+    '__id' => 1
+    '__auth_last_update' => 1429807850
+    '__userRoles' => []
+    '__userPermissions' => []
+    '__userRoutes' => []
+    '__visitorToken' => '55393c3590880'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://localhost/rnce/frontend/web/index.php?r=user-management%2Fpermission%2Findex'
+    'HTTP_COOKIE' => '_ga=GA1.1.1861192029.1415307511; language=30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s%3A2%3A%22en%22%3B; PHPSESSID=302o6iv5pqfgsh4ad755nmckg1; _csrf=79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%226A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB%22%3B%7D'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => 'C:\\oraclexe\\app\\oracle\\product\\11.2.0\\server\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\php;C:\\Apache24;C:\\Apache24\\bin;C:\\Users\\Marcos\\AppData\\Local\\Android\\android-sdk\\platform-tools;C:\\Program Files\\PostgreSQL\\9.3\\bin;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files\\MySQL\\MySQL Server 5.6\\bin;C:\\Program Files\\TortoiseGit\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win64)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '64541'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=user-management%2Fpermission%2Findex'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=user-management%2Fpermission%2Findex'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1429814731.332
+    'REQUEST_TIME' => 1429814731
+]
+2015-04-23 14:17:05 [127.0.0.1][-][-][error][yii\i18n\PhpMessageSource::loadMessages] The message file for category 'modules/user-management/front' does not exist: C:\Apache24\htdocs\rnce/vendor/webvimark/module-user-management/messages/es-VE/front.php Fallback file does not exist as well: C:\Apache24\htdocs\rnce/vendor/webvimark/module-user-management/messages/es/front.php
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\UserManagementModule.php:199
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\views\auth\registration.php:13
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\components\BaseController.php:38
+2015-04-23 14:17:05 [127.0.0.1][-][-][info][application] $_GET = [
+    'r' => 'user-management/auth/registration'
+]
+
+$_COOKIE = [
+    '_ga' => 'GA1.1.1861192029.1415307511'
+    'language' => '30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s:2:\"en\";'
+    'PHPSESSID' => '56uq003ilfcs2kb1ep4lq4ame7'
+    '_csrf' => '79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"6A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__captcha/user-management/auth/captcha' => 'phle'
+    '__captcha/user-management/auth/captchacount' => 1
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://localhost/rnce/frontend/web/index.php'
+    'HTTP_COOKIE' => '_ga=GA1.1.1861192029.1415307511; language=30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s%3A2%3A%22en%22%3B; PHPSESSID=56uq003ilfcs2kb1ep4lq4ame7; _csrf=79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%226A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB%22%3B%7D'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => 'C:\\oraclexe\\app\\oracle\\product\\11.2.0\\server\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\php;C:\\Apache24;C:\\Apache24\\bin;C:\\Users\\Marcos\\AppData\\Local\\Android\\android-sdk\\platform-tools;C:\\Program Files\\PostgreSQL\\9.3\\bin;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files\\MySQL\\MySQL Server 5.6\\bin;C:\\Program Files\\TortoiseGit\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win64)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '64565'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=user-management%2Fauth%2Fregistration'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=user-management%2Fauth%2Fregistration'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1429814825.529
+    'REQUEST_TIME' => 1429814825
+]
+2015-04-23 14:17:13 [127.0.0.1][-][-][error][yii\i18n\PhpMessageSource::loadMessages] The message file for category 'widgets/GridPageSize/app' does not exist: C:\Apache24\htdocs\rnce\vendor\webvimark\grid-page-size/messages/es-VE/app.php Fallback file does not exist as well: C:\Apache24\htdocs\rnce\vendor\webvimark\grid-page-size/messages/es/app.php
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\grid-page-size\GridPageSize.php:104
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\grid-page-size\GridPageSize.php:75
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\views\permission\index.php:38
+2015-04-23 14:17:13 [127.0.0.1][-][-][info][application] $_GET = [
+    'r' => 'user-management/permission/index'
+]
+
+$_COOKIE = [
+    '_ga' => 'GA1.1.1861192029.1415307511'
+    'language' => '30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s:2:\"en\";'
+    'PHPSESSID' => '56uq003ilfcs2kb1ep4lq4ame7'
+    '_csrf' => '79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"6A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__captcha/user-management/auth/captcha' => 'phle'
+    '__captcha/user-management/auth/captchacount' => 1
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://localhost/rnce/frontend/web/index.php'
+    'HTTP_COOKIE' => '_ga=GA1.1.1861192029.1415307511; language=30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s%3A2%3A%22en%22%3B; PHPSESSID=56uq003ilfcs2kb1ep4lq4ame7; _csrf=79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%226A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB%22%3B%7D'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => 'C:\\oraclexe\\app\\oracle\\product\\11.2.0\\server\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\php;C:\\Apache24;C:\\Apache24\\bin;C:\\Users\\Marcos\\AppData\\Local\\Android\\android-sdk\\platform-tools;C:\\Program Files\\PostgreSQL\\9.3\\bin;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files\\MySQL\\MySQL Server 5.6\\bin;C:\\Program Files\\TortoiseGit\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win64)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '64570'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=user-management%2Fpermission%2Findex'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=user-management%2Fpermission%2Findex'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1429814833.446
+    'REQUEST_TIME' => 1429814833
+]
+2015-04-23 14:18:28 [127.0.0.1][-][-][error][yii\i18n\PhpMessageSource::loadMessages] The message file for category 'modules/user-management/front' does not exist: C:\Apache24\htdocs\rnce/vendor/webvimark/module-user-management/messages/es-VE/front.php Fallback file does not exist as well: C:\Apache24\htdocs\rnce/vendor/webvimark/module-user-management/messages/es/front.php
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\UserManagementModule.php:199
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\views\auth\login.php:18
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\components\BaseController.php:38
+2015-04-23 14:18:28 [127.0.0.1][-][-][info][application] $_GET = [
+    'r' => 'user-management/auth/login'
+]
+
+$_COOKIE = [
+    '_ga' => 'GA1.1.1861192029.1415307511'
+    'language' => '30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s:2:\"en\";'
+    'PHPSESSID' => '56uq003ilfcs2kb1ep4lq4ame7'
+    '_csrf' => '79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"6A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__captcha/user-management/auth/captcha' => 'phle'
+    '__captcha/user-management/auth/captchacount' => 1
+    '__returnUrl' => '/rnce/frontend/web/index.php?r=user-management%2Fpermission%2Fview&id=commonPermission'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://localhost/rnce/frontend/web/index.php?r=user-management%2Fpermission%2Fview&id=commonPermission'
+    'HTTP_COOKIE' => '_ga=GA1.1.1861192029.1415307511; language=30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s%3A2%3A%22en%22%3B; PHPSESSID=56uq003ilfcs2kb1ep4lq4ame7; _csrf=79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%226A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB%22%3B%7D'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => 'C:\\oraclexe\\app\\oracle\\product\\11.2.0\\server\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\php;C:\\Apache24;C:\\Apache24\\bin;C:\\Users\\Marcos\\AppData\\Local\\Android\\android-sdk\\platform-tools;C:\\Program Files\\PostgreSQL\\9.3\\bin;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files\\MySQL\\MySQL Server 5.6\\bin;C:\\Program Files\\TortoiseGit\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win64)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '64589'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=user-management%2Fauth%2Flogin'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=user-management%2Fauth%2Flogin'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1429814908.541
+    'REQUEST_TIME' => 1429814908
+]
+2015-04-23 14:18:49 [127.0.0.1][-][-][error][yii\i18n\PhpMessageSource::loadMessages] The message file for category 'modules/user-management/front' does not exist: C:\Apache24\htdocs\rnce/vendor/webvimark/module-user-management/messages/es-VE/front.php Fallback file does not exist as well: C:\Apache24\htdocs\rnce/vendor/webvimark/module-user-management/messages/es/front.php
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\UserManagementModule.php:199
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\views\auth\registration.php:13
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\components\BaseController.php:38
+2015-04-23 14:18:49 [127.0.0.1][-][-][info][application] $_GET = [
+    'r' => 'user-management/auth/registration'
+]
+
+$_COOKIE = [
+    '_ga' => 'GA1.1.1861192029.1415307511'
+    'language' => '30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s:2:\"en\";'
+    'PHPSESSID' => '21gl9qunmpda50mja8auj3g5r4'
+    '_csrf' => '79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"6A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__captcha/user-management/auth/captcha' => 'fac'
+    '__captcha/user-management/auth/captchacount' => 1
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://localhost/rnce/frontend/web/index.php'
+    'HTTP_COOKIE' => '_ga=GA1.1.1861192029.1415307511; language=30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s%3A2%3A%22en%22%3B; PHPSESSID=21gl9qunmpda50mja8auj3g5r4; _csrf=79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%226A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB%22%3B%7D'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => 'C:\\oraclexe\\app\\oracle\\product\\11.2.0\\server\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\php;C:\\Apache24;C:\\Apache24\\bin;C:\\Users\\Marcos\\AppData\\Local\\Android\\android-sdk\\platform-tools;C:\\Program Files\\PostgreSQL\\9.3\\bin;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files\\MySQL\\MySQL Server 5.6\\bin;C:\\Program Files\\TortoiseGit\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win64)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '64602'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=user-management%2Fauth%2Fregistration'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=user-management%2Fauth%2Fregistration'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1429814929.382
+    'REQUEST_TIME' => 1429814929
+]
+2015-04-23 14:19:01 [127.0.0.1][-][-][error][yii\i18n\PhpMessageSource::loadMessages] The message file for category 'modules/user-management/front' does not exist: C:\Apache24\htdocs\rnce/vendor/webvimark/module-user-management/messages/es-VE/front.php Fallback file does not exist as well: C:\Apache24\htdocs\rnce/vendor/webvimark/module-user-management/messages/es/front.php
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\UserManagementModule.php:199
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\views\auth\registration.php:13
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\components\BaseController.php:38
+2015-04-23 14:19:01 [127.0.0.1][-][-][info][application] $_GET = [
+    'r' => 'user-management/auth/registration'
+]
+
+$_COOKIE = [
+    '_ga' => 'GA1.1.1861192029.1415307511'
+    'language' => '30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s:2:\"en\";'
+    'PHPSESSID' => '21gl9qunmpda50mja8auj3g5r4'
+    '_csrf' => '79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"6A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__captcha/user-management/auth/captcha' => 'fac'
+    '__captcha/user-management/auth/captchacount' => 1
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://localhost/rnce/frontend/web/index.php?r=user-management%2Fauth%2Fregistration'
+    'HTTP_COOKIE' => '_ga=GA1.1.1861192029.1415307511; language=30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s%3A2%3A%22en%22%3B; PHPSESSID=21gl9qunmpda50mja8auj3g5r4; _csrf=79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%226A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB%22%3B%7D'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => 'C:\\oraclexe\\app\\oracle\\product\\11.2.0\\server\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\php;C:\\Apache24;C:\\Apache24\\bin;C:\\Users\\Marcos\\AppData\\Local\\Android\\android-sdk\\platform-tools;C:\\Program Files\\PostgreSQL\\9.3\\bin;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files\\MySQL\\MySQL Server 5.6\\bin;C:\\Program Files\\TortoiseGit\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win64)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '64609'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=user-management%2Fauth%2Fregistration'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=user-management%2Fauth%2Fregistration'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1429814941.414
+    'REQUEST_TIME' => 1429814941
+]
+2015-04-23 14:19:01 [127.0.0.1][-][-][error][yii\i18n\PhpMessageSource::loadMessages] The message file for category 'modules/user-management/front' does not exist: C:\Apache24\htdocs\rnce/vendor/webvimark/module-user-management/messages/es-VE/front.php Fallback file does not exist as well: C:\Apache24\htdocs\rnce/vendor/webvimark/module-user-management/messages/es/front.php
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\UserManagementModule.php:199
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\views\auth\registration.php:13
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\components\BaseController.php:38
+2015-04-23 14:19:01 [127.0.0.1][-][-][info][application] $_GET = [
+    'r' => 'user-management/auth/registration'
+]
+
+$_COOKIE = [
+    '_ga' => 'GA1.1.1861192029.1415307511'
+    'language' => '30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s:2:\"en\";'
+    'PHPSESSID' => '21gl9qunmpda50mja8auj3g5r4'
+    '_csrf' => '79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"6A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__captcha/user-management/auth/captcha' => 'fac'
+    '__captcha/user-management/auth/captchacount' => 1
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://localhost/rnce/frontend/web/index.php?r=user-management%2Fauth%2Fregistration'
+    'HTTP_COOKIE' => '_ga=GA1.1.1861192029.1415307511; language=30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s%3A2%3A%22en%22%3B; PHPSESSID=21gl9qunmpda50mja8auj3g5r4; _csrf=79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%226A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB%22%3B%7D'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => 'C:\\oraclexe\\app\\oracle\\product\\11.2.0\\server\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\php;C:\\Apache24;C:\\Apache24\\bin;C:\\Users\\Marcos\\AppData\\Local\\Android\\android-sdk\\platform-tools;C:\\Program Files\\PostgreSQL\\9.3\\bin;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files\\MySQL\\MySQL Server 5.6\\bin;C:\\Program Files\\TortoiseGit\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win64)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '64610'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=user-management%2Fauth%2Fregistration'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=user-management%2Fauth%2Fregistration'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1429814941.569
+    'REQUEST_TIME' => 1429814941
+]
+2015-04-23 14:19:06 [127.0.0.1][-][-][error][yii\i18n\PhpMessageSource::loadMessages] The message file for category 'modules/user-management/front' does not exist: C:\Apache24\htdocs\rnce/vendor/webvimark/module-user-management/messages/es-VE/front.php Fallback file does not exist as well: C:\Apache24\htdocs\rnce/vendor/webvimark/module-user-management/messages/es/front.php
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\UserManagementModule.php:199
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\views\auth\passwordRecovery.php:13
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\components\BaseController.php:38
+2015-04-23 14:19:05 [127.0.0.1][-][-][info][application] $_GET = [
+    'r' => 'user-management/auth/password-recovery'
+]
+
+$_COOKIE = [
+    '_ga' => 'GA1.1.1861192029.1415307511'
+    'language' => '30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s:2:\"en\";'
+    'PHPSESSID' => '21gl9qunmpda50mja8auj3g5r4'
+    '_csrf' => '79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"6A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__captcha/user-management/auth/captcha' => 'fac'
+    '__captcha/user-management/auth/captchacount' => 1
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://localhost/rnce/frontend/web/index.php?r=user-management%2Fauth%2Fregistration'
+    'HTTP_COOKIE' => '_ga=GA1.1.1861192029.1415307511; language=30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s%3A2%3A%22en%22%3B; PHPSESSID=21gl9qunmpda50mja8auj3g5r4; _csrf=79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%226A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB%22%3B%7D'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => 'C:\\oraclexe\\app\\oracle\\product\\11.2.0\\server\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\php;C:\\Apache24;C:\\Apache24\\bin;C:\\Users\\Marcos\\AppData\\Local\\Android\\android-sdk\\platform-tools;C:\\Program Files\\PostgreSQL\\9.3\\bin;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files\\MySQL\\MySQL Server 5.6\\bin;C:\\Program Files\\TortoiseGit\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win64)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '64612'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=user-management%2Fauth%2Fpassword-recovery'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=user-management%2Fauth%2Fpassword-recovery'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1429814945.947
+    'REQUEST_TIME' => 1429814945
+]
+2015-04-23 14:19:15 [127.0.0.1][-][-][error][yii\i18n\PhpMessageSource::loadMessages] The message file for category 'modules/user-management/front' does not exist: C:\Apache24\htdocs\rnce/vendor/webvimark/module-user-management/messages/es-VE/front.php Fallback file does not exist as well: C:\Apache24\htdocs\rnce/vendor/webvimark/module-user-management/messages/es/front.php
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\UserManagementModule.php:199
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\views\auth\passwordRecovery.php:13
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\components\BaseController.php:38
+2015-04-23 14:19:14 [127.0.0.1][-][-][info][application] $_GET = [
+    'r' => 'user-management/auth/password-recovery'
+]
+
+$_COOKIE = [
+    '_ga' => 'GA1.1.1861192029.1415307511'
+    'language' => '30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s:2:\"en\";'
+    'PHPSESSID' => '21gl9qunmpda50mja8auj3g5r4'
+    '_csrf' => '79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"6A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__captcha/user-management/auth/captcha' => 'fac'
+    '__captcha/user-management/auth/captchacount' => 1
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://localhost/rnce/frontend/web/index.php'
+    'HTTP_COOKIE' => '_ga=GA1.1.1861192029.1415307511; language=30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s%3A2%3A%22en%22%3B; PHPSESSID=21gl9qunmpda50mja8auj3g5r4; _csrf=79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%226A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB%22%3B%7D'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => 'C:\\oraclexe\\app\\oracle\\product\\11.2.0\\server\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\php;C:\\Apache24;C:\\Apache24\\bin;C:\\Users\\Marcos\\AppData\\Local\\Android\\android-sdk\\platform-tools;C:\\Program Files\\PostgreSQL\\9.3\\bin;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files\\MySQL\\MySQL Server 5.6\\bin;C:\\Program Files\\TortoiseGit\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win64)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '64611'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=user-management%2Fauth%2Fpassword-recovery'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=user-management%2Fauth%2Fpassword-recovery'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1429814954.957
+    'REQUEST_TIME' => 1429814954
+]
+2015-04-23 14:19:19 [127.0.0.1][-][-][error][yii\i18n\PhpMessageSource::loadMessages] The message file for category 'modules/user-management/front' does not exist: C:\Apache24\htdocs\rnce/vendor/webvimark/module-user-management/messages/es-VE/front.php Fallback file does not exist as well: C:\Apache24\htdocs\rnce/vendor/webvimark/module-user-management/messages/es/front.php
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\UserManagementModule.php:199
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\views\auth\passwordRecovery.php:13
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\components\BaseController.php:38
+2015-04-23 14:19:19 [127.0.0.1][-][-][info][application] $_GET = [
+    'r' => 'user-management/auth/password-recovery'
+]
+
+$_COOKIE = [
+    '_ga' => 'GA1.1.1861192029.1415307511'
+    'language' => '30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s:2:\"en\";'
+    'PHPSESSID' => '21gl9qunmpda50mja8auj3g5r4'
+    '_csrf' => '79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"6A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__captcha/user-management/auth/captcha' => 'fac'
+    '__captcha/user-management/auth/captchacount' => 1
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://localhost/rnce/frontend/web/index.php'
+    'HTTP_COOKIE' => '_ga=GA1.1.1861192029.1415307511; language=30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s%3A2%3A%22en%22%3B; PHPSESSID=21gl9qunmpda50mja8auj3g5r4; _csrf=79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%226A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB%22%3B%7D'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => 'C:\\oraclexe\\app\\oracle\\product\\11.2.0\\server\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\php;C:\\Apache24;C:\\Apache24\\bin;C:\\Users\\Marcos\\AppData\\Local\\Android\\android-sdk\\platform-tools;C:\\Program Files\\PostgreSQL\\9.3\\bin;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files\\MySQL\\MySQL Server 5.6\\bin;C:\\Program Files\\TortoiseGit\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win64)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '64611'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=user-management%2Fauth%2Fpassword-recovery'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=user-management%2Fauth%2Fpassword-recovery'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1429814959.389
+    'REQUEST_TIME' => 1429814959
+]
+2015-04-23 14:19:21 [127.0.0.1][-][-][error][yii\i18n\PhpMessageSource::loadMessages] The message file for category 'modules/user-management/front' does not exist: C:\Apache24\htdocs\rnce/vendor/webvimark/module-user-management/messages/es-VE/front.php Fallback file does not exist as well: C:\Apache24\htdocs\rnce/vendor/webvimark/module-user-management/messages/es/front.php
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\UserManagementModule.php:199
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\views\auth\registration.php:13
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\components\BaseController.php:38
+2015-04-23 14:19:21 [127.0.0.1][-][-][info][application] $_GET = [
+    'r' => 'user-management/auth/registration'
+]
+
+$_COOKIE = [
+    '_ga' => 'GA1.1.1861192029.1415307511'
+    'language' => '30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s:2:\"en\";'
+    'PHPSESSID' => '21gl9qunmpda50mja8auj3g5r4'
+    '_csrf' => '79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"6A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__captcha/user-management/auth/captcha' => 'fac'
+    '__captcha/user-management/auth/captchacount' => 1
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://localhost/rnce/frontend/web/index.php?r=user-management%2Fauth%2Fpassword-recovery'
+    'HTTP_COOKIE' => '_ga=GA1.1.1861192029.1415307511; language=30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s%3A2%3A%22en%22%3B; PHPSESSID=21gl9qunmpda50mja8auj3g5r4; _csrf=79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%226A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB%22%3B%7D'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => 'C:\\oraclexe\\app\\oracle\\product\\11.2.0\\server\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\php;C:\\Apache24;C:\\Apache24\\bin;C:\\Users\\Marcos\\AppData\\Local\\Android\\android-sdk\\platform-tools;C:\\Program Files\\PostgreSQL\\9.3\\bin;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files\\MySQL\\MySQL Server 5.6\\bin;C:\\Program Files\\TortoiseGit\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win64)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '64611'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=user-management%2Fauth%2Fregistration'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=user-management%2Fauth%2Fregistration'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1429814961.571
+    'REQUEST_TIME' => 1429814961
+]
+2015-04-23 14:19:42 [127.0.0.1][5][-][error][yii\i18n\PhpMessageSource::loadMessages] The message file for category 'modules/user-management/front' does not exist: C:\Apache24\htdocs\rnce/vendor/webvimark/module-user-management/messages/es-VE/front.php Fallback file does not exist as well: C:\Apache24\htdocs\rnce/vendor/webvimark/module-user-management/messages/es/front.php
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\UserManagementModule.php:199
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\models\forms\RegistrationForm.php:71
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\controllers\AuthController.php:139
+2015-04-23 14:19:42 [127.0.0.1][5][-][info][application] $_GET = [
+    'r' => 'user-management/auth/registration'
+]
+
+$_POST = [
+    '_csrf' => 'Y2lRX3d6YXBVKHwzOTw7RgVQKWs7Mww1EDs7Cj8OKy8FIQQHQBc2Mg=='
+    'RegistrationForm' => [
+        'username' => 'Socram'
+        'password' => '123456'
+        'repeat_password' => '123456'
+        'captcha' => 'fac'
+    ]
+]
+
+$_COOKIE = [
+    '_ga' => 'GA1.1.1861192029.1415307511'
+    'language' => '30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s:2:\"en\";'
+    'PHPSESSID' => '21gl9qunmpda50mja8auj3g5r4'
+    '_csrf' => '79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"6A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__captcha/user-management/auth/captcha' => 'zeca'
+    '__captcha/user-management/auth/captchacount' => 1
+    '__id' => 5
+    '__auth_last_update' => 1429814908
+    '__userRoles' => []
+    '__userPermissions' => []
+    '__userRoutes' => []
+    '__visitorToken' => '55393ec745560'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://localhost/rnce/frontend/web/index.php?r=user-management%2Fauth%2Fregistration'
+    'HTTP_COOKIE' => '_ga=GA1.1.1861192029.1415307511; language=30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s%3A2%3A%22en%22%3B; PHPSESSID=21gl9qunmpda50mja8auj3g5r4; _csrf=79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%226A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB%22%3B%7D'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'CONTENT_LENGTH' => '221'
+    'PATH' => 'C:\\oraclexe\\app\\oracle\\product\\11.2.0\\server\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\php;C:\\Apache24;C:\\Apache24\\bin;C:\\Users\\Marcos\\AppData\\Local\\Android\\android-sdk\\platform-tools;C:\\Program Files\\PostgreSQL\\9.3\\bin;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files\\MySQL\\MySQL Server 5.6\\bin;C:\\Program Files\\TortoiseGit\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win64)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '64627'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => 'r=user-management%2Fauth%2Fregistration'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=user-management%2Fauth%2Fregistration'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1429814982.378
+    'REQUEST_TIME' => 1429814982
+]
+2015-04-23 14:19:52 [127.0.0.1][5][-][error][yii\i18n\PhpMessageSource::loadMessages] The message file for category 'modules/user-management/front' does not exist: C:\Apache24\htdocs\rnce/vendor/webvimark/module-user-management/messages/es-VE/front.php Fallback file does not exist as well: C:\Apache24\htdocs\rnce/vendor/webvimark/module-user-management/messages/es/front.php
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\UserManagementModule.php:199
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\models\forms\ChangeOwnPasswordForm.php:50
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\views\auth\changeOwnPassword.php:37
+2015-04-23 14:19:51 [127.0.0.1][5][-][info][application] $_GET = [
+    'r' => 'user-management/auth/change-own-password'
+]
+
+$_COOKIE = [
+    '_ga' => 'GA1.1.1861192029.1415307511'
+    'language' => '30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s:2:\"en\";'
+    'PHPSESSID' => 'ijsavtvrcp5n5tp546oo5v6g46'
+    '_csrf' => '79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"6A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__captcha/user-management/auth/captcha' => 'zeca'
+    '__captcha/user-management/auth/captchacount' => 1
+    '__id' => 5
+    '__auth_last_update' => 1429814908
+    '__userRoles' => []
+    '__userPermissions' => []
+    '__userRoutes' => []
+    '__visitorToken' => '55393ec745560'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://localhost/rnce/frontend/web/index.php'
+    'HTTP_COOKIE' => '_ga=GA1.1.1861192029.1415307511; language=30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s%3A2%3A%22en%22%3B; PHPSESSID=ijsavtvrcp5n5tp546oo5v6g46; _csrf=79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%226A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB%22%3B%7D'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => 'C:\\oraclexe\\app\\oracle\\product\\11.2.0\\server\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\php;C:\\Apache24;C:\\Apache24\\bin;C:\\Users\\Marcos\\AppData\\Local\\Android\\android-sdk\\platform-tools;C:\\Program Files\\PostgreSQL\\9.3\\bin;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files\\MySQL\\MySQL Server 5.6\\bin;C:\\Program Files\\TortoiseGit\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win64)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '64633'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=user-management%2Fauth%2Fchange-own-password'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=user-management%2Fauth%2Fchange-own-password'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1429814991.847
+    'REQUEST_TIME' => 1429814991
+]
+2015-04-23 14:19:56 [127.0.0.1][5][-][error][yii\i18n\PhpMessageSource::loadMessages] The message file for category 'modules/user-management/front' does not exist: C:\Apache24\htdocs\rnce/vendor/webvimark/module-user-management/messages/es-VE/front.php Fallback file does not exist as well: C:\Apache24\htdocs\rnce/vendor/webvimark/module-user-management/messages/es/front.php
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\UserManagementModule.php:199
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\views\auth\confirmEmail.php:12
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\components\BaseController.php:38
+2015-04-23 14:19:55 [127.0.0.1][5][-][info][application] $_GET = [
+    'r' => 'user-management/auth/confirm-email'
+]
+
+$_COOKIE = [
+    '_ga' => 'GA1.1.1861192029.1415307511'
+    'language' => '30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s:2:\"en\";'
+    'PHPSESSID' => 'ijsavtvrcp5n5tp546oo5v6g46'
+    '_csrf' => '79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"6A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__captcha/user-management/auth/captcha' => 'zeca'
+    '__captcha/user-management/auth/captchacount' => 1
+    '__id' => 5
+    '__auth_last_update' => 1429814908
+    '__userRoles' => []
+    '__userPermissions' => []
+    '__userRoutes' => []
+    '__visitorToken' => '55393ec745560'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://localhost/rnce/frontend/web/index.php?r=user-management%2Fauth%2Fchange-own-password'
+    'HTTP_COOKIE' => '_ga=GA1.1.1861192029.1415307511; language=30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s%3A2%3A%22en%22%3B; PHPSESSID=ijsavtvrcp5n5tp546oo5v6g46; _csrf=79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%226A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB%22%3B%7D'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => 'C:\\oraclexe\\app\\oracle\\product\\11.2.0\\server\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\php;C:\\Apache24;C:\\Apache24\\bin;C:\\Users\\Marcos\\AppData\\Local\\Android\\android-sdk\\platform-tools;C:\\Program Files\\PostgreSQL\\9.3\\bin;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files\\MySQL\\MySQL Server 5.6\\bin;C:\\Program Files\\TortoiseGit\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win64)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '64635'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=user-management%2Fauth%2Fconfirm-email'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=user-management%2Fauth%2Fconfirm-email'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1429814995.876
+    'REQUEST_TIME' => 1429814995
+]
+2015-04-23 14:20:05 [127.0.0.1][5][-][error][yii\base\InvalidParamException] exception 'yii\base\InvalidParamException' with message 'The view file does not exist: C:\Apache24\htdocs\rnce\frontend/mail\layouts/html.php' in C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\View.php:226
+Stack trace:
+#0 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\View.php(149): yii\base\View->renderFile('C:\\Apache24\\htd...', Array, Object(yii\swiftmailer\Mailer))
+#1 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\mail\BaseMailer.php(301): yii\base\View->render('layouts/html', Array, Object(yii\swiftmailer\Mailer))
+#2 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\mail\BaseMailer.php(192): yii\mail\BaseMailer->render('/mail/emailConf...', Array, 'layouts/html')
+#3 C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\models\forms\ConfirmEmailForm.php(121): yii\mail\BaseMailer->compose('/mail/emailConf...', Array)
+#4 C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\controllers\AuthController.php(327): webvimark\modules\UserManagement\models\forms\ConfirmEmailForm->sendEmail(false)
+#5 [internal function]: webvimark\modules\UserManagement\controllers\AuthController->actionConfirmEmail()
+#6 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\InlineAction.php(55): call_user_func_array(Array, Array)
+#7 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Controller.php(151): yii\base\InlineAction->runWithParams(Array)
+#8 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Module.php(455): yii\base\Controller->runAction('confirm-email', Array)
+#9 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\web\Application.php(83): yii\base\Module->runAction('user-management...', Array)
+#10 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#11 C:\Apache24\htdocs\rnce\frontend\web\index.php(18): yii\base\Application->run()
+#12 {main}
+2015-04-23 14:20:04 [127.0.0.1][5][-][info][application] $_GET = [
+    'r' => 'user-management/auth/confirm-email'
+]
+
+$_POST = [
+    '_csrf' => 'Z2Vqak9oRUJRJEcGAS4fdAFcEl4DISgHFDcAPwccDx0BLT8yeAUSAA=='
+    'ConfirmEmailForm' => [
+        'email' => 'marcospha@gmail.com'
+    ]
+]
+
+$_COOKIE = [
+    '_ga' => 'GA1.1.1861192029.1415307511'
+    'language' => '30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s:2:\"en\";'
+    'PHPSESSID' => 'ijsavtvrcp5n5tp546oo5v6g46'
+    '_csrf' => '79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"6A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__captcha/user-management/auth/captcha' => 'zeca'
+    '__captcha/user-management/auth/captchacount' => 1
+    '__id' => 5
+    '__auth_last_update' => 1429814908
+    '__userRoles' => []
+    '__userPermissions' => []
+    '__userRoutes' => []
+    '__visitorToken' => '55393ec745560'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://localhost/rnce/frontend/web/index.php?r=user-management%2Fauth%2Fconfirm-email'
+    'HTTP_COOKIE' => '_ga=GA1.1.1861192029.1415307511; language=30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s%3A2%3A%22en%22%3B; PHPSESSID=ijsavtvrcp5n5tp546oo5v6g46; _csrf=79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%226A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB%22%3B%7D'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'CONTENT_LENGTH' => '116'
+    'PATH' => 'C:\\oraclexe\\app\\oracle\\product\\11.2.0\\server\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\php;C:\\Apache24;C:\\Apache24\\bin;C:\\Users\\Marcos\\AppData\\Local\\Android\\android-sdk\\platform-tools;C:\\Program Files\\PostgreSQL\\9.3\\bin;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files\\MySQL\\MySQL Server 5.6\\bin;C:\\Program Files\\TortoiseGit\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win64)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '64643'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => 'r=user-management%2Fauth%2Fconfirm-email'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=user-management%2Fauth%2Fconfirm-email'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1429815004.813
+    'REQUEST_TIME' => 1429815004
+]
+2015-04-23 14:22:23 [127.0.0.1][5][-][error][yii\base\InvalidParamException] exception 'yii\base\InvalidParamException' with message 'The view file does not exist: C:\Apache24\htdocs\rnce\frontend/mail\layouts/html.php' in C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\View.php:226
+Stack trace:
+#0 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\View.php(149): yii\base\View->renderFile('C:\\Apache24\\htd...', Array, Object(yii\swiftmailer\Mailer))
+#1 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\mail\BaseMailer.php(301): yii\base\View->render('layouts/html', Array, Object(yii\swiftmailer\Mailer))
+#2 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\mail\BaseMailer.php(192): yii\mail\BaseMailer->render('/mail/emailConf...', Array, 'layouts/html')
+#3 C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\models\forms\ConfirmEmailForm.php(121): yii\mail\BaseMailer->compose('/mail/emailConf...', Array)
+#4 C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\controllers\AuthController.php(327): webvimark\modules\UserManagement\models\forms\ConfirmEmailForm->sendEmail(false)
+#5 [internal function]: webvimark\modules\UserManagement\controllers\AuthController->actionConfirmEmail()
+#6 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\InlineAction.php(55): call_user_func_array(Array, Array)
+#7 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Controller.php(151): yii\base\InlineAction->runWithParams(Array)
+#8 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Module.php(455): yii\base\Controller->runAction('confirm-email', Array)
+#9 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\web\Application.php(83): yii\base\Module->runAction('user-management...', Array)
+#10 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#11 C:\Apache24\htdocs\rnce\frontend\web\index.php(18): yii\base\Application->run()
+#12 {main}
+2015-04-23 14:22:23 [127.0.0.1][5][-][info][application] $_GET = [
+    'r' => 'user-management/auth/confirm-email'
+]
+
+$_POST = [
+    '_csrf' => 'Z2Vqak9oRUJRJEcGAS4fdAFcEl4DISgHFDcAPwccDx0BLT8yeAUSAA=='
+    'ConfirmEmailForm' => [
+        'email' => 'marcospha@gmail.com'
+    ]
+]
+
+$_COOKIE = [
+    '_ga' => 'GA1.1.1861192029.1415307511'
+    'language' => '30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s:2:\"en\";'
+    'PHPSESSID' => 'ijsavtvrcp5n5tp546oo5v6g46'
+    '_csrf' => '79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"6A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__captcha/user-management/auth/captcha' => 'zeca'
+    '__captcha/user-management/auth/captchacount' => 1
+    '__id' => 5
+    '__auth_last_update' => 1429814908
+    '__userRoles' => []
+    '__userPermissions' => []
+    '__userRoutes' => []
+    '__visitorToken' => '55393ec745560'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://localhost/rnce/frontend/web/index.php?r=user-management%2Fauth%2Fconfirm-email'
+    'HTTP_COOKIE' => '_ga=GA1.1.1861192029.1415307511; language=30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s%3A2%3A%22en%22%3B; PHPSESSID=ijsavtvrcp5n5tp546oo5v6g46; _csrf=79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%226A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB%22%3B%7D'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'CONTENT_LENGTH' => '116'
+    'PATH' => 'C:\\oraclexe\\app\\oracle\\product\\11.2.0\\server\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\php;C:\\Apache24;C:\\Apache24\\bin;C:\\Users\\Marcos\\AppData\\Local\\Android\\android-sdk\\platform-tools;C:\\Program Files\\PostgreSQL\\9.3\\bin;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files\\MySQL\\MySQL Server 5.6\\bin;C:\\Program Files\\TortoiseGit\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win64)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '64720'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => 'r=user-management%2Fauth%2Fconfirm-email'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=user-management%2Fauth%2Fconfirm-email'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1429815143.36
+    'REQUEST_TIME' => 1429815143
+]
+2015-04-23 14:24:24 [127.0.0.1][5][-][error][yii\i18n\PhpMessageSource::loadMessages] The message file for category 'modules/user-management/front' does not exist: C:\Apache24\htdocs\rnce/vendor/webvimark/module-user-management/messages/es-VE/front.php Fallback file does not exist as well: C:\Apache24\htdocs\rnce/vendor/webvimark/module-user-management/messages/es/front.php
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\UserManagementModule.php:199
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\models\forms\ConfirmEmailForm.php:124
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\controllers\AuthController.php:327
+2015-04-23 14:24:25 [127.0.0.1][5][-][error][Swift_TransportException] exception 'Swift_TransportException' with message 'Connection could not be established with host 127.0.0.1 [No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión.
+ #10061]' in C:\Apache24\htdocs\rnce\vendor\swiftmailer\swiftmailer\lib\classes\Swift\Transport\StreamBuffer.php:265
+Stack trace:
+#0 C:\Apache24\htdocs\rnce\vendor\swiftmailer\swiftmailer\lib\classes\Swift\Transport\StreamBuffer.php(62): Swift_Transport_StreamBuffer->_establishSocketConnection()
+#1 C:\Apache24\htdocs\rnce\vendor\swiftmailer\swiftmailer\lib\classes\Swift\Transport\AbstractSmtpTransport.php(113): Swift_Transport_StreamBuffer->initialize(Array)
+#2 C:\Apache24\htdocs\rnce\vendor\swiftmailer\swiftmailer\lib\classes\Swift\Mailer.php(79): Swift_Transport_AbstractSmtpTransport->start()
+#3 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2-swiftmailer\Mailer.php(140): Swift_Mailer->send(Object(Swift_Message))
+#4 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\mail\BaseMailer.php(260): yii\swiftmailer\Mailer->sendMessage(Object(yii\swiftmailer\Message))
+#5 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\mail\BaseMessage.php(48): yii\mail\BaseMailer->send(Object(yii\swiftmailer\Message))
+#6 C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\models\forms\ConfirmEmailForm.php(125): yii\mail\BaseMessage->send()
+#7 C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\controllers\AuthController.php(327): webvimark\modules\UserManagement\models\forms\ConfirmEmailForm->sendEmail(false)
+#8 [internal function]: webvimark\modules\UserManagement\controllers\AuthController->actionConfirmEmail()
+#9 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\InlineAction.php(55): call_user_func_array(Array, Array)
+#10 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Controller.php(151): yii\base\InlineAction->runWithParams(Array)
+#11 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Module.php(455): yii\base\Controller->runAction('confirm-email', Array)
+#12 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\web\Application.php(83): yii\base\Module->runAction('user-management...', Array)
+#13 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#14 C:\Apache24\htdocs\rnce\frontend\web\index.php(18): yii\base\Application->run()
+#15 {main}
+2015-04-23 14:24:23 [127.0.0.1][5][-][info][application] $_GET = [
+    'r' => 'user-management/auth/confirm-email'
+]
+
+$_POST = [
+    '_csrf' => 'Z2Vqak9oRUJRJEcGAS4fdAFcEl4DISgHFDcAPwccDx0BLT8yeAUSAA=='
+    'ConfirmEmailForm' => [
+        'email' => 'marcospha@gmail.com'
+    ]
+]
+
+$_COOKIE = [
+    '_ga' => 'GA1.1.1861192029.1415307511'
+    'language' => '30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s:2:\"en\";'
+    'PHPSESSID' => 'ijsavtvrcp5n5tp546oo5v6g46'
+    '_csrf' => '79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"6A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__captcha/user-management/auth/captcha' => 'zeca'
+    '__captcha/user-management/auth/captchacount' => 1
+    '__id' => 5
+    '__auth_last_update' => 1429814908
+    '__userRoles' => []
+    '__userPermissions' => []
+    '__userRoutes' => []
+    '__visitorToken' => '55393ec745560'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://localhost/rnce/frontend/web/index.php?r=user-management%2Fauth%2Fconfirm-email'
+    'HTTP_COOKIE' => '_ga=GA1.1.1861192029.1415307511; language=30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s%3A2%3A%22en%22%3B; PHPSESSID=ijsavtvrcp5n5tp546oo5v6g46; _csrf=79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%226A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB%22%3B%7D'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'CONTENT_LENGTH' => '116'
+    'PATH' => 'C:\\oraclexe\\app\\oracle\\product\\11.2.0\\server\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\php;C:\\Apache24;C:\\Apache24\\bin;C:\\Users\\Marcos\\AppData\\Local\\Android\\android-sdk\\platform-tools;C:\\Program Files\\PostgreSQL\\9.3\\bin;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files\\MySQL\\MySQL Server 5.6\\bin;C:\\Program Files\\TortoiseGit\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win64)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '64737'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => 'r=user-management%2Fauth%2Fconfirm-email'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=user-management%2Fauth%2Fconfirm-email'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1429815263.71
+    'REQUEST_TIME' => 1429815263
+]
+2015-04-23 14:24:33 [127.0.0.1][5][-][error][yii\i18n\PhpMessageSource::loadMessages] The message file for category 'modules/user-management/front' does not exist: C:\Apache24\htdocs\rnce/vendor/webvimark/module-user-management/messages/es-VE/front.php Fallback file does not exist as well: C:\Apache24\htdocs\rnce/vendor/webvimark/module-user-management/messages/es/front.php
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\UserManagementModule.php:199
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\views\auth\confirmEmail.php:12
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\components\BaseController.php:38
+2015-04-23 14:24:33 [127.0.0.1][5][-][info][application] $_GET = [
+    'r' => 'user-management/auth/confirm-email'
+]
+
+$_COOKIE = [
+    '_ga' => 'GA1.1.1861192029.1415307511'
+    'language' => '30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s:2:\"en\";'
+    'PHPSESSID' => 'ijsavtvrcp5n5tp546oo5v6g46'
+    '_csrf' => '79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"6A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__captcha/user-management/auth/captcha' => 'zeca'
+    '__captcha/user-management/auth/captchacount' => 1
+    '__id' => 5
+    '__auth_last_update' => 1429814908
+    '__userRoles' => []
+    '__userPermissions' => []
+    '__userRoutes' => []
+    '__visitorToken' => '55393ec745560'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://localhost/rnce/frontend/web/index.php?r=user-management%2Fauth%2Fchange-own-password'
+    'HTTP_COOKIE' => '_ga=GA1.1.1861192029.1415307511; language=30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s%3A2%3A%22en%22%3B; PHPSESSID=ijsavtvrcp5n5tp546oo5v6g46; _csrf=79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%226A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB%22%3B%7D'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => 'C:\\oraclexe\\app\\oracle\\product\\11.2.0\\server\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\php;C:\\Apache24;C:\\Apache24\\bin;C:\\Users\\Marcos\\AppData\\Local\\Android\\android-sdk\\platform-tools;C:\\Program Files\\PostgreSQL\\9.3\\bin;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files\\MySQL\\MySQL Server 5.6\\bin;C:\\Program Files\\TortoiseGit\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win64)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '64742'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=user-management%2Fauth%2Fconfirm-email'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=user-management%2Fauth%2Fconfirm-email'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1429815273.112
+    'REQUEST_TIME' => 1429815273
+]
+2015-04-23 14:25:06 [127.0.0.1][-][-][error][yii\i18n\PhpMessageSource::loadMessages] The message file for category 'modules/user-management/front' does not exist: C:\Apache24\htdocs\rnce/vendor/webvimark/module-user-management/messages/es-VE/front.php Fallback file does not exist as well: C:\Apache24\htdocs\rnce/vendor/webvimark/module-user-management/messages/es/front.php
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\UserManagementModule.php:199
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\views\auth\login.php:18
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\components\BaseController.php:38
+2015-04-23 14:25:06 [127.0.0.1][-][-][info][application] $_GET = [
+    'r' => 'user-management/auth/login'
+]
+
+$_COOKIE = [
+    '_ga' => 'GA1.1.1861192029.1415307511'
+    'language' => '30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s:2:\"en\";'
+    'PHPSESSID' => '79t0eb2jkcsc9o3ibvet1l5716'
+    '_csrf' => '79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"6A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://localhost/rnce/frontend/web/index.php'
+    'HTTP_COOKIE' => '_ga=GA1.1.1861192029.1415307511; language=30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s%3A2%3A%22en%22%3B; PHPSESSID=79t0eb2jkcsc9o3ibvet1l5716; _csrf=79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%226A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB%22%3B%7D'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => 'C:\\oraclexe\\app\\oracle\\product\\11.2.0\\server\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\php;C:\\Apache24;C:\\Apache24\\bin;C:\\Users\\Marcos\\AppData\\Local\\Android\\android-sdk\\platform-tools;C:\\Program Files\\PostgreSQL\\9.3\\bin;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files\\MySQL\\MySQL Server 5.6\\bin;C:\\Program Files\\TortoiseGit\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win64)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '64762'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=user-management%2Fauth%2Flogin'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=user-management%2Fauth%2Flogin'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1429815306.778
+    'REQUEST_TIME' => 1429815306
+]
+2015-04-23 14:25:13 [127.0.0.1][-][-][error][yii\i18n\PhpMessageSource::loadMessages] The message file for category 'modules/user-management/front' does not exist: C:\Apache24\htdocs\rnce/vendor/webvimark/module-user-management/messages/es-VE/front.php Fallback file does not exist as well: C:\Apache24\htdocs\rnce/vendor/webvimark/module-user-management/messages/es/front.php
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\UserManagementModule.php:199
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\models\forms\LoginForm.php:59
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\models\forms\LoginForm.php:90
+2015-04-23 14:25:13 [127.0.0.1][-][-][info][application] $_GET = [
+    'r' => 'user-management/auth/login'
+]
+
+$_POST = [
+    '_csrf' => 'ZG53MTVodzVSL1pdey4tAwJXDwV5IRpwFzwdZH0cPWoCJiJpAgUgdw=='
+    'LoginForm' => [
+        'username' => 'superadmin'
+        'password' => 'ks'
+        'rememberMe' => '0'
+    ]
+]
+
+$_COOKIE = [
+    '_ga' => 'GA1.1.1861192029.1415307511'
+    'language' => '30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s:2:\"en\";'
+    'PHPSESSID' => '79t0eb2jkcsc9o3ibvet1l5716'
+    '_csrf' => '79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"6A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '_um_last_attempt' => 1429815313
+    '_um_attempt_count' => 1
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://localhost/rnce/frontend/web/index.php?r=user-management%2Fauth%2Flogin'
+    'HTTP_COOKIE' => '_ga=GA1.1.1861192029.1415307511; language=30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s%3A2%3A%22en%22%3B; PHPSESSID=79t0eb2jkcsc9o3ibvet1l5716; _csrf=79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%226A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB%22%3B%7D'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'CONTENT_LENGTH' => '156'
+    'PATH' => 'C:\\oraclexe\\app\\oracle\\product\\11.2.0\\server\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\php;C:\\Apache24;C:\\Apache24\\bin;C:\\Users\\Marcos\\AppData\\Local\\Android\\android-sdk\\platform-tools;C:\\Program Files\\PostgreSQL\\9.3\\bin;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files\\MySQL\\MySQL Server 5.6\\bin;C:\\Program Files\\TortoiseGit\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win64)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '64769'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => 'r=user-management%2Fauth%2Flogin'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=user-management%2Fauth%2Flogin'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1429815313.017
+    'REQUEST_TIME' => 1429815313
+]
+2015-04-23 14:25:26 [127.0.0.1][1][-][error][yii\i18n\PhpMessageSource::loadMessages] The message file for category 'widgets/GridPageSize/app' does not exist: C:\Apache24\htdocs\rnce\vendor\webvimark\grid-page-size/messages/es-VE/app.php Fallback file does not exist as well: C:\Apache24\htdocs\rnce\vendor\webvimark\grid-page-size/messages/es/app.php
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\grid-page-size\GridPageSize.php:104
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\grid-page-size\GridPageSize.php:75
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\views\user\index.php:42
+2015-04-23 14:25:26 [127.0.0.1][1][-][error][yii\i18n\PhpMessageSource::loadMessages] The message file for category 'widgets/GridBulkActions/app' does not exist: C:\Apache24\htdocs\rnce\vendor\webvimark\grid-bulk-actions/messages/es-VE/app.php Fallback file does not exist as well: C:\Apache24\htdocs\rnce\vendor\webvimark\grid-bulk-actions/messages/es/app.php
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\grid-bulk-actions\GridBulkActions.php:91
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\grid-bulk-actions\GridBulkActions.php:61
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\views\user\index.php:61
+2015-04-23 14:25:26 [127.0.0.1][1][-][info][application] $_GET = [
+    'r' => 'user-management/user/index'
+]
+
+$_COOKIE = [
+    '_ga' => 'GA1.1.1861192029.1415307511'
+    'language' => '30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s:2:\"en\";'
+    'PHPSESSID' => 'uaf0a6a6cm41tlla5koc97lcg1'
+    '_csrf' => '79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"6A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '_um_last_attempt' => 1429815313
+    '_um_attempt_count' => 2
+    '__id' => 1
+    '__auth_last_update' => 1429814908
+    '__userRoles' => []
+    '__userPermissions' => []
+    '__userRoutes' => []
+    '__visitorToken' => '5539401679180'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://localhost/rnce/frontend/web/index.php'
+    'HTTP_COOKIE' => '_ga=GA1.1.1861192029.1415307511; language=30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s%3A2%3A%22en%22%3B; PHPSESSID=uaf0a6a6cm41tlla5koc97lcg1; _csrf=79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%226A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB%22%3B%7D'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => 'C:\\oraclexe\\app\\oracle\\product\\11.2.0\\server\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\php;C:\\Apache24;C:\\Apache24\\bin;C:\\Users\\Marcos\\AppData\\Local\\Android\\android-sdk\\platform-tools;C:\\Program Files\\PostgreSQL\\9.3\\bin;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files\\MySQL\\MySQL Server 5.6\\bin;C:\\Program Files\\TortoiseGit\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win64)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '64775'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=user-management%2Fuser%2Findex'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=user-management%2Fuser%2Findex'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1429815326.065
+    'REQUEST_TIME' => 1429815326
+]
+2015-04-23 14:25:46 [127.0.0.1][1][-][error][yii\i18n\PhpMessageSource::loadMessages] The message file for category 'widgets/GridPageSize/app' does not exist: C:\Apache24\htdocs\rnce\vendor\webvimark\grid-page-size/messages/es-VE/app.php Fallback file does not exist as well: C:\Apache24\htdocs\rnce\vendor\webvimark\grid-page-size/messages/es/app.php
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\grid-page-size\GridPageSize.php:104
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\grid-page-size\GridPageSize.php:75
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\views\permission\index.php:38
+2015-04-23 14:25:46 [127.0.0.1][1][-][info][application] $_GET = [
+    'r' => 'user-management/permission/index'
+]
+
+$_COOKIE = [
+    '_ga' => 'GA1.1.1861192029.1415307511'
+    'language' => '30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s:2:\"en\";'
+    'PHPSESSID' => 'uaf0a6a6cm41tlla5koc97lcg1'
+    '_csrf' => '79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"6A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '_um_last_attempt' => 1429815313
+    '_um_attempt_count' => 2
+    '__id' => 1
+    '__auth_last_update' => 1429814908
+    '__userRoles' => []
+    '__userPermissions' => []
+    '__userRoutes' => []
+    '__visitorToken' => '5539401679180'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://localhost/rnce/frontend/web/index.php?r=user-management%2Fuser%2Findex'
+    'HTTP_COOKIE' => '_ga=GA1.1.1861192029.1415307511; language=30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s%3A2%3A%22en%22%3B; PHPSESSID=uaf0a6a6cm41tlla5koc97lcg1; _csrf=79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%226A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB%22%3B%7D'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => 'C:\\oraclexe\\app\\oracle\\product\\11.2.0\\server\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\php;C:\\Apache24;C:\\Apache24\\bin;C:\\Users\\Marcos\\AppData\\Local\\Android\\android-sdk\\platform-tools;C:\\Program Files\\PostgreSQL\\9.3\\bin;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files\\MySQL\\MySQL Server 5.6\\bin;C:\\Program Files\\TortoiseGit\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win64)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '64784'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=user-management%2Fpermission%2Findex'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=user-management%2Fpermission%2Findex'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1429815346.204
+    'REQUEST_TIME' => 1429815346
+]
+2015-04-23 14:25:54 [127.0.0.1][1][-][error][yii\i18n\PhpMessageSource::loadMessages] The message file for category 'widgets/GridPageSize/app' does not exist: C:\Apache24\htdocs\rnce\vendor\webvimark\grid-page-size/messages/es-VE/app.php Fallback file does not exist as well: C:\Apache24\htdocs\rnce\vendor\webvimark\grid-page-size/messages/es/app.php
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\grid-page-size\GridPageSize.php:104
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\grid-page-size\GridPageSize.php:75
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\views\permission\index.php:38
+2015-04-23 14:25:54 [127.0.0.1][1][-][info][application] $_GET = [
+    'r' => 'user-management/permission/index'
+]
+
+$_COOKIE = [
+    '_ga' => 'GA1.1.1861192029.1415307511'
+    'language' => '30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s:2:\"en\";'
+    'PHPSESSID' => 'uaf0a6a6cm41tlla5koc97lcg1'
+    '_csrf' => '79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"6A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '_um_last_attempt' => 1429815313
+    '_um_attempt_count' => 2
+    '__id' => 1
+    '__auth_last_update' => 1429814908
+    '__userRoles' => []
+    '__userPermissions' => []
+    '__userRoutes' => []
+    '__visitorToken' => '5539401679180'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://localhost/rnce/frontend/web/index.php?r=user-management%2Fpermission%2Findex'
+    'HTTP_COOKIE' => '_ga=GA1.1.1861192029.1415307511; language=30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s%3A2%3A%22en%22%3B; PHPSESSID=uaf0a6a6cm41tlla5koc97lcg1; _csrf=79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%226A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB%22%3B%7D'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => 'C:\\oraclexe\\app\\oracle\\product\\11.2.0\\server\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\php;C:\\Apache24;C:\\Apache24\\bin;C:\\Users\\Marcos\\AppData\\Local\\Android\\android-sdk\\platform-tools;C:\\Program Files\\PostgreSQL\\9.3\\bin;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files\\MySQL\\MySQL Server 5.6\\bin;C:\\Program Files\\TortoiseGit\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win64)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '64791'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=user-management%2Fpermission%2Findex'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=user-management%2Fpermission%2Findex'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1429815353.993
+    'REQUEST_TIME' => 1429815353
+]
+2015-04-23 14:26:49 [127.0.0.1][-][-][error][yii\i18n\PhpMessageSource::loadMessages] The message file for category 'modules/user-management/front' does not exist: C:\Apache24\htdocs\rnce/vendor/webvimark/module-user-management/messages/es-VE/front.php Fallback file does not exist as well: C:\Apache24\htdocs\rnce/vendor/webvimark/module-user-management/messages/es/front.php
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\UserManagementModule.php:199
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\views\auth\passwordRecovery.php:13
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\components\BaseController.php:38
+2015-04-23 14:26:49 [127.0.0.1][-][-][info][application] $_GET = [
+    'r' => 'user-management/auth/password-recovery'
+]
+
+$_COOKIE = [
+    '_ga' => 'GA1.1.1861192029.1415307511'
+    'language' => '30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s:2:\"en\";'
+    'PHPSESSID' => 'ask0sjp3707nmnri0e8jm686c5'
+    '_csrf' => '79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"6A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__captcha/user-management/auth/captcha' => 'tiy'
+    '__captcha/user-management/auth/captchacount' => 1
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://localhost/rnce/frontend/web/index.php'
+    'HTTP_COOKIE' => '_ga=GA1.1.1861192029.1415307511; language=30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s%3A2%3A%22en%22%3B; PHPSESSID=ask0sjp3707nmnri0e8jm686c5; _csrf=79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%226A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB%22%3B%7D'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => 'C:\\oraclexe\\app\\oracle\\product\\11.2.0\\server\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\php;C:\\Apache24;C:\\Apache24\\bin;C:\\Users\\Marcos\\AppData\\Local\\Android\\android-sdk\\platform-tools;C:\\Program Files\\PostgreSQL\\9.3\\bin;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files\\MySQL\\MySQL Server 5.6\\bin;C:\\Program Files\\TortoiseGit\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win64)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '64811'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=user-management%2Fauth%2Fpassword-recovery'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=user-management%2Fauth%2Fpassword-recovery'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1429815409.007
+    'REQUEST_TIME' => 1429815409
+]
+2015-04-23 14:26:51 [127.0.0.1][-][-][error][yii\i18n\PhpMessageSource::loadMessages] The message file for category 'modules/user-management/front' does not exist: C:\Apache24\htdocs\rnce/vendor/webvimark/module-user-management/messages/es-VE/front.php Fallback file does not exist as well: C:\Apache24\htdocs\rnce/vendor/webvimark/module-user-management/messages/es/front.php
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\UserManagementModule.php:199
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\views\auth\login.php:18
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\components\BaseController.php:38
+2015-04-23 14:26:51 [127.0.0.1][-][-][info][application] $_GET = [
+    'r' => 'user-management/auth/login'
+]
+
+$_COOKIE = [
+    '_ga' => 'GA1.1.1861192029.1415307511'
+    'language' => '30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s:2:\"en\";'
+    'PHPSESSID' => 'ask0sjp3707nmnri0e8jm686c5'
+    '_csrf' => '79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"6A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__captcha/user-management/auth/captcha' => 'tiy'
+    '__captcha/user-management/auth/captchacount' => 1
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://localhost/rnce/frontend/web/index.php'
+    'HTTP_COOKIE' => '_ga=GA1.1.1861192029.1415307511; language=30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s%3A2%3A%22en%22%3B; PHPSESSID=ask0sjp3707nmnri0e8jm686c5; _csrf=79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%226A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB%22%3B%7D'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => 'C:\\oraclexe\\app\\oracle\\product\\11.2.0\\server\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\php;C:\\Apache24;C:\\Apache24\\bin;C:\\Users\\Marcos\\AppData\\Local\\Android\\android-sdk\\platform-tools;C:\\Program Files\\PostgreSQL\\9.3\\bin;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files\\MySQL\\MySQL Server 5.6\\bin;C:\\Program Files\\TortoiseGit\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win64)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '64811'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=user-management%2Fauth%2Flogin'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=user-management%2Fauth%2Flogin'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1429815411.55
+    'REQUEST_TIME' => 1429815411
+]
+2015-04-23 14:27:01 [127.0.0.1][1][-][error][yii\i18n\PhpMessageSource::loadMessages] The message file for category 'widgets/GridPageSize/app' does not exist: C:\Apache24\htdocs\rnce\vendor\webvimark\grid-page-size/messages/es-VE/app.php Fallback file does not exist as well: C:\Apache24\htdocs\rnce\vendor\webvimark\grid-page-size/messages/es/app.php
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\grid-page-size\GridPageSize.php:104
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\grid-page-size\GridPageSize.php:75
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\views\permission\index.php:38
+2015-04-23 14:27:01 [127.0.0.1][1][-][info][application] $_GET = [
+    'r' => 'user-management/permission/index'
+]
+
+$_COOKIE = [
+    '_ga' => 'GA1.1.1861192029.1415307511'
+    'language' => '30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s:2:\"en\";'
+    'PHPSESSID' => 'sqr4hi3kj3ath91i3kg4c6d542'
+    '_csrf' => '79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"6A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__captcha/user-management/auth/captcha' => 'tiy'
+    '__captcha/user-management/auth/captchacount' => 1
+    '_um_last_attempt' => 1429815416
+    '_um_attempt_count' => 1
+    '__id' => 1
+    '__auth_last_update' => 1429815397
+    '__userRoles' => []
+    '__userPermissions' => []
+    '__userRoutes' => []
+    '__visitorToken' => '5539407973b90'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://localhost/rnce/frontend/web/index.php'
+    'HTTP_COOKIE' => '_ga=GA1.1.1861192029.1415307511; language=30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s%3A2%3A%22en%22%3B; PHPSESSID=sqr4hi3kj3ath91i3kg4c6d542; _csrf=79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%226A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB%22%3B%7D'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => 'C:\\oraclexe\\app\\oracle\\product\\11.2.0\\server\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\php;C:\\Apache24;C:\\Apache24\\bin;C:\\Users\\Marcos\\AppData\\Local\\Android\\android-sdk\\platform-tools;C:\\Program Files\\PostgreSQL\\9.3\\bin;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files\\MySQL\\MySQL Server 5.6\\bin;C:\\Program Files\\TortoiseGit\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win64)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '64812'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=user-management%2Fpermission%2Findex'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=user-management%2Fpermission%2Findex'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1429815421.707
+    'REQUEST_TIME' => 1429815421
+]
+2015-04-23 14:27:19 [127.0.0.1][-][-][error][yii\i18n\PhpMessageSource::loadMessages] The message file for category 'modules/user-management/front' does not exist: C:\Apache24\htdocs\rnce/vendor/webvimark/module-user-management/messages/es-VE/front.php Fallback file does not exist as well: C:\Apache24\htdocs\rnce/vendor/webvimark/module-user-management/messages/es/front.php
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\UserManagementModule.php:199
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\views\auth\registration.php:13
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\components\BaseController.php:38
+2015-04-23 14:27:19 [127.0.0.1][-][-][info][application] $_GET = [
+    'r' => 'user-management/auth/registration'
+]
+
+$_COOKIE = [
+    '_ga' => 'GA1.1.1861192029.1415307511'
+    'language' => '30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s:2:\"en\";'
+    'PHPSESSID' => '9ld1ommbu6nr30l75jqpl1e230'
+    '_csrf' => '79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"6A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__captcha/user-management/auth/captcha' => 'qaw'
+    '__captcha/user-management/auth/captchacount' => 1
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://localhost/rnce/frontend/web/index.php'
+    'HTTP_COOKIE' => '_ga=GA1.1.1861192029.1415307511; language=30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s%3A2%3A%22en%22%3B; PHPSESSID=9ld1ommbu6nr30l75jqpl1e230; _csrf=79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%226A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB%22%3B%7D'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => 'C:\\oraclexe\\app\\oracle\\product\\11.2.0\\server\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\php;C:\\Apache24;C:\\Apache24\\bin;C:\\Users\\Marcos\\AppData\\Local\\Android\\android-sdk\\platform-tools;C:\\Program Files\\PostgreSQL\\9.3\\bin;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files\\MySQL\\MySQL Server 5.6\\bin;C:\\Program Files\\TortoiseGit\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win64)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '64822'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=user-management%2Fauth%2Fregistration'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=user-management%2Fauth%2Fregistration'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1429815439.382
+    'REQUEST_TIME' => 1429815439
+]
+2015-04-23 14:29:52 [127.0.0.1][-][-][error][yii\i18n\PhpMessageSource::loadMessages] The message file for category 'modules/user-management/front' does not exist: C:\Apache24\htdocs\rnce/vendor/webvimark/module-user-management/messages/es-VE/front.php Fallback file does not exist as well: C:\Apache24\htdocs\rnce/vendor/webvimark/module-user-management/messages/es/front.php
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\UserManagementModule.php:199
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\views\auth\registration.php:13
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\components\BaseController.php:38
+2015-04-23 14:29:52 [127.0.0.1][-][-][info][application] $_GET = [
+    'r' => 'user-management/auth/registration'
+]
+
+$_COOKIE = [
+    '_ga' => 'GA1.1.1861192029.1415307511'
+    'language' => '30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s:2:\"en\";'
+    'PHPSESSID' => '9ld1ommbu6nr30l75jqpl1e230'
+    '_csrf' => '79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"6A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__captcha/user-management/auth/captcha' => 'qaw'
+    '__captcha/user-management/auth/captchacount' => 1
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://localhost/rnce/frontend/web/index.php'
+    'HTTP_COOKIE' => '_ga=GA1.1.1861192029.1415307511; language=30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s%3A2%3A%22en%22%3B; PHPSESSID=9ld1ommbu6nr30l75jqpl1e230; _csrf=79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%226A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB%22%3B%7D'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'PATH' => 'C:\\oraclexe\\app\\oracle\\product\\11.2.0\\server\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\php;C:\\Apache24;C:\\Apache24\\bin;C:\\Users\\Marcos\\AppData\\Local\\Android\\android-sdk\\platform-tools;C:\\Program Files\\PostgreSQL\\9.3\\bin;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files\\MySQL\\MySQL Server 5.6\\bin;C:\\Program Files\\TortoiseGit\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win64)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '64849'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=user-management%2Fauth%2Fregistration'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=user-management%2Fauth%2Fregistration'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1429815592.304
+    'REQUEST_TIME' => 1429815592
+]
+2015-04-23 14:41:42 [127.0.0.1][-][-][error][yii\i18n\PhpMessageSource::loadMessages] The message file for category 'modules/user-management/front' does not exist: C:\Apache24\htdocs\rnce/vendor/webvimark/module-user-management/messages/es-VE/front.php Fallback file does not exist as well: C:\Apache24\htdocs\rnce/vendor/webvimark/module-user-management/messages/es/front.php
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\UserManagementModule.php:199
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\views\auth\registration.php:13
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\components\BaseController.php:38
+2015-04-23 14:41:42 [127.0.0.1][-][-][info][application] $_GET = [
+    'r' => 'user-management/auth/registration'
+]
+
+$_COOKIE = [
+    '_ga' => 'GA1.1.1861192029.1415307511'
+    'language' => '30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s:2:\"en\";'
+    'PHPSESSID' => '9ld1ommbu6nr30l75jqpl1e230'
+    '_csrf' => '79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"6A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__captcha/user-management/auth/captcha' => 'qaw'
+    '__captcha/user-management/auth/captchacount' => 1
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://localhost/rnce/frontend/web/index.php'
+    'HTTP_COOKIE' => '_ga=GA1.1.1861192029.1415307511; language=30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s%3A2%3A%22en%22%3B; PHPSESSID=9ld1ommbu6nr30l75jqpl1e230; _csrf=79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%226A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB%22%3B%7D'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'PATH' => 'C:\\oraclexe\\app\\oracle\\product\\11.2.0\\server\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\php;C:\\Apache24;C:\\Apache24\\bin;C:\\Users\\Marcos\\AppData\\Local\\Android\\android-sdk\\platform-tools;C:\\Program Files\\PostgreSQL\\9.3\\bin;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files\\MySQL\\MySQL Server 5.6\\bin;C:\\Program Files\\TortoiseGit\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win64)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '65029'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=user-management%2Fauth%2Fregistration'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=user-management%2Fauth%2Fregistration'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1429816302.501
+    'REQUEST_TIME' => 1429816302
+]
+2015-04-23 14:43:08 [127.0.0.1][-][-][error][yii\i18n\PhpMessageSource::loadMessages] The message file for category 'modules/user-management/front' does not exist: C:\Apache24\htdocs\rnce/vendor/webvimark/module-user-management/messages/es-VE/front.php Fallback file does not exist as well: C:\Apache24\htdocs\rnce/vendor/webvimark/module-user-management/messages/es/front.php
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\UserManagementModule.php:199
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\views\auth\registration.php:13
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\components\BaseController.php:38
+2015-04-23 14:43:08 [127.0.0.1][-][-][info][application] $_GET = [
+    'r' => 'user-management/auth/registration'
+]
+
+$_COOKIE = [
+    '_ga' => 'GA1.1.1861192029.1415307511'
+    'language' => '30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s:2:\"en\";'
+    'PHPSESSID' => '9ld1ommbu6nr30l75jqpl1e230'
+    '_csrf' => '79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"6A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__captcha/user-management/auth/captcha' => 'qaw'
+    '__captcha/user-management/auth/captchacount' => 1
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://localhost/rnce/frontend/web/index.php'
+    'HTTP_COOKIE' => '_ga=GA1.1.1861192029.1415307511; language=30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s%3A2%3A%22en%22%3B; PHPSESSID=9ld1ommbu6nr30l75jqpl1e230; _csrf=79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%226A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB%22%3B%7D'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'PATH' => 'C:\\oraclexe\\app\\oracle\\product\\11.2.0\\server\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\php;C:\\Apache24;C:\\Apache24\\bin;C:\\Users\\Marcos\\AppData\\Local\\Android\\android-sdk\\platform-tools;C:\\Program Files\\PostgreSQL\\9.3\\bin;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files\\MySQL\\MySQL Server 5.6\\bin;C:\\Program Files\\TortoiseGit\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win64)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '65036'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=user-management%2Fauth%2Fregistration'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=user-management%2Fauth%2Fregistration'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1429816388.122
+    'REQUEST_TIME' => 1429816388
+]
+2015-04-23 14:43:32 [127.0.0.1][-][-][error][yii\i18n\PhpMessageSource::loadMessages] The message file for category 'modules/user-management/front' does not exist: C:\Apache24\htdocs\rnce/vendor/webvimark/module-user-management/messages/es-VE/front.php Fallback file does not exist as well: C:\Apache24\htdocs\rnce/vendor/webvimark/module-user-management/messages/es/front.php
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\UserManagementModule.php:199
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\views\auth\registration.php:13
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\components\BaseController.php:38
+2015-04-23 14:43:32 [127.0.0.1][-][-][info][application] $_GET = [
+    'r' => 'user-management/auth/registration'
+]
+
+$_COOKIE = [
+    '_ga' => 'GA1.1.1861192029.1415307511'
+    'language' => '30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s:2:\"en\";'
+    'PHPSESSID' => '9ld1ommbu6nr30l75jqpl1e230'
+    '_csrf' => '79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"6A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__captcha/user-management/auth/captcha' => 'qaw'
+    '__captcha/user-management/auth/captchacount' => 1
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://localhost/rnce/frontend/web/index.php'
+    'HTTP_COOKIE' => '_ga=GA1.1.1861192029.1415307511; language=30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s%3A2%3A%22en%22%3B; PHPSESSID=9ld1ommbu6nr30l75jqpl1e230; _csrf=79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%226A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB%22%3B%7D'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'PATH' => 'C:\\oraclexe\\app\\oracle\\product\\11.2.0\\server\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\php;C:\\Apache24;C:\\Apache24\\bin;C:\\Users\\Marcos\\AppData\\Local\\Android\\android-sdk\\platform-tools;C:\\Program Files\\PostgreSQL\\9.3\\bin;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files\\MySQL\\MySQL Server 5.6\\bin;C:\\Program Files\\TortoiseGit\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win64)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '65045'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=user-management%2Fauth%2Fregistration'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=user-management%2Fauth%2Fregistration'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1429816412.793
+    'REQUEST_TIME' => 1429816412
+]
