@@ -7,6 +7,11 @@ use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAsset;
 use frontend\widgets\Alert;
 
+
+use webvimark\modules\UserManagement\components\GhostMenu;
+use webvimark\modules\UserManagement\components\GhostHtml;
+use webvimark\modules\UserManagement\UserManagementModule;
+
 /* @var $this \yii\web\View */
 /* @var $content string */
 
@@ -56,7 +61,7 @@ AppAsset::register($this);
                 ],
             ];
             if (Yii::$app->user->isGuest) {
-                $menuItems[] = ['label' => 'Registrate', 'url' => ['/site/signup']];
+                $menuItems[] = ['label' => 'Registrate',  'url' => ['/user-management/auth/registration']];//['/site/signup']];
                 $menuItems[] = ['label' => 'Iniciar sesión', 'url' => ['/site/login']];
             } else {
                 $menuItems[] = [
@@ -81,9 +86,6 @@ AppAsset::register($this);
         </div>
     </div>
 <?php 
-
-use webvimark\modules\UserManagement\components\GhostMenu;
-use webvimark\modules\UserManagement\UserManagementModule;
 
 echo GhostMenu::widget([
     'encodeLabels'=>false,

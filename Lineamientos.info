@@ -1,3 +1,5 @@
+*** GII: ***
+
 **** Configuración para la creación de modelos:
 
 Namespace: common\models\NOMBREESQUEMA			// Se coloca el nombre del esquema como parte de la ruta del namespace
@@ -23,3 +25,12 @@ Base Controller Class: common\components\BaseController
 Enable I18N   // Activar esta opción
 
 Message Category: app // La categoría por defecto de Yii
+
+
+*** FORMATOS DE RESPUESTA ***
+
+Cuaquier llamada en ajax debera ser respondida en json:
+
+y debe ser parametrizada en forma de arreglo:
+
+Ej: [0=>Cuerpo de la respuesta,1=>exitoso(true or false),2=>'Mensaje de respuesta']
