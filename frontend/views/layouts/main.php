@@ -44,7 +44,7 @@ AppAsset::register($this);
                     'items' => [
                          ['label' => 'Balance general', 'url' => ['/site/balancegeneral']],
                          ['label' => 'Estado de resultados', 'url' => ['/site/edoresultados']],
-                         ['label' => 'Efectivos y sus equivalentes', 'url' => ['#']],
+                         ['label' => 'Efectivos y sus equivalentes', 'url' => ['/nombres-cajas/efectivos_equivalentes']],
                     ],
                 ],
                 ['label' => 'Bienes',

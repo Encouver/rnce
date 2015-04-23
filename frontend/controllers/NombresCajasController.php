@@ -41,6 +41,12 @@ class NombresCajasController extends BaseController
         ]);
     }
 
+
+    public function actionEfectivos_equivalentes()
+    {
+        $this->render("efectivos_equivalentes");
+    }
+
     /**
      * Displays a single NombresCajas model.
      * @param integer $id
