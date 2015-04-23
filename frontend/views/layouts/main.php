@@ -68,8 +68,8 @@ AppAsset::register($this);
                 ],
             ];
             if (Yii::$app->user->isGuest) {
-                $menuItems[] = ['label' => 'Registrate',  'url' => ['/user-management/auth/registration']];//['/site/signup']];
-                $menuItems[] = ['label' => 'Iniciar sesión', 'url' => ['/site/login']];
+                $menuItems[] = ['label' => 'Registrate',  'url' => ['/site/signup']];
+                $menuItems[] = ['label' => 'Iniciar sesión', 'url' => ['/user-management/auth/login']];//['/site/login']];
             } else {
                 $menuItems[] = [
                     'label' => 'Cerrar sesión (' . Yii::$app->user->identity->username . ')',
@@ -89,10 +89,7 @@ AppAsset::register($this);
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
         <?= Alert::widget() ?>
-        <?= $content ?>
-        </div>
-    </div>
-<?php 
+        <?php 
 
 echo GhostMenu::widget([
     'encodeLabels'=>false,
@@ -116,6 +113,10 @@ echo GhostMenu::widget([
     ],
 ]);
 ?>
+        <?= $content ?>
+        </div>
+    </div>
+
     <footer class="footer">
         <div class="container">
         <p class="pull-left">&copy; Registro Nacional de Contratistas <?= date('Y') ?></p>

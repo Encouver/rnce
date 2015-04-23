@@ -40,6 +40,9 @@ ALTER TABLE personas_naturales
 
 
 
+
+
+
 -- Table: actividades_economicas
 
 -- DROP TABLE actividades_economicas;
@@ -53,8 +56,8 @@ CREATE TABLE actividades_economicas
   contratista_id integer NOT NULL, -- Clave foranea a la tabla contratista
   sys_status boolean NOT NULL DEFAULT true, -- Estatus interno del sistema
   sys_creado_el timestamp with time zone DEFAULT now(), -- Fecha de creación del registro.
-  sys_actualizado_el timestamp with time zone DEFAULT now(), -- Fecha de última actualización del registro.
-  sys_finalizado_el timestamp with time zone DEFAULT now(), -- Fecha de "eliminado" el registro.
+  sys_actualizado_el timestamp with time zone, -- Fecha de última actualización del registro.
+  sys_finalizado_el timestamp with time zone, -- Fecha de "eliminado" el registro.
   CONSTRAINT actividades_economicas_pkey PRIMARY KEY (id),
   CONSTRAINT actividades_economicas_comp1_caev_id_fkey FOREIGN KEY (comp1_caev_id)
       REFERENCES sys_caev (id) MATCH SIMPLE
@@ -100,8 +103,8 @@ CREATE TABLE contratistas_contactos
   contratista_id integer NOT NULL, -- CLave foranea a la tabla de contratistas
   sys_status boolean NOT NULL DEFAULT true, -- Estatus interno del sistema
   sys_creado_el timestamp with time zone DEFAULT now(), -- Fecha de creación del registro.
-  sys_actualizado_el timestamp with time zone DEFAULT now(), -- Fecha de última actualización del registro.
-  sys_finalizado_el timestamp with time zone DEFAULT now(), -- Fecha de "eliminado" el registro.
+  sys_actualizado_el timestamp with time zone, -- Fecha de última actualización del registro.
+  sys_finalizado_el timestamp with time zone, -- Fecha de "eliminado" el registro.
   CONSTRAINT contratistas_contactos_pkey PRIMARY KEY (id),
   CONSTRAINT contratistas_contactos_contacto_id_fkey FOREIGN KEY (contacto_id)
       REFERENCES personas_naturales (id) MATCH SIMPLE
@@ -140,8 +143,8 @@ CREATE TABLE principios_contables
   contratista_id integer NOT NULL, -- Clave foranea a la tabla contratistas
   sys_status boolean NOT NULL DEFAULT true, -- Estatus interno del sistema
   sys_creado_el timestamp with time zone DEFAULT now(), -- Fecha de creación del registro.
-  sys_actualizado_el timestamp with time zone DEFAULT now(), -- Fecha de última actualización del registro.
-  sys_finalizado_el timestamp with time zone DEFAULT now(), -- Fecha de "eliminado" el registro.
+  sys_actualizado_el timestamp with time zone, -- Fecha de última actualización del registro.
+  sys_finalizado_el timestamp with time zone, -- Fecha de "eliminado" el registro.
   CONSTRAINT principios_contables_pkey PRIMARY KEY (id),
   CONSTRAINT principios_contables_contratista_id_fkey FOREIGN KEY (contratista_id)
       REFERENCES contratistas (id) MATCH SIMPLE
@@ -177,8 +180,8 @@ CREATE TABLE empresas_relacionadas
   fecha_fin date, -- Fecha vigencia fin solo extranjeros
   sys_status boolean NOT NULL DEFAULT true, -- Estatus interno del sistema
   sys_creado_el timestamp with time zone DEFAULT now(), -- Fecha de creación del registro.
-  sys_actualizado_el timestamp with time zone DEFAULT now(), -- Fecha de última actualización del registro.
-  sys_finalizado_el timestamp with time zone DEFAULT now(), -- Fecha de "eliminado" el registro.
+  sys_actualizado_el timestamp with time zone, -- Fecha de última actualización del registro.
+  sys_finalizado_el timestamp with time zone, -- Fecha de "eliminado" el registro.
   persona_juridica_id integer NOT NULL, -- Clave foranea a la tabla personas juridicas
   persona_contacto_id integer NOT NULL, -- Clave foranea a personas_naturales
   CONSTRAINT empresas_relacionadas_pkey PRIMARY KEY (id),
@@ -219,20 +222,6 @@ ALTER TABLE personas_juridicas DROP COLUMN nacionalidad;
 ALTER TABLE personas_juridicas ADD COLUMN tipo_nacionalidad tipo_nacionalidad;
 COMMENT ON COLUMN personas_juridicas.tipo_nacionalidad IS 'Enum tipo nacionalidad puede ser Nacional o extranjera';
 
-
--- Column: rif
-ALTER TABLE personas_juridicas DROP COLUMN rif;
-
-ALTER TABLE personas_juridicas ADD COLUMN rif character varying(20);
-COMMENT ON COLUMN personas_juridicas.rif IS 'Registro de informacion fiscal';
-
-
--- Column: rif
-
- ALTER TABLE personas_naturales DROP COLUMN rif;
-
-ALTER TABLE personas_naturales ADD COLUMN rif character varying(20);
-COMMENT ON COLUMN personas_naturales.rif IS 'Rif de la persona natural registrada';
 
 -- Column: nacionalidad
 

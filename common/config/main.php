@@ -31,7 +31,7 @@ return [
         ],
 	    'user' => [
 	        'class' => 'webvimark\modules\UserManagement\components\UserConfig',
-
+	        'loginUrl' => ['user-management/auth/login'],
 	        // Comment this if you don't want to record user logins
 	        'on afterLogin' => function($event) {
 	                \webvimark\modules\UserManagement\models\UserVisitLog::newVisitor($event->identity->id);
@@ -48,7 +48,7 @@ return [
 	        'on beforeAction'=>function(yii\base\ActionEvent $event) {
 	                if ( $event->action->uniqueId == 'user-management/auth/login' )
 	                {
-	                    $event->action->controller->layout = 'loginLayout.php';
+	                    //$event->action->controller->layout = 'loginLayout.php';
 	                };
 	            },
 	    ],
