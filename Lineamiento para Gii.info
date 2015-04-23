@@ -5,9 +5,9 @@ Base Class: common\components\BaseActiveRecord	// Modelo Base de todos los model
 
 Enable I18N   // Activar esta opción para la internacionalización y poder traducir todos los cruds al español más fácilmente.
 
-Message Category: app // La defector por Yii
+Message Category: app // La de Yii por defecto
 
-
+Generate Relations mantener esta opción activada para que en el modelo se establezcan las relaciones.
 
 
 **** Configuración para la creación de CRUDs:

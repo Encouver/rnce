@@ -35,10 +35,13 @@ AppAsset::register($this);
             ]);
             $menuItems = [
                 ['label' => 'Inicio', 'url' => ['/site/index']],
-                ['label' => 'Balance general', 'url' => ['/site/balancegeneral']],
-                // ['label' => 'Acerca', 'url' => ['/site/about']],
-                ['label' => 'Estado de resultados', 'url' => ['/site/edoresultados']],
-                //['label' => 'Bienes', 'url' => ['/bienes/create']],
+                ['label' => 'Módulo financiero',
+                    'items' => [
+                         ['label' => 'Balance general', 'url' => ['/site/balancegeneral']],
+                         ['label' => 'Estado de resultados', 'url' => ['/site/edoresultados']],
+                         ['label' => 'Efectivos y sus equivalentes', 'url' => ['#']],
+                    ],
+                ],
                 ['label' => 'Bienes',
                     'items' => [
                          ['label' => 'Crear bien', 'url' => ['/bienes/create']],
@@ -48,8 +51,7 @@ AppAsset::register($this);
                 ],
                 ['label' => 'Información general',
                     'items' => [
-                         ['label' => 'Crear bien', 'url' => ['#']],
-                        ['label' => 'Crear Contratista', 'url' => ['/contratistas/index']],
+                         ['label' => 'Aqui van las cosas', 'url' => ['#']],
                     ],
                 ],
             ];
