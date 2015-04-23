@@ -80,6 +80,11 @@ class SiteController extends Controller
         return $this->render('balancegeneral');
     }
 
+    public function actionEfectivos_equivalentes()
+    {
+        return $this->render("efectivos_equivalentes");
+    }
+
     public function actionLogin()
     {
         if (!\Yii::$app->user->isGuest) {
