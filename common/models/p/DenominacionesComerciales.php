@@ -11,7 +11,6 @@ use Yii;
  * @property integer $sys_denominacion_comercial_id
  * @property integer $sys_subdenominacion_comercial_id
  * @property string $codigo_situr
- * @property string $codigo_sudaseg
  * @property boolean $fin_lucro
  * @property string $cooperativa_capital
  * @property string $cooperativa_distribuicion
@@ -49,7 +48,7 @@ class DenominacionesComerciales extends \common\components\BaseActiveRecord
             [['fin_lucro', 'sys_status'], 'boolean'],
             [['cooperativa_capital', 'cooperativa_distribuicion'], 'string'],
             [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
-            [['codigo_situr', 'codigo_sudaseg'], 'string', 'max' => 255]
+            [['codigo_situr'], 'string', 'max' => 255]
         ];
     }
 
@@ -63,7 +62,6 @@ class DenominacionesComerciales extends \common\components\BaseActiveRecord
             'sys_denominacion_comercial_id' => Yii::t('app', 'Sys Denominacion Comercial ID'),
             'sys_subdenominacion_comercial_id' => Yii::t('app', 'Sys Subdenominacion Comercial ID'),
             'codigo_situr' => Yii::t('app', 'Codigo Situr'),
-            'codigo_sudaseg' => Yii::t('app', 'Codigo Sudaseg'),
             'fin_lucro' => Yii::t('app', 'Fin Lucro'),
             'cooperativa_capital' => Yii::t('app', 'Cooperativa Capital'),
             'cooperativa_distribuicion' => Yii::t('app', 'Cooperativa Distribuicion'),

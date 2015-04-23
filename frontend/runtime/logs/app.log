@@ -24960,3 +24960,362 @@ $_SERVER = [
     'REQUEST_TIME_FLOAT' => 1429770402.024
     'REQUEST_TIME' => 1429770402
 ]
+2015-04-23 11:24:08 [127.0.0.1][-][-][error][yii\i18n\PhpMessageSource::loadMessages] The message file for category 'modules/user-management/back' does not exist: C:\Apache\htdocs\rnce/vendor/webvimark/module-user-management/messages/es-VE/back.php Fallback file does not exist as well: C:\Apache\htdocs\rnce/vendor/webvimark/module-user-management/messages/es/back.php
+    in C:\Apache\htdocs\rnce\vendor\webvimark\module-user-management\UserManagementModule.php:199
+    in C:\Apache\htdocs\rnce\vendor\webvimark\module-user-management\UserManagementModule.php:166
+    in C:\Apache\htdocs\rnce\frontend\views\layouts\main.php:96
+2015-04-23 11:24:07 [127.0.0.1][-][-][info][application] $_COOKIE = [
+    '_ga' => 'GA1.1.1925949620.1426916938'
+    '_identity' => 'b3ef3da7066703e5649d79dff6f2a519854983318bf2ea839175fd394f1a5cb5a:2:{i:0;s:9:\"_identity\";i:1;s:47:\"[10,\"VI3H3hf3F51MCLDRGpsFJ_JXrWbfRVhD\",2592000]\";}'
+    '_csrf' => '25f1ed76c0031dabf1dd2049af7dfa46047bd6a5e081ea45d18c126481c05654a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"VmLsp5sNs-DkwG3_XdZuAyYIGDHInwDl\";}'
+    'PHPSESSID' => 'vuhk3plqfh76e5it9ouvc4v5p7'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__returnUrl' => '/rnce/frontend/web/index.php?r=user-management%2Fauth%2Fregistration'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36'
+    'HTTP_REFERER' => 'http://localhost/rnce/frontend/'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'es-ES,es;q=0.8'
+    'HTTP_COOKIE' => '_ga=GA1.1.1925949620.1426916938; _identity=b3ef3da7066703e5649d79dff6f2a519854983318bf2ea839175fd394f1a5cb5a%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A47%3A%22%5B10%2C%22VI3H3hf3F51MCLDRGpsFJ_JXrWbfRVhD%22%2C2592000%5D%22%3B%7D; _csrf=25f1ed76c0031dabf1dd2049af7dfa46047bd6a5e081ea45d18c126481c05654a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22VmLsp5sNs-DkwG3_XdZuAyYIGDHInwDl%22%3B%7D; PHPSESSID=vuhk3plqfh76e5it9ouvc4v5p7'
+    'PATH' => 'C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files (x86)\\Rational\\common;C:\\php;C:\\php\\ext\\php_curl.dll;C:\\Apache;C:\\Apache\\bin;C:\\Apache\\yii\\framework;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\TortoiseGit\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.9 (Win64) PHP/5.5.22'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache/htdocs'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'C:/Apache/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '50802'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/rnce/frontend/web/'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1429804447.208
+    'REQUEST_TIME' => 1429804447
+]
+2015-04-23 11:24:12 [127.0.0.1][-][-][error][yii\base\ErrorException:8] exception 'yii\base\ErrorException' with message 'Undefined variable: content2' in C:\Apache\htdocs\rnce\frontend\views\nombres-cajas\efectivosequivalentes.php:19
+Stack trace:
+#0 C:\Apache\htdocs\rnce\frontend\views\nombres-cajas\efectivosequivalentes.php(19): yii\base\ErrorHandler->handleError(8, 'Undefined varia...', 'C:\\Apache\\htdoc...', 19, Array)
+#1 C:\Apache\htdocs\rnce\vendor\yiisoft\yii2\base\View.php(325): require('C:\\Apache\\htdoc...')
+#2 C:\Apache\htdocs\rnce\vendor\yiisoft\yii2\base\View.php(247): yii\base\View->renderPhpFile('C:\\Apache\\htdoc...', Array)
+#3 C:\Apache\htdocs\rnce\vendor\yiisoft\yii2\base\View.php(149): yii\base\View->renderFile('C:\\Apache\\htdoc...', Array, Object(frontend\controllers\NombresCajasController))
+#4 C:\Apache\htdocs\rnce\vendor\yiisoft\yii2\base\Controller.php(367): yii\base\View->render('efectivosequiva...', Array, Object(frontend\controllers\NombresCajasController))
+#5 C:\Apache\htdocs\rnce\frontend\controllers\NombresCajasController.php(47): yii\base\Controller->render('efectivosequiva...')
+#6 [internal function]: frontend\controllers\NombresCajasController->actionEfectivosequivalentes()
+#7 C:\Apache\htdocs\rnce\vendor\yiisoft\yii2\base\InlineAction.php(55): call_user_func_array(Array, Array)
+#8 C:\Apache\htdocs\rnce\vendor\yiisoft\yii2\base\Controller.php(151): yii\base\InlineAction->runWithParams(Array)
+#9 C:\Apache\htdocs\rnce\vendor\yiisoft\yii2\base\Module.php(455): yii\base\Controller->runAction('efectivosequiva...', Array)
+#10 C:\Apache\htdocs\rnce\vendor\yiisoft\yii2\web\Application.php(83): yii\base\Module->runAction('nombres-cajas/e...', Array)
+#11 C:\Apache\htdocs\rnce\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#12 C:\Apache\htdocs\rnce\frontend\web\index.php(18): yii\base\Application->run()
+#13 {main}
+2015-04-23 11:24:11 [127.0.0.1][-][-][info][application] $_GET = [
+    'r' => 'nombres-cajas/efectivosequivalentes'
+]
+
+$_COOKIE = [
+    '_ga' => 'GA1.1.1925949620.1426916938'
+    '_identity' => 'b3ef3da7066703e5649d79dff6f2a519854983318bf2ea839175fd394f1a5cb5a:2:{i:0;s:9:\"_identity\";i:1;s:47:\"[10,\"VI3H3hf3F51MCLDRGpsFJ_JXrWbfRVhD\",2592000]\";}'
+    '_csrf' => '25f1ed76c0031dabf1dd2049af7dfa46047bd6a5e081ea45d18c126481c05654a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"VmLsp5sNs-DkwG3_XdZuAyYIGDHInwDl\";}'
+    'PHPSESSID' => 'vuhk3plqfh76e5it9ouvc4v5p7'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36'
+    'HTTP_REFERER' => 'http://localhost/rnce/frontend/web/'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'es-ES,es;q=0.8'
+    'HTTP_COOKIE' => '_ga=GA1.1.1925949620.1426916938; _identity=b3ef3da7066703e5649d79dff6f2a519854983318bf2ea839175fd394f1a5cb5a%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A47%3A%22%5B10%2C%22VI3H3hf3F51MCLDRGpsFJ_JXrWbfRVhD%22%2C2592000%5D%22%3B%7D; _csrf=25f1ed76c0031dabf1dd2049af7dfa46047bd6a5e081ea45d18c126481c05654a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22VmLsp5sNs-DkwG3_XdZuAyYIGDHInwDl%22%3B%7D; PHPSESSID=vuhk3plqfh76e5it9ouvc4v5p7'
+    'PATH' => 'C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files (x86)\\Rational\\common;C:\\php;C:\\php\\ext\\php_curl.dll;C:\\Apache;C:\\Apache\\bin;C:\\Apache\\yii\\framework;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\TortoiseGit\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.9 (Win64) PHP/5.5.22'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache/htdocs'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'C:/Apache/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '50802'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=nombres-cajas%2Fefectivosequivalentes'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=nombres-cajas%2Fefectivosequivalentes'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1429804451.907
+    'REQUEST_TIME' => 1429804451
+]
+2015-04-23 11:24:46 [127.0.0.1][-][-][error][yii\i18n\PhpMessageSource::loadMessages] The message file for category 'modules/user-management/back' does not exist: C:\Apache\htdocs\rnce/vendor/webvimark/module-user-management/messages/es-VE/back.php Fallback file does not exist as well: C:\Apache\htdocs\rnce/vendor/webvimark/module-user-management/messages/es/back.php
+    in C:\Apache\htdocs\rnce\vendor\webvimark\module-user-management\UserManagementModule.php:199
+    in C:\Apache\htdocs\rnce\vendor\webvimark\module-user-management\UserManagementModule.php:166
+    in C:\Apache\htdocs\rnce\frontend\views\layouts\main.php:96
+2015-04-23 11:24:45 [127.0.0.1][-][-][info][application] $_GET = [
+    'r' => 'nombres-cajas/efectivosequivalentes'
+]
+
+$_COOKIE = [
+    '_ga' => 'GA1.1.1925949620.1426916938'
+    '_identity' => 'b3ef3da7066703e5649d79dff6f2a519854983318bf2ea839175fd394f1a5cb5a:2:{i:0;s:9:\"_identity\";i:1;s:47:\"[10,\"VI3H3hf3F51MCLDRGpsFJ_JXrWbfRVhD\",2592000]\";}'
+    '_csrf' => '25f1ed76c0031dabf1dd2049af7dfa46047bd6a5e081ea45d18c126481c05654a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"VmLsp5sNs-DkwG3_XdZuAyYIGDHInwDl\";}'
+    'PHPSESSID' => 'vuhk3plqfh76e5it9ouvc4v5p7'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__returnUrl' => '/rnce/frontend/web/index.php?r=user-management%2Fauth%2Fregistration'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36'
+    'HTTP_REFERER' => 'http://localhost/rnce/frontend/web/'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'es-ES,es;q=0.8'
+    'HTTP_COOKIE' => '_ga=GA1.1.1925949620.1426916938; _identity=b3ef3da7066703e5649d79dff6f2a519854983318bf2ea839175fd394f1a5cb5a%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A47%3A%22%5B10%2C%22VI3H3hf3F51MCLDRGpsFJ_JXrWbfRVhD%22%2C2592000%5D%22%3B%7D; _csrf=25f1ed76c0031dabf1dd2049af7dfa46047bd6a5e081ea45d18c126481c05654a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22VmLsp5sNs-DkwG3_XdZuAyYIGDHInwDl%22%3B%7D; PHPSESSID=vuhk3plqfh76e5it9ouvc4v5p7'
+    'PATH' => 'C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files (x86)\\Rational\\common;C:\\php;C:\\php\\ext\\php_curl.dll;C:\\Apache;C:\\Apache\\bin;C:\\Apache\\yii\\framework;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\TortoiseGit\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.9 (Win64) PHP/5.5.22'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache/htdocs'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'C:/Apache/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '50815'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=nombres-cajas%2Fefectivosequivalentes'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=nombres-cajas%2Fefectivosequivalentes'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1429804485.665
+    'REQUEST_TIME' => 1429804485
+]
+2015-04-23 11:24:52 [127.0.0.1][-][-][error][yii\i18n\PhpMessageSource::loadMessages] The message file for category 'modules/user-management/front' does not exist: C:\Apache\htdocs\rnce/vendor/webvimark/module-user-management/messages/es-VE/front.php Fallback file does not exist as well: C:\Apache\htdocs\rnce/vendor/webvimark/module-user-management/messages/es/front.php
+    in C:\Apache\htdocs\rnce\vendor\webvimark\module-user-management\UserManagementModule.php:199
+    in C:\Apache\htdocs\rnce\vendor\webvimark\module-user-management\views\auth\login.php:18
+    in C:\Apache\htdocs\rnce\vendor\webvimark\components\BaseController.php:38
+2015-04-23 11:24:51 [127.0.0.1][-][-][info][application] $_GET = [
+    'r' => 'user-management/auth/login'
+]
+
+$_COOKIE = [
+    '_ga' => 'GA1.1.1925949620.1426916938'
+    '_identity' => 'b3ef3da7066703e5649d79dff6f2a519854983318bf2ea839175fd394f1a5cb5a:2:{i:0;s:9:\"_identity\";i:1;s:47:\"[10,\"VI3H3hf3F51MCLDRGpsFJ_JXrWbfRVhD\",2592000]\";}'
+    '_csrf' => '25f1ed76c0031dabf1dd2049af7dfa46047bd6a5e081ea45d18c126481c05654a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"VmLsp5sNs-DkwG3_XdZuAyYIGDHInwDl\";}'
+    'PHPSESSID' => 'vuhk3plqfh76e5it9ouvc4v5p7'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__returnUrl' => '/rnce/frontend/web/index.php?r=user-management%2Fauth%2Fregistration'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36'
+    'HTTP_REFERER' => 'http://localhost/rnce/frontend/web/index.php?r=nombres-cajas%2Fefectivosequivalentes'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'es-ES,es;q=0.8'
+    'HTTP_COOKIE' => '_ga=GA1.1.1925949620.1426916938; _identity=b3ef3da7066703e5649d79dff6f2a519854983318bf2ea839175fd394f1a5cb5a%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A47%3A%22%5B10%2C%22VI3H3hf3F51MCLDRGpsFJ_JXrWbfRVhD%22%2C2592000%5D%22%3B%7D; _csrf=25f1ed76c0031dabf1dd2049af7dfa46047bd6a5e081ea45d18c126481c05654a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22VmLsp5sNs-DkwG3_XdZuAyYIGDHInwDl%22%3B%7D; PHPSESSID=vuhk3plqfh76e5it9ouvc4v5p7'
+    'PATH' => 'C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files (x86)\\Rational\\common;C:\\php;C:\\php\\ext\\php_curl.dll;C:\\Apache;C:\\Apache\\bin;C:\\Apache\\yii\\framework;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\TortoiseGit\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.9 (Win64) PHP/5.5.22'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache/htdocs'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'C:/Apache/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '50815'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=user-management%2Fauth%2Flogin'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=user-management%2Fauth%2Flogin'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1429804491.405
+    'REQUEST_TIME' => 1429804491
+]
+2015-04-23 11:25:05 [127.0.0.1][1][-][error][yii\i18n\PhpMessageSource::loadMessages] The message file for category 'modules/user-management/back' does not exist: C:\Apache\htdocs\rnce/vendor/webvimark/module-user-management/messages/es-VE/back.php Fallback file does not exist as well: C:\Apache\htdocs\rnce/vendor/webvimark/module-user-management/messages/es/back.php
+    in C:\Apache\htdocs\rnce\vendor\webvimark\module-user-management\UserManagementModule.php:199
+    in C:\Apache\htdocs\rnce\vendor\webvimark\module-user-management\UserManagementModule.php:166
+    in C:\Apache\htdocs\rnce\frontend\views\layouts\main.php:96
+2015-04-23 11:25:05 [127.0.0.1][1][-][info][application] $_COOKIE = [
+    '_ga' => 'GA1.1.1925949620.1426916938'
+    '_identity' => 'b3ef3da7066703e5649d79dff6f2a519854983318bf2ea839175fd394f1a5cb5a:2:{i:0;s:9:\"_identity\";i:1;s:47:\"[10,\"VI3H3hf3F51MCLDRGpsFJ_JXrWbfRVhD\",2592000]\";}'
+    '_csrf' => '25f1ed76c0031dabf1dd2049af7dfa46047bd6a5e081ea45d18c126481c05654a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"VmLsp5sNs-DkwG3_XdZuAyYIGDHInwDl\";}'
+    'PHPSESSID' => 'c89mq634smo9p6hp6j3ennuqa0'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__returnUrl' => '/rnce/frontend/web/index.php?r=user-management%2Fauth%2Fregistration'
+    '_um_last_attempt' => 1429804501
+    '_um_attempt_count' => 1
+    '__id' => 1
+    '__auth_last_update' => 1429804504
+    '__userRoles' => []
+    '__userPermissions' => []
+    '__userRoutes' => []
+    '__visitorToken' => '553915d8a407f'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36'
+    'HTTP_REFERER' => 'http://localhost/rnce/frontend/web/index.php?r=user-management%2Fauth%2Flogin'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'es-ES,es;q=0.8'
+    'HTTP_COOKIE' => '_ga=GA1.1.1925949620.1426916938; _identity=b3ef3da7066703e5649d79dff6f2a519854983318bf2ea839175fd394f1a5cb5a%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A47%3A%22%5B10%2C%22VI3H3hf3F51MCLDRGpsFJ_JXrWbfRVhD%22%2C2592000%5D%22%3B%7D; _csrf=25f1ed76c0031dabf1dd2049af7dfa46047bd6a5e081ea45d18c126481c05654a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22VmLsp5sNs-DkwG3_XdZuAyYIGDHInwDl%22%3B%7D; PHPSESSID=c89mq634smo9p6hp6j3ennuqa0'
+    'PATH' => 'C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files (x86)\\Rational\\common;C:\\php;C:\\php\\ext\\php_curl.dll;C:\\Apache;C:\\Apache\\bin;C:\\Apache\\yii\\framework;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\TortoiseGit\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.9 (Win64) PHP/5.5.22'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache/htdocs'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'C:/Apache/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '50824'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/rnce/frontend/web/index.php'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1429804505.379
+    'REQUEST_TIME' => 1429804505
+]
+2015-04-23 12:26:13 [127.0.0.1][1][-][error][yii\i18n\PhpMessageSource::loadMessages] The message file for category 'modules/user-management/back' does not exist: C:\Apache\htdocs\rnce/vendor/webvimark/module-user-management/messages/es-VE/back.php Fallback file does not exist as well: C:\Apache\htdocs\rnce/vendor/webvimark/module-user-management/messages/es/back.php
+    in C:\Apache\htdocs\rnce\vendor\webvimark\module-user-management\UserManagementModule.php:199
+    in C:\Apache\htdocs\rnce\vendor\webvimark\module-user-management\UserManagementModule.php:166
+    in C:\Apache\htdocs\rnce\frontend\views\layouts\main.php:96
+2015-04-23 12:26:12 [127.0.0.1][1][-][info][application] $_GET = [
+    'r' => 'site/balancegeneral'
+]
+
+$_COOKIE = [
+    '_ga' => 'GA1.1.1925949620.1426916938'
+    '_identity' => 'b3ef3da7066703e5649d79dff6f2a519854983318bf2ea839175fd394f1a5cb5a:2:{i:0;s:9:\"_identity\";i:1;s:47:\"[10,\"VI3H3hf3F51MCLDRGpsFJ_JXrWbfRVhD\",2592000]\";}'
+    '_csrf' => '25f1ed76c0031dabf1dd2049af7dfa46047bd6a5e081ea45d18c126481c05654a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"VmLsp5sNs-DkwG3_XdZuAyYIGDHInwDl\";}'
+    'PHPSESSID' => 'c89mq634smo9p6hp6j3ennuqa0'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__returnUrl' => '/rnce/frontend/web/index.php?r=user-management%2Fauth%2Fregistration'
+    '_um_last_attempt' => 1429804501
+    '_um_attempt_count' => 1
+    '__id' => 1
+    '__auth_last_update' => 1429804504
+    '__userRoles' => []
+    '__userPermissions' => []
+    '__userRoutes' => []
+    '__visitorToken' => '553915d8a407f'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36'
+    'HTTP_REFERER' => 'http://localhost/rnce/frontend/web/index.php'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'es-ES,es;q=0.8'
+    'HTTP_COOKIE' => '_ga=GA1.1.1925949620.1426916938; _identity=b3ef3da7066703e5649d79dff6f2a519854983318bf2ea839175fd394f1a5cb5a%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A47%3A%22%5B10%2C%22VI3H3hf3F51MCLDRGpsFJ_JXrWbfRVhD%22%2C2592000%5D%22%3B%7D; _csrf=25f1ed76c0031dabf1dd2049af7dfa46047bd6a5e081ea45d18c126481c05654a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22VmLsp5sNs-DkwG3_XdZuAyYIGDHInwDl%22%3B%7D; PHPSESSID=c89mq634smo9p6hp6j3ennuqa0'
+    'PATH' => 'C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files (x86)\\Rational\\common;C:\\php;C:\\php\\ext\\php_curl.dll;C:\\Apache;C:\\Apache\\bin;C:\\Apache\\yii\\framework;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\TortoiseGit\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.9 (Win64) PHP/5.5.22'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache/htdocs'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'C:/Apache/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '51029'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=site%2Fbalancegeneral'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=site%2Fbalancegeneral'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1429808172.258
+    'REQUEST_TIME' => 1429808172
+]

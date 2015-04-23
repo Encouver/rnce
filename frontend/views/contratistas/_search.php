@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model frontend\models\ContratistasSearch */
+/* @var $model app\models\ContratistasSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
@@ -23,17 +23,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'sigla') ?>
 
-    <?= $form->field($model, 'principio_contable') ?>
-
-    <?php // echo $form->field($model, 'ppal_caev_id') ?>
-
-    <?php // echo $form->field($model, 'comp1_caev_id') ?>
-
-    <?php // echo $form->field($model, 'comp2_caev_id') ?>
-
-    <?php // echo $form->field($model, 'contacto_id') ?>
-
-    <?php // echo $form->field($model, 'sys_status')->checkbox() ?>
+    <?= $form->field($model, 'sys_status')->checkbox() ?>
 
     <?php // echo $form->field($model, 'sys_creado_el') ?>
 

@@ -12,19 +12,11 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'rif')->textInput() ?>
+    <?= $form->field($model, 'natural_juridica_id')->textInput() ?>
+
+    <?= $form->field($model, 'estatus_contratista_id')->textInput() ?>
 
     <?= $form->field($model, 'sigla')->textInput(['maxlength' => 50]) ?>
-
-    <?= $form->field($model, 'principio_contable')->dropDownList([ 'PYME' => 'PYME', 'OSP' => 'OSP', 'FP' => 'FP', 'PN' => 'PN', 'COOPERATIVA' => 'COOPERATIVA', 'ESPECIAL' => 'ESPECIAL', 'GRAN ENTIDAD' => 'GRAN ENTIDAD', 'EMPRESA DE SEGURO' => 'EMPRESA DE SEGURO', ], ['prompt' => '']) ?>
-
-    <?= $form->field($model, 'ppal_caev_id')->textInput() ?>
-
-    <?= $form->field($model, 'comp1_caev_id')->textInput() ?>
-
-    <?= $form->field($model, 'comp2_caev_id')->textInput() ?>
-
-    <?= $form->field($model, 'contacto_id')->textInput() ?>
 
     <?= $form->field($model, 'sys_status')->checkbox() ?>
 

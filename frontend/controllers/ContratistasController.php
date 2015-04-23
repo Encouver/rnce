@@ -4,15 +4,15 @@ namespace frontend\controllers;
 
 use Yii;
 use common\models\p\Contratistas;
-use frontend\models\ContratistasSearch;
-use common\components\BaseController;
+use app\models\ContratistasSearch;
+use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
  * ContratistasController implements the CRUD actions for Contratistas model.
  */
-class ContratistasController extends BaseController
+class ContratistasController extends Controller
 {
     public function behaviors()
     {

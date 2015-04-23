@@ -1,6 +1,6 @@
 <?php
 
-namespace frontend\models;
+namespace app\models;
 
 use Yii;
 use yii\base\Model;
@@ -15,12 +15,11 @@ class ContratistasSearch extends Contratistas
     /**
      * @inheritdoc
      */
-    public $rif;
     public function rules()
     {
         return [
-            [['id', 'rif','natural_juridica_id', 'estatus_contratista_id', 'ppal_caev_id', 'comp1_caev_id', 'comp2_caev_id', 'contacto_id'], 'integer'],
-            [['sigla', 'principio_contable', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el', 'tipo_sector'], 'safe'],
+            [['id', 'natural_juridica_id', 'estatus_contratista_id'], 'integer'],
+            [['sigla', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el', 'tipo_sector'], 'safe'],
             [['sys_status'], 'boolean'],
         ];
     }
@@ -60,12 +59,7 @@ class ContratistasSearch extends Contratistas
         $query->andFilterWhere([
             'id' => $this->id,
             'natural_juridica_id' => $this->natural_juridica_id,
-            'rif'=>$this->rif,
             'estatus_contratista_id' => $this->estatus_contratista_id,
-            'ppal_caev_id' => $this->ppal_caev_id,
-            'comp1_caev_id' => $this->comp1_caev_id,
-            'comp2_caev_id' => $this->comp2_caev_id,
-            'contacto_id' => $this->contacto_id,
             'sys_status' => $this->sys_status,
             'sys_creado_el' => $this->sys_creado_el,
             'sys_actualizado_el' => $this->sys_actualizado_el,
@@ -73,36 +67,8 @@ class ContratistasSearch extends Contratistas
         ]);
 
         $query->andFilterWhere(['like', 'sigla', $this->sigla])
-            ->andFilterWhere(['like', 'principio_contable', $this->principio_contable])
             ->andFilterWhere(['like', 'tipo_sector', $this->tipo_sector]);
 
         return $dataProvider;
-    }
-     public function webservices($params)
-    {
-         
-         $respuesta= true;
-         if($repuesta){
-             $persona_juridica = new PersonasJuridicas;
-             $persona_juridica->rif = 'J-45675656-6';
-             $persona_juridica->razon_social = 'EurekaSolutions C.A';
-             $persona_juridica->nacionalidad = false;
-             $persona_juridica->save();
-             
-             
-             $nat_jur = new SysNaturalesJuridicas();
-             $nat_jur->rif = $persona_juridica->rif;
-             $nat_jur->denominacion= $persona_juridica->razon_social;
-             $nat_jur->juridica= true;
-             $nat_jur->save();
-             
-             $this->natural_juridica_id= $nat_jur->id;
-             
-             return true;
-              
-         }else{
-             return false;
-         }
-         
     }
 }
