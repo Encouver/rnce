@@ -7,7 +7,6 @@ use Yii;
 /**
  * This is the model class for table "public.sucursales".
  *
- * @property integer $id
  * @property integer $persona_natural_id
  * @property integer $direccion_id
  * @property integer $contratista_id
@@ -15,6 +14,7 @@ use Yii;
  * @property string $sys_creado_el
  * @property string $sys_actualizado_el
  * @property string $sys_finalizado_el
+ * @property integer $id
  *
  * @property Contratistas $contratista
  * @property Direcciones $direccion
@@ -36,8 +36,8 @@ class Sucursales extends \common\components\BaseActiveRecord
     public function rules()
     {
         return [
-            [['id', 'persona_natural_id', 'direccion_id', 'contratista_id'], 'required'],
-            [['id', 'persona_natural_id', 'direccion_id', 'contratista_id'], 'integer'],
+            [['persona_natural_id', 'direccion_id', 'contratista_id'], 'required'],
+            [['persona_natural_id', 'direccion_id', 'contratista_id'], 'integer'],
             [['sys_status'], 'boolean'],
             [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe']
         ];
@@ -49,7 +49,6 @@ class Sucursales extends \common\components\BaseActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
             'persona_natural_id' => Yii::t('app', 'Persona Natural ID'),
             'direccion_id' => Yii::t('app', 'Direccion ID'),
             'contratista_id' => Yii::t('app', 'Contratista ID'),
@@ -57,6 +56,7 @@ class Sucursales extends \common\components\BaseActiveRecord
             'sys_creado_el' => Yii::t('app', 'Sys Creado El'),
             'sys_actualizado_el' => Yii::t('app', 'Sys Actualizado El'),
             'sys_finalizado_el' => Yii::t('app', 'Sys Finalizado El'),
+            'id' => Yii::t('app', 'ID'),
         ];
     }
 

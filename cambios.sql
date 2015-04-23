@@ -266,3 +266,8 @@ ALTER TABLE domicilios ADD COLUMN documento_registrado_id integer;
 COMMENT ON COLUMN domicilios.documento_registrado_id IS 'Clave foranea a la tabla documentos registrados  en el esquema activos';
 
 
+ALTER TABLE sucursales DROP COLUMN id;
+ALTER TABLE sucursales ADD COLUMN id integer;
+ALTER TABLE sucursales ALTER COLUMN id SET NOT NULL;
+ALTER TABLE sucursales ALTER COLUMN id SET DEFAULT nextval('sucursales_id_seq'::regclass);
+COMMENT ON COLUMN sucursales.id IS 'clave primaria';
