@@ -2,7 +2,10 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-
+use yii\helpers\ArrayHelper;
+use common\models\p\SysEstados;
+use common\models\p\SysMunicipios;
+use common\models\p\SysParroquias;
 /* @var $this yii\web\View */
 /* @var $model common\models\p\ContratistasContactos */
 /* @var $form yii\widgets\ActiveForm */

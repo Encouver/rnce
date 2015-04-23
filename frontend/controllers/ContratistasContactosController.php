@@ -83,7 +83,7 @@ class ContratistasContactosController extends Controller
             
             $model2->save();
             $model->contacto_id = $model2->id;
-            $model->contratista_id = 2;
+            $model->contratista_id = 1;
             $model->save();
             
             return $this->redirect(['view', 'id' => $model->id]);

@@ -5,6 +5,9 @@ namespace frontend\controllers;
 use Yii;
 use common\models\p\Sucursales;
 use app\models\SucursalesSearch;
+use common\models\p\PersonasNaturales;
+use common\models\p\Direcciones;
+use common\models\p\SysNaturalesJuridicas;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -61,12 +64,37 @@ class SucursalesController extends Controller
     public function actionCreate()
     {
         $model = new Sucursales();
+        $model2 = new Direcciones();
+        $model3  = new PersonasNaturales();
+        $model4  = new SysNaturalesJuridicas();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model2->load(Yii::$app->request->post()) && $model3->load(Yii::$app->request->post())) {
+             $model2->save();
+             
+             
+            $model4->rif= $model3->rif;
+            $model4->juridica= false;
+            $model4->denominacion=$model3->primer_nombre.' '.$model3->primer_apellido;
+            $model4->sys_status=true;
+            $model4->save();
+            
+            $model3->sys_pais_id = 1;
+            $model3->nacionalidad = "NACIONAL";
+            $model3->creado_por = 1;
+             $model3->save();
+             
+             $model->persona_natural_id =$model3->id;
+             $model->direccion_id =$model2->id;
+             $model->contratista_id =2;
+             $model->save();
+            
+            
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'model2' => $model2,
+                'model3' => $model3,
             ]);
         }
     }
