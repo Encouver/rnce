@@ -39,6 +39,7 @@ return [
 	    ],
     ],
 	'modules'=>[
+		//https://github.com/webvimark/user-management
 	    'user-management' => [
 	        'class' => 'webvimark\modules\UserManagement\UserManagementModule',
 
