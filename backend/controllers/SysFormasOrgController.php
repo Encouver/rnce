@@ -3,7 +3,7 @@
 namespace backend\controllers;
 
 use Yii;
-use common\models\SysFormasOrg;
+use common\models\a\SysFormasOrg;
 use app\models\SysFormasOrgSearch;
 use common\components\BaseController;
 use yii\web\NotFoundHttpException;

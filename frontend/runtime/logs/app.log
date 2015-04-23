@@ -23365,3 +23365,1598 @@ $_SERVER = [
     'REQUEST_TIME_FLOAT' => 1429766167.176
     'REQUEST_TIME' => 1429766167
 ]
+2015-04-23 01:00:57 [127.0.0.1][-][-][error][yii\web\HttpException:404] exception 'yii\base\InvalidRouteException' with message 'Unable to resolve the request "sys-caev/index".' in C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Module.php:461
+Stack trace:
+#0 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\web\Application.php(83): yii\base\Module->runAction('sys-caev/index', Array)
+#1 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 C:\Apache24\htdocs\rnce\frontend\web\index.php(18): yii\base\Application->run()
+#3 {main}
+
+Next exception 'yii\web\NotFoundHttpException' with message 'Página no encontrada.' in C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\web\Application.php:95
+Stack trace:
+#0 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 C:\Apache24\htdocs\rnce\frontend\web\index.php(18): yii\base\Application->run()
+#2 {main}
+2015-04-23 01:00:57 [127.0.0.1][-][-][error][yii\i18n\PhpMessageSource::loadMessages] The message file for category 'modules/user-management/back' does not exist: C:\Apache24\htdocs\rnce/vendor/webvimark/module-user-management/messages/es-VE/back.php Fallback file does not exist as well: C:\Apache24\htdocs\rnce/vendor/webvimark/module-user-management/messages/es/back.php
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\UserManagementModule.php:199
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\UserManagementModule.php:166
+    in C:\Apache24\htdocs\rnce\frontend\views\layouts\main.php:96
+2015-04-23 01:00:57 [127.0.0.1][-][-][info][application] $_GET = [
+    'r' => 'sys-caev/index'
+]
+
+$_COOKIE = [
+    '_ga' => 'GA1.1.1861192029.1415307511'
+    'language' => '30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s:2:\"en\";'
+    'PHPSESSID' => 'p91d40gen5re4h39qh2ivtgcd1'
+    '_csrf' => '55bed5ff24cb73ec8285ad3aa9e8ec4b9339d875551e1d86dc40ff4b7b6d5356a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"1GuXkZEde1RHVG1u6S5prJK-mQo_2-dR\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__returnUrl' => '/rnce/frontend/web/index.php?r=user-management%2Fauth%2Fregistration'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_COOKIE' => '_ga=GA1.1.1861192029.1415307511; language=30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s%3A2%3A%22en%22%3B; PHPSESSID=p91d40gen5re4h39qh2ivtgcd1; _csrf=55bed5ff24cb73ec8285ad3aa9e8ec4b9339d875551e1d86dc40ff4b7b6d5356a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%221GuXkZEde1RHVG1u6S5prJK-mQo_2-dR%22%3B%7D'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => 'C:\\oraclexe\\app\\oracle\\product\\11.2.0\\server\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\php;C:\\Apache24;C:\\Apache24\\bin;C:\\Users\\Marcos\\AppData\\Local\\Android\\android-sdk\\platform-tools;C:\\Program Files\\PostgreSQL\\9.3\\bin;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files\\MySQL\\MySQL Server 5.6\\bin;C:\\Program Files\\TortoiseGit\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win64)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '59868'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=sys-caev%2Findex'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=sys-caev%2Findex'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1429767057.333
+    'REQUEST_TIME' => 1429767057
+]
+2015-04-23 01:01:03 [127.0.0.1][-][-][error][yii\web\HttpException:404] exception 'yii\base\InvalidRouteException' with message 'Unable to resolve the request "syscaev/index".' in C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Module.php:461
+Stack trace:
+#0 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\web\Application.php(83): yii\base\Module->runAction('syscaev/index', Array)
+#1 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 C:\Apache24\htdocs\rnce\frontend\web\index.php(18): yii\base\Application->run()
+#3 {main}
+
+Next exception 'yii\web\NotFoundHttpException' with message 'Página no encontrada.' in C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\web\Application.php:95
+Stack trace:
+#0 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 C:\Apache24\htdocs\rnce\frontend\web\index.php(18): yii\base\Application->run()
+#2 {main}
+2015-04-23 01:01:03 [127.0.0.1][-][-][error][yii\i18n\PhpMessageSource::loadMessages] The message file for category 'modules/user-management/back' does not exist: C:\Apache24\htdocs\rnce/vendor/webvimark/module-user-management/messages/es-VE/back.php Fallback file does not exist as well: C:\Apache24\htdocs\rnce/vendor/webvimark/module-user-management/messages/es/back.php
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\UserManagementModule.php:199
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\UserManagementModule.php:166
+    in C:\Apache24\htdocs\rnce\frontend\views\layouts\main.php:96
+2015-04-23 01:01:03 [127.0.0.1][-][-][info][application] $_GET = [
+    'r' => 'syscaev/index'
+]
+
+$_COOKIE = [
+    '_ga' => 'GA1.1.1861192029.1415307511'
+    'language' => '30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s:2:\"en\";'
+    'PHPSESSID' => 'p91d40gen5re4h39qh2ivtgcd1'
+    '_csrf' => '55bed5ff24cb73ec8285ad3aa9e8ec4b9339d875551e1d86dc40ff4b7b6d5356a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"1GuXkZEde1RHVG1u6S5prJK-mQo_2-dR\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__returnUrl' => '/rnce/frontend/web/index.php?r=user-management%2Fauth%2Fregistration'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_COOKIE' => '_ga=GA1.1.1861192029.1415307511; language=30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s%3A2%3A%22en%22%3B; PHPSESSID=p91d40gen5re4h39qh2ivtgcd1; _csrf=55bed5ff24cb73ec8285ad3aa9e8ec4b9339d875551e1d86dc40ff4b7b6d5356a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%221GuXkZEde1RHVG1u6S5prJK-mQo_2-dR%22%3B%7D'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => 'C:\\oraclexe\\app\\oracle\\product\\11.2.0\\server\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\php;C:\\Apache24;C:\\Apache24\\bin;C:\\Users\\Marcos\\AppData\\Local\\Android\\android-sdk\\platform-tools;C:\\Program Files\\PostgreSQL\\9.3\\bin;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files\\MySQL\\MySQL Server 5.6\\bin;C:\\Program Files\\TortoiseGit\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win64)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '59870'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=syscaev%2Findex'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=syscaev%2Findex'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1429767063.711
+    'REQUEST_TIME' => 1429767063
+]
+2015-04-23 01:01:09 [127.0.0.1][-][-][error][yii\web\HttpException:404] exception 'yii\base\InvalidRouteException' with message 'Unable to resolve the request "sys-caev/index".' in C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Module.php:461
+Stack trace:
+#0 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\web\Application.php(83): yii\base\Module->runAction('sys-caev/index', Array)
+#1 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 C:\Apache24\htdocs\rnce\frontend\web\index.php(18): yii\base\Application->run()
+#3 {main}
+
+Next exception 'yii\web\NotFoundHttpException' with message 'Página no encontrada.' in C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\web\Application.php:95
+Stack trace:
+#0 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 C:\Apache24\htdocs\rnce\frontend\web\index.php(18): yii\base\Application->run()
+#2 {main}
+2015-04-23 01:01:09 [127.0.0.1][-][-][error][yii\i18n\PhpMessageSource::loadMessages] The message file for category 'modules/user-management/back' does not exist: C:\Apache24\htdocs\rnce/vendor/webvimark/module-user-management/messages/es-VE/back.php Fallback file does not exist as well: C:\Apache24\htdocs\rnce/vendor/webvimark/module-user-management/messages/es/back.php
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\UserManagementModule.php:199
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\UserManagementModule.php:166
+    in C:\Apache24\htdocs\rnce\frontend\views\layouts\main.php:96
+2015-04-23 01:01:08 [127.0.0.1][-][-][info][application] $_GET = [
+    'r' => 'sys-caev/index'
+]
+
+$_COOKIE = [
+    '_ga' => 'GA1.1.1861192029.1415307511'
+    'language' => '30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s:2:\"en\";'
+    'PHPSESSID' => 'p91d40gen5re4h39qh2ivtgcd1'
+    '_csrf' => '55bed5ff24cb73ec8285ad3aa9e8ec4b9339d875551e1d86dc40ff4b7b6d5356a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"1GuXkZEde1RHVG1u6S5prJK-mQo_2-dR\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__returnUrl' => '/rnce/frontend/web/index.php?r=user-management%2Fauth%2Fregistration'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_COOKIE' => '_ga=GA1.1.1861192029.1415307511; language=30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s%3A2%3A%22en%22%3B; PHPSESSID=p91d40gen5re4h39qh2ivtgcd1; _csrf=55bed5ff24cb73ec8285ad3aa9e8ec4b9339d875551e1d86dc40ff4b7b6d5356a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%221GuXkZEde1RHVG1u6S5prJK-mQo_2-dR%22%3B%7D'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => 'C:\\oraclexe\\app\\oracle\\product\\11.2.0\\server\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\php;C:\\Apache24;C:\\Apache24\\bin;C:\\Users\\Marcos\\AppData\\Local\\Android\\android-sdk\\platform-tools;C:\\Program Files\\PostgreSQL\\9.3\\bin;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files\\MySQL\\MySQL Server 5.6\\bin;C:\\Program Files\\TortoiseGit\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win64)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '59870'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=sys-caev%2Findex'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=sys-caev%2Findex'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1429767068.95
+    'REQUEST_TIME' => 1429767068
+]
+2015-04-23 01:01:31 [127.0.0.1][-][-][error][yii\web\HttpException:404] exception 'yii\base\InvalidRouteException' with message 'Unable to resolve the request "sys-caev/index".' in C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Module.php:461
+Stack trace:
+#0 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\web\Application.php(83): yii\base\Module->runAction('sys-caev/index', Array)
+#1 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 C:\Apache24\htdocs\rnce\frontend\web\index.php(18): yii\base\Application->run()
+#3 {main}
+
+Next exception 'yii\web\NotFoundHttpException' with message 'Página no encontrada.' in C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\web\Application.php:95
+Stack trace:
+#0 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 C:\Apache24\htdocs\rnce\frontend\web\index.php(18): yii\base\Application->run()
+#2 {main}
+2015-04-23 01:01:31 [127.0.0.1][-][-][error][yii\i18n\PhpMessageSource::loadMessages] The message file for category 'modules/user-management/back' does not exist: C:\Apache24\htdocs\rnce/vendor/webvimark/module-user-management/messages/es-VE/back.php Fallback file does not exist as well: C:\Apache24\htdocs\rnce/vendor/webvimark/module-user-management/messages/es/back.php
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\UserManagementModule.php:199
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\UserManagementModule.php:166
+    in C:\Apache24\htdocs\rnce\frontend\views\layouts\main.php:96
+2015-04-23 01:01:31 [127.0.0.1][-][-][info][application] $_GET = [
+    'r' => 'sys-caev/index'
+]
+
+$_COOKIE = [
+    '_ga' => 'GA1.1.1861192029.1415307511'
+    'language' => '30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s:2:\"en\";'
+    'PHPSESSID' => 'p91d40gen5re4h39qh2ivtgcd1'
+    '_csrf' => '6fdc78b3db1d554699353eafc65ffe2f2b453cf6bd61619042eb474cfd008708a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"uBMlaR0AyV7EWaBtmGkuwL6qsENlDp3d\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__returnUrl' => '/rnce/frontend/web/index.php?r=user-management%2Fauth%2Fregistration'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_COOKIE' => '_ga=GA1.1.1861192029.1415307511; language=30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s%3A2%3A%22en%22%3B; PHPSESSID=p91d40gen5re4h39qh2ivtgcd1; _csrf=6fdc78b3db1d554699353eafc65ffe2f2b453cf6bd61619042eb474cfd008708a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22uBMlaR0AyV7EWaBtmGkuwL6qsENlDp3d%22%3B%7D'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => 'C:\\oraclexe\\app\\oracle\\product\\11.2.0\\server\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\php;C:\\Apache24;C:\\Apache24\\bin;C:\\Users\\Marcos\\AppData\\Local\\Android\\android-sdk\\platform-tools;C:\\Program Files\\PostgreSQL\\9.3\\bin;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files\\MySQL\\MySQL Server 5.6\\bin;C:\\Program Files\\TortoiseGit\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win64)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '59878'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=sys-caev/index'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=sys-caev/index'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1429767091.516
+    'REQUEST_TIME' => 1429767091
+]
+2015-04-23 01:02:45 [127.0.0.1][-][-][error][yii\web\HttpException:404] exception 'yii\base\InvalidRouteException' with message 'Unable to resolve the request "sys-formas-org/index".' in C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Module.php:461
+Stack trace:
+#0 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\web\Application.php(83): yii\base\Module->runAction('sys-formas-org/...', Array)
+#1 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 C:\Apache24\htdocs\rnce\frontend\web\index.php(18): yii\base\Application->run()
+#3 {main}
+
+Next exception 'yii\web\NotFoundHttpException' with message 'Página no encontrada.' in C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\web\Application.php:95
+Stack trace:
+#0 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 C:\Apache24\htdocs\rnce\frontend\web\index.php(18): yii\base\Application->run()
+#2 {main}
+2015-04-23 01:02:45 [127.0.0.1][-][-][error][yii\i18n\PhpMessageSource::loadMessages] The message file for category 'modules/user-management/back' does not exist: C:\Apache24\htdocs\rnce/vendor/webvimark/module-user-management/messages/es-VE/back.php Fallback file does not exist as well: C:\Apache24\htdocs\rnce/vendor/webvimark/module-user-management/messages/es/back.php
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\UserManagementModule.php:199
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\UserManagementModule.php:166
+    in C:\Apache24\htdocs\rnce\frontend\views\layouts\main.php:96
+2015-04-23 01:02:45 [127.0.0.1][-][-][info][application] $_GET = [
+    'r' => 'sys-formas-org/index'
+]
+
+$_COOKIE = [
+    '_ga' => 'GA1.1.1861192029.1415307511'
+    'language' => '30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s:2:\"en\";'
+    'PHPSESSID' => 'p91d40gen5re4h39qh2ivtgcd1'
+    '_csrf' => '79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"6A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__returnUrl' => '/rnce/frontend/web/index.php?r=user-management%2Fauth%2Fregistration'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_COOKIE' => '_ga=GA1.1.1861192029.1415307511; language=30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s%3A2%3A%22en%22%3B; PHPSESSID=p91d40gen5re4h39qh2ivtgcd1; _csrf=79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%226A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB%22%3B%7D'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => 'C:\\oraclexe\\app\\oracle\\product\\11.2.0\\server\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\php;C:\\Apache24;C:\\Apache24\\bin;C:\\Users\\Marcos\\AppData\\Local\\Android\\android-sdk\\platform-tools;C:\\Program Files\\PostgreSQL\\9.3\\bin;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files\\MySQL\\MySQL Server 5.6\\bin;C:\\Program Files\\TortoiseGit\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win64)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '59883'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=sys-formas-org/index'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=sys-formas-org/index'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1429767165.022
+    'REQUEST_TIME' => 1429767165
+]
+2015-04-23 01:05:38 [127.0.0.1][-][-][error][yii\i18n\PhpMessageSource::loadMessages] The message file for category 'modules/user-management/back' does not exist: C:\Apache24\htdocs\rnce/vendor/webvimark/module-user-management/messages/es-VE/back.php Fallback file does not exist as well: C:\Apache24\htdocs\rnce/vendor/webvimark/module-user-management/messages/es/back.php
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\UserManagementModule.php:199
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\UserManagementModule.php:166
+    in C:\Apache24\htdocs\rnce\frontend\views\layouts\main.php:96
+2015-04-23 01:05:38 [127.0.0.1][-][-][info][application] $_GET = [
+    'r' => 'sys-caev/index'
+]
+
+$_COOKIE = [
+    '_ga' => 'GA1.1.1861192029.1415307511'
+    'language' => '30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s:2:\"en\";'
+    'PHPSESSID' => 'p91d40gen5re4h39qh2ivtgcd1'
+    '_csrf' => '79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"6A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__returnUrl' => '/rnce/frontend/web/index.php?r=user-management%2Fauth%2Fregistration'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_COOKIE' => '_ga=GA1.1.1861192029.1415307511; language=30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s%3A2%3A%22en%22%3B; PHPSESSID=p91d40gen5re4h39qh2ivtgcd1; _csrf=79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%226A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB%22%3B%7D'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => 'C:\\oraclexe\\app\\oracle\\product\\11.2.0\\server\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\php;C:\\Apache24;C:\\Apache24\\bin;C:\\Users\\Marcos\\AppData\\Local\\Android\\android-sdk\\platform-tools;C:\\Program Files\\PostgreSQL\\9.3\\bin;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files\\MySQL\\MySQL Server 5.6\\bin;C:\\Program Files\\TortoiseGit\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win64)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '59913'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=sys-caev/index'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=sys-caev/index'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1429767338.444
+    'REQUEST_TIME' => 1429767338
+]
+2015-04-23 01:05:41 [127.0.0.1][-][-][error][yii\i18n\PhpMessageSource::loadMessages] The message file for category 'modules/user-management/back' does not exist: C:\Apache24\htdocs\rnce/vendor/webvimark/module-user-management/messages/es-VE/back.php Fallback file does not exist as well: C:\Apache24\htdocs\rnce/vendor/webvimark/module-user-management/messages/es/back.php
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\UserManagementModule.php:199
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\UserManagementModule.php:166
+    in C:\Apache24\htdocs\rnce\frontend\views\layouts\main.php:96
+2015-04-23 01:05:41 [127.0.0.1][-][-][info][application] $_GET = [
+    'r' => 'sys-caev/create'
+]
+
+$_COOKIE = [
+    '_ga' => 'GA1.1.1861192029.1415307511'
+    'language' => '30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s:2:\"en\";'
+    'PHPSESSID' => 'p91d40gen5re4h39qh2ivtgcd1'
+    '_csrf' => '79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"6A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__returnUrl' => '/rnce/frontend/web/index.php?r=user-management%2Fauth%2Fregistration'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://localhost/rnce/frontend/web/index.php?r=sys-caev/index'
+    'HTTP_COOKIE' => '_ga=GA1.1.1861192029.1415307511; language=30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s%3A2%3A%22en%22%3B; PHPSESSID=p91d40gen5re4h39qh2ivtgcd1; _csrf=79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%226A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB%22%3B%7D'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => 'C:\\oraclexe\\app\\oracle\\product\\11.2.0\\server\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\php;C:\\Apache24;C:\\Apache24\\bin;C:\\Users\\Marcos\\AppData\\Local\\Android\\android-sdk\\platform-tools;C:\\Program Files\\PostgreSQL\\9.3\\bin;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files\\MySQL\\MySQL Server 5.6\\bin;C:\\Program Files\\TortoiseGit\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win64)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '59913'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=sys-caev%2Fcreate'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=sys-caev%2Fcreate'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1429767341.311
+    'REQUEST_TIME' => 1429767341
+]
+2015-04-23 01:06:05 [127.0.0.1][-][-][error][yii\i18n\PhpMessageSource::loadMessages] The message file for category 'modules/user-management/back' does not exist: C:\Apache24\htdocs\rnce/vendor/webvimark/module-user-management/messages/es-VE/back.php Fallback file does not exist as well: C:\Apache24\htdocs\rnce/vendor/webvimark/module-user-management/messages/es/back.php
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\UserManagementModule.php:199
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\UserManagementModule.php:166
+    in C:\Apache24\htdocs\rnce\frontend\views\layouts\main.php:96
+2015-04-23 01:06:04 [127.0.0.1][-][-][info][application] $_GET = [
+    'r' => 'sys-caev/create'
+]
+
+$_POST = [
+    '_csrf' => 'NE9qcmlSdlcCDkceJxQsYVJ2EkYlGxsSRx0AJyEmPAhSBz8qXj8hFQ=='
+    'SysCaev' => [
+        'grupo' => 'adsf'
+        'denominacion' => 'adsf'
+        'sys_status' => '1'
+        'sys_creado_el' => '2015-05-01'
+        'sys_actualizado_el' => '2015-05-01'
+        'sys_finalizado_el' => '2015-05-01'
+    ]
+]
+
+$_COOKIE = [
+    '_ga' => 'GA1.1.1861192029.1415307511'
+    'language' => '30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s:2:\"en\";'
+    'PHPSESSID' => 'p91d40gen5re4h39qh2ivtgcd1'
+    '_csrf' => '79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"6A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__returnUrl' => '/rnce/frontend/web/index.php?r=user-management%2Fauth%2Fregistration'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://localhost/rnce/frontend/web/index.php?r=sys-caev%2Fcreate'
+    'HTTP_COOKIE' => '_ga=GA1.1.1861192029.1415307511; language=30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s%3A2%3A%22en%22%3B; PHPSESSID=p91d40gen5re4h39qh2ivtgcd1; _csrf=79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%226A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB%22%3B%7D'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'CONTENT_LENGTH' => '296'
+    'PATH' => 'C:\\oraclexe\\app\\oracle\\product\\11.2.0\\server\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\php;C:\\Apache24;C:\\Apache24\\bin;C:\\Users\\Marcos\\AppData\\Local\\Android\\android-sdk\\platform-tools;C:\\Program Files\\PostgreSQL\\9.3\\bin;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files\\MySQL\\MySQL Server 5.6\\bin;C:\\Program Files\\TortoiseGit\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win64)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '59918'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => 'r=sys-caev%2Fcreate'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=sys-caev%2Fcreate'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1429767364.98
+    'REQUEST_TIME' => 1429767364
+]
+2015-04-23 01:09:23 [127.0.0.1][-][-][error][yii\i18n\PhpMessageSource::loadMessages] The message file for category 'modules/user-management/back' does not exist: C:\Apache24\htdocs\rnce/vendor/webvimark/module-user-management/messages/es-VE/back.php Fallback file does not exist as well: C:\Apache24\htdocs\rnce/vendor/webvimark/module-user-management/messages/es/back.php
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\UserManagementModule.php:199
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\UserManagementModule.php:166
+    in C:\Apache24\htdocs\rnce\frontend\views\layouts\main.php:96
+2015-04-23 01:09:23 [127.0.0.1][-][-][info][application] $_GET = [
+    'r' => 'sys-caev/create'
+]
+
+$_POST = [
+    '_csrf' => 'NE9qcmlSdlcCDkceJxQsYVJ2EkYlGxsSRx0AJyEmPAhSBz8qXj8hFQ=='
+    'SysCaev' => [
+        'grupo' => 'adsf'
+        'denominacion' => 'adsf'
+        'sys_status' => '1'
+        'sys_creado_el' => '2015-05-01'
+        'sys_actualizado_el' => '2015-05-01'
+        'sys_finalizado_el' => '2015-05-01'
+    ]
+]
+
+$_COOKIE = [
+    '_ga' => 'GA1.1.1861192029.1415307511'
+    'language' => '30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s:2:\"en\";'
+    'PHPSESSID' => 'p91d40gen5re4h39qh2ivtgcd1'
+    '_csrf' => '79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"6A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__returnUrl' => '/rnce/frontend/web/index.php?r=user-management%2Fauth%2Fregistration'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://localhost/rnce/frontend/web/index.php?r=sys-caev%2Fcreate'
+    'HTTP_COOKIE' => '_ga=GA1.1.1861192029.1415307511; language=30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s%3A2%3A%22en%22%3B; PHPSESSID=p91d40gen5re4h39qh2ivtgcd1; _csrf=79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%226A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB%22%3B%7D'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'CONTENT_LENGTH' => '296'
+    'PATH' => 'C:\\oraclexe\\app\\oracle\\product\\11.2.0\\server\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\php;C:\\Apache24;C:\\Apache24\\bin;C:\\Users\\Marcos\\AppData\\Local\\Android\\android-sdk\\platform-tools;C:\\Program Files\\PostgreSQL\\9.3\\bin;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files\\MySQL\\MySQL Server 5.6\\bin;C:\\Program Files\\TortoiseGit\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win64)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '59947'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => 'r=sys-caev%2Fcreate'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=sys-caev%2Fcreate'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1429767563.455
+    'REQUEST_TIME' => 1429767563
+]
+2015-04-23 01:09:27 [127.0.0.1][-][-][error][yii\i18n\PhpMessageSource::loadMessages] The message file for category 'modules/user-management/back' does not exist: C:\Apache24\htdocs\rnce/vendor/webvimark/module-user-management/messages/es-VE/back.php Fallback file does not exist as well: C:\Apache24\htdocs\rnce/vendor/webvimark/module-user-management/messages/es/back.php
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\UserManagementModule.php:199
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\UserManagementModule.php:166
+    in C:\Apache24\htdocs\rnce\frontend\views\layouts\main.php:96
+2015-04-23 01:09:26 [127.0.0.1][-][-][info][application] $_GET = [
+    'r' => 'sys-caev/create'
+]
+
+$_POST = [
+    '_csrf' => 'YVB3LnRUT25XEVpCOhIVWAdpDxo4HSIrEgIdezwgBTEHGCJ2QzkYLA=='
+    'SysCaev' => [
+        'grupo' => 'adsf'
+        'denominacion' => 'adsf'
+        'sys_status' => '1'
+        'sys_creado_el' => '2015-05-01'
+        'sys_actualizado_el' => '2015-05-01'
+        'sys_finalizado_el' => '2015-05-01'
+    ]
+]
+
+$_COOKIE = [
+    '_ga' => 'GA1.1.1861192029.1415307511'
+    'language' => '30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s:2:\"en\";'
+    'PHPSESSID' => 'p91d40gen5re4h39qh2ivtgcd1'
+    '_csrf' => '79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"6A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__returnUrl' => '/rnce/frontend/web/index.php?r=user-management%2Fauth%2Fregistration'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://localhost/rnce/frontend/web/index.php?r=sys-caev%2Fcreate'
+    'HTTP_COOKIE' => '_ga=GA1.1.1861192029.1415307511; language=30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s%3A2%3A%22en%22%3B; PHPSESSID=p91d40gen5re4h39qh2ivtgcd1; _csrf=79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%226A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB%22%3B%7D'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'CONTENT_LENGTH' => '296'
+    'PATH' => 'C:\\oraclexe\\app\\oracle\\product\\11.2.0\\server\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\php;C:\\Apache24;C:\\Apache24\\bin;C:\\Users\\Marcos\\AppData\\Local\\Android\\android-sdk\\platform-tools;C:\\Program Files\\PostgreSQL\\9.3\\bin;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files\\MySQL\\MySQL Server 5.6\\bin;C:\\Program Files\\TortoiseGit\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win64)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '59947'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => 'r=sys-caev%2Fcreate'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=sys-caev%2Fcreate'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1429767566.88
+    'REQUEST_TIME' => 1429767566
+]
+2015-04-23 01:10:27 [127.0.0.1][-][-][error][yii\i18n\PhpMessageSource::loadMessages] The message file for category 'app' does not exist: C:\Apache24\htdocs\rnce\frontend/messages/es-VE/app.php Fallback file does not exist as well: C:\Apache24\htdocs\rnce\frontend/messages/es/app.php
+    in C:\Apache24\htdocs\rnce\frontend\views\sys-caev\create.php:9
+    in C:\Apache24\htdocs\rnce\frontend\controllers\SysCaevController.php:70
+2015-04-23 01:10:27 [127.0.0.1][-][-][error][yii\i18n\PhpMessageSource::loadMessages] The message file for category 'modules/user-management/back' does not exist: C:\Apache24\htdocs\rnce/vendor/webvimark/module-user-management/messages/es-VE/back.php Fallback file does not exist as well: C:\Apache24\htdocs\rnce/vendor/webvimark/module-user-management/messages/es/back.php
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\UserManagementModule.php:199
+    in C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\UserManagementModule.php:166
+    in C:\Apache24\htdocs\rnce\frontend\views\layouts\main.php:96
+2015-04-23 01:10:27 [127.0.0.1][-][-][info][application] $_GET = [
+    'r' => 'sys-caev/create'
+]
+
+$_POST = [
+    '_csrf' => 'YVB3LnRUT25XEVpCOhIVWAdpDxo4HSIrEgIdezwgBTEHGCJ2QzkYLA=='
+    'SysCaev' => [
+        'grupo' => 'adsf'
+        'denominacion' => 'adsf'
+        'sys_status' => '1'
+        'sys_creado_el' => '2015-05-01'
+        'sys_actualizado_el' => '2015-05-01'
+        'sys_finalizado_el' => '2015-05-01'
+    ]
+]
+
+$_COOKIE = [
+    '_ga' => 'GA1.1.1861192029.1415307511'
+    'language' => '30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s:2:\"en\";'
+    'PHPSESSID' => 'p91d40gen5re4h39qh2ivtgcd1'
+    '_csrf' => '79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"6A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__returnUrl' => '/rnce/frontend/web/index.php?r=user-management%2Fauth%2Fregistration'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://localhost/rnce/frontend/web/index.php?r=sys-caev%2Fcreate'
+    'HTTP_COOKIE' => '_ga=GA1.1.1861192029.1415307511; language=30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s%3A2%3A%22en%22%3B; PHPSESSID=p91d40gen5re4h39qh2ivtgcd1; _csrf=79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%226A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB%22%3B%7D'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'CONTENT_LENGTH' => '296'
+    'PATH' => 'C:\\oraclexe\\app\\oracle\\product\\11.2.0\\server\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\php;C:\\Apache24;C:\\Apache24\\bin;C:\\Users\\Marcos\\AppData\\Local\\Android\\android-sdk\\platform-tools;C:\\Program Files\\PostgreSQL\\9.3\\bin;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files\\MySQL\\MySQL Server 5.6\\bin;C:\\Program Files\\TortoiseGit\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win64)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '59958'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => 'r=sys-caev%2Fcreate'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=sys-caev%2Fcreate'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1429767627.615
+    'REQUEST_TIME' => 1429767627
+]
+2015-04-23 01:21:29 [127.0.0.1][-][-][error][yii\base\ErrorException:1] exception 'yii\base\ErrorException' with message 'Class 'frontend\controllers\Exception' not found' in C:\Apache24\htdocs\rnce\frontend\controllers\SysCaevController.php:64
+Stack trace:
+#0 [internal function]: yii\base\ErrorHandler->handleFatalError()
+#1 {main}
+2015-04-23 01:21:29 [127.0.0.1][-][-][info][application] $_GET = [
+    'r' => 'sys-caev/create'
+]
+
+$_POST = [
+    '_csrf' => 'UlBwVFNxZnRkEV04HTc8QjRpCGAfOAsxIQIaARsFLCs0GCUMZBwxNg=='
+    'SysCaev' => [
+        'grupo' => 'adsf'
+        'denominacion' => 'adsf'
+        'sys_status' => '1'
+        'sys_creado_el' => '2015-05-01uadsfasdf'
+        'sys_actualizado_el' => '2015-05-01'
+        'sys_finalizado_el' => '2015-05-01'
+    ]
+]
+
+$_COOKIE = [
+    '_ga' => 'GA1.1.1861192029.1415307511'
+    'language' => '30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s:2:\"en\";'
+    'PHPSESSID' => 'p91d40gen5re4h39qh2ivtgcd1'
+    '_csrf' => '79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"6A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB\";}'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://localhost/rnce/frontend/web/index.php?r=sys-caev%2Fcreate'
+    'HTTP_COOKIE' => '_ga=GA1.1.1861192029.1415307511; language=30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s%3A2%3A%22en%22%3B; PHPSESSID=p91d40gen5re4h39qh2ivtgcd1; _csrf=79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%226A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB%22%3B%7D'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'CONTENT_LENGTH' => '305'
+    'PATH' => 'C:\\oraclexe\\app\\oracle\\product\\11.2.0\\server\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\php;C:\\Apache24;C:\\Apache24\\bin;C:\\Users\\Marcos\\AppData\\Local\\Android\\android-sdk\\platform-tools;C:\\Program Files\\PostgreSQL\\9.3\\bin;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files\\MySQL\\MySQL Server 5.6\\bin;C:\\Program Files\\TortoiseGit\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win64)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '60107'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => 'r=sys-caev%2Fcreate'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=sys-caev%2Fcreate'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1429768289.719
+    'REQUEST_TIME' => 1429768289
+]
+2015-04-23 01:21:59 [127.0.0.1][-][-][error][yii\base\ErrorException:1] exception 'yii\base\ErrorException' with message 'Class 'frontend\controllers\HttpException' not found' in C:\Apache24\htdocs\rnce\frontend\controllers\SysCaevController.php:64
+Stack trace:
+#0 [internal function]: yii\base\ErrorHandler->handleFatalError()
+#1 {main}
+2015-04-23 01:21:59 [127.0.0.1][-][-][info][application] $_GET = [
+    'r' => 'sys-caev/create'
+]
+
+$_POST = [
+    '_csrf' => 'UlBwVFNxZnRkEV04HTc8QjRpCGAfOAsxIQIaARsFLCs0GCUMZBwxNg=='
+    'SysCaev' => [
+        'grupo' => 'adsf'
+        'denominacion' => 'adsf'
+        'sys_status' => '1'
+        'sys_creado_el' => '2015-05-01uadsfasdf'
+        'sys_actualizado_el' => '2015-05-01'
+        'sys_finalizado_el' => '2015-05-01'
+    ]
+]
+
+$_COOKIE = [
+    '_ga' => 'GA1.1.1861192029.1415307511'
+    'language' => '30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s:2:\"en\";'
+    'PHPSESSID' => 'p91d40gen5re4h39qh2ivtgcd1'
+    '_csrf' => '79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"6A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB\";}'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://localhost/rnce/frontend/web/index.php?r=sys-caev%2Fcreate'
+    'HTTP_COOKIE' => '_ga=GA1.1.1861192029.1415307511; language=30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s%3A2%3A%22en%22%3B; PHPSESSID=p91d40gen5re4h39qh2ivtgcd1; _csrf=79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%226A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB%22%3B%7D'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'CONTENT_LENGTH' => '305'
+    'PATH' => 'C:\\oraclexe\\app\\oracle\\product\\11.2.0\\server\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\php;C:\\Apache24;C:\\Apache24\\bin;C:\\Users\\Marcos\\AppData\\Local\\Android\\android-sdk\\platform-tools;C:\\Program Files\\PostgreSQL\\9.3\\bin;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files\\MySQL\\MySQL Server 5.6\\bin;C:\\Program Files\\TortoiseGit\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win64)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '60110'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => 'r=sys-caev%2Fcreate'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=sys-caev%2Fcreate'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1429768319.299
+    'REQUEST_TIME' => 1429768319
+]
+2015-04-23 01:23:31 [127.0.0.1][-][-][error][yii\base\ErrorException:1] exception 'yii\base\ErrorException' with message 'Class 'frontend\controllers\HttpException' not found' in C:\Apache24\htdocs\rnce\frontend\controllers\SysCaevController.php:64
+Stack trace:
+#0 [internal function]: yii\base\ErrorHandler->handleFatalError()
+#1 {main}
+2015-04-23 01:23:31 [127.0.0.1][-][-][info][application] $_GET = [
+    'r' => 'sys-caev/create'
+]
+
+$_POST = [
+    '_csrf' => 'UlBwVFNxZnRkEV04HTc8QjRpCGAfOAsxIQIaARsFLCs0GCUMZBwxNg=='
+    'SysCaev' => [
+        'grupo' => 'adsf'
+        'denominacion' => 'adsf'
+        'sys_status' => '1'
+        'sys_creado_el' => '2015-05-01uadsfasdf'
+        'sys_actualizado_el' => '2015-05-01'
+        'sys_finalizado_el' => '2015-05-01'
+    ]
+]
+
+$_COOKIE = [
+    '_ga' => 'GA1.1.1861192029.1415307511'
+    'language' => '30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s:2:\"en\";'
+    'PHPSESSID' => 'p91d40gen5re4h39qh2ivtgcd1'
+    '_csrf' => '79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"6A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB\";}'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://localhost/rnce/frontend/web/index.php?r=sys-caev%2Fcreate'
+    'HTTP_COOKIE' => '_ga=GA1.1.1861192029.1415307511; language=30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s%3A2%3A%22en%22%3B; PHPSESSID=p91d40gen5re4h39qh2ivtgcd1; _csrf=79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%226A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB%22%3B%7D'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'CONTENT_LENGTH' => '305'
+    'PATH' => 'C:\\oraclexe\\app\\oracle\\product\\11.2.0\\server\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\php;C:\\Apache24;C:\\Apache24\\bin;C:\\Users\\Marcos\\AppData\\Local\\Android\\android-sdk\\platform-tools;C:\\Program Files\\PostgreSQL\\9.3\\bin;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files\\MySQL\\MySQL Server 5.6\\bin;C:\\Program Files\\TortoiseGit\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win64)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '60208'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => 'r=sys-caev%2Fcreate'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=sys-caev%2Fcreate'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1429768411.424
+    'REQUEST_TIME' => 1429768411
+]
+2015-04-23 01:23:46 [127.0.0.1][-][-][error][yii\base\InvalidConfigException] exception 'yii\base\InvalidConfigException' with message 'User::identityClass must be set.' in C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\web\User.php:151
+Stack trace:
+#0 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Object.php(107): yii\web\User->init()
+#1 [internal function]: yii\base\Object->__construct(Array)
+#2 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\di\Container.php(366): ReflectionClass->newInstanceArgs(Array)
+#3 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\di\Container.php(151): yii\di\Container->build('yii\\web\\User', Array, Array)
+#4 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\BaseYii.php(344): yii\di\Container->get('yii\\web\\User', Array, Array)
+#5 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\di\ServiceLocator.php(133): yii\BaseYii::createObject(Array)
+#6 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\di\ServiceLocator.php(71): yii\di\ServiceLocator->get('user')
+#7 C:\Apache24\htdocs\rnce\frontend\views\layouts\main.php(63): yii\di\ServiceLocator->__get('user')
+#8 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\View.php(325): require('C:\\Apache24\\htd...')
+#9 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\View.php(247): yii\base\View->renderPhpFile('C:\\Apache24\\htd...', Array)
+#10 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Controller.php(382): yii\base\View->renderFile('C:\\Apache24\\htd...', Array, Object(frontend\controllers\SysCaevController))
+#11 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Controller.php(368): yii\base\Controller->renderContent('<div class="sys...')
+#12 C:\Apache24\htdocs\rnce\frontend\controllers\SysCaevController.php(70): yii\base\Controller->render('create', Array)
+#13 [internal function]: frontend\controllers\SysCaevController->actionCreate()
+#14 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\InlineAction.php(55): call_user_func_array(Array, Array)
+#15 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Controller.php(151): yii\base\InlineAction->runWithParams(Array)
+#16 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Module.php(455): yii\base\Controller->runAction('create', Array)
+#17 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\web\Application.php(83): yii\base\Module->runAction('sys-caev/create', Array)
+#18 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#19 C:\Apache24\htdocs\rnce\frontend\web\index.php(18): yii\base\Application->run()
+#20 {main}
+2015-04-23 01:23:45 [127.0.0.1][-][-][info][application] $_GET = [
+    'r' => 'sys-caev/create'
+]
+
+$_POST = [
+    '_csrf' => 'UlBwVFNxZnRkEV04HTc8QjRpCGAfOAsxIQIaARsFLCs0GCUMZBwxNg=='
+    'SysCaev' => [
+        'grupo' => 'adsf'
+        'denominacion' => 'adsf'
+        'sys_status' => '1'
+        'sys_creado_el' => '2015-05-01uadsfasdf'
+        'sys_actualizado_el' => '2015-05-01'
+        'sys_finalizado_el' => '2015-05-01'
+    ]
+]
+
+$_COOKIE = [
+    '_ga' => 'GA1.1.1861192029.1415307511'
+    'language' => '30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s:2:\"en\";'
+    'PHPSESSID' => 'p91d40gen5re4h39qh2ivtgcd1'
+    '_csrf' => '79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"6A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB\";}'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://localhost/rnce/frontend/web/index.php?r=sys-caev%2Fcreate'
+    'HTTP_COOKIE' => '_ga=GA1.1.1861192029.1415307511; language=30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s%3A2%3A%22en%22%3B; PHPSESSID=p91d40gen5re4h39qh2ivtgcd1; _csrf=79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%226A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB%22%3B%7D'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'CONTENT_LENGTH' => '305'
+    'PATH' => 'C:\\oraclexe\\app\\oracle\\product\\11.2.0\\server\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\php;C:\\Apache24;C:\\Apache24\\bin;C:\\Users\\Marcos\\AppData\\Local\\Android\\android-sdk\\platform-tools;C:\\Program Files\\PostgreSQL\\9.3\\bin;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files\\MySQL\\MySQL Server 5.6\\bin;C:\\Program Files\\TortoiseGit\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win64)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '60210'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => 'r=sys-caev%2Fcreate'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=sys-caev%2Fcreate'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1429768425.906
+    'REQUEST_TIME' => 1429768425
+]
+2015-04-23 01:24:20 [127.0.0.1][-][-][error][yii\base\UnknownPropertyException] exception 'yii\base\UnknownPropertyException' with message 'Getting unknown property: yii\web\User::isSuperadmin' in C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Component.php:143
+Stack trace:
+#0 C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\models\User.php(183): yii\base\Component->__get('isSuperadmin')
+#1 C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\components\GhostMenu.php(37): webvimark\modules\UserManagement\models\User::canRoute(Array)
+#2 C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\components\GhostMenu.php(43): webvimark\modules\UserManagement\components\GhostMenu->ensureVisibility(Array)
+#3 C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\components\GhostMenu.php(21): webvimark\modules\UserManagement\components\GhostMenu->ensureVisibility(Array)
+#4 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Object.php(107): webvimark\modules\UserManagement\components\GhostMenu->init()
+#5 [internal function]: yii\base\Object->__construct(Array)
+#6 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\di\Container.php(372): ReflectionClass->newInstanceArgs(Array)
+#7 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\di\Container.php(151): yii\di\Container->build('webvimark\\modul...', Array, Array)
+#8 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\BaseYii.php(344): yii\di\Container->get('webvimark\\modul...', Array, Array)
+#9 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Widget.php(95): yii\BaseYii::createObject(Array)
+#10 C:\Apache24\htdocs\rnce\frontend\views\layouts\main.php(110): yii\base\Widget::widget(Array)
+#11 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\View.php(325): require('C:\\Apache24\\htd...')
+#12 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\View.php(247): yii\base\View->renderPhpFile('C:\\Apache24\\htd...', Array)
+#13 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Controller.php(382): yii\base\View->renderFile('C:\\Apache24\\htd...', Array, Object(frontend\controllers\SysCaevController))
+#14 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Controller.php(368): yii\base\Controller->renderContent('<div class="sys...')
+#15 C:\Apache24\htdocs\rnce\frontend\controllers\SysCaevController.php(70): yii\base\Controller->render('create', Array)
+#16 [internal function]: frontend\controllers\SysCaevController->actionCreate()
+#17 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\InlineAction.php(55): call_user_func_array(Array, Array)
+#18 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Controller.php(151): yii\base\InlineAction->runWithParams(Array)
+#19 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Module.php(455): yii\base\Controller->runAction('create', Array)
+#20 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\web\Application.php(83): yii\base\Module->runAction('sys-caev/create', Array)
+#21 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#22 C:\Apache24\htdocs\rnce\frontend\web\index.php(18): yii\base\Application->run()
+#23 {main}
+2015-04-23 01:24:20 [127.0.0.1][-][-][info][application] $_GET = [
+    'r' => 'sys-caev/create'
+]
+
+$_POST = [
+    '_csrf' => 'UlBwVFNxZnRkEV04HTc8QjRpCGAfOAsxIQIaARsFLCs0GCUMZBwxNg=='
+    'SysCaev' => [
+        'grupo' => 'adsf'
+        'denominacion' => 'adsf'
+        'sys_status' => '1'
+        'sys_creado_el' => '2015-05-01uadsfasdf'
+        'sys_actualizado_el' => '2015-05-01'
+        'sys_finalizado_el' => '2015-05-01'
+    ]
+]
+
+$_COOKIE = [
+    '_ga' => 'GA1.1.1861192029.1415307511'
+    'language' => '30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s:2:\"en\";'
+    'PHPSESSID' => 'p91d40gen5re4h39qh2ivtgcd1'
+    '_csrf' => '79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"6A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__returnUrl' => '/rnce/frontend/web/index.php?r=user-management%2Fauth%2Fregistration'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://localhost/rnce/frontend/web/index.php?r=sys-caev%2Fcreate'
+    'HTTP_COOKIE' => '_ga=GA1.1.1861192029.1415307511; language=30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s%3A2%3A%22en%22%3B; PHPSESSID=p91d40gen5re4h39qh2ivtgcd1; _csrf=79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%226A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB%22%3B%7D'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'CONTENT_LENGTH' => '305'
+    'PATH' => 'C:\\oraclexe\\app\\oracle\\product\\11.2.0\\server\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\php;C:\\Apache24;C:\\Apache24\\bin;C:\\Users\\Marcos\\AppData\\Local\\Android\\android-sdk\\platform-tools;C:\\Program Files\\PostgreSQL\\9.3\\bin;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files\\MySQL\\MySQL Server 5.6\\bin;C:\\Program Files\\TortoiseGit\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win64)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '60216'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => 'r=sys-caev%2Fcreate'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=sys-caev%2Fcreate'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1429768460.066
+    'REQUEST_TIME' => 1429768460
+]
+2015-04-23 01:24:46 [127.0.0.1][-][-][error][yii\base\UnknownPropertyException] exception 'yii\base\UnknownPropertyException' with message 'Getting unknown property: yii\web\User::isSuperadmin' in C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Component.php:143
+Stack trace:
+#0 C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\models\User.php(183): yii\base\Component->__get('isSuperadmin')
+#1 C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\components\GhostMenu.php(37): webvimark\modules\UserManagement\models\User::canRoute(Array)
+#2 C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\components\GhostMenu.php(43): webvimark\modules\UserManagement\components\GhostMenu->ensureVisibility(Array)
+#3 C:\Apache24\htdocs\rnce\vendor\webvimark\module-user-management\components\GhostMenu.php(21): webvimark\modules\UserManagement\components\GhostMenu->ensureVisibility(Array)
+#4 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Object.php(107): webvimark\modules\UserManagement\components\GhostMenu->init()
+#5 [internal function]: yii\base\Object->__construct(Array)
+#6 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\di\Container.php(372): ReflectionClass->newInstanceArgs(Array)
+#7 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\di\Container.php(151): yii\di\Container->build('webvimark\\modul...', Array, Array)
+#8 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\BaseYii.php(344): yii\di\Container->get('webvimark\\modul...', Array, Array)
+#9 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Widget.php(95): yii\BaseYii::createObject(Array)
+#10 C:\Apache24\htdocs\rnce\frontend\views\layouts\main.php(110): yii\base\Widget::widget(Array)
+#11 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\View.php(325): require('C:\\Apache24\\htd...')
+#12 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\View.php(247): yii\base\View->renderPhpFile('C:\\Apache24\\htd...', Array)
+#13 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Controller.php(382): yii\base\View->renderFile('C:\\Apache24\\htd...', Array, Object(frontend\controllers\SysCaevController))
+#14 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Controller.php(368): yii\base\Controller->renderContent('<div class="sys...')
+#15 C:\Apache24\htdocs\rnce\frontend\controllers\SysCaevController.php(70): yii\base\Controller->render('create', Array)
+#16 [internal function]: frontend\controllers\SysCaevController->actionCreate()
+#17 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\InlineAction.php(55): call_user_func_array(Array, Array)
+#18 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Controller.php(151): yii\base\InlineAction->runWithParams(Array)
+#19 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Module.php(455): yii\base\Controller->runAction('create', Array)
+#20 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\web\Application.php(83): yii\base\Module->runAction('sys-caev/create', Array)
+#21 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#22 C:\Apache24\htdocs\rnce\frontend\web\index.php(18): yii\base\Application->run()
+#23 {main}
+2015-04-23 01:24:46 [127.0.0.1][-][-][info][application] $_GET = [
+    'r' => 'sys-caev/create'
+]
+
+$_POST = [
+    '_csrf' => 'UlBwVFNxZnRkEV04HTc8QjRpCGAfOAsxIQIaARsFLCs0GCUMZBwxNg=='
+    'SysCaev' => [
+        'grupo' => 'adsf'
+        'denominacion' => 'adsf'
+        'sys_status' => '1'
+        'sys_creado_el' => '2015-05-01uadsfasdf'
+        'sys_actualizado_el' => '2015-05-01'
+        'sys_finalizado_el' => '2015-05-01'
+    ]
+]
+
+$_COOKIE = [
+    '_ga' => 'GA1.1.1861192029.1415307511'
+    'language' => '30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s:2:\"en\";'
+    'PHPSESSID' => 'p91d40gen5re4h39qh2ivtgcd1'
+    '_csrf' => '79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"6A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__returnUrl' => '/rnce/frontend/web/index.php?r=user-management%2Fauth%2Fregistration'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://localhost/rnce/frontend/web/index.php?r=sys-caev%2Fcreate'
+    'HTTP_COOKIE' => '_ga=GA1.1.1861192029.1415307511; language=30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s%3A2%3A%22en%22%3B; PHPSESSID=p91d40gen5re4h39qh2ivtgcd1; _csrf=79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%226A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB%22%3B%7D'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'CONTENT_LENGTH' => '305'
+    'PATH' => 'C:\\oraclexe\\app\\oracle\\product\\11.2.0\\server\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\php;C:\\Apache24;C:\\Apache24\\bin;C:\\Users\\Marcos\\AppData\\Local\\Android\\android-sdk\\platform-tools;C:\\Program Files\\PostgreSQL\\9.3\\bin;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files\\MySQL\\MySQL Server 5.6\\bin;C:\\Program Files\\TortoiseGit\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win64)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '60223'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => 'r=sys-caev%2Fcreate'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=sys-caev%2Fcreate'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1429768486.532
+    'REQUEST_TIME' => 1429768486
+]
+2015-04-23 01:46:57 [127.0.0.1][-][-][error][yii\base\ErrorException:4] exception 'yii\base\ErrorException' with message 'syntax error, unexpected 'print_r' (T_STRING)' in C:\Apache24\htdocs\rnce\frontend\controllers\SysCaevController.php:65
+Stack trace:
+#0 [internal function]: yii\base\ErrorHandler->handleFatalError()
+#1 {main}
+2015-04-23 01:46:57 [127.0.0.1][-][-][info][application] $_GET = [
+    'r' => 'sys-caev/create'
+]
+
+$_POST = [
+    '_csrf' => 'aFJhVEhGaHheE0w4BgAyTg5rGWAEDwU9GwALAQAyIicOGjQMfys/Og=='
+    'SysCaev' => [
+        'grupo' => 'dsf'
+        'denominacion' => 'adsf'
+        'sys_status' => '1'
+        'sys_creado_el' => '2015-05-01'
+        'sys_actualizado_el' => '2015-05-01'
+        'sys_finalizado_el' => '2015-05-01'
+    ]
+]
+
+$_COOKIE = [
+    '_ga' => 'GA1.1.1861192029.1415307511'
+    'language' => '30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s:2:\"en\";'
+    'PHPSESSID' => 'p91d40gen5re4h39qh2ivtgcd1'
+    '_csrf' => '79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"6A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB\";}'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://localhost/rnce/frontend/web/index.php?r=sys-caev%2Fcreate'
+    'HTTP_COOKIE' => '_ga=GA1.1.1861192029.1415307511; language=30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s%3A2%3A%22en%22%3B; PHPSESSID=p91d40gen5re4h39qh2ivtgcd1; _csrf=79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%226A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB%22%3B%7D'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'CONTENT_LENGTH' => '297'
+    'PATH' => 'C:\\oraclexe\\app\\oracle\\product\\11.2.0\\server\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\php;C:\\Apache24;C:\\Apache24\\bin;C:\\Users\\Marcos\\AppData\\Local\\Android\\android-sdk\\platform-tools;C:\\Program Files\\PostgreSQL\\9.3\\bin;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files\\MySQL\\MySQL Server 5.6\\bin;C:\\Program Files\\TortoiseGit\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win64)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '60363'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => 'r=sys-caev%2Fcreate'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=sys-caev%2Fcreate'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1429769817.948
+    'REQUEST_TIME' => 1429769817
+]
+2015-04-23 01:47:27 [127.0.0.1][-][-][error][yii\base\ErrorException:4] exception 'yii\base\ErrorException' with message 'syntax error, unexpected 'print_r' (T_STRING)' in C:\Apache24\htdocs\rnce\frontend\controllers\SysCaevController.php:65
+Stack trace:
+#0 [internal function]: yii\base\ErrorHandler->handleFatalError()
+#1 {main}
+2015-04-23 01:47:27 [127.0.0.1][-][-][info][application] $_GET = [
+    'r' => 'sys-caev/create'
+]
+
+$_POST = [
+    '_csrf' => 'aFJhVEhGaHheE0w4BgAyTg5rGWAEDwU9GwALAQAyIicOGjQMfys/Og=='
+    'SysCaev' => [
+        'grupo' => 'dsf'
+        'denominacion' => 'adsf'
+        'sys_status' => '1'
+        'sys_creado_el' => '2015-05-01'
+        'sys_actualizado_el' => '2015-05-01'
+        'sys_finalizado_el' => '2015-05-01'
+    ]
+]
+
+$_COOKIE = [
+    '_ga' => 'GA1.1.1861192029.1415307511'
+    'language' => '30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s:2:\"en\";'
+    'PHPSESSID' => 'p91d40gen5re4h39qh2ivtgcd1'
+    '_csrf' => '79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"6A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB\";}'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://localhost/rnce/frontend/web/index.php?r=sys-caev%2Fcreate'
+    'HTTP_COOKIE' => '_ga=GA1.1.1861192029.1415307511; language=30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s%3A2%3A%22en%22%3B; PHPSESSID=p91d40gen5re4h39qh2ivtgcd1; _csrf=79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%226A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB%22%3B%7D'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'CONTENT_LENGTH' => '297'
+    'PATH' => 'C:\\oraclexe\\app\\oracle\\product\\11.2.0\\server\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\php;C:\\Apache24;C:\\Apache24\\bin;C:\\Users\\Marcos\\AppData\\Local\\Android\\android-sdk\\platform-tools;C:\\Program Files\\PostgreSQL\\9.3\\bin;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files\\MySQL\\MySQL Server 5.6\\bin;C:\\Program Files\\TortoiseGit\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win64)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '60367'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => 'r=sys-caev%2Fcreate'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=sys-caev%2Fcreate'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1429769847.795
+    'REQUEST_TIME' => 1429769847
+]
+2015-04-23 01:54:40 [127.0.0.1][-][-][error][yii\base\ErrorException:2048] exception 'yii\base\ErrorException' with message 'Declaration of common\components\BaseActiveRecord::beforeSave() should be compatible with yii\db\BaseActiveRecord::beforeSave($insert)' in C:\Apache24\htdocs\rnce\common\components\BaseActiveRecord.php:8
+Stack trace:
+#0 C:\Apache24\htdocs\rnce\common\components\BaseActiveRecord.php(8): yii\base\ErrorHandler->handleError(2048, 'Declaration of ...', 'C:\\Apache24\\htd...', 8, Array)
+#1 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\BaseYii.php(288): include('C:\\Apache24\\htd...')
+#2 [internal function]: yii\BaseYii::autoload('common\\componen...')
+#3 C:\Apache24\htdocs\rnce\common\models\p\SysCaev.php(21): spl_autoload_call('common\\componen...')
+#4 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\BaseYii.php(288): include('C:\\Apache24\\htd...')
+#5 [internal function]: yii\BaseYii::autoload('common\\models\\p...')
+#6 C:\Apache24\htdocs\rnce\frontend\controllers\SysCaevController.php(115): spl_autoload_call('common\\models\\p...')
+#7 C:\Apache24\htdocs\rnce\frontend\controllers\SysCaevController.php(82): frontend\controllers\SysCaevController->findModel('1')
+#8 [internal function]: frontend\controllers\SysCaevController->actionUpdate('1')
+#9 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\InlineAction.php(55): call_user_func_array(Array, Array)
+#10 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Controller.php(151): yii\base\InlineAction->runWithParams(Array)
+#11 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Module.php(455): yii\base\Controller->runAction('update', Array)
+#12 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\web\Application.php(83): yii\base\Module->runAction('sys-caev/update', Array)
+#13 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#14 C:\Apache24\htdocs\rnce\frontend\web\index.php(18): yii\base\Application->run()
+#15 {main}
+2015-04-23 01:54:40 [127.0.0.1][-][-][info][application] $_GET = [
+    'r' => 'sys-caev/update'
+    'id' => '1'
+]
+
+$_POST = [
+    '_csrf' => 'Q3ZnUlVUUzV1N0o.GxIJAyVPH2YZHT5wMCQNBx0gGWolPjIKYjkEdw=='
+    'SysCaev' => [
+        'grupo' => 'dsf'
+        'denominacion' => 'dfghdfghdfgh'
+        'sys_status' => '1'
+        'sys_creado_el' => '2015-05-01 00:00:00-04:30'
+        'sys_actualizado_el' => '2015-04-23'
+        'sys_finalizado_el' => '2015-05-01 00:00:00-04:30'
+    ]
+]
+
+$_COOKIE = [
+    '_ga' => 'GA1.1.1861192029.1415307511'
+    'language' => '30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s:2:\"en\";'
+    'PHPSESSID' => 'p91d40gen5re4h39qh2ivtgcd1'
+    '_csrf' => '79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"6A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB\";}'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://localhost/rnce/frontend/web/index.php?r=sys-caev%2Fupdate&id=1'
+    'HTTP_COOKIE' => '_ga=GA1.1.1861192029.1415307511; language=30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s%3A2%3A%22en%22%3B; PHPSESSID=p91d40gen5re4h39qh2ivtgcd1; _csrf=79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%226A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB%22%3B%7D'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'CONTENT_LENGTH' => '345'
+    'PATH' => 'C:\\oraclexe\\app\\oracle\\product\\11.2.0\\server\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\php;C:\\Apache24;C:\\Apache24\\bin;C:\\Users\\Marcos\\AppData\\Local\\Android\\android-sdk\\platform-tools;C:\\Program Files\\PostgreSQL\\9.3\\bin;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files\\MySQL\\MySQL Server 5.6\\bin;C:\\Program Files\\TortoiseGit\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win64)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '60448'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => 'r=sys-caev%2Fupdate&id=1'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=sys-caev%2Fupdate&id=1'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1429770280.154
+    'REQUEST_TIME' => 1429770280
+]
+2015-04-23 01:55:45 [127.0.0.1][-][-][error][yii\base\ErrorException:2048] exception 'yii\base\ErrorException' with message 'Declaration of common\components\BaseActiveRecord::beforeSave() should be compatible with yii\db\BaseActiveRecord::beforeSave($insert)' in C:\Apache24\htdocs\rnce\common\components\BaseActiveRecord.php:8
+Stack trace:
+#0 C:\Apache24\htdocs\rnce\common\components\BaseActiveRecord.php(8): yii\base\ErrorHandler->handleError(2048, 'Declaration of ...', 'C:\\Apache24\\htd...', 8, Array)
+#1 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\BaseYii.php(288): include('C:\\Apache24\\htd...')
+#2 [internal function]: yii\BaseYii::autoload('common\\componen...')
+#3 C:\Apache24\htdocs\rnce\common\models\p\SysCaev.php(21): spl_autoload_call('common\\componen...')
+#4 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\BaseYii.php(288): include('C:\\Apache24\\htd...')
+#5 [internal function]: yii\BaseYii::autoload('common\\models\\p...')
+#6 C:\Apache24\htdocs\rnce\frontend\controllers\SysCaevController.php(115): spl_autoload_call('common\\models\\p...')
+#7 C:\Apache24\htdocs\rnce\frontend\controllers\SysCaevController.php(82): frontend\controllers\SysCaevController->findModel('1')
+#8 [internal function]: frontend\controllers\SysCaevController->actionUpdate('1')
+#9 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\InlineAction.php(55): call_user_func_array(Array, Array)
+#10 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Controller.php(151): yii\base\InlineAction->runWithParams(Array)
+#11 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Module.php(455): yii\base\Controller->runAction('update', Array)
+#12 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\web\Application.php(83): yii\base\Module->runAction('sys-caev/update', Array)
+#13 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#14 C:\Apache24\htdocs\rnce\frontend\web\index.php(18): yii\base\Application->run()
+#15 {main}
+2015-04-23 01:55:45 [127.0.0.1][-][-][info][application] $_GET = [
+    'r' => 'sys-caev/update'
+    'id' => '1'
+]
+
+$_POST = [
+    '_csrf' => 'Q3ZnUlVUUzV1N0o.GxIJAyVPH2YZHT5wMCQNBx0gGWolPjIKYjkEdw=='
+    'SysCaev' => [
+        'grupo' => 'dsf'
+        'denominacion' => 'dfghdfghdfgh'
+        'sys_status' => '1'
+        'sys_creado_el' => '2015-05-01 00:00:00-04:30'
+        'sys_actualizado_el' => '2015-04-23'
+        'sys_finalizado_el' => '2015-05-01 00:00:00-04:30'
+    ]
+]
+
+$_COOKIE = [
+    '_ga' => 'GA1.1.1861192029.1415307511'
+    'language' => '30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s:2:\"en\";'
+    'PHPSESSID' => 'p91d40gen5re4h39qh2ivtgcd1'
+    '_csrf' => '79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"6A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB\";}'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://localhost/rnce/frontend/web/index.php?r=sys-caev%2Fupdate&id=1'
+    'HTTP_COOKIE' => '_ga=GA1.1.1861192029.1415307511; language=30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s%3A2%3A%22en%22%3B; PHPSESSID=p91d40gen5re4h39qh2ivtgcd1; _csrf=79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%226A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB%22%3B%7D'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'CONTENT_LENGTH' => '345'
+    'PATH' => 'C:\\oraclexe\\app\\oracle\\product\\11.2.0\\server\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\php;C:\\Apache24;C:\\Apache24\\bin;C:\\Users\\Marcos\\AppData\\Local\\Android\\android-sdk\\platform-tools;C:\\Program Files\\PostgreSQL\\9.3\\bin;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files\\MySQL\\MySQL Server 5.6\\bin;C:\\Program Files\\TortoiseGit\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win64)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '60450'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => 'r=sys-caev%2Fupdate&id=1'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=sys-caev%2Fupdate&id=1'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1429770345.572
+    'REQUEST_TIME' => 1429770345
+]
+2015-04-23 01:56:42 [127.0.0.1][-][-][error][yii\base\ErrorException:2] exception 'yii\base\ErrorException' with message 'Missing argument 1 for yii\db\BaseActiveRecord::beforeSave(), called in C:\Apache24\htdocs\rnce\common\components\BaseActiveRecord.php on line 17 and defined' in C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\db\BaseActiveRecord.php:864
+Stack trace:
+#0 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\db\BaseActiveRecord.php(864): yii\base\ErrorHandler->handleError(2, 'Missing argumen...', 'C:\\Apache24\\htd...', 864, Array)
+#1 C:\Apache24\htdocs\rnce\common\components\BaseActiveRecord.php(17): yii\db\BaseActiveRecord->beforeSave()
+#2 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\db\BaseActiveRecord.php(695): common\components\BaseActiveRecord->beforeSave(false)
+#3 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\db\ActiveRecord.php(539): yii\db\BaseActiveRecord->updateInternal(NULL)
+#4 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\db\BaseActiveRecord.php(584): yii\db\ActiveRecord->update(true, NULL)
+#5 C:\Apache24\htdocs\rnce\frontend\controllers\SysCaevController.php(84): yii\db\BaseActiveRecord->save()
+#6 [internal function]: frontend\controllers\SysCaevController->actionUpdate('1')
+#7 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\InlineAction.php(55): call_user_func_array(Array, Array)
+#8 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Controller.php(151): yii\base\InlineAction->runWithParams(Array)
+#9 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Module.php(455): yii\base\Controller->runAction('update', Array)
+#10 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\web\Application.php(83): yii\base\Module->runAction('sys-caev/update', Array)
+#11 C:\Apache24\htdocs\rnce\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#12 C:\Apache24\htdocs\rnce\frontend\web\index.php(18): yii\base\Application->run()
+#13 {main}
+2015-04-23 01:56:42 [127.0.0.1][-][-][info][application] $_GET = [
+    'r' => 'sys-caev/update'
+    'id' => '1'
+]
+
+$_POST = [
+    '_csrf' => 'Q3ZnUlVUUzV1N0o.GxIJAyVPH2YZHT5wMCQNBx0gGWolPjIKYjkEdw=='
+    'SysCaev' => [
+        'grupo' => 'dsf'
+        'denominacion' => 'dfghdfghdfgh'
+        'sys_status' => '1'
+        'sys_creado_el' => '2015-05-01 00:00:00-04:30'
+        'sys_actualizado_el' => '2015-04-23'
+        'sys_finalizado_el' => '2015-05-01 00:00:00-04:30'
+    ]
+]
+
+$_COOKIE = [
+    '_ga' => 'GA1.1.1861192029.1415307511'
+    'language' => '30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s:2:\"en\";'
+    'PHPSESSID' => 'p91d40gen5re4h39qh2ivtgcd1'
+    '_csrf' => '79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"6A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB\";}'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_REFERER' => 'http://localhost/rnce/frontend/web/index.php?r=sys-caev%2Fupdate&id=1'
+    'HTTP_COOKIE' => '_ga=GA1.1.1861192029.1415307511; language=30cdc35bafffd4821e6b0d8b9ed6cba4d89c6796s%3A2%3A%22en%22%3B; PHPSESSID=p91d40gen5re4h39qh2ivtgcd1; _csrf=79a7a4bcd246da222fa9365d051de3a75c3ee7d933fb4d638e26899b44e8b423a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%226A-lNFZ6f9x4LImEsRjUHtJ_fHUX7mWB%22%3B%7D'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'CONTENT_LENGTH' => '345'
+    'PATH' => 'C:\\oraclexe\\app\\oracle\\product\\11.2.0\\server\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\php;C:\\Apache24;C:\\Apache24\\bin;C:\\Users\\Marcos\\AppData\\Local\\Android\\android-sdk\\platform-tools;C:\\Program Files\\PostgreSQL\\9.3\\bin;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files\\MySQL\\MySQL Server 5.6\\bin;C:\\Program Files\\TortoiseGit\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win64)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/Apache24/htdocs'
+    'SERVER_ADMIN' => 'admin@example.com'
+    'SCRIPT_FILENAME' => 'C:/Apache24/htdocs/rnce/frontend/web/index.php'
+    'REMOTE_PORT' => '60454'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => 'r=sys-caev%2Fupdate&id=1'
+    'REQUEST_URI' => '/rnce/frontend/web/index.php?r=sys-caev%2Fupdate&id=1'
+    'SCRIPT_NAME' => '/rnce/frontend/web/index.php'
+    'PHP_SELF' => '/rnce/frontend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1429770402.024
+    'REQUEST_TIME' => 1429770402
+]
