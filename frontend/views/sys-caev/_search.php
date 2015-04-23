@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\PersonasJuridicasSearch */
+/* @var $model app\models\SysCaevSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="personas-juridicas-search">
+<div class="sys-caev-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
@@ -17,19 +17,13 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'id') ?>
 
-    <?= $form->field($model, 'rif') ?>
+    <?= $form->field($model, 'grupo') ?>
 
-    <?= $form->field($model, 'razon_social') ?>
+    <?= $form->field($model, 'denominacion') ?>
 
-    <?= $form->field($model, 'creado_por') ?>
+    <?= $form->field($model, 'sys_status')->checkbox() ?>
 
-    <?= $form->field($model, 'nacionalidad')->checkbox() ?>
-
-    <?php // echo $form->field($model, 'numero_identitifacion') ?>
-
-    <?php // echo $form->field($model, 'sys_status')->checkbox() ?>
-
-    <?php // echo $form->field($model, 'sys_creado_el') ?>
+    <?= $form->field($model, 'sys_creado_el') ?>
 
     <?php // echo $form->field($model, 'sys_actualizado_el') ?>
 

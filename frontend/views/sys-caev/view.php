@@ -4,13 +4,13 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\p\PersonasJuridicas */
+/* @var $model common\models\p\SysCaev */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Personas Juridicas'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Sys Caevs'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="personas-juridicas-view">
+<div class="sys-caev-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -29,11 +29,8 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'rif',
-            'razon_social',
-            'creado_por',
-            'nacionalidad:boolean',
-            'numero_identitifacion',
+            'grupo',
+            'denominacion:ntext',
             'sys_status:boolean',
             'sys_creado_el',
             'sys_actualizado_el',

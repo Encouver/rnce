@@ -3,16 +3,16 @@
 namespace frontend\controllers;
 
 use Yii;
-use common\models\p\NombresCajas;
-use app\models\NombresCajasSearch;
+use common\models\p\SysCaev;
+use app\models\SysCaevSearch;
 use common\components\BaseController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\helpers\Json;
+
 /**
- * NombresCajasController implements the CRUD actions for NombresCajas model.
+ * SysCaevController implements the CRUD actions for SysCaev model.
  */
-class NombresCajasController extends BaseController
+class SysCaevController extends BaseController
 {
     public function behaviors()
     {
@@ -27,12 +27,12 @@ class NombresCajasController extends BaseController
     }
 
     /**
-     * Lists all NombresCajas models.
+     * Lists all SysCaev models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new NombresCajasSearch();
+        $searchModel = new SysCaevSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -41,14 +41,8 @@ class NombresCajasController extends BaseController
         ]);
     }
 
-
-    public function actionEfectivosequivalentes()
-    {
-        return $this->render("efectivosequivalentes");
-    }
-
     /**
-     * Displays a single NombresCajas model.
+     * Displays a single SysCaev model.
      * @param integer $id
      * @return mixed
      */
@@ -60,13 +54,13 @@ class NombresCajasController extends BaseController
     }
 
     /**
-     * Creates a new NombresCajas model.
+     * Creates a new SysCaev model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new NombresCajas();
+        $model = new SysCaev();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -77,22 +71,8 @@ class NombresCajasController extends BaseController
         }
     }
 
-     public function actionRaul()
-    {
-        $model = new NombresCajas();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return Json::encode($this->renderPartial('_form', [
-                'model' => $model,
-            ]));
-        }
-    }
-
-
     /**
-     * Updates an existing NombresCajas model.
+     * Updates an existing SysCaev model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -111,7 +91,7 @@ class NombresCajasController extends BaseController
     }
 
     /**
-     * Deletes an existing NombresCajas model.
+     * Deletes an existing SysCaev model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -124,15 +104,15 @@ class NombresCajasController extends BaseController
     }
 
     /**
-     * Finds the NombresCajas model based on its primary key value.
+     * Finds the SysCaev model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return NombresCajas the loaded model
+     * @return SysCaev the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = NombresCajas::findOne($id)) !== null) {
+        if (($model = SysCaev::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

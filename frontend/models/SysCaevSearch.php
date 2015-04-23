@@ -5,12 +5,12 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\p\PersonasJuridicas;
+use common\models\p\SysCaev;
 
 /**
- * PersonasJuridicasSearch represents the model behind the search form about `common\models\p\PersonasJuridicas`.
+ * SysCaevSearch represents the model behind the search form about `common\models\p\SysCaev`.
  */
-class PersonasJuridicasSearch extends PersonasJuridicas
+class SysCaevSearch extends SysCaev
 {
     /**
      * @inheritdoc
@@ -18,9 +18,9 @@ class PersonasJuridicasSearch extends PersonasJuridicas
     public function rules()
     {
         return [
-            [['id', 'creado_por'], 'integer'],
-            [['rif', 'razon_social', 'numero_identitifacion', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
-            [['nacionalidad', 'sys_status'], 'boolean'],
+            [['id'], 'integer'],
+            [['grupo', 'denominacion', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
+            [['sys_status'], 'boolean'],
         ];
     }
 
@@ -42,7 +42,7 @@ class PersonasJuridicasSearch extends PersonasJuridicas
      */
     public function search($params)
     {
-        $query = PersonasJuridicas::find();
+        $query = SysCaev::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -58,17 +58,14 @@ class PersonasJuridicasSearch extends PersonasJuridicas
 
         $query->andFilterWhere([
             'id' => $this->id,
-            'creado_por' => $this->creado_por,
-            'nacionalidad' => $this->nacionalidad,
             'sys_status' => $this->sys_status,
             'sys_creado_el' => $this->sys_creado_el,
             'sys_actualizado_el' => $this->sys_actualizado_el,
             'sys_finalizado_el' => $this->sys_finalizado_el,
         ]);
 
-        $query->andFilterWhere(['like', 'rif', $this->rif])
-            ->andFilterWhere(['like', 'razon_social', $this->razon_social])
-            ->andFilterWhere(['like', 'numero_identitifacion', $this->numero_identitifacion]);
+        $query->andFilterWhere(['like', 'grupo', $this->grupo])
+            ->andFilterWhere(['like', 'denominacion', $this->denominacion]);
 
         return $dataProvider;
     }

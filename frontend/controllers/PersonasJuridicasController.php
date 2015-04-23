@@ -3,16 +3,16 @@
 namespace frontend\controllers;
 
 use Yii;
-use common\models\PersonasJuridicas;
+use common\models\p\PersonasJuridicas;
 use app\models\PersonasJuridicasSearch;
-use yii\web\Controller;
+use common\components\BaseController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
  * PersonasJuridicasController implements the CRUD actions for PersonasJuridicas model.
  */
-class PersonasJuridicasController extends Controller
+class PersonasJuridicasController extends BaseController
 {
     public function behaviors()
     {
