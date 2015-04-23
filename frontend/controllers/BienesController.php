@@ -3,7 +3,7 @@
 namespace frontend\controllers;
 
 use Yii;
-use common\models\activos\Bienes;
+use common\models\a\Bienes;
 use app\models\BienesSearch;
 use common\components\BaseController;
 use yii\web\NotFoundHttpException;

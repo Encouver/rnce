@@ -32,9 +32,11 @@ use yii\widgets\Menu;
 
 
         ?>
+        <!--
 <h1 style="text-align:center;">MÓDULO FINANCIERO</h1>
+-->
 <?php
-
+/*
 echo Yii::$app->formatter->asPercent(0.125, 2); // output: 12.50%
 echo "<br>";
 echo Yii::$app->formatter->asEmail('cebe@example.com'); // output: <a href="mailto:cebe@example.com">cebe@example.com</a>
@@ -112,5 +114,4 @@ echo Yii::$app->formatter->asDate('2014-01-01'); // output: 1 января 2014 
         </div>
     
     </div> -->
-
 </div>

@@ -2,7 +2,7 @@
 
 namespace frontend\controllers;
 
-use common\models\Bienes;
+use common\models\a\Bienes;
 
 use kartik\widgets\DatePicker;
 
