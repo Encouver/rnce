@@ -3,16 +3,16 @@
 namespace frontend\controllers;
 
 use Yii;
-use common\models\p\BancosContratistas;
-use app\models\BancosContratistasSearch;
+use common\models\p\RelacionesContratos;
+use app\models\RelacionesContratosSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * BancosContratistasController implements the CRUD actions for BancosContratistas model.
+ * RelacionesContratosController implements the CRUD actions for RelacionesContratos model.
  */
-class BancosContratistasController extends Controller
+class RelacionesContratosController extends Controller
 {
     public function behaviors()
     {
@@ -27,12 +27,12 @@ class BancosContratistasController extends Controller
     }
 
     /**
-     * Lists all BancosContratistas models.
+     * Lists all RelacionesContratos models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new BancosContratistasSearch();
+        $searchModel = new RelacionesContratosSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -42,7 +42,7 @@ class BancosContratistasController extends Controller
     }
 
     /**
-     * Displays a single BancosContratistas model.
+     * Displays a single RelacionesContratos model.
      * @param integer $id
      * @return mixed
      */
@@ -54,18 +54,15 @@ class BancosContratistasController extends Controller
     }
 
     /**
-     * Creates a new BancosContratistas model.
+     * Creates a new RelacionesContratos model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new BancosContratistas();
+        $model = new RelacionesContratos();
 
-        if ($model->load(Yii::$app->request->post())) {
-            
-            $model->contratista_id=2;
-            $model->save();
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
@@ -75,7 +72,7 @@ class BancosContratistasController extends Controller
     }
 
     /**
-     * Updates an existing BancosContratistas model.
+     * Updates an existing RelacionesContratos model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -94,7 +91,7 @@ class BancosContratistasController extends Controller
     }
 
     /**
-     * Deletes an existing BancosContratistas model.
+     * Deletes an existing RelacionesContratos model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -107,15 +104,15 @@ class BancosContratistasController extends Controller
     }
 
     /**
-     * Finds the BancosContratistas model based on its primary key value.
+     * Finds the RelacionesContratos model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return BancosContratistas the loaded model
+     * @return RelacionesContratos the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = BancosContratistas::findOne($id)) !== null) {
+        if (($model = RelacionesContratos::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
