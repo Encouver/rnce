@@ -18,7 +18,7 @@ class DocumentosRegistradosSearch extends DocumentosRegistrados
     public function rules()
     {
         return [
-            [['id', 'contratista_id', 'sys_tipo_documento_id', 'sys_tipo_registro_id'], 'integer'],
+            [['id', 'contratista_id', 'sys_tipo_registro_id'], 'integer'],
             [['circunscripcion', 'num_registro_notaria', 'tomo', 'folio', 'fecha_registro', 'fecha_asamblea', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['valor_adquisicion'], 'number'],
             [['sys_status'], 'boolean'],
@@ -60,7 +60,6 @@ class DocumentosRegistradosSearch extends DocumentosRegistrados
         $query->andFilterWhere([
             'id' => $this->id,
             'contratista_id' => $this->contratista_id,
-            'sys_tipo_documento_id' => $this->sys_tipo_documento_id,
             'sys_tipo_registro_id' => $this->sys_tipo_registro_id,
             'fecha_registro' => $this->fecha_registro,
             'valor_adquisicion' => $this->valor_adquisicion,

@@ -19,13 +19,11 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'contratista_id') ?>
 
-    <?= $form->field($model, 'sys_tipo_documento_id') ?>
-
     <?= $form->field($model, 'sys_tipo_registro_id') ?>
 
     <?= $form->field($model, 'circunscripcion') ?>
 
-    <?php // echo $form->field($model, 'num_registro_notaria') ?>
+    <?= $form->field($model, 'num_registro_notaria') ?>
 
     <?php // echo $form->field($model, 'tomo') ?>
 

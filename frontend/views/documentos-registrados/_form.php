@@ -14,8 +14,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'contratista_id')->textInput() ?>
 
-    <?= $form->field($model, 'sys_tipo_documento_id')->textInput() ?>
-
     <?= $form->field($model, 'sys_tipo_registro_id')->textInput() ?>
 
     <?= $form->field($model, 'circunscripcion')->textInput(['maxlength' => 255]) ?>

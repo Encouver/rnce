@@ -9,7 +9,6 @@ use Yii;
  *
  * @property integer $id
  * @property integer $contratista_id
- * @property integer $sys_tipo_documento_id
  * @property integer $sys_tipo_registro_id
  * @property string $circunscripcion
  * @property string $num_registro_notaria
@@ -42,8 +41,8 @@ class DocumentosRegistrados extends \common\components\BaseActiveRecord
     public function rules()
     {
         return [
-            [['contratista_id', 'sys_tipo_documento_id', 'sys_tipo_registro_id', 'circunscripcion', 'num_registro_notaria', 'tomo', 'folio', 'fecha_registro', 'valor_adquisicion'], 'required'],
-            [['contratista_id', 'sys_tipo_documento_id', 'sys_tipo_registro_id'], 'integer'],
+            [['contratista_id', 'sys_tipo_registro_id', 'circunscripcion', 'num_registro_notaria', 'tomo', 'folio', 'fecha_registro', 'valor_adquisicion'], 'required'],
+            [['contratista_id', 'sys_tipo_registro_id'], 'integer'],
             [['fecha_registro', 'fecha_asamblea', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['valor_adquisicion'], 'number'],
             [['sys_status'], 'boolean'],
@@ -60,7 +59,6 @@ class DocumentosRegistrados extends \common\components\BaseActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'contratista_id' => Yii::t('app', 'Contratista ID'),
-            'sys_tipo_documento_id' => Yii::t('app', 'Sys Tipo Documento ID'),
             'sys_tipo_registro_id' => Yii::t('app', 'Sys Tipo Registro ID'),
             'circunscripcion' => Yii::t('app', 'Circunscripcion'),
             'num_registro_notaria' => Yii::t('app', 'Num Registro Notaria'),

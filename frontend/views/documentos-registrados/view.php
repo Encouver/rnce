@@ -30,7 +30,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'contratista_id',
-            'sys_tipo_documento_id',
             'sys_tipo_registro_id',
             'circunscripcion',
             'num_registro_notaria',
