@@ -74,7 +74,8 @@ AppAsset::register($this);
                 ],
                  ['label' => 'Acta Constitutiva',
                     'items' => [
-                         ['label' => 'Datos basicos', 'url' => ['/contratistas/index']],
+                         ['label' => 'Registro documento', 'url' => ['/documentos-registrados/index']],
+                        ['label' => 'Objeto Social', 'url' => ['/objetos-sociales/index']],
                     ],
                 ],
                 

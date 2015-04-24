@@ -4,19 +4,19 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\DocumentosRegistradosSearch */
+/* @var $searchModel app\models\ObjetosSocialesSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Documentos Registrados');
+$this->title = Yii::t('app', 'Objetos Sociales');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="documentos-registrados-index">
+<div class="objetos-sociales-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a(Yii::t('app', 'Create Documentos Registrados'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Create Objetos Sociales'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
@@ -27,14 +27,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'contratista_id',
-            'sys_tipo_registro_id',
-            'circunscripcion',
-            'num_registro_notaria',
-            // 'tomo',
-            // 'folio',
-            // 'fecha_registro',
-            // 'valor_adquisicion',
-            // 'fecha_asamblea',
+            'documento_registrado_id',
+            'tipo_objeto',
+            'descripcion:ntext',
             // 'sys_status:boolean',
             // 'sys_creado_el',
             // 'sys_actualizado_el',

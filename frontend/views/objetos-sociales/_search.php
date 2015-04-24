@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\DocumentosRegistradosSearch */
+/* @var $model app\models\ObjetosSocialesSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="documentos-registrados-search">
+<div class="objetos-sociales-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
@@ -19,21 +19,11 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'contratista_id') ?>
 
-    <?= $form->field($model, 'sys_tipo_registro_id') ?>
+    <?= $form->field($model, 'documento_registrado_id') ?>
 
-    <?= $form->field($model, 'circunscripcion') ?>
+    <?= $form->field($model, 'tipo_objeto') ?>
 
-    <?= $form->field($model, 'num_registro_notaria') ?>
-
-    <?php // echo $form->field($model, 'tomo') ?>
-
-    <?php // echo $form->field($model, 'folio') ?>
-
-    <?php // echo $form->field($model, 'fecha_registro') ?>
-
-    <?php // echo $form->field($model, 'valor_adquisicion') ?>
-
-    <?php // echo $form->field($model, 'fecha_asamblea') ?>
+    <?= $form->field($model, 'descripcion') ?>
 
     <?php // echo $form->field($model, 'sys_status')->checkbox() ?>
 

@@ -4,13 +4,13 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\a\DocumentosRegistrados */
+/* @var $model common\models\p\ObjetosSociales */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Documentos Registrados'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Objetos Sociales'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="documentos-registrados-view">
+<div class="objetos-sociales-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -30,14 +30,9 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'contratista_id',
-            'sys_tipo_registro_id',
-            'circunscripcion',
-            'num_registro_notaria',
-            'tomo',
-            'folio',
-            'fecha_registro',
-            'valor_adquisicion',
-            'fecha_asamblea',
+            'documento_registrado_id',
+            'tipo_objeto',
+            'descripcion:ntext',
             'sys_status:boolean',
             'sys_creado_el',
             'sys_actualizado_el',
