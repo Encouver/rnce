@@ -76,6 +76,7 @@ AppAsset::register($this);
                     'items' => [
                          ['label' => 'Registro documento', 'url' => ['/documentos-registrados/index']],
                         ['label' => 'Objeto Social', 'url' => ['/objetos-sociales/index']],
+                        ['label' => 'Actividades Economicas', 'url' => ['/actividades-economicas/index']],
                     ],
                 ],
                 
