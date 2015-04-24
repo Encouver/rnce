@@ -364,3 +364,34 @@ table:  Product_tag
 
 $currentTags = Tag::find()->innerJoin('product_tag', 'tag.id = product_tag.tag_id')->where(['product_id' => $model->id])->all();
 ?>
+
+
+
+/**************************   MODULO DE USUARIOS   **************************/
+
+
+Usage
+
+You controllers may have two properties that will make whole controller or selected action accessible to everyone
+
+public $freeAccess = true;
+Or
+
+public $freeAccessActions = ['first-action', 'another-action'];
+Here are list of the useful helpers. For detailed explanation look in the corresponding functions.
+
+
+User::hasRole($roles, $superAdminAllowed = true)
+User::hasPermission($permission, $superAdminAllowed = true)
+User::canRoute($route, $superAdminAllowed = true)
+
+User::assignRole($userId, $roleName)
+User::revokeRole($userId, $roleName)
+
+User::getCurrentUser($fromSingleton = true)
+Role, Permission and Route all have following methods
+
+
+Role::create($name, $description = null, $groupCode = null, $ruleName = null, $data = null)
+Role::addChildren($parentName, $childrenNames, $throwException = false)
+Role::removeChildren($parentName, $childrenNames)
