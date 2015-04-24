@@ -72,6 +72,12 @@ AppAsset::register($this);
                          ['label' => 'Relaciones contratos', 'url' => ['/relaciones-contratos/index']],
                     ],
                 ],
+                 ['label' => 'Acta Constitutiva',
+                    'items' => [
+                         ['label' => 'Datos basicos', 'url' => ['/contratistas/index']],
+                    ],
+                ],
+                
             ];
             if (Yii::$app->user->isGuest) {
                 $menuItems[] = ['label' => 'Registrate',  'url' => ['/user-management/auth/registration']];//['/site/signup']];

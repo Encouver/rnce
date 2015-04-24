@@ -27,3 +27,7 @@ COMMENT ON COLUMN actividades_economicas.comp1_experiencia IS 'Experiencia de la
 ALTER TABLE actividades_economicas ADD COLUMN comp2_experiencia integer;
 COMMENT ON COLUMN actividades_economicas.comp2_experiencia IS 'Experiencia de la actividad economica complementaria 2';
 
+ALTER TABLE activos.documentos_registrados DROP COLUMN sys_tipo_documento_id;
+
+DROP TABLE activos.tipos_documentos;
+

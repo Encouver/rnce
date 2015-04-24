@@ -24,7 +24,6 @@ use Yii;
  * @property string $sys_finalizado_el
  *
  * @property Contratistas $contratista
- * @property SysTiposDocumentos $sysTipoDocumento
  * @property SysTiposRegistros $sysTipoRegistro
  */
 class DocumentosRegistrados extends \common\components\BaseActiveRecord
@@ -83,14 +82,6 @@ class DocumentosRegistrados extends \common\components\BaseActiveRecord
     public function getContratista()
     {
         return $this->hasOne(Contratistas::className(), ['id' => 'contratista_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getSysTipoDocumento()
-    {
-        return $this->hasOne(SysTiposDocumentos::className(), ['id' => 'sys_tipo_documento_id']);
     }
 
     /**
