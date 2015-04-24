@@ -5,6 +5,7 @@ namespace frontend\controllers;
 use Yii;
 use common\models\p\RelacionesContratos;
 use app\models\RelacionesContratosSearch;
+use common\models\p\SysNaturalesJuridicas;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -61,12 +62,24 @@ class RelacionesContratosController extends Controller
     public function actionCreate()
     {
         $model = new RelacionesContratos();
+        $model2  = new SysNaturalesJuridicas();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && $model2->load(Yii::$app->request->post())) {
+            
+             $model2->juridica=true;
+            $model2->sys_status=true;
+            
+            $model2->save();
+            
+            
+            $model->contratista_id = 2;
+            $model->natural_juridica_id = $model2->id;
+            $model->save();
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'model2'=>$model2,
             ]);
         }
     }
