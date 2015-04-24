@@ -37,7 +37,7 @@ class DuracionesEmpresas extends \common\components\BaseActiveRecord
     public function rules()
     {
         return [
-            [['contratista_id', 'documento_registrado_id', 'tiempo_prorroga', 'fecha_vencimiento'], 'required'],
+            [['contratista_id', 'documento_registrado_id', 'fecha_vencimiento'], 'required'],
             [['contratista_id', 'documento_registrado_id', 'tiempo_prorroga'], 'integer'],
             [['fecha_vencimiento', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['sys_status'], 'boolean']

@@ -70,14 +70,16 @@ AppAsset::register($this);
                          ['label' => 'Sucursales', 'url' => ['/sucursales/index']],
                          ['label' => 'Bancos', 'url' => ['/bancos-contratistas/index']],
                          ['label' => 'Relaciones contratos', 'url' => ['/relaciones-contratos/index']],
+                         ['label' => 'Principios Contables', 'url' => ['/principios-contables/index']],
+                        ['label' => 'Actividades Economicas', 'url' => ['/actividades-economicas/index']],
                     ],
                 ],
                  ['label' => 'Acta Constitutiva',
                     'items' => [
                          ['label' => 'Registro documento', 'url' => ['/documentos-registrados/index']],
                         ['label' => 'Objeto Social', 'url' => ['/objetos-sociales/index']],
-                        ['label' => 'Actividades Economicas', 'url' => ['/actividades-economicas/index']],
-                        ['label' => 'Principios Contables', 'url' => ['/principios-contables/index']],
+                        ['label' => 'Cierre ejercicio', 'url' => ['/cierres-ejercicios/index']],
+                        ['label' => 'Duracion empresa', 'url' => ['/duraciones-empresas/index']],
                     ],
                 ],
                 

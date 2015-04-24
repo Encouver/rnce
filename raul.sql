@@ -32,3 +32,4 @@ ALTER TABLE activos.documentos_registrados DROP COLUMN sys_tipo_documento_id;
 
 DROP TABLE activos.tipos_documentos;
 
+ALTER TABLE duraciones_empresas ALTER COLUMN tiempo_prorroga DROP NOT NULL;
