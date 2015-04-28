@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
     'items' => [
         [
             'header' => 'Datos basicos',
-            'content' => $this->render('_form', [
+            'content' => $this->render('datos_basicos.php', [
         'model' => $model,
         'model2' => $model2,
     ]),
