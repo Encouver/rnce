@@ -8,7 +8,6 @@ use Yii;
  * This is the model class for table "public.certificaciones_aportes".
  *
  * @property integer $id
- * @property integer $capital_id
  * @property integer $persona_natural_id
  * @property string $colegiatura
  * @property string $tipo_profesion
@@ -18,7 +17,9 @@ use Yii;
  * @property string $sys_actualizado_el
  * @property string $sys_finalizado_el
  *
- * @property Capitales $capital
+ * @property Capitales[] $capitales
+ * @property EmpresasFusionadas[] $empresasFusionadas
+ * @property LimitacionesCapitales[] $limitacionesCapitales
  */
 class CertificacionesAportes extends \common\components\BaseActiveRecord
 {
@@ -36,8 +37,8 @@ class CertificacionesAportes extends \common\components\BaseActiveRecord
     public function rules()
     {
         return [
-            [['capital_id', 'tipo_profesion', 'fecha_informe'], 'required'],
-            [['capital_id', 'persona_natural_id'], 'integer'],
+            [['persona_natural_id'], 'integer'],
+            [['tipo_profesion', 'fecha_informe'], 'required'],
             [['tipo_profesion'], 'string'],
             [['fecha_informe', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['sys_status'], 'boolean'],
@@ -52,7 +53,6 @@ class CertificacionesAportes extends \common\components\BaseActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'capital_id' => Yii::t('app', 'Capital ID'),
             'persona_natural_id' => Yii::t('app', 'Persona Natural ID'),
             'colegiatura' => Yii::t('app', 'Colegiatura'),
             'tipo_profesion' => Yii::t('app', 'Tipo Profesion'),
@@ -67,8 +67,24 @@ class CertificacionesAportes extends \common\components\BaseActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getCapital()
+    public function getCapitales()
     {
-        return $this->hasOne(Capitales::className(), ['id' => 'capital_id']);
+        return $this->hasMany(Capitales::className(), ['certificacion_aporte_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getEmpresasFusionadas()
+    {
+        return $this->hasMany(EmpresasFusionadas::className(), ['certificacion_aporte_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getLimitacionesCapitales()
+    {
+        return $this->hasMany(LimitacionesCapitales::className(), ['certificacion_aporte_id' => 'id']);
     }
 }

@@ -20,10 +20,15 @@ use Yii;
  * @property string $sys_creado_el
  * @property string $sys_actualizado_el
  * @property string $sys_finalizado_el
+ * @property boolean $auditor
+ * @property boolean $responsable_contabilidad
+ * @property boolean $informe_conversion
+ * @property integer $natural_juridica_id
  *
  * @property ActasConstitutivas[] $actasConstitutivas
  * @property Contratistas $contratista
  * @property DocumentosRegistrados $documentoRegistrado
+ * @property SysNaturalesJuridicas $naturalJuridica
  */
 class ComisariosAuditores extends \common\components\BaseActiveRecord
 {
@@ -41,11 +46,11 @@ class ComisariosAuditores extends \common\components\BaseActiveRecord
     public function rules()
     {
         return [
-            [['fecha_vencimiento', 'tipo_profesion', 'fecha_carta', 'documento_registrado_id', 'contratista_id', 'comisario'], 'required'],
+            [['fecha_vencimiento', 'tipo_profesion', 'fecha_carta', 'documento_registrado_id', 'contratista_id', 'comisario', 'auditor', 'responsable_contabilidad', 'informe_conversion', 'natural_juridica_id'], 'required'],
             [['fecha_vencimiento', 'fecha_carta', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
-            [['declaracion_jurada', 'comisario', 'sys_status'], 'boolean'],
+            [['declaracion_jurada', 'comisario', 'sys_status', 'auditor', 'responsable_contabilidad', 'informe_conversion'], 'boolean'],
             [['tipo_profesion'], 'string'],
-            [['documento_registrado_id', 'contratista_id'], 'integer'],
+            [['documento_registrado_id', 'contratista_id', 'natural_juridica_id'], 'integer'],
             [['colegiatura'], 'string', 'max' => 255]
         ];
     }
@@ -69,6 +74,10 @@ class ComisariosAuditores extends \common\components\BaseActiveRecord
             'sys_creado_el' => Yii::t('app', 'Sys Creado El'),
             'sys_actualizado_el' => Yii::t('app', 'Sys Actualizado El'),
             'sys_finalizado_el' => Yii::t('app', 'Sys Finalizado El'),
+            'auditor' => Yii::t('app', 'Auditor'),
+            'responsable_contabilidad' => Yii::t('app', 'Responsable Contabilidad'),
+            'informe_conversion' => Yii::t('app', 'Informe Conversion'),
+            'natural_juridica_id' => Yii::t('app', 'Natural Juridica ID'),
         ];
     }
 
@@ -94,5 +103,13 @@ class ComisariosAuditores extends \common\components\BaseActiveRecord
     public function getDocumentoRegistrado()
     {
         return $this->hasOne(DocumentosRegistrados::className(), ['id' => 'documento_registrado_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getNaturalJuridica()
+    {
+        return $this->hasOne(SysNaturalesJuridicas::className(), ['id' => 'natural_juridica_id']);
     }
 }
