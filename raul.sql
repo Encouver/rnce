@@ -872,10 +872,22 @@ ALTER TABLE actas_constitutivas ADD COLUMN modificacion_balance boolean;
 ALTER TABLE actas_constitutivas ALTER COLUMN modificacion_balance SET NOT NULL;
 COMMENT ON COLUMN actas_constitutivas.modificacion_balance IS 'True se busca informacion en la tabla modificaciones_balances';
 
+ALTER TABLE comisarios_auditores ADD COLUMN auditor boolean;
+ALTER TABLE comisarios_auditores ALTER COLUMN auditor SET NOT NULL;
+COMMENT ON COLUMN comisarios_auditores.auditor IS 'True si es un contador auditor';
 
 
+ALTER TABLE comisarios_auditores ADD COLUMN responsable_contabilidad boolean;
+ALTER TABLE comisarios_auditores ALTER COLUMN responsable_contabilidad SET NOT NULL;
+COMMENT ON COLUMN comisarios_auditores.responsable_contabilidad IS 'Si es responsable de la contabilidad';
 
 
+ALTER TABLE comisarios_auditores ADD COLUMN informe_conversion boolean;
+ALTER TABLE comisarios_auditores ALTER COLUMN informe_conversion SET NOT NULL;
+COMMENT ON COLUMN comisarios_auditores.informe_conversion IS 'True si es el profesional que realiza el informe de conversion';
 
 
+ALTER TABLE comisarios_auditores ADD COLUMN natural_juridica_id integer;
+ALTER TABLE comisarios_auditores ALTER COLUMN natural_juridica_id SET NOT NULL;
+COMMENT ON COLUMN comisarios_auditores.natural_juridica_id IS 'Clave foranea a la tabla sys_naturales_juridicas';
 
