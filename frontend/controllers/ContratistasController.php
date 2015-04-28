@@ -80,14 +80,40 @@ class ContratistasController extends Controller
             ]);
         }
     }
+    public function actionDatosbasicos()
+    {
+         $model = new Contratistas();
+        $model2 = new SysNaturalesJuridicas();
+         Yii::$app->session->setFlash('success', 'Si llego a la funcion');
+         
+        return $this->render('acordion', [
+                'model' => $model,
+                'model2'=>$model2,
+            ]);
+    }
+    
+    
     
      public function actionAcordion()
     {
          $model = new Contratistas();
         $model2 = new SysNaturalesJuridicas();
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && $model2->load(Yii::$app->request->post())) {
+             $model2->juridica=true;
+            $model2->sys_status=true;
+            $model2->save();
+            $model->estatus_contratista_id = 1;
+            $model->natural_juridica_id = $model2->id; // aqui se le asigna al natural_juridica_id el id de naturales_juridicas
+            if($model->save()){
+                
+                Yii::$app->session->setFlash('success', 'Datos basicos guardados con exito');
+            }else{
+                 Yii::$app->session->setFlash('error', 'No se ha podido guardar el registro');
+            }
             
-            return $this->redirect(['view', 'id' => $model->id]);
+             
+              return $this->refresh();
+           
         } else {
             return $this->render('acordion', [
                 'model' => $model,
