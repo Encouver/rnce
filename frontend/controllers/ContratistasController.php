@@ -79,6 +79,21 @@ class ContratistasController extends Controller
             ]);
         }
     }
+    
+     public function actionAcordion()
+    {
+         $model = new Contratistas();
+        $model2 = new SysNaturalesJuridicas();
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            
+            return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            return $this->render('acordion', [
+                'model' => $model,
+                'model2'=>$model2,
+            ]);
+        }
+    }
 
     /**
      * Updates an existing Contratistas model.

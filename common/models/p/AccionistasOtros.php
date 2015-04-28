@@ -23,11 +23,13 @@ use Yii;
  * @property string $sys_creado_el
  * @property string $sys_actualizado_el
  * @property string $sys_finalizado_el
+ * @property string $repr_legal_vigencia
  *
- * @property ActasConstitutivas[] $actasConstitutivas
  * @property Contratistas $contratista
  * @property SysNaturalesJuridicas $naturalJuridica
  * @property DocumentosRegistrados $documentoRegistrado
+ * @property ActasConstitutivas[] $actasConstitutivas
+ * @property PagosAccionistasDecretos[] $pagosAccionistasDecretos
  */
 class AccionistasOtros extends \common\components\BaseActiveRecord
 {
@@ -48,7 +50,7 @@ class AccionistasOtros extends \common\components\BaseActiveRecord
             [['contratista_id', 'natural_juridica_id', 'porcentaje_accionario', 'valor_compra', 'fecha', 'obligacion', 'accionista', 'junta_directiva', 'rep_legal', 'documento_registrado_id'], 'required'],
             [['contratista_id', 'natural_juridica_id', 'documento_registrado_id'], 'integer'],
             [['porcentaje_accionario', 'valor_compra'], 'number'],
-            [['fecha', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
+            [['fecha', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el', 'repr_legal_vigencia'], 'safe'],
             [['accionista', 'junta_directiva', 'rep_legal', 'sys_status'], 'boolean'],
             [['obligacion'], 'string', 'max' => 100],
             [['cargo'], 'string', 'max' => 255]
@@ -77,15 +79,8 @@ class AccionistasOtros extends \common\components\BaseActiveRecord
             'sys_creado_el' => Yii::t('app', 'Sys Creado El'),
             'sys_actualizado_el' => Yii::t('app', 'Sys Actualizado El'),
             'sys_finalizado_el' => Yii::t('app', 'Sys Finalizado El'),
+            'repr_legal_vigencia' => Yii::t('app', 'Repr Legal Vigencia'),
         ];
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getActasConstitutivas()
-    {
-        return $this->hasMany(ActasConstitutivas::className(), ['accionista_otro' => 'id']);
     }
 
     /**
@@ -110,5 +105,21 @@ class AccionistasOtros extends \common\components\BaseActiveRecord
     public function getDocumentoRegistrado()
     {
         return $this->hasOne(DocumentosRegistrados::className(), ['id' => 'documento_registrado_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getActasConstitutivas()
+    {
+        return $this->hasMany(ActasConstitutivas::className(), ['accionista_otro' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPagosAccionistasDecretos()
+    {
+        return $this->hasMany(PagosAccionistasDecretos::className(), ['accionista_id' => 'id']);
     }
 }
