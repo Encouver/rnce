@@ -728,7 +728,7 @@ COMMENT ON COLUMN decretos_div_excedentes.utilidad_decretada IS 'Utilidad Decret
 
 CREATE TABLE pagos_accionistas_decretos
 (
-  id integer NOT NULL DEFAULT nextval('pagos_accionistas_decreto_id_seq'::regclass), -- Clave primaria
+  id serial NOT NULL, -- Clave primaria
   sys_status boolean NOT NULL DEFAULT true, -- Estatus interno del sistema
   sys_creado_el timestamp with time zone DEFAULT now(), -- Fecha de creación del registro.
   sys_actualizado_el timestamp with time zone DEFAULT now(), -- Fecha de última actualización del registro.
