@@ -11,8 +11,13 @@ use demogorgorn\ajax\AjaxSubmitButton;
 <div class="contratistas-form">
 
     <?php $form = ActiveForm::begin([
+        'id' => "raul",
     //'action' => ['contratistas/datosbasicos'],
-        'enableAjaxValidation' => false
+        /*'enableAjaxValidation' => true,
+        
+        'ajaxParam'  => 'ajax'*/
+        'ajaxDataType' => 'json'
+
 
 ]); ?>
 
@@ -32,8 +37,11 @@ use demogorgorn\ajax\AjaxSubmitButton;
         'label' => 'Enviar',
         'ajaxOptions' => [
             'type'=>'POST',
+            'contentType' => "application/json; charset=utf-8",
+             'dataType' => "json",
             'url'=>Yii::$app->urlManager->createUrl('contratistas/datosbasicos'),
             /*'cache' => false, */
+            'data' => '$("#raul").serialize()',
             'success' => new \yii\web\JsExpression('function(html){
                 $("#output").html(html);
                     alert("raul es marico");
