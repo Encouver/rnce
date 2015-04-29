@@ -15,6 +15,7 @@ use demogorgorn\ajax\AjaxSubmitButton;
         'enableAjaxValidation' => false
 
 ]); ?>
+     <div id = "output"></div>
 
     <?= $form->field($model2, 'rif')->textInput(['maxlength' => 50]) ?>
     
@@ -36,7 +37,6 @@ use demogorgorn\ajax\AjaxSubmitButton;
             /*'cache' => false, */
             'success' => new \yii\web\JsExpression('function(html){
                 $("#output").html(html);
-                    alert("raul es marico");
                 }'),
         ],
         'options' => ['class' => 'btn btn-success', 'type' => 'submit'],
@@ -46,5 +46,5 @@ use demogorgorn\ajax\AjaxSubmitButton;
     ?>
 
     <?php ActiveForm::end(); ?>
-    <div id = "output"></div>
+   
 </div>
