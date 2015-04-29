@@ -105,7 +105,14 @@ class ContratistasController extends Controller
             $model->natural_juridica_id = $model2->id; // aqui se le asigna al natural_juridica_id el id de naturales_juridicas
             if($model->save()){
                 
-                Yii::$app->session->setFlash('success', 'Datos basicos guardados con exito');
+                $usuario = User::find(Yii::$app->user->identity->id);
+                if($usuario){
+                    $usuario->contratista_id = $model->id;
+                    if($usuario->save())
+                        Yii::$app->session->setFlash('success', 'Datos basicos guardados con exito');
+                    else
+                        Yii::$app->session->setFlash('success', 'Datos basicos guardados con exito');
+                }
             }else{
                  Yii::$app->session->setFlash('error', 'No se ha podido guardar el registro');
             }
