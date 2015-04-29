@@ -127,14 +127,14 @@ class ContratistasController extends Controller
                'model' => $model,
                'model2'=>$model2,
            ]);*/
-          /* Yii::$app->response->format = Response::FORMAT_JSON;
+          //Yii::$app->response->format = Response::FORMAT_JSON;
            $res = array(
             'body'    => date('Y-m-d H:i:s'),
             'success' => true,
         );
  
-        return $res;*/
-        echo "ohoao";
+        return json_encode($res);
+        //echo "ohoao";
    }
 
     /**

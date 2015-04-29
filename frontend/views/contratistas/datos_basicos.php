@@ -12,12 +12,19 @@ use yii\helpers\Url;
 <div class="contratistas-form">
 
     <?php $form = ActiveForm::begin([
-  
+        'id' => "raul",
+    //'action' => ['contratistas/datosbasicos'],
+        /*'enableAjaxValidation' => true,
+        
+        'ajaxParam'  => 'ajax'*/
+        'ajaxDataType' => 'json'
+
 
 ]); ?>
 
     <?= $form->field($model2, 'rif')->textInput(['maxlength' => 50]) ?>
     
+
     <?= $form->field($model2, 'tipo_persona')->dropDownList([ '0' => 'PERSONA NATURAL', '1' => 'PERSONA JURIDICA' ],
             ['prompt' => 'Seleccione tipo de persona',
                 
@@ -34,12 +41,14 @@ use yii\helpers\Url;
                 ]) ?>
     
      <div id = "sector"></div>
+
     <?= $form->field($model2, 'denominacion')->textInput(['maxlength' => 50]) ?>    
 
     <?= $form->field($model, 'sigla')->textInput(['maxlength' => 50]) ?>
     
-    
-   
+
+    <?= $form->field($model, 'tipo_sector')->dropDownList([ 'PUBLICO' => 'PUBLICO', 'PRIVADO' => 'PRIVADO', 'MIXTO' => 'MIXTO' ], ['prompt' => '']) ?>
+
    
    <!-- <div class="form-group">
          <?= Html::submitButton(Yii::t('app', 'Create'), ['class' => 'btn btn-success']) ?> 
@@ -49,13 +58,14 @@ use yii\helpers\Url;
         'label' => 'Enviar',
         'ajaxOptions' => [
             'type'=>'POST',
-            'format'=>'JSON',
+            'contentType' => "application/json; charset=utf-8",
+             'dataType' => "json",
             'url'=>Yii::$app->urlManager->createUrl('contratistas/datosbasicos'),
-            /*'cache' => false,*/
+            /*'cache' => false, */
+            'data' => '$("#raul").serialize()',
             'success' => new \yii\web\JsExpression('function(html){
                 $("#output").html(html);
-                    alert(html);
-                    //alert(html.respuesta);
+                    alert("raul es marico");
                 }'),
         ],
         'options' => ['class' => 'btn btn-success', 'type' => 'submit'],
