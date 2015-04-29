@@ -15,7 +15,6 @@ use demogorgorn\ajax\AjaxSubmitButton;
         'enableAjaxValidation' => false
 
 ]); ?>
-     <div id = "output"></div>
 
     <?= $form->field($model2, 'rif')->textInput(['maxlength' => 50]) ?>
     
@@ -33,10 +32,13 @@ use demogorgorn\ajax\AjaxSubmitButton;
         'label' => 'Enviar',
         'ajaxOptions' => [
             'type'=>'POST',
+            'format'=>'JSON',
             'url'=>Yii::$app->urlManager->createUrl('contratistas/datosbasicos'),
-            /*'cache' => false, */
+            /*'cache' => false,*/
             'success' => new \yii\web\JsExpression('function(html){
                 $("#output").html(html);
+                    alert(html);
+                    //alert(html.respuesta);
                 }'),
         ],
         'options' => ['class' => 'btn btn-success', 'type' => 'submit'],
@@ -46,5 +48,5 @@ use demogorgorn\ajax\AjaxSubmitButton;
     ?>
 
     <?php ActiveForm::end(); ?>
-   
+    <div id = "output"></div>
 </div>
