@@ -66,6 +66,7 @@ class ContratistasController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model2->load(Yii::$app->request->post())) {
             $model2->juridica=true;
             $model2->sys_status=true;
+            //$model2->rif = '21212121212';
             $model2->save();
             $model->estatus_contratista_id = 1;
             $model->natural_juridica_id = $model2->id;
