@@ -70,14 +70,30 @@ class ContratistasController extends Controller
             $model->estatus_contratista_id = 1;
             $model->natural_juridica_id = $model2->id;
             $model->save();
-            
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('create', [
+
+            if($model->save()){
+                $usuario = User::find(Yii::$app->user->identity->id);
+                if($usuario){
+                    $usuario->contratista_id = $model->id;
+                    if($usuario->save()) {
+                        Yii::$app->session->setFlash('success', 'Datos basicos guardados con exito');
+
+                        return $this->redirect(['view', 'id' => $model->id]);
+                    }else {
+                        Yii::$app->session->setFlash('error', 'No se ha podido guardar el registro');
+                    }
+                }
+            }else{
+                Yii::$app->session->setFlash('error', 'No se ha podido guardar el registro');
+            }
+
+        }
+
+        return $this->render('create', [
                 'model' => $model,
                 'model2'=>$model2,
             ]);
-        }
+
     }
     
      public function actionAcordion()
