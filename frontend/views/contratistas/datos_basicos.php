@@ -31,11 +31,13 @@ use demogorgorn\ajax\AjaxSubmitButton;
         'label' => 'Enviar',
         'ajaxOptions' => [
             'type'=>'POST',
-            'url'=>'contratistas/datosbasicos',
+            'format'=>'JSON',
+            'url'=>Yii::$app->urlManager->createUrl('contratistas/datosbasicos'),
             /*'cache' => false,*/
             'success' => new \yii\web\JsExpression('function(html){
                 //$("#output").html(html);
-                    alert("raul es marico");
+                    alert(html);
+                    //alert(html.respuesta);
                 }'),
         ],
         'options' => ['class' => 'btn btn-success', 'type' => 'submit'],
