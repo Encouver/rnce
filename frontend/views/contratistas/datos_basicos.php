@@ -29,7 +29,7 @@ use yii\helpers\Url;
             ['prompt' => 'Seleccione tipo de persona',
                 
                 'onchange'=>'
-                $.get( "'.Url::toRoute('contratistas/datos').'", { id: $(this).val() } )
+                $.get( "'.Url::toRoute('contratistas/obtenertipopersona').'", { id: $(this).val() } )
                             .done(function( data ) {
                                 $("#sector").html( data );
                             }
@@ -46,10 +46,6 @@ use yii\helpers\Url;
 
     <?= $form->field($model, 'sigla')->textInput(['maxlength' => 50]) ?>
     
-
-    <?= $form->field($model, 'tipo_sector')->dropDownList([ 'PUBLICO' => 'PUBLICO', 'PRIVADO' => 'PRIVADO', 'MIXTO' => 'MIXTO' ], ['prompt' => '']) ?>
-
-   
    <!-- <div class="form-group">
          <?= Html::submitButton(Yii::t('app', 'Create'), ['class' => 'btn btn-success']) ?> 
     </div>-->

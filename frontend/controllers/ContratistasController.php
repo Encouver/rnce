@@ -111,9 +111,23 @@ class ContratistasController extends Controller
         }
     }
 
-     public function actionDatos()
+     public function actionObtenertipopersona()
    {
-         echo "hola";
+     
+         
+         echo '<div class="form-group field-contratistas-tipo_sector required">
+                <label class="control-label" for="contratistas-tipo_sector">Tipo Sector</label>
+                <select id="contratistas-tipo_sector" class="form-control" name="Contratistas[tipo_sector]">
+                    <option value="">SELECCIONE TIPO SECTOR</option>
+                    <option value="PUBLICO">PUBLICO</option>
+                    <option value="PRIVADO">PRIVADO</option>
+                    <option value="MIXTO">MIXTO</option>
+                </select>
+
+                <div class="help-block"></div>
+            </div>';
+        
+         
          
    }
      public function actionDatosbasicos()
