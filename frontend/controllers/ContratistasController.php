@@ -114,8 +114,9 @@ class ContratistasController extends Controller
      public function actionObtenertipopersona()
    {
      
+        
          
-         echo '<div class="form-group field-contratistas-tipo_sector required">
+         return '<div class="form-group field-contratistas-tipo_sector required">
                 <label class="control-label" for="contratistas-tipo_sector">Tipo Sector</label>
                 <select id="contratistas-tipo_sector" class="form-control" name="Contratistas[tipo_sector]">
                     <option value="">SELECCIONE TIPO SECTOR</option>
@@ -142,13 +143,29 @@ class ContratistasController extends Controller
                'model2'=>$model2,
            ]);*/
           //Yii::$app->response->format = Response::FORMAT_JSON;
-           $res = array(
+        /*   $res = array(
             'body'    => date('Y-m-d H:i:s'),
             'success' => true,
         );
  
         return json_encode($res);
-        //echo "ohoao";
+        //echo "ohoao";*/
+         
+         $model = new Contratistas();
+        $model2 = new SysNaturalesJuridicas();
+        if ($model->load(Yii::$app->request->post()) && $model2->load(Yii::$app->request->post())) {
+            $model2->juridica=true;
+            $model2->sys_status=true;
+            $model2->save();
+            $model->estatus_contratista_id = 1;
+            $model->natural_juridica_id = $model2->id;
+            $model->save();
+            
+            return "guardado con exito";
+        }else{
+            print_r($_POST);
+            return "no fue guardado";
+        }
    }
 
     /**

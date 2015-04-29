@@ -31,6 +31,7 @@ use yii\helpers\Url;
                 'onchange'=>'
                 $.get( "'.Url::toRoute('contratistas/obtenertipopersona').'", { id: $(this).val() } )
                             .done(function( data ) {
+                            alert(data);
                                 $("#sector").html( data );
                             }
                         );
@@ -54,11 +55,11 @@ use yii\helpers\Url;
         'label' => 'Enviar',
         'ajaxOptions' => [
             'type'=>'POST',
-            'contentType' => "application/json; charset=utf-8",
+            //'contentType' => "application/json; charset=utf-8",
              'dataType' => "json",
             'url'=>Yii::$app->urlManager->createUrl('contratistas/datosbasicos'),
             /*'cache' => false, */
-            'data' => '$("#raul").serialize()',
+            //'data' => '$("#raul").serialize()',
             'success' => new \yii\web\JsExpression('function(html){
                 $("#output").html(html);
                     alert("raul es marico");
