@@ -102,11 +102,19 @@ class ContratistasController extends Controller
          //$model2 = new SysNaturalesJuridicas();
         //Yii::$app->session->setFlash('success', 'Si llego a la funcion');
         
-        return $this->renderAjax('_form');
+        //return $this->renderAjax('_form');
       /* return $this->render('acordion', [
                'model' => $model,
                'model2'=>$model2,
            ]);*/
+          /* Yii::$app->response->format = Response::FORMAT_JSON;
+           $res = array(
+            'body'    => date('Y-m-d H:i:s'),
+            'success' => true,
+        );
+ 
+        return $res;*/
+        echo "ohoao";
    }
 
     /**
