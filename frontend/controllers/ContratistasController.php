@@ -95,7 +95,11 @@ class ContratistasController extends Controller
         }
     }
 
-
+     public function actionDatos($id)
+   {
+         echo "hola";
+         
+   }
      public function actionDatosbasicos()
    {
         //$model = new Contratistas();

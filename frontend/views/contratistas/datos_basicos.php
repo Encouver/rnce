@@ -17,9 +17,20 @@ use demogorgorn\ajax\AjaxSubmitButton;
 
     <?= $form->field($model2, 'rif')->textInput(['maxlength' => 50]) ?>
     
-    <?= $form->field($model2, 'tipo_persona')->dropDownList([ 'PERSONA NATURAL' => 'PERSONA NATURAL', 'PERSONA JURIDICA' => 'PERSONA JURIDICA' ], ['prompt' => 'Seleccione tipo de persona']) ?>
+    <?= $form->field($model2, 'tipo_persona')->dropDownList([ 'PERSONA NATURAL' => 'PERSONA NATURAL', 'PERSONA JURIDICA' => 'PERSONA JURIDICA' ],
+            ['prompt' => 'Seleccione tipo de persona',
+                
+                'onchange'=>'
+                $.post( "'.Yii::$app->urlManager->createUrl('contratistas/datos?id=').'"+$(this).val(), function( data ) {
+                  $( "#sector" ).html( data );
+                });
+            '
+                
+              
+         
+                ]) ?>
     
-    
+     <div id = "sector"></div>
     <?= $form->field($model2, 'denominacion')->textInput(['maxlength' => 50]) ?>    
 
     <?= $form->field($model, 'sigla')->textInput(['maxlength' => 50]) ?>
