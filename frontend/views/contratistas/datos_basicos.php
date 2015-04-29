@@ -11,16 +11,19 @@ use demogorgorn\ajax\AjaxSubmitButton;
 <div class="contratistas-form">
 
     <?php $form = ActiveForm::begin([
-    //'action' => ['contratistas/datosbasicos'],
-        'enableAjaxValidation' => false
+  
 
 ]); ?>
 
     <?= $form->field($model2, 'rif')->textInput(['maxlength' => 50]) ?>
     
+    <?= $form->field($model2, 'tipo_persona')->dropDownList([ 'PERSONA NATURAL' => 'PERSONA NATURAL', 'PERSONA JURIDICA' => 'PERSONA JURIDICA' ], ['prompt' => 'Seleccione tipo de persona']) ?>
+    
+    
     <?= $form->field($model2, 'denominacion')->textInput(['maxlength' => 50]) ?>    
 
     <?= $form->field($model, 'sigla')->textInput(['maxlength' => 50]) ?>
+    
     
     <?= $form->field($model, 'tipo_sector')->dropDownList([ 'PUBLICO' => 'PUBLICO', 'PRIVADO' => 'PRIVADO', 'MIXTO' => 'MIXTO' ], ['prompt' => '']) ?>
    

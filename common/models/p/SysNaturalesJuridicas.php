@@ -28,6 +28,8 @@ class SysNaturalesJuridicas extends \common\components\BaseActiveRecord
     /**
      * @inheritdoc
      */
+    
+     public $tipo_persona;
     public static function tableName()
     {
         return 'public.sys_naturales_juridicas';
@@ -39,7 +41,7 @@ class SysNaturalesJuridicas extends \common\components\BaseActiveRecord
     public function rules()
     {
         return [
-            [['rif', 'juridica', 'denominacion'], 'required'],
+            [['rif', 'juridica', 'denominacion','tipo_persona'], 'required'],
             [['juridica', 'sys_status'], 'boolean'],
             [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['rif'], 'string', 'max' => 20],
@@ -56,6 +58,7 @@ class SysNaturalesJuridicas extends \common\components\BaseActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'rif' => Yii::t('app', 'Rif'),
+            'tipo_persona'=> Yii::t('app', 'Tipo de persona'),
             'juridica' => Yii::t('app', 'Juridica'),
             'denominacion' => Yii::t('app', 'Razon Social'),
             'sys_status' => Yii::t('app', 'Sys Status'),
