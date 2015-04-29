@@ -53,7 +53,7 @@ class Contratistas extends \common\components\BaseActiveRecord
     /**
      * @inheritdoc
      */
-    public $rif;
+   
     public function rules()
     {
         return [
