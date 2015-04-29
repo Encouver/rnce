@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use demogorgorn\ajax\AjaxSubmitButton;
+use yii\helpers\Url;
 /* @var $this yii\web\View */
 /* @var $model common\models\p\Contratistas */
 /* @var $form yii\widgets\ActiveForm */
@@ -21,9 +22,11 @@ use demogorgorn\ajax\AjaxSubmitButton;
             ['prompt' => 'Seleccione tipo de persona',
                 
                 'onchange'=>'
-                $.post( "'.Yii::$app->urlManager->createUrl('contratistas/datos','id=>$(this).val()').', function( data ) {
-                  $( "#sector" ).html( data );
-                });
+                $.get( "'.Url::toRoute('contratistas/datos').'", { id: $(this).val() } )
+                            .done(function( data ) {
+                                $("#sector").html( data );
+                            }
+                        );
             '
                 
               
@@ -36,7 +39,7 @@ use demogorgorn\ajax\AjaxSubmitButton;
     <?= $form->field($model, 'sigla')->textInput(['maxlength' => 50]) ?>
     
     
-    <?= $form->field($model, 'tipo_sector')->dropDownList([ 'PUBLICO' => 'PUBLICO', 'PRIVADO' => 'PRIVADO', 'MIXTO' => 'MIXTO' ], ['prompt' => '']) ?>
+   
    
    <!-- <div class="form-group">
          <?= Html::submitButton(Yii::t('app', 'Create'), ['class' => 'btn btn-success']) ?> 
