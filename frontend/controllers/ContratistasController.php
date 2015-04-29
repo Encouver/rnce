@@ -95,7 +95,7 @@ class ContratistasController extends Controller
         }
     }
 
-     public function actionDatos($id)
+     public function actionDatos()
    {
          echo "hola";
          

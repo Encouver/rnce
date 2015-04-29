@@ -17,11 +17,11 @@ use demogorgorn\ajax\AjaxSubmitButton;
 
     <?= $form->field($model2, 'rif')->textInput(['maxlength' => 50]) ?>
     
-    <?= $form->field($model2, 'tipo_persona')->dropDownList([ 'PERSONA NATURAL' => 'PERSONA NATURAL', 'PERSONA JURIDICA' => 'PERSONA JURIDICA' ],
+    <?= $form->field($model2, 'tipo_persona')->dropDownList([ '0' => 'PERSONA NATURAL', '1' => 'PERSONA JURIDICA' ],
             ['prompt' => 'Seleccione tipo de persona',
                 
                 'onchange'=>'
-                $.post( "'.Yii::$app->urlManager->createUrl('contratistas/datos?id=').'"+$(this).val(), function( data ) {
+                $.post( "'.Yii::$app->urlManager->createUrl('contratistas/datos','id=>$(this).val()').', function( data ) {
                   $( "#sector" ).html( data );
                 });
             '
