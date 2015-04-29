@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "4fe8cf322f7cb2fff56c7acde5cb3f4f",
+    "hash": "207fb09ecf3bece16c9feb5aed69870c",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -60,16 +60,16 @@
         },
         {
             "name": "bower-asset/jquery",
-            "version": "2.1.3",
+            "version": "2.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jquery/jquery.git",
-                "reference": "8f2a9d9272d6ed7f32d3a484740ab342c02541e0"
+                "reference": "7751e69b615c6eca6f783a81e292a55725af6b85"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jquery/jquery/zipball/8f2a9d9272d6ed7f32d3a484740ab342c02541e0",
-                "reference": "8f2a9d9272d6ed7f32d3a484740ab342c02541e0",
+                "url": "https://api.github.com/repos/jquery/jquery/zipball/7751e69b615c6eca6f783a81e292a55725af6b85",
+                "reference": "7751e69b615c6eca6f783a81e292a55725af6b85",
                 "shasum": ""
             },
             "require-dev": {
@@ -84,6 +84,7 @@
                 "bower-asset-ignore": [
                     "**/.*",
                     "build",
+                    "dist/cdn",
                     "speed",
                     "test",
                     "*.md",
@@ -298,6 +299,51 @@
                 "markdown-extra"
             ],
             "time": "2015-03-06 05:21:16"
+        },
+        {
+            "name": "demogorgorn/yii2-ajax-submit-button",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/demogorgorn/yii2-ajax-submit-button.git",
+                "reference": "68cfa2d6adc3e63140b2a5171a2f45b3f1aba0f1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/demogorgorn/yii2-ajax-submit-button/zipball/68cfa2d6adc3e63140b2a5171a2f45b3f1aba0f1",
+                "reference": "68cfa2d6adc3e63140b2a5171a2f45b3f1aba0f1",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "demogorgorn\\ajax\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Oleg Martemjanov",
+                    "email": "demogorgorn@gmail.com",
+                    "homepage": "http://foreign.by"
+                }
+            ],
+            "description": "AjaxSubmitButton renders an ajax button which is very similar to ajaxSubmitButton from Yii1.",
+            "homepage": "https://github.com/demogorgorn/yii2-ajax-submit-button",
+            "keywords": [
+                "ajax",
+                "button",
+                "extension",
+                "submit",
+                "widget"
+            ],
+            "time": "2015-04-09 07:44:50"
         },
         {
             "name": "ezyang/htmlpurifier",
