@@ -5,6 +5,8 @@ namespace frontend\controllers;
 use Yii;
 use common\models\p\Contratistas;
 use common\models\p\SysNaturalesJuridicas;
+use common\models\p\PersonasNaturales;
+use common\models\p\PersonasJuridicas;
 use app\models\ContratistasSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -99,24 +101,34 @@ class ContratistasController extends Controller
      public function actionAcordion()
     {
          $model = new Contratistas();
-        $model2 = new SysNaturalesJuridicas();
+        $naturales_juridicas = new SysNaturalesJuridicas();
+        $personas_naturales = new PersonasNaturales();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('acordion', [
                 'model' => $model,
-                'model2'=>$model2,
+                'naturales_juridicas'=>$naturales_juridicas,
+                'personas_naturales'=>$personas_naturales,
             ]);
         }
     }
 
-     public function actionObtenertipopersona()
+     public function actionObtenertipopersona($id)
    {
      
-        
-         
-         return '<div class="form-group field-contratistas-tipo_sector required">
+        if ($id=='0'){
+             $model = new PersonasNaturales();
+             return $this->renderPartial('personas_naturales', array('model' => $model));
+             
+            // if$model->validate()
+                 
+              
+         }else{
+             
+              return ' 
+             <div  class="form-group field-contratistas-tipo_sector required">
                 <label class="control-label" for="contratistas-tipo_sector">Tipo Sector</label>
                 <select id="contratistas-tipo_sector" class="form-control" name="Contratistas[tipo_sector]">
                     <option value="">SELECCIONE TIPO SECTOR</option>
@@ -126,7 +138,11 @@ class ContratistasController extends Controller
                 </select>
 
                 <div class="help-block"></div>
-            </div>';
+                </div>
+           ';
+         
+         }
+        
         
          
          
@@ -151,19 +167,22 @@ class ContratistasController extends Controller
         return json_encode($res);
         //echo "ohoao";*/
          
+         
+         
+         
          $model = new Contratistas();
-        $model2 = new SysNaturalesJuridicas();
-        if ($model->load(Yii::$app->request->post()) && $model2->load(Yii::$app->request->post())) {
-            $model2->juridica=true;
-            $model2->sys_status=true;
+        $naturales_juridicas = new SysNaturalesJuridicas();
+        if ($model->load(Yii::$app->request->post()) && $naturales_juridicas->load(Yii::$app->request->post())) {
+            $naturales_juridicas->juridica=true;
+            $naturales_juridicas->sys_status=true;
             $model2->save();
             $model->estatus_contratista_id = 1;
-            $model->natural_juridica_id = $model2->id;
+            $model->natural_juridica_id = $naturales_juridicasdel2->id;
             $model->save();
             
             return "guardado con exito";
         }else{
-            print_r($_POST);
+          
             return "no fue guardado";
         }
    }

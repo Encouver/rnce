@@ -20,7 +20,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'header' => 'Datos basicos',
             'content' => $this->render('datos_basicos', [
             'model' => $model,
-            'model2' => $model2,
+            'naturales_juridicas' => $naturales_juridicas,
+            'personas_naturales'=>$personas_naturales,
     ]),
         ],
         [

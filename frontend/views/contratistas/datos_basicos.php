@@ -21,18 +21,14 @@ use yii\helpers\Url;
 
 
 ]); ?>
-
-    <?= $form->field($model2, 'rif')->textInput(['maxlength' => 50]) ?>
     
-
-    <?= $form->field($model2, 'tipo_persona')->dropDownList([ '0' => 'PERSONA NATURAL', '1' => 'PERSONA JURIDICA' ],
+    <?= $form->field($naturales_juridicas, 'tipo_persona')->dropDownList([ '0' => 'PERSONA NATURAL', '1' => 'PERSONA JURIDICA' ],
             ['prompt' => 'Seleccione tipo de persona',
                 
                 'onchange'=>'
                 $.get( "'.Url::toRoute('contratistas/obtenertipopersona').'", { id: $(this).val() } )
                             .done(function( data ) {
-                            alert(data);
-                                $("#sector").html( data );
+                                $("#respuesta_ajax").html( data );
                             }
                         );
             '
@@ -40,10 +36,15 @@ use yii\helpers\Url;
               
          
                 ]) ?>
-    
-     <div id = "sector"></div>
 
-    <?= $form->field($model2, 'denominacion')->textInput(['maxlength' => 50]) ?>    
+    <?= $form->field($naturales_juridicas, 'rif')->textInput(['maxlength' => 50]) ?>
+    
+
+    
+    
+     <div id="respuesta_ajax"></div>
+
+    <?= $form->field($naturales_juridicas, 'denominacion')->textInput(['maxlength' => 50]) ?>    
 
     <?= $form->field($model, 'sigla')->textInput(['maxlength' => 50]) ?>
     
