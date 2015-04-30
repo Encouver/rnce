@@ -124,7 +124,9 @@ class ContratistasController extends Controller
                          'natural_juridica'=> $natural_juridica,
                          
                          ));
-         }else{
+         }
+         if($id=='1'){
+             return "hola mundo";
          
          }
         
