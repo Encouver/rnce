@@ -1,3 +1,45 @@
+-- Table: cuentas.sys_totales
+
+-- DROP TABLE cuentas.sys_totales;
+
+CREATE TABLE cuentas.sys_totales
+(
+  id serial NOT NULL, -- Clave primaria
+  classname character varying(200) NOT NULL, -- Nombre de la tabla a donde pertenecen los totales
+  valor character varying(255) NOT NULL, -- Valores separados por : que indican la cantidad de los totales
+  id_classname integer NOT NULL, -- Clave "foranea" a la tabla referenciada por classname
+  sys_status boolean NOT NULL DEFAULT true, -- Estatus interno del sistema
+  sys_creado_el timestamp with time zone DEFAULT now(), -- Fecha de creación del registro.
+  sys_actualizado_el timestamp with time zone, -- Fecha de última actualización del registro.
+  sys_finalizado_el timestamp with time zone, -- Fecha de "eliminado" el registro.
+  contratista_id integer NOT NULL, -- Clave foranea al contratista
+  total boolean DEFAULT false, -- si el valor pertenece a un total
+  CONSTRAINT sys_totales_pkey PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE cuentas.sys_totales
+  OWNER TO eureka;
+COMMENT ON TABLE cuentas.sys_totales
+  IS 'Tabla donde se almanecaran los totales de todas las cuentas';
+COMMENT ON COLUMN cuentas.sys_totales.id IS 'Clave primaria';
+COMMENT ON COLUMN cuentas.sys_totales.classname IS 'Nombre de la tabla a donde pertenecen los totales';
+COMMENT ON COLUMN cuentas.sys_totales.valor IS 'Valores separados por : que indican la cantidad de los totales';
+COMMENT ON COLUMN cuentas.sys_totales.id_classname IS 'Clave "foranea" a la tabla referenciada por classname';
+COMMENT ON COLUMN cuentas.sys_totales.sys_status IS 'Estatus interno del sistema';
+COMMENT ON COLUMN cuentas.sys_totales.sys_creado_el IS 'Fecha de creación del registro.';
+COMMENT ON COLUMN cuentas.sys_totales.sys_actualizado_el IS 'Fecha de última actualización del registro.';
+COMMENT ON COLUMN cuentas.sys_totales.sys_finalizado_el IS 'Fecha de "eliminado" el registro.';
+COMMENT ON COLUMN cuentas.sys_totales.contratista_id IS 'Clave foranea al contratista';
+COMMENT ON COLUMN cuentas.sys_totales.total IS 'si el valor pertenece a un total';
+
+
+
+ALTER TABLE cuentas.sys_totales ADD COLUMN ahno character varying(100);
+ALTER TABLE cuentas.sys_totales ALTER COLUMN ahno SET NOT NULL;
+COMMENT ON COLUMN cuentas.sys_totales.ahno IS 'Año y mes del cierre contable';
+
 -- Table: cuentas.a_efectivos_bancos
 
 -- DROP TABLE cuentas.a_efectivos_bancos;
@@ -122,7 +164,7 @@ CREATE INDEX fki_usuario_cuenta_a
 
 CREATE TABLE cuentas.a_efectivos_cajas
 (
-  id integer NOT NULL DEFAULT nextval('cuentas.a_efectivo_caja_id_seq'::regclass), -- Clave foranea
+  id serial NOT NULL, -- Clave foranea
   nombre_caja_id integer, -- Clave foranea a la tabla public.nombres_cajas
   saldo_cierre_ae numeric(38,6) NOT NULL, -- Saldo al cierre de la actividad economica
   tipo_moneda_id integer, -- Clave foranea a la tabla public.sys_divisas
@@ -328,45 +370,3 @@ CREATE INDEX fki_usuario_inversiones
   ON cuentas.a_inversiones_negociar
   USING btree
   (creado_por);
-
--- Table: cuentas.sys_totales
-
--- DROP TABLE cuentas.sys_totales;
-
-CREATE TABLE cuentas.sys_totales
-(
-  id serial NOT NULL, -- Clave primaria
-  classname character varying(200) NOT NULL, -- Nombre de la tabla a donde pertenecen los totales
-  valor character varying(255) NOT NULL, -- Valores separados por : que indican la cantidad de los totales
-  id_classname integer NOT NULL, -- Clave "foranea" a la tabla referenciada por classname
-  sys_status boolean NOT NULL DEFAULT true, -- Estatus interno del sistema
-  sys_creado_el timestamp with time zone DEFAULT now(), -- Fecha de creación del registro.
-  sys_actualizado_el timestamp with time zone, -- Fecha de última actualización del registro.
-  sys_finalizado_el timestamp with time zone, -- Fecha de "eliminado" el registro.
-  contratista_id integer NOT NULL, -- Clave foranea al contratista
-  total boolean DEFAULT false, -- si el valor pertenece a un total
-  CONSTRAINT sys_totales_pkey PRIMARY KEY (id)
-)
-WITH (
-  OIDS=FALSE
-);
-ALTER TABLE cuentas.sys_totales
-  OWNER TO eureka;
-COMMENT ON TABLE cuentas.sys_totales
-  IS 'Tabla donde se almanecaran los totales de todas las cuentas';
-COMMENT ON COLUMN cuentas.sys_totales.id IS 'Clave primaria';
-COMMENT ON COLUMN cuentas.sys_totales.classname IS 'Nombre de la tabla a donde pertenecen los totales';
-COMMENT ON COLUMN cuentas.sys_totales.valor IS 'Valores separados por : que indican la cantidad de los totales';
-COMMENT ON COLUMN cuentas.sys_totales.id_classname IS 'Clave "foranea" a la tabla referenciada por classname';
-COMMENT ON COLUMN cuentas.sys_totales.sys_status IS 'Estatus interno del sistema';
-COMMENT ON COLUMN cuentas.sys_totales.sys_creado_el IS 'Fecha de creación del registro.';
-COMMENT ON COLUMN cuentas.sys_totales.sys_actualizado_el IS 'Fecha de última actualización del registro.';
-COMMENT ON COLUMN cuentas.sys_totales.sys_finalizado_el IS 'Fecha de "eliminado" el registro.';
-COMMENT ON COLUMN cuentas.sys_totales.contratista_id IS 'Clave foranea al contratista';
-COMMENT ON COLUMN cuentas.sys_totales.total IS 'si el valor pertenece a un total';
-
-
-
-ALTER TABLE cuentas.sys_totales ADD COLUMN ahno character varying(100);
-ALTER TABLE cuentas.sys_totales ALTER COLUMN ahno SET NOT NULL;
-COMMENT ON COLUMN cuentas.sys_totales.ahno IS 'Año y mes del cierre contable';
