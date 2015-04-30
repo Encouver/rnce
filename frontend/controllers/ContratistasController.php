@@ -61,6 +61,28 @@ class ContratistasController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
+    
+    public function actionRaul()
+    {
+        
+   
+     $natural_juridica = new SysNaturalesJuridicas();
+        
+             $persona_natural = new PersonasNaturales();
+             
+           
+             return $this->render('personas_naturales', 
+                     array('persona_natural' => $persona_natural,
+                         'natural_juridica'=> $natural_juridica,
+      
+                         ));
+             
+            // if$model->validate()
+                 
+              
+         
+        
+    }
     public function actionCreate()
     {
         $model = new Contratistas();
@@ -112,10 +134,12 @@ class ContratistasController extends Controller
      public function actionObtenertipopersona($id)
    {
      $contratista = new Contratistas();
-     $natural_juridica = SysNaturalesJuridicas();
+     $natural_juridica = new SysNaturalesJuridicas();
         if ($id=='0'){
              $persona_natural = new PersonasNaturales();
-             return $this->renderPartial('personas_naturales', 
+             
+             
+             return $this->renderAjax('personas_naturales', 
                      array('persona_natural' => $persona_natural,
                          'natural_juridica'=> $natural_juridica,
                          'contratista'=> $contratista,
@@ -132,11 +156,15 @@ class ContratistasController extends Controller
          
          
    }
+    public function actionDatosnatural()
+   {
+        
+   }
      public function actionDatosbasicos()
    {
-       
+       return "hola mundo";
          
-         $model = new Contratistas();
+      /*   $model = new Contratistas();
         $naturales_juridicas = new SysNaturalesJuridicas();
         if ($model->load(Yii::$app->request->post()) && $naturales_juridicas->load(Yii::$app->request->post())) {
             $naturales_juridicas->juridica=true;
@@ -180,10 +208,7 @@ class ContratistasController extends Controller
                        else return "guardado con exito";
                    }
                }
-               /*else{
-                    //print_r($_POST);
-                    return "no fue guardado";
-                }*/
+               
                if(!$flag)
                {
                    $transaction->rollBack();
@@ -192,9 +217,9 @@ class ContratistasController extends Controller
                $transaction->rollBack();
            }
        }
+            
 
-
-        }
+        }*/
    }
 
     /**

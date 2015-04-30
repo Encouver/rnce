@@ -1,8 +1,6 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
-use demogorgorn\ajax\AjaxSubmitButton;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 /* @var $this yii\web\View */

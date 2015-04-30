@@ -12,7 +12,11 @@ use demogorgorn\ajax\AjaxSubmitButton;
 
 <div class="personas-naturales-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin([
+        'id' => "raul",
+     //'action' => ['contratistas/datosbasicos'],
+
+]); ?>
     <?= $form->field($natural_juridica, 'rif')->textInput(['maxlength' => 50]) ?>
     
     <?= $form->field($persona_natural, 'primer_nombre')->textInput(['maxlength' => 255]) ?>
@@ -23,7 +27,24 @@ use demogorgorn\ajax\AjaxSubmitButton;
 
     <?= $form->field($persona_natural, 'segundo_apellido')->textInput(['maxlength' => 255]) ?>
 
-    
+     <?php AjaxSubmitButton::begin([
+        'label' => 'Enviar',
+        'ajaxOptions' => [
+            'type'=>'POST',
+
+            // 'dataType' => "json",
+            'url'=>Yii::$app->urlManager->createUrl('contratistas/datosbasicos'),
+            'success' => new \yii\web\JsExpression('function(html){
+                $("#output").html(html);
+                 alert("probando");  
+                }'),
+        ],
+        'options' => ['class' => 'btn btn-success', 'type' => 'submit'],
+        ]);
+
+        AjaxSubmitButton::end();?>
     <?php ActiveForm::end(); ?>
 
 </div>
+
+<div id="output"></div>
