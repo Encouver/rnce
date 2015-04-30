@@ -59,6 +59,6 @@ return [
 		        // message source
 		        // 'downloadAction' => 'gridview/export/download',
 		        // 'i18n' => []
-		    ]
+		 ]
 	],
 ];

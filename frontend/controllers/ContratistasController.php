@@ -116,8 +116,25 @@ class ContratistasController extends Controller
          echo "hola";
          
    }
-     public function actionDatosbasicos()
+    public function actionDatosbasicos()
    {
+
+        $headers = Yii::$app->request->headers;
+
+        if (0 === strpos($headers->get('Content-Type'), 'application/json')) {
+            if(Yii::$app->request->isAjax) echo "probando";
+                
+                file_get_contents('php://input');
+                
+                echo html_entity_decode(file_get_contents('php://input'));
+                
+                //print_r($data);
+            //$data = json_decode(Yii::$app->request->bodyParams);
+            //print_r(Yii::$app->request->post('data'));
+            //echo Yii::$app->request;
+            //$request->request->replace(is_array($data) ? $data : array());
+            //echo "Hola";
+        }
         //$model = new Contratistas();
          //$model2 = new SysNaturalesJuridicas();
         //Yii::$app->session->setFlash('success', 'Si llego a la funcion');
@@ -128,12 +145,12 @@ class ContratistasController extends Controller
                'model2'=>$model2,
            ]);*/
           //Yii::$app->response->format = Response::FORMAT_JSON;
-           $res = array(
+        /*   $res = array(
             'body'    => date('Y-m-d H:i:s'),
             'success' => true,
         );
  
-        return json_encode($res);
+        return json_encode($res);*/
         //echo "ohoao";
    }
 

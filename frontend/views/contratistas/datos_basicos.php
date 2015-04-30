@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use demogorgorn\ajax\AjaxSubmitButton;
+use yii\helpers\Json;
 /* @var $this yii\web\View */
 /* @var $model common\models\p\Contratistas */
 /* @var $form yii\widgets\ActiveForm */
@@ -12,11 +13,12 @@ use demogorgorn\ajax\AjaxSubmitButton;
 
     <?php $form = ActiveForm::begin([
         'id' => "raul",
+        //'htmlOptions'=>array('enctype'=>'application/json'),
     //'action' => ['contratistas/datosbasicos'],
-        /*'enableAjaxValidation' => true,
-        
+        'enableAjaxValidation' => false,
+        /*
         'ajaxParam'  => 'ajax'*/
-        'ajaxDataType' => 'json'
+        //'ajaxDataType' => 'json'
 
 
 ]); ?>
@@ -37,15 +39,13 @@ use demogorgorn\ajax\AjaxSubmitButton;
         'label' => 'Enviar',
         'ajaxOptions' => [
             'type'=>'POST',
+            //'encode' => 'identity',
+            'dataType' => "json",
             'contentType' => "application/json; charset=utf-8",
-             'dataType' => "json",
             'url'=>Yii::$app->urlManager->createUrl('contratistas/datosbasicos'),
             /*'cache' => false, */
-            'data' => '$("#raul").serialize()',
-            'success' => new \yii\web\JsExpression('function(html){
-                $("#output").html(html);
-                    alert("raul es marico");
-                }'),
+            //'data'=> new \yii\web\JsExpression('Jquery(form).serialize'),
+            
         ],
         'options' => ['class' => 'btn btn-success', 'type' => 'submit'],
         ]);
