@@ -136,7 +136,7 @@ class ContratistasController extends Controller
         //$model = new Contratistas();
          //$model2 = new SysNaturalesJuridicas();
         //Yii::$app->session->setFlash('success', 'Si llego a la funcion');
-        
+
         //return $this->renderAjax('_form');
       /* return $this->render('acordion', [
                'model' => $model,
@@ -147,25 +147,81 @@ class ContratistasController extends Controller
             'body'    => date('Y-m-d H:i:s'),
             'success' => true,
         );
- 
+
         return json_encode($res);
         //echo "ohoao";*/
-         
-         $model = new Contratistas();
+       $model = new Contratistas();
+       $model2 = new SysNaturalesJuridicas();
+
+
+       if ($model->load(Yii::$app->request->post()) && $model2->load(Yii::$app->request->post())) {
+           $transaction = \Yii::$app->db->beginTransaction();
+           try {
+                $flag =false;
+               $model2->juridica = true;
+               $model2->sys_status = true;
+               if ($model2->save()) {
+                   $model->estatus_contratista_id = 1;
+                   $model->natural_juridica_id = $model2->id;
+                   if ($model->save()) {
+                       if ($usuario= \common\models\p\User::findOne(Yii::$app->user->identity->id)) {
+                           $usuario->contratista_id = $model->id;
+                           if ($usuario->save()) {
+                               Yii::$app->session->setFlash('success', 'Datos basicos guardados con exito');
+                               $transaction->commit();
+                               $flag = true;
+
+                               //return $this->redirect(['view', 'id' => $model->id]);
+                           } else {
+                               $transaction->rollBack();
+                               Yii::$app->session->setFlash('error', 'No se ha podido guardar el registro');
+                           }
+                       }
+                       else return "guardado con exito";
+                   }
+               }
+               /*else{
+                    //print_r($_POST);
+                    return "no fue guardado";
+                }*/
+               if(!$flag)
+               {
+                   $transaction->rollBack();
+               }
+           } catch (Exception $e) {
+               $transaction->rollBack();
+           }
+       }
+
+
+/*         $model = new Contratistas();
         $model2 = new SysNaturalesJuridicas();
         if ($model->load(Yii::$app->request->post()) && $model2->load(Yii::$app->request->post())) {
             $model2->juridica=true;
             $model2->sys_status=true;
-            $model2->save();
-            $model->estatus_contratista_id = 1;
-            $model->natural_juridica_id = $model2->id;
-            $model->save();
-            
-            return "guardado con exito";
+            if($model2->save()) {
+                $model->estatus_contratista_id = 1;
+                $model->natural_juridica_id = $model2->id;
+                if($model->save()) {
+                    $usuario = \common\models\p\User::find(Yii::$app->user->identity->id);
+                    if ($usuario) {
+                        $usuario->contratista_id = $model->id;
+                        print_r($usuario);
+                        if ($usuario->save()) {
+                            Yii::$app->session->setFlash('success', 'Datos basicos guardados con exito');
+
+                            return $this->redirect(['view', 'id' => $model->id]);
+                        } else {
+
+                            Yii::$app->session->setFlash('error', 'No se ha podido guardar el registro');
+                        }return "guardado con exito";
+                    }
+                }
+            }
         }else{
-            print_r($_POST);
+            //print_r($_POST);
             return "no fue guardado";
-        }
+        }*/
    }
 
     /**
