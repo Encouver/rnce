@@ -891,3 +891,21 @@ ALTER TABLE comisarios_auditores ADD COLUMN natural_juridica_id integer;
 ALTER TABLE comisarios_auditores ALTER COLUMN natural_juridica_id SET NOT NULL;
 COMMENT ON COLUMN comisarios_auditores.natural_juridica_id IS 'Clave foranea a la tabla sys_naturales_juridicas';
 
+
+
+
+
+
+
+
+
+ALTER TABLE personas_naturales ALTER COLUMN telefono_local DROP NOT NULL;
+ALTER TABLE personas_naturales ALTER COLUMN telefono_celular DROP NOT NULL;
+ALTER TABLE personas_naturales ALTER COLUMN correo DROP NOT NULL;
+
+
+ALTER TABLE contratistas ALTER COLUMN tipo_sector DROP NOT NULL;
+
+
+
+

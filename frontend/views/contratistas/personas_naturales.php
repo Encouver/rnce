@@ -33,10 +33,10 @@ use demogorgorn\ajax\AjaxSubmitButton;
             'type'=>'POST',
 
             // 'dataType' => "json",
-            'url'=>Yii::$app->urlManager->createUrl('contratistas/datosbasicos'),
+            'url'=>Yii::$app->urlManager->createUrl('contratistas/datosnatural'),
             'success' => new \yii\web\JsExpression('function(html){
                 $("#output").html(html);
-                 alert("probando");  
+               
                 }'),
         ],
         'options' => ['class' => 'btn btn-success', 'type' => 'submit'],
