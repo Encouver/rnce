@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use demogorgorn\ajax\AjaxSubmitButton;
+
 
 /* @var $this yii\web\View */
 /* @var $model common\models\p\PersonasNaturales */
@@ -21,24 +23,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($persona_natural, 'segundo_apellido')->textInput(['maxlength' => 255]) ?>
 
-     <?php AjaxSubmitButton::begin([
-        'label' => 'Enviar',
-        'ajaxOptions' => [
-            'type'=>'POST',
-            //'contentType' => "application/json; charset=utf-8",
-             'dataType' => "json",
-            'url'=>Yii::$app->urlManager->createUrl('contratistas/datosbasicos'),
-            /*'cache' => false, */
-            //'data' => '$("#raul").serialize()',
-            'success' => new \yii\web\JsExpression('function(html){
-                $("#output").html(html);
-                    alert("raul es marico");
-                }'),
-        ],
-        'options' => ['class' => 'btn btn-success', 'type' => 'submit'],
-        ]);
-
-        AjaxSubmitButton::end();?>
+    
     <?php ActiveForm::end(); ?>
 
 </div>

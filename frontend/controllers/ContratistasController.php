@@ -117,7 +117,7 @@ class ContratistasController extends Controller
              $persona_natural = new PersonasNaturales();
              return $this->renderPartial('personas_naturales', 
                      array('persona_natural' => $persona_natural,
-                         'natural_jurdica'=> $natural_juridica,
+                         'natural_juridica'=> $natural_juridica,
                          'contratista'=> $contratista,
                          ));
              
