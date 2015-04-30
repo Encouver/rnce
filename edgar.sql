@@ -364,3 +364,9 @@ COMMENT ON COLUMN cuentas.sys_totales.sys_actualizado_el IS 'Fecha de última ac
 COMMENT ON COLUMN cuentas.sys_totales.sys_finalizado_el IS 'Fecha de "eliminado" el registro.';
 COMMENT ON COLUMN cuentas.sys_totales.contratista_id IS 'Clave foranea al contratista';
 COMMENT ON COLUMN cuentas.sys_totales.total IS 'si el valor pertenece a un total';
+
+
+
+ALTER TABLE cuentas.sys_totales ADD COLUMN ahno character varying(100);
+ALTER TABLE cuentas.sys_totales ALTER COLUMN ahno SET NOT NULL;
+COMMENT ON COLUMN cuentas.sys_totales.ahno IS 'Año y mes del cierre contable';
