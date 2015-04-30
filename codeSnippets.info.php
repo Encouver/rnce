@@ -365,7 +365,21 @@ table:  Product_tag
 $currentTags = Tag::find()->innerJoin('product_tag', 'tag.id = product_tag.tag_id')->where(['product_id' => $model->id])->all();
 ?>
 
-
+/ ***************Dropdown dependt  metodo get***/
+ <?= $form->field($model2, 'tipo_persona')->dropDownList([ '0' => 'PERSONA NATURAL', '1' => 'PERSONA JURIDICA' ],
+            ['prompt' => 'Seleccione tipo de persona',
+                
+                'onchange'=>'
+                $.get( "'.Url::toRoute('contratistas/datos').'", { id: $(this).val() } )
+                            .done(function( data ) {
+                                $("#sector").html( data );
+                            }
+                        );
+            '
+                
+              
+         
+                ]) ?>
 
 /**************************   MODULO DE USUARIOS   **************************/
 

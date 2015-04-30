@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use demogorgorn\ajax\AjaxSubmitButton;
-use yii\helpers\Json;
+use yii\helpers\Url;
 /* @var $this yii\web\View */
 /* @var $model common\models\p\Contratistas */
 /* @var $form yii\widgets\ActiveForm */
@@ -13,24 +13,40 @@ use yii\helpers\Json;
 
     <?php $form = ActiveForm::begin([
         'id' => "raul",
-        //'htmlOptions'=>array('enctype'=>'application/json'),
     //'action' => ['contratistas/datosbasicos'],
-        'enableAjaxValidation' => false,
-        /*
+        /*'enableAjaxValidation' => true,
+        
         'ajaxParam'  => 'ajax'*/
-        //'ajaxDataType' => 'json'
+        'ajaxDataType' => 'json'
 
 
 ]); ?>
 
     <?= $form->field($model2, 'rif')->textInput(['maxlength' => 50]) ?>
     
+
+    <?= $form->field($model2, 'tipo_persona')->dropDownList([ '0' => 'PERSONA NATURAL', '1' => 'PERSONA JURIDICA' ],
+            ['prompt' => 'Seleccione tipo de persona',
+                
+                'onchange'=>'
+                $.get( "'.Url::toRoute('contratistas/obtenertipopersona').'", { id: $(this).val() } )
+                            .done(function( data ) {
+                            alert(data);
+                                $("#sector").html( data );
+                            }
+                        );
+            '
+                
+              
+         
+                ]) ?>
+    
+     <div id = "sector"></div>
+
     <?= $form->field($model2, 'denominacion')->textInput(['maxlength' => 50]) ?>    
 
     <?= $form->field($model, 'sigla')->textInput(['maxlength' => 50]) ?>
     
-    <?= $form->field($model, 'tipo_sector')->dropDownList([ 'PUBLICO' => 'PUBLICO', 'PRIVADO' => 'PRIVADO', 'MIXTO' => 'MIXTO' ], ['prompt' => '']) ?>
-   
    <!-- <div class="form-group">
          <?= Html::submitButton(Yii::t('app', 'Create'), ['class' => 'btn btn-success']) ?> 
     </div>-->
@@ -39,13 +55,15 @@ use yii\helpers\Json;
         'label' => 'Enviar',
         'ajaxOptions' => [
             'type'=>'POST',
-            //'encode' => 'identity',
-            'dataType' => "json",
-            'contentType' => "application/json; charset=utf-8",
+            //'contentType' => "application/json; charset=utf-8",
+             'dataType' => "json",
             'url'=>Yii::$app->urlManager->createUrl('contratistas/datosbasicos'),
             /*'cache' => false, */
-            //'data'=> new \yii\web\JsExpression('Jquery(form).serialize'),
-            
+            //'data' => '$("#raul").serialize()',
+            'success' => new \yii\web\JsExpression('function(html){
+                $("#output").html(html);
+                    alert("raul es marico");
+                }'),
         ],
         'options' => ['class' => 'btn btn-success', 'type' => 'submit'],
         ]);

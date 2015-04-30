@@ -111,30 +111,28 @@ class ContratistasController extends Controller
         }
     }
 
-     public function actionDatos($id)
+     public function actionObtenertipopersona()
    {
-         echo "hola";
+     
+        
+         
+         return '<div class="form-group field-contratistas-tipo_sector required">
+                <label class="control-label" for="contratistas-tipo_sector">Tipo Sector</label>
+                <select id="contratistas-tipo_sector" class="form-control" name="Contratistas[tipo_sector]">
+                    <option value="">SELECCIONE TIPO SECTOR</option>
+                    <option value="PUBLICO">PUBLICO</option>
+                    <option value="PRIVADO">PRIVADO</option>
+                    <option value="MIXTO">MIXTO</option>
+                </select>
+
+                <div class="help-block"></div>
+            </div>';
+        
+         
          
    }
-    public function actionDatosbasicos()
+     public function actionDatosbasicos()
    {
-
-        $headers = Yii::$app->request->headers;
-
-        if (0 === strpos($headers->get('Content-Type'), 'application/json')) {
-            if(Yii::$app->request->isAjax) echo "probando";
-                
-                file_get_contents('php://input');
-                
-                echo html_entity_decode(file_get_contents('php://input'));
-                
-                //print_r($data);
-            //$data = json_decode(Yii::$app->request->bodyParams);
-            //print_r(Yii::$app->request->post('data'));
-            //echo Yii::$app->request;
-            //$request->request->replace(is_array($data) ? $data : array());
-            //echo "Hola";
-        }
         //$model = new Contratistas();
          //$model2 = new SysNaturalesJuridicas();
         //Yii::$app->session->setFlash('success', 'Si llego a la funcion');
@@ -150,8 +148,24 @@ class ContratistasController extends Controller
             'success' => true,
         );
  
-        return json_encode($res);*/
-        //echo "ohoao";
+        return json_encode($res);
+        //echo "ohoao";*/
+         
+         $model = new Contratistas();
+        $model2 = new SysNaturalesJuridicas();
+        if ($model->load(Yii::$app->request->post()) && $model2->load(Yii::$app->request->post())) {
+            $model2->juridica=true;
+            $model2->sys_status=true;
+            $model2->save();
+            $model->estatus_contratista_id = 1;
+            $model->natural_juridica_id = $model2->id;
+            $model->save();
+            
+            return "guardado con exito";
+        }else{
+            print_r($_POST);
+            return "no fue guardado";
+        }
    }
 
     /**
