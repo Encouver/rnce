@@ -18,11 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
     'items' => [
         [
             'header' => 'Datos basicos',
-            'content' => $this->render('datos_basicos', [
-            'model' => $model,
-            'naturales_juridicas' => $naturales_juridicas,
-            'personas_naturales'=>$personas_naturales,
-    ]),
+            'content' => $this->render('datos_basicos'),
         ],
         [
             'header' => 'Section 2',
