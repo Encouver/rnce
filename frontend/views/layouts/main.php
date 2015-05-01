@@ -47,7 +47,7 @@ AppAsset::register($this);
                     'items' => [
                          ['label' => 'Balance general', 'url' => ['/site/balancegeneral']],
                          ['label' => 'Estado de resultados', 'url' => ['/site/edoresultados']],
-                         ['label' => 'Efectivos y sus equivalentes', 'url' => ['/nombres-cajas/efectivosequivalentes']],
+                         ['label' => 'Efectivos y sus equivalentes', 'url' => ['/aefectivos-bancos/efectivosequivalentes']],
                     ],
                 ],
                 ['label' => 'Bienes',
@@ -140,7 +140,7 @@ AppAsset::register($this);
 
     <footer class="footer">
         <div class="container">
-        <p class="pull-left">&copy; Registro Nacional de Contratistas <?= date('Y') ?></p>
+        <p class="pull-left">&copy; Registro Nacional de Contrataciones <?= date('Y') ?></p>
         <p class="pull-right"><?php // Yii::powered() ?></p>
         </div>
     </footer>
