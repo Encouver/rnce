@@ -26,6 +26,12 @@ class AEfectivosBancosController extends BaseController
         ];
     }
 
+    
+    public function actionEfectivosequivalentes()
+    {
+        return $this->render('efectivosequivalentes');
+    }
+
     /**
      * Lists all AEfectivosBancos models.
      * @return mixed

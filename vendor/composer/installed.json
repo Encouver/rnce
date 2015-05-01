@@ -2883,12 +2883,12 @@
         "source": {
             "type": "git",
             "url": "https://github.com/RobinHerbots/jquery.inputmask.git",
-            "reference": "1061d80bf0d62c20ab18c443494463b3a5349922"
+            "reference": "85980b17522759a5c62e37ea6bcd8d01e07d0747"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/RobinHerbots/jquery.inputmask/zipball/1061d80bf0d62c20ab18c443494463b3a5349922",
-            "reference": "1061d80bf0d62c20ab18c443494463b3a5349922",
+            "url": "https://api.github.com/repos/RobinHerbots/jquery.inputmask/zipball/85980b17522759a5c62e37ea6bcd8d01e07d0747",
+            "reference": "85980b17522759a5c62e37ea6bcd8d01e07d0747",
             "shasum": ""
         },
         "require": {
