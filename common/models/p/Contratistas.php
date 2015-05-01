@@ -57,7 +57,7 @@ class Contratistas extends \common\components\BaseActiveRecord
     public function rules()
     {
         return [
-            [['estatus_contratista_id', 'tipo_sector'], 'required'],
+            [['estatus_contratista_id'], 'required'],
             [['natural_juridica_id', 'estatus_contratista_id'], 'integer'],
             [['sys_status'], 'boolean'],
             [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],

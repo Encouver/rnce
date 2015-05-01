@@ -5,6 +5,8 @@ namespace frontend\controllers;
 use Yii;
 use common\models\p\Contratistas;
 use common\models\p\SysNaturalesJuridicas;
+use common\models\p\PersonasNaturales;
+use common\models\p\PersonasJuridicas;
 use app\models\ContratistasSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -59,6 +61,8 @@ class ContratistasController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
+    
+   
     public function actionCreate()
     {
         $model = new Contratistas();
@@ -99,72 +103,155 @@ class ContratistasController extends Controller
      public function actionAcordion()
     {
          $model = new Contratistas();
-        $model2 = new SysNaturalesJuridicas();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
-            return $this->render('acordion', [
-                'model' => $model,
-                'model2'=>$model2,
-            ]);
+            return $this->render('acordion');
         }
     }
 
-     public function actionObtenertipopersona()
+     public function actionObtenertipopersona($id)
    {
-     
-        
+     $contratista = new Contratistas();
+     $natural_juridica = new SysNaturalesJuridicas();
+        if ($id=='0'){
+             $persona_natural = new PersonasNaturales();
+             
+             
+             return $this->renderAjax('personas_naturales', 
+                     array('persona_natural' => $persona_natural,
+                         'natural_juridica'=> $natural_juridica,
+                         
+                         ));
+         }
+         if($id=='1'){
+             return "hola mundo";
          
-         return '<div class="form-group field-contratistas-tipo_sector required">
-                <label class="control-label" for="contratistas-tipo_sector">Tipo Sector</label>
-                <select id="contratistas-tipo_sector" class="form-control" name="Contratistas[tipo_sector]">
-                    <option value="">SELECCIONE TIPO SECTOR</option>
-                    <option value="PUBLICO">PUBLICO</option>
-                    <option value="PRIVADO">PRIVADO</option>
-                    <option value="MIXTO">MIXTO</option>
-                </select>
-
-                <div class="help-block"></div>
-            </div>';
+         }
+        
         
          
          
    }
+    public function actionDatosnatural()
+   {
+            
+        $contratista = new Contratistas();
+        $natural_juridica = new SysNaturalesJuridicas();
+        $persona_natural = new PersonasNaturales();
+       if ($natural_juridica->load(Yii::$app->request->post()) && $persona_natural->load(Yii::$app->request->post())) {
+           $transaction = \Yii::$app->db->beginTransaction();
+           try {
+                $flag =false;
+                $natural_juridica->juridica=false;
+                $natural_juridica->denominacion = $persona_natural->primer_nombre.' '.$persona_natural->primer_apellido;
+               if ($natural_juridica->save()) {
+                   
+                   $persona_natural->rif = $natural_juridica->rif;
+                   $persona_natural->sys_pais_id = 1;
+                   $persona_natural->nacionalidad = "VENEZOLANA";
+                   $persona_natural->creado_por = 1;
+                   if ($persona_natural->save()) {
+                       
+                       $contratista->estatus_contratista_id = 1;
+                       $contratista ->natural_juridica_id = $natural_juridica->id;
+                       
+                       if($contratista->save()){
+                           
+                           if ($usuario= \common\models\p\User::findOne(Yii::$app->user->identity->id)) {
+                           $usuario->contratista_id = $contratista->id;
+                           if ($usuario->save()) {
+                               Yii::$app->session->setFlash('success', 'Datos basicos guardados con exito');
+                               $transaction->commit();
+                               $flag = true;
+                               return "Datos guardados con mucho exito";
+                               //return $this->redirect(['view', 'id' => $model->id]);
+                           } else {
+                               $transaction->rollBack();
+                               Yii::$app->session->setFlash('error', 'No se ha podido guardar el registro');
+                           }
+                       }
+                       else return "guardado con exito";
+                       }
+                       
+                   }
+               }
+               
+               if(!$flag)
+               {
+                   $transaction->rollBack();
+               }
+           } catch (Exception $e) {
+               $transaction->rollBack();
+           }
+       }else{
+           
+           return "Datos incompleto";
+       }
+            
+
+        
+   }
      public function actionDatosbasicos()
    {
-        //$model = new Contratistas();
-         //$model2 = new SysNaturalesJuridicas();
-        //Yii::$app->session->setFlash('success', 'Si llego a la funcion');
-        
-        //return $this->renderAjax('_form');
-      /* return $this->render('acordion', [
-               'model' => $model,
-               'model2'=>$model2,
-           ]);*/
-          //Yii::$app->response->format = Response::FORMAT_JSON;
-        /*   $res = array(
-            'body'    => date('Y-m-d H:i:s'),
-            'success' => true,
-        );
- 
-        return json_encode($res);
-        //echo "ohoao";*/
+     
          
-         $model = new Contratistas();
-        $model2 = new SysNaturalesJuridicas();
-        if ($model->load(Yii::$app->request->post()) && $model2->load(Yii::$app->request->post())) {
-            $model2->juridica=true;
-            $model2->sys_status=true;
+        $model = new Contratistas();
+        $naturales_juridicas = new SysNaturalesJuridicas();
+        if ($model->load(Yii::$app->request->post()) && $naturales_juridicas->load(Yii::$app->request->post())) {
+            $naturales_juridicas->juridica=true;
+            $naturales_juridicas->sys_status=true;
             $model2->save();
             $model->estatus_contratista_id = 1;
-            $model->natural_juridica_id = $model2->id;
+            $model->natural_juridica_id = $naturales_juridicasdel2->id;
             $model->save();
             
             return "guardado con exito";
         }else{
-            print_r($_POST);
-            return "no fue guardado";
+          
+
+       $model = new Contratistas();
+       $model2 = new SysNaturalesJuridicas();
+
+
+       if ($model->load(Yii::$app->request->post()) && $model2->load(Yii::$app->request->post())) {
+           $transaction = \Yii::$app->db->beginTransaction();
+           try {
+                $flag =false;
+               $model2->juridica = true;
+               $model2->sys_status = true;
+               if ($model2->save()) {
+                   $model->estatus_contratista_id = 1;
+                   $model->natural_juridica_id = $model2->id;
+                   if ($model->save()) {
+                       if ($usuario= \common\models\p\User::findOne(Yii::$app->user->identity->id)) {
+                           $usuario->contratista_id = $model->id;
+                           if ($usuario->save()) {
+                               Yii::$app->session->setFlash('success', 'Datos basicos guardados con exito');
+                               $transaction->commit();
+                               $flag = true;
+
+                               //return $this->redirect(['view', 'id' => $model->id]);
+                           } else {
+                               $transaction->rollBack();
+                               Yii::$app->session->setFlash('error', 'No se ha podido guardar el registro');
+                           }
+                       }
+                       else return "guardado con exito";
+                   }
+               }
+               
+               if(!$flag)
+               {
+                   $transaction->rollBack();
+               }
+           } catch (Exception $e) {
+               $transaction->rollBack();
+           }
+       }
+            
+
         }
    }
 

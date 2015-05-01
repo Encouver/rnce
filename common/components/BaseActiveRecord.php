@@ -69,10 +69,11 @@ class BaseActiveRecord extends ActiveRecord
 
 	public function beforeSave($insert){
 
-		parent::beforeSave($insert);
+		//parent::beforeSave($insert);
 
 		if (parent::beforeSave($insert)) {
-			if($this->scenario != 'eliminar'){
+			if($this->scenario != 'eliminar' and isset($this->sys_status)
+                and isset($this->sys_status) and isset($this->sys_actualizado_el)  and isset($this->sys_creado_el)){
 		    	$this->sys_status = true;
 		    	$this->sys_actualizado_el = date('Y-m-d H:i:s');
 				
