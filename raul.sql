@@ -908,4 +908,105 @@ ALTER TABLE contratistas ALTER COLUMN tipo_sector DROP NOT NULL;
 
 
 
+ALTER TABLE accionistas_otros ADD COLUMN empresa_fusionada_id integer;
+COMMENT ON COLUMN accionistas_otros.empresa_fusionada_id IS 'Clave foranea a la tabla empresas_fusionadas, en caso de que el accionista provenga de una fusion empresarial';
+
+
+ALTER TABLE accionistas_otros
+  ADD CONSTRAINT accionistas_otros_empresa_fusionada_id_fkey FOREIGN KEY (empresa_fusionada_id)
+      REFERENCES empresas_fusionadas (id) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+
+
+ALTER TABLE empresas_fusionadas ADD COLUMN descripcion_acuerdo text;
+ALTER TABLE empresas_fusionadas ALTER COLUMN descripcion_acuerdo SET NOT NULL;
+COMMENT ON COLUMN empresas_fusionadas.descripcion_acuerdo IS 'Descripcion del acuerdo soportado en el documento autenticado';
+
+
+ALTER TABLE empresas_fusionadas ADD COLUMN accion_suscrita integer;
+COMMENT ON COLUMN empresas_fusionadas.accion_suscrita IS 'Numero de acciones a suscribir';
+
+
+
+ALTER TABLE empresas_fusionadas ADD COLUMN valor_nominal numeric(38,6);
+ALTER TABLE empresas_fusionadas ALTER COLUMN valor_nominal SET NOT NULL;
+COMMENT ON COLUMN empresas_fusionadas.valor_nominal IS 'Valor nominal de la accion';
+
+
+ALTER TABLE empresas_fusionadas ADD COLUMN valor_venta numeric(38,6);
+ALTER TABLE empresas_fusionadas ALTER COLUMN valor_venta SET NOT NULL;
+COMMENT ON COLUMN empresas_fusionadas.valor_venta IS 'Valor de venta de las acciones';
+
+
+ALTER TABLE empresas_fusionadas ADD COLUMN prima numeric(38,6);
+ALTER TABLE empresas_fusionadas ALTER COLUMN prima SET NOT NULL;
+COMMENT ON COLUMN empresas_fusionadas.prima IS 'Prima o descuento por accion';
+
+ALTER TABLE empresas_fusionadas ADD COLUMN total_monto numeric(38,6);
+ALTER TABLE empresas_fusionadas ALTER COLUMN total_monto SET NOT NULL;
+COMMENT ON COLUMN empresas_fusionadas.total_monto IS 'monto total a cancelar';
+
+ALTER TABLE empresas_fusionadas ADD COLUMN capital_id integer;
+ALTER TABLE empresas_fusionadas ALTER COLUMN capital_id SET NOT NULL;
+COMMENT ON COLUMN empresas_fusionadas.capital_id IS 'Clave foranea a la tabla capitales_id, para registrar las formas de pago.';
+
+
+
+ALTER TABLE empresas_fusionadas
+  ADD CONSTRAINT empresas_fusiondad_capial_id_fkey FOREIGN KEY (capital_id)
+      REFERENCES capitales (id) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+ALTER TABLE capitales ADD COLUMN inversion numeric(38,6);
+COMMENT ON COLUMN capitales.inversion IS 'Monto de bs de la inversion, esto en caso de ser un tipo de capital FUSION EMPRESARIAL';
+
+ALTER TABLE capitales ADD COLUMN cuenta_cobrar numeric(38,6);
+COMMENT ON COLUMN capitales.cuenta_cobrar IS 'Monto en bs de la cuenta por cobrar, en caso de que el tipo de capital sea FUSION_EMPRESARIAL';
+
+
+
+CREATE TABLE fusiones_empresariales
+(
+  id serial NOT NULL, -- Clave primaria
+  sys_status boolean NOT NULL DEFAULT true, -- Estatus interno del sistema
+  sys_creado_el timestamp with time zone DEFAULT now(), -- Fecha de creación del registro.
+  sys_actualizado_el timestamp with time zone DEFAULT now(), -- Fecha de última actualización del registro.
+  sys_finalizado_el timestamp with time zone DEFAULT now(), -- Fecha de "eliminado" el registro.
+  acta_constitutiva_id integer NOT NULL, -- Clave foranea a la tabla actas_constitutivas
+  total_accion integer NOT NULL, -- Total Número de Acciones / Participaciones
+  valor_accion numeric(38,6) NOT NULL, -- Valor de las Acciones / Participaciones
+  total_prima numeric(38,6) NOT NULL, -- Total Primas/Descuentos en Acciones
+  total_plusvalia numeric(38,6) NOT NULL, -- Total Plusvalía
+  total_capital numeric(38,6) NOT NULL, -- Total Capital Social una vez aplicada la Fusión
+  CONSTRAINT fusiones_empresariales_pkey PRIMARY KEY (id),
+  CONSTRAINT fusiones_empresariales_acta_constitutiva_id_fkey FOREIGN KEY (acta_constitutiva_id)
+      REFERENCES actas_constitutivas (id) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE CASCADE
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE fusiones_empresariales
+  OWNER TO eureka;
+COMMENT ON TABLE fusiones_empresariales
+  IS 'Tabla donde se almacenan el resultado de las fusiones empresariales asociadas al acta constitutiva';
+COMMENT ON COLUMN fusiones_empresariales.id IS 'Clave primaria';
+COMMENT ON COLUMN fusiones_empresariales.sys_status IS 'Estatus interno del sistema';
+COMMENT ON COLUMN fusiones_empresariales.sys_creado_el IS 'Fecha de creación del registro.';
+COMMENT ON COLUMN fusiones_empresariales.sys_actualizado_el IS 'Fecha de última actualización del registro.';
+COMMENT ON COLUMN fusiones_empresariales.sys_finalizado_el IS 'Fecha de "eliminado" el registro.';
+COMMENT ON COLUMN fusiones_empresariales.acta_constitutiva_id IS 'Clave foranea a la tabla actas_constitutivas';
+COMMENT ON COLUMN fusiones_empresariales.total_accion IS 'Total Número de Acciones / Participaciones 
+';
+COMMENT ON COLUMN fusiones_empresariales.valor_accion IS 'Valor de las Acciones / Participaciones 
+';
+COMMENT ON COLUMN fusiones_empresariales.total_prima IS 'Total Primas/Descuentos en Acciones
+';
+COMMENT ON COLUMN fusiones_empresariales.total_plusvalia IS 'Total Plusvalía
+';
+COMMENT ON COLUMN fusiones_empresariales.total_capital IS 'Total Capital Social una vez aplicada la Fusión
+';
 

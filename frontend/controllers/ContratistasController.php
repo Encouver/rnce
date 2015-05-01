@@ -134,6 +134,23 @@ class ContratistasController extends Controller
          
          
    }
+   
+   public function actionRaul(){
+       
+       $contratista = new Contratistas();
+     $natural_juridica = new SysNaturalesJuridicas();
+     
+             $persona_natural = new PersonasNaturales();
+             
+             
+             return $this->render('personas_naturales', 
+                     array('persona_natural' => $persona_natural,
+                         'natural_juridica'=> $natural_juridica,
+                         
+                         ));
+         
+        
+   }
     public function actionDatosnatural()
    {
             
@@ -141,6 +158,8 @@ class ContratistasController extends Controller
         $natural_juridica = new SysNaturalesJuridicas();
         $persona_natural = new PersonasNaturales();
        if ($natural_juridica->load(Yii::$app->request->post()) && $persona_natural->load(Yii::$app->request->post())) {
+           
+           return "entro aqui";
            $transaction = \Yii::$app->db->beginTransaction();
            try {
                 $flag =false;
