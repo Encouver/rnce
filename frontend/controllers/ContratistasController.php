@@ -9,6 +9,7 @@ use common\models\p\PersonasNaturales;
 use common\models\p\PersonasJuridicas;
 use common\models\p\Domicilios;
 use common\models\p\Direcciones;
+use common\models\p\ContratistasContactos;
 use app\models\ContratistasSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -385,6 +386,63 @@ class ContratistasController extends Controller
                }else{
                    
                    return "Direccion principal no guardada";
+               }
+               
+               if(!$flag)
+               {
+                   $transaction->rollBack();
+               }
+           } catch (Exception $e) {
+               $transaction->rollBack();
+           }
+       }else{
+           return "Datos incompletos";
+       }
+            
+
+        
+   }
+
+   
+    public function actionPersonacontacto()
+   {
+     
+        $contratista_contacto = new ContratistasContactos();
+        $persona_natural  = new PersonasNaturales();
+         $natural_juridica  = new SysNaturalesJuridicas();
+       
+        if ($persona_natural->load(Yii::$app->request->post())) {
+           $transaction = \Yii::$app->db->beginTransaction();
+           try {
+                $flag =false;
+                $natural_juridica->rif= $persona_natural->rif;
+            $natural_juridica->juridica= false;
+            $natural_juridica->denominacion=$persona_natural->primer_nombre.' '.$persona_natural->primer_apellido;
+            $natural_juridica->sys_status=true;
+            $natural_juridica->save();
+            
+                $persona_natural->sys_pais_id = 1;
+            $persona_natural->nacionalidad = "NACIONAL";
+            $persona_natural->creado_por = 1;
+               if ($persona_natural->save()) {
+                $contratista_contacto->contacto_id = $persona_natural->id;
+          
+           $usuario= \common\models\p\User::findOne(Yii::$app->user->identity->id);
+            $contratista_contacto->contratista_id=  $usuario->contratista_id;
+                   if ($contratista_contacto->save()) {
+                      
+                               Yii::$app->session->setFlash('success', 'Datos basicos guardados con exito');
+                               $transaction->commit();
+                               return "Dtos guardados con exito";
+                               $flag = true;
+
+                       
+                   }else{
+                       return "Datos no guardados";
+                   }
+               }else{
+                   
+                   return "Persona de contacto no guardada";
                }
                
                if(!$flag)
