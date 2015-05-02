@@ -159,17 +159,18 @@ class ContratistasController extends Controller
         $persona_natural = new PersonasNaturales();
        if ($natural_juridica->load(Yii::$app->request->post()) && $persona_natural->load(Yii::$app->request->post())) {
            
-           return "entro aqui";
+      
            $transaction = \Yii::$app->db->beginTransaction();
            try {
                 $flag =false;
                 $natural_juridica->juridica=false;
                 $natural_juridica->denominacion = $persona_natural->primer_nombre.' '.$persona_natural->primer_apellido;
-               if ($natural_juridica->save()) {
+               
+                if ($natural_juridica->save()) {
                    
                    $persona_natural->rif = $natural_juridica->rif;
                    $persona_natural->sys_pais_id = 1;
-                   $persona_natural->nacionalidad = "VENEZOLANA";
+                   $persona_natural->nacionalidad = "NACIONAL";
                    $persona_natural->creado_por = 1;
                    if ($persona_natural->save()) {
                        
@@ -177,8 +178,9 @@ class ContratistasController extends Controller
                        $contratista ->natural_juridica_id = $natural_juridica->id;
                        
                        if($contratista->save()){
-                           
+                          
                            if ($usuario= \common\models\p\User::findOne(Yii::$app->user->identity->id)) {
+                               
                            $usuario->contratista_id = $contratista->id;
                            if ($usuario->save()) {
                                Yii::$app->session->setFlash('success', 'Datos basicos guardados con exito');
@@ -190,11 +192,16 @@ class ContratistasController extends Controller
                                $transaction->rollBack();
                                Yii::$app->session->setFlash('error', 'No se ha podido guardar el registro');
                            }
-                       }
+                            }
                        else return "guardado con exito";
                        }
                        
+                   }else{
+                       return "Persona natural no guardada";
                    }
+               }else{
+                   
+                   return "Natural juridica no guardada";
                }
                
                if(!$flag)

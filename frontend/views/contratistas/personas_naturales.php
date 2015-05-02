@@ -27,24 +27,40 @@ use demogorgorn\ajax\AjaxSubmitButton;
     <?= $form->field($persona_natural, 'primer_apellido')->textInput(['maxlength' => 255]) ?>
 
     <?= $form->field($persona_natural, 'segundo_apellido')->textInput(['maxlength' => 255]) ?>
-
-     <?php AjaxSubmitButton::begin([
-        'label' => 'Enviar',
-        'ajaxOptions' => [
-            'type'=>'POST',
-            
-            // 'dataType' => "json",
-            'url'=>Yii::$app->urlManager->createUrl('contratistas/datosnatural'),
-            'success' => new \yii\web\JsExpression('function(html){
-                $("#output").html(html);
-               
-                }'),
-        ],
-        'options' => ['class' => 'btn btn-success', 'type' => 'submit'],
-        ]);
-
-        AjaxSubmitButton::end();?>
+     <div class="form-group">
+         <?= Html::Button(Yii::t('app', 'Enviar'), ['class' => 'btn btn-success', 'id' => 'enviar']) ?> 
+    </div>
+   
     <?php ActiveForm::end(); ?>
+    
+     <?php
+$script = <<< JS
+    $('#enviar').click(function(e){
+          
+            if($('form#raul').find('.has-error').length!=0){
+              
+                return false;
+            }else
+            {
+                //$('form#raul').submit();
+                e.preventDefault();
+                e.stopImmediatePropagation();
+               $.ajax({
+                   
+                    url: 'http://localhost/rnce/frontend/web/index.php?r=contratistas/datosnatural',
+                    type: 'post',
+                    data: $('form#raul').serialize(),
+                    success: function(data) {
+                             $( "#output" ).html( data ); 
+                    }
+                });
+                
+            }
+    });
+JS;
+$this->registerJs($script);
+
+?>
 
 </div>
 
