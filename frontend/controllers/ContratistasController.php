@@ -126,7 +126,11 @@ class ContratistasController extends Controller
                          ));
          }
          if($id=='1'){
-             return "hola mundo";
+            return $this->renderAjax('personas_juridicas', 
+                     array('contratista' => $contratista,
+                         'natural_juridica'=> $natural_juridica,
+                         
+                         ));
          
          }
         
@@ -198,6 +202,76 @@ class ContratistasController extends Controller
                        
                    }else{
                        return "Persona natural no guardada";
+                   }
+               }else{
+                   
+                   return "Natural juridica no guardada";
+               }
+               
+               if(!$flag)
+               {
+                   $transaction->rollBack();
+               }
+           } catch (Exception $e) {
+               $transaction->rollBack();
+           }
+       }else{
+           
+           return "Datos incompleto";
+       }
+            
+
+        
+   }
+   
+    public function actionDatosjuridica()
+   {
+            
+        $contratista = new Contratistas();
+        $natural_juridica = new SysNaturalesJuridicas();
+        $persona_juridica = new PersonasJuridicas();
+       if ($natural_juridica->load(Yii::$app->request->post()) && $contratista->load(Yii::$app->request->post())) {
+           
+      
+           $transaction = \Yii::$app->db->beginTransaction();
+           try {
+                $flag =false;
+                $natural_juridica->juridica=true;
+               
+               
+                if ($natural_juridica->save()) {
+                   
+                $persona_juridica->rif = $natural_juridica->rif;
+                $persona_juridica->razon_social = $natural_juridica->denominacion;
+            
+                   $persona_juridica->tipo_nacionalidad = "NACIONAL";
+                 $persona_juridica->creado_por = 1;
+                   if ($persona_juridica->save()) {
+                       
+                       $contratista->estatus_contratista_id = 1;
+                       $contratista ->natural_juridica_id = $natural_juridica->id;
+                       
+                       if($contratista->save()){
+                          
+                           if ($usuario= \common\models\p\User::findOne(Yii::$app->user->identity->id)) {
+                               
+                           $usuario->contratista_id = $contratista->id;
+                           if ($usuario->save()) {
+                               Yii::$app->session->setFlash('success', 'Datos basicos guardados con exito');
+                               $transaction->commit();
+                               $flag = true;
+                               return "Datos guardados con mucho exito";
+                               //return $this->redirect(['view', 'id' => $model->id]);
+                           } else {
+                               $transaction->rollBack();
+                               Yii::$app->session->setFlash('error', 'No se ha podido guardar el registro');
+                           }
+                            }
+                       else return "guardado con exito";
+                       }
+                       
+                   }else{
+                       return "Persona juridica no guardada";
                    }
                }else{
                    

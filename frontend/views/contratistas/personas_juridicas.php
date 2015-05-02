@@ -12,20 +12,17 @@ use yii\widgets\ActiveForm;
 <div class="personas-naturales-form">
 
     <?php $form = ActiveForm::begin([
-        'id' => "raul",
-     //'action' => ['contratistas/datosbasicos'],
+        'id' => "p_juridica",
+  
 
 ]); ?>
-    <div id="output"></div>
+    <div id="output2"></div>
     <?= $form->field($natural_juridica, 'rif')->textInput(['maxlength' => 50]) ?>
+     <?= $form->field($natural_juridica, 'denominacion')->textInput(['maxlength' => 50]) ?>   
+      <?= $form->field($contratista, 'sigla')->textInput(['maxlength' => 50]) ?>
     
-    <?= $form->field($persona_natural, 'primer_nombre')->textInput(['maxlength' => 255]) ?>
-
-    <?= $form->field($persona_natural, 'segundo_nombre')->textInput(['maxlength' => 255]) ?>
-
-    <?= $form->field($persona_natural, 'primer_apellido')->textInput(['maxlength' => 255]) ?>
-
-    <?= $form->field($persona_natural, 'segundo_apellido')->textInput(['maxlength' => 255]) ?>
+    <?= $form->field($contratista, 'tipo_sector')->dropDownList([ 'PUBLICO' => 'PUBLICO', 'PRIVADO' => 'PRIVADO', 'MIXTO' => 'MIXTO' ], ['prompt' => '']) ?>
+    
      <div class="form-group">
          <?= Html::Button(Yii::t('app', 'Enviar'), ['class' => 'btn btn-success', 'id' => 'enviar']) ?> 
     </div>
@@ -36,21 +33,21 @@ use yii\widgets\ActiveForm;
 $script = <<< JS
     $('#enviar').click(function(e){
           
-            if($('form#raul').find('.has-error').length!=0){
+            if($('form#p_juridical').find('.has-error').length!=0){
               
                 return false;
             }else
             {
-                //$('form#raul').submit();
+                //$('form#p_juridica').submit();
                 e.preventDefault();
                 e.stopImmediatePropagation();
                $.ajax({
                    
-                    url: 'http://localhost/rnce/frontend/web/index.php?r=contratistas/datosnatural',
+                    url: 'http://localhost/rnce/frontend/web/index.php?r=contratistas/datosjuridica',
                     type: 'post',
-                    data: $('form#raul').serialize(),
+                    data: $('form#p_juridica').serialize(),
                     success: function(data) {
-                             $( "#output" ).html( data ); 
+                             $( "#output2" ).html( data ); 
                     }
                 });
                 
