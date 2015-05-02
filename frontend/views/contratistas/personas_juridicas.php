@@ -33,7 +33,7 @@ use yii\widgets\ActiveForm;
 $script = <<< JS
     $('#enviar').click(function(e){
           
-            if($('form#p_juridical').find('.has-error').length!=0){
+            if($('form#p_juridica').find('.has-error').length!=0){
               
                 return false;
             }else
