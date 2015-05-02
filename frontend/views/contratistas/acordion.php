@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use yii\jui\Accordion;
-
+use common\models\p\Direcciones;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\p\Contratistas */
@@ -10,6 +10,9 @@ use yii\jui\Accordion;
 $this->title = Yii::t('app', 'Crud Contratistas');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Contratistas'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+
+$direccion = new Direcciones();
+
 ?>
 <div class="contratistas-acordion">
 
@@ -21,7 +24,11 @@ $this->params['breadcrumbs'][] = $this->title;
             'content' => $this->render('datos_basicos'),
         ],
         [
-            'header' => 'Section 2',
+            'header' => 'Direccion principal',
+            'content' => $this->render('_direcciones_principales',['direccion' => $direccion]),
+        ],
+        [
+            'header' => 'Section 3',
             'headerOptions' => ['tag' => 'h3'],
             'content' => 'Sed non urna. Phasellus eu ligula. Vestibulum sit amet purus...',
             'options' => ['tag' => 'div'],

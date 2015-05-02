@@ -7,6 +7,8 @@ use common\models\p\Contratistas;
 use common\models\p\SysNaturalesJuridicas;
 use common\models\p\PersonasNaturales;
 use common\models\p\PersonasJuridicas;
+use common\models\p\Domicilios;
+use common\models\p\Direcciones;
 use app\models\ContratistasSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -353,6 +355,51 @@ class ContratistasController extends Controller
             
 
         }
+   }
+    public function actionDireccionprincipal()
+   {
+     
+         
+        $domicilio = new Domicilios();
+        $direccion = new Direcciones();
+        if ($direccion->load(Yii::$app->request->post())) {
+           $transaction = \Yii::$app->db->beginTransaction();
+           try {
+                $flag =false;
+               if ($direccion->save()) {
+                 $domicilio->fiscal=false;
+           $domicilio->direccion_id=$direccion->id;
+           $usuario= \common\models\p\User::findOne(Yii::$app->user->identity->id);
+            $domicilio->contratista_id=  $usuario->contratista_id;
+                   if ($domicilio->save()) {
+                      
+                               Yii::$app->session->setFlash('success', 'Datos basicos guardados con exito');
+                               $transaction->commit();
+                               return "Dtos guardados con exito";
+                               $flag = true;
+
+                       
+                   }else{
+                       return "Domicilio no guardado";
+                   }
+               }else{
+                   
+                   return "Direccion principal no guardada";
+               }
+               
+               if(!$flag)
+               {
+                   $transaction->rollBack();
+               }
+           } catch (Exception $e) {
+               $transaction->rollBack();
+           }
+       }else{
+           return "Datos incompletos";
+       }
+            
+
+        
    }
 
     /**
