@@ -42,7 +42,7 @@ $persona_natural = new PersonasNaturales();
     'options' => ['tag' => 'div'],
     'itemOptions' => ['tag' => 'div'],
     'headerOptions' => ['tag' => 'h3'],
-    'clientOptions' => ['collapsible' => false],
+    'clientOptions' => ['collapsible' => true],
 ]);?>
     
 </div>
