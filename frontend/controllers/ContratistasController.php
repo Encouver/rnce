@@ -10,6 +10,7 @@ use common\models\p\PersonasJuridicas;
 use common\models\p\Domicilios;
 use common\models\p\Direcciones;
 use common\models\p\ContratistasContactos;
+use common\models\p\BancosContratistas;
 use app\models\ContratistasSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;

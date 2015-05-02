@@ -4,6 +4,9 @@ use yii\helpers\Html;
 use yii\jui\Accordion;
 use common\models\p\Direcciones;
 use common\models\p\PersonasNaturales;
+use common\models\p\BancosContratistas;
+use app\base\Model;
+use yii\web\Response;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\p\Contratistas */
@@ -14,6 +17,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
 $direccion = new Direcciones();
 $persona_natural = new PersonasNaturales();
+$banco_contratista = [new BancosContratistas];
+
 ?>
 <div class="contratistas-acordion">
 
@@ -31,6 +36,10 @@ $persona_natural = new PersonasNaturales();
          [
             'header' => 'Persona de contacto',
             'content' => $this->render('_personas_contactos',['persona_natural' => $persona_natural]),
+        ],
+         [
+            'header' => 'Bancos',
+            'content' => $this->render('_bancos_contratistas',['banco_contratista' => (empty($banco_contratista)) ? [new BancosContratistas] : $banco_contratista]),
         ],
         [
             'header' => 'Section 3',
