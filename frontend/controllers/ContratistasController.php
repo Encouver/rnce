@@ -12,6 +12,7 @@ use common\models\p\Direcciones;
 use common\models\p\ContratistasContactos;
 use common\models\p\BancosContratistas;
 use app\models\ContratistasSearch;
+use common\models\p\Model;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -462,6 +463,44 @@ class ContratistasController extends Controller
 
         
    }
+    public function actionBancocontratista()
+   {
+          $usuario= \common\models\p\User::findOne(Yii::$app->user->identity->id);
+        $banco_contratista = [new BancosContratistas];
+              
+           $banco_contratista = Model::createMultiple(BancosContratistas::classname());
+            Model::loadMultiple($banco_contratista, Yii::$app->request->post());
+            
+           
+           $transaction = \Yii::$app->db->beginTransaction();
+           try {
+                
+                
+                
+                foreach ($banco_contratista as $carga_banco) {
+                            $carga_banco->contratista_id = $usuario->contratista_id;
+                            $carga_banco->save();
+                            
+                            if (! ($flag = $carga_banco->save(false))) {
+                                
+                                $transaction->rollBack();
+                                return "error en la carga de de datos";
+                                break;
+                            }
+                        }
+                
+                        Yii::$app->session->setFlash('success', 'Datos bancos guardados con exito');
+                        $transaction->commit();
+                        return "Datos guardados con exito";
+               
+           } catch (Exception $e) {
+               $transaction->rollBack();
+           }
+            
+            
+           
+   }
+   
 
     /**
      * Updates an existing Contratistas model.
