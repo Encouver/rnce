@@ -38,7 +38,7 @@ AppAsset::register($this);
                 'brandLabel' => 'Registro Nacional de Contratistas',
                 'brandUrl' => Yii::$app->homeUrl,
                 'options' => [
-                    'class' => 'navbar-inverse navbar-fixed-top',
+                    'class' => 'navbar-inverse navbar-fixed-top ',
                 ],
             ]);
             $menuItems = [
@@ -84,7 +84,7 @@ AppAsset::register($this);
                 ],
                 
             ];
-            if (Yii::$app->user->isGuest) {
+/*            if (Yii::$app->user->isGuest) {
                 $menuItems[] = ['label' => 'Registrate',  'url' => ['/user-management/auth/registration']];//['/site/signup']];
                 $menuItems[] = ['label' => 'Iniciar sesión', 'url' => ['/user-management/auth/login']];//['/site/login']];
             } else {
@@ -93,16 +93,40 @@ AppAsset::register($this);
                     'url' => ['/site/logout'],
                     'linkOptions' => ['data-method' => 'post']
                 ];
-            }
+            }*/
 
+            // Items del menu de usuario
+            $menuItems[]= ['label'=>'Registrate', 'url'=>['/user-management/auth/registration']];
+            $menuItems[]= ['label'=>'Iniciar sesion', 'url'=>['/user-management/auth/login']];
+            $menuItems[]= ['label'=>'Cerrar sesion', 'url'=>['/user-management/auth/logout']];
 
-    
-            echo Nav::widget([
+            $menuItems[] =
+                [
+                    'label' => 'Administrar Usuarios',
+                    'items'=>UserManagementModule::menuItems()
+                ];
+            $menuItems[] =  [
+                        'label' => 'Perfil',
+                        'items'=>[
+                            ['label'=>'Cambiar contraseña', 'url'=>['/user-management/auth/change-own-password']],
+                            ['label'=>'Recuperar contraseña', 'url'=>['/user-management/auth/password-recovery']],
+                            ['label'=>'Confirmar E-mail', 'url'=>['/user-management/auth/confirm-email']],
+                        ],
+                    ];
+
+            echo GhostNav::widget([
+                'encodeLabels'=>false,
+                'activateParents'=>false,
+                'items' => $menuItems,
+                'options' => ['class' =>'navbar-nav navbar-right'],
+            ]);
+           /* echo Nav::widget([
+                'encodeLabels'=>false,
+                'activateParents'=>false,
                 'options' => ['class' => 'navbar-nav navbar-right'],
                 'items' => $menuItems,
-            ]);
-            NavBar::end(); 
-
+            ]);*/
+            NavBar::end();
 
         ?>
 <div class="container"></div>
@@ -111,8 +135,80 @@ AppAsset::register($this);
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
         <?= Alert::widget() ?>
-        <?php 
-                        echo GhostNav::widget([
+        <?php
+
+        use kartik\tabs\TabsX;
+        $item = [
+            [
+                'label'=>'<i class="glyphicon glyphicon-home"></i> Corrientes',
+                'content'=> 'A',
+                'active'=>true
+            ],
+            [
+                'label'=>'<i class="glyphicon glyphicon-user"></i> No corrientes',
+                'content'=>'',
+                'linkOptions'=>['data-url'=>\yii\helpers\Url::to(['/site/tabs-data'])]
+            ],
+
+        ];
+
+        $items = [
+            [
+                'label'=>'<i class="glyphicon glyphicon-home"></i> Cuentas Activos',
+                'content'=>TabsX::widget([
+                    'items'=>$item,
+                    'position'=>TabsX::POS_ABOVE,
+                    'bordered'=>false,
+                    'encodeLabels'=>false
+                ]),
+                'active'=>true
+            ],
+            [
+                'label'=>'<i class="glyphicon glyphicon-user"></i> Cuentas Pasivos',
+                'content'=>TabsX::widget([
+                    'items'=>$item,
+                    'position'=>TabsX::POS_ABOVE,
+                    'bordered'=>false,
+                    'encodeLabels'=>false
+                ]),
+                //'linkOptions'=>['data-url'=>\yii\helpers\Url::to(['/site/tabs-data'])]
+            ],
+            [
+                'label'=>'<i class="glyphicon glyphicon-list-alt"></i> Cuentas Patrimonio',
+                'items'=>[
+                    [
+                        'label'=>'<i class="glyphicon glyphicon-chevron-right"></i> Option 1',
+                        'encode'=>false,
+                        'content'=>TabsX::widget([
+                            'items'=>$item,
+                            'position'=>TabsX::POS_ABOVE,
+                            'bordered'=>false,
+                            'encodeLabels'=>false
+                        ]),
+                    ],
+                    [
+                        'label'=>'<i class="glyphicon glyphicon-chevron-right"></i> Option 2',
+                        'encode'=>false,
+                        'content'=>TabsX::widget([
+                            'items'=>$item,
+                            'position'=>TabsX::POS_ABOVE,
+                            'bordered'=>false,
+                            'encodeLabels'=>false
+                        ]),
+                    ],
+                ],
+            ],
+        ];
+
+
+        // Above
+/*        echo TabsX::widget([
+            'items'=>$items,
+            'position'=>TabsX::POS_ABOVE,
+            'encodeLabels'=>false
+        ]);*/
+
+       /* echo GhostNav::widget([
                 'encodeLabels'=>false,
                 'activateParents'=>false,
                 'items' => [
@@ -132,7 +228,8 @@ AppAsset::register($this);
                         ],
                     ],
                 ],
-            ]);
+            'options' => ['class' =>'nav-pills'],
+            ]);*/
         ?>
         <?= $content ?>
         </div>
