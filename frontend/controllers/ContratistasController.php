@@ -114,11 +114,9 @@ class ContratistasController extends Controller
             return $this->render('acordion');
         }
     }
-      public function actionBancosraul()
-    {
-         $banco_contratista = [new BancosContratistas];
-        return $this->render('_bancos_contratistas',['banco_contratista' => (empty($banco_contratista)) ? [new BancosContratistas] : $banco_contratista]);
-    }
+    
+    
+    
      public function actionObtenertipopersona($id)
    {
      $contratista = new Contratistas();
