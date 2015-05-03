@@ -84,21 +84,21 @@ AppAsset::register($this);
                 ],
                 
             ];
-/*            if (Yii::$app->user->isGuest) {
+
+            // Items del menu de usuario
+            if (Yii::$app->user->isGuest) {
                 $menuItems[] = ['label' => 'Registrate',  'url' => ['/user-management/auth/registration']];//['/site/signup']];
                 $menuItems[] = ['label' => 'Iniciar sesión', 'url' => ['/user-management/auth/login']];//['/site/login']];
             } else {
                 $menuItems[] = [
                     'label' => 'Cerrar sesión (' . Yii::$app->user->identity->username . ')',
-                    'url' => ['/site/logout'],
+                    'url' => ['/user-management/auth/logout'],//['/site/logout'],
                     'linkOptions' => ['data-method' => 'post']
                 ];
-            }*/
-
-            // Items del menu de usuario
-            $menuItems[]= ['label'=>'Registrate', 'url'=>['/user-management/auth/registration']];
-            $menuItems[]= ['label'=>'Iniciar sesion', 'url'=>['/user-management/auth/login']];
-            $menuItems[]= ['label'=>'Cerrar sesion', 'url'=>['/user-management/auth/logout']];
+            }
+            //$menuItems[]= ['label'=>'Registrate', 'url'=>['/user-management/auth/registration']];
+           // $menuItems[]= ['label'=>'Iniciar sesion', 'url'=>['/user-management/auth/login']];
+            //$menuItems[]= ['label'=>'Cerrar sesion', 'url'=>['/user-management/auth/logout']];
 
             $menuItems[] =
                 [
