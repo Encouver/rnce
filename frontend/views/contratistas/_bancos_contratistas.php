@@ -71,6 +71,9 @@ use wbraganca\dynamicform\DynamicFormWidget;
                                 <?= $form->field($carga_banco, "[{$i}]num_cuenta")->textInput() ?>
                             </div>
                             <div class="col-sm-12">
+                             <?= $form->field($carga_banco, "[{$i}]tipo_moneda")->dropDownList([ 'BOLIVARES' => 'BOLIVARES', 'DOLARES' => 'DOLARES', 'EUROS' => 'EUROS', ], ['prompt' => '']) ?>
+                            </div>
+                            <div class="col-sm-12">
                                <?= $form->field($carga_banco, "[{$i}]tipo_cuenta")->dropDownList([ 'CUENTA CORRIENTE' => 'CUENTA CORRIENTE', 'CUENTA CORRIENTE CON INTERESES / REMUNERADA' => 'CUENTA CORRIENTE CON INTERESES / REMUNERADA', 'CUENTA DE AHORROS' => 'CUENTA DE AHORROS', 'CUENTA EN MONEDA EXTRANGERA' => 'CUENTA EN MONEDA EXTRANGERA', ], ['prompt' => '']) ?>
                             </div>
                           <div class="col-sm-12">
@@ -107,7 +110,7 @@ $script = <<< JS
                 e.stopImmediatePropagation();
                $.ajax({
                    
-                    url: 'http://localhost/rnce/frontend/web/index.php?r=contratistas/datosjuridica',
+                    url: 'http://localhost/rnce/frontend/web/index.php?r=contratistas/bancocontratista',
                     type: 'post',
                     data: $('form#b_contratista').serialize(),
                     success: function(data) {
