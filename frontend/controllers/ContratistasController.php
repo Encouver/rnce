@@ -114,7 +114,9 @@ class ContratistasController extends Controller
             return $this->render('acordion');
         }
     }
-
+    
+    
+    
      public function actionObtenertipopersona($id)
    {
      $contratista = new Contratistas();

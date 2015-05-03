@@ -42,7 +42,7 @@ use wbraganca\dynamicform\DynamicFormWidget;
             ]); ?>
 
             <div class="container-items"><!-- widgetContainer -->
-            <?php foreach ($banco_contratista as $i => $banco_contratist): ?>
+            <?php foreach ($banco_contratista as $i => $carga_banco): ?>
                 <div class="item panel panel-default"><!-- widgetBody -->
                     <div class="panel-heading">
                         <h3 class="panel-title pull-left">Address</h3>
@@ -55,26 +55,26 @@ use wbraganca\dynamicform\DynamicFormWidget;
                     <div class="panel-body">
                         <?php
                             // necessary for update action.
-                            if (! $banco_contratist->isNewRecord) {
-                                echo Html::activeHiddenInput($banco_contratist, "[{$i}]id");
+                            if (! $carga_banco->isNewRecord) {
+                                echo Html::activeHiddenInput($carga_banco, "[{$i}]id");
                             }
                         ?>
                       
                      
                              <div class="col-sm-12">
-                              <?= $form->field($banco_contratist, "[{$i}]banco_id")->dropDownList(
+                              <?= $form->field($carga_banco, "[{$i}]banco_id")->dropDownList(
                                 ArrayHelper::map(SysBancos::find()->all(),'id','nombre'),
                             ['prompt' => 'Seleccione Banco'] 
                             ) ?>
                                  </div>
                             <div class="col-sm-12">
-                                <?= $form->field($banco_contratista, "[{$i}]num_cuenta")->textInput() ?>
+                                <?= $form->field($carga_banco, "[{$i}]num_cuenta")->textInput() ?>
                             </div>
                             <div class="col-sm-12">
-                               <?= $form->field($banco_contratista, "[{$i}]tipo_cuenta")->dropDownList([ 'CUENTA CORRIENTE' => 'CUENTA CORRIENTE', 'CUENTA CORRIENTE CON INTERESES / REMUNERADA' => 'CUENTA CORRIENTE CON INTERESES / REMUNERADA', 'CUENTA DE AHORROS' => 'CUENTA DE AHORROS', 'CUENTA EN MONEDA EXTRANGERA' => 'CUENTA EN MONEDA EXTRANGERA', ], ['prompt' => '']) ?>
+                               <?= $form->field($carga_banco, "[{$i}]tipo_cuenta")->dropDownList([ 'CUENTA CORRIENTE' => 'CUENTA CORRIENTE', 'CUENTA CORRIENTE CON INTERESES / REMUNERADA' => 'CUENTA CORRIENTE CON INTERESES / REMUNERADA', 'CUENTA DE AHORROS' => 'CUENTA DE AHORROS', 'CUENTA EN MONEDA EXTRANGERA' => 'CUENTA EN MONEDA EXTRANGERA', ], ['prompt' => '']) ?>
                             </div>
                           <div class="col-sm-12">
-                               <?= $form->field($banco_contratista, "[{$i}]estatus_cuenta")->dropDownList([ 'ACTIVA' => 'ACTIVA', 'INACTIVA' => 'INACTIVA', ], ['prompt' => '']) ?>
+                               <?= $form->field($carga_banco, "[{$i}]estatus_cuenta")->dropDownList([ 'ACTIVA' => 'ACTIVA', 'INACTIVA' => 'INACTIVA', ], ['prompt' => '']) ?>
                             </div>
                           
                      
