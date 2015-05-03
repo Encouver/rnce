@@ -37,10 +37,10 @@ $banco_contratista = [new BancosContratistas];
             'header' => 'Persona de contacto',
             'content' => $this->render('_personas_contactos',['persona_natural' => $persona_natural]),
         ],
-         [
+         /*[
             'header' => 'Bancos',
             'content' => $this->render('_bancos_contratistas',['banco_contratista' => (empty($banco_contratista)) ? [new BancosContratistas] : $banco_contratista]),
-        ],
+        ],*/
         [
             'header' => 'Section 3',
             'headerOptions' => ['tag' => 'h3'],
