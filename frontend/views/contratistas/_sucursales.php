@@ -19,7 +19,7 @@ use wbraganca\dynamicform\DynamicFormWidget;
   
 
 ]); ?>
-    <div id="output6"></div>
+    <div id="output5"></div>
     
     <div class="panel panel-default">
         <div class="panel-heading"><h4><i class="glyphicon glyphicon-envelope"></i> Bancos asociados</h4></div>

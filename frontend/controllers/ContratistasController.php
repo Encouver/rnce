@@ -9,8 +9,10 @@ use common\models\p\PersonasNaturales;
 use common\models\p\PersonasJuridicas;
 use common\models\p\Domicilios;
 use common\models\p\Direcciones;
+use common\models\p\Sucursales;
 use common\models\p\ContratistasContactos;
 use common\models\p\BancosContratistas;
+use common\models\p\RelacionesSucursales;
 use app\models\ContratistasSearch;
 use common\models\p\Model;
 use common\components\BaseController;
@@ -508,21 +510,86 @@ class ContratistasController extends BaseController
             
          $usuario= \common\models\p\User::findOne(Yii::$app->user->identity->id);
         $relacion_sucursal = [new RelacionesSucursales];
-        $natural_juridica = new SysNaturalesJuridicas();
-        $persona_natural = new PersonasNaturales();
-        
-        
        $relacion_sucursal = Model::createMultiple(RelacionesSucursales::classname());
             Model::loadMultiple($relacion_sucursal, Yii::$app->request->post());
            
            $transaction = \Yii::$app->db->beginTransaction();
            try {
-                $flag =false;
-              return "Hola mundo";
-               if(!$flag)
-               {
-                   $transaction->rollBack();
-               }
+                foreach ($relacion_sucursal as $carga_sucursal) {
+                             $direccion_sucursal = new Direcciones();
+                             $natural_juridica = new SysNaturalesJuridicas();
+                             $persona_sucursal = new PersonasNaturales();
+                             $sucursal= new Sucursales();
+                             
+                            $direccion_sucursal->sys_estado_id = $carga_sucursal->sys_estado_id;
+                            $direccion_sucursal->sys_municipio_id = $carga_sucursal->sys_municipio_id;
+                            $direccion_sucursal->sys_parroquia_id = $carga_sucursal->sys_parroquia_id;
+                            $direccion_sucursal->zona = $carga_sucursal->zona;
+                            $direccion_sucursal->calle = $carga_sucursal->calle;
+                            $direccion_sucursal->casa = $carga_sucursal->casa;
+                            $direccion_sucursal->nivel = $carga_sucursal->nivel;                         
+                            $direccion_sucursal->numero = $carga_sucursal->numero;
+                            $direccion_sucursal->referencia = $carga_sucursal->referencia;
+
+                             if (! ($flag = $direccion_sucursal->save(false))) {
+                                
+                                $transaction->rollBack();
+                                return "error en la carga de de datos de direcciones";
+                                break;
+                            }
+                             
+                            
+                              $natural_juridica->rif= $carga_sucursal->rif;
+                              $natural_juridica->juridica= false;
+                              $natural_juridica->denominacion=$carga_sucursal->primer_nombre.' '.$carga_sucursal->primer_apellido;
+                              $natural_juridica->sys_status=true;
+                              
+                            if (! ($flag = $natural_juridica->save(false))) {
+                                
+                                $transaction->rollBack();
+                                return "error en la carga de la persona natural";
+                                break;
+                            }
+                            
+                            $persona_sucursal->rif= $carga_sucursal->rif;
+                            $persona_sucursal->primer_nombre= $carga_sucursal->primer_nombre;
+                            $persona_sucursal->segundo_nombre= $carga_sucursal->segundo_nombre;
+                            $persona_sucursal->primer_apellido= $carga_sucursal->primer_apellido;
+                            $persona_sucursal->segundo_apellido= $carga_sucursal->segundo_apellido;
+                            $persona_sucursal->telefono_local= $carga_sucursal->telefono_local;
+                            $persona_sucursal->telefono_celular= $carga_sucursal->telefono_celular;
+                            $persona_sucursal->fax= $carga_sucursal->fax;
+                            $persona_sucursal->correo= $carga_sucursal->correo;
+                            $persona_sucursal->pagina_web= $carga_sucursal->pagina_web;
+                            $persona_sucursal->facebook= $carga_sucursal->facebook;
+                            $persona_sucursal->twitter= $carga_sucursal->twitter;
+                            $persona_sucursal->instagram= $carga_sucursal->instagram;
+            
+                            $persona_sucursal->sys_pais_id = 1;
+                            $persona_sucursal->nacionalidad = "NACIONAL";
+                            $persona_sucursal->creado_por = 1;
+                            
+                            if (! ($flag =  $persona_sucursal->save(false))) {
+                                
+                                $transaction->rollBack();
+                                return "error en la carga de la persona de contacto";
+                            }
+                            
+                            $sucursal->representante= $carga_sucursal->representante;
+                            $sucursal->accionista= $carga_sucursal->accionista;
+                            $sucursal->persona_natural_id= $persona_sucursal->id;
+                            $sucursal->direccion_id= $direccion_sucursal->id;
+                            $sucursal->contratista_id= $usuario->contratista_id;
+                             if (! ($flag =   $sucursal->save(false))) {
+                                
+                                $transaction->rollBack();
+                                return "error en la carga de la sucursal";
+                            }
+                        }
+                        Yii::$app->session->setFlash('success', 'Datos bancos guardados con exito');
+                        $transaction->commit();
+                        return "Datos guardados con exito";
+                        
            } catch (Exception $e) {
                $transaction->rollBack();
            }
