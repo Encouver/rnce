@@ -105,14 +105,14 @@ class ContratistasController extends BaseController
 
     }
     
-     public function actionAcordion()
+     public function actionAcordeon()
     {
          $model = new Contratistas();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
-            return $this->render('acordion');
+            return $this->render('acordeon');
         }
     }
     
@@ -500,6 +500,33 @@ class ContratistasController extends BaseController
             
            
    }
+   
+   
+   
+   public function actionRelacionsucursal()
+   {
+            
+         $usuario= \common\models\p\User::findOne(Yii::$app->user->identity->id);
+        $relacion_sucursal = [new RelacionesSucursales];
+        $natural_juridica = new SysNaturalesJuridicas();
+        $persona_natural = new PersonasNaturales();
+        
+        
+       $relacion_sucursal = Model::createMultiple(RelacionesSucursales::classname());
+            Model::loadMultiple($relacion_sucursal, Yii::$app->request->post());
+           
+           $transaction = \Yii::$app->db->beginTransaction();
+           try {
+                $flag =false;
+              return "Hola mundo";
+               if(!$flag)
+               {
+                   $transaction->rollBack();
+               }
+           } catch (Exception $e) {
+               $transaction->rollBack();
+           }
+       }
    
 
     /**
