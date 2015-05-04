@@ -61,7 +61,7 @@ $sucursal = new Sucursales();
     'options' => ['tag' => 'div'],
     'itemOptions' => ['tag' => 'div'],
     'headerOptions' => ['tag' => 'h3'],
-    'clientOptions' => ['collapsible' => false],
+    'clientOptions' => ['collapsible' => true],
 ]);?>
     
 </div>
