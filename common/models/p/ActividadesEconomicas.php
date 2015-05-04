@@ -55,17 +55,17 @@ class ActividadesEconomicas extends \common\components\BaseActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'ppal_caev_id' => Yii::t('app', 'Ppal Caev ID'),
-            'comp1_caev_id' => Yii::t('app', 'Comp1 Caev ID'),
-            'comp2_caev_id' => Yii::t('app', 'Comp2 Caev ID'),
+            'ppal_caev_id' => Yii::t('app', 'Actividad economica principal'),
+            'comp1_caev_id' => Yii::t('app', 'Actividad economica complementaria 1'),
+            'comp2_caev_id' => Yii::t('app', 'Actividad economica complementaria 2'),
             'contratista_id' => Yii::t('app', 'Contratista ID'),
             'sys_status' => Yii::t('app', 'Sys Status'),
             'sys_creado_el' => Yii::t('app', 'Sys Creado El'),
             'sys_actualizado_el' => Yii::t('app', 'Sys Actualizado El'),
             'sys_finalizado_el' => Yii::t('app', 'Sys Finalizado El'),
-            'ppal_experiencia' => Yii::t('app', 'Ppal Experiencia'),
-            'comp1_experiencia' => Yii::t('app', 'Comp1 Experiencia'),
-            'comp2_experiencia' => Yii::t('app', 'Comp2 Experiencia'),
+            'ppal_experiencia' => Yii::t('app', 'Experiencia'),
+            'comp1_experiencia' => Yii::t('app', 'Experiencia'),
+            'comp2_experiencia' => Yii::t('app', 'Experiencia'),
         ];
     }
 

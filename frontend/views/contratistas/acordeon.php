@@ -6,6 +6,7 @@ use common\models\p\Direcciones;
 use common\models\p\PersonasNaturales;
 use common\models\p\BancosContratistas;
 use common\models\p\RelacionesSucursales;
+use common\models\p\ActividadesEconomicas;
 use app\base\Model;
 use yii\web\Response;
 
@@ -18,6 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 $direccion = new Direcciones();
 $persona_natural = new PersonasNaturales();
+$actividad_economica = new ActividadesEconomicas();
 
 ?>
 <div class="contratistas-acordion">
@@ -44,6 +46,10 @@ $persona_natural = new PersonasNaturales();
          [
             'header' => 'Bancos',
             'content' => $this->render('_bancos_contratistas',['banco_contratista' => (empty($banco_contratista)) ? [new BancosContratistas] : $banco_contratista]),
+        ],
+        [
+            'header' => 'Actividades economicas',
+            'content' => $this->render('_actividades_economicas',['actividad_economica' => $actividad_economica]),
         ],
         [
             'header' => 'Section 3',
