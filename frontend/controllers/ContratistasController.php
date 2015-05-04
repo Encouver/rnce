@@ -13,6 +13,7 @@ use common\models\p\Sucursales;
 use common\models\p\ContratistasContactos;
 use common\models\p\BancosContratistas;
 use common\models\p\RelacionesSucursales;
+use common\models\p\ActividadesEconomicas;
 use app\models\ContratistasSearch;
 use common\models\p\Model;
 use common\components\BaseController;
@@ -196,14 +197,14 @@ class ContratistasController extends BaseController
                                
                            $usuario->contratista_id = $contratista->id;
                            if ($usuario->save()) {
-                               Yii::$app->session->setFlash('success', 'Datos basicos guardados con exito');
+                              
                                $transaction->commit();
                                $flag = true;
                                return "Datos guardados con mucho exito";
                                //return $this->redirect(['view', 'id' => $model->id]);
                            } else {
                                $transaction->rollBack();
-                               Yii::$app->session->setFlash('error', 'No se ha podido guardar el registro');
+                             
                            }
                             }
                        else return "guardado con exito";
@@ -266,14 +267,14 @@ class ContratistasController extends BaseController
                                
                            $usuario->contratista_id = $contratista->id;
                            if ($usuario->save()) {
-                               Yii::$app->session->setFlash('success', 'Datos basicos guardados con exito');
+                              
                                $transaction->commit();
                                $flag = true;
                                return "Datos guardados con mucho exito";
                                //return $this->redirect(['view', 'id' => $model->id]);
                            } else {
                                $transaction->rollBack();
-                               Yii::$app->session->setFlash('error', 'No se ha podido guardar el registro');
+                              
                            }
                             }
                        else return "guardado con exito";
@@ -337,14 +338,14 @@ class ContratistasController extends BaseController
                        if ($usuario= \common\models\p\User::findOne(Yii::$app->user->identity->id)) {
                            $usuario->contratista_id = $model->id;
                            if ($usuario->save()) {
-                               Yii::$app->session->setFlash('success', 'Datos basicos guardados con exito');
+                              
                                $transaction->commit();
                                $flag = true;
 
                                //return $this->redirect(['view', 'id' => $model->id]);
                            } else {
                                $transaction->rollBack();
-                               Yii::$app->session->setFlash('error', 'No se ha podido guardar el registro');
+                             
                            }
                        }
                        else return "guardado con exito";
@@ -380,7 +381,7 @@ class ContratistasController extends BaseController
             $domicilio->contratista_id=  $usuario->contratista_id;
                    if ($domicilio->save()) {
                       
-                               Yii::$app->session->setFlash('success', 'Datos basicos guardados con exito');
+                             
                                $transaction->commit();
                                return "Dtos guardados con exito";
                                $flag = true;
@@ -437,7 +438,7 @@ class ContratistasController extends BaseController
             $contratista_contacto->contratista_id=  $usuario->contratista_id;
                    if ($contratista_contacto->save()) {
                       
-                               Yii::$app->session->setFlash('success', 'Datos basicos guardados con exito');
+                              
                                $transaction->commit();
                                return "Dtos guardados con exito";
                                $flag = true;
@@ -491,7 +492,7 @@ class ContratistasController extends BaseController
                             }
                         }
                 
-                        Yii::$app->session->setFlash('success', 'Datos bancos guardados con exito');
+                       
                         $transaction->commit();
                         return "Datos guardados con exito";
                
@@ -595,7 +596,49 @@ class ContratistasController extends BaseController
            }
        }
    
+       
+       
+       public function actionActividadeconomica()
+   {
+     
+         
+        $actividad_economica = new ActividadesEconomicas();
+      
+        if ($actividad_economica->load(Yii::$app->request->post())) {
+           $transaction = \Yii::$app->db->beginTransaction();
+           try {
+                $flag =false;
+                
+               
+           $usuario= \common\models\p\User::findOne(Yii::$app->user->identity->id);
+            $actividad_economica->contratista_id=  $usuario->contratista_id;
+                   if ( $actividad_economica->save()) {
+                      
+                             
+                               $transaction->commit();
+                               return "Datos guardados con exito";
+                               $flag = true;
 
+                       
+                   }else{
+                       return "Actividades economicas no guardadas";
+                   }
+               
+               
+               if(!$flag)
+               {
+                   $transaction->rollBack();
+               }
+           } catch (Exception $e) {
+               $transaction->rollBack();
+           }
+       }else{
+           return "Datos incompletos";
+       }
+            
+
+        
+   }
     /**
      * Updates an existing Contratistas model.
      * If update is successful, the browser will be redirected to the 'view' page.
