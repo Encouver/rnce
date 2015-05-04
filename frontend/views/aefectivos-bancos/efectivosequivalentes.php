@@ -22,7 +22,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 $menuItems[] =   ['label'=>'Efectivos en caja', 'url'=>['/aefectivos-cajas/create']];
                          $menuItems[] =   ['label'=>'Inversiones para negociar', 'url'=>['/ainversiones-negociar/create']];
    				$menuItems[] = ['label'=>'Ver resumen', 'url'=>['/aefectivos-bancos/efectivosequivalentes']];	
-   					NavBar::begin($navBarOptions);
+   					$navBarOptions = array();
+            NavBar::begin($navBarOptions);
 					echo NavX::widget([
 					    'options' => ['class' => 'navbar-nav'],
 					    'items' => $menuItems,

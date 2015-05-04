@@ -3,7 +3,11 @@
 * http://github.com/RobinHerbots/jquery.inputmask
 * Copyright (c) 2010 - 2015 Robin Herbots
 * Licensed under the MIT license (http://www.opensource.org/licenses/mit-license.php)
+<<<<<<< HEAD
+* Version: 3.1.64-1
+=======
 * Version: 3.1.63
+>>>>>>> 9a43cb6201d8cf1c31da7f4112a104e60a32dfbe
 */
 !function(factory) {
     "function" == typeof define && define.amd ? define([ "jquery", "./jquery.inputmask" ], factory) : "object" == typeof exports ? module.exports = factory(require("jquery"), require("./jquery.inputmask")) : factory(jQuery);
