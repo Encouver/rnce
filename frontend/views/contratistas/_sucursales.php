@@ -209,7 +209,7 @@ $script = <<< JS
                 e.stopImmediatePropagation();
                $.ajax({
                    
-                    url: 'http://localhost/rnce/frontend/web/index.php?r=contratistas/bancocontratista',
+                    url: 'http://localhost/rnce/frontend/web/index.php?r=contratistas/relacionsucursal',
                     type: 'post',
                     data: $('form#r_sucursal').serialize(),
                     success: function(data) {
