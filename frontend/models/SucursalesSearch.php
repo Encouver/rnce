@@ -19,7 +19,7 @@ class SucursalesSearch extends Sucursales
     {
         return [
             [['persona_natural_id', 'direccion_id', 'contratista_id', 'id'], 'integer'],
-            [['sys_status'], 'boolean'],
+            [['sys_status', 'representante', 'accionista'], 'boolean'],
             [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
         ];
     }
@@ -65,6 +65,8 @@ class SucursalesSearch extends Sucursales
             'sys_actualizado_el' => $this->sys_actualizado_el,
             'sys_finalizado_el' => $this->sys_finalizado_el,
             'id' => $this->id,
+            'representante' => $this->representante,
+            'accionista' => $this->accionista,
         ]);
 
         return $dataProvider;

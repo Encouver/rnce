@@ -2,7 +2,6 @@
 
 namespace common\models\p;
 
-
 use Yii;
 
 /**
@@ -16,6 +15,8 @@ use Yii;
  * @property string $sys_actualizado_el
  * @property string $sys_finalizado_el
  * @property integer $id
+ * @property boolean $representante
+ * @property boolean $accionista
  *
  * @property Contratistas $contratista
  * @property Direcciones $direccion
@@ -37,9 +38,9 @@ class Sucursales extends \common\components\BaseActiveRecord
     public function rules()
     {
         return [
-            [['persona_natural_id', 'direccion_id', 'contratista_id'], 'required'],
+            [['persona_natural_id', 'direccion_id', 'contratista_id', 'representante', 'accionista'], 'required'],
             [['persona_natural_id', 'direccion_id', 'contratista_id'], 'integer'],
-            [['sys_status'], 'boolean'],
+            [['sys_status', 'representante', 'accionista'], 'boolean'],
             [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe']
         ];
     }
@@ -58,6 +59,8 @@ class Sucursales extends \common\components\BaseActiveRecord
             'sys_actualizado_el' => Yii::t('app', 'Sys Actualizado El'),
             'sys_finalizado_el' => Yii::t('app', 'Sys Finalizado El'),
             'id' => Yii::t('app', 'ID'),
+            'representante' => Yii::t('app', 'Representante'),
+            'accionista' => Yii::t('app', 'Accionista'),
         ];
     }
 

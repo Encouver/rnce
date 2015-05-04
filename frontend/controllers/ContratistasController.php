@@ -13,14 +13,14 @@ use common\models\p\ContratistasContactos;
 use common\models\p\BancosContratistas;
 use app\models\ContratistasSearch;
 use common\models\p\Model;
-use yii\web\Controller;
+use common\components\BaseController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
  * ContratistasController implements the CRUD actions for Contratistas model.
  */
-class ContratistasController extends Controller
+class ContratistasController extends BaseController
 {
     public function behaviors()
     {

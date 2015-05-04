@@ -33,6 +33,8 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'sys_actualizado_el',
             // 'sys_finalizado_el',
             // 'id',
+            // 'representante:boolean',
+            // 'accionista:boolean',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
