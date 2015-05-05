@@ -57,8 +57,11 @@ if($natural_juridica->juridica && $contratista->tipo_sector != "PRIVADO"){
     
     <div id="output9"></div>
     <?php $form = ActiveForm::begin([
-        'id' => "d_comercial",]); ?>
-    <?= $form->field($denominacion_comercial, 'tipo_denominacion')->dropDownList(ArrayHelper::map($denominacion, 'id', 'name'), ['prompt' => 'Seleccione tipo de denominacion']) ?>
+        'id'=>'d_comercial',
+  ]); ?>
+    
+    
+    <?= $form->field($denominacion_comercial, 'tipo_denominacion')->dropDownList(ArrayHelper::map($denominacion, 'id', 'name'), ['prompt' => 'Seleccione tipo de denominacion'])?>
     
 <!--    <div class="form-group centered">
          <?/*= Html::Button(Yii::t('app', 'Seleccionar'), ['class' => 'btn btn-success', 'id' => 'enviar8']) */?>
