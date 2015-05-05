@@ -8,24 +8,19 @@ use Yii;
  * This is the model class for table "public.denominaciones_comerciales".
  *
  * @property integer $id
- * @property integer $sys_denominacion_comercial_id
- * @property integer $sys_subdenominacion_comercial_id
  * @property string $codigo_situr
- * @property boolean $fin_lucro
  * @property string $cooperativa_capital
  * @property string $cooperativa_distribuicion
  * @property integer $contratista_id
- * @property integer $documento_registrado_id
  * @property boolean $sys_status
  * @property string $sys_creado_el
  * @property string $sys_actualizado_el
  * @property string $sys_finalizado_el
+ * @property string $tipo_denominacion
+ * @property string $tipo_subdenominacion
  *
- * @property ActasConstitutivas[] $actasConstitutivas
  * @property Contratistas $contratista
- * @property SysDenominacionesComerciales $sysDenominacionComercial
- * @property DocumentosRegistrados $documentoRegistrado
- * @property SysSubdenominacionesComerciales $sysSubdenominacionComercial
+ * @property ActasConstitutivas[] $actasConstitutivas
  */
 class DenominacionesComerciales extends \common\components\BaseActiveRecord
 {
@@ -43,10 +38,10 @@ class DenominacionesComerciales extends \common\components\BaseActiveRecord
     public function rules()
     {
         return [
-            [['sys_denominacion_comercial_id', 'contratista_id', 'documento_registrado_id'], 'required'],
-            [['sys_denominacion_comercial_id', 'sys_subdenominacion_comercial_id', 'contratista_id', 'documento_registrado_id'], 'integer'],
-            [['fin_lucro', 'sys_status'], 'boolean'],
-            [['cooperativa_capital', 'cooperativa_distribuicion'], 'string'],
+            [['cooperativa_capital', 'cooperativa_distribuicion', 'tipo_denominacion', 'tipo_subdenominacion'], 'string'],
+            [['contratista_id', 'tipo_denominacion'], 'required'],
+            [['contratista_id'], 'integer'],
+            [['sys_status'], 'boolean'],
             [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['codigo_situr'], 'string', 'max' => 255]
         ];
@@ -59,27 +54,17 @@ class DenominacionesComerciales extends \common\components\BaseActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'sys_denominacion_comercial_id' => Yii::t('app', 'Sys Denominacion Comercial ID'),
-            'sys_subdenominacion_comercial_id' => Yii::t('app', 'Sys Subdenominacion Comercial ID'),
             'codigo_situr' => Yii::t('app', 'Codigo Situr'),
-            'fin_lucro' => Yii::t('app', 'Fin Lucro'),
             'cooperativa_capital' => Yii::t('app', 'Cooperativa Capital'),
             'cooperativa_distribuicion' => Yii::t('app', 'Cooperativa Distribuicion'),
             'contratista_id' => Yii::t('app', 'Contratista ID'),
-            'documento_registrado_id' => Yii::t('app', 'Documento Registrado ID'),
             'sys_status' => Yii::t('app', 'Sys Status'),
             'sys_creado_el' => Yii::t('app', 'Sys Creado El'),
             'sys_actualizado_el' => Yii::t('app', 'Sys Actualizado El'),
             'sys_finalizado_el' => Yii::t('app', 'Sys Finalizado El'),
+            'tipo_denominacion' => Yii::t('app', 'Tipo Denominacion'),
+            'tipo_subdenominacion' => Yii::t('app', 'Tipo Subdenominacion'),
         ];
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getActasConstitutivas()
-    {
-        return $this->hasMany(ActasConstitutivas::className(), ['denominacion_comercial_id' => 'id']);
     }
 
     /**
@@ -93,24 +78,8 @@ class DenominacionesComerciales extends \common\components\BaseActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getSysDenominacionComercial()
+    public function getActasConstitutivas()
     {
-        return $this->hasOne(SysDenominacionesComerciales::className(), ['id' => 'sys_denominacion_comercial_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getDocumentoRegistrado()
-    {
-        return $this->hasOne(DocumentosRegistrados::className(), ['id' => 'documento_registrado_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getSysSubdenominacionComercial()
-    {
-        return $this->hasOne(SysSubdenominacionesComerciales::className(), ['id' => 'sys_subdenominacion_comercial_id']);
+        return $this->hasMany(ActasConstitutivas::className(), ['denominacion_comercial_id' => 'id']);
     }
 }

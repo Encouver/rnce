@@ -7,6 +7,8 @@ use common\models\p\PersonasNaturales;
 use common\models\p\BancosContratistas;
 use common\models\p\RelacionesSucursales;
 use common\models\p\ActividadesEconomicas;
+use common\models\p\User;
+use common\models\p\DenominacionesComerciales;
 use app\base\Model;
 use yii\web\Response;
 
@@ -20,6 +22,10 @@ $this->params['breadcrumbs'][] = $this->title;
 $direccion = new Direcciones();
 $persona_natural = new PersonasNaturales();
 $actividad_economica = new ActividadesEconomicas();
+$denominacion_comercial = new DenominacionesComerciales;
+$usuario= User::findOne(Yii::$app->user->identity->id);
+
+$id_contratista = $usuario->contratista_id;
 
 ?>
 <div class="contratistas-acordion">
@@ -50,6 +56,11 @@ $actividad_economica = new ActividadesEconomicas();
         [
             'header' => 'Actividades economicas',
             'content' => $this->render('_actividades_economicas',['actividad_economica' => $actividad_economica]),
+        ],
+        [
+            'header' => 'Denominacion comercial',
+            'content' => $this->render('_denominaciones_comerciales',['denominacion_comercial' => $denominacion_comercial,
+                                                                      'id_contratista'=>$id_contratista]),
         ],
         [
             'header' => 'Section 3',

@@ -14,6 +14,7 @@ use common\models\p\ContratistasContactos;
 use common\models\p\BancosContratistas;
 use common\models\p\RelacionesSucursales;
 use common\models\p\ActividadesEconomicas;
+use common\models\p\DenominacionesComerciales;
 use app\models\ContratistasSearch;
 use common\models\p\Model;
 use common\components\BaseController;
@@ -638,6 +639,117 @@ class ContratistasController extends BaseController
             
 
         
+   }
+   
+    public function actionDenominacion()
+   {
+     $denominacion_comercial = new DenominacionesComerciales();
+      $usuario= \common\models\p\User::findOne(Yii::$app->user->identity->id);
+    if ($denominacion_comercial->load(Yii::$app->request->post())) {
+         $denominacion_comercial->contratista_id = $usuario->contratista_id;
+        if($denominacion_comercial->tipo_denominacion == "PERSONA NATURAL" || $denominacion_comercial->tipo_denominacion =="FIRMA PERSONAL" || $denominacion_comercial->tipo_denominacion == "SOCIEDAD DE RESPONSABILIDAD LIMITADA" || $denominacion_comercial->tipo_denominacion== "COMPAÑIA NOMBRE COLECTIVO" || $denominacion_comercial->tipo_denominacion == "COMPAÑIA ANONIMA"){
+           
+            if($denominacion_comercial->save()){
+                return "Datos guardados con exito";
+            }else{
+                return "Faltan datos por guardar";
+            }
+            
+        }else{
+            
+            
+         switch ($denominacion_comercial->tipo_denominacion) {
+                case "SOCIEDAD ANONIMA":
+                    return $this->renderAjax('_sociedades_anonimas', 
+                     array('d_comercial' => $denominacion_comercial,));
+                    break;
+                case "COMANDITA":
+                     return $this->renderAjax('_comanditas', 
+                     array('d_comercial' => $denominacion_comercial,));
+                    break;
+                case "FUNDACION":
+                     return $this->renderAjax('_fundaciones', 
+                     array('d_comercial' => $denominacion_comercial,));
+                    break;
+                case "ORGANIZACION SOCIOPRODUCTIVA":
+                     return $this->renderAjax('_org_socioproductivas', 
+                     array('d_comercial' => $denominacion_comercial,));
+                    break;
+                case "COOPERATIVA":
+                     return $this->renderAjax('_cooperativas', 
+                     array('d_comercial' => $denominacion_comercial,));
+                    break;
+                case "EMPRESA EXTRANJERA":
+                     return $this->renderAjax('_empresas_extranjeras', 
+                     array('d_comercial' => $denominacion_comercial,));
+                    break;
+                 case "ASOCIACION CIVIL":
+                     return $this->renderAjax('_asociedades_civiles', 
+                     array('d_comercial' => $denominacion_comercial,));
+                    break;
+                 case "SOCIEDAD CIVIL":
+                     return $this->renderAjax('_asociedades_civiles', 
+                     array('d_comercial' => $denominacion_comercial,));
+                    break;
+                default:
+                            return "Debe elegir una opcion";
+                    }
+           
+        }
+        
+        
+        
+    }else{
+    return "Datos incompletos";
+    }
+      
+        
+        
+         
+         
+   }
+   
+    public function actionDenominacioncomercial()
+   {
+     $denominacion_comercial = new DenominacionesComerciales();
+     
+     if ($denominacion_comercial->load(Yii::$app->request->post())) {
+         
+         if($denominacion_comercial->tipo_subdenominacion!=null && $denominacion_comercial->tipo_denominacion!="COOPERATIVA" ){
+             
+               if($denominacion_comercial->tipo_denominacion=="ORGANIZACION SOCIOPRODUCTIVA" && $denominacion_comercial->codigo_situr==null){
+              return "Faltan datos debe ingresar el codigo situr";
+            }else{
+            if($denominacion_comercial->save()){
+                return "Datos guardados con exito";
+            }else{
+                return "Faltan datos por guardar";
+            }
+         
+            }
+         }else{
+             
+             if($denominacion_comercial->tipo_denominacion=="COOPERATIVA" ){
+                 
+                 if($denominacion_comercial->cooperativa_capital==null || $denominacion_comercial->cooperativa_distribuicion ==  null){
+                      return "Faltan datos debe competar los campos";
+                 }else{
+                     if($denominacion_comercial->save()){
+                            return "Datos guardados con exito";
+                        }else{
+                        return "Faltan datos por guardar";
+                        }
+                 }
+             }else{
+                 
+                 return "eror fuera de orbita";
+             }
+         }
+       
+     }else{
+         return "Datos incorrectos";
+     }
+         
    }
     /**
      * Updates an existing Contratistas model.
