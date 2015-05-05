@@ -41,3 +41,10 @@ Alter type tipo_sub_denominacion ADD VALUE 'SIN DOMICILIO EN VENEZUELA' BEFORE '
 Alter type tipo_sub_denominacion ADD VALUE 'UNIDAD PRODUCTIVA FAMILIAR' BEFORE 'SIN DOMICILIO EN VENEZUELA';
 
  ALTER TABLE denominaciones_comerciales DROP COLUMN fin_lucro;
+
+
+
+
+
+DROP TABLE sys_subdenominaciones_comerciales;
+DROP TABLE sys_denominaciones_comerciales;

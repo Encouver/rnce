@@ -138,4 +138,13 @@ class PersonasNaturales extends \common\components\BaseActiveRecord
     {
         return $this->hasMany(ContratistasContactos::className(), ['contacto_id' => 'id']);
     }
+    
+    public function getFormAttribs() {
+    return [
+        'primer_nombre'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Enter username...']],
+        'segundo_nombre'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Enter username...']],
+        'primer_apellido'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Enter username...']],
+        'segundo_apellido'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Enter username...']],
+    ];
+}   
 }

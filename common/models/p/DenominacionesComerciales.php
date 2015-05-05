@@ -82,4 +82,7 @@ class DenominacionesComerciales extends \common\components\BaseActiveRecord
     {
         return $this->hasMany(ActasConstitutivas::className(), ['denominacion_comercial_id' => 'id']);
     }
+    
+    
+
 }

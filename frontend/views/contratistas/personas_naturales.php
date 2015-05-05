@@ -1,7 +1,8 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use kartik\widgets\ActiveForm;
+use kartik\builder\Form;
 
 
 /* @var $this yii\web\View */
@@ -11,21 +12,22 @@ use yii\widgets\ActiveForm;
 
 <div class="personas-naturales-form">
 
-    <?php $form = ActiveForm::begin([
-        'id' => "raul",
-     //'action' => ['contratistas/datosbasicos'],
-
-]); ?>
+    <?php $form = ActiveForm::begin(['id'=>'raul', 'type'=>ActiveForm::TYPE_VERTICAL]); ?>
+    
+    
     <div id="output"></div>
+    
+    
     <?= $form->field($natural_juridica, 'rif')->textInput(['maxlength' => 50]) ?>
     
-    <?= $form->field($persona_natural, 'primer_nombre')->textInput(['maxlength' => 255]) ?>
-
-    <?= $form->field($persona_natural, 'segundo_nombre')->textInput(['maxlength' => 255]) ?>
-
-    <?= $form->field($persona_natural, 'primer_apellido')->textInput(['maxlength' => 255]) ?>
-
-    <?= $form->field($persona_natural, 'segundo_apellido')->textInput(['maxlength' => 255]) ?>
+    <?php echo Form::widget([
+    'model'=>$persona_natural,
+    'form'=>$form,
+    'columns'=>2,
+    'attributes'=>$persona_natural->formAttribs
+      ]); ?>
+    
+   
      <div class="form-group">
          <?= Html::Button(Yii::t('app', 'Enviar'), ['class' => 'btn btn-success', 'id' => 'enviar']) ?> 
     </div>
