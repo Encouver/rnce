@@ -14,7 +14,7 @@ use yii\widgets\ActiveForm;
 <div class="sociedad-drop" style="margin-bottom: 10px;">
     
     
-    
+
     <?php $form = ActiveForm::begin([
         'id' => "dc_cooperativas",]); ?>
 
@@ -24,13 +24,13 @@ use yii\widgets\ActiveForm;
     <?= $form->field($d_comercial, 'cooperativa_distribuicion')->dropDownList([ 'UTILIDADES' => 'UTILIDADES', 'EXCEDENTES' => 'EXCEDENTES', ], ['prompt' => '']) ?> 
    
     
-    <?= $form->field($d_comercial, 'tipo_denominacion')->hiddenInput()->label(false) ?>    
-       
+    <?= $form->field($d_comercial, 'tipo_denominacion')->hiddenInput()->label(false) ?>
+
      <?= $form->field($d_comercial, 'contratista_id')->hiddenInput()->label(false) ?>
     
     
    <div class="form-group centered">
-         <?= Html::Button(Yii::t('app', 'Enviar'), ['class' => 'btn btn-success', 'id' => 'enviar9']) ?> 
+         <?= Html::Button(Yii::t('app', 'Enviar'), ['class' => 'btn btn-success', 'id' => 'enviar9']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

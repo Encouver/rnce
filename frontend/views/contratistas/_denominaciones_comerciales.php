@@ -60,17 +60,17 @@ if($natural_juridica->juridica && $contratista->tipo_sector != "PRIVADO"){
         'id' => "d_comercial",]); ?>
     <?= $form->field($denominacion_comercial, 'tipo_denominacion')->dropDownList(ArrayHelper::map($denominacion, 'id', 'name'), ['prompt' => 'Seleccione tipo de denominacion']) ?>
     
-    <div class="form-group centered">
-         <?= Html::Button(Yii::t('app', 'Enviar'), ['class' => 'btn btn-success', 'id' => 'enviar8']) ?> 
+<!--    <div class="form-group centered">
+         <?/*= Html::Button(Yii::t('app', 'Seleccionar'), ['class' => 'btn btn-success', 'id' => 'enviar8']) */?>
     </div>
-
+-->
     <?php ActiveForm::end(); ?>
     
     <div id="output8"></div>
      <?php
 $script = <<< JS
-    $('#enviar8').click(function(e){
-          
+    $('#denominacionescomerciales-tipo_denominacion').change(function(e){
+
             if($('form#d_comercial').find('.has-error').length!=0){
               
                 return false;
