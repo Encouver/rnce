@@ -173,13 +173,13 @@ AppAsset::register($this);
                 ]),
                 //'linkOptions'=>['data-url'=>\yii\helpers\Url::to(['/site/tabs-data'])]
             ],
-            [
+            /*[
                 'label'=>'<i class="glyphicon glyphicon-list-alt"></i> Cuentas Patrimonio',
                 'items'=>[
                     [
                         'label'=>'<i class="glyphicon glyphicon-chevron-right"></i> Option 1',
                         'encode'=>false,
-                        'content'=>TabsX::widget([
+                        'items'=>TabsX::widget([
                             'items'=>$item,
                             'position'=>TabsX::POS_ABOVE,
                             'bordered'=>false,
@@ -189,7 +189,7 @@ AppAsset::register($this);
                     [
                         'label'=>'<i class="glyphicon glyphicon-chevron-right"></i> Option 2',
                         'encode'=>false,
-                        'content'=>TabsX::widget([
+                        'items'=>TabsX::widget([
                             'items'=>$item,
                             'position'=>TabsX::POS_ABOVE,
                             'bordered'=>false,
@@ -197,16 +197,17 @@ AppAsset::register($this);
                         ]),
                     ],
                 ],
-            ],
+            ],*/
         ];
 
 
         // Above
-/*        echo TabsX::widget([
+        echo TabsX::widget([
             'items'=>$items,
             'position'=>TabsX::POS_ABOVE,
-            'encodeLabels'=>false
-        ]);*/
+            'encodeLabels'=>false,
+            'options' => ['class' =>'nav-tabs '],
+        ]);
 
        /* echo GhostNav::widget([
                 'encodeLabels'=>false,
