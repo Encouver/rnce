@@ -3,6 +3,10 @@
 namespace common\models\c;
 
 use Yii;
+use kartik\builder\TabularForm;
+use kartik\grid\GridView;
+use yii\helpers\ArrayHelper;
+
 
 /**
  * This is the model class for table "cuentas.a_efectivos_bancos".
@@ -127,4 +131,17 @@ class AEfectivosBancos extends \common\components\BaseActiveRecord
     {
         return $this->hasOne(SysDivisas::className(), ['id' => 'tipo_moneda_id']);
     }
+
+    public function getFormAttribs() {
+        return [
+            // primary key column
+            'id'=>[ // primary key attribute
+                'type'=>TabularForm::INPUT_HIDDEN, 
+                'columnOptions'=>['hidden'=>true]
+            ], 
+            'saldo_segun_b'=>['type'=>TabularForm::INPUT_TEXT],
+        ];
+    }
+
+
 }
