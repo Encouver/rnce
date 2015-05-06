@@ -18,6 +18,7 @@ use common\models\p\DenominacionesComerciales;
 use common\models\p\ObjetosEmpresas;
 use common\models\p\User;
 use common\models\p\ObjetosAutorizaciones;
+use common\models\p\RelacionesObjetos;
 use app\models\ContratistasSearch;
 use common\models\p\Model;
 use common\components\BaseController;
@@ -224,8 +225,8 @@ class ContratistasController extends BaseController
 
            if(count($autorizados)){
                 
-               return $this->renderAjax('_objetos_autorizaciones',
-                       array('objeto_autorizacion' => (empty($objeto_autorizacion)) ? [new ObjetosAutorizaciones()] : $objeto_autorizacion,
+               return $this->renderAjax('_relaciones_objetos',
+                       array('relacion_objeto' => (empty($relacion_objeto)) ? [new RelacionesObjetos()] : $relacion_objeto,
                          'valores'=>$valores,
                          'autorizado'=>$autorizados
                          ));
