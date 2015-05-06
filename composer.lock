@@ -1,11 +1,55 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "afd999d89f96ea582a52db4f58779adb",
+    "hash": "a1a6eb14a79777dd436b576599fcc81a",
     "packages": [
+        {
+            "name": "amnah/yii2-classes",
+            "version": "dev-master",
+            "target-dir": "amnah/yii2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/amnah/yii2-classes.git",
+                "reference": "7f3ab904b16258c794eccff31e5777faab07d879"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/amnah/yii2-classes/zipball/7f3ab904b16258c794eccff31e5777faab07d879",
+                "reference": "7f3ab904b16258c794eccff31e5777faab07d879",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-0": {
+                    "amnah\\yii2\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "amnah",
+                    "email": "amnah.dev@gmail.com"
+                }
+            ],
+            "description": "Yii2 classes",
+            "keywords": [
+                "Fixture",
+                "soft-delete",
+                "softdelete",
+                "yii",
+                "yii2"
+            ],
+            "time": "2014-01-22 16:22:51"
+        },
         {
             "name": "bower-asset/bootstrap",
             "version": "v3.3.4",
@@ -3017,7 +3061,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "amnah/yii2-classes": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

@@ -336,4 +336,13 @@ return array (
       '@kartik/builder' => $vendorDir . '/kartik-v/yii2-builder',
     ),
   ),
+  'amnah/yii2-classes' => 
+  array (
+    'name' => 'amnah/yii2-classes',
+    'version' => '9999999-dev',
+    'alias' => 
+    array (
+      '@amnah/yii2' => $vendorDir . '/amnah/yii2-classes/amnah/yii2',
+    ),
+  ),
 );

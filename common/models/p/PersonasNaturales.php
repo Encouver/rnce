@@ -2,6 +2,7 @@
 
 namespace common\models\p;
 
+use kartik\builder\Form;
 use Yii;
 
 /**
@@ -146,5 +147,5 @@ class PersonasNaturales extends \common\components\BaseActiveRecord
         'primer_apellido'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Enter username...']],
         'segundo_apellido'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Enter username...']],
     ];
-}   
+}
 }

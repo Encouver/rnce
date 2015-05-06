@@ -3091,6 +3091,52 @@
         ]
     },
     {
+        "name": "amnah/yii2-classes",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "target-dir": "amnah/yii2",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/amnah/yii2-classes.git",
+            "reference": "7f3ab904b16258c794eccff31e5777faab07d879"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/amnah/yii2-classes/zipball/7f3ab904b16258c794eccff31e5777faab07d879",
+            "reference": "7f3ab904b16258c794eccff31e5777faab07d879",
+            "shasum": ""
+        },
+        "require": {
+            "yiisoft/yii2": "*"
+        },
+        "time": "2014-01-22 16:22:51",
+        "type": "yii2-extension",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "amnah\\yii2\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "amnah",
+                "email": "amnah.dev@gmail.com"
+            }
+        ],
+        "description": "Yii2 classes",
+        "keywords": [
+            "Fixture",
+            "soft-delete",
+            "softdelete",
+            "yii",
+            "yii2"
+        ]
+    },
+    {
         "name": "kartik-v/yii2-builder",
         "version": "v1.6.0",
         "version_normalized": "1.6.0.0",
