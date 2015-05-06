@@ -9,6 +9,7 @@ use common\models\p\RelacionesSucursales;
 use common\models\p\ActividadesEconomicas;
 use common\models\p\User;
 use common\models\p\DenominacionesComerciales;
+use common\models\p\ObjetosEmpresas;
 use app\base\Model;
 use yii\web\Response;
 
@@ -24,7 +25,7 @@ $persona_natural = new PersonasNaturales();
 $actividad_economica = new ActividadesEconomicas();
 $denominacion_comercial = new DenominacionesComerciales;
 $usuario= User::findOne(Yii::$app->user->identity->id);
-
+$objeto_empresa = new ObjetosEmpresas();
 $id_contratista = $usuario->contratista_id;
 
 ?>
@@ -33,6 +34,10 @@ $id_contratista = $usuario->contratista_id;
     <h1><?= Html::encode($this->title) ?></h1>
     <?= Accordion::widget([
     'items' => [
+        [
+            'header' => 'Objeto empresa',
+            'content' => $this->render('_objetos_empresas',['objeto_empresa' => $objeto_empresa]),
+        ],
         [
             'header' => 'Datos basicos',
             'content' => $this->render('datos_basicos'),
