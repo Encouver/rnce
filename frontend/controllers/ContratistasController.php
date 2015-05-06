@@ -18,6 +18,7 @@ use common\models\p\DenominacionesComerciales;
 use common\models\p\ObjetosEmpresas;
 use common\models\p\User;
 use common\models\p\ObjetosAutorizaciones;
+use common\models\p\RelacionesObjetos;
 use app\models\ContratistasSearch;
 use common\models\p\Model;
 use common\components\BaseController;
@@ -183,17 +184,17 @@ class ContratistasController extends BaseController
                     break;
                 case "DISTRIBUIDOR AUTORIZADO":
                     $objeto_empresa->distribuidor_autorizado=true;
-                    $elemento = ['DISTRIBUIDOR AUTORIZADO'=>'DISTRIBUIDOR AUTORIZADO'];
-                    $autorizados[]= $elemento;
-                    //array_push($autorizados,$elemento);
+                   // $elemento = ['DISTRIBUIDOR AUTORIZADO'=>'DISTRIBUIDOR AUTORIZADO'];
+                    $autorizados['DISTRIBUIDOR AUTORIZADO']= 'DISTRIBUIDOR AUTORIZADO';
+                    //array_push($autorizados[0],$elemento);
                     break;
                 case "DISTRIBUIDOR IMPORTADOR":
                     $objeto_empresa->distribuidor_importador=true;
                     break;
                 case "DISTRIBUIDOR IMPORTADOR AUTORIZADO":
                      $objeto_empresa->dist_importador_aut=true;
-                     $elemento = ['DISTRIBUIDOR IMPORTADOR AUTORIZADO'=>'DISTRIBUIDOR IMPORTADOR AUTORIZADO'];
-                     $autorizados[]= $elemento;
+                    // $elemento = ['DISTRIBUIDOR IMPORTADOR AUTORIZADO'=>'DISTRIBUIDOR IMPORTADOR AUTORIZADO'];
+                     $autorizados['DISTRIBUIDOR IMPORTADOR AUTORIZADO']= 'DISTRIBUIDOR IMPORTADOR AUTORIZADO';
                        //array_push($autorizados,$elemento);
                     break;
                 case "SERVICIOS BASICOS":
@@ -207,8 +208,8 @@ class ContratistasController extends BaseController
                     break;
                 case "SERVICIOS COMERCIALES AUTORIZADO":
                     $objeto_empresa->ser_comercial_aut=true;
-                    $elemento = ['SERVICIOS COMERCIALES AUTORIZADO'=>'SERVICIOS COMERCIALES AUTORIZADO'];
-                    $autorizados[]= $elemento;
+                    //$elemento = ['SERVICIOS COMERCIALES AUTORIZADO'=>'SERVICIOS COMERCIALES AUTORIZADO'];
+                    $autorizados['SERVICIOS COMERCIALES AUTORIZADO']= 'SERVICIOS COMERCIALES AUTORIZADO';
                      //array_push($autorizados,$elemento);
                     break;
                 case "FABRICANTE":
@@ -224,8 +225,8 @@ class ContratistasController extends BaseController
 
            if(count($autorizados)){
                 
-               return $this->renderAjax('_objetos_autorizaciones',
-                       array('objeto_autorizacion' => (empty($objeto_autorizacion)) ? [new ObjetosAutorizaciones()] : $objeto_autorizacion,
+               return $this->renderAjax('_relaciones_objetos',
+                       array('relacion_objeto' => (empty($relacion_objeto)) ? [new RelacionesObjetos()] : $relacion_objeto,
                          'valores'=>$valores,
                          'autorizado'=>$autorizados
                          ));
