@@ -4,6 +4,7 @@ namespace common\models\p;
 
 use kartik\builder\Form;
 use Yii;
+use kartik\builder\Form;
 
 /**
  * This is the model class for table "public.personas_naturales".

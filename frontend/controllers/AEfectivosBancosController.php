@@ -29,7 +29,16 @@ class AEfectivosBancosController extends BaseController
     
     public function actionEfectivosequivalentes()
     {
-        return $this->render('efectivosequivalentes');
+
+        $query = AEfectivosBancos::find()->indexBy('id'); // where `id` is your primary key
+ 
+        $dataProvider = new \yii\data\ActiveDataProvider([
+            'query' => $query,
+        ]);
+
+        $model = new AEfectivosBancos();
+
+        return $this->render('efectivosequivalentes', ['dataProvider' => $dataProvider, 'model' => $model]);
     }
 
     /**
