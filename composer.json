@@ -38,10 +38,11 @@
         "kartik-v/yii2-grid": "*",
         "kartik-v/yii2-widgets": "*",
         "demogorgorn/yii2-ajax-submit-button": "*",
-        "wbraganca/yii2-dynamicform": "*",
         "amnah/yii2-classes": "dev-master",
         "wbraganca/yii2-dynamicform": "*",
-        "kartik-v/yii2-builder": "*"
+        "kartik-v/yii2-builder": "*",
+        "kartik-v/yii2-popover-x": "*"
+
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",
