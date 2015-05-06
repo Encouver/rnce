@@ -38,11 +38,16 @@ $data = [
     ],
 
 ]);?>
+    <br>
     <div class="form-group">
          <?= Html::Button(Yii::t('app', 'Enviar'), ['class' => 'btn btn-success', 'id' => 'enviar10']) ?> 
     </div>
   
     <?php ActiveForm::end(); ?>
+    <br>
+    <br>
+    <br>
+    <br>
     
        <div id="output10"></div>
      <?php

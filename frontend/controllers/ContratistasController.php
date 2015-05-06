@@ -152,6 +152,10 @@ class ContratistasController extends BaseController
 
 
    }
+   public function actionObjetoautorizacion(){
+       
+       return "Hola mundo";
+   }
 
    public function actionRaul(){
 
@@ -219,9 +223,9 @@ class ContratistasController extends BaseController
 
 
            if(count($autorizados)){
-                $objeto_autorizacion = new ObjetosAutorizaciones();
+                
                return $this->renderAjax('_objetos_autorizaciones',
-                       array('objeto_autorizacion' => $objeto_autorizacion,
+                       array('objeto_autorizacion' => (empty($objeto_autorizacion)) ? [new ObjetosAutorizaciones()] : $objeto_autorizacion,
                          'valores'=>$valores,
                          'autorizado'=>$autorizados
                          ));
