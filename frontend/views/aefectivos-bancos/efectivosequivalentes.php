@@ -50,7 +50,7 @@ $attribs['attributes']['status'] = [
     'type'=>TabularForm::INPUT_WIDGET, 
     'widgetClass'=>\kartik\widgets\SwitchInput::classname()
 ];
- 
+
 echo TabularForm::widget([
     'dataProvider'=>$dataProvider,
     'form'=>$form,
