@@ -170,8 +170,6 @@ class ContratistasController extends BaseController
             switch ($valores[$i]) {
                 case "PRODUCTOR":
                     $objeto_empresa->productor=true;
-                    $elemento = ['PRODUCTOR'=>'PRODUCTOR'];
-                    $autorizados[]= $elemento;
                     break;
                 case "FABRICANTE":
                     $objeto_empresa->fabricante=true;
@@ -183,6 +181,7 @@ class ContratistasController extends BaseController
                     $objeto_empresa->distribuidor_autorizado=true;
                     $elemento = ['DISTRIBUIDOR AUTORIZADO'=>'DISTRIBUIDOR AUTORIZADO'];
                     $autorizados[]= $elemento;
+                    //array_push($autorizados,$elemento);
                     break;
                 case "DISTRIBUIDOR IMPORTADOR":
                     $objeto_empresa->distribuidor_importador=true;
@@ -191,6 +190,7 @@ class ContratistasController extends BaseController
                      $objeto_empresa->dist_importador_aut=true;
                      $elemento = ['DISTRIBUIDOR IMPORTADOR AUTORIZADO'=>'DISTRIBUIDOR IMPORTADOR AUTORIZADO'];
                      $autorizados[]= $elemento;
+                       //array_push($autorizados,$elemento);
                     break;
                 case "SERVICIOS BASICOS":
                     $objeto_empresa->servicio_basico=true;
@@ -205,6 +205,7 @@ class ContratistasController extends BaseController
                     $objeto_empresa->ser_comercial_aut=true;
                     $elemento = ['SERVICIOS COMERCIALES AUTORIZADO'=>'SERVICIOS COMERCIALES AUTORIZADO'];
                     $autorizados[]= $elemento;
+                     //array_push($autorizados,$elemento);
                     break;
                 case "FABRICANTE":
                     $objeto_empresa->fabricante=true;
@@ -221,7 +222,8 @@ class ContratistasController extends BaseController
                 $objeto_autorizacion = new ObjetosAutorizaciones();
                return $this->renderAjax('_objetos_autorizaciones',
                        array('objeto_autorizacion' => $objeto_autorizacion,
-                         'valores'=>$valores
+                         'valores'=>$valores,
+                         'autorizado'=>$autorizados
                          ));
            }else{
                if($objeto_empresa->save()){
