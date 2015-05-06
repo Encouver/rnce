@@ -44,17 +44,12 @@ $this->params['breadcrumbs'][] = $this->title;
       
 <?php
  $form = ActiveForm::begin();
-$attribs = $model->formAttribs;
-unset($attribs['attributes']['color']);
-$attribs['attributes']['status'] = [
-    'type'=>TabularForm::INPUT_WIDGET, 
-    'widgetClass'=>\kartik\widgets\SwitchInput::classname()
-];
- 
+//$attribs = $model->formAttribs;
+
 echo TabularForm::widget([
     'dataProvider'=>$dataProvider,
     'form'=>$form,
-    'attributes'=>$attribs,
+    'attributes'=>$model->formAttribs,
     'gridSettings'=>[
         'floatHeader'=>true,
         'panel'=>[
