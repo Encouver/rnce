@@ -58,6 +58,9 @@ ALTER TABLE objetos_empresas DROP COLUMN autorizacion;
 ALTER TABLE objetos_empresas RENAME COLUMN tipo_relacion to contratista;
 ALTER TABLE objetos_empresas RENAME COLUMN relacion_id to empresa_relacionada_id;
 ALTER TABLE objetos_empresas ALTER COLUMN empresa_relacionada_id DROP NOT NULL;
+ALTER TABLE objetos_empresas ADD COLUMN contratista_id integer;
+ALTER TABLE objetos_empresas ALTER COLUMN contratista_id SET NOT NULL;
+COMMENT ON COLUMN objetos_empresas.contratista_id IS 'Clave foranea a la tabla contratista';
 
 create type objeto_autorizacion as enum ('DISTRIBUIDOR AUTORIZADO','DISTRIBUIDOR IMPORTADOR AUTORIZADO', 'SERVICIOS COMERCIALES AUTORIZADO');
 
