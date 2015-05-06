@@ -9,14 +9,12 @@ use kartik\widgets\Select2;
 /* @var $model common\models\p\Contratistas */
 /* @var $form yii\widgets\ActiveForm */
 
-$tip_sub_denominacion = [
-    ['id' => 'CON FINES DE LUCRO', 'name' => 'CON FINES DE LUCRO'],
-    ['id' => 'SIN FINES DE LUCRO', 'name' => 'SIN FINES DE LUCRO'],
-   
-];
+
+
+
 $data = [
- 'PROVEEDOR'=> [1=>'Producto 1', 2=>'Producto 2'],
- 'SERVICIOS'=>[3=>'Producto 3' ,   4=>'Producto 4'],
+ 'PROVEEDOR'=> ['PRODUCTOR'=>'PRODUCTOR', 'FABRICANTE'=>'FABRICANTE','FABRICANTE IMPORTADOR'=>'FABRICANTE IMPORTADOR', 'DISTRIBUIDOR'=>'DISTRIBUIDOR','DISTRIBUIDOR AUTORIZADO'=>'DISTRIBUIDOR AUTORIZADO','DISTRIBUIDOR IMPORTADOR'=>'DITRIBUIDOR IMPORTADOR','DISTRIBUIDOR IMPORTADOR AUTORIZADO'=>'DISTRIBUIDOR IMPORTADOR AUTORIZADO'],
+ 'SERVICIOS'=>['SERVICIOS BASICOS'=>'SERVICIOS BASICOS' ,'SERVICIOS PROFESIONALES'=>'SERVICIOS PROFESIONALES','SERVICIOS COMERCIALES'=>'SERVICIOS COMERCIALES','SERVICIOS COMERCIALES AUTORIZADO'=>'SERVICIOS COMERCIALES AUTORIZADO'],
  'OBRAS'=>'OBRAS'
  ];
 ?>
@@ -38,32 +36,34 @@ $data = [
         'placeholder' => 'Select provinces ...', 
         'multiple' => true
     ],
+
 ]);?>
-    
-   <div class="form-group centered">
+    <div class="form-group">
          <?= Html::Button(Yii::t('app', 'Enviar'), ['class' => 'btn btn-success', 'id' => 'enviar10']) ?> 
     </div>
-
+  
     <?php ActiveForm::end(); ?>
+    
+       <div id="output10"></div>
      <?php
 $script = <<< JS
     $('#enviar10').click(function(e){
           
-            if($('form#dc_asociedades').find('.has-error').length!=0){
+            if($('form#o_empresas').find('.has-error').length!=0){
               
                 return false;
             }else
             {
-                //$('form#dc_asociedades').submit();
+                //$('form#o_empresas').submit();
                 e.preventDefault();
                 e.stopImmediatePropagation();
                $.ajax({
                    
-                    url: 'http://localhost/rnce/frontend/web/index.php?r=contratistas/denominacioncomercial',
+                    url: 'http://localhost/rnce/frontend/web/index.php?r=contratistas/raul',
                     type: 'post',
-                    data: $('form#dc_asociedades').serialize(),
+                    data: $('form#o_empresas').serialize(),
                     success: function(data) {
-                             $( "#output9" ).html( data ); 
+                             $( "#output10" ).html( data ); 
                     }
                 });
                 
