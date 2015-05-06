@@ -217,7 +217,7 @@ class ContratistasController extends BaseController
         }
         
        
-           if(count($autorizados)>=2){
+           if(count($autorizados)>=1){
                 $objeto_autorizacion = new ObjetosAutorizaciones();
                return $this->renderAjax('_objetos_autorizaciones',
                        array('objeto_autorizacion' => $objeto_autorizacion,
