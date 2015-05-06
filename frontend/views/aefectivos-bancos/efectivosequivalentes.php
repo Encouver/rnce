@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <center><h1><?= Html::encode($this->title) ?></h1>
 
-   <?php 
+   <?php
    				/*
                 $menuItems[] =  ['label'=>'Efectivos en bancos', 'url'=>['/aefectivos-bancos/create']];
                 $menuItems[] =   ['label'=>'Efectivos en caja', 'url'=>['/aefectivos-cajas/create']];
@@ -47,10 +47,10 @@ $this->params['breadcrumbs'][] = $this->title;
 $attribs = $model->formAttribs;
 unset($attribs['attributes']['color']);
 $attribs['attributes']['status'] = [
-    'type'=>TabularForm::INPUT_WIDGET, 
+    'type'=>TabularForm::INPUT_WIDGET,
     'widgetClass'=>\kartik\widgets\SwitchInput::classname()
 ];
- 
+
 echo TabularForm::widget([
     'dataProvider'=>$dataProvider,
     'form'=>$form,
@@ -60,7 +60,7 @@ echo TabularForm::widget([
         'panel'=>[
             'heading' => '<h3 class="panel-title"><i class="glyphicon glyphicon-book"></i> Manage Books</h3>',
             'type' => GridView::TYPE_PRIMARY,
-            'after'=> Html::a('<i class="glyphicon glyphicon-plus"></i> Add New', '#', ['class'=>'btn btn-success']) . ' ' . 
+            'after'=> Html::a('<i class="glyphicon glyphicon-plus"></i> Add New', '#', ['class'=>'btn btn-success']) . ' '.
                     Html::a('<i class="glyphicon glyphicon-remove"></i> Delete', '#', ['class'=>'btn btn-danger']) . ' ' .
                     Html::submitButton('<i class="glyphicon glyphicon-floppy-disk"></i> Save', ['class'=>'btn btn-primary'])
         ]

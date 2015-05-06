@@ -26,43 +26,53 @@ class BaseActiveRecord extends ActiveRecord
 	public function behaviors()
     {
         return [
-/*			  'status'=>[
-			            'class' => AttributeBehavior::className(),
-			            'attributes' => [
-			                ActiveRecord::EVENT_BEFORE_INSERT => 'sys_status',
-			                ActiveRecord::EVENT_BEFORE_DELETE => 'sys_status',
-			            ],
-			            'value' => function ($event) {
-			            	switch ($event) {
-			            		case  ActiveRecord::EVENT_BEFORE_INSERT:
-			            			# code...
-			            		return true;
-			            			break;
-  			            		case  ActiveRecord::EVENT_BEFORE_DELETE:
-			            			# code... 
-  			            		return false;
-			            			break;
-			            		default:
-			            			# code...
-			            		return true;
-			            			break;
-			            	}
-			        
-			            },
-			        ],*/
-/*            'timestamp' => [
+                /*
+                'status'=>[
+                    'class' => AttributeBehavior::className(),
+                    'attributes' => [
+                        ActiveRecord::EVENT_BEFORE_INSERT => 'sys_status',
+                        ActiveRecord::EVENT_BEFORE_DELETE => 'sys_status',
+                    ],
+                    'value' => function ($event) {
+                        switch ($event) {
+                            case  ActiveRecord::EVENT_BEFORE_INSERT:
+                                this.sys_status = true;
+                                # code...
+                            return true;
+                                break;
+                            case  ActiveRecord::EVENT_BEFORE_DELETE:
+                                this.sys_status = false;
+                                # code...
+                            return true;
+                                break;
+                            default:
+                                # code...
+                            return true;
+                                break;
+                        }
+
+                    },
+                ],*/
+                /*            'timestamp' => [
                 'class' => TimestampBehavior::className(),
-                'attributes' => [
-                    ActiveRecord::EVENT_BEFORE_INSERT => ['sys_creado_el', 'sys_actualizado_el'],
-                    ActiveRecord::EVENT_BEFORE_UPDATE => ['sys_actualizado_el'],
-                    ActiveRecord::EVENT_BEFORE_DELETE => ['sys_finalizado_el'],
-                ],
-                'value' => new Expression('NOW()'),
-            ],*/
-            /*'blameable' => [
-                'class' => BlameableBehavior::className(),
-                //'createdByAttribute' => 'creado_por',
-                //'updatedByAttribute' => 'actualizado_por',
+                    'attributes' => [
+                        ActiveRecord::EVENT_BEFORE_INSERT => ['sys_creado_el', 'sys_actualizado_el'],
+                        ActiveRecord::EVENT_BEFORE_UPDATE => ['sys_actualizado_el'],
+                        ActiveRecord::EVENT_BEFORE_DELETE => ['sys_finalizado_el'],
+                    ],
+                    'value' => new Expression('NOW()'),
+                ],*/
+    /*          'blameable' => [
+                    'class' => BlameableBehavior::className(),
+                    'createdByAttribute' => 'creado_por',
+                    'updatedByAttribute' => 'actualizado_por',
+                    ],
+                'softDelete' => [
+                    'class' => 'amnah\yii2\behaviors\SoftDelete',
+                    // these are the default values, which you can omit
+                    'attribute' => 'sys_finalizado_el',
+                    'timestamp' => null, // this is the same format as in AutoTimestamp
+                    'safeMode' => true, // this processes '$model->delete()' calls as soft-deletes
                 ],*/
         ];
     }
