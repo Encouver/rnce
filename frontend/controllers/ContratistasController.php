@@ -15,6 +15,9 @@ use common\models\p\BancosContratistas;
 use common\models\p\RelacionesSucursales;
 use common\models\p\ActividadesEconomicas;
 use common\models\p\DenominacionesComerciales;
+use common\models\p\ObjetosEmpresas;
+use common\models\p\User;
+use common\models\p\ObjetosAutorizaciones;
 use app\models\ContratistasSearch;
 use common\models\p\Model;
 use common\components\BaseController;
@@ -151,18 +154,98 @@ class ContratistasController extends BaseController
    }
    
    public function actionRaul(){
+                
        
-       $contratista = new Contratistas();
-     $natural_juridica = new SysNaturalesJuridicas();
-     
-             $persona_natural = new PersonasNaturales();
-             
-             
-             return $this->render('personas_naturales', 
-                     array('persona_natural' => $persona_natural,
-                         'natural_juridica'=> $natural_juridica,
-                         
+       if(isset($_POST['objeto'])){
+            $valores=$_POST['objeto'];
+            $cantidad= count($valores);
+            $objeto_empresa= new ObjetosEmpresas();
+             $usuario= User::findOne(Yii::$app->user->identity->id);
+             $objeto_empresa->contratista_id= $usuario->contratista_id;
+             $objeto_empresa->contratista= true;
+             $autorizados = array(); 
+             for ($i = 0; $i < $cantidad; $i++) {
+       
+       
+            switch ($valores[$i]) {
+                case "PRODUCTOR":
+                    $objeto_empresa->productor=true;
+                    $elemento = ['PRODUCTOR'=>'PRODUCTOR'];
+                    $autorizados[]= $elemento;
+                    break;
+                case "FABRICANTE":
+                    $objeto_empresa->fabricante=true;
+                    break;
+                case "DISTRIBUIDOR":
+                    $objeto_empresa->distribuidor=true;
+                    break;
+                case "DISTRIBUIDOR AUTORIZADO":
+                    $objeto_empresa->distribuidor_autorizado=true;
+                    $elemento = ['DISTRIBUIDOR AUTORIZADO'=>'DISTRIBUIDOR AUTORIZADO'];
+                    $autorizados[]= $elemento;
+                    break;
+                case "DISTRIBUIDOR IMPORTADOR":
+                    $objeto_empresa->distribuidor_importador=true;
+                    break;
+                case "DISTRIBUIDOR IMPORTADOR AUTORIZADO":
+                     $objeto_empresa->dist_importador_aut=true;
+                     $elemento = ['DISTRIBUIDOR IMPORTADOR AUTORIZADO'=>'DISTRIBUIDOR IMPORTADOR AUTORIZADO'];
+                     $autorizados[]= $elemento;
+                    break;
+                case "SERVICIOS BASICOS":
+                    $objeto_empresa->servicio_basico=true;
+                    break;
+                case "SERVICIOS PROFESIONALES":
+                    $objeto_empresa->servicio_profesional=true;
+                    break;
+                case "SERVICIOS COMERCIALES":
+                    $objeto_empresa->servicio_comercial=true;
+                    break;
+                case "SERVICIOS COMERCIALES AUTORIZADO":
+                    $objeto_empresa->ser_comercial_aut=true;
+                    $elemento = ['SERVICIOS COMERCIALES AUTORIZADO'=>'SERVICIOS COMERCIALES AUTORIZADO'];
+                    $autorizados[]= $elemento;
+                    break;
+                case "FABRICANTE":
+                    $objeto_empresa->fabricante=true;
+                    break;
+                
+                
+                default:
+                    break;
+                    }       
+        }
+        
+       
+           if(count($autorizados)>=2){
+                $objeto_autorizacion = new ObjetosAutorizaciones();
+               return $this->renderAjax('_objetos_autorizaciones',
+                       array('objeto_autorizacion' => $objeto_autorizacion,
+                         'valores'=>$valores
                          ));
+           }else{
+               if($objeto_empresa->save()){
+                   return "datos guardaos";
+               }else{
+                   return "faltan datos";
+               }
+               
+           }
+       }else{
+           return "no hay datos";
+       }
+      
+        
+       
+                
+            
+			
+        
+          
+   
+        
+								
+    
          
         
    }
