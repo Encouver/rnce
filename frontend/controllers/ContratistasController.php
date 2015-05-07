@@ -158,7 +158,7 @@ class ContratistasController extends BaseController
        return "Hola mundo";
    }
 
-   public function actionRaul(){
+   public function actionObjetoempresa(){
 
 
        if(isset($_POST['objeto'])){
@@ -227,7 +227,7 @@ class ContratistasController extends BaseController
                 
                return $this->renderAjax('_relaciones_objetos',
                        array('relacion_objeto' => (empty($relacion_objeto)) ? [new RelacionesObjetos()] : $relacion_objeto,
-                         'valores'=>$valores,
+                         'objeto_empresa'=>$objeto_empresa,
                          'autorizado'=>$autorizados
                          ));
            }else{

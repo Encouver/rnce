@@ -64,7 +64,7 @@ $script = <<< JS
                 e.stopImmediatePropagation();
                $.ajax({
                    
-                    url: 'http://localhost/rnce/frontend/web/index.php?r=contratistas/raul',
+                    url: 'http://localhost/rnce/frontend/web/index.php?r=contratistas/objetoempresa',
                     type: 'post',
                     data: $('form#o_empresas').serialize(),
                     success: function(data) {

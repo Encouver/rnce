@@ -56,6 +56,7 @@ return array(
     'kartik\\base\\' => array($vendorDir . '/kartik-v/yii2-krajee-base'),
     'kartik\\alert\\' => array($vendorDir . '/kartik-v/yii2-widget-alert'),
     'kartik\\affix\\' => array($vendorDir . '/kartik-v/yii2-widget-affix'),
+    'dosamigos\\datepicker\\' => array($vendorDir . '/2amigos/yii2-date-picker-widget/src'),
     'demogorgorn\\ajax\\' => array($vendorDir . '/demogorgorn/yii2-ajax-submit-button'),
     'cebe\\markdown\\' => array($vendorDir . '/cebe/markdown'),
 );

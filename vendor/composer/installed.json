@@ -936,57 +936,6 @@
         ]
     },
     {
-        "name": "kartik-v/yii2-date-range",
-        "version": "v1.6.1",
-        "version_normalized": "1.6.1.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/kartik-v/yii2-date-range.git",
-            "reference": "5fb92535697c637190d1d72055f65211e864d365"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/kartik-v/yii2-date-range/zipball/5fb92535697c637190d1d72055f65211e864d365",
-            "reference": "5fb92535697c637190d1d72055f65211e864d365",
-            "shasum": ""
-        },
-        "require": {
-            "kartik-v/yii2-krajee-base": "*"
-        },
-        "time": "2015-02-16 16:52:35",
-        "type": "yii2-extension",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "kartik\\daterange\\": ""
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "BSD 3-Clause"
-        ],
-        "authors": [
-            {
-                "name": "Kartik Visweswaran",
-                "email": "kartikv2@gmail.com",
-                "homepage": "http://www.krajee.com/"
-            }
-        ],
-        "description": "An advanced Yii 2 date range picker input for based on bootstrap-daterangepicker plugin.",
-        "homepage": "https://github.com/kartik-v/yii2-date-range",
-        "keywords": [
-            "bootstrap",
-            "bootstrap 3",
-            "date",
-            "date-range",
-            "extension",
-            "range",
-            "time",
-            "widget",
-            "yii2"
-        ]
-    },
-    {
         "name": "kartik-v/yii2-field-range",
         "version": "v1.3.0",
         "version_normalized": "1.3.0.0",
@@ -3091,6 +3040,106 @@
         ]
     },
     {
+        "name": "kartik-v/yii2-builder",
+        "version": "v1.6.0",
+        "version_normalized": "1.6.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/kartik-v/yii2-builder.git",
+            "reference": "a9af9bdf9cc1f97ee6a262dbd801d0cdac97a8c8"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/kartik-v/yii2-builder/zipball/a9af9bdf9cc1f97ee6a262dbd801d0cdac97a8c8",
+            "reference": "a9af9bdf9cc1f97ee6a262dbd801d0cdac97a8c8",
+            "shasum": ""
+        },
+        "require": {
+            "kartik-v/yii2-grid": "*",
+            "kartik-v/yii2-krajee-base": "*",
+            "kartik-v/yii2-widget-activeform": "*"
+        },
+        "time": "2015-01-28 03:40:28",
+        "type": "yii2-extension",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "kartik\\builder\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD 3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Kartik Visweswaran",
+                "email": "kartikv2@gmail.com",
+                "homepage": "http://www.krajee.com/"
+            }
+        ],
+        "description": "Build forms (single-row or multi-row/tabular) easily for Yii Framework 2.0",
+        "homepage": "https://github.com/kartik-v/yii2-builder",
+        "keywords": [
+            "builder",
+            "extension",
+            "form",
+            "widget",
+            "yii2"
+        ]
+    },
+    {
+        "name": "kartik-v/yii2-date-range",
+        "version": "v1.6.2",
+        "version_normalized": "1.6.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/kartik-v/yii2-date-range.git",
+            "reference": "3d11ca5e85149420a91555733b12019377d00f87"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/kartik-v/yii2-date-range/zipball/3d11ca5e85149420a91555733b12019377d00f87",
+            "reference": "3d11ca5e85149420a91555733b12019377d00f87",
+            "shasum": ""
+        },
+        "require": {
+            "kartik-v/yii2-krajee-base": "*"
+        },
+        "time": "2015-04-21 15:10:00",
+        "type": "yii2-extension",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "kartik\\daterange\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD 3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Kartik Visweswaran",
+                "email": "kartikv2@gmail.com",
+                "homepage": "http://www.krajee.com/"
+            }
+        ],
+        "description": "An advanced Yii 2 date range picker input for based on bootstrap-daterangepicker plugin.",
+        "homepage": "https://github.com/kartik-v/yii2-date-range",
+        "keywords": [
+            "bootstrap",
+            "bootstrap 3",
+            "date",
+            "date-range",
+            "extension",
+            "range",
+            "time",
+            "widget",
+            "yii2"
+        ]
+    },
+    {
         "name": "amnah/yii2-classes",
         "version": "dev-master",
         "version_normalized": "9999999-dev",
@@ -3137,51 +3186,98 @@
         ]
     },
     {
-        "name": "kartik-v/yii2-builder",
-        "version": "v1.6.0",
-        "version_normalized": "1.6.0.0",
+        "name": "bower-asset/bootstrap-datepicker",
+        "version": "v1.4.0",
+        "version_normalized": "1.4.0.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/kartik-v/yii2-builder.git",
-            "reference": "a9af9bdf9cc1f97ee6a262dbd801d0cdac97a8c8"
+            "url": "https://github.com/eternicode/bootstrap-datepicker.git",
+            "reference": "e7ca6bb94dc483817f2ff10fc2b723b2b935e016"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/kartik-v/yii2-builder/zipball/a9af9bdf9cc1f97ee6a262dbd801d0cdac97a8c8",
-            "reference": "a9af9bdf9cc1f97ee6a262dbd801d0cdac97a8c8",
+            "url": "https://api.github.com/repos/eternicode/bootstrap-datepicker/zipball/e7ca6bb94dc483817f2ff10fc2b723b2b935e016",
+            "reference": "e7ca6bb94dc483817f2ff10fc2b723b2b935e016",
             "shasum": ""
         },
         "require": {
-            "kartik-v/yii2-grid": "*",
-            "kartik-v/yii2-krajee-base": "*",
-            "kartik-v/yii2-widget-activeform": "*"
+            "bower-asset/bootstrap": ">=2.0.4,<4.0",
+            "bower-asset/jquery": ">=1.7.1"
         },
-        "time": "2015-01-28 03:40:28",
+        "type": "bower-asset-library",
+        "extra": {
+            "bower-asset-main": [
+                "dist/css/bootstrap-datepicker.css",
+                "dist/css/bootstrap-datepicker3.css",
+                "js/bootstrap-datepicker.js"
+            ],
+            "bower-asset-ignore": []
+        },
+        "installation-source": "dist",
+        "license": [
+            "Apache-2.0"
+        ]
+    },
+    {
+        "name": "2amigos/yii2-date-picker-widget",
+        "version": "1.0.5",
+        "version_normalized": "1.0.5.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/2amigos/yii2-date-picker-widget.git",
+            "reference": "89cd0d7f00785b608b4a9670016f2795f2e3984d"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/2amigos/yii2-date-picker-widget/zipball/89cd0d7f00785b608b4a9670016f2795f2e3984d",
+            "reference": "89cd0d7f00785b608b4a9670016f2795f2e3984d",
+            "shasum": ""
+        },
+        "require": {
+            "bower-asset/bootstrap-datepicker": "1.4.0",
+            "yiisoft/yii2": "~2.0.0",
+            "yiisoft/yii2-bootstrap": "~2.0.3"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "4.*"
+        },
+        "time": "2015-04-02 11:48:05",
         "type": "yii2-extension",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.0-dev"
+            },
+            "asset-installer-paths": {
+                "bower-asset-library": "vendor/bower"
+            }
+        },
         "installation-source": "dist",
         "autoload": {
             "psr-4": {
-                "kartik\\builder\\": ""
+                "dosamigos\\datepicker\\": "src"
             }
         },
         "notification-url": "https://packagist.org/downloads/",
         "license": [
-            "BSD 3-Clause"
+            "BSD-3-Clause"
         ],
         "authors": [
             {
-                "name": "Kartik Visweswaran",
-                "email": "kartikv2@gmail.com",
-                "homepage": "http://www.krajee.com/"
+                "name": "2amigOS! Consulting Group",
+                "email": "hola@2amigos.us",
+                "homepage": "http://2amigos.us",
+                "role": "Developer"
             }
         ],
-        "description": "Build forms (single-row or multi-row/tabular) easily for Yii Framework 2.0",
-        "homepage": "https://github.com/kartik-v/yii2-builder",
+        "description": "Bootstrap DatePicker widget for Yii2.",
+        "homepage": "http://yiiwheels.com/extension/bootstrap-datepicker",
         "keywords": [
-            "builder",
+            "2amigos",
+            "datepicker",
             "extension",
-            "form",
             "widget",
+            "yii",
+            "yii 2",
             "yii2"
         ]
     }
