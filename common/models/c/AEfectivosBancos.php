@@ -139,7 +139,7 @@ class AEfectivosBancos extends \common\components\BaseActiveRecord
                 'type'=>TabularForm::INPUT_HIDDEN,
                 'columnOptions'=>['hidden'=>true]
             ],
-            'saldo_segun_b'=>['type'=>TabularForm::INPUT_TEXT],
+            'saldo_segun_b'=>['type'=>TabularForm::INPUT_TEXT,'label'=>'Saldo según Banco'],
         ];
     }
 

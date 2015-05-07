@@ -184,16 +184,16 @@ class ContratistasController extends BaseController
                     break;
                 case "DISTRIBUIDOR AUTORIZADO":
                     $objeto_empresa->distribuidor_autorizado=true;
-                   // $elemento = ['DISTRIBUIDOR AUTORIZADO'=>'DISTRIBUIDOR AUTORIZADO'];
+
                     $autorizados['DISTRIBUIDOR AUTORIZADO']= 'DISTRIBUIDOR AUTORIZADO';
-                    //array_push($autorizados[0],$elemento);
+                    //array_push($autorizados,$elemento);
                     break;
                 case "DISTRIBUIDOR IMPORTADOR":
                     $objeto_empresa->distribuidor_importador=true;
                     break;
                 case "DISTRIBUIDOR IMPORTADOR AUTORIZADO":
                      $objeto_empresa->dist_importador_aut=true;
-                    // $elemento = ['DISTRIBUIDOR IMPORTADOR AUTORIZADO'=>'DISTRIBUIDOR IMPORTADOR AUTORIZADO'];
+
                      $autorizados['DISTRIBUIDOR IMPORTADOR AUTORIZADO']= 'DISTRIBUIDOR IMPORTADOR AUTORIZADO';
                        //array_push($autorizados,$elemento);
                     break;
@@ -208,7 +208,7 @@ class ContratistasController extends BaseController
                     break;
                 case "SERVICIOS COMERCIALES AUTORIZADO":
                     $objeto_empresa->ser_comercial_aut=true;
-                    //$elemento = ['SERVICIOS COMERCIALES AUTORIZADO'=>'SERVICIOS COMERCIALES AUTORIZADO'];
+
                     $autorizados['SERVICIOS COMERCIALES AUTORIZADO']= 'SERVICIOS COMERCIALES AUTORIZADO';
                      //array_push($autorizados,$elemento);
                     break;

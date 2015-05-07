@@ -140,12 +140,13 @@ AppAsset::register($this);
         use kartik\tabs\TabsX;
         $item = [
             [
-                'label'=>'<i class="glyphicon glyphicon-home"></i> Corrientes',
+                'label'=>'<i class="glyphicon glyphicon-list-alt"></i> Corrientes',
                 'content'=> 'A',
-                'active'=>true
+                'active'=>true,
+                'linkOptions'=>['data-url'=>\yii\helpers\Url::to(['/aa-obligaciones-bancarias/tabs-data'])]
             ],
             [
-                'label'=>'<i class="glyphicon glyphicon-user"></i> No corrientes',
+                'label'=>'<i class="glyphicon glyphicon-list"></i> No corrientes',
                 'content'=>'',
                 'linkOptions'=>['data-url'=>\yii\helpers\Url::to(['/site/tabs-data'])]
             ],
