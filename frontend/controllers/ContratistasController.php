@@ -155,28 +155,78 @@ class ContratistasController extends BaseController
    }
    public function actionObjetoautorizacion(){
        
-      
+   
        $objeto_empresa = new ObjetosEmpresas();
         $relacion_objeto = [new RelacionesObjetos];
        $relacion_objeto = Model::createMultiple(RelacionesObjetos::classname());
             Model::loadMultiple($relacion_objeto, Yii::$app->request->post());
             if($objeto_empresa->load(Yii::$app->request->post())){
+               
            $transaction = \Yii::$app->db->beginTransaction();
            
-           $distribuidor=null;
-           $importador=null;
-           $servicio=null;
-           if(!($objeto_empresa->distribuidor_autorizado)){
-                $distribuidor=false;
-           }
-            if(!($objeto_empresa->dist_importador_aut)){
-                $importador=false;
-           }
-            if(!($objeto_empresa->ser_comercial_aut)){
-                $servicio=false;
-           }
-            foreach ($relacion_objeto as $carga) {
+           
+           
+           if($objeto_empresa->distribuidor_autorizado==null){
                
+               $objeto_empresa->distribuidor_autorizado=false;
+           }
+            if($objeto_empresa->dist_importador_aut==null){
+              
+                $objeto_empresa->dist_importador_aut=false;
+           }
+            if($objeto_empresa->ser_comercial_aut==null){
+                $objeto_empresa->ser_comercial_aut=false;
+           }
+            if($objeto_empresa->productor==null){
+               
+               $objeto_empresa->productor=false;
+           }
+            if($objeto_empresa->fabricante==null){
+              
+                $objeto_empresa->fabricante=false;
+           }
+            if($objeto_empresa->fabricante_importado==null){
+                
+                $objeto_empresa->fabricante_importado=false;
+           }
+             if($objeto_empresa->distribuidor==null){
+               
+               $objeto_empresa->distribuidor=false;
+           }
+            if($objeto_empresa->distribuidor_importador==null){
+              
+                $objeto_empresa->distribuidor_importador=false;
+           }
+            if($objeto_empresa->servicio_basico==null){
+                $objeto_empresa->servicio_basico=false;
+           }
+           if($objeto_empresa->servicio_profesional==null){
+                $objeto_empresa->servicio_profesional=false;
+           }
+           if($objeto_empresa->servicio_comercial==null){
+                $objeto_empresa->servicio_comercial=false;
+           }
+            if($objeto_empresa->obra==null){
+                $objeto_empresa->obra=false;
+           }
+           
+           $distribuidor=-1;
+           $importador=-1;
+           $servicio=-1;
+           if($objeto_empresa->distribuidor_autorizado==1){
+               
+                $distribuidor=0;
+           }
+            if($objeto_empresa->dist_importador_aut==1){
+              
+                $importador=0;
+           }
+            if($objeto_empresa->ser_comercial_aut==1){
+                $servicio=0;
+           }
+          
+            foreach ($relacion_objeto as $carga) {
+               echo $carga->tipo_objeto;
                 switch ($carga->tipo_objeto){
                     
                     case "DISTRIBUIDOR AUTORIZADO":
@@ -193,11 +243,12 @@ class ContratistasController extends BaseController
                 }
             }
            try {
+             
                
-               
-               if(($distribuidor!=null && $distribuidor==false)|| ($servicio!=null && $servicio==false) || ($importador!=null && $importador==false)){
-                   return "datos incompletos faltaron rellenar campos tl tipo autorizacion";
+               if($distribuidor==0 || $servicio==0 || $importador==0){
+                   return "datos incompletos faltaron rellenar campos del tipo autorizacion";
                }else{
+                
                      if (! ($flag = $objeto_empresa->save(false))) {
 
                                             $transaction->rollBack();
@@ -287,6 +338,7 @@ class ContratistasController extends BaseController
 
        if(isset($_POST['objeto'])){
             $valores=$_POST['objeto'];
+     
             $cantidad= count($valores);
             $objeto_empresa= new ObjetosEmpresas();
              $usuario= User::findOne(Yii::$app->user->identity->id);
@@ -302,6 +354,9 @@ class ContratistasController extends BaseController
                     break;
                 case "FABRICANTE":
                     $objeto_empresa->fabricante=true;
+                    break;
+                case "FABRICANTE IMPORTADOR":
+                    $objeto_empresa->fabricante_importado=true;
                     break;
                 case "DISTRIBUIDOR":
                     $objeto_empresa->distribuidor=true;
