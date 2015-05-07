@@ -2,6 +2,7 @@
 
 namespace common\models\c;
 
+use kartik\builder\TabularForm;
 use Yii;
 
 /**
@@ -124,5 +125,16 @@ class AaObligacionesBancarias extends \common\components\BaseActiveRecord
     public function getBanco()
     {
         return $this->hasOne(SysBancos::className(), ['id' => 'banco_id']);
+    }
+
+    public function getFormAttribs() {
+        return [
+            // primary key column
+            'id'=>[ // primary key attribute
+                'type'=>TabularForm::INPUT_HIDDEN,
+                'columnOptions'=>['hidden'=>true]
+            ],
+            'corriente'=>['type'=>TabularForm::INPUT_CHECKBOX,'label'=>'Corriente'],
+        ];
     }
 }

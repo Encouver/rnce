@@ -3,16 +3,16 @@
 namespace frontend\controllers;
 
 use Yii;
-use common\models\c\AaObligacionesBancarias;
-use app\models\AaObligacionesBancariasSearch;
+use common\models\p\ObjetosEmpresas;
+use app\models\ObjetosEmpresasSearch;
 use common\components\BaseController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * AaObligacionesBancariasController implements the CRUD actions for AaObligacionesBancarias model.
+ * ObjetosEmpresasController implements the CRUD actions for ObjetosEmpresas model.
  */
-class AaObligacionesBancariasController extends BaseController
+class ObjetosEmpresasController extends BaseController
 {
     public function behaviors()
     {
@@ -26,39 +26,13 @@ class AaObligacionesBancariasController extends BaseController
         ];
     }
 
-    public function actionObligacionesbancarias(){
-        $query = AaObligacionesBancarias::find()->indexBy('id'); // where `id` is your primary key
-
-        $dataProvider = new \yii\data\ActiveDataProvider([
-            'query' => $query,
-        ]);
-
-        $model = new AaObligacionesBancarias();
-
-        return $this->render('obligacionesbancarias', ['dataProvider' => $dataProvider, 'model' => $model]);
-    }
-    public function actionTabsData()
-    {
-        $model = new AaObligacionesBancarias();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            //return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->renderPartial('_form', [
-                'model' => $model,
-            ]);
-        }
-
-        $html = $this->renderAjax('_form',['model'=>$model]);
-        return Json::encode($html);
-    }
     /**
-     * Lists all AaObligacionesBancarias models.
+     * Lists all ObjetosEmpresas models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new AaObligacionesBancariasSearch();
+        $searchModel = new ObjetosEmpresasSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -68,7 +42,7 @@ class AaObligacionesBancariasController extends BaseController
     }
 
     /**
-     * Displays a single AaObligacionesBancarias model.
+     * Displays a single ObjetosEmpresas model.
      * @param integer $id
      * @return mixed
      */
@@ -80,13 +54,13 @@ class AaObligacionesBancariasController extends BaseController
     }
 
     /**
-     * Creates a new AaObligacionesBancarias model.
+     * Creates a new ObjetosEmpresas model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new AaObligacionesBancarias();
+        $model = new ObjetosEmpresas();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -98,7 +72,7 @@ class AaObligacionesBancariasController extends BaseController
     }
 
     /**
-     * Updates an existing AaObligacionesBancarias model.
+     * Updates an existing ObjetosEmpresas model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -117,7 +91,7 @@ class AaObligacionesBancariasController extends BaseController
     }
 
     /**
-     * Deletes an existing AaObligacionesBancarias model.
+     * Deletes an existing ObjetosEmpresas model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -130,15 +104,15 @@ class AaObligacionesBancariasController extends BaseController
     }
 
     /**
-     * Finds the AaObligacionesBancarias model based on its primary key value.
+     * Finds the ObjetosEmpresas model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return AaObligacionesBancarias the loaded model
+     * @return ObjetosEmpresas the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = AaObligacionesBancarias::findOne($id)) !== null) {
+        if (($model = ObjetosEmpresas::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

@@ -6,6 +6,7 @@ use wbraganca\dynamicform\DynamicFormWidget;
 use kartik\widgets\Select2;
 use yii\helpers\ArrayHelper;
 use common\models\p\SysPaises;
+use dosamigos\datepicker\DatePicker;
 /* @var $this yii\web\View */
 /* @var $model common\models\p\ObjetosAutorizaciones */
 /* @var $form yii\widgets\ActiveForm */
@@ -19,7 +20,27 @@ use common\models\p\SysPaises;
        
        
         
-   
+    <?= $form->field($objeto_empresa, 'contratista')->hiddenInput()->label(false) ?>
+
+    <?= $form->field($objeto_empresa, 'productor')->hiddenInput()->label(false) ?>
+
+    <?= $form->field($objeto_empresa, 'fabricante')->hiddenInput()->label(false) ?>
+
+    <?= $form->field($objeto_empresa, 'fabricante_importado')->hiddenInput()->label(false) ?>
+
+    <?= $form->field($objeto_empresa, 'distribuidor')->hiddenInput()->label(false) ?>
+
+    <?= $form->field($objeto_empresa, 'distribuidor_importador')->hiddenInput()->label(false) ?>
+
+    <?= $form->field($objeto_empresa, 'servicio_basico')->hiddenInput()->label(false) ?>
+
+    <?= $form->field($objeto_empresa, 'servicio_profesional')->hiddenInput()->label(false) ?>
+
+    <?= $form->field($objeto_empresa, 'servicio_comercial')->hiddenInput()->label(false) ?>
+
+    <?= $form->field($objeto_empresa, 'obra')->hiddenInput()->label(false) ?>
+
+    <?= $form->field($objeto_empresa, 'contratista_id')->hiddenInput()->label(false) ?>
    
     
    
@@ -132,11 +153,33 @@ use common\models\p\SysPaises;
                         </div>
                        
                         <div class="col-sm-12">
-                             <?= $form->field($carga_autorizacion, "[{$i}]fecha_emision") ?>
+                            <?= $form->field($carga_autorizacion, "[{$i}]fecha_emision")->widget(
+                                DatePicker::className(), [
+                             // inline too, not bad
+                            'inline' => false, 
+                            // modify template for custom rendering
+                            //'template' => '<div class="well well-sm" style="background-color: #fff; width:250px">{input}</div>',
+                            'clientOptions' => [
+                            'autoclose' => true,
+                            'format' => 'yyyy-mm-dd'
+                                ]
+                                ]);?>
+                            
                                  
                         </div> 
                        <div class="col-sm-12">
-                             <?= $form->field($carga_autorizacion, "[{$i}]fecha_vencimiento") ?>
+                            <?= $form->field($carga_autorizacion, "[{$i}]fecha_vencimiento")->widget(
+                                DatePicker::className(), [
+                             // inline too, not bad
+                            'inline' => false, 
+                            // modify template for custom rendering
+                            //'template' => '<div class="well well-sm" style="background-color: #fff; width:250px">{input}</div>',
+                            'clientOptions' => [
+                            'autoclose' => true,
+                            'format' => 'yyyy-mm-dd'
+                                ]
+                                ]);?>
+                           
                                  
                         </div> 
                         
