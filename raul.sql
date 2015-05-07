@@ -149,3 +149,8 @@ ALTER TABLE objetos_empresas
   ADD CONSTRAINT objetos_empresas_empresa_relacionada_id_fkey FOREIGN KEY (empresa_relacionada_id)
       REFERENCES empresas_relacionadas (id) MATCH SIMPLE
       ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+-- 7 mayo 2015
+
+alter table personas_juridicas rename column numero_identitifacion to numero_identificacion;
