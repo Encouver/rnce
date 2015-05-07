@@ -35,8 +35,10 @@ return array(
     'kartik\\select2\\' => array($vendorDir . '/kartik-v/yii2-widget-select2'),
     'kartik\\rating\\' => array($vendorDir . '/kartik-v/yii2-widget-rating'),
     'kartik\\range\\' => array($vendorDir . '/kartik-v/yii2-widget-rangeinput'),
+    'kartik\\popover\\' => array($vendorDir . '/kartik-v/yii2-popover-x'),
     'kartik\\plugins\\tabs\\' => array($vendorDir . '/kartik-v/bootstrap-tabs-x'),
     'kartik\\plugins\\rating\\' => array($vendorDir . '/kartik-v/bootstrap-star-rating'),
+    'kartik\\plugins\\popover\\' => array($vendorDir . '/kartik-v/bootstrap-popover-x'),
     'kartik\\plugins\\fileinput\\' => array($vendorDir . '/kartik-v/bootstrap-fileinput'),
     'kartik\\plugins\\depdrop\\' => array($vendorDir . '/kartik-v/dependent-dropdown'),
     'kartik\\nav\\' => array($vendorDir . '/kartik-v/yii2-nav-x'),
@@ -56,6 +58,7 @@ return array(
     'kartik\\base\\' => array($vendorDir . '/kartik-v/yii2-krajee-base'),
     'kartik\\alert\\' => array($vendorDir . '/kartik-v/yii2-widget-alert'),
     'kartik\\affix\\' => array($vendorDir . '/kartik-v/yii2-widget-affix'),
+    'dosamigos\\datepicker\\' => array($vendorDir . '/2amigos/yii2-date-picker-widget/src'),
     'demogorgorn\\ajax\\' => array($vendorDir . '/demogorgorn/yii2-ajax-submit-button'),
     'cebe\\markdown\\' => array($vendorDir . '/cebe/markdown'),
 );

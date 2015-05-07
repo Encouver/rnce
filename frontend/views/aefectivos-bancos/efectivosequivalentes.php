@@ -6,6 +6,8 @@ use yii\bootstrap\NavBar;
 use kartik\widgets\ActiveForm;
 use kartik\builder\TabularForm;
 use kartik\grid\GridView;
+use kartik\popover\PopoverX;
+//use kartik\helpers\Html;
 
 
 /* @var $this yii\web\View */
@@ -19,7 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <center><h1><?= Html::encode($this->title) ?></h1>
 
-   <?php 
+   <?php
    				/*
                 $menuItems[] =  ['label'=>'Efectivos en bancos', 'url'=>['/aefectivos-bancos/create']];
                 $menuItems[] =   ['label'=>'Efectivos en caja', 'url'=>['/aefectivos-cajas/create']];
@@ -41,26 +43,35 @@ $this->params['breadcrumbs'][] = $this->title;
           Probando
         </div>
         	AQUI IRIA LA HOJA RESUMEN ALGO ASI COMO EL EXCEL QUE ELLA MANDO
-      
+
+
 <?php
- $form = ActiveForm::begin();
-//$attribs = $model->formAttribs;
+ $form = ActiveForm::begin(['fieldConfig'=>['showLabels'=>false]]);
+$attribs = $model->getFormAttribs();
+unset($attribs['attributes']['color']);
+$attribs['status'] = [
+    'type'=>TabularForm::INPUT_WIDGET,
+    'widgetClass'=>\kartik\widgets\SwitchInput::classname()
+];
+
 
 echo TabularForm::widget([
     'dataProvider'=>$dataProvider,
     'form'=>$form,
-    'attributes'=>$model->formAttribs,
+    'attributes'=>$attribs,
     'gridSettings'=>[
         'floatHeader'=>true,
         'panel'=>[
-            'heading' => '<h3 class="panel-title"><i class="glyphicon glyphicon-book"></i> Manage Books</h3>',
+            'heading' => '<h3 class="panel-title"><i class="glyphicon glyphicon-book"></i> Gestionar Bancos</h3>',
             'type' => GridView::TYPE_PRIMARY,
-            'after'=> Html::a('<i class="glyphicon glyphicon-plus"></i> Add New', '#', ['class'=>'btn btn-success']) . ' ' . 
+            'after'=> /*Html::a('<i class="glyphicon glyphicon-plus"></i> Add New', '#', ['class'=>'btn btn-success'])*/ $this->render('_modal-form',['model'=>$model]). ' '.
                     Html::a('<i class="glyphicon glyphicon-remove"></i> Delete', '#', ['class'=>'btn btn-danger']) . ' ' .
                     Html::submitButton('<i class="glyphicon glyphicon-floppy-disk"></i> Save', ['class'=>'btn btn-primary'])
         ]
-    ]   
+    ]
 ]);
+
+
 ActiveForm::end();
 ?>
 </div>

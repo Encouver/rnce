@@ -936,57 +936,6 @@
         ]
     },
     {
-        "name": "kartik-v/yii2-date-range",
-        "version": "v1.6.1",
-        "version_normalized": "1.6.1.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/kartik-v/yii2-date-range.git",
-            "reference": "5fb92535697c637190d1d72055f65211e864d365"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/kartik-v/yii2-date-range/zipball/5fb92535697c637190d1d72055f65211e864d365",
-            "reference": "5fb92535697c637190d1d72055f65211e864d365",
-            "shasum": ""
-        },
-        "require": {
-            "kartik-v/yii2-krajee-base": "*"
-        },
-        "time": "2015-02-16 16:52:35",
-        "type": "yii2-extension",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "kartik\\daterange\\": ""
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "BSD 3-Clause"
-        ],
-        "authors": [
-            {
-                "name": "Kartik Visweswaran",
-                "email": "kartikv2@gmail.com",
-                "homepage": "http://www.krajee.com/"
-            }
-        ],
-        "description": "An advanced Yii 2 date range picker input for based on bootstrap-daterangepicker plugin.",
-        "homepage": "https://github.com/kartik-v/yii2-date-range",
-        "keywords": [
-            "bootstrap",
-            "bootstrap 3",
-            "date",
-            "date-range",
-            "extension",
-            "range",
-            "time",
-            "widget",
-            "yii2"
-        ]
-    },
-    {
         "name": "kartik-v/yii2-field-range",
         "version": "v1.3.0",
         "version_normalized": "1.3.0.0",
@@ -2414,6 +2363,223 @@
         ]
     },
     {
+        "name": "bower-asset/yii2-pjax",
+        "version": "v2.0.4",
+        "version_normalized": "2.0.4.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/yiisoft/jquery-pjax.git",
+            "reference": "3f20897307cca046fca5323b318475ae9dac0ca0"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/yiisoft/jquery-pjax/zipball/3f20897307cca046fca5323b318475ae9dac0ca0",
+            "reference": "3f20897307cca046fca5323b318475ae9dac0ca0",
+            "shasum": ""
+        },
+        "require": {
+            "bower-asset/jquery": ">=1.8"
+        },
+        "type": "bower-asset-library",
+        "extra": {
+            "bower-asset-main": "./jquery.pjax.js",
+            "bower-asset-ignore": [
+                ".travis.yml",
+                "Gemfile",
+                "Gemfile.lock",
+                "vendor/",
+                "script/",
+                "test/"
+            ]
+        },
+        "installation-source": "dist",
+        "license": [
+            "MIT"
+        ]
+    },
+    {
+        "name": "bower-asset/punycode",
+        "version": "v1.3.2",
+        "version_normalized": "1.3.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/bestiejs/punycode.js.git",
+            "reference": "38c8d3131a82567bfef18da09f7f4db68c84f8a3"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/bestiejs/punycode.js/zipball/38c8d3131a82567bfef18da09f7f4db68c84f8a3",
+            "reference": "38c8d3131a82567bfef18da09f7f4db68c84f8a3",
+            "shasum": ""
+        },
+        "type": "bower-asset-library",
+        "extra": {
+            "bower-asset-main": "punycode.js",
+            "bower-asset-ignore": [
+                "coverage",
+                "tests",
+                ".*",
+                "component.json",
+                "Gruntfile.js",
+                "node_modules",
+                "package.json"
+            ]
+        },
+        "installation-source": "dist"
+    },
+    {
+        "name": "cebe/markdown",
+        "version": "1.0.2",
+        "version_normalized": "1.0.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/cebe/markdown.git",
+            "reference": "f681fee8303310415b746f3758eeda0a7ad08bda"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/cebe/markdown/zipball/f681fee8303310415b746f3758eeda0a7ad08bda",
+            "reference": "f681fee8303310415b746f3758eeda0a7ad08bda",
+            "shasum": ""
+        },
+        "require": {
+            "lib-pcre": "*",
+            "php": ">=5.4.0"
+        },
+        "require-dev": {
+            "cebe/indent": "*",
+            "facebook/xhprof": "*@dev",
+            "phpunit/phpunit": "3.7.*"
+        },
+        "time": "2015-03-06 05:21:16",
+        "bin": [
+            "bin/markdown"
+        ],
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.0.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "cebe\\markdown\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Carsten Brandt",
+                "email": "mail@cebe.cc",
+                "homepage": "http://cebe.cc/",
+                "role": "Creator"
+            }
+        ],
+        "description": "A super fast, highly extensible markdown parser for PHP",
+        "homepage": "https://github.com/cebe/markdown#readme",
+        "keywords": [
+            "extensible",
+            "fast",
+            "gfm",
+            "markdown",
+            "markdown-extra"
+        ]
+    },
+    {
+        "name": "yiisoft/yii2",
+        "version": "2.0.3",
+        "version_normalized": "2.0.3.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/yiisoft/yii2-framework.git",
+            "reference": "85b773a384f3894d558905cb13522bb338c99dba"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/85b773a384f3894d558905cb13522bb338c99dba",
+            "reference": "85b773a384f3894d558905cb13522bb338c99dba",
+            "shasum": ""
+        },
+        "require": {
+            "bower-asset/jquery": "2.1.*@stable | 1.11.*@stable",
+            "bower-asset/jquery.inputmask": "3.1.*",
+            "bower-asset/punycode": "1.3.*",
+            "bower-asset/yii2-pjax": ">=2.0.1",
+            "cebe/markdown": "~1.0.0",
+            "ext-mbstring": "*",
+            "ezyang/htmlpurifier": "4.6.*",
+            "lib-pcre": "*",
+            "php": ">=5.4.0",
+            "yiisoft/yii2-composer": "*"
+        },
+        "time": "2015-03-01 06:22:44",
+        "bin": [
+            "yii"
+        ],
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.0.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "yii\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Qiang Xue",
+                "email": "qiang.xue@gmail.com",
+                "homepage": "http://www.yiiframework.com/",
+                "role": "Founder and project lead"
+            },
+            {
+                "name": "Alexander Makarov",
+                "email": "sam@rmcreative.ru",
+                "homepage": "http://rmcreative.ru/",
+                "role": "Core framework development"
+            },
+            {
+                "name": "Maurizio Domba",
+                "homepage": "http://mdomba.info/",
+                "role": "Core framework development"
+            },
+            {
+                "name": "Carsten Brandt",
+                "email": "mail@cebe.cc",
+                "homepage": "http://cebe.cc/",
+                "role": "Core framework development"
+            },
+            {
+                "name": "Timur Ruziev",
+                "email": "resurtm@gmail.com",
+                "homepage": "http://resurtm.com/",
+                "role": "Core framework development"
+            },
+            {
+                "name": "Paul Klimov",
+                "email": "klimov.paul@gmail.com",
+                "role": "Core framework development"
+            }
+        ],
+        "description": "Yii PHP Framework Version 2",
+        "homepage": "http://www.yiiframework.com/",
+        "keywords": [
+            "framework",
+            "yii2"
+        ]
+    },
+    {
         "name": "symfony/css-selector",
         "version": "v2.6.6",
         "version_normalized": "2.6.6.0",
@@ -2571,6 +2737,60 @@
             "yii2",
             "yii2 dynamic form",
             "yii2-dynamicform"
+        ]
+    },
+    {
+        "name": "bower-asset/jquery.inputmask",
+        "version": "3.1.63",
+        "version_normalized": "3.1.63.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/RobinHerbots/jquery.inputmask.git",
+            "reference": "c40c7287eadc31e341ebbf0c02352eb55b9cbc48"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/RobinHerbots/jquery.inputmask/zipball/c40c7287eadc31e341ebbf0c02352eb55b9cbc48",
+            "reference": "c40c7287eadc31e341ebbf0c02352eb55b9cbc48",
+            "shasum": ""
+        },
+        "require": {
+            "bower-asset/jquery": ">=1.7"
+        },
+        "type": "bower-asset-library",
+        "extra": {
+            "bower-asset-main": [
+                "./dist/inputmask/jquery.inputmask.js",
+                "./dist/inputmask/jquery.inputmask.extensions.js",
+                "./dist/inputmask/jquery.inputmask.date.extensions.js",
+                "./dist/inputmask/jquery.inputmask.numeric.extensions.js",
+                "./dist/inputmask/jquery.inputmask.phone.extensions.js",
+                "./dist/inputmask/jquery.inputmask.regex.extensions.js"
+            ],
+            "bower-asset-ignore": [
+                "**/.*",
+                "qunit/",
+                "nuget/",
+                "tools/",
+                "js/",
+                "*.md",
+                "build.properties",
+                "build.xml",
+                "jquery.inputmask.jquery.json"
+            ]
+        },
+        "installation-source": "dist",
+        "license": [
+            "http://opensource.org/licenses/mit-license.php"
+        ],
+        "description": "jquery.inputmask is a jquery plugin which create an input mask.",
+        "keywords": [
+            "form",
+            "input",
+            "inputmask",
+            "jquery",
+            "mask",
+            "plugins"
         ]
     },
     {
@@ -2869,162 +3089,30 @@
         ]
     },
     {
-        "name": "bower-asset/yii2-pjax",
-        "version": "v2.0.4",
-        "version_normalized": "2.0.4.0",
+        "name": "amnah/yii2-classes",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "target-dir": "amnah/yii2",
         "source": {
             "type": "git",
-            "url": "https://github.com/yiisoft/jquery-pjax.git",
-            "reference": "3f20897307cca046fca5323b318475ae9dac0ca0"
+            "url": "https://github.com/amnah/yii2-classes.git",
+            "reference": "7f3ab904b16258c794eccff31e5777faab07d879"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/yiisoft/jquery-pjax/zipball/3f20897307cca046fca5323b318475ae9dac0ca0",
-            "reference": "3f20897307cca046fca5323b318475ae9dac0ca0",
+            "url": "https://api.github.com/repos/amnah/yii2-classes/zipball/7f3ab904b16258c794eccff31e5777faab07d879",
+            "reference": "7f3ab904b16258c794eccff31e5777faab07d879",
             "shasum": ""
         },
         "require": {
-            "bower-asset/jquery": ">=1.8"
+            "yiisoft/yii2": "*"
         },
-        "type": "bower-asset-library",
-        "extra": {
-            "bower-asset-main": "./jquery.pjax.js",
-            "bower-asset-ignore": [
-                ".travis.yml",
-                "Gemfile",
-                "Gemfile.lock",
-                "vendor/",
-                "script/",
-                "test/"
-            ]
-        },
-        "installation-source": "dist",
-        "license": [
-            "MIT"
-        ]
-    },
-    {
-        "name": "bower-asset/punycode",
-        "version": "v1.3.2",
-        "version_normalized": "1.3.2.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/bestiejs/punycode.js.git",
-            "reference": "38c8d3131a82567bfef18da09f7f4db68c84f8a3"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/bestiejs/punycode.js/zipball/38c8d3131a82567bfef18da09f7f4db68c84f8a3",
-            "reference": "38c8d3131a82567bfef18da09f7f4db68c84f8a3",
-            "shasum": ""
-        },
-        "type": "bower-asset-library",
-        "extra": {
-            "bower-asset-main": "punycode.js",
-            "bower-asset-ignore": [
-                "coverage",
-                "tests",
-                ".*",
-                "component.json",
-                "Gruntfile.js",
-                "node_modules",
-                "package.json"
-            ]
-        },
-        "installation-source": "dist"
-    },
-    {
-        "name": "bower-asset/jquery.inputmask",
-        "version": "3.1.63",
-        "version_normalized": "3.1.63.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/RobinHerbots/jquery.inputmask.git",
-            "reference": "c40c7287eadc31e341ebbf0c02352eb55b9cbc48"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/RobinHerbots/jquery.inputmask/zipball/c40c7287eadc31e341ebbf0c02352eb55b9cbc48",
-            "reference": "c40c7287eadc31e341ebbf0c02352eb55b9cbc48",
-            "shasum": ""
-        },
-        "require": {
-            "bower-asset/jquery": ">=1.7"
-        },
-        "type": "bower-asset-library",
-        "extra": {
-            "bower-asset-main": [
-                "./dist/inputmask/jquery.inputmask.js",
-                "./dist/inputmask/jquery.inputmask.extensions.js",
-                "./dist/inputmask/jquery.inputmask.date.extensions.js",
-                "./dist/inputmask/jquery.inputmask.numeric.extensions.js",
-                "./dist/inputmask/jquery.inputmask.phone.extensions.js",
-                "./dist/inputmask/jquery.inputmask.regex.extensions.js"
-            ],
-            "bower-asset-ignore": [
-                "**/.*",
-                "qunit/",
-                "nuget/",
-                "tools/",
-                "js/",
-                "*.md",
-                "build.properties",
-                "build.xml",
-                "jquery.inputmask.jquery.json"
-            ]
-        },
-        "installation-source": "dist",
-        "license": [
-            "http://opensource.org/licenses/mit-license.php"
-        ],
-        "description": "jquery.inputmask is a jquery plugin which create an input mask.",
-        "keywords": [
-            "form",
-            "input",
-            "inputmask",
-            "jquery",
-            "mask",
-            "plugins"
-        ]
-    },
-    {
-        "name": "cebe/markdown",
-        "version": "1.0.2",
-        "version_normalized": "1.0.2.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/cebe/markdown.git",
-            "reference": "f681fee8303310415b746f3758eeda0a7ad08bda"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/cebe/markdown/zipball/f681fee8303310415b746f3758eeda0a7ad08bda",
-            "reference": "f681fee8303310415b746f3758eeda0a7ad08bda",
-            "shasum": ""
-        },
-        "require": {
-            "lib-pcre": "*",
-            "php": ">=5.4.0"
-        },
-        "require-dev": {
-            "cebe/indent": "*",
-            "facebook/xhprof": "*@dev",
-            "phpunit/phpunit": "3.7.*"
-        },
-        "time": "2015-03-06 05:21:16",
-        "bin": [
-            "bin/markdown"
-        ],
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.0.x-dev"
-            }
-        },
+        "time": "2014-01-22 16:22:51",
+        "type": "yii2-extension",
         "installation-source": "dist",
         "autoload": {
-            "psr-4": {
-                "cebe\\markdown\\": ""
+            "psr-0": {
+                "amnah\\yii2\\": ""
             }
         },
         "notification-url": "https://packagist.org/downloads/",
@@ -3033,63 +3121,236 @@
         ],
         "authors": [
             {
-                "name": "Carsten Brandt",
-                "email": "mail@cebe.cc",
-                "homepage": "http://cebe.cc/",
-                "role": "Creator"
+                "name": "amnah",
+                "email": "amnah.dev@gmail.com"
             }
         ],
-        "description": "A super fast, highly extensible markdown parser for PHP",
-        "homepage": "https://github.com/cebe/markdown#readme",
+        "description": "Yii2 classes",
         "keywords": [
-            "extensible",
-            "fast",
-            "gfm",
-            "markdown",
-            "markdown-extra"
+            "Fixture",
+            "soft-delete",
+            "softdelete",
+            "yii",
+            "yii2"
         ]
     },
     {
-        "name": "yiisoft/yii2",
-        "version": "2.0.3",
-        "version_normalized": "2.0.3.0",
+        "name": "kartik-v/yii2-date-range",
+        "version": "v1.6.2",
+        "version_normalized": "1.6.2.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/yiisoft/yii2-framework.git",
-            "reference": "85b773a384f3894d558905cb13522bb338c99dba"
+            "url": "https://github.com/kartik-v/yii2-date-range.git",
+            "reference": "3d11ca5e85149420a91555733b12019377d00f87"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/85b773a384f3894d558905cb13522bb338c99dba",
-            "reference": "85b773a384f3894d558905cb13522bb338c99dba",
+            "url": "https://api.github.com/repos/kartik-v/yii2-date-range/zipball/3d11ca5e85149420a91555733b12019377d00f87",
+            "reference": "3d11ca5e85149420a91555733b12019377d00f87",
             "shasum": ""
         },
         "require": {
-            "bower-asset/jquery": "2.1.*@stable | 1.11.*@stable",
-            "bower-asset/jquery.inputmask": "3.1.*",
-            "bower-asset/punycode": "1.3.*",
-            "bower-asset/yii2-pjax": ">=2.0.1",
-            "cebe/markdown": "~1.0.0",
-            "ext-mbstring": "*",
-            "ezyang/htmlpurifier": "4.6.*",
-            "lib-pcre": "*",
-            "php": ">=5.4.0",
-            "yiisoft/yii2-composer": "*"
+            "kartik-v/yii2-krajee-base": "*"
         },
-        "time": "2015-03-01 06:22:44",
-        "bin": [
-            "yii"
+        "time": "2015-04-21 15:10:00",
+        "type": "yii2-extension",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "kartik\\daterange\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD 3-Clause"
         ],
+        "authors": [
+            {
+                "name": "Kartik Visweswaran",
+                "email": "kartikv2@gmail.com",
+                "homepage": "http://www.krajee.com/"
+            }
+        ],
+        "description": "An advanced Yii 2 date range picker input for based on bootstrap-daterangepicker plugin.",
+        "homepage": "https://github.com/kartik-v/yii2-date-range",
+        "keywords": [
+            "bootstrap",
+            "bootstrap 3",
+            "date",
+            "date-range",
+            "extension",
+            "range",
+            "time",
+            "widget",
+            "yii2"
+        ]
+    },
+    {
+        "name": "kartik-v/bootstrap-popover-x",
+        "version": "v1.4.1",
+        "version_normalized": "1.4.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/kartik-v/bootstrap-popover-x.git",
+            "reference": "ce1d165af25f6e6caaf97083e20b5a3ad7c7b7c6"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/kartik-v/bootstrap-popover-x/zipball/ce1d165af25f6e6caaf97083e20b5a3ad7c7b7c6",
+            "reference": "ce1d165af25f6e6caaf97083e20b5a3ad7c7b7c6",
+            "shasum": ""
+        },
+        "time": "2015-03-18 13:08:39",
         "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "kartik\\plugins\\popover\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD 3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Kartik Visweswaran",
+                "email": "kartikv2@gmail.com",
+                "homepage": "http://www.krajee.com/"
+            }
+        ],
+        "description": "Bootstrap Popover Extended - Popover with modal behavior, styling enhancements and more.",
+        "homepage": "https://github.com/kartik-v/bootstrap-popover-x",
+        "keywords": [
+            "bootstrap",
+            "extended",
+            "jquery",
+            "modal",
+            "modal-popover",
+            "popover",
+            "popover-x"
+        ]
+    },
+    {
+        "name": "kartik-v/yii2-popover-x",
+        "version": "v1.3.0",
+        "version_normalized": "1.3.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/kartik-v/yii2-popover-x.git",
+            "reference": "b1c458338a315d047b74356532563722ce9e29c6"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/kartik-v/yii2-popover-x/zipball/b1c458338a315d047b74356532563722ce9e29c6",
+            "reference": "b1c458338a315d047b74356532563722ce9e29c6",
+            "shasum": ""
+        },
+        "require": {
+            "kartik-v/bootstrap-popover-x": "*",
+            "kartik-v/yii2-krajee-base": "*"
+        },
+        "time": "2014-11-25 09:26:09",
+        "type": "yii2-extension",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "kartik\\popover\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD 3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Kartik Visweswaran",
+                "email": "kartikv2@gmail.com",
+                "homepage": "http://www.krajee.com/"
+            }
+        ],
+        "description": "An extended bootstrap 3.0 popover widget which combines both the bootstrap popover and modal features and includes various new styling enhancements.",
+        "homepage": "https://github.com/kartik-v/yii2-popover-x",
+        "keywords": [
+            "bootstrap",
+            "extended",
+            "jquery",
+            "modal",
+            "modal-popover",
+            "popover",
+            "popover-x"
+        ]
+    },
+    {
+        "name": "bower-asset/bootstrap-datepicker",
+        "version": "v1.4.0",
+        "version_normalized": "1.4.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/eternicode/bootstrap-datepicker.git",
+            "reference": "e7ca6bb94dc483817f2ff10fc2b723b2b935e016"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/eternicode/bootstrap-datepicker/zipball/e7ca6bb94dc483817f2ff10fc2b723b2b935e016",
+            "reference": "e7ca6bb94dc483817f2ff10fc2b723b2b935e016",
+            "shasum": ""
+        },
+        "require": {
+            "bower-asset/bootstrap": ">=2.0.4,<4.0",
+            "bower-asset/jquery": ">=1.7.1"
+        },
+        "type": "bower-asset-library",
+        "extra": {
+            "bower-asset-main": [
+                "dist/css/bootstrap-datepicker.css",
+                "dist/css/bootstrap-datepicker3.css",
+                "js/bootstrap-datepicker.js"
+            ],
+            "bower-asset-ignore": []
+        },
+        "installation-source": "dist",
+        "license": [
+            "Apache-2.0"
+        ]
+    },
+    {
+        "name": "2amigos/yii2-date-picker-widget",
+        "version": "1.0.5",
+        "version_normalized": "1.0.5.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/2amigos/yii2-date-picker-widget.git",
+            "reference": "89cd0d7f00785b608b4a9670016f2795f2e3984d"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/2amigos/yii2-date-picker-widget/zipball/89cd0d7f00785b608b4a9670016f2795f2e3984d",
+            "reference": "89cd0d7f00785b608b4a9670016f2795f2e3984d",
+            "shasum": ""
+        },
+        "require": {
+            "bower-asset/bootstrap-datepicker": "1.4.0",
+            "yiisoft/yii2": "~2.0.0",
+            "yiisoft/yii2-bootstrap": "~2.0.3"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "4.*"
+        },
+        "time": "2015-04-02 11:48:05",
+        "type": "yii2-extension",
         "extra": {
             "branch-alias": {
-                "dev-master": "2.0.x-dev"
+                "dev-master": "1.0-dev"
+            },
+            "asset-installer-paths": {
+                "bower-asset-library": "vendor/bower"
             }
         },
         "installation-source": "dist",
         "autoload": {
             "psr-4": {
-                "yii\\": ""
+                "dosamigos\\datepicker\\": "src"
             }
         },
         "notification-url": "https://packagist.org/downloads/",
@@ -3098,44 +3359,21 @@
         ],
         "authors": [
             {
-                "name": "Qiang Xue",
-                "email": "qiang.xue@gmail.com",
-                "homepage": "http://www.yiiframework.com/",
-                "role": "Founder and project lead"
-            },
-            {
-                "name": "Alexander Makarov",
-                "email": "sam@rmcreative.ru",
-                "homepage": "http://rmcreative.ru/",
-                "role": "Core framework development"
-            },
-            {
-                "name": "Maurizio Domba",
-                "homepage": "http://mdomba.info/",
-                "role": "Core framework development"
-            },
-            {
-                "name": "Carsten Brandt",
-                "email": "mail@cebe.cc",
-                "homepage": "http://cebe.cc/",
-                "role": "Core framework development"
-            },
-            {
-                "name": "Timur Ruziev",
-                "email": "resurtm@gmail.com",
-                "homepage": "http://resurtm.com/",
-                "role": "Core framework development"
-            },
-            {
-                "name": "Paul Klimov",
-                "email": "klimov.paul@gmail.com",
-                "role": "Core framework development"
+                "name": "2amigOS! Consulting Group",
+                "email": "hola@2amigos.us",
+                "homepage": "http://2amigos.us",
+                "role": "Developer"
             }
         ],
-        "description": "Yii PHP Framework Version 2",
-        "homepage": "http://www.yiiframework.com/",
+        "description": "Bootstrap DatePicker widget for Yii2.",
+        "homepage": "http://yiiwheels.com/extension/bootstrap-datepicker",
         "keywords": [
-            "framework",
+            "2amigos",
+            "datepicker",
+            "extension",
+            "widget",
+            "yii",
+            "yii 2",
             "yii2"
         ]
     }

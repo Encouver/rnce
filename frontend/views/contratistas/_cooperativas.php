@@ -27,7 +27,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($d_comercial, 'tipo_denominacion')->hiddenInput()->label(false) ?>
 
      <?= $form->field($d_comercial, 'contratista_id')->hiddenInput()->label(false) ?>
-    
+
     
    <div class="form-group centered">
          <?= Html::Button(Yii::t('app', 'Enviar'), ['class' => 'btn btn-success', 'id' => 'enviar9']) ?>

@@ -25,6 +25,7 @@ use Yii;
  * @property string $sys_actualizado_el
  * @property string $sys_finalizado_el
  * @property integer $persona_juridica_id
+ * @property string $tipo_objeto
  *
  * @property SysPaises $domicilioFabricante
  * @property ObjetosEmpresas $objetoEmpresa
@@ -47,9 +48,9 @@ class ObjetosAutorizaciones extends \common\components\BaseActiveRecord
     public function rules()
     {
         return [
-            [['objeto_empresa_id', 'domicilio_fabricante_id', 'productos', 'marcas', 'origen_producto_id', 'persona_juridica_id'], 'required'],
+            [['objeto_empresa_id', 'domicilio_fabricante_id', 'productos', 'marcas', 'origen_producto_id', 'persona_juridica_id', 'tipo_objeto'], 'required'],
             [['objeto_empresa_id', 'domicilio_fabricante_id', 'origen_producto_id', 'idioma_redacion_id', 'persona_juridica_id'], 'integer'],
-            [['productos', 'marcas'], 'string'],
+            [['productos', 'marcas', 'tipo_objeto'], 'string'],
             [['sello_firma', 'documento_traducido', 'sys_status'], 'boolean'],
             [['fecha_emision', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['numero_identificacion', 'nombre_interprete', 'fecha_vencimiento'], 'string', 'max' => 255]
@@ -80,6 +81,7 @@ class ObjetosAutorizaciones extends \common\components\BaseActiveRecord
             'sys_actualizado_el' => Yii::t('app', 'Sys Actualizado El'),
             'sys_finalizado_el' => Yii::t('app', 'Sys Finalizado El'),
             'persona_juridica_id' => Yii::t('app', 'Persona Juridica ID'),
+            'tipo_objeto' => Yii::t('app', 'Tipo Objeto'),
         ];
     }
 

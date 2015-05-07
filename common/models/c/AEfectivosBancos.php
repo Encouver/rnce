@@ -136,10 +136,10 @@ class AEfectivosBancos extends \common\components\BaseActiveRecord
         return [
             // primary key column
             'id'=>[ // primary key attribute
-                'type'=>TabularForm::INPUT_HIDDEN, 
+                'type'=>TabularForm::INPUT_HIDDEN,
                 'columnOptions'=>['hidden'=>true]
-            ], 
-            'saldo_segun_b'=>['type'=>TabularForm::INPUT_TEXT],
+            ],
+            'saldo_segun_b'=>['type'=>TabularForm::INPUT_TEXT,'label'=>'Saldo según Banco'],
         ];
     }
 
