@@ -141,21 +141,21 @@ AppAsset::register($this);
         $item = [
             [
                 'label'=>'<i class="glyphicon glyphicon-list-alt"></i> Corrientes',
-                'content'=> 'A',
+                'content'=> 'A', // Para colocar todos los links a cada cuenta dependiendo de esta sección.
                 'active'=>true,
-                'linkOptions'=>['data-url'=>\yii\helpers\Url::to(['/aa-obligaciones-bancarias/tabs-data'])]
+                //'linkOptions'=>['data-url'=>\yii\helpers\Url::to(['/aa-obligaciones-bancarias/tabs-data'])]
             ],
             [
                 'label'=>'<i class="glyphicon glyphicon-list"></i> No corrientes',
                 'content'=>'',
-                'linkOptions'=>['data-url'=>\yii\helpers\Url::to(['/site/tabs-data'])]
+                //'linkOptions'=>['data-url'=>\yii\helpers\Url::to(['/site/tabs-data'])]
             ],
 
         ];
 
         $items = [
             [
-                'label'=>'<i class="glyphicon glyphicon-home"></i> Cuentas Activos',
+                'label'=>'<i class="glyphicon glyphicon-list"></i> Cuentas Activos',
                 'content'=>TabsX::widget([
                     'items'=>$item,
                     'position'=>TabsX::POS_ABOVE,
@@ -165,7 +165,7 @@ AppAsset::register($this);
                 'active'=>true
             ],
             [
-                'label'=>'<i class="glyphicon glyphicon-user"></i> Cuentas Pasivos',
+                'label'=>'<i class="glyphicon glyphicon-list"></i> Cuentas Pasivos',
                 'content'=>TabsX::widget([
                     'items'=>$item,
                     'position'=>TabsX::POS_ABOVE,

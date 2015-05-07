@@ -6,6 +6,7 @@ use Yii;
 use common\models\c\AaObligacionesBancarias;
 use app\models\AaObligacionesBancariasSearch;
 use common\components\BaseController;
+use yii\helpers\Json;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -44,13 +45,15 @@ class AaObligacionesBancariasController extends BaseController
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             //return $this->redirect(['view', 'id' => $model->id]);
         } else {
-            return $this->renderPartial('_form', [
+            $html = $this->renderAjax('_form',['model'=>$model]);
+            return Json::encode($html);
+
+/*            return $this->renderPartial('_form', [
                 'model' => $model,
-            ]);
+            ]);*/
         }
 
-        $html = $this->renderAjax('_form',['model'=>$model]);
-        return Json::encode($html);
+
     }
     /**
      * Lists all AaObligacionesBancarias models.

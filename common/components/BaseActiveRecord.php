@@ -58,7 +58,7 @@ class BaseActiveRecord extends ActiveRecord
                     'attributes' => [
                         ActiveRecord::EVENT_BEFORE_INSERT => ['sys_creado_el', 'sys_actualizado_el'],
                         ActiveRecord::EVENT_BEFORE_UPDATE => ['sys_actualizado_el'],
-                        ActiveRecord::EVENT_BEFORE_DELETE => ['sys_finalizado_el'],
+                        //ActiveRecord::EVENT_BEFORE_DELETE => ['sys_finalizado_el'],
                     ],
                     'value' => new Expression('NOW()'),
                 ],*/
@@ -98,7 +98,7 @@ class BaseActiveRecord extends ActiveRecord
 	    }
 	}
 
-	public function beforeDelete(){
+/*	public function beforeDelete(){
 
 	    if (parent::beforeDelete()) {
 	    	//HAY QUE EVITAR QUE ELIMINE EL REGISTRO SOLO QUE SETEE ESTAS VARIABLES.
@@ -111,6 +111,28 @@ class BaseActiveRecord extends ActiveRecord
 	    } else {
 	        return false;
 	    }
-	}
+	}*/
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+ /*   public function getCreadoPor()
+    {
+        if(isset(this->creado_por))
+            return $this->hasOne(User::className(), ['id' => 'creado_por']);
+        else
+            return null;
+    }*/
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+  /*  public function getActualizadoPor()
+    {
+        if(isset(this->actualizado_por))
+            return $this->hasOne(User::className(), ['id' => 'actualizado_por']);
+        else
+            return null;
+    }*/
 
 }
