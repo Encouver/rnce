@@ -1,12 +1,13 @@
 <?php
 
+use kartik\date\DatePicker;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use wbraganca\dynamicform\DynamicFormWidget;
 use kartik\widgets\Select2;
 use yii\helpers\ArrayHelper;
 use common\models\p\SysPaises;
-use dosamigos\datepicker\DatePicker;
+//use dosamigos\datepicker\DatePicker;
 /* @var $this yii\web\View */
 /* @var $model common\models\p\ObjetosAutorizaciones */
 /* @var $form yii\widgets\ActiveForm */
@@ -156,10 +157,10 @@ use dosamigos\datepicker\DatePicker;
                             <?= $form->field($carga_autorizacion, "[{$i}]fecha_emision")->widget(
                                 DatePicker::className(), [
                              // inline too, not bad
-                            'inline' => false, 
+                            //'inline' => false,
                             // modify template for custom rendering
                             //'template' => '<div class="well well-sm" style="background-color: #fff; width:250px">{input}</div>',
-                            'clientOptions' => [
+                            'pluginOptions' => [
                             'autoclose' => true,
                             'format' => 'yyyy-mm-dd'
                                 ]
@@ -171,10 +172,10 @@ use dosamigos\datepicker\DatePicker;
                             <?= $form->field($carga_autorizacion, "[{$i}]fecha_vencimiento")->widget(
                                 DatePicker::className(), [
                              // inline too, not bad
-                            'inline' => false, 
+                            //'inline' => false,
                             // modify template for custom rendering
                             //'template' => '<div class="well well-sm" style="background-color: #fff; width:250px">{input}</div>',
-                            'clientOptions' => [
+                            'pluginOptions' => [
                             'autoclose' => true,
                             'format' => 'yyyy-mm-dd'
                                 ]
