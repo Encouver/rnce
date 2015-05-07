@@ -155,7 +155,131 @@ class ContratistasController extends BaseController
    }
    public function actionObjetoautorizacion(){
        
-       return "Hola mundo";
+      
+       $objeto_empresa = new ObjetosEmpresas();
+        $relacion_objeto = [new RelacionesObjetos];
+       $relacion_objeto = Model::createMultiple(RelacionesObjetos::classname());
+            Model::loadMultiple($relacion_objeto, Yii::$app->request->post());
+            if($objeto_empresa->load(Yii::$app->request->post())){
+           $transaction = \Yii::$app->db->beginTransaction();
+           
+           $distribuidor=null;
+           $importador=null;
+           $servicio=null;
+           if(!($objeto_empresa->distribuidor_autorizado)){
+                $distribuidor=false;
+           }
+            if(!($objeto_empresa->dist_importador_aut)){
+                $importador=false;
+           }
+            if(!($objeto_empresa->ser_comercial_aut)){
+                $servicio=false;
+           }
+            foreach ($relacion_objeto as $carga) {
+               
+                switch ($carga->tipo_objeto){
+                    
+                    case "DISTRIBUIDOR AUTORIZADO":
+                        $distribuidor=true;
+                        break;
+                    case "DISTRIBUIDOR IMPORTADOR AUTORIZADO":
+                        $importador=true;
+                        break;
+                    case "SERVICIOS COMERCIALES AUTORIZADO";
+                        $servicio=true;
+                        break;
+                    default :
+                        break;
+                }
+            }
+           try {
+               
+               
+               if(($distribuidor!=null && $distribuidor==false)|| ($servicio!=null && $servicio==false) || ($importador!=null && $importador==false)){
+                   return "datos incompletos faltaron rellenar campos tl tipo autorizacion";
+               }else{
+                     if (! ($flag = $objeto_empresa->save(false))) {
+
+                                            $transaction->rollBack();
+                                            return "faltan datos del objeto empresa";
+                                          
+                                    }
+                   
+                    }
+              
+               
+                foreach ($relacion_objeto as $carga_objeto) {
+                            
+                             $natural_juridica = new SysNaturalesJuridicas();
+                             $persona_juridica = new PersonasJuridicas();
+                             $objeto_autorizacion= new ObjetosAutorizaciones();
+                             
+                             if($carga_objeto->domicilio_fabricante_id==1){
+                                 
+                                 $natural_juridica->rif = $carga_objeto->numero_identificacion;
+                                 $natural_juridica->denominacion= $carga_objeto->denominacion;
+                                 $natural_juridica->juridica=true;
+                                  if (! ($flag = $natural_juridica->save(false))) {
+
+                                            $transaction->rollBack();
+                                            return "faltan datos natural juridica";
+                                            break;
+                                    }
+                                     
+                                     $persona_juridica->rif=$natural_juridica->rif;
+                                     $persona_juridica->razon_social=$natural_juridica->denominacion;
+                                     $persona_juridica->tipo_nacionalidad="NACIONAL";
+                                     $persona_juridica->creado_por=1;
+                                    if (! ($flag = $persona_juridica->save(false))) {
+
+                                        $transaction->rollBack();
+                                    return "faltan datos de persona juridica";
+                                            break;
+                                    }
+                                 
+                             }else{
+                                   
+                                     $persona_juridica->numero_identitifacion=$carga_objeto->numero_identificacion;
+                                     $persona_juridica->razon_social=$carga_objeto->denominacion;
+                                     $persona_juridica->tipo_nacionalidad="EXTRANJERA";
+                                     $persona_juridica->creado_por=1;
+                                     if (! ($flag = $persona_juridica->save(false))) {
+
+                                        $transaction->rollBack();
+                                    return "faltan datos de persona juridica extranjera";
+                                            break;
+                                    }
+                             }
+                             
+                            $objeto_autorizacion->domicilio_fabricante_id= $carga_objeto->domicilio_fabricante_id;
+                            $objeto_autorizacion->productos= $carga_objeto->productos;
+                             $objeto_autorizacion->marcas= $carga_objeto->marcas;
+                             $objeto_autorizacion->origen_producto_id= $carga_objeto->origen_producto_id;
+                             $objeto_autorizacion->sello_firma= $carga_objeto->sello_firma;
+                             $objeto_autorizacion->idioma_redacion_id= $carga_objeto->idioma_redaccion_id;
+                             $objeto_autorizacion->documento_traducido= $carga_objeto->documento_traducido;
+                             $objeto_autorizacion->numero_identificacion= $carga_objeto->traductor_identificacion;
+                             $objeto_autorizacion->nombre_interprete= $carga_objeto->nombre_interprete;
+                             $objeto_autorizacion->fecha_emision= $carga_objeto->fecha_emision;
+                             $objeto_autorizacion->fecha_vencimiento= $carga_objeto->fecha_vencimiento;
+                             $objeto_autorizacion->tipo_objeto= $carga_objeto->tipo_objeto;
+                             $objeto_autorizacion->persona_juridica_id= $persona_juridica->id;
+                              $objeto_autorizacion->objeto_empresa_id= $objeto_empresa->id;
+                             if (! ($flag =   $objeto_autorizacion->save(false))) {
+
+                                $transaction->rollBack();
+                                return "error en la carga de las autorizaciones";
+                            }
+                        }
+                      
+                        $transaction->commit();
+                        return "Datos guardados con exito";
+
+           } catch (Exception $e) {
+               $transaction->rollBack();
+           }
+           
+            }
    }
 
    public function actionObjetoempresa(){
