@@ -62,10 +62,10 @@ class ContratistasController extends BaseController
        
     $out = ['more' => false];
     if (!is_null($search)) {
-        $query = new Query;
+        $query = new \yii\db\Query;
         $query->select('id, rif AS text')
             ->from('sys_naturales_juridicas')
-            ->where('rif LIKE "%' . $search .'%"')
+            ->where("rif LIKE "."'%" . $search ."%'")
             ->limit(20);
         $command = $query->createCommand();
         $data = $command->queryAll();
@@ -77,7 +77,8 @@ class ContratistasController extends BaseController
     else {
         $out['results'] = ['id' => 0, 'text' => 'No matching records found'];
     }
-    echo Json::encode($out);
+  
+    echo \yii\helpers\Json::encode($out);
 }
     
     /**
