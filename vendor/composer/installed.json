@@ -2740,60 +2740,6 @@
         ]
     },
     {
-        "name": "bower-asset/jquery.inputmask",
-        "version": "3.1.63",
-        "version_normalized": "3.1.63.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/RobinHerbots/jquery.inputmask.git",
-            "reference": "c40c7287eadc31e341ebbf0c02352eb55b9cbc48"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/RobinHerbots/jquery.inputmask/zipball/c40c7287eadc31e341ebbf0c02352eb55b9cbc48",
-            "reference": "c40c7287eadc31e341ebbf0c02352eb55b9cbc48",
-            "shasum": ""
-        },
-        "require": {
-            "bower-asset/jquery": ">=1.7"
-        },
-        "type": "bower-asset-library",
-        "extra": {
-            "bower-asset-main": [
-                "./dist/inputmask/jquery.inputmask.js",
-                "./dist/inputmask/jquery.inputmask.extensions.js",
-                "./dist/inputmask/jquery.inputmask.date.extensions.js",
-                "./dist/inputmask/jquery.inputmask.numeric.extensions.js",
-                "./dist/inputmask/jquery.inputmask.phone.extensions.js",
-                "./dist/inputmask/jquery.inputmask.regex.extensions.js"
-            ],
-            "bower-asset-ignore": [
-                "**/.*",
-                "qunit/",
-                "nuget/",
-                "tools/",
-                "js/",
-                "*.md",
-                "build.properties",
-                "build.xml",
-                "jquery.inputmask.jquery.json"
-            ]
-        },
-        "installation-source": "dist",
-        "license": [
-            "http://opensource.org/licenses/mit-license.php"
-        ],
-        "description": "jquery.inputmask is a jquery plugin which create an input mask.",
-        "keywords": [
-            "form",
-            "input",
-            "inputmask",
-            "jquery",
-            "mask",
-            "plugins"
-        ]
-    },
-    {
         "name": "kartik-v/yii2-krajee-base",
         "version": "v1.7.5",
         "version_normalized": "1.7.5.0",
@@ -3089,52 +3035,6 @@
         ]
     },
     {
-        "name": "amnah/yii2-classes",
-        "version": "dev-master",
-        "version_normalized": "9999999-dev",
-        "target-dir": "amnah/yii2",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/amnah/yii2-classes.git",
-            "reference": "7f3ab904b16258c794eccff31e5777faab07d879"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/amnah/yii2-classes/zipball/7f3ab904b16258c794eccff31e5777faab07d879",
-            "reference": "7f3ab904b16258c794eccff31e5777faab07d879",
-            "shasum": ""
-        },
-        "require": {
-            "yiisoft/yii2": "*"
-        },
-        "time": "2014-01-22 16:22:51",
-        "type": "yii2-extension",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "amnah\\yii2\\": ""
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "amnah",
-                "email": "amnah.dev@gmail.com"
-            }
-        ],
-        "description": "Yii2 classes",
-        "keywords": [
-            "Fixture",
-            "soft-delete",
-            "softdelete",
-            "yii",
-            "yii2"
-        ]
-    },
-    {
         "name": "kartik-v/yii2-date-range",
         "version": "v1.6.2",
         "version_normalized": "1.6.2.0",
@@ -3182,6 +3082,106 @@
             "range",
             "time",
             "widget",
+            "yii2"
+        ]
+    },
+    {
+        "name": "bower-asset/jquery.inputmask",
+        "version": "3.x-dev",
+        "version_normalized": "3.9999999.9999999.9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/RobinHerbots/jquery.inputmask.git",
+            "reference": "411498346c09b3356c5ffba7a5247286e834892a"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/RobinHerbots/jquery.inputmask/zipball/411498346c09b3356c5ffba7a5247286e834892a",
+            "reference": "411498346c09b3356c5ffba7a5247286e834892a",
+            "shasum": ""
+        },
+        "require": {
+            "bower-asset/jquery": ">=1.7"
+        },
+        "type": "bower-asset-library",
+        "extra": {
+            "bower-asset-main": [
+                "./dist/inputmask/jquery.inputmask.js",
+                "./dist/inputmask/jquery.inputmask.extensions.js",
+                "./dist/inputmask/jquery.inputmask.date.extensions.js",
+                "./dist/inputmask/jquery.inputmask.numeric.extensions.js",
+                "./dist/inputmask/jquery.inputmask.phone.extensions.js",
+                "./dist/inputmask/jquery.inputmask.regex.extensions.js"
+            ],
+            "bower-asset-ignore": [
+                "**/.*",
+                "qunit/",
+                "nuget/",
+                "tools/",
+                "js/",
+                "*.md",
+                "build.properties",
+                "build.xml",
+                "jquery.inputmask.jquery.json"
+            ]
+        },
+        "installation-source": "dist",
+        "license": [
+            "http://opensource.org/licenses/mit-license.php"
+        ],
+        "description": "jquery.inputmask is a jquery plugin which create an input mask.",
+        "keywords": [
+            "form",
+            "input",
+            "inputmask",
+            "jquery",
+            "mask",
+            "plugins"
+        ]
+    },
+    {
+        "name": "amnah/yii2-classes",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "target-dir": "amnah/yii2",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/amnah/yii2-classes.git",
+            "reference": "7f3ab904b16258c794eccff31e5777faab07d879"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/amnah/yii2-classes/zipball/7f3ab904b16258c794eccff31e5777faab07d879",
+            "reference": "7f3ab904b16258c794eccff31e5777faab07d879",
+            "shasum": ""
+        },
+        "require": {
+            "yiisoft/yii2": "*"
+        },
+        "time": "2014-01-22 16:22:51",
+        "type": "yii2-extension",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "amnah\\yii2\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "amnah",
+                "email": "amnah.dev@gmail.com"
+            }
+        ],
+        "description": "Yii2 classes",
+        "keywords": [
+            "Fixture",
+            "soft-delete",
+            "softdelete",
+            "yii",
             "yii2"
         ]
     },
@@ -3279,102 +3279,6 @@
             "modal-popover",
             "popover",
             "popover-x"
-        ]
-    },
-    {
-        "name": "bower-asset/bootstrap-datepicker",
-        "version": "v1.4.0",
-        "version_normalized": "1.4.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/eternicode/bootstrap-datepicker.git",
-            "reference": "e7ca6bb94dc483817f2ff10fc2b723b2b935e016"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/eternicode/bootstrap-datepicker/zipball/e7ca6bb94dc483817f2ff10fc2b723b2b935e016",
-            "reference": "e7ca6bb94dc483817f2ff10fc2b723b2b935e016",
-            "shasum": ""
-        },
-        "require": {
-            "bower-asset/bootstrap": ">=2.0.4,<4.0",
-            "bower-asset/jquery": ">=1.7.1"
-        },
-        "type": "bower-asset-library",
-        "extra": {
-            "bower-asset-main": [
-                "dist/css/bootstrap-datepicker.css",
-                "dist/css/bootstrap-datepicker3.css",
-                "js/bootstrap-datepicker.js"
-            ],
-            "bower-asset-ignore": []
-        },
-        "installation-source": "dist",
-        "license": [
-            "Apache-2.0"
-        ]
-    },
-    {
-        "name": "2amigos/yii2-date-picker-widget",
-        "version": "1.0.5",
-        "version_normalized": "1.0.5.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/2amigos/yii2-date-picker-widget.git",
-            "reference": "89cd0d7f00785b608b4a9670016f2795f2e3984d"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/2amigos/yii2-date-picker-widget/zipball/89cd0d7f00785b608b4a9670016f2795f2e3984d",
-            "reference": "89cd0d7f00785b608b4a9670016f2795f2e3984d",
-            "shasum": ""
-        },
-        "require": {
-            "bower-asset/bootstrap-datepicker": "1.4.0",
-            "yiisoft/yii2": "~2.0.0",
-            "yiisoft/yii2-bootstrap": "~2.0.3"
-        },
-        "require-dev": {
-            "phpunit/phpunit": "4.*"
-        },
-        "time": "2015-04-02 11:48:05",
-        "type": "yii2-extension",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.0-dev"
-            },
-            "asset-installer-paths": {
-                "bower-asset-library": "vendor/bower"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "dosamigos\\datepicker\\": "src"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "BSD-3-Clause"
-        ],
-        "authors": [
-            {
-                "name": "2amigOS! Consulting Group",
-                "email": "hola@2amigos.us",
-                "homepage": "http://2amigos.us",
-                "role": "Developer"
-            }
-        ],
-        "description": "Bootstrap DatePicker widget for Yii2.",
-        "homepage": "http://yiiwheels.com/extension/bootstrap-datepicker",
-        "keywords": [
-            "2amigos",
-            "datepicker",
-            "extension",
-            "widget",
-            "yii",
-            "yii 2",
-            "yii2"
         ]
     }
 ]

@@ -3,7 +3,7 @@
 * http://github.com/RobinHerbots/jquery.inputmask
 * Copyright (c) 2010 - 2015 Robin Herbots
 * Licensed under the MIT license (http://www.opensource.org/licenses/mit-license.php)
-* Version: 3.1.63
+* Version: 3.1.64-8
 */
 !function($) {
     function isInputEventSupported(eventName) {
@@ -594,11 +594,14 @@
             if (test = test || getTest(pos), void 0 != test.placeholder) return test.placeholder;
             if (null == test.fn) {
                 if (!opts.keepStatic && void 0 == getMaskSet().validPositions[pos]) {
-                    for (var tests = getTests(pos), staticAlternations = !0, i = 0; i < tests.length; i++) if ("" != tests[i].match.def && (null !== tests[i].match.fn || void 0 == tests[i].alternation || tests[i].locator[tests[i].alternation].length > 1)) {
-                        staticAlternations = !1;
-                        break;
+                    for (var prevTest, tests = getTests(pos), hasAlternations = !1, i = 0; i < tests.length; i++) {
+                        if (prevTest && "" != tests[i].match.def && tests[i].match.def != prevTest.match.def && (void 0 == tests[i].alternation || tests[i].alternation == prevTest.alternation)) {
+                            hasAlternations = !0;
+                            break;
+                        }
+                        1 != tests[i].match.optionality && 1 != tests[i].match.optionalQuantifier && (prevTest = tests[i]);
                     }
-                    if (staticAlternations) return opts.placeholder.charAt(pos % opts.placeholder.length);
+                    if (hasAlternations) return opts.placeholder.charAt(pos % opts.placeholder.length);
                 }
                 return test.def;
             }
@@ -941,8 +944,9 @@
                 !1;
                 pasteValue || (pasteValue = inputValue);
             }
-            return checkVal(input, !0, !1, isRTL ? pasteValue.split("").reverse() : pasteValue.split("")), 
-            $input.click(), isComplete(getBuffer()) === !0 && $input.trigger("complete"), !1;
+            return checkVal(input, !1, !1, isRTL ? pasteValue.split("").reverse() : pasteValue.split("")), 
+            writeBuffer(input, getBuffer(), void 0, e, !0), $input.click(), isComplete(getBuffer()) === !0 && $input.trigger("complete"), 
+            !1;
         }
         function inputFallBackEvent(e) {
             var input = this;
@@ -1920,7 +1924,8 @@
                     opts.integerDigits = parseInt(opts.integerDigits) + (0 == mod ? seps - 1 : seps);
                 }
                 opts.placeholder.length > 1 && (opts.placeholder = opts.placeholder.charAt(0)), 
-                opts.radixFocus = opts.radixFocus && "0" == opts.placeholder, opts.definitions[";"] = opts.definitions["~"];
+                opts.radixFocus = opts.radixFocus && "0" == opts.placeholder, opts.definitions[";"] = opts.definitions["~"], 
+                opts.definitions[";"].definitionSymbol = "~";
                 var mask = autoEscape(opts.prefix);
                 return mask += "[+]", mask += "~{1," + opts.integerDigits + "}", void 0 != opts.digits && (isNaN(opts.digits) || parseInt(opts.digits) > 0) && (mask += opts.digitsOptional ? "[" + (opts.decimalProtect ? ":" : opts.radixPoint) + ";{" + opts.digits + "}]" : (opts.decimalProtect ? ":" : opts.radixPoint) + ";{" + opts.digits + "}"), 
                 "" != opts.negationSymbol.back && (mask += "[-]"), mask += autoEscape(opts.suffix), 
