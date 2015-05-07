@@ -17,30 +17,6 @@ use dosamigos\datepicker\DatePicker;
     <?php $form = ActiveForm::begin(['id' => 'r_objetos']); ?>
       
      
-       
-       
-        
-    <?= $form->field($objeto_empresa, 'contratista')->hiddenInput()->label(false) ?>
-
-    <?= $form->field($objeto_empresa, 'productor')->hiddenInput()->label(false) ?>
-
-    <?= $form->field($objeto_empresa, 'fabricante')->hiddenInput()->label(false) ?>
-
-    <?= $form->field($objeto_empresa, 'fabricante_importado')->hiddenInput()->label(false) ?>
-
-    <?= $form->field($objeto_empresa, 'distribuidor')->hiddenInput()->label(false) ?>
-
-    <?= $form->field($objeto_empresa, 'distribuidor_importador')->hiddenInput()->label(false) ?>
-
-    <?= $form->field($objeto_empresa, 'servicio_basico')->hiddenInput()->label(false) ?>
-
-    <?= $form->field($objeto_empresa, 'servicio_profesional')->hiddenInput()->label(false) ?>
-
-    <?= $form->field($objeto_empresa, 'servicio_comercial')->hiddenInput()->label(false) ?>
-
-    <?= $form->field($objeto_empresa, 'obra')->hiddenInput()->label(false) ?>
-
-    <?= $form->field($objeto_empresa, 'contratista_id')->hiddenInput()->label(false) ?>
    
     
    
