@@ -26,7 +26,7 @@ $natural_juridica = new SysNaturalesJuridicas();
 $persona_juridica = new PersonasJuridicas();
 $url = \yii\helpers\Url::to(['naturaljuridicalist']);
 $persona_natural = new PersonasNaturales();
-$accionista = new common\models\p\AccionistasOtros();
+$relacion_contrato = new common\models\p\RelacionesContratos();
 
 
 $initScript = <<< SCRIPT
@@ -48,7 +48,7 @@ SCRIPT;
     'header' => '<h4 style="margin:0; padding:0">Agregar Persona Natural</h4>',
     'toggleButton' => ['label' => 'Agregar persona natural', 'class'=>'btn btn-lg btn-primary','style'=>'margin-bottom:10px;'],
 ]);?>
-    <?php $form2 = ActiveForm::begin(['id'=>'modal_pnatural', 'type'=>ActiveForm::TYPE_VERTICAL]); ?>
+    <?php $form2 = ActiveForm::begin(['id'=>'modal2_pnatural', 'type'=>ActiveForm::TYPE_VERTICAL]); ?>
     
     
     <div id="output"></div>
@@ -68,9 +68,9 @@ SCRIPT;
       ]); ?>
       <?= $form2->field($persona_natural, 'estado_civil')->dropDownList([ 'SOLTERO (A)' => 'SOLTERO (A)', 'CASADO (A)' => 'CASADO (A)', 'CONCUBINO (A)' => 'CONCUBINO (A)', 'DIVORCIADO (A)' => 'DIVORCIADO (A)', 'VIUDO (A)' => 'VIUDO (A)', ], ['prompt' => 'Seleccione estado civil']) ?>
 
-    <div id="output15"></div>
+    <div id="output18"></div>
     <div class="form-group">
-         <?= Html::Button(Yii::t('app', 'Enviar'), ['class' => 'btn btn-success', 'id' => 'enviar15']) ?> 
+         <?= Html::Button(Yii::t('app', 'Enviar'), ['class' => 'btn btn-success', 'id' => 'enviar18']) ?> 
     </div>
    
    
@@ -85,10 +85,10 @@ SCRIPT;
     'header' => '<h4 style="margin:0; padding:0">Agregar Persona Juridica</h4>',
     'toggleButton' => ['label' => 'Agregar persona juridica', 'class'=>'btn btn-lg btn-primary','style'=>'margin-bottom:10px;'],
         ]);?>
-    <?php $form3 = ActiveForm::begin(['id'=>'modal_pjuridica', 'type'=>ActiveForm::TYPE_VERTICAL]); ?>
+    <?php $form3 = ActiveForm::begin(['id'=>'modal2_pjuridica', 'type'=>ActiveForm::TYPE_VERTICAL]); ?>
     
     
-    <div id="output"></div>
+
         <?= $form3->field($persona_juridica, 'tipo_nacionalidad')->dropDownList([ 'NACIONAL' => 'NACIONAL', 'EXTRANJERA' => 'EXTRANJERA', ], ['prompt' => '']) ?>
 
     <?php echo Form::widget([
@@ -98,9 +98,9 @@ SCRIPT;
     'attributes'=>$persona_juridica->formAttribs
       ]); ?>
     
-    <div id="output16"></div>
+    <div id="output19"></div>
     <div class="form-group">
-         <?= Html::Button(Yii::t('app', 'Enviar'), ['class' => 'btn btn-success', 'id' => 'enviar16']) ?> 
+         <?= Html::Button(Yii::t('app', 'Enviar'), ['class' => 'btn btn-success', 'id' => 'enviar19']) ?> 
     </div>
    
    
@@ -116,7 +116,7 @@ SCRIPT;
     
      
  
-<?= $form->field($accionista, 'natural_juridica_id')->widget(Select2::classname(), [
+<?= $form->field($relacion_contrato, 'natural_juridica_id')->widget(Select2::classname(), [
     'options' => ['placeholder' => 'Numero de identificacion ...'],
     'pluginOptions' => [
         'allowClear' => true,
@@ -132,71 +132,69 @@ SCRIPT;
 ]);?>
     
     
-     <?= $form->field($accionista, 'accionista')->checkbox() ?>
-    <?= $form->field($accionista, 'porcentaje_accionario')->textInput() ?>
-    <?= $form->field($accionista, 'junta_directiva')->checkbox() ?>
-    <?= $form->field($accionista, 'cargo')->textInput(['maxlength' => 255]) ?>
-    <?= $form->field($accionista, 'rep_legal')->checkbox() ?>
-    <?= $form->field($accionista, 'repr_legal_vigencia')->widget(\yii\jui\DatePicker::classname(), [
+    
+    <?= $form->field($relacion_contrato, 'fecha_inicio')->widget(\yii\jui\DatePicker::classname(), [
     //'language' => 'ru',
     'dateFormat' => 'yyyy-MM-dd',
     ])  ?>
-     
-     <?= $form->field($accionista, 'tipo_obligacion')->dropDownList([ 'FIRMA CONJUNTA' => 'FIRMA CONJUNTA', 'FIRMA SEPARADA' => 'FIRMA SEPARADA', ], ['prompt' => '']) ?>
+      <?= $form->field($relacion_contrato, 'fecha_fin')->widget(\yii\jui\DatePicker::classname(), [
+    //'language' => 'ru',
+    'dateFormat' => 'yyyy-MM-dd',
+    ])  ?>
     
     <div id="output17"></div>
       <div class="form-group">
-         <?= Html::Button(Yii::t('app', 'Enviar'), ['class' => 'btn btn-success', 'id' => 'enviar17']) ?> 
+         <?= Html::Button(Yii::t('app', 'Enviar'), ['class' => 'btn btn-success', 'id' => 'enviar18']) ?> 
     </div>
     <?php ActiveForm::end(); ?>
 
    <?php
 $script = <<< JS
-    $('#enviar15').click(function(e){
+    $('#enviar18').click(function(e){
           
-            if($('form#modal_pnatural').find('.has-error').length!=0){
+            if($('form#modal2_pnatural').find('.has-error').length!=0){
               
                 return false;
             }else
             {
-                //$('form#modal_pnatural').submit();
+                //$('form#modal2_pnatural').submit();
                 e.preventDefault();
                 e.stopImmediatePropagation();
                $.ajax({
                    
                     url: 'http://localhost/rnce/frontend/web/index.php?r=personas-naturales/crearpersonanatural',
                     type: 'post',
-                    data: $('form#modal_pnatural').serialize(),
+                    data: $('form#modal2_pnatural').serialize(),
                     success: function(data) {
-                             $( "#output15" ).html( data ); 
+                             $( "#output18" ).html( data ); 
                     }
                 });
                 
             }
     });
-     $('#enviar16').click(function(e){
+     $('#enviar19').click(function(e){
           
-            if($('form#modal_pjuridica').find('.has-error').length!=0){
+            if($('form#modal2_pjuridica').find('.has-error').length!=0){
               
                 return false;
             }else
             {
-                //$('form#modal_pjuridica').submit();
+                //$('form#modal2_pjuridica').submit();
                 e.preventDefault();
                 e.stopImmediatePropagation();
                $.ajax({
                    
                     url: 'http://localhost/rnce/frontend/web/index.php?r=personas-juridicas/crearpersonajuridica',
                     type: 'post',
-                    data: $('form#modal_pjuridica').serialize(),
+                    data: $('form#modal2_pjuridica').serialize(),
                     success: function(data) {
-                             $( "#output16" ).html( data ); 
+                             $( "#output19" ).html( data ); 
                     }
                 });
                 
             }
     });
-          $('#enviar17').click(function(e){
+          $('#enviar20').click(function(e){
           
             if($('form#a_otros').find('.has-error').length!=0){
               
@@ -212,7 +210,7 @@ $script = <<< JS
                     type: 'post',
                     data: $('form#a_otros').serialize(),
                     success: function(data) {
-                             $( "#output17" ).html( data ); 
+                             $( "#output20" ).html( data ); 
                     }
                 });
                 

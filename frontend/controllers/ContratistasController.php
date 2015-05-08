@@ -93,6 +93,10 @@ class ContratistasController extends BaseController
             'model' => $this->findModel($id),
         ]);
     }
+      public function actionDatosbasicos()
+    {
+        return $this->render('datos_basicos');
+    }
 
     /**
      * Creates a new Contratistas model.
@@ -598,7 +602,7 @@ class ContratistasController extends BaseController
 
 
    }
-     public function actionDatosbasicos()
+  /*   public function actionDatosbasicos()
    {
 
 
@@ -658,7 +662,7 @@ class ContratistasController extends BaseController
 
 
         }
-   }
+   } */
     public function actionDireccionprincipal()
    {
 

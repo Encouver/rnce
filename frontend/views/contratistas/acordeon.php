@@ -69,8 +69,12 @@ $id_contratista = $usuario->contratista_id;
             'content' => $this->render('_objetos_empresas',['objeto_empresa' => $objeto_empresa]),
         ],
          [
-            'header' => 'Accionistas Junta Directivay Representantes',
+            'header' => 'Accionista Junta Directiva y Representante Legal',
             'content' => $this->render('_accionistas'),
+        ],
+         [
+            'header' => 'Relacion de contratos',
+            'content' => $this->render('_relaciones_contratos'),
         ],
         [
             'header' => 'Section 3',

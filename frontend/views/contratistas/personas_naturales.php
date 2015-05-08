@@ -18,7 +18,7 @@ use kartik\builder\Form;
     <div id="output"></div>
     
     
-    <?= $form->field($natural_juridica, 'rif')->textInput(['maxlength' => 50]) ?>
+    <?= $form->field($natural_juridica, 'rif')->textInput(['maxlength' => 50])->inputOptions(['class'=>'col-md-6']) ?>
     
     <?php echo Form::widget([
     'model'=>$persona_natural,
