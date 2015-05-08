@@ -70,6 +70,63 @@ class PersonasNaturalesController extends Controller
             ]);
         }
     }
+    
+     public function actionCrearpersonanatural()
+    {
+        $persona_natural = new PersonasNaturales();
+        $natural_juridica= new \common\models\p\SysNaturalesJuridicas();
+        
+
+        if ($persona_natural->load(Yii::$app->request->post())) {
+           $transaction = \Yii::$app->db->beginTransaction();
+           try {
+                $flag =false;
+                $natural_juridica->rif= $persona_natural->numero_identificacion;
+            $natural_juridica->juridica= false;
+            $natural_juridica->denominacion=$persona_natural->primer_nombre.' '.$persona_natural->primer_apellido;
+            $natural_juridica->sys_status=true;
+            if (! ($flag = $natural_juridica->save(false))) {
+
+                                        $transaction->rollBack();
+                                    return "faltan datos de natural juridica";
+                                            
+                                    }
+                                     
+                                     
+            if($persona_natural->sys_pais_id==1){
+                $persona_natural->rif=$persona_natural->numero_identificacion;
+                $persona_natural->numero_identificacion=null;
+                $persona_natural->nacionalidad = "NACIONAL";
+            }else{
+                 $persona_natural->nacionalidad = "EXTRANJERA";
+            }
+
+           
+           
+            $persona_natural->creado_por = 1;
+               if ($persona_natural->save()) {
+           
+
+                               $transaction->commit();
+                               return "Datos guardados con exito";
+                               
+
+
+                   }else{
+                        $transaction->rollBack();
+                       return "Datos no guardados";
+                   }
+             
+             
+           } catch (Exception $e) {
+               $transaction->rollBack();
+           }
+       }else{
+           return "Datos incompletos";
+       }
+
+
+    }
 
     /**
      * Updates an existing PersonasNaturales model.

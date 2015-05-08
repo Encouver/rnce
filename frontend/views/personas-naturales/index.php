@@ -48,6 +48,7 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'sys_finalizado_el',
             // 'numero_identificacion',
             // 'nacionalidad',
+            // 'estado_civil',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

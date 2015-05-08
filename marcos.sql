@@ -370,3 +370,332 @@ COMMENT ON COLUMN cuentas.aa_obligaciones_bancarias.sys_creado_el IS 'Fecha de c
 COMMENT ON COLUMN cuentas.aa_obligaciones_bancarias.sys_actualizado_el IS 'Fecha de última actualización del registro.';
 COMMENT ON COLUMN cuentas.aa_obligaciones_bancarias.sys_finalizado_el IS 'Fecha de "eliminado" el registro.';
 
+
+
+/**************     07/05/2015 *************/
+
+-- Column: costo_avaluo
+
+-- ALTER TABLE activos.depreciaciones_amortizaciones DROP COLUMN costo_avaluo;
+
+ALTER TABLE activos.depreciaciones_amortizaciones ADD COLUMN costo_avaluo numeric(38,6);
+COMMENT ON COLUMN activos.depreciaciones_amortizaciones.costo_avaluo IS 'Costo según avaluo.';
+
+
+ALTER TABLE activos.depreciaciones_amortizaciones
+   ALTER COLUMN vida_util DROP NOT NULL;
+
+
+ALTER TABLE activos.depreciaciones_amortizaciones
+   ALTER COLUMN valor_residual DROP NOT NULL;
+
+ALTER TABLE activos.depreciaciones_amortizaciones
+   ALTER COLUMN bs_unidad DROP NOT NULL;
+
+ALTER TABLE activos.depreciaciones_amortizaciones
+   ALTER COLUMN unidades_estimadas DROP NOT NULL;
+
+   ALTER TABLE activos.depreciaciones_amortizaciones
+   ALTER COLUMN tasa_anual DROP NOT NULL;
+
+ALTER TABLE activos.depreciaciones_amortizaciones
+   ALTER COLUMN valor_depreciar DROP NOT NULL;
+
+COMMENT ON COLUMN activos.depreciaciones_amortizaciones.valor_residual
+  IS 'Valor residual.';
+
+COMMENT ON COLUMN activos.depreciaciones_amortizaciones.valor_depreciar
+  IS 'Valor a depreciar.';
+
+COMMENT ON COLUMN activos.depreciaciones_amortizaciones.tasa_anual
+  IS 'Tasa anual.';
+
+COMMENT ON COLUMN activos.depreciaciones_amortizaciones.unidades_estimadas
+  IS 'Unidades estimadas.';
+
+COMMENT ON COLUMN activos.depreciaciones_amortizaciones.bs_unidad
+  IS 'Bs. por unidad.';
+
+
+ALTER TABLE activos.depreciaciones_amortizaciones
+   ALTER COLUMN unidades_producidas_periodo DROP NOT NULL;
+COMMENT ON COLUMN activos.depreciaciones_amortizaciones.unidades_producidas_periodo
+  IS 'Unidades producidas en el periodo.';
+
+ALTER TABLE activos.depreciaciones_amortizaciones
+   ALTER COLUMN unidades_consumidas DROP NOT NULL;
+COMMENT ON COLUMN activos.depreciaciones_amortizaciones.unidades_consumidas
+  IS 'Unidades consumidas.';
+
+-- Column: directo
+
+-- ALTER TABLE activos.mediciones DROP COLUMN directo;
+
+ALTER TABLE activos.mediciones ADD COLUMN directo boolean;
+COMMENT ON COLUMN activos.mediciones.directo IS 'Indica si es directo o indirecto  en tal caso que este vinculado al proceso productivo.';
+
+COMMENT ON TABLE activos.sys_metodos_medicion
+  IS 'Lista de metodos de depreciación y amortización.';
+
+-- Column: modelo_id
+
+-- ALTER TABLE activos.sys_metodos_medicion DROP COLUMN modelo_id;
+
+ALTER TABLE activos.sys_metodos_medicion ADD COLUMN modelo_id integer;
+ALTER TABLE activos.sys_metodos_medicion ALTER COLUMN modelo_id SET NOT NULL;
+COMMENT ON COLUMN activos.sys_metodos_medicion.modelo_id IS 'Clave foránea a la tabla sys_modelos_mediciones. Indica a que modelo pertenece el método o técnica de medición.';
+
+
+-- Column: clasificacion_id
+
+-- ALTER TABLE activos.sys_metodos_medicion DROP COLUMN clasificacion_id;
+
+ALTER TABLE activos.sys_metodos_medicion ADD COLUMN clasificacion_id integer;
+ALTER TABLE activos.sys_metodos_medicion ALTER COLUMN clasificacion_id SET NOT NULL;
+COMMENT ON COLUMN activos.sys_metodos_medicion.clasificacion_id IS 'Clave foránea a la tabla sys_clasificaciones_bienes. Indica la clasificación del método o técnica.';
+
+COMMENT ON TABLE activos.sys_metodos_medicion
+  IS 'Lista de metodos y técnicas.';
+
+
+ALTER TABLE activos.sys_modelos_mediciones
+  DROP CONSTRAINT sys_modelos_pkey;
+ALTER TABLE activos.sys_modelos_mediciones
+  ADD PRIMARY KEY (id);
+ALTER TABLE activos.sys_modelos_mediciones
+  ADD UNIQUE (nombre);
+
+
+
+ALTER TABLE activos.sys_metodos_medicion
+  ADD FOREIGN KEY (clasificacion_id) REFERENCES activos.sys_clasificaciones_metodos (id) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE activos.sys_metodos_medicion
+  ADD FOREIGN KEY (modelo_id) REFERENCES activos.sys_modelos_mediciones (id) ON UPDATE NO ACTION ON DELETE NO ACTION;
+
+COMMENT ON COLUMN activos.deterioros.acumulado_ejer_ant
+  IS 'Deterioro acumulado de ejercicios anteriores.';
+
+COMMENT ON COLUMN activos.deterioros.ejercicios_anteriores
+  IS 'Ejercicios anteriores. Para el modelo de reavaluación.';
+
+COMMENT ON COLUMN activos.deterioros.valor_uso
+  IS 'Valor de uso.';
+
+  ALTER TABLE cuentas.sys_formulas_tecnicas
+  DROP CONSTRAINT sys_formulas_tecnicas_tecnica_medicion_id_fkey;
+ALTER TABLE cuentas.sys_formulas_tecnicas
+  ADD FOREIGN KEY (tecnica_medicion_id) REFERENCES activos.sys_metodos_medicion (id) ON UPDATE NO ACTION ON DELETE NO ACTION;
+
+
+
+COMMENT ON COLUMN activos.facturas.comprador_id
+  IS 'Clave foranea a la tabla public.sys_naturales_juridicas';
+ALTER TABLE activos.facturas
+  DROP CONSTRAINT facturas_comprador_id_fkey;
+ALTER TABLE activos.facturas
+  ADD FOREIGN KEY (comprador_id) REFERENCES sys_naturales_juridicas (id) ON UPDATE NO ACTION ON DELETE NO ACTION;
+COMMENT ON COLUMN activos.facturas.comprador_id IS 'Clave foranea a la tabla public.sys_naturales_juridicas';
+
+
+
+
+
+-- Table: cuentas.mm2_descripciones
+
+-- DROP TABLE cuentas.mm2_descripciones;
+
+CREATE TABLE cuentas.mm2_descripciones
+(
+  id serial NOT NULL, -- Clave primaria.
+  nombre character varying(255), -- Contenido de la descripción.
+  descripcion character varying(255), -- Descripción de la descripción.
+  CONSTRAINT mm2_descripciones_pkey PRIMARY KEY (id),
+  CONSTRAINT mm2_descripciones_nombre_key UNIQUE (nombre)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE cuentas.mm2_descripciones
+  OWNER TO eureka;
+COMMENT ON TABLE cuentas.mm2_descripciones
+  IS 'Lista de descripciones.';
+COMMENT ON COLUMN cuentas.mm2_descripciones.id IS 'Clave primaria.';
+COMMENT ON COLUMN cuentas.mm2_descripciones.nombre IS 'Contenido de la descripción.';
+COMMENT ON COLUMN cuentas.mm2_descripciones.descripcion IS 'Descripción de la descripción.';
+
+
+
+-- Table: cuentas.mm2_tipos_fondos_reservas
+
+-- DROP TABLE cuentas.mm2_tipos_fondos_reservas;
+
+CREATE TABLE cuentas.mm2_tipos_fondos_reservas
+(
+  id serial NOT NULL, -- Clave primaria.
+  nombre character varying(255) NOT NULL, -- Nombre del tipo de fondo y reserva.
+  descripcion character varying(255), -- Descripción del tipo de fondo y reserva.
+  CONSTRAINT mm2_tipos_fondos_reservas_pkey PRIMARY KEY (id),
+  CONSTRAINT mm2_tipos_fondos_reservas_nombre_key UNIQUE (nombre)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE cuentas.mm2_tipos_fondos_reservas
+  OWNER TO eureka;
+COMMENT ON TABLE cuentas.mm2_tipos_fondos_reservas
+  IS 'Lista de los tipos de Fondos y Reservas.';
+COMMENT ON COLUMN cuentas.mm2_tipos_fondos_reservas.id IS 'Clave primaria.';
+COMMENT ON COLUMN cuentas.mm2_tipos_fondos_reservas.nombre IS 'Nombre del tipo de fondo y reserva.';
+COMMENT ON COLUMN cuentas.mm2_tipos_fondos_reservas.descripcion IS 'Descripción del tipo de fondo y reserva.';
+
+
+
+
+
+
+
+
+CREATE TABLE cuentas.mm2_fondos_reservas
+(
+   id serial NOT NULL, 
+   tipo_fondo_reserva_id integer NOT NULL, 
+   saldo_inicial_ejercicio numeric(38,6) NOT NULL, 
+   saldo_ajuscierre_ejercicio numeric(38,6) NOT NULL, 
+   descripcion_id integer NOT NULL, 
+   detalle character varying(255) NOT NULL, 
+   fecha_uso date, 
+   monto numeric(38,6) NOT NULL, 
+   monto_ajustado numeric(38,6) NOT NULL, 
+   reservas boolean NOT NULL, 
+   descripcion_apartado_id integer, 
+   ingreso_ejercicio numeric(38,6) NOT NULL, 
+   porcentaje_aplicado numeric(38,6) NOT NULL, 
+   monto_apartados numeric(38,6) NOT NULL, 
+   saldo_cierre_ejercicio numeric(38,6) NOT NULL, 
+   PRIMARY KEY (id), 
+   FOREIGN KEY (tipo_fondo_reserva_id) REFERENCES cuentas.mm2_tipos_fondos_reservas (id) ON UPDATE NO ACTION ON DELETE NO ACTION, 
+   FOREIGN KEY (descripcion_apartado_id) REFERENCES cuentas.mm2_descripciones (id) ON UPDATE NO ACTION ON DELETE NO ACTION, 
+   FOREIGN KEY (descripcion_id) REFERENCES cuentas.mm2_descripciones (id) ON UPDATE NO ACTION ON DELETE NO ACTION
+) 
+WITH (
+  OIDS = FALSE
+)
+;
+ALTER TABLE cuentas.mm2_fondos_reservas
+  OWNER TO eureka;
+COMMENT ON COLUMN cuentas.mm2_fondos_reservas.id IS 'Clave primaria.';
+COMMENT ON COLUMN cuentas.mm2_fondos_reservas.tipo_fondo_reserva_id IS 'Clave foránea a la tabla tipos_fondos_reservas. ';
+COMMENT ON COLUMN cuentas.mm2_fondos_reservas.saldo_inicial_ejercicio IS 'Saldo inicial del ejercicio económico.';
+COMMENT ON COLUMN cuentas.mm2_fondos_reservas.saldo_ajuscierre_ejercicio IS 'Saldo ajustado al cierre del ejercicio económico.';
+COMMENT ON COLUMN cuentas.mm2_fondos_reservas.descripcion_id IS 'Clave foránea a la tabla mm2_descripciones.';
+COMMENT ON COLUMN cuentas.mm2_fondos_reservas.detalle IS 'Detalle.';
+COMMENT ON COLUMN cuentas.mm2_fondos_reservas.fecha_uso IS 'Fecha de uso (No aplica para ajustes).';
+COMMENT ON COLUMN cuentas.mm2_fondos_reservas.monto IS 'Monto.';
+COMMENT ON COLUMN cuentas.mm2_fondos_reservas.monto_ajustado IS 'Monto Ajustado.';
+COMMENT ON COLUMN cuentas.mm2_fondos_reservas.reservas IS 'Genero reservas durante el periodo.';
+COMMENT ON COLUMN cuentas.mm2_fondos_reservas.descripcion_apartado_id IS 'Clave foránea a la tabla mm2_descripciones.';
+COMMENT ON COLUMN cuentas.mm2_fondos_reservas.ingreso_ejercicio IS 'Ingreso del Ejercicio.';
+COMMENT ON COLUMN cuentas.mm2_fondos_reservas.porcentaje_aplicado IS 'Porcentaje aplicado.';
+COMMENT ON COLUMN cuentas.mm2_fondos_reservas.monto_apartados IS 'Monto de apartados durante el ejercicio.';
+COMMENT ON COLUMN cuentas.mm2_fondos_reservas.saldo_cierre_ejercicio IS 'Saldo al cierre del ejercicio económico.';
+COMMENT ON TABLE cuentas.mm2_fondos_reservas
+  IS 'Cuenta MM2 - Fondos y Reservas';
+
+
+
+  CREATE TABLE cuentas.mm1_ajustes_correciones_revals
+(
+   id serial NOT NULL, 
+   nombre character varying(255) NOT NULL, 
+   descripcion character varying(255), 
+   PRIMARY KEY (id), 
+   UNIQUE (nombre)
+) 
+WITH (
+  OIDS = FALSE
+)
+;
+ALTER TABLE cuentas.mm1_ajustes_correciones_revals
+  OWNER TO eureka;
+COMMENT ON COLUMN cuentas.mm1_ajustes_correciones_revals.id IS 'Clave primaria.';
+COMMENT ON COLUMN cuentas.mm1_ajustes_correciones_revals.nombre IS 'Nombre del Ajuste / Correccion / Revalorizacion.';
+COMMENT ON COLUMN cuentas.mm1_ajustes_correciones_revals.descripcion IS 'Descripcion del Ajuste / Correccion / Revalorizacion.';
+COMMENT ON TABLE cuentas.mm1_ajustes_correciones_revals
+  IS 'Lista de Ajustes / Correcciones / Revalorizaciones';
+
+
+
+
+
+
+
+
+
+-- Table: cuentas.mm1_resacum_ajus_correc
+
+-- DROP TABLE cuentas.mm1_resacum_ajus_correc;
+
+CREATE TABLE cuentas.mm1_resacum_ajus_correc
+(
+  id serial NOT NULL, -- Clave primaria.
+  resultado_acumulado_id integer NOT NULL, -- Clave foránea a la tabla mm1_resultados_acumulados.
+  ajuste_corre_reval_id integer NOT NULL, -- Clave foránea a la tabla mm1_ajustes_correciones_revals.
+  CONSTRAINT mm1_resacum_ajus_correc_pkey PRIMARY KEY (id),
+  CONSTRAINT mm1_resacum_ajus_correc_ajuste_corre_reval_id_fkey FOREIGN KEY (ajuste_corre_reval_id)
+      REFERENCES cuentas.mm1_ajustes_correciones_revals (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT mm1_resacum_ajus_correc_resultado_acumulado_id_fkey FOREIGN KEY (resultado_acumulado_id)
+      REFERENCES cuentas.mm1_resultados_acumulados (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE cuentas.mm1_resacum_ajus_correc
+  OWNER TO eureka;
+COMMENT ON TABLE cuentas.mm1_resacum_ajus_correc
+  IS 'Lista de ajuste correciones y revalorizaciones.';
+COMMENT ON COLUMN cuentas.mm1_resacum_ajus_correc.id IS 'Clave primaria.';
+COMMENT ON COLUMN cuentas.mm1_resacum_ajus_correc.resultado_acumulado_id IS 'Clave foránea a la tabla mm1_resultados_acumulados.';
+COMMENT ON COLUMN cuentas.mm1_resacum_ajus_correc.ajuste_corre_reval_id IS 'Clave foránea a la tabla mm1_ajustes_correciones_revals.';
+
+
+
+-- Table: cuentas.mm1_resultados_acumulados
+
+-- DROP TABLE cuentas.mm1_resultados_acumulados;
+
+CREATE TABLE cuentas.mm1_resultados_acumulados
+(
+  id serial NOT NULL, -- Clave primaria.
+  saldo_inicio_ejercicio numeric(38,6) NOT NULL, -- Saldo al Inicio del Ejercicio Económico.
+  saldo_ajuscierre_ejercicio numeric(38,6) NOT NULL, -- Saldo ajustado al cierre del ejercicio económico.
+  ajustes_correcciones_reval boolean NOT NULL, -- Pregunta: Se Aplicaron Ajustes / Correcciones / Revalorizaciones? No. (NO se carga) Si.  (Activar Lista Desplegable)
+  fecha_inicio date NOT NULL, -- Fecha (INICIO)
+  monto_aum_dis numeric(38,6) NOT NULL, -- Monto de aumentos y disminuciones.
+  monto_ajustado_aum_dis numeric(38,6) NOT NULL, -- Monto Ajustado aumentos y disminuciones.
+  total_ajustes_correciones numeric(38,6) NOT NULL, -- Total de Ajustes/Correciones.
+  monto_historico numeric(38,6) NOT NULL, -- Monto Histórico.
+  monto_ajustado_gan_per numeric(38,6) NOT NULL, -- Monto Ajustado Ganancia o Pérdida del Ejercicio.
+  saldo_cierre_ejercicio numeric(38,6) NOT NULL, -- Saldo al cierre del ejercicio económico.
+  CONSTRAINT mm1_resultados_acumulados_pkey PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE cuentas.mm1_resultados_acumulados
+  OWNER TO eureka;
+COMMENT ON TABLE cuentas.mm1_resultados_acumulados
+  IS 'Cuenta MM1 - Resultados Acumulados.';
+COMMENT ON COLUMN cuentas.mm1_resultados_acumulados.id IS 'Clave primaria.';
+COMMENT ON COLUMN cuentas.mm1_resultados_acumulados.saldo_inicio_ejercicio IS 'Saldo al Inicio del Ejercicio Económico.';
+COMMENT ON COLUMN cuentas.mm1_resultados_acumulados.saldo_ajuscierre_ejercicio IS 'Saldo ajustado al cierre del ejercicio económico.';
+COMMENT ON COLUMN cuentas.mm1_resultados_acumulados.ajustes_correcciones_reval IS 'Pregunta: Se Aplicaron Ajustes / Correcciones / Revalorizaciones? No. (NO se carga) Si.  (Activar Lista Desplegable)';
+COMMENT ON COLUMN cuentas.mm1_resultados_acumulados.fecha_inicio IS 'Fecha (INICIO)';
+COMMENT ON COLUMN cuentas.mm1_resultados_acumulados.monto_aum_dis IS 'Monto de aumentos y disminuciones.';
+COMMENT ON COLUMN cuentas.mm1_resultados_acumulados.monto_ajustado_aum_dis IS 'Monto Ajustado aumentos y disminuciones.';
+COMMENT ON COLUMN cuentas.mm1_resultados_acumulados.total_ajustes_correciones IS 'Total de Ajustes/Correciones.';
+COMMENT ON COLUMN cuentas.mm1_resultados_acumulados.monto_historico IS 'Monto Histórico.';
+COMMENT ON COLUMN cuentas.mm1_resultados_acumulados.monto_ajustado_gan_per IS 'Monto Ajustado Ganancia o Pérdida del Ejercicio.';
+COMMENT ON COLUMN cuentas.mm1_resultados_acumulados.saldo_cierre_ejercicio IS 'Saldo al cierre del ejercicio económico.';
+

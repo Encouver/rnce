@@ -3,16 +3,16 @@
 namespace frontend\controllers;
 
 use Yii;
-use common\models\p\PersonasJuridicas;
-use app\models\PersonasJuridicasSearch;
+use common\models\p\AccionistasOtros;
+use app\models\AccionistasOtrosSearch;
 use common\components\BaseController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * PersonasJuridicasController implements the CRUD actions for PersonasJuridicas model.
+ * AccionistasOtrosController implements the CRUD actions for AccionistasOtros model.
  */
-class PersonasJuridicasController extends BaseController
+class AccionistasOtrosController extends BaseController
 {
     public function behaviors()
     {
@@ -27,12 +27,12 @@ class PersonasJuridicasController extends BaseController
     }
 
     /**
-     * Lists all PersonasJuridicas models.
+     * Lists all AccionistasOtros models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new PersonasJuridicasSearch();
+        $searchModel = new AccionistasOtrosSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -42,7 +42,7 @@ class PersonasJuridicasController extends BaseController
     }
 
     /**
-     * Displays a single PersonasJuridicas model.
+     * Displays a single AccionistasOtros model.
      * @param integer $id
      * @return mixed
      */
@@ -54,13 +54,13 @@ class PersonasJuridicasController extends BaseController
     }
 
     /**
-     * Creates a new PersonasJuridicas model.
+     * Creates a new AccionistasOtros model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new PersonasJuridicas();
+        $model = new AccionistasOtros();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -70,34 +70,37 @@ class PersonasJuridicasController extends BaseController
             ]);
         }
     }
-public function actionCrearpersonajuridica()
+     public function actionCrearaccionista()
     {
-        $persona_juridica = new PersonasJuridicas();
-        $natural_juridica= new \common\models\p\SysNaturalesJuridicas();
-        
-
-        if ($persona_juridica->load(Yii::$app->request->post())) {
-           $transaction = \Yii::$app->db->beginTransaction();
+        $accionista_otro = new AccionistasOtros();
+        $usuario= \common\models\p\User::findOne(Yii::$app->user->identity->id);
+        if ($accionista_otro->load(Yii::$app->request->post())) {
+            
+             $transaction = \Yii::$app->db->beginTransaction();
            try {
-              
-                $natural_juridica->rif= $persona_juridica->numero_identificacion;
-            $natural_juridica->juridica= true;
-            $natural_juridica->denominacion=$persona_juridica->razon_social;
-            $natural_juridica->sys_status=true;
-            if (! ($flag = $natural_juridica->save(false))) {
-
-                                        $transaction->rollBack();
-                                    return "faltan datos de natural juridica";
-                                            
-                                    }
-            if($persona_juridica->tipo_nacionalidad=="NACIONAL"){
-                $persona_juridica->rif=$persona_juridica->numero_identificacion;
-                $persona_juridica->numero_identificacion=null;
+                
+            if($accionista_otro->accionista=="1" && $accionista_otro->porcentaje_accionario==null){
+               return "Datos incompletos debe ingresar el porcentaje accionario";
             }
-            $persona_juridica->creado_por=1;
-            $persona_juridica->sys_status=true;
+             if($accionista_otro->accionista=="0" && $accionista_otro->porcentaje_accionario!=null){
+               return "Debe seleccionar el campo accionista";
+            }
+             if($accionista_otro->junta_directiva=="1" && $accionista_otro->cargo==null){
+               return "Datos incompletos debe ingresar el cargo";
+            }
+            if($accionista_otro->junta_directiva=="0" && $accionista_otro->cargo!=null){
+               return "Datos seleccionar el campo junta directiva";
+            }
+            if($accionista_otro->rep_legal=="1" && $accionista_otro->repr_legal_vigencia==null){
+               return "Datos incompletos debe ingresar la fecha de vigencia";
+            }
+              
+            if($accionista_otro->rep_legal=="0" && $accionista_otro->repr_legal_vigencia!=null){
+               return "Datos seleccionar el campo representante legal";
+            }
+            $accionista_otro->contratista_id = $usuario->contratista_id;
            
-               if ($persona_juridica->save()) {
+               if ($accionista_otro->save()) {
            
 
                                $transaction->commit();
@@ -114,14 +117,11 @@ public function actionCrearpersonajuridica()
            } catch (Exception $e) {
                $transaction->rollBack();
            }
-       }else{
-           return "Datos incompletos";
-       }
-
-
+        }
     }
+
     /**
-     * Updates an existing PersonasJuridicas model.
+     * Updates an existing AccionistasOtros model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -140,7 +140,7 @@ public function actionCrearpersonajuridica()
     }
 
     /**
-     * Deletes an existing PersonasJuridicas model.
+     * Deletes an existing AccionistasOtros model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -153,15 +153,15 @@ public function actionCrearpersonajuridica()
     }
 
     /**
-     * Finds the PersonasJuridicas model based on its primary key value.
+     * Finds the AccionistasOtros model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return PersonasJuridicas the loaded model
+     * @return AccionistasOtros the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = PersonasJuridicas::findOne($id)) !== null) {
+        if (($model = AccionistasOtros::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
