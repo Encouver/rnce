@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use common\models\a\SysTiposRegistros;
-use yii\jui\DatePicker
+use yii\jui\DatePicker;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\a\DocumentosRegistrados */
@@ -30,8 +30,7 @@ use yii\jui\DatePicker
     <?= $form->field($model, 'folio')->textInput(['maxlength' => 100]) ?>
     
       <?= $form->field($model, 'fecha_registro')->widget(\yii\jui\DatePicker::classname(), [
-    //'language' => 'ru',
-    'dateFormat' => 'yyyy-MM-dd',
+    'dateFormat' => 'yyyy-mm-dd',
     ])  ?>
 
 

@@ -31,6 +31,7 @@ use Yii;
  * @property string $sys_finalizado_el
  * @property string $numero_identificacion
  * @property string $nacionalidad
+ * * @property string $estado_civil
  *
  * @property EmpresasRelacionadas[] $empresasRelacionadas
  * @property Sucursales[] $sucursales
@@ -61,7 +62,7 @@ class PersonasNaturales extends \common\components\BaseActiveRecord
             [['nacionalidad'], 'string'],
             [['primer_nombre', 'segundo_nombre', 'primer_apellido', 'segundo_apellido', 'pagina_web', 'facebook', 'twitter', 'instagram', 'numero_identificacion'], 'string', 'max' => 255],
             [['rif'], 'string', 'max' => 20],
-            [['telefono_local', 'telefono_celular', 'fax'], 'string', 'max' => 50],
+            [['telefono_local', 'telefono_celular','estado_civil', 'fax'], 'string', 'max' => 50],
             [['correo'], 'string', 'max' => 150],
             [['rif'], 'unique'],
             [['ci'], 'unique']
@@ -90,13 +91,14 @@ class PersonasNaturales extends \common\components\BaseActiveRecord
             'facebook' => Yii::t('app', 'Facebook'),
             'twitter' => Yii::t('app', 'Twitter'),
             'instagram' => Yii::t('app', 'Instagram'),
-            'sys_pais_id' => Yii::t('app', 'Sys Pais ID'),
+            'sys_pais_id' => Yii::t('app', 'Pais de Origen'),
             'sys_status' => Yii::t('app', 'Sys Status'),
             'sys_creado_el' => Yii::t('app', 'Sys Creado El'),
             'sys_actualizado_el' => Yii::t('app', 'Sys Actualizado El'),
             'sys_finalizado_el' => Yii::t('app', 'Sys Finalizado El'),
             'numero_identificacion' => Yii::t('app', 'Numero Identificacion'),
             'nacionalidad' => Yii::t('app', 'Nacionalidad'),
+            'estado_civil' => Yii::t('app', 'Estado Civil'),
         ];
     }
 
@@ -147,5 +149,5 @@ class PersonasNaturales extends \common\components\BaseActiveRecord
         'primer_apellido'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Enter username...']],
         'segundo_apellido'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Enter username...']],
     ];
-}
+    }
 }

@@ -32,12 +32,12 @@ $this->params['breadcrumbs'][] = $this->title;
             'rif',
             'razon_social',
             'creado_por',
-            'nacionalidad:boolean',
-            'numero_identitifacion',
+            'numero_identificacion',
             'sys_status:boolean',
             'sys_creado_el',
             'sys_actualizado_el',
             'sys_finalizado_el',
+            'tipo_nacionalidad',
         ],
     ]) ?>
 

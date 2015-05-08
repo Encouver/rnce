@@ -4,13 +4,13 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\p\PersonasNaturales */
+/* @var $model common\models\p\AccionistasOtros */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Personas Naturales'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Accionistas Otros'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="personas-naturales-view">
+<div class="accionistas-otros-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -29,29 +29,23 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'primer_nombre',
-            'segundo_nombre',
-            'rif',
-            'ci',
-            'creado_por',
-            'primer_apellido',
-            'segundo_apellido',
-            'telefono_local',
-            'telefono_celular',
-            'fax',
-            'correo',
-            'pagina_web',
-            'facebook',
-            'twitter',
-            'instagram',
-            'sys_pais_id',
+            'contratista_id',
+            'natural_juridica_id',
+            'porcentaje_accionario',
+            'valor_compra',
+            'fecha',
+            'accionista:boolean',
+            'junta_directiva:boolean',
+            'rep_legal:boolean',
+            'cargo',
+            'documento_registrado_id',
             'sys_status:boolean',
             'sys_creado_el',
             'sys_actualizado_el',
             'sys_finalizado_el',
-            'numero_identificacion',
-            'nacionalidad',
-            'estado_civil',
+            'repr_legal_vigencia',
+            'empresa_fusionada_id',
+            'tipo_obligacion',
         ],
     ]) ?>
 

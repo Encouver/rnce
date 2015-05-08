@@ -23,9 +23,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'creado_por') ?>
 
-    <?= $form->field($model, 'nacionalidad')->checkbox() ?>
-
-    <?php // echo $form->field($model, 'numero_identitifacion') ?>
+    <?= $form->field($model, 'numero_identificacion') ?>
 
     <?php // echo $form->field($model, 'sys_status')->checkbox() ?>
 
@@ -34,6 +32,8 @@ use yii\widgets\ActiveForm;
     <?php // echo $form->field($model, 'sys_actualizado_el') ?>
 
     <?php // echo $form->field($model, 'sys_finalizado_el') ?>
+
+    <?php // echo $form->field($model, 'tipo_nacionalidad') ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>

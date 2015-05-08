@@ -34,10 +34,7 @@ $id_contratista = $usuario->contratista_id;
     <h1><?= Html::encode($this->title) ?></h1>
     <?= Accordion::widget([
     'items' => [
-        [
-            'header' => 'Objeto empresa',
-            'content' => $this->render('_objetos_empresas',['objeto_empresa' => $objeto_empresa]),
-        ],
+      
         [
             'header' => 'Datos basicos',
             'content' => $this->render('datos_basicos'),
@@ -66,6 +63,14 @@ $id_contratista = $usuario->contratista_id;
             'header' => 'Denominacion comercial',
             'content' => $this->render('_denominaciones_comerciales',['denominacion_comercial' => $denominacion_comercial,
                                                                       'id_contratista'=>$id_contratista]),
+        ],
+          [
+            'header' => 'Objeto empresa',
+            'content' => $this->render('_objetos_empresas',['objeto_empresa' => $objeto_empresa]),
+        ],
+         [
+            'header' => 'Accionistas Junta Directivay Representantes',
+            'content' => $this->render('_accionistas'),
         ],
         [
             'header' => 'Section 3',
