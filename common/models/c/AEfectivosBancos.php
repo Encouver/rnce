@@ -6,6 +6,9 @@ use Yii;
 use kartik\builder\TabularForm;
 use kartik\grid\GridView;
 use yii\helpers\ArrayHelper;
+use kartik\builder\Form;
+use kartik\builder\ActiveFormEvent;
+use yii\helpers\Html;
 
 
 /**
@@ -139,9 +142,19 @@ class AEfectivosBancos extends \common\components\BaseActiveRecord
                 'type'=>TabularForm::INPUT_HIDDEN,
                 'columnOptions'=>['hidden'=>true]
             ],
-            'saldo_segun_b'=>['type'=>TabularForm::INPUT_TEXT,'label'=>'Saldo según Banco'],
+            'banco_contratista_id'=>['type'=>Form::INPUT_TEXT,'label'=>'Banco'],
+            'saldo_segun_b'=>['type'=>Form::INPUT_TEXT,'label'=>'Saldo segun banco'],
+            'nd_no_cont'=>['type'=>Form::INPUT_TEXT,'label'=>'Nd no contabilizadas'],
+            'depo_transito'=>['type'=>Form::INPUT_TEXT,'label'=>'Depositos en transito'],
+            'nc_no_cont'=>['type'=>Form::INPUT_TEXT,'label'=>'Nc no contabilizadas'],
+            'cheques_transito'=>['type'=>Form::INPUT_TEXT,'label'=>'Cheques en transito'],
+            'saldo_al_cierre'=>['type'=>Form::INPUT_TEXT,'label'=>'Saldo al cierre'],
+            'intereses_act_eco'=>['type'=>Form::INPUT_TEXT,'label'=>'Intereses generados'],
+            'tipo_moneda_id'=>['type'=>Form::INPUT_TEXT,'label'=>'Tipo moneda'],
+            //'monto_moneda_extra'=>['type'=>Form::INPUT_TEXT,'label'=>'Saldo según Banco'],
+            //'tipo_cambio_cierre'=>['type'=>Form::INPUT_TEXT,'label'=>'Saldo según Banco'],
+
+            //'actions'=>['type'=>TabularForm::INPUT_RAW, 'value'=>Html::submitButton('Submit', ['class'=>'btn btn-primary'])]
         ];
     }
-
-
 }
