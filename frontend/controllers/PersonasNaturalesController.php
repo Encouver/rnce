@@ -81,7 +81,7 @@ class PersonasNaturalesController extends Controller
            $transaction = \Yii::$app->db->beginTransaction();
            try {
                 $flag =false;
-                $natural_juridica->rif= $persona_natural->rif;
+                $natural_juridica->rif= $persona_natural->numero_identificacion;
             $natural_juridica->juridica= false;
             $natural_juridica->denominacion=$persona_natural->primer_nombre.' '.$persona_natural->primer_apellido;
             $natural_juridica->sys_status=true;
@@ -91,9 +91,18 @@ class PersonasNaturalesController extends Controller
                                     return "faltan datos de natural juridica";
                                             
                                     }
+                                     
+                                     
+            if($persona_natural->sys_pais_id==1){
+                $persona_natural->rif=$persona_natural->numero_identificacion;
+                $persona_natural->numero_identificacion=null;
+                $persona_natural->nacionalidad = "NACIONAL";
+            }else{
+                 $persona_natural->nacionalidad = "EXTRANJERA";
+            }
 
-            $persona_natural->sys_pais_id = 1;
-            $persona_natural->nacionalidad = "NACIONAL";
+           
+           
             $persona_natural->creado_por = 1;
                if ($persona_natural->save()) {
            

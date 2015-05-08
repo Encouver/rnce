@@ -19,7 +19,7 @@ class PersonasNaturalesSearch extends PersonasNaturales
     {
         return [
             [['id', 'ci', 'creado_por', 'sys_pais_id'], 'integer'],
-            [['primer_nombre', 'segundo_nombre', 'rif', 'primer_apellido', 'segundo_apellido', 'telefono_local', 'telefono_celular', 'fax', 'correo', 'pagina_web', 'facebook', 'twitter', 'instagram', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el', 'numero_identificacion', 'nacionalidad'], 'safe'],
+            [['primer_nombre', 'segundo_nombre', 'rif', 'primer_apellido', 'segundo_apellido', 'telefono_local', 'telefono_celular', 'fax', 'correo', 'pagina_web', 'facebook', 'twitter', 'instagram', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el', 'numero_identificacion', 'nacionalidad', 'estado_civil'], 'safe'],
             [['sys_status'], 'boolean'],
         ];
     }
@@ -81,7 +81,8 @@ class PersonasNaturalesSearch extends PersonasNaturales
             ->andFilterWhere(['like', 'twitter', $this->twitter])
             ->andFilterWhere(['like', 'instagram', $this->instagram])
             ->andFilterWhere(['like', 'numero_identificacion', $this->numero_identificacion])
-            ->andFilterWhere(['like', 'nacionalidad', $this->nacionalidad]);
+            ->andFilterWhere(['like', 'nacionalidad', $this->nacionalidad])
+            ->andFilterWhere(['like', 'estado_civil', $this->estado_civil]);
 
         return $dataProvider;
     }

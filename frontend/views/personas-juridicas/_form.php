@@ -18,9 +18,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'creado_por')->textInput() ?>
 
-    <?= $form->field($model, 'nacionalidad')->checkbox() ?>
-
-    <?= $form->field($model, 'numero_identitifacion')->textInput(['maxlength' => 255]) ?>
+    <?= $form->field($model, 'numero_identificacion')->textInput(['maxlength' => 255]) ?>
 
     <?= $form->field($model, 'sys_status')->checkbox() ?>
 
@@ -29,6 +27,8 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'sys_actualizado_el')->textInput() ?>
 
     <?= $form->field($model, 'sys_finalizado_el')->textInput() ?>
+
+    <?= $form->field($model, 'tipo_nacionalidad')->dropDownList([ 'NACIONAL' => 'NACIONAL', 'EXTRANJERA' => 'EXTRANJERA', ], ['prompt' => '']) ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

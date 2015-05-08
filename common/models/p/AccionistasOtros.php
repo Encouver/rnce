@@ -13,7 +13,6 @@ use Yii;
  * @property string $porcentaje_accionario
  * @property string $valor_compra
  * @property string $fecha
- * @property string $obligacion
  * @property boolean $accionista
  * @property boolean $junta_directiva
  * @property boolean $rep_legal
@@ -24,10 +23,13 @@ use Yii;
  * @property string $sys_actualizado_el
  * @property string $sys_finalizado_el
  * @property string $repr_legal_vigencia
+ * @property integer $empresa_fusionada_id
+ * @property string $tipo_obligacion
  *
  * @property Contratistas $contratista
  * @property SysNaturalesJuridicas $naturalJuridica
  * @property DocumentosRegistrados $documentoRegistrado
+ * @property EmpresasFusionadas $empresaFusionada
  * @property ActasConstitutivas[] $actasConstitutivas
  * @property PagosAccionistasDecretos[] $pagosAccionistasDecretos
  */
@@ -47,12 +49,12 @@ class AccionistasOtros extends \common\components\BaseActiveRecord
     public function rules()
     {
         return [
-            [['contratista_id', 'natural_juridica_id', 'porcentaje_accionario', 'valor_compra', 'fecha', 'obligacion', 'accionista', 'junta_directiva', 'rep_legal', 'documento_registrado_id'], 'required'],
-            [['contratista_id', 'natural_juridica_id', 'documento_registrado_id'], 'integer'],
+            [['contratista_id', 'natural_juridica_id', 'accionista', 'junta_directiva', 'rep_legal', 'tipo_obligacion'], 'required'],
+            [['contratista_id', 'natural_juridica_id', 'documento_registrado_id', 'empresa_fusionada_id'], 'integer'],
             [['porcentaje_accionario', 'valor_compra'], 'number'],
             [['fecha', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el', 'repr_legal_vigencia'], 'safe'],
             [['accionista', 'junta_directiva', 'rep_legal', 'sys_status'], 'boolean'],
-            [['obligacion'], 'string', 'max' => 100],
+            [['tipo_obligacion'], 'string'],
             [['cargo'], 'string', 'max' => 255]
         ];
     }
@@ -65,11 +67,10 @@ class AccionistasOtros extends \common\components\BaseActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'contratista_id' => Yii::t('app', 'Contratista ID'),
-            'natural_juridica_id' => Yii::t('app', 'Natural Juridica ID'),
+            'natural_juridica_id' => Yii::t('app', 'Numero de identificacion'),
             'porcentaje_accionario' => Yii::t('app', 'Porcentaje Accionario'),
             'valor_compra' => Yii::t('app', 'Valor Compra'),
             'fecha' => Yii::t('app', 'Fecha'),
-            'obligacion' => Yii::t('app', 'Obligacion'),
             'accionista' => Yii::t('app', 'Accionista'),
             'junta_directiva' => Yii::t('app', 'Junta Directiva'),
             'rep_legal' => Yii::t('app', 'Rep Legal'),
@@ -79,7 +80,9 @@ class AccionistasOtros extends \common\components\BaseActiveRecord
             'sys_creado_el' => Yii::t('app', 'Sys Creado El'),
             'sys_actualizado_el' => Yii::t('app', 'Sys Actualizado El'),
             'sys_finalizado_el' => Yii::t('app', 'Sys Finalizado El'),
-            'repr_legal_vigencia' => Yii::t('app', 'Repr Legal Vigencia'),
+            'repr_legal_vigencia' => Yii::t('app', 'Fecha Vigencia del representante legal'),
+            'empresa_fusionada_id' => Yii::t('app', 'Empresa Fusionada ID'),
+            'tipo_obligacion' => Yii::t('app', 'Tipo Obligacion'),
         ];
     }
 
@@ -105,6 +108,14 @@ class AccionistasOtros extends \common\components\BaseActiveRecord
     public function getDocumentoRegistrado()
     {
         return $this->hasOne(DocumentosRegistrados::className(), ['id' => 'documento_registrado_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getEmpresaFusionada()
+    {
+        return $this->hasOne(EmpresasFusionadas::className(), ['id' => 'empresa_fusionada_id']);
     }
 
     /**

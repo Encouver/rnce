@@ -19,8 +19,8 @@ class PersonasJuridicasSearch extends PersonasJuridicas
     {
         return [
             [['id', 'creado_por'], 'integer'],
-            [['rif', 'razon_social', 'numero_identitifacion', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
-            [['nacionalidad', 'sys_status'], 'boolean'],
+            [['rif', 'razon_social', 'numero_identificacion', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el', 'tipo_nacionalidad'], 'safe'],
+            [['sys_status'], 'boolean'],
         ];
     }
 
@@ -59,7 +59,6 @@ class PersonasJuridicasSearch extends PersonasJuridicas
         $query->andFilterWhere([
             'id' => $this->id,
             'creado_por' => $this->creado_por,
-            'nacionalidad' => $this->nacionalidad,
             'sys_status' => $this->sys_status,
             'sys_creado_el' => $this->sys_creado_el,
             'sys_actualizado_el' => $this->sys_actualizado_el,
@@ -68,7 +67,8 @@ class PersonasJuridicasSearch extends PersonasJuridicas
 
         $query->andFilterWhere(['like', 'rif', $this->rif])
             ->andFilterWhere(['like', 'razon_social', $this->razon_social])
-            ->andFilterWhere(['like', 'numero_identitifacion', $this->numero_identitifacion]);
+            ->andFilterWhere(['like', 'numero_identificacion', $this->numero_identificacion])
+            ->andFilterWhere(['like', 'tipo_nacionalidad', $this->tipo_nacionalidad]);
 
         return $dataProvider;
     }

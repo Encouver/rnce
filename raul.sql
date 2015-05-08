@@ -154,3 +154,26 @@ ALTER TABLE objetos_empresas
 -- 7 mayo 2015
 
 alter table personas_juridicas rename column numero_identitifacion to numero_identificacion;
+
+create type tipo_estado_civil as enum ('SOLTERO (A)', 'CASADO (A)','CONCUBINO (A)', 'DIVORCIADO (A)', 'VIUDO (A)');
+
+ALTER TABLE personas_naturales ADD COLUMN estado_civil tipo_estado_civil;
+COMMENT ON COLUMN personas_naturales.estado_civil IS 'Enum de los posibles estados civiles';
+
+create type tipo_obligacion as enum ('FIRMA CONJUNTA', 'FIRMA SEPARADA');
+
+ ALTER TABLE accionistas_otros DROP COLUMN obligacion;
+
+
+ALTER TABLE accionistas_otros ADD COLUMN tipo_obligacion tipo_obligacion;
+ALTER TABLE accionistas_otros ALTER COLUMN tipo_obligacion SET NOT NULL;
+COMMENT ON COLUMN accionistas_otros.tipo_obligacion IS 'Enum puede ser FIRMA CONJUNTA FIRMA SEPARADA';
+
+
+ALTER TABLE accionistas_otros ALTER COLUMN valor_compra DROP NOT NULL;
+
+ALTER TABLE accionistas_otros ALTER COLUMN fecha DROP NOT NULL;
+
+ALTER TABLE accionistas_otros ALTER COLUMN porcentaje_accionario DROP NOT NULL;
+
+ALTER TABLE accionistas_otros ALTER COLUMN documento_registrado_id DROP NOT NULL;
