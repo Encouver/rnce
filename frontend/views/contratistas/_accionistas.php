@@ -11,7 +11,8 @@ use yii\bootstrap\Modal;
 use kartik\builder\Form;
 use common\models\p\SysPaises;
 use yii\helpers\ArrayHelper;
-use kartik\date\DatePicker;
+use yii\jui\DatePicker;
+
 /* @var $this yii\web\View */
 /* @var $model common\models\p\Contratistas */
 /* @var $form yii\widgets\ActiveForm */
@@ -134,17 +135,10 @@ SCRIPT;
     <?= $form->field($accionista, 'junta_directiva')->checkbox() ?>
     <?= $form->field($accionista, 'cargo')->textInput(['maxlength' => 255]) ?>
     <?= $form->field($accionista, 'rep_legal')->checkbox() ?>
-    <?= $form->field($accionista, 'repr_legal_vigencia')->widget(DatePicker::className(), [
-                             // inline too, not bad
-                            //'inline' => false,
-                            // modify template for custom rendering
-                            //'template' => '<div class="well well-sm" style="background-color: #fff; width:250px">{input}</div>',
-                            'pluginOptions' => [
-                            'autoclose' => true,
-                            'format' => 'yyyy-mm-dd'
-                                ]
-                                ]);?>
-                            
+    <?= $form->field($accionista, 'repr_legal_vigencia')->widget(\yii\jui\DatePicker::classname(), [
+    //'language' => 'ru',
+    'dateFormat' => 'yyyy-MM-dd',
+    ])  ?>
      
      <?= $form->field($accionista, 'tipo_obligacion')->dropDownList([ 'FIRMA CONJUNTA' => 'FIRMA CONJUNTA', 'FIRMA SEPARADA' => 'FIRMA SEPARADA', ], ['prompt' => '']) ?>
     

@@ -48,6 +48,7 @@ class ContratistasController extends BaseController
      */
     public function actionIndex()
     {
+      
         $searchModel = new ContratistasSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
