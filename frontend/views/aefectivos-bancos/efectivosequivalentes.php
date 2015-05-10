@@ -45,6 +45,24 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
 <?php
+ $form = ActiveForm::begin(['fieldConfig'=>['showLabels'=>false]]);
+ $attribs = $model->getFormAttribs('nacional');
+ echo TabularForm::widget([
+    'dataProvider'=>$dataProvider,
+    'form'=>$form,
+    'attributes'=>$attribs,
+    'gridSettings'=>[
+        'floatHeader'=>false,
+        'panel'=>[
+            'heading' => '<h3 class="panel-title"><i class="glyphicon glyphicon-book"></i> Gestionar Bancos</h3>',
+            'type' => GridView::TYPE_PRIMARY,
+            'after'=> Html::a('<i class="glyphicon glyphicon-remove"></i> Delete', '#', ['class'=>'btn btn-danger']) . ' ' .
+                    Html::submitButton('<i class="glyphicon glyphicon-floppy-disk"></i> Save', ['class'=>'btn btn-primary'])
+        ]
+    ]
+]);
 
+
+ActiveForm::end();
 ?>
 </div>

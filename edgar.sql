@@ -370,3 +370,25 @@ CREATE INDEX fki_usuario_inversiones
   ON cuentas.a_inversiones_negociar
   USING btree
   (creado_por);
+
+  
+  
+---------10/05/2015-----------
+
+ALTER TABLE cuentas.a_inversiones_negociar ADD COLUMN nacional boolean;
+ALTER TABLE cuentas.a_inversiones_negociar ALTER COLUMN nacional SET DEFAULT true;
+COMMENT ON COLUMN cuentas.a_inversiones_negociar.nacional IS 'indica si la cuenta es nacional o no';
+
+
+ALTER TABLE cuentas.a_efectivos_bancos ADD COLUMN nacional boolean;
+ALTER TABLE cuentas.a_efectivos_bancos ALTER COLUMN nacional SET DEFAULT true;
+COMMENT ON COLUMN cuentas.a_efectivos_bancos.nacional IS 'indica si la cuenta es nacional o no';
+
+
+ALTER TABLE sys_bancos DROP COLUMN tipo_nacionalidad;
+
+ALTER TABLE sys_bancos ADD COLUMN nacional boolean;
+ALTER TABLE sys_bancos ALTER COLUMN nacional SET DEFAULT true;
+COMMENT ON COLUMN sys_bancos.nacional IS 'Indica si la cuenta es nacional o no';
+
+

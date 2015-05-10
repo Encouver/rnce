@@ -26,7 +26,6 @@ class AEfectivosBancosController extends BaseController
         ];
     }
 
-    
     public function actionEfectivosequivalentes()
     {
 
