@@ -47,12 +47,12 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <?php
  $form = ActiveForm::begin(['fieldConfig'=>['showLabels'=>false]]);
-$attribs = $model->getFormAttribs();
-unset($attribs['attributes']['color']);
-$attribs['status'] = [
+ $attribs = $model->getFormAttribs('nacional');
+//unset($attribs['attributes']['color']);
+/*$attribs['status'] = [
     'type'=>TabularForm::INPUT_WIDGET,
     'widgetClass'=>\kartik\widgets\SwitchInput::classname()
-];
+];*/
 
 
 echo TabularForm::widget([
@@ -60,11 +60,11 @@ echo TabularForm::widget([
     'form'=>$form,
     'attributes'=>$attribs,
     'gridSettings'=>[
-        'floatHeader'=>true,
+        'floatHeader'=>false,
         'panel'=>[
             'heading' => '<h3 class="panel-title"><i class="glyphicon glyphicon-book"></i> Gestionar Bancos</h3>',
             'type' => GridView::TYPE_PRIMARY,
-            'after'=> /*Html::a('<i class="glyphicon glyphicon-plus"></i> Add New', '#', ['class'=>'btn btn-success'])*/ $this->render('_modal-form',['model'=>$model]). ' '.
+            'after'=> $this->render('_modal-form',['model'=>$model]). ' '.
                     Html::a('<i class="glyphicon glyphicon-remove"></i> Delete', '#', ['class'=>'btn btn-danger']) . ' ' .
                     Html::submitButton('<i class="glyphicon glyphicon-floppy-disk"></i> Save', ['class'=>'btn btn-primary'])
         ]
@@ -75,4 +75,3 @@ echo TabularForm::widget([
 ActiveForm::end();
 ?>
 </div>
-

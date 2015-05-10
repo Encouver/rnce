@@ -6,7 +6,11 @@ use Yii;
 use kartik\builder\TabularForm;
 use kartik\grid\GridView;
 use yii\helpers\ArrayHelper;
-
+use kartik\builder\Form;
+use kartik\builder\ActiveFormEvent;
+use yii\helpers\Html;
+use common\models\p\BancosContratistas;
+use common\models\p\SysDivisas;
 
 /**
  * This is the model class for table "cuentas.a_efectivos_bancos".
@@ -132,16 +136,33 @@ class AEfectivosBancos extends \common\components\BaseActiveRecord
         return $this->hasOne(SysDivisas::className(), ['id' => 'tipo_moneda_id']);
     }
 
-    public function getFormAttribs() {
-        return [
-            // primary key column
-            'id'=>[ // primary key attribute
-                'type'=>TabularForm::INPUT_HIDDEN,
-                'columnOptions'=>['hidden'=>true]
-            ],
-            'saldo_segun_b'=>['type'=>TabularForm::INPUT_TEXT,'label'=>'Saldo según Banco'],
-        ];
+    public function getFormAttribs($id) {
+        
+        if($id=='nacional')
+        {
+            return [
+                // primary key column
+                'id'=>[ // primary key attribute
+                    'type'=>TabularForm::INPUT_HIDDEN,
+                    'columnOptions'=>['hidden'=>true]
+                ],
+                'banco_contratista_id'=>['type'=>Form::INPUT_DROPDOWN_LIST, 'items'=>ArrayHelper::map(BancosContratistas::find()->orderBy('banco_id')->asArray()->all(), 'id', 'banco_id'), 'label'=>'Banco'],
+                'saldo_segun_b'=>['type'=>Form::INPUT_TEXT,'label'=>'Saldo segun banco'],
+                'nd_no_cont'=>['type'=>Form::INPUT_TEXT,'label'=>'Nd no contabilizadas'],
+                'depo_transito'=>['type'=>Form::INPUT_TEXT,'label'=>'Depositos en transito'],
+                'nc_no_cont'=>['type'=>Form::INPUT_TEXT,'label'=>'Nc no contabilizadas'],
+                'cheques_transito'=>['type'=>Form::INPUT_TEXT,'label'=>'Cheques en transito'],
+                'saldo_al_cierre'=>['type'=>Form::INPUT_TEXT,'label'=>'Saldo al cierre'],
+                'intereses_act_eco'=>['type'=>Form::INPUT_TEXT,'label'=>'Intereses generados'],
+                'tipo_moneda_id'=>['type'=>Form::INPUT_DROPDOWN_LIST, 'items'=>ArrayHelper::map(SysDivisas::find()->orderBy('nombre')->asArray()->all(), 'id', 'nombre'), 'label'=>'Tipo moneda'],
+                //'monto_moneda_extra'=>['type'=>Form::INPUT_TEXT,'label'=>'Saldo según Banco'],
+                //'tipo_cambio_cierre'=>['type'=>Form::INPUT_TEXT,'label'=>'Saldo según Banco'],
+
+                //'actions'=>['type'=>TabularForm::INPUT_RAW, 'value'=>Html::submitButton('Submit', ['class'=>'btn btn-primary'])]
+            ];
+        }else
+        {
+            echo 'Hola';
+        }
     }
-
-
 }
