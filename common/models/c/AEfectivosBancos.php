@@ -58,7 +58,8 @@ class AEfectivosBancos extends \common\components\BaseActiveRecord
     public function rules()
     {
         return [
-            [['banco_contratista_id', 'nd_no_cont', 'depo_transito', 'nc_no_cont', 'cheques_transito', 'saldo_al_cierre', 'intereses_act_eco', 'total_id'], 'required'],
+            [['banco_contratista_id', 'nd_no_cont', 'depo_transito', 'nc_no_cont', 'cheques_transito', 'saldo_al_cierre', 'intereses_act_eco', 'total_id'], 'required', 'on' => 'nacional'],
+            [['banco_contratista_id', 'nd_no_cont', 'depo_transito', 'nc_no_cont', 'cheques_transito', 'saldo_al_cierre', 'intereses_act_eco', 'total_id', 'monto_moneda_extra', 'tipo_cambio_cierre', 'tipo_moneda_id'], 'required', 'on' => 'extranjero'],
             [['banco_contratista_id', 'tipo_moneda_id', 'creado_por', 'contratista_id', 'total_id'], 'integer'],
             [['saldo_segun_b', 'nd_no_cont', 'depo_transito', 'nc_no_cont', 'cheques_transito', 'saldo_al_cierre', 'intereses_act_eco', 'monto_moneda_extra', 'tipo_cambio_cierre'], 'number'],
             [['sys_status'], 'boolean'],
@@ -95,6 +96,8 @@ class AEfectivosBancos extends \common\components\BaseActiveRecord
             'total_id' => Yii::t('app', 'Total ID'),
         ];
     }
+
+
 
     /**
      * @return \yii\db\ActiveQuery
@@ -140,13 +143,20 @@ class AEfectivosBancos extends \common\components\BaseActiveRecord
         
         if($id=='nacional')
         {
+
+            $ban = BancosContratistas::find()->all();
+            $array = array();
+            foreach ($ban as $key => $value) {
+                $array[] = ['id' => $value->id, 'nombre' => $value->banco->nombre];
+            }
+
             return [
                 // primary key column
                 'id'=>[ // primary key attribute
                     'type'=>TabularForm::INPUT_HIDDEN,
                     'columnOptions'=>['hidden'=>true]
                 ],
-                'banco_contratista_id'=>['type'=>Form::INPUT_DROPDOWN_LIST, 'items'=>ArrayHelper::map(BancosContratistas::find()->orderBy('banco_id')->asArray()->all(), 'id', 'banco_id'), 'label'=>'Banco'],
+                'banco_contratista_id'=>['type'=>Form::INPUT_DROPDOWN_LIST, 'items'=>ArrayHelper::map($array, 'id', 'nombre'), 'label'=>'Banco'],
                 'saldo_segun_b'=>['type'=>Form::INPUT_TEXT,'label'=>'Saldo segun banco'],
                 'nd_no_cont'=>['type'=>Form::INPUT_TEXT,'label'=>'Nd no contabilizadas'],
                 'depo_transito'=>['type'=>Form::INPUT_TEXT,'label'=>'Depositos en transito'],

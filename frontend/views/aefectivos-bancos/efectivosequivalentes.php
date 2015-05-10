@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <center><h1><?= Html::encode($this->title) ?></h1>
 
    <?php
-   				/*
+   			/*
                 $menuItems[] =  ['label'=>'Efectivos en bancos', 'url'=>['/aefectivos-bancos/create']];
                 $menuItems[] =   ['label'=>'Efectivos en caja', 'url'=>['/aefectivos-cajas/create']];
                          $menuItems[] =   ['label'=>'Inversiones para negociar', 'url'=>['/ainversiones-negociar/create']];
@@ -40,38 +40,11 @@ $this->params['breadcrumbs'][] = $this->title;
         ?>
         </center>
         <div class="container">
-          Probando
+         
         </div>
-        	AQUI IRIA LA HOJA RESUMEN ALGO ASI COMO EL EXCEL QUE ELLA MANDO
 
 
 <?php
- $form = ActiveForm::begin(['fieldConfig'=>['showLabels'=>false]]);
- $attribs = $model->getFormAttribs('nacional');
-//unset($attribs['attributes']['color']);
-/*$attribs['status'] = [
-    'type'=>TabularForm::INPUT_WIDGET,
-    'widgetClass'=>\kartik\widgets\SwitchInput::classname()
-];*/
 
-
-echo TabularForm::widget([
-    'dataProvider'=>$dataProvider,
-    'form'=>$form,
-    'attributes'=>$attribs,
-    'gridSettings'=>[
-        'floatHeader'=>false,
-        'panel'=>[
-            'heading' => '<h3 class="panel-title"><i class="glyphicon glyphicon-book"></i> Gestionar Bancos</h3>',
-            'type' => GridView::TYPE_PRIMARY,
-            'after'=> $this->render('_modal-form',['model'=>$model]). ' '.
-                    Html::a('<i class="glyphicon glyphicon-remove"></i> Delete', '#', ['class'=>'btn btn-danger']) . ' ' .
-                    Html::submitButton('<i class="glyphicon glyphicon-floppy-disk"></i> Save', ['class'=>'btn btn-primary'])
-        ]
-    ]
-]);
-
-
-ActiveForm::end();
 ?>
 </div>
