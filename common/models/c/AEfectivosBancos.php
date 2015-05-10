@@ -9,7 +9,8 @@ use yii\helpers\ArrayHelper;
 use kartik\builder\Form;
 use kartik\builder\ActiveFormEvent;
 use yii\helpers\Html;
-
+use common\models\p\BancosContratistas;
+use common\models\p\SysDivisas;
 
 /**
  * This is the model class for table "cuentas.a_efectivos_bancos".
@@ -142,7 +143,7 @@ class AEfectivosBancos extends \common\components\BaseActiveRecord
                 'type'=>TabularForm::INPUT_HIDDEN,
                 'columnOptions'=>['hidden'=>true]
             ],
-            'banco_contratista_id'=>['type'=>Form::INPUT_TEXT,'label'=>'Banco'],
+            'banco_contratista_id'=>['type'=>Form::INPUT_DROPDOWN_LIST, 'items'=>ArrayHelper::map(BancosContratistas::find()->orderBy('banco_id')->asArray()->all(), 'id', 'banco_id'), 'label'=>'Banco'],
             'saldo_segun_b'=>['type'=>Form::INPUT_TEXT,'label'=>'Saldo segun banco'],
             'nd_no_cont'=>['type'=>Form::INPUT_TEXT,'label'=>'Nd no contabilizadas'],
             'depo_transito'=>['type'=>Form::INPUT_TEXT,'label'=>'Depositos en transito'],
@@ -150,7 +151,7 @@ class AEfectivosBancos extends \common\components\BaseActiveRecord
             'cheques_transito'=>['type'=>Form::INPUT_TEXT,'label'=>'Cheques en transito'],
             'saldo_al_cierre'=>['type'=>Form::INPUT_TEXT,'label'=>'Saldo al cierre'],
             'intereses_act_eco'=>['type'=>Form::INPUT_TEXT,'label'=>'Intereses generados'],
-            'tipo_moneda_id'=>['type'=>Form::INPUT_TEXT,'label'=>'Tipo moneda'],
+            'tipo_moneda_id'=>['type'=>Form::INPUT_DROPDOWN_LIST, 'items'=>ArrayHelper::map(SysDivisas::find()->orderBy('nombre')->asArray()->all(), 'id', 'nombre'), 'label'=>'Tipo moneda'],
             //'monto_moneda_extra'=>['type'=>Form::INPUT_TEXT,'label'=>'Saldo según Banco'],
             //'tipo_cambio_cierre'=>['type'=>Form::INPUT_TEXT,'label'=>'Saldo según Banco'],
 

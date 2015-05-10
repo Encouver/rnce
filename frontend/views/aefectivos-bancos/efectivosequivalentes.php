@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <center><h1><?= Html::encode($this->title) ?></h1>
 
    <?php
-   				
+   				/*
                 $menuItems[] =  ['label'=>'Efectivos en bancos', 'url'=>['/aefectivos-bancos/create']];
                 $menuItems[] =   ['label'=>'Efectivos en caja', 'url'=>['/aefectivos-cajas/create']];
                          $menuItems[] =   ['label'=>'Inversiones para negociar', 'url'=>['/ainversiones-negociar/create']];
@@ -36,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
 					    'encodeLabels' => false
 					]);
 					NavBar::end();
-         
+          */
         ?>
         </center>
         <div class="container">
