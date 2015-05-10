@@ -1,5 +1,6 @@
 <?php
 
+use kartik\dynagrid\DynaGrid;
 use yii\helpers\Html;
 use kartik\nav\NavX;
 use yii\bootstrap\NavBar;
@@ -65,4 +66,53 @@ $this->params['breadcrumbs'][] = $this->title;
 
 ActiveForm::end();
 ?>
+    <?php
+    $columns = [
+        ['class'=>'kartik\grid\SerialColumn', 'order'=>DynaGrid::ORDER_FIX_LEFT],
+        //'id',
+        'saldo_segun_b',
+        'nd_no_cont',
+        'depo_transito',
+        'nc_no_cont',
+        'cheques_transito',
+        'saldo_al_cierre',
+        'intereses_act_eco',
+        'tipo_moneda_id',
+        'monto_moneda_extra',
+        'tipo_cambio_cierre',
+/*        [
+            'attribute'=>'nd_no_cont',
+            'filterType'=>GridView::FILTER_DATE,
+            'format'=>'raw',
+            'width'=>'170px',
+            'filterWidgetOptions'=>[
+                'pluginOptions'=>['format'=>'yyyy-mm-dd']
+            ],
+        ],
+        [
+            'class'=>'kartik\grid\BooleanColumn',
+            'attribute'=>'depo_transito',
+            'vAlign'=>'middle',
+        ],*/
+        [
+            'class'=>'kartik\grid\ActionColumn',
+            'dropdown'=>false,
+            'order'=>DynaGrid::ORDER_FIX_RIGHT
+        ],
+        ['class'=>'kartik\grid\CheckboxColumn', 'order'=>DynaGrid::ORDER_FIX_RIGHT],
+    ];
+    use app\models\AEfectivosBancosSearch;
+    echo DynaGrid::widget([
+        'columns'=>$columns,
+        'storage'=>DynaGrid::TYPE_COOKIE,
+        'theme'=>'panel-danger',
+        'gridOptions'=>[
+            'dataProvider'=>$dataProvider,
+            //'filterModel'=>AEfectivosBancosSearch,
+            'panel'=>['heading'=>'<h3 class="panel-title">Efectivo en Bancos</h3>'],
+        ],
+        'options'=>['id'=>'dynagrid-1'] // a unique identifier is important
+    ]);
+
+    ?>
 </div>
