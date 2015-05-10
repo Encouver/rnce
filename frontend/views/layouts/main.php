@@ -48,6 +48,7 @@ AppAsset::register($this);
                          ['label' => 'Balance general', 'url' => ['/site/balancegeneral']],
                          ['label' => 'Estado de resultados', 'url' => ['/site/edoresultados']],
                          ['label' => 'Efectivos y sus equivalentes', 'url' => ['/aefectivos-bancos/efectivosequivalentes']],
+                         ['label' => 'Obligaciones Bancarias', 'url' => ['/aa-obligaciones-bancarias/index']],
                     ],
                 ],
                 ['label' => 'Bienes',
@@ -57,11 +58,11 @@ AppAsset::register($this);
                          ['label' => 'Aqui van los otros', 'url' => ['#']],
                     ],
                 ],
-                ['label' => 'Información general',
+/*                ['label' => 'Información general',
                     'items' => [
                          ['label' => 'Aqui van las cosas', 'url' => ['#']],
                     ],
-                ],
+                ],*/
                 ['label' => 'Contratistas',
                     'items' => [
                          ['label' => 'Acordeon', 'url' => ['/contratistas/acordeon']],

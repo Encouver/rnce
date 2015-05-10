@@ -177,3 +177,5 @@ ALTER TABLE accionistas_otros ALTER COLUMN fecha DROP NOT NULL;
 ALTER TABLE accionistas_otros ALTER COLUMN porcentaje_accionario DROP NOT NULL;
 
 ALTER TABLE accionistas_otros ALTER COLUMN documento_registrado_id DROP NOT NULL;
+
+-- MARCOS
