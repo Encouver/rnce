@@ -20,7 +20,7 @@ PopoverX::begin([
         'form'=>$form,
         'columns'=>2,
         //'columns'=>11,
-        'attributes'=>$model->getFormAttribs()
+        'attributes'=>$model->getFormAttribs('nacional')
     ]);
 //echo $form->field($model, 'status')->textInput(['placeholder'=>'Enter password...']);
 PopoverX::end();

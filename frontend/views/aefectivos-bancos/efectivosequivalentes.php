@@ -47,7 +47,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <?php
  $form = ActiveForm::begin(['fieldConfig'=>['showLabels'=>false]]);
-$attribs = $model->getFormAttribs();
+ $attribs = $model->getFormAttribs('nacional');
 //unset($attribs['attributes']['color']);
 /*$attribs['status'] = [
     'type'=>TabularForm::INPUT_WIDGET,
@@ -60,7 +60,7 @@ echo TabularForm::widget([
     'form'=>$form,
     'attributes'=>$attribs,
     'gridSettings'=>[
-        'floatHeader'=>true,
+        'floatHeader'=>false,
         'panel'=>[
             'heading' => '<h3 class="panel-title"><i class="glyphicon glyphicon-book"></i> Gestionar Bancos</h3>',
             'type' => GridView::TYPE_PRIMARY,

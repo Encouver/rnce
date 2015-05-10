@@ -67,7 +67,7 @@ use kartik\builder\Form;
         'form'=>$form,
         'columns'=>2,
         //'columns'=>11,
-        'attributes'=>$model->getFormAttribs()
+        'attributes'=>$model->getFormAttribs('nacional')
     ]);
     echo Html::submitButton('Submit', ['type'=>'button', 'class'=>'btn btn-primary']);
     ActiveForm::end();
