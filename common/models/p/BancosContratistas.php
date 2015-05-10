@@ -77,7 +77,7 @@ class BancosContratistas extends \common\components\BaseActiveRecord
 
     /**
      * @return \yii\db\ActiveQuery
-     */
+*/
     public function getBanco()
     {
         return $this->hasOne(SysBancos::className(), ['id' => 'banco_id']);

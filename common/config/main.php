@@ -59,6 +59,10 @@ return [
 		        // message source
 		        // 'downloadAction' => 'gridview/export/download',
 		        // 'i18n' => []
-		 ]
+		 ],
+        'dynagrid'=> [
+            'class'=>'\kartik\dynagrid\Module',
+            // other module settings
+        ],
 	],
 ];

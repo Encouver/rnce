@@ -30,7 +30,7 @@ class AEfectivosBancosController extends BaseController
     public function actionEfectivosequivalentes()
     {
 
-        $query = AEfectivosBancos::find()->indexBy('id'); // where `id` is your primary key
+        $query = AEfectivosBancosSearch::find()->indexBy('id'); // where `id` is your primary key
  
         $dataProvider = new \yii\data\ActiveDataProvider([
             'query' => $query,

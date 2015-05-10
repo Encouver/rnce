@@ -146,7 +146,7 @@ class AEfectivosBancos extends \common\components\BaseActiveRecord
                     'type'=>TabularForm::INPUT_HIDDEN,
                     'columnOptions'=>['hidden'=>true]
                 ],
-                'banco_contratista_id'=>['type'=>Form::INPUT_DROPDOWN_LIST, 'items'=>ArrayHelper::map(BancosContratistas::find()->orderBy('banco_id')->asArray()->all(), 'id', 'banco_id'), 'label'=>'Banco'],
+                'banco_contratista_id'=>['type'=>Form::INPUT_DROPDOWN_LIST, 'items'=>ArrayHelper::map(BancosContratistas::find()->orderBy('banco_id')->banco()->asArray()->all(), 'id', 'banco_id'), 'label'=>'Banco'],
                 'saldo_segun_b'=>['type'=>Form::INPUT_TEXT,'label'=>'Saldo segun banco'],
                 'nd_no_cont'=>['type'=>Form::INPUT_TEXT,'label'=>'Nd no contabilizadas'],
                 'depo_transito'=>['type'=>Form::INPUT_TEXT,'label'=>'Depositos en transito'],
