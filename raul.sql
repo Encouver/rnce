@@ -178,4 +178,9 @@ ALTER TABLE accionistas_otros ALTER COLUMN porcentaje_accionario DROP NOT NULL;
 
 ALTER TABLE accionistas_otros ALTER COLUMN documento_registrado_id DROP NOT NULL;
 
--- MARCOS
+
+
+-- 11 mayo de 2015
+
+Alter type tipo_profesion ADD VALUE 'ECONOMISTA' BEFORE 'ABOGADO';
+alter table comisarios_auditores alter column documento_registrado_id drop not null;

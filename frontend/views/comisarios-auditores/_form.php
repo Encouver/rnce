@@ -16,7 +16,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'declaracion_jurada')->checkbox() ?>
 
-    <?= $form->field($model, 'tipo_profesion')->dropDownList([ 'CONTADOR PUBLICO' => 'CONTADOR PUBLICO', 'ADMINISTRADOR' => 'ADMINISTRADOR', 'ABOGADO' => 'ABOGADO', ], ['prompt' => '']) ?>
+    <?= $form->field($model, 'tipo_profesion')->dropDownList([ 'CONTADOR PUBLICO' => 'CONTADOR PUBLICO', 'ADMINISTRADOR' => 'ADMINISTRADOR', 'ECONOMISTA' => 'ECONOMISTA', ], ['prompt' => '']) ?>
 
     <?= $form->field($model, 'fecha_carta')->textInput() ?>
 
