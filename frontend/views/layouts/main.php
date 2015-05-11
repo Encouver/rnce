@@ -75,7 +75,7 @@ AppAsset::register($this);
                          ['label' => 'Denominaciones Comerciales', 'url' => ['/denominaciones-comerciales/creardenominacion']],
                          ['label' => 'Objeto empresa', 'url' => ['/objetos-empresas/crearobjeto']],
                          ['label' => 'Accionistas Representante Legal o Junta Directiva', 'url' => ['/accionistas-otros/crearaccionistaotro']],
-                         //['label' => 'Relaciones contratos', 'url' => ['/relaciones-contratos/index']],
+                         ['label' => 'Comisarios', 'url' => ['/comisarios-auditores/crearcomisario']],
          
                         
                     ],
