@@ -3,16 +3,16 @@
 namespace frontend\controllers;
 
 use Yii;
-use common\models\c\AEfectivosBancos;
-use app\models\AEfectivosBancosSearch;
+use common\models\p\ComisariosAuditores;
+use app\models\ComisariosAuditoresSearch;
 use common\components\BaseController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * AEfectivosBancosController implements the CRUD actions for AEfectivosBancos model.
+ * ComisariosAuditoresController implements the CRUD actions for ComisariosAuditores model.
  */
-class AEfectivosBancosController extends BaseController
+class ComisariosAuditoresController extends BaseController
 {
     public function behaviors()
     {
@@ -26,27 +26,13 @@ class AEfectivosBancosController extends BaseController
         ];
     }
 
-    public function actionEfectivosequivalentes()
-    {
-
-        $model = new AEfectivosBancos(['scenario' => 'nacional']);
-
-        $query = $model::find()->indexBy('id'); // where `id` is your primary key
- 
-        $dataProvider = new \yii\data\ActiveDataProvider([
-            'query' => $query,
-        ]);
-
-        return $this->render('efectivosequivalentes', ['dataProvider' => $dataProvider, 'model' => $model]);
-    }
-
     /**
-     * Lists all AEfectivosBancos models.
+     * Lists all ComisariosAuditores models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new AEfectivosBancosSearch();
+        $searchModel = new ComisariosAuditoresSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -56,7 +42,7 @@ class AEfectivosBancosController extends BaseController
     }
 
     /**
-     * Displays a single AEfectivosBancos model.
+     * Displays a single ComisariosAuditores model.
      * @param integer $id
      * @return mixed
      */
@@ -68,13 +54,13 @@ class AEfectivosBancosController extends BaseController
     }
 
     /**
-     * Creates a new AEfectivosBancos model.
+     * Creates a new ComisariosAuditores model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new AEfectivosBancos();
+        $model = new ComisariosAuditores();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -84,9 +70,19 @@ class AEfectivosBancosController extends BaseController
             ]);
         }
     }
+     public function actionCrearcomisario()
+    {
+        $comisario = new ComisariosAuditores();
+
+      
+           return $this->render('_comisarios', [
+                'comisario' => $comisario,
+            ]);
+        
+    }
 
     /**
-     * Updates an existing AEfectivosBancos model.
+     * Updates an existing ComisariosAuditores model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -94,11 +90,10 @@ class AEfectivosBancosController extends BaseController
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $model->scenario = 'extranjero';
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
-
             return $this->render('update', [
                 'model' => $model,
             ]);
@@ -106,7 +101,7 @@ class AEfectivosBancosController extends BaseController
     }
 
     /**
-     * Deletes an existing AEfectivosBancos model.
+     * Deletes an existing ComisariosAuditores model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -119,15 +114,15 @@ class AEfectivosBancosController extends BaseController
     }
 
     /**
-     * Finds the AEfectivosBancos model based on its primary key value.
+     * Finds the ComisariosAuditores model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return AEfectivosBancos the loaded model
+     * @return ComisariosAuditores the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = AEfectivosBancos::findOne($id)) !== null) {
+        if (($model = ComisariosAuditores::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

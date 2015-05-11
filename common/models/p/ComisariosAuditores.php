@@ -24,11 +24,6 @@ use Yii;
  * @property boolean $responsable_contabilidad
  * @property boolean $informe_conversion
  * @property integer $natural_juridica_id
- *
- * @property ActasConstitutivas[] $actasConstitutivas
- * @property Contratistas $contratista
- * @property DocumentosRegistrados $documentoRegistrado
- * @property SysNaturalesJuridicas $naturalJuridica
  */
 class ComisariosAuditores extends \common\components\BaseActiveRecord
 {
@@ -79,37 +74,5 @@ class ComisariosAuditores extends \common\components\BaseActiveRecord
             'informe_conversion' => Yii::t('app', 'Informe Conversion'),
             'natural_juridica_id' => Yii::t('app', 'Natural Juridica ID'),
         ];
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getActasConstitutivas()
-    {
-        return $this->hasMany(ActasConstitutivas::className(), ['comisario_auditor_id' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getContratista()
-    {
-        return $this->hasOne(Contratistas::className(), ['id' => 'contratista_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getDocumentoRegistrado()
-    {
-        return $this->hasOne(DocumentosRegistrados::className(), ['id' => 'documento_registrado_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getNaturalJuridica()
-    {
-        return $this->hasOne(SysNaturalesJuridicas::className(), ['id' => 'natural_juridica_id']);
     }
 }

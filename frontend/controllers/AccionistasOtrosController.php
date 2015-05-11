@@ -124,7 +124,32 @@ class AccionistasOtrosController extends BaseController
            }
         }
     }
-
+    
+    
+     
+    public function actionNaturaljuridicalist($search = null, $id = null) {
+        
+       
+    $out = ['more' => false];
+    if (!is_null($search)) {
+        $query = new \yii\db\Query;
+        $query->select('id, rif AS text')
+            ->from('sys_naturales_juridicas')
+            ->where("rif LIKE "."'%" . $search ."%'")
+            ->limit(20);
+        $command = $query->createCommand();
+        $data = $command->queryAll();
+        $out['results'] = array_values($data);
+    }
+    elseif ($id > 0) {
+        $out['results'] = ['id' => $id, 'text' => SysNaturalesJuridicas::find($id)->rif];
+    }
+    else {
+        $out['results'] = ['id' => 0, 'text' => 'No matching records found'];
+    }
+  
+    echo \yii\helpers\Json::encode($out);
+}
     /**
      * Updates an existing AccionistasOtros model.
      * If update is successful, the browser will be redirected to the 'view' page.

@@ -62,8 +62,8 @@ class AEfectivosBancos extends \common\components\BaseActiveRecord
             [['banco_contratista_id', 'nd_no_cont', 'depo_transito', 'nc_no_cont', 'cheques_transito', 'saldo_al_cierre', 'intereses_act_eco', 'total_id', 'monto_moneda_extra', 'tipo_cambio_cierre', 'tipo_moneda_id'], 'required', 'on' => 'extranjero'],
             [['banco_contratista_id', 'tipo_moneda_id', 'creado_por', 'contratista_id', 'total_id'], 'integer'],
             [['saldo_segun_b', 'nd_no_cont', 'depo_transito', 'nc_no_cont', 'cheques_transito', 'saldo_al_cierre', 'intereses_act_eco', 'monto_moneda_extra', 'tipo_cambio_cierre'], 'number'],
-            [['sys_status'], 'boolean'],
-            [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
+            [['sys_status', 'nacional'], 'boolean'],
+            [['nacional', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['anho'], 'string', 'max' => 100]
         ];
     }
@@ -173,7 +173,8 @@ class AEfectivosBancos extends \common\components\BaseActiveRecord
             ];
         }else
         {
-            $ban = BancosContratistas::find()->where(['nacional' => false])->all();
+            //where(['nacional' => true])->
+            $ban = BancosContratistas::find()->all();
             $array = array();
             foreach ($ban as $key => $value) {
                 if(!$value->banco->nacional)

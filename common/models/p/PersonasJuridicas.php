@@ -102,7 +102,7 @@ class PersonasJuridicas extends \common\components\BaseActiveRecord
     }
     
     public function getFormAttribs() {
-        $data=[ 'NACIONAL' => 'NACIONAL', 'EXTRANJERA' => 'EXTRANJERA', ];
+        //$data=[ 'NACIONAL' => 'NACIONAL', 'EXTRANJERA' => 'EXTRANJERA', ];
     return [
         //'tipo_nacionalidad'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>$data , 'options'=>['placeholder'=>'Enter username...']],
         'razon_social'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Enter username...']],

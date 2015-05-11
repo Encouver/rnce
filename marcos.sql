@@ -699,3 +699,10 @@ COMMENT ON COLUMN cuentas.mm1_resultados_acumulados.monto_historico IS 'Monto Hi
 COMMENT ON COLUMN cuentas.mm1_resultados_acumulados.monto_ajustado_gan_per IS 'Monto Ajustado Ganancia o Pérdida del Ejercicio.';
 COMMENT ON COLUMN cuentas.mm1_resultados_acumulados.saldo_cierre_ejercicio IS 'Saldo al cierre del ejercicio económico.';
 
+
+
+
+/**************     02/05/2015 *************/
+
+
+ALTER TABLE cuentas.sys_totales RENAME ahno  TO anho;

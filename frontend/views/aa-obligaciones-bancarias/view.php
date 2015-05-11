@@ -28,29 +28,45 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
+            //'id',
             'corriente:boolean',
-            'banco_id',
+            [
+                'attribute'=>'banco_id',
+                'format'=>'html',
+                'value'=>$model->banco->nombre
+            ],
             'num_documento',
             'monto_otorgado',
             'fecha_prestamo',
             'fecha_vencimiento',
             'tasa_interes',
-            'condicion_pago_id',
+            [
+                'attribute'=>'condicion_pago_id',
+                'format'=>'html',
+                'value'=>$model->condicionPago->nombre
+            ],
             'plazo',
-            'tipo_garantia_id',
+            [
+                'attribute'=>'tipo_garantia_id',
+                'format'=>'html',
+                'value'=>$model->tipoGarantia->nombre
+            ],
             'interes_ejer_econ',
             'interes_pagar',
             'importe_deuda',
-            'total_imp_deu_int',
-            'contratista_id',
+            [
+                'attribute'=>'total_imp_deu_int',
+                'format'=>'html',
+                'value'=>floatval($model->totalImpDeuInt->valor)
+            ],
+            //'contratista_id',
             'anho',
-            'creado_por',
+/*            'creado_por',
             'actualizado_por',
             'sys_status:boolean',
             'sys_creado_el',
             'sys_actualizado_el',
-            'sys_finalizado_el',
+            'sys_finalizado_el',*/
         ],
     ]) ?>
 
