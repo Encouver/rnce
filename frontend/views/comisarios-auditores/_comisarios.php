@@ -35,7 +35,7 @@ function (element, callback) {
 SCRIPT;
         
 ?>
-<div class="col-md-12">
+<div class="col-sm-12">
     
     <?php  Modal::begin([
     'options'=>['id'=>'m1_natural'],
@@ -53,6 +53,7 @@ SCRIPT;
     'columns'=>2,
     'attributes'=>$persona_natural->formAttribs
       ]); ?>
+
     <div id="output15"></div>
     <div class="form-group">
          <?= Html::Button(Yii::t('app', 'Enviar'), ['class' => 'btn btn-success', 'id' => 'enviar15']) ?> 
@@ -62,11 +63,12 @@ SCRIPT;
     <?php ActiveForm::end(); ?>
    <?php Modal::end();?>
 </div>
-<div class="contratista-drop" style="margin-bottom: 10px;">
+<div class="contratista-drop col-sm-9" style="margin-bottom: 10px;">
     
    
     <?php $form = ActiveForm::begin([
-        'id'=>'a_otros'
+        'id'=>'c_comisarios',
+        'type'=>ActiveForm::TYPE_VERTICAL
   ]); ?>
     
      
@@ -85,6 +87,12 @@ SCRIPT;
         'initSelection' => new JsExpression($initScript)
     ],
 ]);?>
+     <?php echo Form::widget([
+    'model'=>$comisario,
+    'form'=>$form,
+    'columns'=>2,
+    'attributes'=>$comisario->formAttribs
+      ]); ?>
     
   
      
@@ -121,19 +129,19 @@ $script = <<< JS
     });
      $('#enviar17').click(function(e){
           
-            if($('form#a_otros').find('.has-error').length!=0){
+            if($('form#c_comisarios').find('.has-error').length!=0){
               
                 return false;
             }else
             {
-                //$('form#a_otros').submit();
+                //$('form#c_comisarios').submit();
                 e.preventDefault();
                 e.stopImmediatePropagation();
                $.ajax({
                    
-                    url: 'http://localhost/rnce/frontend/web/index.php?r=accionistas-otros/crearaccionista',
+                    url: 'http://localhost/rnce/frontend/web/index.php?r=comisarios-auditores/comisario',
                     type: 'post',
-                    data: $('form#a_otros').serialize(),
+                    data: $('form#c_comisarios').serialize(),
                     success: function(data) {
                              $( "#output17" ).html( data ); 
                     }

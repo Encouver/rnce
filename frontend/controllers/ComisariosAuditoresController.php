@@ -80,6 +80,50 @@ class ComisariosAuditoresController extends BaseController
             ]);
         
     }
+    
+    
+    public function actionComisario(){
+        
+        
+        
+         $comisario = new ComisariosAuditores();
+        $usuario= \common\models\p\User::findOne(Yii::$app->user->identity->id);
+        if ( $comisario->load(Yii::$app->request->post())) {
+            
+             $transaction = \Yii::$app->db->beginTransaction();
+           try {
+                
+            if($comisario->declaracion_jurada==false){
+               return "Para continuar debe aceptar la declaracion jurada";
+            }
+            
+            $comisario->contratista_id = $usuario->contratista_id;
+            $comisario->comisario=true;
+            $comisario->auditor=false;
+           $comisario->responsable_contabilidad=false;
+           $comisario->informe_conversion=false;
+          
+               if ( $comisario->save()) {
+           
+
+                               $transaction->commit();
+                               return "Datos guardados con exito";
+                               
+
+
+                   }else{
+                        $transaction->rollBack();
+                       return "Datos no guardados";
+                   }
+             
+             
+           } catch (Exception $e) {
+               $transaction->rollBack();
+           }
+        }
+        
+    }
+    
 
     /**
      * Updates an existing ComisariosAuditores model.
