@@ -46,7 +46,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
 <?php
- $form = ActiveForm::begin(['fieldConfig'=>['showLabels'=>false]]);
+ /*$form = ActiveForm::begin(['fieldConfig'=>['showLabels'=>false]]);
  $attribs = $model->getFormAttribs('nacional');
  echo TabularForm::widget([
     'dataProvider'=>$dataProvider,
@@ -64,12 +64,21 @@ $this->params['breadcrumbs'][] = $this->title;
 ]);
 
 
-ActiveForm::end();
+ActiveForm::end();*/
 ?>
     <?php
     $columns = [
         ['class'=>'kartik\grid\SerialColumn', 'order'=>DynaGrid::ORDER_FIX_LEFT],
         //'id',
+        [
+          'attribute' => 'banco_contratista_id',
+          'label' => 'Banco',
+          'format' => 'html',
+          'value' => function ($model)
+          {
+              return '<div>'.$model->bancoContratista->banco->nombre.'</div>';
+          }
+        ],
         'saldo_segun_b',
         'nd_no_cont',
         'depo_transito',
@@ -77,7 +86,16 @@ ActiveForm::end();
         'cheques_transito',
         'saldo_al_cierre',
         'intereses_act_eco',
-        'tipo_moneda_id',
+        [
+          'attribute' => 'tipo_moneda_id',
+          'label' => 'Tipo moneda',
+          'format' => 'html',
+          'value' => function ($model)
+          {
+              return '<div>'.$model->tipoMoneda->nombre.'</div>';
+          }
+        ],
+        
         'monto_moneda_extra',
         'tipo_cambio_cierre',
 /*        [
@@ -109,7 +127,7 @@ ActiveForm::end();
         'gridOptions'=>[
             'dataProvider'=>$dataProvider,
             //'filterModel'=>AEfectivosBancosSearch,
-            'panel'=>['heading'=>'<h3 class="panel-title">Efectivo en Bancos</h3>'],
+            'panel'=>['heading'=>'<h3 class="panel-title">Efectivo en Bancos Nacionales</h3>'],
         ],
         'options'=>['id'=>'dynagrid-1'] // a unique identifier is important
     ]);

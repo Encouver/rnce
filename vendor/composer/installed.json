@@ -1917,6 +1917,128 @@
         },
         "type": "bower-asset-library",
         "extra": {
+<<<<<<< HEAD
+            "branch-alias": {
+                "dev-master": "1.0.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "cebe\\markdown\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Carsten Brandt",
+                "email": "mail@cebe.cc",
+                "homepage": "http://cebe.cc/",
+                "role": "Creator"
+            }
+        ],
+        "description": "A super fast, highly extensible markdown parser for PHP",
+        "homepage": "https://github.com/cebe/markdown#readme",
+        "keywords": [
+            "extensible",
+            "fast",
+            "gfm",
+            "markdown",
+            "markdown-extra"
+        ]
+    },
+    {
+        "name": "yiisoft/yii2",
+        "version": "2.0.3",
+        "version_normalized": "2.0.3.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/yiisoft/yii2-framework.git",
+            "reference": "85b773a384f3894d558905cb13522bb338c99dba"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/85b773a384f3894d558905cb13522bb338c99dba",
+            "reference": "85b773a384f3894d558905cb13522bb338c99dba",
+            "shasum": ""
+        },
+        "require": {
+            "bower-asset/jquery": "2.1.*@stable | 1.11.*@stable",
+            "bower-asset/jquery.inputmask": "3.1.*",
+            "bower-asset/punycode": "1.3.*",
+            "bower-asset/yii2-pjax": ">=2.0.1",
+            "cebe/markdown": "~1.0.0",
+            "ext-mbstring": "*",
+            "ezyang/htmlpurifier": "4.6.*",
+            "lib-pcre": "*",
+            "php": ">=5.4.0",
+            "yiisoft/yii2-composer": "*"
+        },
+        "time": "2015-03-01 06:22:44",
+        "bin": [
+            "yii"
+        ],
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.0.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "yii\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Qiang Xue",
+                "email": "qiang.xue@gmail.com",
+                "homepage": "http://www.yiiframework.com/",
+                "role": "Founder and project lead"
+            },
+            {
+                "name": "Alexander Makarov",
+                "email": "sam@rmcreative.ru",
+                "homepage": "http://rmcreative.ru/",
+                "role": "Core framework development"
+            },
+            {
+                "name": "Maurizio Domba",
+                "homepage": "http://mdomba.info/",
+                "role": "Core framework development"
+            },
+            {
+                "name": "Carsten Brandt",
+                "email": "mail@cebe.cc",
+                "homepage": "http://cebe.cc/",
+                "role": "Core framework development"
+            },
+            {
+                "name": "Timur Ruziev",
+                "email": "resurtm@gmail.com",
+                "homepage": "http://resurtm.com/",
+                "role": "Core framework development"
+            },
+            {
+                "name": "Paul Klimov",
+                "email": "klimov.paul@gmail.com",
+                "role": "Core framework development"
+            }
+        ],
+        "description": "Yii PHP Framework Version 2",
+        "homepage": "http://www.yiiframework.com/",
+        "keywords": [
+            "framework",
+            "yii2"
+=======
             "bower-asset-main": [
                 "./dist/inputmask/jquery.inputmask.js",
                 "./dist/inputmask/jquery.inputmask.extensions.js",
@@ -1949,6 +2071,7 @@
             "jquery",
             "mask",
             "plugins"
+>>>>>>> 871562751b58261d309d3cb9f4f917bb4c0494cf
         ]
     },
     {
@@ -2498,6 +2621,8 @@
             "url": "https://api.github.com/repos/kartik-v/yii2-widget-select2/zipball/b2a3981d3848c35a983bfcd57022cd18df40e418",
             "reference": "b2a3981d3848c35a983bfcd57022cd18df40e418",
             "shasum": ""
+<<<<<<< HEAD
+=======
         },
         "require": {
             "kartik-v/yii2-krajee-base": "*"
@@ -3212,16 +3337,17 @@
             "url": "https://api.github.com/repos/kartik-v/yii2-sortable/zipball/439a27e0f77b0b7beabd6a11f6b32ce6277484ff",
             "reference": "439a27e0f77b0b7beabd6a11f6b32ce6277484ff",
             "shasum": ""
+>>>>>>> 871562751b58261d309d3cb9f4f917bb4c0494cf
         },
         "require": {
             "kartik-v/yii2-krajee-base": "*"
         },
-        "time": "2014-11-10 18:37:03",
+        "time": "2015-05-09 08:06:45",
         "type": "yii2-extension",
         "installation-source": "dist",
         "autoload": {
             "psr-4": {
-                "kartik\\sortable\\": ""
+                "kartik\\select2\\": ""
             }
         },
         "notification-url": "https://packagist.org/downloads/",
@@ -3235,19 +3361,88 @@
                 "homepage": "http://www.krajee.com/"
             }
         ],
-        "description": "Create sortable lists and grids using HTML5 drag and drop API for Yii 2.0.",
-        "homepage": "https://github.com/kartik-v/yii2-sortable",
+        "description": "Enhanced Yii2 wrapper for the Select2 jQuery plugin (sub repo split from yii2-widgets).",
+        "homepage": "https://github.com/kartik-v/yii2-widget-select2",
         "keywords": [
-            "bootstrap",
+            "dropdown",
             "extension",
+            "form",
             "jquery",
-            "range",
-            "sortable",
+            "plugin",
+            "select2",
             "widget",
             "yii2"
         ]
     },
     {
+<<<<<<< HEAD
+        "name": "bower-asset/jquery.inputmask",
+        "version": "3.x-dev",
+        "version_normalized": "3.9999999.9999999.9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/RobinHerbots/jquery.inputmask.git",
+            "reference": "b2c20e46289158eb09eb0a81041945bdd710d73a"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/RobinHerbots/jquery.inputmask/zipball/b2c20e46289158eb09eb0a81041945bdd710d73a",
+            "reference": "b2c20e46289158eb09eb0a81041945bdd710d73a",
+            "shasum": ""
+        },
+        "require": {
+            "bower-asset/jquery": ">=1.7"
+        },
+        "type": "bower-asset-library",
+        "extra": {
+            "bower-asset-main": [
+                "./dist/inputmask/jquery.inputmask.js",
+                "./dist/inputmask/jquery.inputmask.extensions.js",
+                "./dist/inputmask/jquery.inputmask.date.extensions.js",
+                "./dist/inputmask/jquery.inputmask.numeric.extensions.js",
+                "./dist/inputmask/jquery.inputmask.phone.extensions.js",
+                "./dist/inputmask/jquery.inputmask.regex.extensions.js"
+            ],
+            "bower-asset-ignore": [
+                "**/.*",
+                "qunit/",
+                "nuget/",
+                "tools/",
+                "js/",
+                "*.md",
+                "build.properties",
+                "build.xml",
+                "jquery.inputmask.jquery.json"
+            ]
+        },
+        "installation-source": "dist",
+        "license": [
+            "http://opensource.org/licenses/mit-license.php"
+        ],
+        "description": "jquery.inputmask is a jquery plugin which create an input mask.",
+        "keywords": [
+            "form",
+            "input",
+            "inputmask",
+            "jquery",
+            "mask",
+            "plugins"
+        ]
+    },
+    {
+        "name": "kartik-v/yii2-sortable",
+        "version": "v1.1.0",
+        "version_normalized": "1.1.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/kartik-v/yii2-sortable.git",
+            "reference": "439a27e0f77b0b7beabd6a11f6b32ce6277484ff"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/kartik-v/yii2-sortable/zipball/439a27e0f77b0b7beabd6a11f6b32ce6277484ff",
+            "reference": "439a27e0f77b0b7beabd6a11f6b32ce6277484ff",
+=======
         "name": "kartik-v/yii2-widget-activeform",
         "version": "v1.4.2",
         "version_normalized": "1.4.2.0",
@@ -3260,17 +3455,26 @@
             "type": "zip",
             "url": "https://api.github.com/repos/kartik-v/yii2-widget-activeform/zipball/9666688fe5696bb7c43bf4de00d46caca418617c",
             "reference": "9666688fe5696bb7c43bf4de00d46caca418617c",
+>>>>>>> 871562751b58261d309d3cb9f4f917bb4c0494cf
             "shasum": ""
         },
         "require": {
             "kartik-v/yii2-krajee-base": "*"
         },
+<<<<<<< HEAD
+        "time": "2014-11-10 18:37:03",
+=======
         "time": "2015-05-10 19:44:05",
+>>>>>>> 871562751b58261d309d3cb9f4f917bb4c0494cf
         "type": "yii2-extension",
         "installation-source": "dist",
         "autoload": {
             "psr-4": {
+<<<<<<< HEAD
+                "kartik\\sortable\\": ""
+=======
                 "kartik\\form\\": ""
+>>>>>>> 871562751b58261d309d3cb9f4f917bb4c0494cf
             }
         },
         "notification-url": "https://packagist.org/downloads/",
@@ -3284,6 +3488,16 @@
                 "homepage": "http://www.krajee.com/"
             }
         ],
+<<<<<<< HEAD
+        "description": "Create sortable lists and grids using HTML5 drag and drop API for Yii 2.0.",
+        "homepage": "https://github.com/kartik-v/yii2-sortable",
+        "keywords": [
+            "bootstrap",
+            "extension",
+            "jquery",
+            "range",
+            "sortable",
+=======
         "description": "Enhanced Yii2 active-form and active-field with full bootstrap styling support (sub repo split from yii2-widgets).",
         "homepage": "https://github.com/kartik-v/yii2-widget-activeform",
         "keywords": [
@@ -3338,6 +3552,7 @@
         "keywords": [
             "extension",
             "grid",
+>>>>>>> 871562751b58261d309d3cb9f4f917bb4c0494cf
             "widget",
             "yii2"
         ]
