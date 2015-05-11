@@ -9,9 +9,10 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 
 $tip_sub_denominacion = [
-    ['id' => 'SOCIEDAD ANONIMA', 'name' => 'SOCIEDAD ANONIMA'],
-    ['id' => 'SOCIEDAD ANONIMA DE CAPITAL AUTORIZADO', 'name' => 'SOCIEDAD ANONIMA DE CAPITAL AUTORIZADO'],
-    ['id' => 'SOCIEDAD ANONIMA INSCRITA DE CAPITAL ABIERTO', 'name' => 'SOCIEDAD ANONIMA INSCRITA DE CAPITAL ABIERTO'],
+    ['id' => 'EMPRESA DE PROPIEDAD SOCIAL DIRECTA COMUNAL', 'name' => 'EMPRESA DE PROPIEDAD SOCIAL DIRECTA COMUNAL'],
+    ['id' => 'EMPRESA DE PROPIEDAD SOCIAL INDIRECTA COMUNAL', 'name' => 'EMPRESA DE PROPIEDAD SOCIAL INDIRECTA COMUNAL'],
+    ['id' => 'UNIDAD PRODUCTIVA FAMILIAR', 'name' => 'UNIDAD PRODUCTIVA FAMILIAR'],
+    ['id' => 'GRUPO DE INTERCAMBIO SOLIDARIO', 'name' => 'GRUPO DE INTERCAMBIO SOLIDARIO'],
 ];
 ?>
 
@@ -20,13 +21,16 @@ $tip_sub_denominacion = [
     
     
     <?php $form = ActiveForm::begin([
-        'id' => "dc_sociedadanonima",]); ?>
+        'id' => "dc_socioproductivas",]); ?>
 
  
     <?= $form->field($d_comercial, 'tipo_subdenominacion')->dropDownList(ArrayHelper::map($tip_sub_denominacion, 'id', 'name'), ['prompt' => 'Seleccione sub denominacion']) ?>
-   
-     <?= $form->field($d_comercial, 'tipo_denominacion')->hiddenInput()->label(false) ?>    
-    <?= $form->field($d_comercial, 'contratista_id')->hiddenInput()->label(false) ?>
+ 
+    <?= $form->field($d_comercial, 'codigo_situr')->textInput(['maxlength' => 255]) ?>
+    
+    <?= $form->field($d_comercial, 'tipo_denominacion')->hiddenInput()->label(false) ?>    
+       
+     <?= $form->field($d_comercial, 'contratista_id')->hiddenInput()->label(false) ?>
     
     
    <div class="form-group centered">
@@ -38,19 +42,19 @@ $tip_sub_denominacion = [
 $script = <<< JS
     $('#enviar9').click(function(e){
           
-            if($('form#dc_sociedadanonima').find('.has-error').length!=0){
+            if($('form#dc_socioproductivas').find('.has-error').length!=0){
               
                 return false;
             }else
             {
-                //$('form#dc_sociedadanonima').submit();
+                //$('form#dc_socioproductivas').submit();
                 e.preventDefault();
                 e.stopImmediatePropagation();
                $.ajax({
                    
-                    url: 'http://localhost/rnce/frontend/web/index.php?r=contratistas/denominacioncomercial',
+                    url: 'http://localhost/rnce/frontend/web/index.php?r=denominaciones-comerciales/denominacioncomercial',
                     type: 'post',
-                    data: $('form#dc_sociedadanonima').serialize(),
+                    data: $('form#dc_socioproductivas').serialize(),
                     success: function(data) {
                              $( "#output9" ).html( data ); 
                     }

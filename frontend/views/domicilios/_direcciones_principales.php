@@ -69,7 +69,7 @@ $script = <<< JS
                 e.stopImmediatePropagation();
                $.ajax({
                    
-                    url: 'http://localhost/rnce/frontend/web/index.php?r=contratistas/direccionprincipal',
+                    url: 'http://localhost/rnce/frontend/web/index.php?r=domicilios/direccionprincipal',
                     type: 'post',
                     data: $('form#d_principal').serialize(),
                     success: function(data) {

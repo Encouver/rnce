@@ -10,7 +10,7 @@ use kartik\builder\Form;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="personas-naturales-form">
+<div class="col-sm-8 personas-naturales-form">
 
     <?php $form = ActiveForm::begin(['id'=>'raul', 'type'=>ActiveForm::TYPE_VERTICAL]); ?>
     
@@ -18,7 +18,7 @@ use kartik\builder\Form;
     <div id="output"></div>
     
     
-    <?= $form->field($natural_juridica, 'rif')->textInput(['maxlength' => 50])->inputOptions(['class'=>'col-md-6']) ?>
+    <?= $form->field($natural_juridica, 'rif')->textInput(['maxlength' => 50])?>
     
     <?php echo Form::widget([
     'model'=>$persona_natural,
