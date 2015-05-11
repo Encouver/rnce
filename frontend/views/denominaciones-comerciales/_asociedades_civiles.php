@@ -9,18 +9,18 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 
 $tip_sub_denominacion = [
-    ['id' => 'FUNDACION DEL ESTADO (NACIONAL)', 'name' => 'FUNDACION DEL ESTADO (NACIONAL)'],
-    ['id' => 'FUNDACION DEL ESTADO (ESTADAL)', 'name' => 'FUNDACION DEL ESTADO (ESTADAL)'],
-    ['id' => 'FUNDACION DEL ESTADO (MUNICIPAL)', 'name' => 'FUNDACION DEL ESTADO (MUNICIPAL)'],
+    ['id' => 'CON FINES DE LUCRO', 'name' => 'CON FINES DE LUCRO'],
+    ['id' => 'SIN FINES DE LUCRO', 'name' => 'SIN FINES DE LUCRO'],
+   
 ];
 ?>
 
-<div class="sociedad-drop" style="margin-bottom: 10px;">
+<div class="sociedades-drop" style="margin-bottom: 10px;">
     
     
     
     <?php $form = ActiveForm::begin([
-        'id' => "dc_fundaciones",]); ?>
+        'id' => "dc_asociedades",]); ?>
 
  
     <?= $form->field($d_comercial, 'tipo_subdenominacion')->dropDownList(ArrayHelper::map($tip_sub_denominacion, 'id', 'name'), ['prompt' => 'Seleccione sub denominacion']) ?>
@@ -38,19 +38,19 @@ $tip_sub_denominacion = [
 $script = <<< JS
     $('#enviar9').click(function(e){
           
-            if($('form#dc_fundaciones').find('.has-error').length!=0){
+            if($('form#dc_asociedades').find('.has-error').length!=0){
               
                 return false;
             }else
             {
-                //$('form#dc_fundaciones').submit();
+                //$('form#dc_asociedades').submit();
                 e.preventDefault();
                 e.stopImmediatePropagation();
                $.ajax({
                    
-                    url: 'http://localhost/rnce/frontend/web/index.php?r=contratistas/denominacioncomercial',
+                    url: 'http://localhost/rnce/frontend/web/index.php?r=denominaciones-comerciales/denominacioncomercial',
                     type: 'post',
-                    data: $('form#dc_fundaciones').serialize(),
+                    data: $('form#dc_asociedades').serialize(),
                     success: function(data) {
                              $( "#output9" ).html( data ); 
                     }

@@ -218,7 +218,7 @@ $script = <<< JS
                 e.stopImmediatePropagation();
                $.ajax({
                    
-                    url: 'http://localhost/rnce/frontend/web/index.php?r=contratistas/objetoautorizacion',
+                    url: 'http://localhost/rnce/frontend/web/index.php?r=objetos-empresas/objetoautorizacion',
                     type: 'post',
                     data: $('form#r_objetos').serialize(),
                     success: function(data) {

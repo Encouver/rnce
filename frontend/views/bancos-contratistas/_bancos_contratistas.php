@@ -110,7 +110,7 @@ $script = <<< JS
                 e.stopImmediatePropagation();
                $.ajax({
                    
-                    url: 'http://localhost/rnce/frontend/web/index.php?r=contratistas/bancocontratista',
+                    url: 'http://localhost/rnce/frontend/web/index.php?r=bancos-contratistas/bancocontratista',
                     type: 'post',
                     data: $('form#b_contratista').serialize(),
                     success: function(data) {

@@ -73,6 +73,53 @@ class BancosContratistasController extends Controller
             ]);
         }
     }
+    
+    
+       public function actionCrearbanco()
+    {
+           
+            return $this->render('_bancos_contratistas',['banco_contratista' => (empty($banco_contratista)) ? [new BancosContratistas] : $banco_contratista]);
+    }
+    
+    
+     public function actionBancocontratista()
+   {
+          $usuario= \common\models\p\User::findOne(Yii::$app->user->identity->id);
+        $banco_contratista = [new BancosContratistas];
+
+           $banco_contratista = Model::createMultiple(BancosContratistas::classname());
+            Model::loadMultiple($banco_contratista, Yii::$app->request->post());
+
+
+           $transaction = \Yii::$app->db->beginTransaction();
+           try {
+
+
+
+                foreach ($banco_contratista as $carga_banco) {
+                            $carga_banco->contratista_id = $usuario->contratista_id;
+                            $carga_banco->save();
+
+                            if (! ($flag = $carga_banco->save(false))) {
+
+                                $transaction->rollBack();
+                                return "error en la carga de de datos";
+                                break;
+                            }
+                        }
+
+
+                        $transaction->commit();
+                        return "Datos guardados con exito";
+
+           } catch (Exception $e) {
+               $transaction->rollBack();
+           }
+
+
+
+   }
+
 
     /**
      * Updates an existing BancosContratistas model.
