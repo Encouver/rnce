@@ -70,6 +70,11 @@ class AccionistasOtrosController extends BaseController
             ]);
         }
     }
+    
+     public function actionCrearaccionistaotro()
+    {
+       return $this->render('_accionistas');
+    }
      public function actionCrearaccionista()
     {
         $accionista_otro = new AccionistasOtros();

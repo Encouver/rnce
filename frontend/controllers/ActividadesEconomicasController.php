@@ -72,6 +72,54 @@ class ActividadesEconomicasController extends Controller
             ]);
         }
     }
+    
+     public function actionCrearactividad()
+    {
+        $actividad_economica = new ActividadesEconomicas();
+        return $this->render('_actividades_economicas',['actividad_economica' => $actividad_economica]);
+    }
+    
+     public function actionActividadeconomica()
+   {
+
+
+        $actividad_economica = new ActividadesEconomicas();
+
+        if ($actividad_economica->load(Yii::$app->request->post())) {
+           $transaction = \Yii::$app->db->beginTransaction();
+           try {
+                $flag =false;
+
+
+           $usuario= \common\models\p\User::findOne(Yii::$app->user->identity->id);
+            $actividad_economica->contratista_id=  $usuario->contratista_id;
+                   if ( $actividad_economica->save()) {
+
+
+                               $transaction->commit();
+                               return "Datos guardados con exito";
+                               $flag = true;
+
+
+                   }else{
+                       return "Actividades economicas no guardadas";
+                   }
+
+
+               if(!$flag)
+               {
+                   $transaction->rollBack();
+               }
+           } catch (Exception $e) {
+               $transaction->rollBack();
+           }
+       }else{
+           return "Datos incompletos";
+       }
+
+
+
+   }
 
     /**
      * Updates an existing ActividadesEconomicas model.

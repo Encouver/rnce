@@ -1,6 +1,6 @@
 <?php
 
-use yii\helpers\Html;
+/*use yii\helpers\Html;
 use yii\jui\Accordion;
 use common\models\p\Direcciones;
 use common\models\p\PersonasNaturales;
@@ -16,7 +16,7 @@ use yii\web\Response;
 /* @var $this yii\web\View */
 /* @var $model common\models\p\Contratistas */
 
-$this->title = Yii::t('app', 'Crud Contratistas');
+/*$this->title = Yii::t('app', 'Crud Contratistas');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Contratistas'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
@@ -90,3 +90,4 @@ $id_contratista = $usuario->contratista_id;
 ]);?>
     
 </div>
+*/

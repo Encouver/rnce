@@ -48,7 +48,7 @@ $script = <<< JS
                 e.stopImmediatePropagation();
                $.ajax({
                    
-                    url: 'http://localhost/rnce/frontend/web/index.php?r=contratistas/denominacioncomercial',
+                    url: 'http://localhost/rnce/frontend/web/index.php?r=denominaciones-comerciales/denominacioncomercial',
                     type: 'post',
                     data: $('form#dc_cooperativas').serialize(),
                     success: function(data) {
