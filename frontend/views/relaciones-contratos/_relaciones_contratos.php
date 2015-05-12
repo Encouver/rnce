@@ -202,7 +202,7 @@ $script = <<< JS
                    
                     url: 'http://localhost/rnce/frontend/web/index.php?r=personas-juridicas/crearpersonajuridicanacional',
                     type: 'post',
-                    data: $('form#modal_pjuridica').serialize(),
+                    data: $('form#r_contratos,
                     success: function(data) {
                              $( "#output16" ).html( data ); 
                     }
@@ -217,6 +217,8 @@ $script = <<< JS
                 return false;
             }else
             {
+            var fa = $('form#r_contratos').serialize();
+            var fb = $('form#c_facturas').serialize();
                 //$('form#r_contratos').submit();
                 e.preventDefault();
                 e.stopImmediatePropagation();
@@ -224,7 +226,7 @@ $script = <<< JS
                    
                     url: 'http://localhost/rnce/frontend/web/index.php?r=relaciones-contratos/relacioncontrato',
                     type: 'post',
-                    data: $('form#r_contratos').serialize(),
+                    data: fa+ '&' + fb,
                     success: function(data) {
                              $( "#output17" ).html( data ); 
                     }
