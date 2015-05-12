@@ -14,7 +14,7 @@ COMMENT ON COLUMN "user".contratista_id IS 'Clave foránea a la tabla contratist
 
 CREATE TABLE cuentas.e_movimientos
 (
-  id integer NOT NULL DEFAULT nextval('cuentas.sys_movimientos_id_seq'::regclass), -- Clave primaria
+  id serial NOT NULL, -- Clave primaria
   nombre character varying(255) NOT NULL, -- Nombre del tipo de movimiento.
   creado_por integer, -- Clave foranea al usuario
   actualizado_por integer, -- Clave foranea al usuario
