@@ -10,6 +10,7 @@ use common\models\p\PersonasNaturales;
 use yii\bootstrap\Modal;
 use kartik\builder\Form;
 use yii\helpers\ArrayHelper;
+use yii\grid\GridView;
 
 
 /* @var $this yii\web\View */
@@ -63,7 +64,7 @@ SCRIPT;
     <?php ActiveForm::end(); ?>
    <?php Modal::end();?>
 </div>
-<div class="contratista-drop col-sm-9" style="margin-bottom: 10px;">
+<div class="col-sm-9" style="margin-bottom: 10px;">
     
    
     <?php $form = ActiveForm::begin([
@@ -102,6 +103,15 @@ SCRIPT;
          <?= Html::Button(Yii::t('app', 'Enviar'), ['class' => 'btn btn-success', 'id' => 'enviar17']) ?> 
     </div>
     <?php ActiveForm::end(); ?>
+    
+    
+    
+    
+      <?php $form3 = ActiveForm::begin([
+        'id'=>'tform_comisarios',
+  ]); ?>
+    
+     <?php ActiveForm::end(); ?>
 
    <?php
 $script = <<< JS
@@ -159,6 +169,36 @@ $this->registerJs($script);
 -->
     
   
+</div>
+<div class="col-md-12">
+       <?= GridView::widget([
+        'dataProvider' => $dataProvider,
+        'filterModel' => $searchModel,
+        'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
+
+            'id',
+            'natural_juridica_id',
+             'tipo_profesion',
+            'colegiatura',
+            'fecha_carta',
+            'fecha_vencimiento',
+            //'declaracion_jurada:boolean',
+            // 'documento_registrado_id',
+            // 'contratista_id',
+            // 'comisario:boolean',
+            // 'sys_status:boolean',
+            // 'sys_creado_el',
+            // 'sys_actualizado_el',
+            // 'sys_finalizado_el',
+            // 'auditor:boolean',
+            // 'responsable_contabilidad:boolean',
+            // 'informe_conversion:boolean',
+        
+
+            ['class' => 'yii\grid\ActionColumn'],
+        ],
+    ]); ?>
 </div>
 
 
