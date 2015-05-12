@@ -46,6 +46,7 @@ class ComisariosAuditoresSearch extends ComisariosAuditores
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination' => 10,
         ]);
 
         $this->load($params);

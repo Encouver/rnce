@@ -75,7 +75,8 @@ class ComisariosAuditoresController extends BaseController
         $comisario = new ComisariosAuditores();
          $searchModel = new ComisariosAuditoresSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+       
+    
         return $this->render('_comisarios', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
