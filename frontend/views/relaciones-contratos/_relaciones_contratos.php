@@ -11,6 +11,7 @@ use yii\bootstrap\Modal;
 use kartik\builder\Form;
 use yii\helpers\ArrayHelper;
 use yii\grid\GridView;
+use wbraganca\dynamicform\DynamicFormWidget;
 
 
 /* @var $this yii\web\View */
@@ -22,6 +23,7 @@ use yii\grid\GridView;
 
 $url = \yii\helpers\Url::to(['accionistas-otros/naturaljuridicalist']);
 $persona_juridica = new PersonasJuridicas();
+
 
 
 $initScript = <<< SCRIPT
@@ -95,6 +97,61 @@ SCRIPT;
     
   
       <div id="output"></div>
+      
+      
+       <div class="panel panel-default hide" id="formfactura">
+        <div class="panel-heading"><h4>Facturas</h4></div>
+        <div class="panel-body">
+             <?php DynamicFormWidget::begin([
+                'widgetContainer' => 'dynamicform_wrapper', // required: only alphanumeric characters plus "_" [A-Za-z0-9_]
+                'widgetBody' => '.container-items', // required: css class selector
+                'widgetItem' => '.item', // required: css class
+                'limit' => 10, // the maximum times, an element can be cloned (default 999)
+                'min' => 1, // 0 or 1 (default 1)
+                'insertButton' => '.add-item', // css class
+                'deleteButton' => '.remove-item', // css class
+                'model' => $contrato_factura[0],
+                'formId' => 'r_contratos',
+                'formFields' => [
+                    'orden_factura',
+                    'monto',
+                    
+                ],
+            ]); ?>
+
+            <div class="container-items"><!-- widgetContainer -->
+            <?php foreach ($contrato_factura as $i => $carga_factura): ?>
+                <div class="item panel panel-default"><!-- widgetBody -->
+                    <div class="panel-heading">
+                        <div class="pull-right">
+                            <button type="button" class="add-item btn btn-success btn-xs"><i class="glyphicon glyphicon-plus"></i></button>
+                            <button type="button" class="remove-item btn btn-danger btn-xs"><i class="glyphicon glyphicon-minus"></i></button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="panel-body">
+                     
+                     
+                            
+                            <div class="col-sm-6">
+                                <?= $form->field($carga_factura, "[{$i}]orden_factura")->textInput() ?>
+                            </div>
+                               
+                            <div class="col-sm-6">
+                                <?= $form->field($carga_factura, "[{$i}]monto")->textInput() ?>
+                            </div>
+                            
+                     
+                    </div>
+                </div>
+            <?php endforeach; ?>
+            </div>
+            <?php DynamicFormWidget::end(); ?>
+        </div>
+    </div>
+      
+      
+      
     
     <div id="output17"></div>
       <div class="form-group">
@@ -104,19 +161,19 @@ SCRIPT;
     
     
     
-    
-      <?php $form3 = ActiveForm::begin([
-        'id'=>'tform_comisarios',
-  ]); ?>
-    
-     <?php ActiveForm::end(); ?>
 
    <?php
 $script = <<< JS
         
         
         
-        
+         $('select#relacionescontratos-tipo_contrato').change(function(e){
+
+            if($(this).val()=="SERVICIOS"){
+                $('#formfactura').removeClass("hide");
+            }
+            
+    });
         
     $('#enviar16').click(function(e){
           
@@ -154,7 +211,7 @@ $script = <<< JS
                    
                     url: 'http://localhost/rnce/frontend/web/index.php?r=relaciones-contratos/relacioncontrato',
                     type: 'post',
-                    data:[ $('form#r_contratos').serialize(),$('form#c_facturas').serialize()],
+                    data: $('form#r_contratos').serialize(),
                     success: function(data) {
                              $( "#output17" ).html( data ); 
                     }

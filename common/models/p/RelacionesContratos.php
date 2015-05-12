@@ -120,7 +120,7 @@ class RelacionesContratos extends \common\components\BaseActiveRecord
      $contrato= [ 'OBRAS' => 'OBRAS', 'SERVICIOS' => 'SERVICIOS', 'BIENES' => 'BIENES', ];
     return [
           'tipo_sector'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>$sector , 'options'=>['prompt'=>'Seleccione el sector']],
-          'tipo_contrato'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>$contrato , 'options'=>['prompt'=>'Seleccione el tipo de contrato', 'onchange'=>'
+          'tipo_contrato'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>$contrato , 'options'=>['prompt'=>'Seleccione el tipo de contrato'/*, 'onchange'=>'
                        
             if($(this).val()!=""){
              $.get( "'.Url::toRoute('/relaciones-contratos/tiposector').'", { id: $(this).val() } )
@@ -128,7 +128,7 @@ class RelacionesContratos extends \common\components\BaseActiveRecord
                                 $( "#output" ).html( data );
                             }
                         );
-            }']],
+            }'*/]],
 
         'nombre_proyecto'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Nombre del proyecto']],
         'monto_contrato'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Monto contrato']],

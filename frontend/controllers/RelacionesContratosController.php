@@ -92,6 +92,7 @@ class RelacionesContratosController extends Controller
        
             return $this->render('_relaciones_contratos', [
                 'relacion_contrato' => $relacion_contrato,
+                'contrato_factura' => (empty($contrato_factura)) ? [new ContratosFacturas] : $contrato_factura,
             ]);
         
     }
