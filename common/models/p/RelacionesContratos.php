@@ -51,8 +51,8 @@ class RelacionesContratos extends \common\components\BaseActiveRecord
             [['tipo_sector', 'tipo_contrato'], 'string'],
             [['fecha_inicio', 'fecha_fin', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['monto_contrato', 'anticipo_recibido', 'porcentaje_ejecucion'], 'number'],
-            [['sys_status'], 'boolean'],
-            [['nombre_proyecto', 'evaluacion_ente'], 'string', 'max' => 255]
+            [['sys_status', 'evaluacion_ente'], 'boolean'],
+            [['nombre_proyecto'], 'string', 'max' => 255]
         ];
     }
 
@@ -120,7 +120,7 @@ class RelacionesContratos extends \common\components\BaseActiveRecord
      $contrato= [ 'OBRAS' => 'OBRAS', 'SERVICIOS' => 'SERVICIOS', 'BIENES' => 'BIENES', ];
     return [
           'tipo_sector'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>$sector , 'options'=>['prompt'=>'Seleccione el sector']],
-          'tipo_contrato'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>$contrato , 'options'=>['prompt'=>'Seleccione el tipo de contrato'/*, 'onchange'=>'
+          'tipo_contrato'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>$contrato , 'options'=>['prompt'=>'Seleccione el tipo de contrato', 'onchange'=>'
                        
             if($(this).val()!=""){
              $.get( "'.Url::toRoute('/relaciones-contratos/tiposector').'", { id: $(this).val() } )
@@ -128,7 +128,7 @@ class RelacionesContratos extends \common\components\BaseActiveRecord
                                 $( "#output" ).html( data );
                             }
                         );
-            }'*/]],
+            }']],
 
         'nombre_proyecto'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Nombre del proyecto']],
         'monto_contrato'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Monto contrato']],

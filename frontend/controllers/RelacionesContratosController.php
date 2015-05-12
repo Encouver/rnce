@@ -11,6 +11,7 @@ use common\models\p\SysNaturalesJuridicas;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use common\models\p\Model;
 
 /**
  * RelacionesContratosController implements the CRUD actions for RelacionesContratos model.
@@ -91,10 +92,7 @@ class RelacionesContratosController extends Controller
         $relacion_contrato = new RelacionesContratos();
        
             return $this->render('_relaciones_contratos', [
-                'relacion_contrato' => $relacion_contrato,
-                'contrato_factura' => (empty($contrato_factura)) ? [new ContratosFacturas] : $contrato_factura,
-                'contrato_valuacion' => (empty($contrato_valuacion)) ? [new ContratosValuaciones] : $contrato_valuacion,
-            ]);
+                'relacion_contrato' => $relacion_contrato]);
         
     }
       public function actionTiposector($id)
@@ -102,19 +100,88 @@ class RelacionesContratosController extends Controller
    {
           
           if($id=="OBRAS"){
-              return "es una obra";
+              
+           return $this->renderAjax('_contratos_valuaciones',['contrato_valuacion' => (empty($contrato_valuacion)) ? [new ContratosValuaciones] : $contrato_valuacion]);
+
           }else{ 
               
          return $this->renderAjax('_contratos_facturas',['contrato_factura' => (empty($contrato_factura)) ? [new ContratosFacturas] : $contrato_factura]);
               
           }
-   
-
-
 
 
    }
+     public function actionRelacioncontrato()
+              
+   {
+           $usuario= \common\models\p\User::findOne(Yii::$app->user->identity->id);
+           $relacion_contrato= new RelacionesContratos();
+           
+           if($relacion_contrato->load(Yii::$app->request->post())){
+               $relacion_contrato->contratista_id= $usuario->contratista_id;
+            
+               
+               $transaction = \Yii::$app->db->beginTransaction();
+               try{
+                   
+                   
+                   if (! ($flag = $relacion_contrato->save(false))) {
 
+                                $transaction->rollBack();
+                                return "error en la carga de de datos de los contratos";
+                                
+                            }
+                    if ($relacion_contrato->tipo_contrato=="OBRAS"){
+                        $contrato_valuacion = [new ContratosValuaciones];
+                        $contrato_valuacion = Model::createMultiple(ContratosValuaciones::classname());
+                        Model::loadMultiple($contrato_valuacion, Yii::$app->request->post());
+                         foreach ($contrato_valuacion as $carga_valuacion) {
+                             $valuaciones= new ContratosValuaciones();
+
+                              $valuaciones->orden_valuacion = $carga_valuacion->orden_valuacion;
+                              $valuaciones->monto = $carga_valuacion->monto;
+                              $valuaciones->relacion_contrato_id= $relacion_contrato->id;
+
+                             if (! ($flag = $valuaciones->save(false))) {
+
+                                $transaction->rollBack();
+                                return "error en la carga de las valuaciones";
+                                break;
+                            }
+
+                             
+                         }
+                    }else{
+                         $contrato_factura = [new ContratosFacturas];
+                        $contrato_factura = Model::createMultiple(ContratosFacturas::classname());
+                        Model::loadMultiple($contrato_factura, Yii::$app->request->post());
+                        
+                          foreach ($contrato_factura as $carga_factura) {
+                             $facturas= new ContratosFacturas();
+
+                              $facturas->orden_factura = $carga_factura->orden_factura;
+                              $facturas->monto = $carga_factura->monto;
+                              $facturas->relacion_contrato_id= $relacion_contrato->id;
+
+                             if (! ($flag = $facturas->save(false))) {
+
+                                $transaction->rollBack();
+                                return "error en la carga de las facturas";
+                                break;
+                            }
+
+                             
+                         }
+                    }
+                    
+                    $transaction->commit();
+                    return "Datos guardados con exito";
+                    
+            }  catch (Exception $e) {
+               $transaction->rollBack();
+           }
+        }      
+   }
     /**
      * Updates an existing RelacionesContratos model.
      * If update is successful, the browser will be redirected to the 'view' page.

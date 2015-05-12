@@ -185,4 +185,11 @@ ALTER TABLE accionistas_otros ALTER COLUMN documento_registrado_id DROP NOT NULL
 Alter type tipo_profesion ADD VALUE 'ECONOMISTA' BEFORE 'ABOGADO';
 alter table comisarios_auditores alter column documento_registrado_id drop not null;
 
--- MARCOS
+-- Mayo 12 2015
+ALTER TABLE relaciones_contratos DROP COLUMN evaluacion_ente;
+
+-- no pude pasar el tipo de dato a string por eso tuve que eliinarlo y crear uno nuevo
+
+ALTER TABLE relaciones_contratos ADD COLUMN evaluacion_ente boolean;
+ALTER TABLE relaciones_contratos ALTER COLUMN evaluacion_ente SET NOT NULL;
+COMMENT ON COLUMN relaciones_contratos.evaluacion_ente IS 'Evaluacion del ente';

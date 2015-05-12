@@ -8,16 +8,17 @@ use wbraganca\dynamicform\DynamicFormWidget;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="contratos-facturas-form">
+<div class="contratos-valuaciones-form">
 
     <?php $form = ActiveForm::begin([
-        'id' => "c_facturas",
+        'id' => "c_valuaciones",
   
 
 ]); ?>
     <div id="output6"></div>
     
-   
+
+
              <?php DynamicFormWidget::begin([
                 'widgetContainer' => 'dynamicform_wrapper', // required: only alphanumeric characters plus "_" [A-Za-z0-9_]
                 'widgetBody' => '.container-items', // required: css class selector
@@ -26,17 +27,17 @@ use wbraganca\dynamicform\DynamicFormWidget;
                 'min' => 1, // 0 or 1 (default 1)
                 'insertButton' => '.add-item', // css class
                 'deleteButton' => '.remove-item', // css class
-                'model' => $contrato_factura[0],
-                'formId' => 'c_facturas',
+                'model' => $contrato_valuacion[0],
+                'formId' => 'c_valuaciones',
                 'formFields' => [
-                    'orden_factura',
+                    'orden_valuacion',
                     'monto',
                     
                 ],
             ]); ?>
 
             <div class="container-items"><!-- widgetContainer -->
-            <?php foreach ($contrato_factura as $i => $carga_factura): ?>
+            <?php foreach ($contrato_valuacion as $i => $carga_valuacion): ?>
                 <div class="item panel panel-default"><!-- widgetBody -->
                     <div class="panel-heading">
                         <div class="pull-right">
@@ -50,11 +51,11 @@ use wbraganca\dynamicform\DynamicFormWidget;
                      
                             
                             <div class="col-sm-6">
-                                <?= $form->field($carga_factura, "[{$i}]orden_factura")->textInput() ?>
+                                <?= $form->field($carga_valuacion, "[{$i}]orden_valuacion")->textInput() ?>
                             </div>
                                
                             <div class="col-sm-6">
-                                <?= $form->field($carga_factura, "[{$i}]monto")->textInput() ?>
+                                <?= $form->field($carga_valuacion, "[{$i}]monto")->textInput() ?>
                             </div>
                             
                      
@@ -63,7 +64,8 @@ use wbraganca\dynamicform\DynamicFormWidget;
             <?php endforeach; ?>
             </div>
             <?php DynamicFormWidget::end(); ?>
-      
+    
+    
    
     <?php ActiveForm::end(); ?>
 

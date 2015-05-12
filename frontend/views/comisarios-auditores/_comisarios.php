@@ -171,6 +171,8 @@ $this->registerJs($script);
   
 </div>
 <div class="col-md-12">
+    
+  
        <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,

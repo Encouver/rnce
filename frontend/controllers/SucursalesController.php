@@ -11,6 +11,7 @@ use app\models\SucursalesSearch;
 use common\components\BaseController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use common\models\p\Model;
 
 /**
  * SucursalesController implements the CRUD actions for Sucursales model.
