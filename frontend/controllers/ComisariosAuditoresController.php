@@ -73,11 +73,15 @@ class ComisariosAuditoresController extends BaseController
      public function actionCrearcomisario()
     {
         $comisario = new ComisariosAuditores();
+         $searchModel = new ComisariosAuditoresSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
+        return $this->render('_comisarios', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'comisario' => $comisario,
+        ]);
       
-           return $this->render('_comisarios', [
-                'comisario' => $comisario,
-            ]);
         
     }
     
