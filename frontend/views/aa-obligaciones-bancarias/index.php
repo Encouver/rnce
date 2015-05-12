@@ -234,13 +234,13 @@ $dynagrid = DynaGrid::begin([
     'storage'=>'cookie',
     'gridOptions'=>[
         'dataProvider'=>$dataProvider,
-        'filterModel'=>$searchModel,
+        //'filterModel'=>$searchModel,
         'showPageSummary'=>true,
         'floatHeader'=>true,
         'pjax'=>true,
         'panel'=>[
             'heading'=>'<h3 class="panel-title"><i class="glyphicon glyphicon-book"></i> Obligaciones Bancarias - AA</h3>',
-            'before' =>  '<div style="padding-top: 7px;"><em>* The table header sticks to the top in this demo as you scroll</em></divs>',
+            'before' =>  '<div style="padding-top: 7px;"><em> Cuenta AA - Obligaciones Bancarias</em></divs>',
             'after' => false
         ],
         'toolbar' =>  [
@@ -249,8 +249,17 @@ $dynagrid = DynaGrid::begin([
                 Html::a('<i class="glyphicon glyphicon-repeat"></i>', ['dynagrid-demo'], ['data-pjax'=>0, 'class' => 'btn btn-default', 'title'=>'Reset Grid'])
             ],
             ['content'=>'{dynagridFilter}{dynagridSort}{dynagrid}'],
-            '{export}',
-        ]
+            '{export}', ['class' => '\kartik\grid\ActionColumn', 'template' => '{view}',
+                'buttons' => [ 'imprimir' => function ($url, $model, $key) {
+                    return Html::a('<span class="glyphicon glyphicon-trash"></span>', $url,[
+                        'title' => 'Imprimir',
+                    ]);
+                },
+                ]
+            ],
+        ],
+
+
     ],
     'options'=>['id'=>'dynagrid-1'] // a unique identifier is important
 ]);
