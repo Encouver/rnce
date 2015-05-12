@@ -109,4 +109,12 @@ class PersonasJuridicas extends \common\components\BaseActiveRecord
         'numero_identificacion'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Enter username...']],
     ];
     }
+    public function getFormAttribsnacional() {
+      
+    return [
+        'rif'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'introduza su rif']],
+        'razon_social'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Enter username...']],
+      
+    ];
+    }
 }

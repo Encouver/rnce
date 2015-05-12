@@ -1,7 +1,8 @@
 <?php
 
 namespace common\models\p;
-
+use kartik\builder\Form;
+use yii\helpers\Url;
 use Yii;
 
 /**
@@ -110,5 +111,49 @@ class RelacionesContratos extends \common\components\BaseActiveRecord
     public function getNaturalJuridica()
     {
         return $this->hasOne(SysNaturalesJuridicas::className(), ['id' => 'natural_juridica_id']);
+    }
+    
+     public function getFormAttribs() {
+    
+        
+      $sector= [ 'PUBLICO' => 'PUBLICO', 'PRIVADO' => 'PRIVADO', ];
+     $contrato= [ 'OBRAS' => 'OBRAS', 'SERVICIOS' => 'SERVICIOS', 'BIENES' => 'BIENES', ];
+    return [
+          'tipo_sector'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>$sector , 'options'=>['prompt'=>'Seleccione el sector']],
+          'tipo_contrato'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>$contrato , 'options'=>['prompt'=>'Seleccione el tipo de contrato', 'onchange'=>'
+                       
+            if($(this).val()!=""){
+             $.get( "'.Url::toRoute('/relaciones-contratos/tiposector').'", { id: $(this).val() } )
+                            .done(function( data ) {
+                                $( "#output" ).html( data );
+                            }
+                        );
+            }']],
+
+        'nombre_proyecto'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Nombre del proyecto']],
+        'monto_contrato'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Monto contrato']],
+        'anticipo_recibido'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Monto contrato']],
+        'porcentaje_ejecucion'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Porcentaje de ejecucion']],
+        'fecha_inicio'=>[
+            'type'=>Form::INPUT_WIDGET, 
+            'widgetClass'=>'\kartik\widgets\DatePicker', 
+            'options'=>['pluginOptions' => [
+                    'autoclose'=>true,
+                    'format' => 'yyyy-mm-dd'
+                ]],
+        ], 
+        'fecha_fin'=>[
+            'type'=>Form::INPUT_WIDGET, 
+            'widgetClass'=>'\kartik\widgets\DatePicker', 
+            'options'=>['pluginOptions' => [
+                    'autoclose'=>true,
+                    'format' => 'yyyy-mm-dd'
+                ]],
+        ],
+        'evaluacion_ente'=>['type'=>Form::INPUT_CHECKBOX],
+      
+    ];
+    
+    
     }
 }

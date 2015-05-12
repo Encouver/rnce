@@ -4,6 +4,8 @@ namespace frontend\controllers;
 
 use Yii;
 use common\models\p\RelacionesContratos;
+use common\models\p\ContratosFacturas;
+use common\models\p\ContratosValuaciones;
 use app\models\RelacionesContratosSearch;
 use common\models\p\SysNaturalesJuridicas;
 use yii\web\Controller;
@@ -83,6 +85,33 @@ class RelacionesContratosController extends Controller
             ]);
         }
     }
+    
+      public function actionCrearrelacioncontrato()
+    {
+        $relacion_contrato = new RelacionesContratos();
+       
+            return $this->render('_relaciones_contratos', [
+                'relacion_contrato' => $relacion_contrato,
+            ]);
+        
+    }
+      public function actionTiposector($id)
+              
+   {
+          
+          if($id=="OBRAS"){
+              return "es una obra";
+          }else{ 
+              
+         return $this->renderAjax('_contratos_facturas',['contrato_factura' => (empty($contrato_factura)) ? [new ContratosFacturas] : $contrato_factura]);
+              
+          }
+   
+
+
+
+
+   }
 
     /**
      * Updates an existing RelacionesContratos model.

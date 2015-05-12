@@ -1,7 +1,7 @@
 <?php
 
 namespace common\models\p;
-
+use kartik\builder\Form;
 use Yii;
 
 /**
@@ -65,5 +65,18 @@ class ContratosValuaciones extends \common\components\BaseActiveRecord
     public function getRelacionContrato()
     {
         return $this->hasOne(RelacionesContratos::className(), ['id' => 'relacion_contrato_id']);
+    }
+    public function getFormAttribs() {
+    
+      
+    return [
+          
+        'orden_valuacion'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Orden de la valuacion']],
+        'monto'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Monto de la valuacion']],
+       
+      
+    ];
+    
+    
     }
 }
