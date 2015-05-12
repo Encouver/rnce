@@ -702,7 +702,10 @@ COMMENT ON COLUMN cuentas.mm1_resultados_acumulados.saldo_cierre_ejercicio IS 'S
 
 
 
-/**************     02/05/2015 *************/
+/**************     11/05/2015 *************/
 
 
 ALTER TABLE cuentas.sys_totales RENAME ahno  TO anho;
+
+ALTER TABLE cuentas.aa_obligaciones_bancarias
+ALTER COLUMN total_imp_deu_int DROP NOT NULL;

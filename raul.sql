@@ -184,3 +184,5 @@ ALTER TABLE accionistas_otros ALTER COLUMN documento_registrado_id DROP NOT NULL
 
 Alter type tipo_profesion ADD VALUE 'ECONOMISTA' BEFORE 'ABOGADO';
 alter table comisarios_auditores alter column documento_registrado_id drop not null;
+
+-- MARCOS

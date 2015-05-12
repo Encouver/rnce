@@ -18,9 +18,9 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <p>
-        <?= Html::a(Yii::t('app', 'Create Aa Obligaciones Bancarias'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+  <!--  <p>
+        <?/*= Html::a(Yii::t('app', 'Create Aa Obligaciones Bancarias'), ['create'], ['class' => 'btn btn-success']) */?>
+    </p>-->
 <!--
     <?/*= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -245,7 +245,7 @@ $dynagrid = DynaGrid::begin([
         ],
         'toolbar' =>  [
             ['content'=>
-                Html::button('<i class="glyphicon glyphicon-plus"></i>', ['type'=>'button', 'title'=>'Agregar Obligación Bancaria', 'class'=>'btn btn-success', 'onclick'=>'alert("This will launch the book creation form.\n\nDisabled for this demo!");']) . ' '.
+                Html::a(Yii::t('app', '<i class="glyphicon glyphicon-plus"></i>'), ['create'], ['class' => 'btn btn-success'])  . ' '.
                 Html::a('<i class="glyphicon glyphicon-repeat"></i>', ['dynagrid-demo'], ['data-pjax'=>0, 'class' => 'btn btn-default', 'title'=>'Reset Grid'])
             ],
             ['content'=>'{dynagridFilter}{dynagridSort}{dynagrid}'],
