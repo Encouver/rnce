@@ -72,7 +72,7 @@ class AaObligacionesBancariasSearch extends AaObligacionesBancarias
             'interes_pagar' => $this->interes_pagar,
             'importe_deuda' => $this->importe_deuda,
             'total_imp_deu_int' => $this->total_imp_deu_int,
-            'contratista_id' => $this->contratista_id,
+            'contratista_id' => Yii::$app->user->identity->contratista_id,//$this->contratista_id,
             'creado_por' => $this->creado_por,
             'actualizado_por' => $this->actualizado_por,
             'sys_status' => $this->sys_status,

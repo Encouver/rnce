@@ -2,8 +2,13 @@
 
 namespace common\models\c;
 
+use common\models\p\SysBancos;
+use kartik\builder\Form;
 use kartik\builder\TabularForm;
+use kartik\money\MaskMoney;
+use kartik\widgets\DatePicker;
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "cuentas.aa_obligaciones_bancarias".
@@ -71,21 +76,21 @@ class AaObligacionesBancarias extends \common\components\BaseActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'corriente' => Yii::t('app', 'Corriente'),
-            'banco_id' => Yii::t('app', 'Banco ID'),
-            'num_documento' => Yii::t('app', 'Num Documento'),
-            'monto_otorgado' => Yii::t('app', 'Monto Otorgado'),
-            'fecha_prestamo' => Yii::t('app', 'Fecha Prestamo'),
-            'fecha_vencimiento' => Yii::t('app', 'Fecha Vencimiento'),
-            'tasa_interes' => Yii::t('app', 'Tasa Interes'),
-            'condicion_pago_id' => Yii::t('app', 'Condicion Pago ID'),
+            'banco_id' => Yii::t('app', 'Banco'),
+            'num_documento' => Yii::t('app', 'Num. Documento'),
+            'monto_otorgado' => Yii::t('app', 'Monto otorgado'),
+            'fecha_prestamo' => Yii::t('app', 'Fecha de prestamo'),
+            'fecha_vencimiento' => Yii::t('app', 'Fecha de vencimiento'),
+            'tasa_interes' => Yii::t('app', 'Tasa de interes'),
+            'condicion_pago_id' => Yii::t('app', 'Condicion de pago'),
             'plazo' => Yii::t('app', 'Plazo'),
-            'tipo_garantia_id' => Yii::t('app', 'Tipo Garantia ID'),
-            'interes_ejer_econ' => Yii::t('app', 'Interes Ejer Econ'),
-            'interes_pagar' => Yii::t('app', 'Interes Pagar'),
-            'importe_deuda' => Yii::t('app', 'Importe Deuda'),
-            'total_imp_deu_int' => Yii::t('app', 'Total Imp Deu Int'),
-            'contratista_id' => Yii::t('app', 'Contratista ID'),
-            'anho' => Yii::t('app', 'Anho'),
+            'tipo_garantia_id' => Yii::t('app', 'Tipo Garantia'),
+            'interes_ejer_econ' => Yii::t('app', 'Interes Ejercicio Económico'),
+            'interes_pagar' => Yii::t('app', 'Interes por pagar'),
+            'importe_deuda' => Yii::t('app', 'Importe deuda'),
+            'total_imp_deu_int' => Yii::t('app', 'TOTAL de importe de la deuda más intereses'),
+            'contratista_id' => Yii::t('app', 'Contratista'),
+            'anho' => Yii::t('app', 'Año'),
             'creado_por' => Yii::t('app', 'Creado Por'),
             'actualizado_por' => Yii::t('app', 'Actualizado Por'),
             'sys_status' => Yii::t('app', 'Sys Status'),
@@ -131,10 +136,46 @@ class AaObligacionesBancarias extends \common\components\BaseActiveRecord
         return [
             // primary key column
             'id'=>[ // primary key attribute
-                'type'=>TabularForm::INPUT_HIDDEN,
+                'type'=>Form::INPUT_HIDDEN,
                 'columnOptions'=>['hidden'=>true]
             ],
-            'corriente'=>['type'=>TabularForm::INPUT_CHECKBOX,'label'=>'Corriente'],
+            'corriente'=>['type'=>Form::INPUT_CHECKBOX,],
+            'banco_id'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>ArrayHelper::map(SysBancos::find()->asArray()->all(),'id','nombre'),],
+            'num_documento'=>['type'=>Form::INPUT_TEXT,],
+            'monto_otorgado'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),],
+            'fecha_prestamo'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>DatePicker::className(),'options'=>['options' => ['placeholder' => 'Seleccione fecha ...'],
+                'convertFormat' => true,
+                'pluginOptions' => [
+                    'format' => 'd-M-yyyy ',
+                    'startDate' => date('d-m-Y h:i A'),//'01-Mar-2014 12:00 AM',
+                    'todayHighlight' => true
+                ]]],
+            'fecha_vencimiento'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>DatePicker::className(), 'options'=>['options' => ['placeholder' => 'Seleccione fecha ...'],
+                'convertFormat' => true,
+                'pluginOptions' => [
+                    'format' => 'd-M-yyyy ',
+                    'startDate' => date('d-m-Y h:i A'),//'01-Mar-2014 12:00 AM',
+                    'todayHighlight' => true
+                ]]],
+            'tasa_interes'=>['type'=>Form::INPUT_CHECKBOX,],
+            'condicion_pago_id'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>ArrayHelper::map(\common\models\c\AaCondicionesPagos::find()->asArray()->all(),'id','nombre'),],
+            'plazo'=>['type'=>Form::INPUT_WIDGET, 'widgetClass'=>MaskMoney::className(),'options'=>['pluginOptions' => [
+                'prefix' => '',
+                'suffix' => ' Día/s',
+                'allowNegative' => false
+            ],]],
+            'tipo_garantia_id'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>ArrayHelper::map(\common\models\c\AaTiposGarantias::find()->asArray()->all(),'id','nombre')],
+            'interes_ejer_econ'=>['type'=>Form::INPUT_WIDGET, 'widgetClass'=>MaskMoney::className()],
+            'interes_pagar'=>['type'=>Form::INPUT_WIDGET, 'widgetClass'=>MaskMoney::className()],
+            'importe_deuda'=>['type'=>Form::INPUT_WIDGET, 'widgetClass'=>MaskMoney::className()],
+            //'total_imp_deu_int'=>['type'=>Form::INPUT_WIDGET, 'widgetClass'=>MaskMoney::className()],
+/*            'corriente'=>['type'=>Form::INPUT_CHECKBOX,'label'=>'Corriente'],
+            'corriente'=>['type'=>Form::INPUT_CHECKBOX,'label'=>'Corriente'],
+            'corriente'=>['type'=>Form::INPUT_CHECKBOX,'label'=>'Corriente'],
+            'corriente'=>['type'=>Form::INPUT_CHECKBOX,'label'=>'Corriente'],
+            'corriente'=>['type'=>Form::INPUT_CHECKBOX,'label'=>'Corriente'],*/
+
+
         ];
     }
 }

@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use common\models\c\SysTotales;
 use Yii;
 use common\models\c\AaObligacionesBancarias;
 use app\models\AaObligacionesBancariasSearch;
@@ -91,9 +92,35 @@ class AaObligacionesBancariasController extends BaseController
     {
         $model = new AaObligacionesBancarias();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
+        if($model->load(Yii::$app->request->post()) /*&& $model->validate()*/)
+        {
+            $total = new SysTotales();
+            $total->contratista_id = $model->contratista_id = 1;
+            $total->classname = $model->className();
+            $total->valor = "".($model->interes_pagar+$model->importe_deuda);
+            $total->id_classname = 1;
+            $total->anho = date('m-Y');
+
+            if($total->save()) {
+                $model->anho = '05-2015';
+                $model->total_imp_deu_int =$total->id;
+                //$model->actualizado_por = Yii::$app->user->id;
+                //$model->creado_por = Yii::$app->user->id;
+
+                if ($model->save()) {
+                    $total->id_classname = $model->id;
+                    if($total->save())
+                        return $this->redirect(['view', 'id' => $model->id]);
+                }
+            }
+            print_r($model->getErrors());
+            die;
+        }
+        else {
+            print_r($model->getErrors());
+            echo '<br>';
+            print_r($model->anho);
+            //die;
             return $this->render('create', [
                 'model' => $model,
             ]);

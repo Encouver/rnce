@@ -17,7 +17,7 @@ use Yii;
  * @property string $sys_finalizado_el
  * @property integer $contratista_id
  * @property boolean $total
- * @property string $ahno
+ * @property string $anho
  *
  * @property AEfectivosBancos[] $aEfectivosBancos
  * @property AInversionesNegociar[] $aInversionesNegociars
@@ -38,13 +38,13 @@ class SysTotales extends \common\components\BaseActiveRecord
     public function rules()
     {
         return [
-            [['classname', 'valor', 'id_classname', 'contratista_id', 'ahno'], 'required'],
+            [['classname', 'valor', 'id_classname', 'contratista_id', 'anho'], 'required'],
             [['id_classname', 'contratista_id'], 'integer'],
             [['sys_status', 'total'], 'boolean'],
             [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['classname'], 'string', 'max' => 200],
             [['valor'], 'string', 'max' => 255],
-            [['ahno'], 'string', 'max' => 100]
+            [['anho'], 'string', 'max' => 100]
         ];
     }
 
@@ -64,7 +64,7 @@ class SysTotales extends \common\components\BaseActiveRecord
             'sys_finalizado_el' => Yii::t('app', 'Sys Finalizado El'),
             'contratista_id' => Yii::t('app', 'Contratista ID'),
             'total' => Yii::t('app', 'Total'),
-            'ahno' => Yii::t('app', 'Ahno'),
+            'anho' => Yii::t('app', 'Anho'),
         ];
     }
 
