@@ -135,7 +135,7 @@ class AccionistasOtrosController extends BaseController
         $query = new \yii\db\Query;
         $query->select('id, rif AS text')
             ->from('sys_naturales_juridicas')
-            ->where("rif LIKE "."'%" . $search ."%'")
+            ->where("rif ILIKE "."'%" . $search ."%'")
             ->limit(20);
         $command = $query->createCommand();
         $data = $command->queryAll();
