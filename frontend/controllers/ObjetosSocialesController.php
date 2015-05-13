@@ -4,6 +4,7 @@ namespace frontend\controllers;
 
 use Yii;
 use common\models\p\ObjetosSociales;
+use common\models\a\DocumentosRegistrados;
 use app\models\ObjetosSocialesSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -74,6 +75,59 @@ class ObjetosSocialesController extends Controller
                 'model' => $model,
             ]);
         }
+    }
+    public function actionCrearobjetoacta()
+    {
+        $objeto_social = new ObjetosSociales();
+
+        
+            return $this->render('objetos_actas', [
+                'objeto_social' => $objeto_social,
+            ]);
+        
+    }
+     public function actionObjetoacta(){
+        
+      $objeto_acta = new ObjetosSociales();
+      
+        $usuario= \common\models\p\User::findOne(Yii::$app->user->identity->id);
+       
+        if ( $objeto_acta->load(Yii::$app->request->post())) {
+            
+             $transaction = \Yii::$app->db->beginTransaction();
+             
+           try {
+                $registro = DocumentosRegistrados::findOne(['contratista_id'=>$usuario->contratista_id, 'sys_tipo_registro_id'=>1]);
+                
+            if($objeto_acta->descripcion==null){
+                 $transaction->rollBack();
+                return "Debe ingresar objeto social"; 
+            }
+           
+            $objeto_acta->contratista_id = $usuario->contratista_id;
+            $objeto_acta->documento_registrado_id= $registro->id;
+            $objeto_acta->tipo_objeto= "PRINCIPAL"; 
+            
+               if ($objeto_acta->save()) {
+           
+
+                               $transaction->commit();
+                               return "Datos guardados con exito";
+                               
+
+
+                   }else{
+                        $transaction->rollBack();
+                       return "Datos no guardados";
+                   }
+             
+             
+           } catch (Exception $e) {
+               $transaction->rollBack();
+           }
+        }
+        
+        
     }
 
     /**

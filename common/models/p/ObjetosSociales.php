@@ -55,7 +55,7 @@ class ObjetosSociales extends \common\components\BaseActiveRecord
             'contratista_id' => Yii::t('app', 'Contratista ID'),
             'documento_registrado_id' => Yii::t('app', 'Documento Registrado ID'),
             'tipo_objeto' => Yii::t('app', 'Tipo Objeto'),
-            'descripcion' => Yii::t('app', 'Descripcion'),
+            'descripcion' => Yii::t('app', 'Objeto Social'),
             'sys_status' => Yii::t('app', 'Sys Status'),
             'sys_creado_el' => Yii::t('app', 'Sys Creado El'),
             'sys_actualizado_el' => Yii::t('app', 'Sys Actualizado El'),

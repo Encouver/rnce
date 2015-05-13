@@ -203,3 +203,56 @@ alter table comisarios_auditores alter column fecha_vencimiento drop not null;
 
 ALTER TABLE comisarios_auditores ADD COLUMN fecha_informe date;
 COMMENT ON COLUMN comisarios_auditores.fecha_informe IS 'Fecha informe';
+
+
+--13 mayo 2015
+
+ALTER TABLE activos.documentos_registrados DROP COLUMN valor_adquisicion;
+
+-- Table: sys_circunscripciones
+
+-- DROP TABLE sys_circunscripciones;
+
+CREATE TABLE sys_circunscripciones
+(
+  id serial NOT NULL, -- Clave primaria
+  nombre character varying(255) NOT NULL, -- Nombre de la circunscripcion
+  sys_status boolean NOT NULL DEFAULT true, -- Estatus interno del sistema
+  sys_creado_el timestamp with time zone DEFAULT now(), -- Fecha de creación del registro.
+  sys_actualizado_el timestamp with time zone DEFAULT now(), -- Fecha de última actualización del registro.
+  sys_finalizado_el timestamp with time zone DEFAULT now(), -- Fecha de "eliminado" el registro.
+  CONSTRAINT sys_circunscripciones_pkey PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE sys_circunscripciones
+  OWNER TO eureka;
+COMMENT ON TABLE sys_circunscripciones
+  IS 'Tabla donde se almacenan las circunscripciones asociadas a documentos registrados';
+COMMENT ON COLUMN sys_circunscripciones.id IS 'Clave primaria';
+COMMENT ON COLUMN sys_circunscripciones.nombre IS 'Nombre de la circunscripcion';
+COMMENT ON COLUMN sys_circunscripciones.sys_status IS 'Estatus interno del sistema';
+COMMENT ON COLUMN sys_circunscripciones.sys_creado_el IS 'Fecha de creación del registro.';
+COMMENT ON COLUMN sys_circunscripciones.sys_actualizado_el IS 'Fecha de última actualización del registro.';
+COMMENT ON COLUMN sys_circunscripciones.sys_finalizado_el IS 'Fecha de "eliminado" el registro.';
+
+ALTER TABLE activos.documentos_registrados DROP COLUMN circunscripcion;
+
+
+
+ALTER TABLE activos.documentos_registrados ADD COLUMN sys_circunscripcion_id integer;
+ALTER TABLE activos.documentos_registrados ALTER COLUMN sys_circunscripcion_id SET NOT NULL;
+COMMENT ON COLUMN activos.documentos_registrados.sys_circunscripcion_id IS 'Clave foranea a la tabla sys_circunscripciones';
+
+
+
+ALTER TABLE activos.documentos_registrados
+  ADD CONSTRAINT documentos_registrados_sys_circunscripcion_id_fkey FOREIGN KEY (sys_circunscripcion_id)
+      REFERENCES sys_circunscripciones (id) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+ALTER TABLE duraciones_empresas ADD COLUMN "duracion_años" integer;
+ALTER TABLE duraciones_empresas ALTER COLUMN "duracion_años" SET NOT NULL;
+COMMENT ON COLUMN duraciones_empresas."duracion_años" IS 'Años de duracion';

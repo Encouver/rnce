@@ -18,7 +18,7 @@ class DuracionesEmpresasSearch extends DuracionesEmpresas
     public function rules()
     {
         return [
-            [['id', 'contratista_id', 'documento_registrado_id', 'tiempo_prorroga'], 'integer'],
+            [['id', 'contratista_id', 'documento_registrado_id', 'tiempo_prorroga', 'duracion_años'], 'integer'],
             [['fecha_vencimiento', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['sys_status'], 'boolean'],
         ];
@@ -51,7 +51,7 @@ class DuracionesEmpresasSearch extends DuracionesEmpresas
         $this->load($params);
 
         if (!$this->validate()) {
-            // uncomment the following line if you do not want to any records when validation fails
+            // uncomment the following line if you do not want to return any records when validation fails
             // $query->where('0=1');
             return $dataProvider;
         }
@@ -66,6 +66,7 @@ class DuracionesEmpresasSearch extends DuracionesEmpresas
             'sys_creado_el' => $this->sys_creado_el,
             'sys_actualizado_el' => $this->sys_actualizado_el,
             'sys_finalizado_el' => $this->sys_finalizado_el,
+            'duracion_años' => $this->duracion_años,
         ]);
 
         return $dataProvider;

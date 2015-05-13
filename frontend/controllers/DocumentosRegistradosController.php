@@ -73,6 +73,56 @@ class DocumentosRegistradosController extends Controller
             ]);
         }
     }
+    public function actionCrearacta()
+    {
+        $registro_acta = new DocumentosRegistrados();
+            
+          
+            return $this->render('registros_actas', [
+                'registro_acta' => $registro_acta,
+            ]);
+        
+    }
+     public function actionRegistroacta(){
+        
+       $registro_acta = new DocumentosRegistrados();
+      
+        $usuario= \common\models\p\User::findOne(Yii::$app->user->identity->id);
+        if ( $registro_acta->load(Yii::$app->request->post())) {
+            
+             $transaction = \Yii::$app->db->beginTransaction();
+             
+           try {
+               
+            if($registro_acta->fecha_asamblea==null){
+                 $transaction->rollBack();
+                return "Debe ingresar fecha asamblea"; 
+            }
+           
+            $registro_acta->contratista_id = $usuario->contratista_id;
+            $registro_acta->sys_tipo_registro_id=1;
+         
+               if ( $registro_acta->save()) {
+           
+
+                               $transaction->commit();
+                               return "Datos guardados con exito";
+                               
+
+
+                   }else{
+                        $transaction->rollBack();
+                       return "Datos no guardados";
+                   }
+             
+             
+           } catch (Exception $e) {
+               $transaction->rollBack();
+           }
+        }
+        
+        
+    }
 
     /**
      * Updates an existing DocumentosRegistrados model.

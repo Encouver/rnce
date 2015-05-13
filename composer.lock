@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c439799b0f724f515e7fd81397d3c206",
+    "hash": "f0d3e4d4145171b0a5ad60e28b0e7cf6",
     "packages": [
         {
             "name": "amnah/yii2-classes",

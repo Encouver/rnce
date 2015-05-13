@@ -1,11 +1,11 @@
 <?php
 
 namespace common\models\p;
-
+use kartik\builder\Form;
 use Yii;
 
 /**
- * This is the model class for table "public.duraciones_empresas".
+ * This is the model class for table "duraciones_empresas".
  *
  * @property integer $id
  * @property integer $contratista_id
@@ -16,10 +16,11 @@ use Yii;
  * @property string $sys_creado_el
  * @property string $sys_actualizado_el
  * @property string $sys_finalizado_el
+ * @property integer $duracion_años
  *
  * @property ActasConstitutivas[] $actasConstitutivas
+ * @property ActivosDocumentosRegistrados $documentoRegistrado
  * @property Contratistas $contratista
- * @property DocumentosRegistrados $documentoRegistrado
  */
 class DuracionesEmpresas extends \common\components\BaseActiveRecord
 {
@@ -28,7 +29,7 @@ class DuracionesEmpresas extends \common\components\BaseActiveRecord
      */
     public static function tableName()
     {
-        return 'public.duraciones_empresas';
+        return 'duraciones_empresas';
     }
 
     /**
@@ -37,8 +38,8 @@ class DuracionesEmpresas extends \common\components\BaseActiveRecord
     public function rules()
     {
         return [
-            [['contratista_id', 'documento_registrado_id', 'fecha_vencimiento'], 'required'],
-            [['contratista_id', 'documento_registrado_id', 'tiempo_prorroga'], 'integer'],
+            [['contratista_id', 'documento_registrado_id', 'fecha_vencimiento', 'duracion_años'], 'required'],
+            [['contratista_id', 'documento_registrado_id', 'tiempo_prorroga', 'duracion_años'], 'integer'],
             [['fecha_vencimiento', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['sys_status'], 'boolean']
         ];
@@ -59,6 +60,7 @@ class DuracionesEmpresas extends \common\components\BaseActiveRecord
             'sys_creado_el' => Yii::t('app', 'Sys Creado El'),
             'sys_actualizado_el' => Yii::t('app', 'Sys Actualizado El'),
             'sys_finalizado_el' => Yii::t('app', 'Sys Finalizado El'),
+            'duracion_años' => Yii::t('app', 'Duracion Años'),
         ];
     }
 
@@ -73,16 +75,37 @@ class DuracionesEmpresas extends \common\components\BaseActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getContratista()
+    public function getDocumentoRegistrado()
     {
-        return $this->hasOne(Contratistas::className(), ['id' => 'contratista_id']);
+        return $this->hasOne(ActivosDocumentosRegistrados::className(), ['id' => 'documento_registrado_id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getDocumentoRegistrado()
+    public function getContratista()
     {
-        return $this->hasOne(DocumentosRegistrados::className(), ['id' => 'documento_registrado_id']);
+        return $this->hasOne(Contratistas::className(), ['id' => 'contratista_id']);
     }
+    public function getFormAttribs() {
+      
+        
+       
+    return [
+            'duracion_años'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Tiempo en años']],
+            'fecha_vencimiento'=>[
+                'type'=>Form::INPUT_WIDGET, 
+                'widgetClass'=>'\kartik\widgets\DatePicker', 
+                'options'=>['pluginOptions' => [
+                    'autoclose'=>true,
+                    'format' => 'yyyy-mm-dd'
+                ]],
+                ], 
+          
+      
+    ];
+    
+    
+    }
+    
 }
