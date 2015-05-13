@@ -51,7 +51,7 @@ AppAsset::register($this);
                          ['label' => 'Obligaciones Bancarias', 'url' => ['/aa-obligaciones-bancarias/index']],
                     ],
                 ],
-                ['label' => 'Bienes',
+                ['label' => 'Activos',
                     'items' => [
                          ['label' => 'Crear bien', 'url' => ['/bienes/create']],
                          ['label' => 'Activos', 'url' => ['/activos/index']],

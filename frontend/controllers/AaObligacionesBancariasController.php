@@ -63,11 +63,15 @@ class AaObligacionesBancariasController extends BaseController
     public function actionIndex()
     {
         $searchModel = new AaObligacionesBancariasSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $searchModel->corriente = true;
+        $dataProviderC = $searchModel->search(Yii::$app->request->queryParams);
+        $searchModel->corriente = false;
+        $dataProviderNc = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'dataProviderC' => $dataProviderC,
+            'dataProviderNc' => $dataProviderNc,
         ]);
     }
 
