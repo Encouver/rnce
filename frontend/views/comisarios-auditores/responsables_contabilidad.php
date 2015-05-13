@@ -11,6 +11,7 @@ use yii\bootstrap\Modal;
 use kartik\builder\Form;
 use yii\helpers\ArrayHelper;
 use yii\grid\GridView;
+use common\models\p\SysPaises;
 
 
 /* @var $this yii\web\View */
@@ -21,6 +22,7 @@ use yii\grid\GridView;
 //$natural_juridica= SysNaturalesJuridicas::findOne(['id' => $contratista->natural_juridica_id]);
 
 $url = \yii\helpers\Url::to(['accionistas-otros/naturaljuridicalist']);
+$url2 = \yii\helpers\Url::to(['comisarios-auditores/responsablecontabilidad']);
 $persona_natural = new PersonasNaturales();
 
 
@@ -45,8 +47,12 @@ SCRIPT;
 ]);?>
     <?php $form2 = ActiveForm::begin(['id'=>'modal_pnatural', 'type'=>ActiveForm::TYPE_VERTICAL]); ?>
     
+      <?= $form2->field($persona_natural, 'sys_pais_id')->dropDownList(
+                           ArrayHelper::map(SysPaises::find()->all(),'id','nombre'),
+                                  ['prompt' => 'Seleccione Pais'] 
+                               ) ?>
     
-    <?= $form2->field($persona_natural, 'rif')->textInput(['maxlength' => 50]) ?>
+    <?= $form2->field($persona_natural, 'numero_identificacion')->textInput(['maxlength' => 50]) ?>
     
     <?php echo Form::widget([
     'model'=>$persona_natural,
@@ -64,17 +70,17 @@ SCRIPT;
     <?php ActiveForm::end(); ?>
    <?php Modal::end();?>
 </div>
-<div class="col-sm-9" style="margin-bottom: 10px;">
+<div class="col-sm-6" style="margin-bottom: 10px;">
     
    
     <?php $form = ActiveForm::begin([
-        'id'=>'c_comisarios',
+        'id'=>'r_contabilidades',
         'type'=>ActiveForm::TYPE_VERTICAL
   ]); ?>
     
      
  
-<?= $form->field($comisario, 'natural_juridica_id')->widget(Select2::classname(), [
+<?= $form->field($responsable_contabilidad, 'natural_juridica_id')->widget(Select2::classname(), [
     'options' => ['placeholder' => 'Numero de identificacion ...'],
     'pluginOptions' => [
         'allowClear' => true,
@@ -88,26 +94,15 @@ SCRIPT;
         'initSelection' => new JsExpression($initScript)
     ],
 ]);?>
-     <?php echo Form::widget([
-    'model'=>$comisario,
-    'form'=>$form,
-    'columns'=>2,
-    'attributes'=>$comisario->formAttribs
-      ]); ?>
-    
-  
+  <?= $form->field($responsable_contabilidad, 'colegiatura')->textInput(['maxlength' => 50]) ?>
      
     
     <div id="output17"></div>
       <div class="form-group">
-         <?= Html::Button(Yii::t('app', 'Enviar'), ['class' => 'btn btn-success', 'id' => 'enviar17']) ?> 
+         <?= Html::Button(Yii::t('app', 'Enviar'), ['class' => 'btn btn-success', 'id' => 'enviar']) ?> 
     </div>
-    <?php ActiveForm::end(); ?>
     
-    
-    
-    
-    
+     <?php ActiveForm::end(); ?>
 
    <?php
 $script = <<< JS
@@ -123,7 +118,7 @@ $script = <<< JS
                 e.stopImmediatePropagation();
                $.ajax({
                    
-                    url: 'http://localhost/rnce/frontend/web/index.php?r=personas-naturales/crearcomisario',
+                    url: 'http://localhost/rnce/frontend/web/index.php?r=personas-naturales/crearpersonanatural',
                     type: 'post',
                     data: $('form#modal_pnatural').serialize(),
                     success: function(data) {
@@ -133,21 +128,21 @@ $script = <<< JS
                 
             }
     });
-     $('#enviar17').click(function(e){
+     $('#enviar').click(function(e){
           
-            if($('form#c_comisarios').find('.has-error').length!=0){
+            if($('form#r_contabilidades').find('.has-error').length!=0){
               
                 return false;
             }else
             {
-                //$('form#c_comisarios').submit();
+                //$('form#r_contabilidades').submit();
                 e.preventDefault();
                 e.stopImmediatePropagation();
                $.ajax({
                    
-                    url: 'http://localhost/rnce/frontend/web/index.php?r=comisarios-auditores/comisario',
+                    url: '$url2',
                     type: 'post',
-                    data: $('form#c_comisarios').serialize(),
+                    data: $('form#r_contabilidades').serialize(),
                     success: function(data) {
                              $( "#output17" ).html( data ); 
                     }

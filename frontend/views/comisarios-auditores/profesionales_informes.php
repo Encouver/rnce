@@ -11,6 +11,7 @@ use yii\bootstrap\Modal;
 use kartik\builder\Form;
 use yii\helpers\ArrayHelper;
 use yii\grid\GridView;
+use common\models\p\SysPaises;
 
 
 /* @var $this yii\web\View */
@@ -21,6 +22,7 @@ use yii\grid\GridView;
 //$natural_juridica= SysNaturalesJuridicas::findOne(['id' => $contratista->natural_juridica_id]);
 
 $url = \yii\helpers\Url::to(['accionistas-otros/naturaljuridicalist']);
+$url2 = \yii\helpers\Url::to(['comisarios-auditores/profesionalinforme']);
 $persona_natural = new PersonasNaturales();
 
 
@@ -45,8 +47,12 @@ SCRIPT;
 ]);?>
     <?php $form2 = ActiveForm::begin(['id'=>'modal_pnatural', 'type'=>ActiveForm::TYPE_VERTICAL]); ?>
     
+      <?= $form2->field($persona_natural, 'sys_pais_id')->dropDownList(
+                           ArrayHelper::map(SysPaises::find()->all(),'id','nombre'),
+                                  ['prompt' => 'Seleccione Pais'] 
+                               ) ?>
     
-    <?= $form2->field($persona_natural, 'rif')->textInput(['maxlength' => 50]) ?>
+    <?= $form2->field($persona_natural, 'numero_identificacion')->textInput(['maxlength' => 50]) ?>
     
     <?php echo Form::widget([
     'model'=>$persona_natural,
@@ -68,13 +74,13 @@ SCRIPT;
     
    
     <?php $form = ActiveForm::begin([
-        'id'=>'c_comisarios',
+        'id'=>'p_informes',
         'type'=>ActiveForm::TYPE_VERTICAL
   ]); ?>
     
      
  
-<?= $form->field($comisario, 'natural_juridica_id')->widget(Select2::classname(), [
+<?= $form->field($profesional_informe, 'natural_juridica_id')->widget(Select2::classname(), [
     'options' => ['placeholder' => 'Numero de identificacion ...'],
     'pluginOptions' => [
         'allowClear' => true,
@@ -88,26 +94,20 @@ SCRIPT;
         'initSelection' => new JsExpression($initScript)
     ],
 ]);?>
-     <?php echo Form::widget([
-    'model'=>$comisario,
+   <?php echo Form::widget([
+    'model'=>$profesional_informe,
     'form'=>$form,
-    'columns'=>2,
-    'attributes'=>$comisario->formAttribs
+    'columns'=>3,
+    'attributes'=>$profesional_informe->formAttribsprofesional
       ]); ?>
-    
-  
      
     
     <div id="output17"></div>
       <div class="form-group">
-         <?= Html::Button(Yii::t('app', 'Enviar'), ['class' => 'btn btn-success', 'id' => 'enviar17']) ?> 
+         <?= Html::Button(Yii::t('app', 'Enviar'), ['class' => 'btn btn-success', 'id' => 'enviar']) ?> 
     </div>
-    <?php ActiveForm::end(); ?>
     
-    
-    
-    
-    
+     <?php ActiveForm::end(); ?>
 
    <?php
 $script = <<< JS
@@ -123,7 +123,7 @@ $script = <<< JS
                 e.stopImmediatePropagation();
                $.ajax({
                    
-                    url: 'http://localhost/rnce/frontend/web/index.php?r=personas-naturales/crearcomisario',
+                    url: 'http://localhost/rnce/frontend/web/index.php?r=personas-naturales/crearpersonanatural',
                     type: 'post',
                     data: $('form#modal_pnatural').serialize(),
                     success: function(data) {
@@ -133,21 +133,21 @@ $script = <<< JS
                 
             }
     });
-     $('#enviar17').click(function(e){
+     $('#enviar').click(function(e){
           
-            if($('form#c_comisarios').find('.has-error').length!=0){
+            if($('form#p_informes').find('.has-error').length!=0){
               
                 return false;
             }else
             {
-                //$('form#c_comisarios').submit();
+                //$('form#p_informes').submit();
                 e.preventDefault();
                 e.stopImmediatePropagation();
                $.ajax({
                    
-                    url: 'http://localhost/rnce/frontend/web/index.php?r=comisarios-auditores/comisario',
+                    url: '$url2',
                     type: 'post',
-                    data: $('form#c_comisarios').serialize(),
+                    data: $('form#p_informes').serialize(),
                     success: function(data) {
                              $( "#output17" ).html( data ); 
                     }

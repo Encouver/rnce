@@ -24,6 +24,7 @@ use Yii;
  * @property boolean $responsable_contabilidad
  * @property boolean $informe_conversion
  * @property integer $natural_juridica_id
+ * @property integer $fecha_informe
  */
 class ComisariosAuditores extends \common\components\BaseActiveRecord
 {
@@ -41,8 +42,8 @@ class ComisariosAuditores extends \common\components\BaseActiveRecord
     public function rules()
     {
         return [
-            [['fecha_vencimiento', 'tipo_profesion', 'fecha_carta', 'contratista_id', 'comisario', 'auditor', 'responsable_contabilidad', 'informe_conversion', 'natural_juridica_id'], 'required'],
-            [['fecha_vencimiento', 'fecha_carta', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
+            [[ 'contratista_id', 'natural_juridica_id'], 'required'],
+            [['fecha_vencimiento','fecha_informe', 'fecha_carta', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['declaracion_jurada', 'comisario', 'sys_status', 'auditor', 'responsable_contabilidad', 'informe_conversion'], 'boolean'],
             [['tipo_profesion'], 'string'],
             [['documento_registrado_id', 'contratista_id', 'natural_juridica_id'], 'integer'],
@@ -73,6 +74,7 @@ class ComisariosAuditores extends \common\components\BaseActiveRecord
             'responsable_contabilidad' => Yii::t('app', 'Responsable Contabilidad'),
             'informe_conversion' => Yii::t('app', 'Informe Conversion'),
             'natural_juridica_id' => Yii::t('app', 'Persona Natural'),
+            'fecha_informe' => Yii::t('app', 'Fecha Informe'),
         ];
     }
     
@@ -82,7 +84,7 @@ class ComisariosAuditores extends \common\components\BaseActiveRecord
         
         $profesiones =[ 'CONTADOR PUBLICO' => 'CONTADOR PUBLICO', 'ADMINISTRADOR' => 'ADMINISTRADOR', 'ECONOMISTA' => 'ECONOMISTA', ];
     return [
-          'tipo_profesion'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>$profesiones , 'options'=>['placeholder'=>'Enter username...']],
+          'tipo_profesion'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>$profesiones , 'options'=>['prompt'=>'Seleccione profesion']],
          'colegiatura'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Numero de colegiatura']],
         'fecha_carta'=>[
             'type'=>Form::INPUT_WIDGET, 
@@ -106,7 +108,45 @@ class ComisariosAuditores extends \common\components\BaseActiveRecord
     
     
     }
+     public function getFormAttribscontador() {
+        //$data=[ 'NACIONAL' => 'NACIONAL', 'EXTRANJERA' => 'EXTRANJERA', ];
+        
+    return [
+         'colegiatura'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Numero de colegiatura']],
+        'fecha_vencimiento'=>[
+            'type'=>Form::INPUT_WIDGET, 
+            'widgetClass'=>'\kartik\widgets\DatePicker', 
+            'options'=>['pluginOptions' => [
+                    'autoclose'=>true,
+                    'format' => 'yyyy-mm-dd'
+                ]],
+        ],
+      
+      
+    ];
     
     
+    }
+    public function getFormAttribsprofesional() {
     
+        
+        $profesiones =[ 'CONTADOR PUBLICO' => 'CONTADOR PUBLICO', 'ADMINISTRADOR' => 'ADMINISTRADOR', 'ECONOMISTA' => 'ECONOMISTA', ];
+    return [
+          'tipo_profesion'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>$profesiones , 'options'=>['prompt'=>'Seleccione profesion']],
+         'colegiatura'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Numero de colegiatura']],
+       
+        'fecha_informe'=>[
+            'type'=>Form::INPUT_WIDGET, 
+            'widgetClass'=>'\kartik\widgets\DatePicker', 
+            'options'=>['pluginOptions' => [
+                    'autoclose'=>true,
+                    'format' => 'yyyy-mm-dd'
+                ]],
+        ],
+    ];
+    
+    
+    }
+    
+   
 }

@@ -46,7 +46,7 @@ class ComisariosAuditoresSearch extends ComisariosAuditores
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-            'pagination' => 10,
+            //'pagination' => 10,
         ]);
 
         $this->load($params);
@@ -63,7 +63,7 @@ class ComisariosAuditoresSearch extends ComisariosAuditores
             'declaracion_jurada' => $this->declaracion_jurada,
             'fecha_carta' => $this->fecha_carta,
             'documento_registrado_id' => $this->documento_registrado_id,
-            'contratista_id' => $this->contratista_id,
+            'contratista_id' => Yii::$app->user->identity->contratista_id,
             'comisario' => $this->comisario,
             'sys_status' => $this->sys_status,
             'sys_creado_el' => $this->sys_creado_el,
