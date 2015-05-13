@@ -1,69 +1,72 @@
 <?php
 
+
+use kartik\widgets\ActiveForm;
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
-use yii\helpers\ArrayHelper;
-use common\models\p\SysCaev;
+use kartik\builder\Form;
+
+
 /* @var $this yii\web\View */
-/* @var $model common\models\p\ActividadesEconomicas */
+/* @var $model common\models\p\Contratistas */
 /* @var $form yii\widgets\ActiveForm */
+
+//$contratista= Contratistas::findOne( ['id' => $id_contratista]);
+//$natural_juridica= SysNaturalesJuridicas::findOne(['id' => $contratista->natural_juridica_id]);
+
+$url = \yii\helpers\Url::to(['actividades-economicas/actividadacta']);
+
 ?>
 
-<div class="actividades-economicas-form">
-
+<div class="col-sm-12" style="margin-bottom: 10px;">
+    
+   
     <?php $form = ActiveForm::begin([
-        'id' => "a_economica",
+        'id'=>'ae_actas',
+        'type'=>ActiveForm::TYPE_VERTICAL
+  ]); ?>
+    
+
+     <?php echo Form::widget([
+    'model'=>$actividad_economica,
+    'form'=>$form,
+    'columns'=>2,
+    'attributes'=>$actividad_economica->formAttribs
+      ]); ?>
+    
   
-
-]); ?>
-    <div id="output7"></div>
-     <?= $form->field($actividad_economica, 'ppal_caev_id')->dropDownList(
-        ArrayHelper::map(SysCaev::find()->all(),'id','denominacion'),
-        ['prompt' => 'Seleccione Actividad economica principal'] 
-             ) ?>
-
+     
     
-    <?= $form->field($actividad_economica, 'ppal_experiencia')->textInput() ?>
-
-     <?= $form->field($actividad_economica, 'comp1_caev_id')->dropDownList(
-        ArrayHelper::map(SysCaev::find()->all(),'id','denominacion'),
-        ['prompt' => 'Seleccione actividad economica complementaria 1'] 
-             ) ?>
-    
-     <?= $form->field($actividad_economica, 'comp1_experiencia')->textInput() ?>
-
-     <?= $form->field($actividad_economica, 'comp2_caev_id')->dropDownList(
-        ArrayHelper::map(SysCaev::find()->all(),'id','denominacion'),
-        ['prompt' => 'Seleccione actividad economica complementaria 2'] 
-             ) ?>
-    
-
-    <?= $form->field($actividad_economica, 'comp2_experiencia')->textInput() ?>
-
+    <div id="output17"></div>
       <div class="form-group">
-         <?= Html::Button(Yii::t('app', 'Enviar'), ['class' => 'btn btn-success', 'id' => 'enviar7']) ?> 
+         <?= Html::Button(Yii::t('app', 'Enviar'), ['class' => 'btn btn-success', 'id' => 'enviar']) ?> 
     </div>
-
     <?php ActiveForm::end(); ?>
-    <?php
+    
+    
+    
+    
+    
+
+   <?php
 $script = <<< JS
-    $('#enviar7').click(function(e){
+   
+     $('#enviar').click(function(e){
           
-            if($('form#a_economica').find('.has-error').length!=0){
+            if($('form#ae_actas').find('.has-error').length!=0){
               
                 return false;
             }else
             {
-                //$('form#p_contacto').submit();
+                //$('form#ae_actas').submit();
                 e.preventDefault();
                 e.stopImmediatePropagation();
                $.ajax({
                    
-                    url: 'http://localhost/rnce/frontend/web/index.php?r=contratistas/actividadeconomica',
+                    url: '$url',
                     type: 'post',
-                    data: $('form#a_economica').serialize(),
+                    data: $('form#ae_actas').serialize(),
                     success: function(data) {
-                             $( "#output7" ).html( data ); 
+                             $( "#output17" ).html( data ); 
                     }
                 });
                 
@@ -75,3 +78,6 @@ $this->registerJs($script);
 ?>
 
 </div>
+
+
+

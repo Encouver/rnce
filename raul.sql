@@ -205,6 +205,8 @@ ALTER TABLE comisarios_auditores ADD COLUMN fecha_informe date;
 COMMENT ON COLUMN comisarios_auditores.fecha_informe IS 'Fecha informe';
 
 
+
+
 --13 mayo 2015
 
 ALTER TABLE activos.documentos_registrados DROP COLUMN valor_adquisicion;
@@ -253,6 +255,22 @@ ALTER TABLE activos.documentos_registrados
       ON UPDATE CASCADE ON DELETE CASCADE;
 
 
-ALTER TABLE duraciones_empresas ADD COLUMN "duracion_años" integer;
-ALTER TABLE duraciones_empresas ALTER COLUMN "duracion_años" SET NOT NULL;
-COMMENT ON COLUMN duraciones_empresas."duracion_años" IS 'Años de duracion';
+
+ALTER TABLE duraciones_empresas ADD COLUMN duracion_anos integer;
+ALTER TABLE duraciones_empresas ALTER COLUMN duracion_anos SET NOT NULL;
+COMMENT ON COLUMN duraciones_empresas.duracion_anos IS 'Años de duracion';
+
+
+
+ALTER TABLE actividades_economicas ADD COLUMN documento_registrado_id integer;
+ALTER TABLE actividades_economicas ALTER COLUMN documento_registrado_id SET NOT NULL;
+COMMENT ON COLUMN actividades_economicas.documento_registrado_id IS 'Clave foranea a la tabla documentos registrados';
+
+
+ALTER TABLE actividades_economicas
+  ADD CONSTRAINT actividades_economicas_documento_registrado_id_fkey FOREIGN KEY (documento_registrado_id)
+      REFERENCES activos.documentos_registrados (id) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+ALTER TABLE actividades_economicas ALTER COLUMN comp2_experiencia SET NOT NULL;

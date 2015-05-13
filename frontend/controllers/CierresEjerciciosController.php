@@ -4,6 +4,7 @@ namespace frontend\controllers;
 
 use Yii;
 use common\models\p\CierresEjercicios;
+use common\models\a\DocumentosRegistrados;
 use app\models\CierresEjerciciosSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -74,7 +75,58 @@ class CierresEjerciciosController extends Controller
             ]);
         }
     }
+     public function actionCrearcierreacta()
+    {
+        $cierre_ejercicio = new CierresEjercicios();
+            
+          
+            return $this->render('cierres_actas', [
+                'cierre_ejercicio' => $cierre_ejercicio,
+            ]);
+        
+    }
+     public function actionCierreacta(){
+        
+        $cierre_acta = new CierresEjercicios();
+      
+        $usuario= \common\models\p\User::findOne(Yii::$app->user->identity->id);
+       
+        if ( $cierre_acta->load(Yii::$app->request->post())) {
+            
+             $transaction = \Yii::$app->db->beginTransaction();
+             
+           try {
+                $registro = DocumentosRegistrados::findOne(['contratista_id'=>$usuario->contratista_id, 'sys_tipo_registro_id'=>1]);
+                
+            if($cierre_acta->fecha_cierre==null){
+                 $transaction->rollBack();
+                return "Debe ingresar fecha de cierre"; 
+            }
+           
+            $cierre_acta->contratista_id = $usuario->contratista_id;
+            $cierre_acta->documento_registrado_id= $registro->id;
+            
+               if ($cierre_acta->save()) {
+           
 
+                               $transaction->commit();
+                               return "Datos guardados con exito";
+                               
+
+
+                   }else{
+                        $transaction->rollBack();
+                       return "Datos no guardados";
+                   }
+             
+             
+           } catch (Exception $e) {
+               $transaction->rollBack();
+           }
+        }
+        
+        
+    }
     /**
      * Updates an existing CierresEjercicios model.
      * If update is successful, the browser will be redirected to the 'view' page.

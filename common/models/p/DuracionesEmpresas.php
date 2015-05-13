@@ -16,7 +16,7 @@ use Yii;
  * @property string $sys_creado_el
  * @property string $sys_actualizado_el
  * @property string $sys_finalizado_el
- * @property integer $duracion_años
+ * @property integer $duracion_anos
  *
  * @property ActasConstitutivas[] $actasConstitutivas
  * @property ActivosDocumentosRegistrados $documentoRegistrado
@@ -38,8 +38,8 @@ class DuracionesEmpresas extends \common\components\BaseActiveRecord
     public function rules()
     {
         return [
-            [['contratista_id', 'documento_registrado_id', 'fecha_vencimiento', 'duracion_años'], 'required'],
-            [['contratista_id', 'documento_registrado_id', 'tiempo_prorroga', 'duracion_años'], 'integer'],
+            [['contratista_id', 'documento_registrado_id', 'fecha_vencimiento', 'duracion_anos'], 'required'],
+            [['contratista_id', 'documento_registrado_id', 'tiempo_prorroga', 'duracion_anos'], 'integer'],
             [['fecha_vencimiento', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['sys_status'], 'boolean']
         ];
@@ -60,7 +60,7 @@ class DuracionesEmpresas extends \common\components\BaseActiveRecord
             'sys_creado_el' => Yii::t('app', 'Sys Creado El'),
             'sys_actualizado_el' => Yii::t('app', 'Sys Actualizado El'),
             'sys_finalizado_el' => Yii::t('app', 'Sys Finalizado El'),
-            'duracion_años' => Yii::t('app', 'Duracion Años'),
+            'duracion_anos' => Yii::t('app', 'Duracion Años'),
         ];
     }
 
@@ -92,7 +92,7 @@ class DuracionesEmpresas extends \common\components\BaseActiveRecord
         
        
     return [
-            'duracion_años'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Tiempo en años']],
+            'duracion_anos'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Tiempo en años']],
             'fecha_vencimiento'=>[
                 'type'=>Form::INPUT_WIDGET, 
                 'widgetClass'=>'\kartik\widgets\DatePicker', 

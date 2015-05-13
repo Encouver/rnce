@@ -4,6 +4,7 @@ namespace frontend\controllers;
 
 use Yii;
 use common\models\p\DuracionesEmpresas;
+use common\models\a\DocumentosRegistrados;
 use app\models\DuracionesEmpresasSearch;
 use common\components\BaseController;
 use yii\web\NotFoundHttpException;

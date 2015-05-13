@@ -117,6 +117,7 @@ class ObjetosSocialesController extends Controller
 
 
                    }else{
+                       
                         $transaction->rollBack();
                        return "Datos no guardados";
                    }
