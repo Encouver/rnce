@@ -117,8 +117,8 @@ class ActividadesEconomicasController extends Controller
                    }else{
                        
                         $transaction->rollBack();
-                         return print_r($actividad_acta);
-                      // return "Datos no guardados";
+                        
+                      return "Datos no guardados";
                    }
              
              
