@@ -185,6 +185,8 @@ ALTER TABLE accionistas_otros ALTER COLUMN documento_registrado_id DROP NOT NULL
 Alter type tipo_profesion ADD VALUE 'ECONOMISTA' BEFORE 'ABOGADO';
 alter table comisarios_auditores alter column documento_registrado_id drop not null;
 
+
+
 -- Mayo 12 2015
 ALTER TABLE relaciones_contratos DROP COLUMN evaluacion_ente;
 
@@ -193,3 +195,11 @@ ALTER TABLE relaciones_contratos DROP COLUMN evaluacion_ente;
 ALTER TABLE relaciones_contratos ADD COLUMN evaluacion_ente boolean;
 ALTER TABLE relaciones_contratos ALTER COLUMN evaluacion_ente SET NOT NULL;
 COMMENT ON COLUMN relaciones_contratos.evaluacion_ente IS 'Evaluacion del ente';
+
+alter table comisarios_auditores alter column tipo_profesion drop not null;
+alter table comisarios_auditores alter column fecha_carta drop not null;
+alter table comisarios_auditores alter column fecha_vencimiento drop not null;
+
+
+ALTER TABLE comisarios_auditores ADD COLUMN fecha_informe date;
+COMMENT ON COLUMN comisarios_auditores.fecha_informe IS 'Fecha informe';

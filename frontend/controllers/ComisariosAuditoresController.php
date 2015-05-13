@@ -4,6 +4,7 @@ namespace frontend\controllers;
 
 use Yii;
 use common\models\p\ComisariosAuditores;
+use common\models\p\PersonasNaturales;
 use app\models\ComisariosAuditoresSearch;
 use common\components\BaseController;
 use yii\web\NotFoundHttpException;
@@ -128,8 +129,194 @@ class ComisariosAuditoresController extends BaseController
         }
         
     }
+      public function actionCrearresponsable()
+    {
+        $responsable_contabilidad = new ComisariosAuditores();
+         $searchModel = new ComisariosAuditoresSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+       
     
+        return $this->render('responsables_contabilidad', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'responsable_contabilidad' => $responsable_contabilidad,
+        ]);
+      
+        
+    }
+     public function actionResponsablecontabilidad(){
+        
+        
+        
+         $responsable_contabilidad = new ComisariosAuditores();
+        $usuario= \common\models\p\User::findOne(Yii::$app->user->identity->id);
+        if ( $responsable_contabilidad->load(Yii::$app->request->post())) {
+            
+             $transaction = \Yii::$app->db->beginTransaction();
+           try {
+          
+            
+            $responsable_contabilidad->contratista_id = $usuario->contratista_id;
+            $responsable_contabilidad->comisario=false;
+            $responsable_contabilidad->auditor=false;
+           $responsable_contabilidad->responsable_contabilidad=true;
+           $responsable_contabilidad->informe_conversion=false;
+          
+               if ( $responsable_contabilidad->save()) {
+           
 
+                               $transaction->commit();
+                               return "Datos guardados con exito";
+                               
+
+
+                   }else{
+                        $transaction->rollBack();
+                       return "Datos no guardados";
+                   }
+             
+             
+           } catch (Exception $e) {
+               $transaction->rollBack();
+           }
+        }
+        
+    }
+    public function actionCrearcontador()
+    {
+        $contador_auditor = new ComisariosAuditores();
+         $searchModel = new ComisariosAuditoresSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+       
+    
+        return $this->render('contadores_auditores', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'contador_auditor' => $contador_auditor,
+        ]);
+      
+        
+    }
+    public function actionContadorauditor(){
+        
+       $contador_auditor = new ComisariosAuditores();
+      
+        $usuario= \common\models\p\User::findOne(Yii::$app->user->identity->id);
+        if ( $contador_auditor->load(Yii::$app->request->post())) {
+            
+             $transaction = \Yii::$app->db->beginTransaction();
+             
+           try {
+               $natural_juridica = \common\models\p\SysNaturalesJuridicas::find()->where(['id'=>$contador_auditor->natural_juridica_id])->one();
+           
+               $persona_natural= PersonasNaturales::find()->where(['rif'=>$natural_juridica->rif])->one();
+            if(isset($persona_natural) && $contador_auditor->colegiatura==null){
+                 $transaction->rollBack();
+                return "Debe ingresar el numero de colegido"; 
+            }
+            if($contador_auditor->fecha_vencimiento==null){
+                
+                  $transaction->rollBack();
+                return "Debe ingresar la fecha de vencimineto"; 
+            }
+            $contador_auditor->contratista_id = $usuario->contratista_id;
+            $contador_auditor->comisario=false;
+            $contador_auditor->auditor=true;
+           $contador_auditor->responsable_contabilidad=false;
+           $contador_auditor->informe_conversion=false;
+         
+               if ( $contador_auditor->save()) {
+           
+
+                               $transaction->commit();
+                               return "Datos guardados con exito";
+                               
+
+
+                   }else{
+                        $transaction->rollBack();
+                       return "Datos no guardados";
+                   }
+             
+             
+           } catch (Exception $e) {
+               $transaction->rollBack();
+           }
+        }
+        
+        
+    }
+    
+      public function actionCrearprofesional()
+    {
+        $profesional_informe = new ComisariosAuditores();
+         $searchModel = new ComisariosAuditoresSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+       
+    
+        return $this->render('profesionales_informes', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'profesional_informe' => $profesional_informe,
+        ]);
+      
+        
+    }
+    
+    public function actionProfesionalinforme(){
+        
+       $profesional_informe = new ComisariosAuditores();
+      
+        $usuario= \common\models\p\User::findOne(Yii::$app->user->identity->id);
+        if (  $profesional_informe->load(Yii::$app->request->post())) {
+            
+             $transaction = \Yii::$app->db->beginTransaction();
+             
+           try {
+               $natural_juridica = \common\models\p\SysNaturalesJuridicas::find()->where(['id'=> $profesional_informe->natural_juridica_id])->one();
+           
+               $persona_natural= PersonasNaturales::find()->where(['rif'=>$natural_juridica->rif])->one();
+            if(isset($persona_natural) &&  $profesional_informe->colegiatura==null){
+                 $transaction->rollBack();
+                return "Debe ingresar el numero de colegido"; 
+            }
+            if( $profesional_informe->fecha_informe==null){
+                
+                  $transaction->rollBack();
+                return "Debe ingresar la fecha del informe"; 
+            }
+            if( $profesional_informe->tipo_profesion==null){
+                
+                  $transaction->rollBack();
+                return "Debe ingresar el tipo de profesion"; 
+            }
+             $profesional_informe->contratista_id = $usuario->contratista_id;
+             $profesional_informe->comisario=false;
+             $profesional_informe->auditor=false;
+             $profesional_informe->responsable_contabilidad=false;
+             $profesional_informe->informe_conversion=true;
+         
+               if ($profesional_informe->save()) {
+           
+
+                               $transaction->commit();
+                               return "Datos guardados con exito";
+                               
+
+
+                   }else{
+                        $transaction->rollBack();
+                       return "Datos no guardados";
+                   }
+             
+             
+           } catch (Exception $e) {
+               $transaction->rollBack();
+           }
+        }
+        
+        
+    }
     /**
      * Updates an existing ComisariosAuditores model.
      * If update is successful, the browser will be redirected to the 'view' page.
