@@ -23,10 +23,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
         <?php
         /*
-     $menuItems[] =  ['label'=>'Efectivos en bancos', 'url'=>['/aefectivos-bancos/create']];
-     $menuItems[] =   ['label'=>'Efectivos en caja', 'url'=>['/aefectivos-cajas/create']];
-              $menuItems[] =   ['label'=>'Inversiones para negociar', 'url'=>['/ainversiones-negociar/create']];
-        $menuItems[] = ['label'=>'Ver resumen', 'url'=>['/aefectivos-bancos/efectivosequivalentes']];
+     $menuItems[] =  ['label'=>'Efectivos en bancos', 'url'=>['/a-efectivos-bancos/create']];
+     $menuItems[] =   ['label'=>'Efectivos en caja', 'url'=>['/a-efectivos-cajas/create']];
+              $menuItems[] =   ['label'=>'Inversiones para negociar', 'url'=>['/a-inversiones-negociar/create']];
+        $menuItems[] = ['label'=>'Ver resumen', 'url'=>['/a-efectivos-bancos/efectivosequivalentes']];
             $navBarOptions = array();
  NavBar::begin($navBarOptions);
          echo NavX::widget([

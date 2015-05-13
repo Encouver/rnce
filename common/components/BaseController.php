@@ -13,7 +13,7 @@ class BaseController extends Controller
     public function probando() {
         exit();
     }
-    
+
 	public function behaviors()
 	{
 	    return [
