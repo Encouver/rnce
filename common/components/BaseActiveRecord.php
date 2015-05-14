@@ -168,4 +168,70 @@ class BaseActiveRecord extends ActiveRecord
             return null;
     }*/
 
+/*+++++++++++++++++++++++++++++++METODOS DISPONIBLES PARA HACER LOS CALCULOS EN EL SISTEMA++++++++++++++++++++++++++++*/
+
+    /**
+     * @return bool
+     */
+    public function getPromedio()
+    {
+        return true;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getPorCapas()
+    {
+        return true;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getDelCosto()
+    {
+        return true;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getLineal()
+    {
+        return true;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getDecreciente()
+    {
+        return true;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getBasadoUso()
+    {
+        return true;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getVarlorRazonable()
+    {
+        return true;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getRevaluacion()
+    {
+        return true;
+    }
+
 }
