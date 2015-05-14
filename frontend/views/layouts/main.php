@@ -218,12 +218,12 @@ AppAsset::register($this);
 
 
         // Above
-        echo TabsX::widget([
+        /*echo TabsX::widget([
             'items'=>$items,
             'position'=>TabsX::POS_ABOVE,
             'encodeLabels'=>false,
             'options' => ['class' =>'nav-tabs '],
-        ]);
+        ]);*/
 
        /* echo GhostNav::widget([
                 'encodeLabels'=>false,

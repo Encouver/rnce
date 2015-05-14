@@ -83,4 +83,23 @@ class SysTotales extends \common\components\BaseActiveRecord
     {
         return $this->hasMany(AInversionesNegociar::className(), ['total_id' => 'id']);
     }
+
+    /**
+     * @return bool
+     */
+    public function setTotales($id,$array,$total)
+    {
+        
+        return true;
+    }
+    /**
+     * @return array
+     */
+    public function getTotales($id=3) // solo para probar
+    {
+        //recibe el id del que se quiere obtener los valores, y retorna el array de los mismos.
+        $valor = $this::find()->where(['id' => $id])->one();
+        $valores = explode(",", $valor['valor']);
+        return $valores;
+    }   
 }

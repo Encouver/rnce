@@ -4,7 +4,10 @@ namespace frontend\controllers;
 
 use Yii;
 use common\models\c\AEfectivosBancos;
+use app\models\AEfectivosCajasSearch;
 use app\models\AEfectivosBancosSearch;
+use app\models\AInversionesNegociarSearch;
+
 use common\components\BaseController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -28,16 +31,27 @@ class AEfectivosBancosController extends BaseController
 
     public function actionEfectivosequivalentes()
     {
+        //['scenario' => 'nacional']
 
-        $model = new AEfectivosBancos(['scenario' => 'nacional']);
-
-        $query = $model::find()->indexBy('id'); // where `id` is your primary key
- 
-        $dataProvider = new \yii\data\ActiveDataProvider([
-            'query' => $query,
+        $efectivo_bancos = new AEfectivosBancosSearch();
+        $query_eb = $efectivo_bancos::find()->indexBy('id'); // where `id` is your primary key
+        $dataProvider_eb = new \yii\data\ActiveDataProvider([
+            'query' => $query_eb,
         ]);
 
-        return $this->render('efectivosequivalentes', ['dataProvider' => $dataProvider, 'model' => $model]);
+        $efectivo_caja = new AEfectivosCajasSearch();
+        $query_ec = $efectivo_caja::find()->indexBy('id'); // where `id` is your primary key
+        $dataProvider_ec = new \yii\data\ActiveDataProvider([
+            'query' => $query_ec,
+        ]);
+
+        $inversiones = new AInversionesNegociarSearch();
+        $query_in = $inversiones::find()->indexBy('id'); // where `id` is your primary key
+        $dataProvider_in = new \yii\data\ActiveDataProvider([
+            'query' => $query_in,
+        ]);
+
+        return $this->render('efectivosequivalentes', ['dataProvider_eb' => $dataProvider_eb, 'efectivo_bancos' => $efectivo_bancos, 'dataProvider_ec' => $dataProvider_ec, 'efectivo_caja' => $efectivo_caja, 'dataProvider_in' => $dataProvider_in, 'inversiones' => $inversiones]);
     }
 
     /**

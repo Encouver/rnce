@@ -241,11 +241,12 @@ $dynagrid = DynaGrid::begin([
     ],
     'options'=>['id'=>'dynagrid-C'] // a unique identifier is important
 ]);
+
 if (substr($dynagrid->theme, 0, 6) == 'simple') {
     $dynagrid->gridOptions['panel'] = false;
 }
-DynaGrid::end();
 
+DynaGrid::end();
 
 $dynagrid = DynaGrid::begin([
     'columns'=>$columns,
