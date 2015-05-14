@@ -60,7 +60,7 @@ class BaseActiveRecord extends ActiveRecord
            /*         'attributes'=>
                         [ActiveRecord::EVENT_BEFORE_VALIDATE => ['contratista_id']]*/
                 ],
-                'timestamp' => [
+   /*             'timestamp' => [
                     'class' => TimestampBehavior::className(),
                         'attributes' => [
                             ActiveRecord::EVENT_BEFORE_INSERT => ['sys_creado_el', 'sys_actualizado_el'],
@@ -68,7 +68,7 @@ class BaseActiveRecord extends ActiveRecord
                             //ActiveRecord::EVENT_BEFORE_DELETE => ['sys_finalizado_el'],
                         ],
                         'value' => new Expression('NOW()'),
-                ],
+                ],*/
 /*                'anhoTimestamp' => [
                     'class' => TimestampBehavior::className(),
                     'attributes' => [

@@ -3,6 +3,7 @@
 namespace frontend\controllers;
 
 use common\models\c\SysTotales;
+use webvimark\modules\UserManagement\components\GhostAccessControl;
 use Yii;
 use common\models\c\AaObligacionesBancarias;
 use app\models\AaObligacionesBancariasSearch;
@@ -18,14 +19,14 @@ class AaObligacionesBancariasController extends BaseController
 {
     public function behaviors()
     {
-        return [
+        return array_merge(parent::behaviors(),[
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['post'],
                 ],
             ],
-        ];
+        ]);
     }
 
     public function actionObligacionesbancarias(){
