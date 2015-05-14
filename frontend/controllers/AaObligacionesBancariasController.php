@@ -100,7 +100,7 @@ class AaObligacionesBancariasController extends BaseController
         if($model->load(Yii::$app->request->post()) /*&& $model->validate()*/)
         {
             $total = new SysTotales();
-            $total->contratista_id = $model->contratista_id = 1;
+            $total->contratista_id = $model->contratista_id = Yii::$app->user->identity->contratista_id;
             $total->classname = $model->className();
             $total->valor = "".($model->interes_pagar+$model->importe_deuda);
             $total->id_classname = 1;

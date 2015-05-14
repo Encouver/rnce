@@ -4,31 +4,23 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\a\ActivosBienes */
+/* @var $model common\models\a\ActivosMuebles */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="activos-bienes-form">
+<div class="activos-muebles-form">
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'sys_tipo_bien_id')->textInput() ?>
+    <?= $form->field($model, 'bien_id')->textInput() ?>
 
-    <?= $form->field($model, 'principio_contable')->textInput() ?>
+    <?= $form->field($model, 'marca')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'depreciable')->checkbox() ?>
+    <?= $form->field($model, 'modelo')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'deterioro')->checkbox() ?>
+    <?= $form->field($model, 'serial')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'detalle')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'origen')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'fecha_origen')->textInput() ?>
-
-    <?= $form->field($model, 'contratista_id')->textInput() ?>
-
-    <?= $form->field($model, 'propio')->checkbox() ?>
+    <?= $form->field($model, 'cantidad')->textInput() ?>
 
     <?= $form->field($model, 'sys_status')->checkbox() ?>
 

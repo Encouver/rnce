@@ -214,16 +214,17 @@ $dynagrid = DynaGrid::begin([
         //'filterModel'=>$searchModel,
         'showPageSummary'=>true,
         'floatHeader'=>true,
-        'pjax'=>true,
+        //'pjax'=>true,
+        'summary'=>'',
         'panel'=>[
             'heading'=>'<h3 class="panel-title"><i class="glyphicon glyphicon-book"></i> Obligaciones Bancarias - AA</h3>',
-            'before' =>  '<div style="padding-top: 7px;"><em> Cuenta AA - Obligaciones Bancarias</em></divs>',
+            'before' =>  '<div style="padding-top: 7px;"><em> <!--Cuenta AA - Obligaciones Bancarias--> Corriente</em></divs>',
             'after' => false
         ],
         'toolbar' =>  [
             ['content'=>
-                Html::a(Yii::t('app', '<i class="glyphicon glyphicon-plus"></i>'), ['create'], ['class' => 'btn btn-success'])  . ' '.
-                Html::a('<i class="glyphicon glyphicon-repeat"></i>', ['dynagrid-demo'], ['data-pjax'=>0, 'class' => 'btn btn-default', 'title'=>'Reset Grid'])
+                Html::a(Yii::t('app', '<i class="glyphicon glyphicon-plus"></i>'), ['create'], ['class' => 'btn btn-success'])  /*. ' '.
+                Html::a('<i class="glyphicon glyphicon-repeat"></i>', ['dynagrid-demo'], ['data-pjax'=>0, 'class' => 'btn btn-default', 'title'=>'Reset Grid'])*/
             ],
             ['content'=>'{dynagridFilter}{dynagridSort}{dynagrid}'],
             '{export}', ['class' => '\kartik\grid\ActionColumn', 'template' => '{view}',
@@ -259,7 +260,7 @@ $dynagrid = DynaGrid::begin([
         'pjax'=>true,
         'panel'=>[
             'heading'=>'<h3 class="panel-title"><i class="glyphicon glyphicon-book"></i> Obligaciones Bancarias - AA</h3>',
-            'before' =>  '<div style="padding-top: 7px;"><em> Cuenta AA - Obligaciones Bancarias</em></divs>',
+            'before' =>  '<div style="padding-top: 7px;"><em> <!--Cuenta AA - Obligaciones Bancarias--> No Corriente</em></divs>',
             'after' => false
         ],
         'toolbar' =>  [

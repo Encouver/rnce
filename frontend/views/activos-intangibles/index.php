@@ -4,19 +4,19 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\ActivosBienesSearch */
+/* @var $searchModel app\models\ActivosIntangiblesSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Activos Bienes');
+$this->title = Yii::t('app', 'Activos Activos Intangibles');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="activos-bienes-index">
+<div class="activos-activos-intangibles-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a(Yii::t('app', 'Create Activos Bienes'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Create Activos Activos Intangibles'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
@@ -26,15 +26,10 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'sys_tipo_bien_id',
-            'principio_contable',
-            'depreciable:boolean',
-            'deterioro:boolean',
-            // 'detalle',
-            // 'origen',
-            // 'fecha_origen',
-            // 'contratista_id',
-            // 'propio:boolean',
+            'bien_id',
+            'certificado_registro',
+            'fecha_registro',
+            'vigencia',
             // 'sys_status:boolean',
             // 'sys_creado_el',
             // 'sys_actualizado_el',
