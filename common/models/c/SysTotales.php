@@ -89,11 +89,9 @@ class SysTotales extends \common\components\BaseActiveRecord
      */
     public function setTotales($id,$array,$total)
     {
-
         
         return true;
     }
-
     /**
      * @return array
      */
@@ -103,7 +101,5 @@ class SysTotales extends \common\components\BaseActiveRecord
         $valor = $this::find()->where(['id' => $id])->one();
         $valores = explode(",", $valor['valor']);
         return $valores;
-    }
-
-    
+    }   
 }
