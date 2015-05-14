@@ -90,14 +90,14 @@ class ObjetosSocialesController extends Controller
         
       $objeto_acta = new ObjetosSociales();
       
-        $usuario= \common\models\p\User::findOne(Yii::$app->user->identity->id);
+        //$usuario= \common\models\p\User::findOne(Yii::$app->user->identity->id);
        
         if ( $objeto_acta->load(Yii::$app->request->post())) {
             
              $transaction = \Yii::$app->db->beginTransaction();
              
            try {
-                $registro = DocumentosRegistrados::findOne(['contratista_id'=>$usuario->contratista_id, 'sys_tipo_registro_id'=>1]);
+                $registro = DocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id, 'sys_tipo_registro_id'=>1]);
                 
             if($objeto_acta->descripcion==null){
                  $transaction->rollBack();

@@ -53,7 +53,7 @@ $url = \yii\helpers\Url::to(['documentos-registrados/registroacta']);
    <?php
 $script = <<< JS
    
-     $('#enviar').click(function(e){
+    $('#enviar').click(function(e){
           
             if($('form#r_actas').find('.has-error').length!=0){
               
