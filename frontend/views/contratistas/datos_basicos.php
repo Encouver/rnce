@@ -36,5 +36,5 @@ $tip_persona = [
 </div>
 
 
-<div id="response_ajax" style="height:100px;"></div>
+<div id="response_ajax"></div>
 

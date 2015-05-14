@@ -51,7 +51,7 @@ AppAsset::register($this);
                          ['label' => 'Obligaciones Bancarias', 'url' => ['/aa-obligaciones-bancarias/index']],
                     ],
                 ],
-                ['label' => 'Bienes',
+                ['label' => 'Activos',
                     'items' => [
                          ['label' => 'Crear bien', 'url' => ['/bienes/create']],
                          ['label' => 'Activos', 'url' => ['/activos/index']],
@@ -71,8 +71,8 @@ AppAsset::register($this);
                          ['label' => 'Informacion de contacto', 'url' => ['/contratistas-contactos/crearcontacto']],
                          ['label' => 'Sucursales', 'url' => ['/sucursales/crearsucursal']],
                          ['label' => 'Bancos', 'url' => ['/bancos-contratistas/crearbanco']],
-                         ['label' => 'Actividades Economicas', 'url' => ['/actividades-economicas/crearactividad']],
                          ['label' => 'Denominaciones Comerciales', 'url' => ['/denominaciones-comerciales/creardenominacion']],
+          
                          ['label' => 'Objeto empresa', 'url' => ['/objetos-empresas/crearobjeto']],
                          ['label' => 'Accionistas Representante Legal o Junta Directiva', 'url' => ['/accionistas-otros/crearaccionistaotro']],
                          ['label' => 'Comisarios', 'url' => ['/comisarios-auditores/crearcomisario']],
@@ -86,10 +86,12 @@ AppAsset::register($this);
                 ],
                  ['label' => 'Acta Constitutiva',
                     'items' => [
-                         ['label' => 'Registro documento', 'url' => ['/documentos-registrados/index']],
-                        ['label' => 'Objeto Social', 'url' => ['/objetos-sociales/index']],
-                        ['label' => 'Cierre ejercicio', 'url' => ['/cierres-ejercicios/index']],
-                        ['label' => 'Duracion empresa', 'url' => ['/duraciones-empresas/index']],
+                         ['label' => 'Registro documento', 'url' => ['/documentos-registrados/crearacta']],
+                        ['label' => 'Objeto Social', 'url' => ['/objetos-sociales/crearobjetoacta']],
+                        ['label' => 'Cierre ejercicio', 'url' => ['/cierres-ejercicios/crearcierreacta']],
+                        ['label' => 'Duracion empresa', 'url' => ['/duraciones-empresas/crearduracionacta']],
+                        ['label' => 'Actividades Economicas', 'url' => ['/actividades-economicas/crearactividadacta']],
+                        
                     ],
                 ],
                 

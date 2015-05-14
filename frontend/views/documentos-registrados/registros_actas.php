@@ -1,9 +1,12 @@
 <?php
 
 
+use yii\jui\DatePicker;
 use kartik\widgets\ActiveForm;
 use yii\helpers\Html;
+use yii\web\JsExpression;
 use kartik\builder\Form;
+use yii\grid\GridView;
 
 
 /* @var $this yii\web\View */
@@ -13,24 +16,24 @@ use kartik\builder\Form;
 //$contratista= Contratistas::findOne( ['id' => $id_contratista]);
 //$natural_juridica= SysNaturalesJuridicas::findOne(['id' => $contratista->natural_juridica_id]);
 
-$url = \yii\helpers\Url::to(['actividades-economicas/actividadacta']);
+$url = \yii\helpers\Url::to(['documentos-registrados/registroacta']);
 
 ?>
 
-<div class="col-sm-12" style="margin-bottom: 10px;">
+<div class="col-sm-9" style="margin-bottom: 10px;">
     
    
     <?php $form = ActiveForm::begin([
-        'id'=>'ae_actas',
+        'id'=>'r_actas',
         'type'=>ActiveForm::TYPE_VERTICAL
   ]); ?>
     
 
      <?php echo Form::widget([
-    'model'=>$actividad_economica,
+    'model'=>$registro_acta,
     'form'=>$form,
     'columns'=>2,
-    'attributes'=>$actividad_economica->formAttribs
+    'attributes'=>$registro_acta->formAttribs
       ]); ?>
     
   
@@ -50,21 +53,21 @@ $url = \yii\helpers\Url::to(['actividades-economicas/actividadacta']);
    <?php
 $script = <<< JS
    
-     $('#enviar').click(function(e){
+    $('#enviar').click(function(e){
           
-            if($('form#ae_actas').find('.has-error').length!=0){
+            if($('form#r_actas').find('.has-error').length!=0){
               
                 return false;
             }else
             {
-                //$('form#ae_actas').submit();
+                //$('form#r_actas').submit();
                 e.preventDefault();
                 e.stopImmediatePropagation();
                $.ajax({
                    
                     url: '$url',
                     type: 'post',
-                    data: $('form#ae_actas').serialize(),
+                    data: $('form#r_actas').serialize(),
                     success: function(data) {
                              $( "#output17" ).html( data ); 
                     }

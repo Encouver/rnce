@@ -53,7 +53,7 @@ if($natural_juridica->juridica && $contratista->tipo_sector != "PRIVADO"){
 
 ?>
 
-<div class="contratista-drop" style="margin-bottom: 10px;">
+<div class="contratista-drop col-sm-9" style="margin-bottom: 10px;">
     
     <div id="output9"></div>
     <?php $form = ActiveForm::begin([
@@ -100,5 +100,4 @@ $this->registerJs($script);
 ?>
 </div>
 
-<div id="response_ajax" style="width: 400px; height: 100px;"></div>
 

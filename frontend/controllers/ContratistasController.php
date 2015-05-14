@@ -7,20 +7,8 @@ use common\models\p\Contratistas;
 use common\models\p\SysNaturalesJuridicas;
 use common\models\p\PersonasNaturales;
 use common\models\p\PersonasJuridicas;
-use common\models\p\Domicilios;
-use common\models\p\Direcciones;
-use common\models\p\Sucursales;
-use common\models\p\ContratistasContactos;
-use common\models\p\BancosContratistas;
-use common\models\p\RelacionesSucursales;
-use common\models\p\ActividadesEconomicas;
-use common\models\p\DenominacionesComerciales;
-use common\models\p\ObjetosEmpresas;
 use common\models\p\User;
-use common\models\p\ObjetosAutorizaciones;
-use common\models\p\RelacionesObjetos;
 use app\models\ContratistasSearch;
-use common\models\p\Model;
 use common\components\BaseController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -260,6 +248,7 @@ class ContratistasController extends BaseController
                                return "Datos guardados con mucho exito";
                                //return $this->redirect(['view', 'id' => $model->id]);
                            } else {
+                               return "Usuario noactualizado";
                                $transaction->rollBack();
 
                            }
