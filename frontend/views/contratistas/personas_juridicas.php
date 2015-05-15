@@ -7,6 +7,9 @@ use yii\widgets\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $model common\models\p\PersonasNaturales */
 /* @var $form yii\widgets\ActiveForm */
+
+
+$url = \yii\helpers\Url::to(['contratistas/datosjuridica']);
 ?>
 
 <div class="personas-naturales-form">
@@ -43,7 +46,7 @@ $script = <<< JS
                 e.stopImmediatePropagation();
                $.ajax({
                    
-                    url: 'http://localhost/rnce/frontend/web/index.php?r=contratistas/datosjuridica',
+                    url: '$url',
                     type: 'post',
                     data: $('form#p_juridica').serialize(),
                     success: function(data) {

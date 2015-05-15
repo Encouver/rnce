@@ -3,6 +3,15 @@
 namespace common\models\c;
 
 use Yii;
+use kartik\builder\TabularForm;
+use kartik\grid\GridView;
+use yii\helpers\ArrayHelper;
+use kartik\builder\Form;
+use kartik\builder\ActiveFormEvent;
+use yii\helpers\Html;
+use common\models\p\BancosContratistas;
+use common\models\p\SysDivisas;
+use kartik\widgets\DatePicker;
 
 /**
  * This is the model class for table "cuentas.a_inversiones_negociar".
@@ -51,8 +60,9 @@ class AInversionesNegociar extends \common\components\BaseActiveRecord
     public function rules()
     {
         return [
-            [['banco_id', 'fecha_inversion', 'fecha_finalizacion', 'tasa', 'plazo', 'costo_adquisicion', 'valorizacion', 'saldo_al_cierre', 'intereses_act_eco', 'tipo_moneda_id', 'total_id'], 'required'],
-            [['banco_id', 'plazo', 'tipo_moneda_id', 'contratista_id', 'creado_por', 'total_id'], 'integer'],
+            [['banco_id', 'fecha_inversion', 'fecha_finalizacion', 'tasa', 'plazo', 'costo_adquisicion', 'valorizacion', 'saldo_al_cierre', 'intereses_act_eco'], 'required', 'on' => 'nacional'],
+            [['banco_id', 'fecha_inversion', 'fecha_finalizacion', 'tasa', 'plazo', 'costo_adquisicion', 'valorizacion', 'saldo_al_cierre', 'intereses_act_eco', 'tipo_moneda_id', 'monto_moneda_extra', 'tipo_cambio_cierre'], 'required', 'on' => 'extranjero'],
+            [['banco_id', 'plazo', 'tipo_moneda_id', 'contratista_id', 'creado_por'], 'integer'],
             [['fecha_inversion', 'fecha_finalizacion', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['tasa', 'costo_adquisicion', 'valorizacion', 'saldo_al_cierre', 'intereses_act_eco', 'monto_moneda_extra', 'tipo_cambio_cierre'], 'number'],
             [['sys_status'], 'boolean'],
@@ -128,5 +138,99 @@ class AInversionesNegociar extends \common\components\BaseActiveRecord
     public function getTotal()
     {
         return $this->hasOne(SysTotales::className(), ['id' => 'total_id']);
+    }
+
+    public function getFormAttribs($id) {
+        
+        if($id=='nacional')
+        {
+            //where(['nacional' => true])->
+            $ban = BancosContratistas::find()->all();
+            $array = array();
+            foreach ($ban as $key => $value) {
+                if($value->banco->nacional)
+                $array[] = ['id' => $value->id, 'nombre' => $value->banco->nombre];
+            }
+
+            return [
+                // primary key column
+                'id'=>[ // primary key attribute
+                    'type'=>TabularForm::INPUT_HIDDEN,
+                    'columnOptions'=>['hidden'=>true]
+                ],
+                'banco_id'=>['type'=>Form::INPUT_DROPDOWN_LIST, 'items'=>ArrayHelper::map($array, 'id', 'nombre'), 'label'=>'Banco'],
+                //'fecha_inversion'=>['type'=>Form::INPUT_TEXT,'label'=>'Fecha inversión'],
+
+                'fecha_inversion'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>DatePicker::className(),'options'=>['options' => ['placeholder' => 'Seleccione fecha ...'],
+                'convertFormat' => true,
+                'pluginOptions' => [
+                'format' => 'd-M-yyyy ',
+                //'startDate' => date('d-m-Y h:i A'),//'01-Mar-2014 12:00 AM',
+                'todayHighlight' => true
+                ]]],
+                //'fecha_finalizacion'=>['type'=>Form::INPUT_TEXT,'label'=>'Fecha finalización'],
+                'fecha_finalizacion'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>DatePicker::className(),'options'=>['options' => ['placeholder' => 'Seleccione fecha ...'],
+                'convertFormat' => true,
+                'pluginOptions' => [
+                'format' => 'd-M-yyyy ',
+                //'startDate' => date('d-m-Y h:i A'),//'01-Mar-2014 12:00 AM',
+                'todayHighlight' => true
+                ]]],
+                'tasa'=>['type'=>Form::INPUT_TEXT,'label'=>'Tasa'],
+                'plazo'=>['type'=>Form::INPUT_TEXT,'label'=>'Plazo'],
+                'costo_adquisicion'=>['type'=>Form::INPUT_TEXT,'label'=>'Costo adquisición'],
+                'valorizacion'=>['type'=>Form::INPUT_TEXT,'label'=>'Valorización'],
+                'saldo_al_cierre'=>['type'=>Form::INPUT_TEXT,'label'=>'Saldo al cierre'],
+                'intereses_act_eco'=>['type'=>Form::INPUT_TEXT,'label'=>'Intereses durante actividad economica'],
+                //'tipo_moneda_id'=>['type'=>Form::INPUT_DROPDOWN_LIST, 'items'=>ArrayHelper::map(SysDivisas::find()->orderBy('nombre')->asArray()->all(), 'id', 'nombre'), 'label'=>'Divisa'],
+                //'monto_moneda_extra'=>['type'=>Form::INPUT_TEXT,'label'=>'Monto moneda extranjera'],
+                //'tipo_cambio_cierre'=>['type'=>Form::INPUT_TEXT,'label'=>'Tipo de cambio al cierre'],
+
+            ];
+
+        }else
+        {
+            //where(['nacional' => true])->
+            $ban = BancosContratistas::find()->all();
+            $array = array();
+            foreach ($ban as $key => $value) {
+                if(!$value->banco->nacional)
+                $array[] = ['id' => $value->id, 'nombre' => $value->banco->nombre];
+            }
+
+           return [
+                // primary key column
+                'id'=>[ // primary key attribute
+                    'type'=>TabularForm::INPUT_HIDDEN,
+                    'columnOptions'=>['hidden'=>true]
+                ],
+                'banco_id'=>['type'=>Form::INPUT_DROPDOWN_LIST, 'items'=>ArrayHelper::map($array, 'id', 'nombre'), 'label'=>'Banco'],
+                'fecha_inversion'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>DatePicker::className(),'options'=>['options' => ['placeholder' => 'Seleccione fecha ...'],
+                'convertFormat' => true,
+                'pluginOptions' => [
+                'format' => 'd-M-yyyy ',
+                //'startDate' => date('d-m-Y h:i A'),//'01-Mar-2014 12:00 AM',
+                'todayHighlight' => true
+                ]]],
+                //'fecha_finalizacion'=>['type'=>Form::INPUT_TEXT,'label'=>'Fecha finalización'],
+                'fecha_finalizacion'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>DatePicker::className(),'options'=>['options' => ['placeholder' => 'Seleccione fecha ...'],
+                'convertFormat' => true,
+                'pluginOptions' => [
+                'format' => 'd-M-yyyy ',
+                //'startDate' => date('d-m-Y h:i A'),//'01-Mar-2014 12:00 AM',
+                'todayHighlight' => true
+                ]]],
+                'tasa'=>['type'=>Form::INPUT_TEXT,'label'=>'Tasa'],
+                'plazo'=>['type'=>Form::INPUT_TEXT,'label'=>'Plazo'],
+                'costo_adquisicion'=>['type'=>Form::INPUT_TEXT,'label'=>'Costo adquisición'],
+                'valorizacion'=>['type'=>Form::INPUT_TEXT,'label'=>'Valorización'],
+                'saldo_al_cierre'=>['type'=>Form::INPUT_TEXT,'label'=>'Saldo al cierre'],
+                'intereses_act_eco'=>['type'=>Form::INPUT_TEXT,'label'=>'Intereses durante actividad economica'],
+                'tipo_moneda_id'=>['type'=>Form::INPUT_DROPDOWN_LIST, 'items'=>ArrayHelper::map(SysDivisas::find()->orderBy('nombre')->asArray()->all(), 'id', 'nombre'), 'label'=>'Divisa'],
+                'monto_moneda_extra'=>['type'=>Form::INPUT_TEXT,'label'=>'Monto moneda extranjera'],
+                'tipo_cambio_cierre'=>['type'=>Form::INPUT_TEXT,'label'=>'Tipo de cambio al cierre'],
+
+            ];
+        }
     }
 }

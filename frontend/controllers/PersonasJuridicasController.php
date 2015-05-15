@@ -16,14 +16,14 @@ class PersonasJuridicasController extends BaseController
 {
     public function behaviors()
     {
-        return [
+        return array_merge(parent::behaviors(),[
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['post'],
                 ],
             ],
-        ];
+        ]);
     }
 
     /**
@@ -90,10 +90,60 @@ public function actionCrearpersonajuridica()
                                     return "faltan datos de natural juridica";
                                             
                                     }
+          
             if($persona_juridica->tipo_nacionalidad=="NACIONAL"){
                 $persona_juridica->rif=$persona_juridica->numero_identificacion;
                 $persona_juridica->numero_identificacion=null;
             }
+            $persona_juridica->creado_por=1;
+            $persona_juridica->sys_status=true;
+           
+               if ($persona_juridica->save()) {
+           
+
+                               $transaction->commit();
+                               return "Datos guardados con exito";
+                               
+
+
+                   }else{
+                        $transaction->rollBack();
+                       return "Datos no guardados";
+                   }
+             
+             
+           } catch (Exception $e) {
+               $transaction->rollBack();
+           }
+       }else{
+           return "Datos incompletos";
+       }
+
+
+    }
+    public function actionCrearpersonajuridicanacional()
+    {
+        $persona_juridica = new PersonasJuridicas();
+        $natural_juridica= new \common\models\p\SysNaturalesJuridicas();
+        
+
+        if ($persona_juridica->load(Yii::$app->request->post())) {
+           $transaction = \Yii::$app->db->beginTransaction();
+           try {
+              
+                $natural_juridica->rif= $persona_juridica->rif;
+            $natural_juridica->juridica= true;
+            $natural_juridica->denominacion=$persona_juridica->razon_social;
+            $natural_juridica->sys_status=true;
+            if (! ($flag = $natural_juridica->save(false))) {
+
+                                        $transaction->rollBack();
+                                    return "faltan datos de natural juridica";
+                                            
+                                    }
+             if($persona_juridica->tipo_nacionalidad==null){
+                 $persona_juridica->tipo_nacionalidad="NACIONAL";
+             }
             $persona_juridica->creado_por=1;
             $persona_juridica->sys_status=true;
            

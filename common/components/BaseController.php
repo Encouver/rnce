@@ -2,6 +2,7 @@
 
 namespace common\components;
 
+use webvimark\modules\UserManagement\components\GhostAccessControl;
 use yii\web\Controller;
 
 class BaseController extends Controller
@@ -13,12 +14,12 @@ class BaseController extends Controller
     public function probando() {
         exit();
     }
-    
+
 	public function behaviors()
 	{
 	    return [
 	        'ghost-access'=> [
-	            'class' => 'webvimark\modules\UserManagement\components\GhostAccessControl',
+	            'class' => GhostAccessControl::className(),
 	        ],
 	    ];
 	}

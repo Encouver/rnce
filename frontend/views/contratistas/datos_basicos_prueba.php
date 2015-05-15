@@ -8,7 +8,7 @@ use yii\helpers\Url;
 /* @var $this yii\web\View */
 /* @var $model common\models\p\Contratistas */
 /* @var $form yii\widgets\ActiveForm */
-
+$url = \yii\helpers\Url::to(['contratistas/datosbasicos']);
 ?>
 
 <div class="contratistas-form">
@@ -66,7 +66,7 @@ $script = <<< JS
                 e.stopImmediatePropagation();
                $.ajax({
                    
-                    url: 'http://localhost/rnce/frontend/web/index.php?r=contratistas/datosbasicos',
+                    url: '$url',
                     type: 'post',
                     data: $('form#raul').serialize(),
                     success: function(data) {

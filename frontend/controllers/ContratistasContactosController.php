@@ -18,14 +18,14 @@ class ContratistasContactosController extends Controller
 {
     public function behaviors()
     {
-        return [
+        return array_merge(parent::behaviors(),[
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['post'],
                 ],
             ],
-        ];
+        ]);
     }
 
     /**
@@ -94,7 +94,70 @@ class ContratistasContactosController extends Controller
             ]);
         }
     }
+    public function actionPersonacontacto()
+   {
 
+        $contratista_contacto = new ContratistasContactos();
+        $persona_natural  = new PersonasNaturales();
+         $natural_juridica  = new SysNaturalesJuridicas();
+
+        if ($persona_natural->load(Yii::$app->request->post())) {
+           $transaction = \Yii::$app->db->beginTransaction();
+           try {
+                $flag =false;
+                $natural_juridica->rif= $persona_natural->rif;
+            $natural_juridica->juridica= false;
+            $natural_juridica->denominacion=$persona_natural->primer_nombre.' '.$persona_natural->primer_apellido;
+            $natural_juridica->sys_status=true;
+            $natural_juridica->save();
+
+                $persona_natural->sys_pais_id = 1;
+            $persona_natural->nacionalidad = "NACIONAL";
+            $persona_natural->creado_por = 1;
+               if ($persona_natural->save()) {
+                $contratista_contacto->contacto_id = $persona_natural->id;
+
+           $usuario= \common\models\p\User::findOne(Yii::$app->user->identity->id);
+            $contratista_contacto->contratista_id=  $usuario->contratista_id;
+                   if ($contratista_contacto->save()) {
+
+
+                               $transaction->commit();
+                               return "Dtos guardados con exito";
+                               $flag = true;
+
+
+                   }else{
+                       return "Datos no guardados";
+                   }
+               }else{
+
+                   return "Persona de contacto no guardada";
+               }
+
+               if(!$flag)
+               {
+                   $transaction->rollBack();
+               }
+           } catch (Exception $e) {
+               $transaction->rollBack();
+           }
+       }else{
+           return "Datos incompletos";
+       }
+
+
+
+   }
+   
+   
+   public function actionCrearcontacto()
+           
+    {
+        $persona_natural = new PersonasNaturales();
+        return $this->render('_personas_contactos',['persona_natural' => $persona_natural]);
+    }
+   
     /**
      * Updates an existing ContratistasContactos model.
      * If update is successful, the browser will be redirected to the 'view' page.

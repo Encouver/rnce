@@ -1,4 +1,6 @@
 <?php
+use webvimark\modules\UserManagement\components\UserAuthEvent;
+
 return [
 	'id' => 'RNC',
     'language' => 'es-VE',
@@ -37,13 +39,19 @@ return [
 	                \webvimark\modules\UserManagement\models\UserVisitLog::newVisitor($event->identity->id);
 	            }
 	    ],
+        'formatter' => [
+            'class' => 'yii\i18n\formatter',
+            'thousandSeparator' => '.',
+            'decimalSeparator' => ',',
+        ]
     ],
 	'modules'=>[
 		//https://github.com/webvimark/user-management
 	    'user-management' => [
 	        'class' => 'webvimark\modules\UserManagement\UserManagementModule',
-
-	        // Here you can set your handler to change layout for any controller or action
+            'useEmailAsLogin'=>true,
+            'emailConfirmationRequired'=>true,
+	        // Here you can set your handler to czhange layout for any controller or action
 	        // Tip: you can use this event in any module
 	        'on beforeAction'=>function(yii\base\ActionEvent $event) {
 	                if ( $event->action->uniqueId == 'user-management/auth/login' )
@@ -51,6 +59,9 @@ return [
 	                    //$event->action->controller->layout = 'loginLayout.php';
 	                };
 	            },
+            'on afterRegistration' => function(UserAuthEvent $event) {
+                // Here you can do your own stuff like assign roles, send emails and so on
+            },
 	    ],
 		 'gridview' =>  [
 		        'class' => '\kartik\grid\Module'

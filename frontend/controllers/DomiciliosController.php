@@ -17,14 +17,14 @@ class DomiciliosController extends Controller
 {
     public function behaviors()
     {
-        return [
+        return array_merge(parent::behaviors(),[
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['post'],
                 ],
             ],
-        ];
+        ]);
     }
 
     /**
@@ -79,6 +79,61 @@ class DomiciliosController extends Controller
             ]);
         }
     }
+    
+     public function actionDireccionprincipal()
+   {
+
+
+        $domicilio = new Domicilios();
+        $direccion = new Direcciones();
+        if ($direccion->load(Yii::$app->request->post())) {
+           $transaction = \Yii::$app->db->beginTransaction();
+           try {
+                $flag =false;
+               if ($direccion->save()) {
+                 $domicilio->fiscal=false;
+           $domicilio->direccion_id=$direccion->id;
+           $usuario= \common\models\p\User::findOne(Yii::$app->user->identity->id);
+            $domicilio->contratista_id=  $usuario->contratista_id;
+                   if ($domicilio->save()) {
+
+
+                               $transaction->commit();
+                               return "Dtos guardados con exito";
+                               $flag = true;
+
+
+                   }else{
+                       return "Domicilio no guardado";
+                   }
+               }else{
+
+                   return "Direccion principal no guardada";
+               }
+
+               if(!$flag)
+               {
+                   $transaction->rollBack();
+               }
+           } catch (Exception $e) {
+               $transaction->rollBack();
+           }
+       }else{
+           return "Datos incompletos";
+       }
+
+
+
+   }
+   
+    public function actionCrearprincipal()
+    {
+        $direccion = new Direcciones();
+
+        return $this->render('_direcciones_principales',['direccion' => $direccion]);
+            
+    }
+
 
     /**
      * Updates an existing Domicilios model.

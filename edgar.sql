@@ -370,3 +370,44 @@ CREATE INDEX fki_usuario_inversiones
   ON cuentas.a_inversiones_negociar
   USING btree
   (creado_por);
+
+  
+  
+---------10/05/2015-----------
+
+ALTER TABLE cuentas.a_inversiones_negociar ADD COLUMN nacional boolean;
+ALTER TABLE cuentas.a_inversiones_negociar ALTER COLUMN nacional SET DEFAULT true;
+COMMENT ON COLUMN cuentas.a_inversiones_negociar.nacional IS 'indica si la cuenta es nacional o no';
+
+
+ALTER TABLE cuentas.a_efectivos_bancos ADD COLUMN nacional boolean;
+ALTER TABLE cuentas.a_efectivos_bancos ALTER COLUMN nacional SET DEFAULT true;
+COMMENT ON COLUMN cuentas.a_efectivos_bancos.nacional IS 'indica si la cuenta es nacional o no';
+
+
+ALTER TABLE sys_bancos DROP COLUMN tipo_nacionalidad;
+
+ALTER TABLE sys_bancos ADD COLUMN nacional boolean;
+ALTER TABLE sys_bancos ALTER COLUMN nacional SET DEFAULT true;
+COMMENT ON COLUMN sys_bancos.nacional IS 'Indica si la cuenta es nacional o no';
+
+
+-------------------15/05/2015---------------------------
+
+ALTER TABLE nombres_cajas DROP COLUMN tipo_caja;
+
+ALTER TABLE nombres_cajas ADD COLUMN nacional boolean;
+ALTER TABLE nombres_cajas ALTER COLUMN nacional SET NOT NULL;
+ALTER TABLE nombres_cajas ALTER COLUMN nacional SET DEFAULT true;
+COMMENT ON COLUMN nombres_cajas.nacional IS 'Indica si la caja es para moneda nacional o extranjera';
+
+ALTER TABLE nombres_cajas ADD COLUMN tipo_caja character varying(255);
+ALTER TABLE nombres_cajas ALTER COLUMN tipo_caja SET NOT NULL;
+COMMENT ON COLUMN nombres_cajas.tipo_caja IS 'Campo que indica si la caja es Caja o Caja chica';
+
+ALTER TABLE cuentas.a_efectivos_bancos ALTER COLUMN total_id DROP NOT NULL;
+ALTER TABLE cuentas.a_efectivos_cajas ALTER COLUMN total_id DROP NOT NULL;
+ALTER TABLE cuentas.a_inversiones_negociar ALTER COLUMN total_id DROP NOT NULL;
+
+-- MARCOS
+

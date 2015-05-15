@@ -4,6 +4,7 @@ namespace frontend\controllers;
 
 use Yii;
 use common\models\p\ActividadesEconomicas;
+use common\models\a\DocumentosRegistrados;
 use app\models\ActividadesEconomicasSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -16,14 +17,14 @@ class ActividadesEconomicasController extends Controller
 {
     public function behaviors()
     {
-        return [
+        return array_merge(parent::behaviors(),[
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['post'],
                 ],
             ],
-        ];
+        ]);
     }
 
     /**
@@ -72,6 +73,63 @@ class ActividadesEconomicasController extends Controller
             ]);
         }
     }
+    
+     public function actionCrearactividadacta()
+    {
+        $actividad_economica = new ActividadesEconomicas();
+        return $this->render('_actividades_economicas',['actividad_economica' => $actividad_economica]);
+    }
+    
+     public function actionActividadacta()
+   {
+
+
+        $actividad_acta = new ActividadesEconomicas();
+
+            $usuario= \common\models\p\User::findOne(Yii::$app->user->identity->id);
+        if ( $actividad_acta->load(Yii::$app->request->post())) {
+            
+             $transaction = \Yii::$app->db->beginTransaction();
+             
+           try {
+                $registro = DocumentosRegistrados::findOne(['contratista_id'=>$usuario->contratista_id, 'sys_tipo_registro_id'=>1]);
+                
+            if($actividad_acta->ppal_caev_id==null || $actividad_acta->comp1_caev_id==null || $actividad_acta->comp2_caev_id==null){
+                 $transaction->rollBack();
+                return "Debe ingresar actividad economica"; 
+            }
+             if($actividad_acta->ppal_experiencia==null || $actividad_acta->comp1_experiencia==null || $actividad_acta->comp1_experiencia==null){
+                 $transaction->rollBack();
+                return "Debe ingresar años de experiencia"; 
+            }
+           
+            $actividad_acta->contratista_id = $usuario->contratista_id;
+            $actividad_acta->documento_registrado_id= $registro->id;
+          
+               if ($actividad_acta->save()) {
+           
+
+                               $transaction->commit();
+                               return "Datos guardados con exito";
+                               
+
+
+                   }else{
+                       
+                        $transaction->rollBack();
+                        
+                      return "Datos no guardados";
+                   }
+             
+             
+           } catch (Exception $e) {
+               $transaction->rollBack();
+           }
+        }
+        
+
+
+   }
 
     /**
      * Updates an existing ActividadesEconomicas model.

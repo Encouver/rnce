@@ -47,15 +47,18 @@ AppAsset::register($this);
                     'items' => [
                          ['label' => 'Balance general', 'url' => ['/site/balancegeneral']],
                          ['label' => 'Estado de resultados', 'url' => ['/site/edoresultados']],
-                         ['label' => 'Efectivos y sus equivalentes', 'url' => ['/aefectivos-bancos/efectivosequivalentes']],
+                         ['label' => 'Efectivos y sus equivalentes', 'url' => ['/a-efectivos-bancos/efectivosequivalentes']],
                          ['label' => 'Obligaciones Bancarias', 'url' => ['/aa-obligaciones-bancarias/index']],
                     ],
                 ],
-                ['label' => 'Bienes',
+                ['label' => 'Activos',
                     'items' => [
-                         ['label' => 'Crear bien', 'url' => ['/bienes/create']],
-                         ['label' => 'Activos', 'url' => ['/activos/index']],
-                         ['label' => 'Aqui van los otros', 'url' => ['#']],
+                         //['label' => 'Crear bien', 'url' => ['/activos-bienes/index']],
+                        ['label' => 'Bienes', 'url' => ['/activos-bienes/index']],
+                        ['label' => 'Facturas', 'url' => ['/activos-facturas/index']],
+                        ['label' => 'Avaluos', 'url' => ['/activos-avaluos/index']],
+                        //['label' => 'Datos', 'url' => ['/activos-avaluos/index']],
+                        //['label' => 'Aqui van los otros', 'url' => ['#']],
                     ],
                 ],
 /*                ['label' => 'Información general',
@@ -65,22 +68,34 @@ AppAsset::register($this);
                 ],*/
                 ['label' => 'Contratistas',
                     'items' => [
-                         ['label' => 'Acordeon', 'url' => ['/contratistas/acordeon']],
-                         ['label' => 'Informacion de contacto', 'url' => ['/contratistas-contactos/index']],
-                         ['label' => 'Direccion Principal', 'url' => ['/domicilios/index']],
-                         ['label' => 'Sucursales', 'url' => ['/sucursales/index']],
-                         ['label' => 'Bancos', 'url' => ['/bancos-contratistas/index']],
-                         ['label' => 'Relaciones contratos', 'url' => ['/relaciones-contratos/index']],
-                         ['label' => 'Principios Contables', 'url' => ['/principios-contables/index']],
-                        ['label' => 'Actividades Economicas', 'url' => ['/actividades-economicas/index']],
+                         //['label' => 'Acordeon', 'url' => ['/contratistas/acordeon']],
+                         ['label' => 'Datos basicos', 'url' => ['/contratistas/primerdato']],
+                         ['label' => 'Direccion Principal', 'url' => ['/domicilios/crearprincipal']],
+                         ['label' => 'Informacion de contacto', 'url' => ['/contratistas-contactos/crearcontacto']],
+                         ['label' => 'Sucursales', 'url' => ['/sucursales/crearsucursal']],
+                         ['label' => 'Bancos', 'url' => ['/bancos-contratistas/crearbanco']],
+                         ['label' => 'Denominaciones Comerciales', 'url' => ['/denominaciones-comerciales/creardenominacion']],
+          
+                         ['label' => 'Objeto empresa', 'url' => ['/objetos-empresas/crearobjeto']],
+                         ['label' => 'Accionistas Representante Legal o Junta Directiva', 'url' => ['/accionistas-otros/crearaccionistaotro']],
+                         ['label' => 'Comisarios', 'url' => ['/comisarios-auditores/crearcomisario']],
+                         ['label' => 'Responsable Contabilidad', 'url' => ['/comisarios-auditores/crearresponsable']],
+                         ['label' => 'Contador Auditor', 'url' => ['/comisarios-auditores/crearcontador']],
+                         ['label' => 'Profesional Informe de conversion', 'url' => ['/comisarios-auditores/crearprofesional']],
+                         ['label' => 'Relacion de Contratos', 'url' => ['/relaciones-contratos/crearrelacioncontrato']],
+         
+                        
                     ],
                 ],
                  ['label' => 'Acta Constitutiva',
                     'items' => [
-                         ['label' => 'Registro documento', 'url' => ['/documentos-registrados/index']],
-                        ['label' => 'Objeto Social', 'url' => ['/objetos-sociales/index']],
-                        ['label' => 'Cierre ejercicio', 'url' => ['/cierres-ejercicios/index']],
-                        ['label' => 'Duracion empresa', 'url' => ['/duraciones-empresas/index']],
+                         ['label' => 'Registro documento', 'url' => ['/documentos-registrados/crearacta']],
+                        ['label' => 'Objeto Social', 'url' => ['/objetos-sociales/crearobjetoacta']],
+                        ['label' => 'Cierre ejercicio', 'url' => ['/cierres-ejercicios/crearcierreacta']],
+                        ['label' => 'Duracion empresa', 'url' => ['/duraciones-empresas/crearduracionacta']],
+                        ['label' => 'Actividades Economicas', 'url' => ['/actividades-economicas/crearactividadacta']],
+                        ['label' => 'Capital Suscrito', 'url' => ['/actas-constitutivas/crearcapitalsuscrito']],
+                        ['label' => 'Resumen', 'url' => ['/actas-constitutivas/resumenacta']],
                     ],
                 ],
                 
@@ -204,12 +219,12 @@ AppAsset::register($this);
 
 
         // Above
-        echo TabsX::widget([
+        /*echo TabsX::widget([
             'items'=>$items,
             'position'=>TabsX::POS_ABOVE,
             'encodeLabels'=>false,
             'options' => ['class' =>'nav-tabs '],
-        ]);
+        ]);*/
 
        /* echo GhostNav::widget([
                 'encodeLabels'=>false,

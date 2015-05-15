@@ -16,14 +16,14 @@ class AInversionesNegociarController extends BaseController
 {
     public function behaviors()
     {
-        return [
+        return array_merge(parent::behaviors(),[
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['post'],
                 ],
             ],
-        ];
+        ]);
     }
 
     /**
@@ -80,10 +80,17 @@ class AInversionesNegociarController extends BaseController
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        //$model->scenario = 'extranjero';
+        if($model->nacional)
+        {
+            $model->scenario = 'nacional';
+                        
+        }else  $model->scenario = 'extranjero';
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
+
             return $this->render('update', [
                 'model' => $model,
             ]);

@@ -75,7 +75,7 @@ class AEfectivosBancosSearch extends AEfectivosBancos
             'sys_creado_el' => $this->sys_creado_el,
             'sys_actualizado_el' => $this->sys_actualizado_el,
             'sys_finalizado_el' => $this->sys_finalizado_el,
-            'contratista_id' => $this->contratista_id,
+            'contratista_id' => Yii::$app->user->identity->contratista_id,
             'total_id' => $this->total_id,
         ]);
 

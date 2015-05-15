@@ -4,26 +4,27 @@ namespace frontend\controllers;
 
 use Yii;
 use common\models\p\DuracionesEmpresas;
+use common\models\a\DocumentosRegistrados;
 use app\models\DuracionesEmpresasSearch;
-use yii\web\Controller;
+use common\components\BaseController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
  * DuracionesEmpresasController implements the CRUD actions for DuracionesEmpresas model.
  */
-class DuracionesEmpresasController extends Controller
+class DuracionesEmpresasController extends BaseController
 {
     public function behaviors()
     {
-        return [
+        return array_merge(parent::behaviors(),[
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['post'],
                 ],
             ],
-        ];
+        ]);
     }
 
     /**
@@ -62,11 +63,7 @@ class DuracionesEmpresasController extends Controller
     {
         $model = new DuracionesEmpresas();
 
-        if ($model->load(Yii::$app->request->post())) {
-            
-            $model->contratista_id=2;
-            $model->documento_registrado_id=1;
-            $model->save();
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
@@ -74,7 +71,62 @@ class DuracionesEmpresasController extends Controller
             ]);
         }
     }
+     public function actionCrearduracionacta()
+    {
+        $duracion_empresa = new DuracionesEmpresas();
+            
+          
+            return $this->render('duraciones_actas', [
+                'duracion_empresa' => $duracion_empresa,
+            ]);
+        
+    }
+     public function actionDuracionacta(){
+        
+       $duracion_acta= new DuracionesEmpresas();
+      
+        $usuario= \common\models\p\User::findOne(Yii::$app->user->identity->id);
+       
+        if ( $duracion_acta->load(Yii::$app->request->post())) {
+           
+             $transaction = \Yii::$app->db->beginTransaction();
+             
+           try {
+                $registro = DocumentosRegistrados::findOne(['contratista_id'=>$usuario->contratista_id, 'sys_tipo_registro_id'=>1]);
+                
+            if($duracion_acta->fecha_vencimiento==null){
+                 $transaction->rollBack();
+                return "Debe ingresar fecha vencimiento"; 
+            }
+             if($duracion_acta->duracion_anos==null){
+                 $transaction->rollBack();
+                return "Debe ingresar Duracion"; 
+            }
+           
+            $duracion_acta->contratista_id = $usuario->contratista_id;
+            $duracion_acta->documento_registrado_id= $registro->id;
+            
+               if ($duracion_acta->save()) {
+           
 
+                               $transaction->commit();
+                               return "Datos guardados con exito";
+                               
+
+
+                   }else{
+                        $transaction->rollBack();
+                       return "Datos no guardados";
+                   }
+             
+             
+           } catch (Exception $e) {
+               $transaction->rollBack();
+           }
+        }
+        
+        
+    }
     /**
      * Updates an existing DuracionesEmpresas model.
      * If update is successful, the browser will be redirected to the 'view' page.

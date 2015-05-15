@@ -1,7 +1,7 @@
 <?php
 
 namespace common\models\p;
-
+use kartik\builder\Form;
 use Yii;
 
 /**
@@ -24,11 +24,7 @@ use Yii;
  * @property boolean $responsable_contabilidad
  * @property boolean $informe_conversion
  * @property integer $natural_juridica_id
- *
- * @property ActasConstitutivas[] $actasConstitutivas
- * @property Contratistas $contratista
- * @property DocumentosRegistrados $documentoRegistrado
- * @property SysNaturalesJuridicas $naturalJuridica
+ * @property integer $fecha_informe
  */
 class ComisariosAuditores extends \common\components\BaseActiveRecord
 {
@@ -46,8 +42,8 @@ class ComisariosAuditores extends \common\components\BaseActiveRecord
     public function rules()
     {
         return [
-            [['fecha_vencimiento', 'tipo_profesion', 'fecha_carta', 'documento_registrado_id', 'contratista_id', 'comisario', 'auditor', 'responsable_contabilidad', 'informe_conversion', 'natural_juridica_id'], 'required'],
-            [['fecha_vencimiento', 'fecha_carta', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
+            [[ 'contratista_id', 'natural_juridica_id'], 'required'],
+            [['fecha_vencimiento','fecha_informe', 'fecha_carta', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['declaracion_jurada', 'comisario', 'sys_status', 'auditor', 'responsable_contabilidad', 'informe_conversion'], 'boolean'],
             [['tipo_profesion'], 'string'],
             [['documento_registrado_id', 'contratista_id', 'natural_juridica_id'], 'integer'],
@@ -64,8 +60,8 @@ class ComisariosAuditores extends \common\components\BaseActiveRecord
             'id' => Yii::t('app', 'ID'),
             'fecha_vencimiento' => Yii::t('app', 'Fecha Vencimiento'),
             'declaracion_jurada' => Yii::t('app', 'Declaracion Jurada'),
-            'tipo_profesion' => Yii::t('app', 'Tipo Profesion'),
-            'fecha_carta' => Yii::t('app', 'Fecha Carta'),
+            'tipo_profesion' => Yii::t('app', 'Profesion'),
+            'fecha_carta' => Yii::t('app', 'Fecha de Aceptacion'),
             'colegiatura' => Yii::t('app', 'Colegiatura'),
             'documento_registrado_id' => Yii::t('app', 'Documento Registrado ID'),
             'contratista_id' => Yii::t('app', 'Contratista ID'),
@@ -77,39 +73,80 @@ class ComisariosAuditores extends \common\components\BaseActiveRecord
             'auditor' => Yii::t('app', 'Auditor'),
             'responsable_contabilidad' => Yii::t('app', 'Responsable Contabilidad'),
             'informe_conversion' => Yii::t('app', 'Informe Conversion'),
-            'natural_juridica_id' => Yii::t('app', 'Natural Juridica ID'),
+            'natural_juridica_id' => Yii::t('app', 'Persona Natural'),
+            'fecha_informe' => Yii::t('app', 'Fecha Informe'),
         ];
     }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getActasConstitutivas()
-    {
-        return $this->hasMany(ActasConstitutivas::className(), ['comisario_auditor_id' => 'id']);
+    
+    
+    public function getFormAttribs() {
+        //$data=[ 'NACIONAL' => 'NACIONAL', 'EXTRANJERA' => 'EXTRANJERA', ];
+        
+        $profesiones =[ 'CONTADOR PUBLICO' => 'CONTADOR PUBLICO', 'ADMINISTRADOR' => 'ADMINISTRADOR', 'ECONOMISTA' => 'ECONOMISTA', ];
+    return [
+          'tipo_profesion'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>$profesiones , 'options'=>['prompt'=>'Seleccione profesion']],
+         'colegiatura'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Numero de colegiatura']],
+        'fecha_carta'=>[
+            'type'=>Form::INPUT_WIDGET, 
+            'widgetClass'=>'\kartik\widgets\DatePicker', 
+            'options'=>['pluginOptions' => [
+                    'autoclose'=>true,
+                    'format' => 'yyyy-mm-dd'
+                ]],
+        ], 
+        'fecha_vencimiento'=>[
+            'type'=>Form::INPUT_WIDGET, 
+            'widgetClass'=>'\kartik\widgets\DatePicker', 
+            'options'=>['pluginOptions' => [
+                    'autoclose'=>true,
+                    'format' => 'yyyy-mm-dd'
+                ]],
+        ],
+        'declaracion_jurada'=>['type'=>Form::INPUT_CHECKBOX],
+      
+    ];
+    
+    
     }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getContratista()
-    {
-        return $this->hasOne(Contratistas::className(), ['id' => 'contratista_id']);
+     public function getFormAttribscontador() {
+        //$data=[ 'NACIONAL' => 'NACIONAL', 'EXTRANJERA' => 'EXTRANJERA', ];
+        
+    return [
+         'colegiatura'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Numero de colegiatura']],
+        'fecha_vencimiento'=>[
+            'type'=>Form::INPUT_WIDGET, 
+            'widgetClass'=>'\kartik\widgets\DatePicker', 
+            'options'=>['pluginOptions' => [
+                    'autoclose'=>true,
+                    'format' => 'yyyy-mm-dd'
+                ]],
+        ],
+      
+      
+    ];
+    
+    
     }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getDocumentoRegistrado()
-    {
-        return $this->hasOne(DocumentosRegistrados::className(), ['id' => 'documento_registrado_id']);
+    public function getFormAttribsprofesional() {
+    
+        
+        $profesiones =[ 'CONTADOR PUBLICO' => 'CONTADOR PUBLICO', 'ADMINISTRADOR' => 'ADMINISTRADOR', 'ECONOMISTA' => 'ECONOMISTA', ];
+    return [
+          'tipo_profesion'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>$profesiones , 'options'=>['prompt'=>'Seleccione profesion']],
+         'colegiatura'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Numero de colegiatura']],
+       
+        'fecha_informe'=>[
+            'type'=>Form::INPUT_WIDGET, 
+            'widgetClass'=>'\kartik\widgets\DatePicker', 
+            'options'=>['pluginOptions' => [
+                    'autoclose'=>true,
+                    'format' => 'yyyy-mm-dd'
+                ]],
+        ],
+    ];
+    
+    
     }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getNaturalJuridica()
-    {
-        return $this->hasOne(SysNaturalesJuridicas::className(), ['id' => 'natural_juridica_id']);
-    }
+    
+   
 }

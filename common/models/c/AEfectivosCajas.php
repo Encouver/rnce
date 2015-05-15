@@ -2,7 +2,18 @@
 
 namespace common\models\c;
 
+
+
 use Yii;
+use kartik\builder\TabularForm;
+use kartik\grid\GridView;
+use yii\helpers\ArrayHelper;
+use kartik\builder\Form;
+use kartik\builder\ActiveFormEvent;
+use yii\helpers\Html;
+//use common\models\p\BancosContratistas;
+use common\models\p\SysDivisas;
+use common\models\p\NombresCajas;
 
 /**
  * This is the model class for table "cuentas.a_efectivos_cajas".
@@ -44,8 +55,9 @@ class AEfectivosCajas extends \common\components\BaseActiveRecord
     public function rules()
     {
         return [
-            [['nombre_caja_id', 'tipo_moneda_id', 'total_id', 'contratista_id', 'creado_por'], 'integer'],
-            [['saldo_cierre_ae', 'total_id', 'anho'], 'required'],
+            [['nombre_caja_id', 'tipo_moneda_id', 'contratista_id', 'creado_por'], 'integer'],
+            [['saldo_cierre_ae', 'nombre_caja_id'], 'required', 'on' => 'nacional'],
+            [['saldo_cierre_ae', 'nombre_caja_id', 'tipo_moneda_id', 'monto_me', 'tipo_cambio_cierre'], 'required', 'on' => 'extranjero'],
             [['saldo_cierre_ae', 'monto_me', 'tipo_cambio_cierre'], 'number'],
             [['nacional', 'sys_status'], 'boolean'],
             [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
@@ -107,5 +119,41 @@ class AEfectivosCajas extends \common\components\BaseActiveRecord
     public function getTipoMoneda()
     {
         return $this->hasOne(SysDivisas::className(), ['id' => 'tipo_moneda_id']);
+    }
+
+    public function getFormAttribs($id){
+        
+        if($id=='nacional')
+        {
+
+            return [
+                // primary key column
+                'id'=>[ // primary key attribute
+                    'type'=>TabularForm::INPUT_HIDDEN,
+                    'columnOptions'=>['hidden'=>true]
+                ],
+                'nombre_caja_id'=>['type'=>Form::INPUT_DROPDOWN_LIST, 'items'=>ArrayHelper::map(NombresCajas::find()->where(['nacional' => true])->orderBy('nombre')->asArray()->all(), 'id', 'nombre'), 'label'=>'Nombre caja'],
+                'saldo_cierre_ae'=>['type'=>Form::INPUT_TEXT,'label'=>'Saldo cierre'],
+                //'tipo_moneda_id'=>['type'=>Form::INPUT_DROPDOWN_LIST, 'items'=>ArrayHelper::map(SysDivisas::find()->orderBy('nombre')->asArray()->all(), 'id', 'nombre'), 'label'=>'Divisa'],
+                //'monto_me'=>['type'=>Form::INPUT_TEXT,'label'=>'Depositos en transito'],
+                //'tipo_cambio_cierre'=>['type'=>Form::INPUT_TEXT,'label'=>'Nc no contabilizadas'],
+            ];
+
+        }else
+        {
+
+           return [
+                // primary key column
+                'id'=>[ // primary key attribute
+                    'type'=>TabularForm::INPUT_HIDDEN,
+                    'columnOptions'=>['hidden'=>true]
+                ],
+                'nombre_caja_id'=>['type'=>Form::INPUT_DROPDOWN_LIST, 'items'=>ArrayHelper::map(NombresCajas::find()->where(['nacional' => false])->orderBy('nombre')->asArray()->all(), 'id', 'nombre'), 'label'=>'Nombre caja'],
+                'saldo_cierre_ae'=>['type'=>Form::INPUT_TEXT,'label'=>'Saldo cierre'],
+                'tipo_moneda_id'=>['type'=>Form::INPUT_DROPDOWN_LIST, 'items'=>ArrayHelper::map(SysDivisas::find()->orderBy('nombre')->asArray()->all(), 'id', 'nombre'), 'label'=>'Divisa'],
+                'monto_me'=>['type'=>Form::INPUT_TEXT,'label'=>'Monto moneda extranjera'],
+                'tipo_cambio_cierre'=>['type'=>Form::INPUT_TEXT,'label'=>'Tipo de cambio al cierre'],
+            ];
+        }
     }
 }

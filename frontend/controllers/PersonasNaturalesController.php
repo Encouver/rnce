@@ -16,14 +16,14 @@ class PersonasNaturalesController extends Controller
 {
     public function behaviors()
     {
-        return [
+        return array_merge(parent::behaviors(),[
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['post'],
                 ],
             ],
-        ];
+        ]);
     }
 
     /**
@@ -127,7 +127,58 @@ class PersonasNaturalesController extends Controller
 
 
     }
+       public function actionCrearcomisario()
+    {
+        $persona_natural = new PersonasNaturales();
+        $natural_juridica= new \common\models\p\SysNaturalesJuridicas();
+        
 
+        if ($persona_natural->load(Yii::$app->request->post())) {
+           $transaction = \Yii::$app->db->beginTransaction();
+           try {
+                $flag =false;
+                $natural_juridica->rif= $persona_natural->rif;
+            $natural_juridica->juridica= false;
+            $natural_juridica->denominacion=$persona_natural->primer_nombre.' '.$persona_natural->primer_apellido;
+            $natural_juridica->sys_status=true;
+            if (! ($flag = $natural_juridica->save(false))) {
+
+                                        $transaction->rollBack();
+                                    return "faltan datos de natural juridica";
+                                            
+                                    }
+              $persona_natural->sys_pais_id=1;                       
+              $persona_natural->nacionalidad = "NACIONAL";
+                 
+
+           
+           
+            $persona_natural->creado_por = 1;
+            $persona_natural->save();
+           
+               if ($persona_natural->save()) {
+           
+
+                               $transaction->commit();
+                               return "Datos guardados con exito";
+                               
+
+
+                   }else{
+                        $transaction->rollBack();
+                       return "Datos no guardados";
+                   }
+             
+             
+           } catch (Exception $e) {
+               $transaction->rollBack();
+           }
+       }else{
+           return "Datos incompletos";
+       }
+
+
+    }
     /**
      * Updates an existing PersonasNaturales model.
      * If update is successful, the browser will be redirected to the 'view' page.
