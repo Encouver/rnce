@@ -58,7 +58,7 @@ class AaObligacionesBancarias extends \common\components\BaseActiveRecord
     public function rules()
     {
         return [
-            [['corriente', 'banco_id', 'num_documento', 'monto_otorgado', 'fecha_prestamo', 'fecha_vencimiento', 'tasa_interes', 'condicion_pago_id', 'plazo', 'tipo_garantia_id', 'interes_ejer_econ', 'interes_pagar', 'importe_deuda', 'total_imp_deu_int', 'contratista_id', 'anho', 'creado_por', 'actualizado_por'], 'required'],
+            [['corriente', 'banco_id', 'num_documento', 'monto_otorgado', 'fecha_prestamo', 'fecha_vencimiento', 'tasa_interes', 'condicion_pago_id', 'plazo', 'tipo_garantia_id', 'interes_ejer_econ', 'interes_pagar', 'importe_deuda', 'total_imp_deu_int', 'contratista_id', 'anho',], 'required'],
             [['corriente', 'sys_status'], 'boolean'],
             [['banco_id', 'condicion_pago_id', 'plazo', 'tipo_garantia_id', 'total_imp_deu_int', 'contratista_id', 'creado_por', 'actualizado_por'], 'integer'],
             [['monto_otorgado', 'tasa_interes', 'interes_ejer_econ', 'interes_pagar', 'importe_deuda'], 'number'],

@@ -59,7 +59,7 @@ COMMENT ON COLUMN TABLA.sys_creado_el IS 'Fecha de creación del registro.';
  ALTER TABLE TABLA DROP COLUMN IF EXISTS sys_actualizado_el;
 
 ALTER TABLE TABLA ADD COLUMN sys_actualizado_el timestamp with time zone;
---ALTER TABLE TABLA ALTER COLUMN sys_actualizado_el SET DEFAULT now();
+ALTER TABLE TABLA ALTER COLUMN sys_actualizado_el SET DEFAULT now();
 COMMENT ON COLUMN TABLA.sys_actualizado_el IS 'Fecha de última actualización del registro.';
 
 

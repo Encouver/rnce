@@ -814,3 +814,69 @@ ADD COLUMN tipo_bien_id integer NOT NULL;
 COMMENT ON COLUMN activos.fabricaciones_muebles.tipo_bien_id
 IS 'Tipo de bien mueble que esta fabricando.';
 
+-- Table: activos.sys_origenes_bienes
+
+-- DROP TABLE activos.sys_origenes_bienes;
+
+CREATE TABLE activos.sys_origenes_bienes
+(
+  id integer NOT NULL DEFAULT nextval('activos.origenes_bienes_id_seq'::regclass), -- Clave primaria.
+  nombre character varying(255) NOT NULL, -- Nombre del origen.
+  descripcion character varying(255), -- Descripción del origen.
+  CONSTRAINT origenes_bienes_pkey PRIMARY KEY (id),
+  CONSTRAINT origenes_bienes_nombre_key UNIQUE (nombre)
+)
+WITH (
+OIDS=FALSE
+);
+ALTER TABLE activos.sys_origenes_bienes
+OWNER TO eureka;
+COMMENT ON TABLE activos.sys_origenes_bienes
+IS 'Lista de origen de los bienes.';
+COMMENT ON COLUMN activos.sys_origenes_bienes.id IS 'Clave primaria.';
+COMMENT ON COLUMN activos.sys_origenes_bienes.nombre IS 'Nombre del origen.';
+COMMENT ON COLUMN activos.sys_origenes_bienes.descripcion IS 'Descripción del origen.';
+
+
+
+ALTER TABLE activos.bienes
+DROP COLUMN origen;
+ALTER TABLE activos.bienes
+ADD COLUMN origen_id integer NOT NULL;
+ALTER TABLE activos.bienes
+ADD COLUMN nacional boolean;
+ALTER TABLE activos.bienes
+ADD FOREIGN KEY (origen_id) REFERENCES activos.sys_origenes_bienes (id) ON UPDATE NO ACTION ON DELETE NO ACTION;
+COMMENT ON COLUMN activos.bienes.origen_id IS 'Clave foránea a la tabla sys_origenes_bienes.';
+COMMENT ON COLUMN activos.bienes.nacional IS 'Indica si es Nacional o Importado';
+
+
+ALTER TABLE activos.bienes
+ALTER COLUMN fecha_origen DROP NOT NULL;
+
+
+ALTER TABLE activos.inmuebles
+ADD UNIQUE (bien_id);
+
+ALTER TABLE activos.activos_biologicos
+ADD UNIQUE (bien_id);
+
+ALTER TABLE activos.activos_intangibles
+ADD UNIQUE (bien_id);
+
+
+ALTER TABLE activos.muebles
+ADD UNIQUE (bien_id);
+
+ALTER TABLE activos.fabricaciones_muebles
+ADD UNIQUE (bien_id);
+
+ALTER TABLE activos.construcciones_inmuebles
+ADD UNIQUE (bien_id);
+
+
+ALTER TABLE activos.datos_importaciones
+ADD UNIQUE (bien_id);
+
+ALTER TABLE cuentas.aa_condiciones_pagos
+ALTER COLUMN "descripción" DROP NOT NULL;

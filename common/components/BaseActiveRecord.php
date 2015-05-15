@@ -55,20 +55,23 @@ class BaseActiveRecord extends ActiveRecord
 
                     },
                 ],*/
-                'variables'=>[
+                'contratista'=>[
                     'class'=>MyBehavior::className(),
-           /*         'attributes'=>
-                        [ActiveRecord::EVENT_BEFORE_VALIDATE => ['contratista_id']]*/
+                    'contratista_id'=>'contratista_id',
+                    'anho'=>'anho',
+                  /*  'attributes'=>
+                        [ActiveRecord::EVENT_BEFORE_INSERT => ['contratista_id']]*/
                 ],
-   /*             'timestamp' => [
+                'timestamp' => [
                     'class' => TimestampBehavior::className(),
+                        'createdAtAttribute'=>'sys_creado_el',
+                        'updatedAtAttribute'=>'sys_actualizado_el',
                         'attributes' => [
                             ActiveRecord::EVENT_BEFORE_INSERT => ['sys_creado_el', 'sys_actualizado_el'],
                             ActiveRecord::EVENT_BEFORE_UPDATE => ['sys_actualizado_el'],
-                            //ActiveRecord::EVENT_BEFORE_DELETE => ['sys_finalizado_el'],
                         ],
                         'value' => new Expression('NOW()'),
-                ],*/
+                ],
 /*                'anhoTimestamp' => [
                     'class' => TimestampBehavior::className(),
                     'attributes' => [
@@ -76,14 +79,14 @@ class BaseActiveRecord extends ActiveRecord
                     ],
                     'value' => new Expression("to_char(NOW(),'MM-YYYY')"),
                 ],*/
-/*                'blameable' => isset($this->creado_por)?[
+                'blameable' => [
                     'class' => BlameableBehavior::className(),
                     'createdByAttribute' => 'creado_por',
                     'updatedByAttribute' => 'actualizado_por',
-                    'attributes' => [
+             /*       'attributes' => [
                         ActiveRecord::EVENT_BEFORE_VALIDATE => ['creado_por', 'actualizado_por']
-                    ]
-                ]:['class' => TimestampBehavior::className(),],*/
+                    ]*/
+                ],
   /*              'softDelete' => [
                     'class' => 'amnah\yii2\behaviors\SoftDelete',
                     // these are the default values, which you can omit
@@ -96,7 +99,7 @@ class BaseActiveRecord extends ActiveRecord
 
     public  function  beforeValidate(){
 
-        //if(isset($this->anho))
+/*        //if(isset($this->anho))
             $this->anho = date('m-Y');
 
         //if(isset($this->creado_por))
@@ -106,7 +109,12 @@ class BaseActiveRecord extends ActiveRecord
             $this->actualizado_por = Yii::$app->user->id;
            // print_r('hola');
         //}
-       // die;
+/*        $this->sys_status = true;
+        $this->sys_actualizado_el = date('Y-m-d H:i:s');
+
+        if($this->isNewRecord)
+            $this->sys_creado_el = date('Y-m-d H:i:s');*/
+       // die;*/
         return parent::beforeValidate();
     }
 	public function beforeSave($insert){
@@ -114,16 +122,16 @@ class BaseActiveRecord extends ActiveRecord
 		//parent::beforeSave($insert);
 
 		if (parent::beforeSave($insert)) {
-/*			if($this->scenario != 'eliminar' and isset($this->sys_status)
-                and isset($this->sys_status) and isset($this->sys_actualizado_el)  and isset($this->sys_creado_el)){
-		    	$this->sys_status = true;
+	/*		if($this->scenario != 'eliminar' and isset($this->sys_status)
+                and isset($this->sys_status) and isset($this->sys_actualizado_el)  and isset($this->sys_creado_el)){*/
+/*		    	$this->sys_status = true;
 		    	$this->sys_actualizado_el = date('Y-m-d H:i:s');
 				
 				if($this->isNewRecord)
 					$this->sys_creado_el = date('Y-m-d H:i:s');
 				
-					
-		    }*/
+					*/
+		    //}
 
 	        return true;
 	    } else {

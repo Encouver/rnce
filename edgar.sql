@@ -409,5 +409,5 @@ ALTER TABLE cuentas.a_efectivos_bancos ALTER COLUMN total_id DROP NOT NULL;
 ALTER TABLE cuentas.a_efectivos_cajas ALTER COLUMN total_id DROP NOT NULL;
 ALTER TABLE cuentas.a_inversiones_negociar ALTER COLUMN total_id DROP NOT NULL;
 
-
+-- MARCOS
 

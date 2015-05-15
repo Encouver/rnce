@@ -32,12 +32,12 @@ use kartik\widgets\ActiveForm;
             'attributes'=>$modelBienTipo->getFormAttribs($model)
         ]);
 
-        echo '<label class="cbx-label" for="s_2">Left</label>';
+/*        echo '<label class="cbx-label" for="s_2">Left</label>';
         echo CheckboxX::widget([
             'name'=>'s_2',
             'value'=>1,
             'options'=>['id'=>'s_2']
-        ]);
+        ]);*/
     ?>
 <!--
     <?/*= $form->field($model, 'sys_tipo_bien_id')->textInput() */?>

@@ -73,9 +73,9 @@ class ActivosBienesController extends BaseController
     {
         $model = new ActivosBienes();
 
-        $modelBienTipo = null;
+        $modelBienTipo = new ActivosInmuebles();
 
-        $model->contratista_id = Yii::$app->user->identity->contratista_id;
+        //$model->contratista_id = Yii::$app->user->identity->contratista_id;
         //$model->principio_contable = 1;
 
         if ($model->load(Yii::$app->request->post())) {
@@ -141,13 +141,62 @@ class ActivosBienesController extends BaseController
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
+        $modelBienTipo = $model->getBienTipo();
+
+        if ($model->load(Yii::$app->request->post())) {
+            switch($model->sysTipoBien->sys_clasificacion_bien_id){
+                case 1:
+                    $modelBienTipo = new ActivosInmuebles();
+                    break;
+                case 2:
+                    $modelBienTipo = new ActivosMuebles();
+                    break;
+                case 3:
+                    if($model->sys_tipo_bien_id == 8)
+                        $modelBienTipo = new ActivosConstruccionesInmuebles();
+                    if($model->sys_tipo_bien_id == 9)
+                        $modelBienTipo = new ActivosFabricacionesMuebles();
+                    break;
+                case 4:
+                    $modelBienTipo = new ActivosActivosBiologicos();
+                    break;
+                case 5:
+                    $modelBienTipo = new ActivosActivosIntangibles();
+                    break;
+                default:
+                    break;
+            }
+            if ($modelBienTipo->load(Yii::$app->request->post()) && $model->validate() ) {
+
+                $transaction = \Yii::$app->db->beginTransaction();
+                try {
+                    if($model->save()){
+
+                        $modelBienTipo->bien_id = $model->id;
+                        if($modelBienTipo->save()) {
+                            $transaction->commit();
+                            return $this->redirect(['view', 'id' => $model->id]);
+                        }else
+                            $transaction->rollBack();
+
+                    }
+
+                } catch (Exception $e) {
+                    $transaction->rollBack();
+                }
+
+
+            }
+            //return $this->redirect(['view', 'id' => $model->id]);
         }
+
+  /*      if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
+        } else {*/
+            return $this->render('update', [
+                'model' => $model,'modelBienTipo'=> $modelBienTipo
+            ]);
+    //    }
     }
 
     /**
