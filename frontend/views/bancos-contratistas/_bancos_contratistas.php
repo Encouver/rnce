@@ -8,6 +8,8 @@ use wbraganca\dynamicform\DynamicFormWidget;
 /* @var $this yii\web\View */
 /* @var $model common\models\p\PersonasNaturales */
 /* @var $form yii\widgets\ActiveForm */
+
+$url = \yii\helpers\Url::to(['bancos-contratistas/bancocontratista']);
 ?>
 
 <div class="bancos-contratistas-form">
@@ -110,7 +112,7 @@ $script = <<< JS
                 e.stopImmediatePropagation();
                $.ajax({
                    
-                    url: 'http://localhost/rnce/frontend/web/index.php?r=bancos-contratistas/bancocontratista',
+                    url: '$url',
                     type: 'post',
                     data: $('form#b_contratista').serialize(),
                     success: function(data) {

@@ -23,6 +23,7 @@ use common\models\p\SysPaises;
 
 $url = \yii\helpers\Url::to(['accionistas-otros/naturaljuridicalist']);
 $url2 = \yii\helpers\Url::to(['comisarios-auditores/profesionalinforme']);
+$url3 = \yii\helpers\Url::to(['personas-naturales/crearpersonanatural']);
 $persona_natural = new PersonasNaturales();
 
 
@@ -123,7 +124,7 @@ $script = <<< JS
                 e.stopImmediatePropagation();
                $.ajax({
                    
-                    url: 'http://localhost/rnce/frontend/web/index.php?r=personas-naturales/crearpersonanatural',
+                    url: '$url3',
                     type: 'post',
                     data: $('form#modal_pnatural').serialize(),
                     success: function(data) {

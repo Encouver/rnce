@@ -21,6 +21,8 @@ use yii\grid\GridView;
 //$natural_juridica= SysNaturalesJuridicas::findOne(['id' => $contratista->natural_juridica_id]);
 
 $url = \yii\helpers\Url::to(['accionistas-otros/naturaljuridicalist']);
+$url2 = \yii\helpers\Url::to(['personas-naturales/crearcomisario']);
+$url3 = \yii\helpers\Url::to(['comisarios-auditores/comisario']);
 $persona_natural = new PersonasNaturales();
 
 
@@ -123,7 +125,7 @@ $script = <<< JS
                 e.stopImmediatePropagation();
                $.ajax({
                    
-                    url: 'http://localhost/rnce/frontend/web/index.php?r=personas-naturales/crearcomisario',
+                    url: '$url2',
                     type: 'post',
                     data: $('form#modal_pnatural').serialize(),
                     success: function(data) {
@@ -145,7 +147,7 @@ $script = <<< JS
                 e.stopImmediatePropagation();
                $.ajax({
                    
-                    url: 'http://localhost/rnce/frontend/web/index.php?r=comisarios-auditores/comisario',
+                    url: '$url3',
                     type: 'post',
                     data: $('form#c_comisarios').serialize(),
                     success: function(data) {

@@ -6,7 +6,6 @@ use yii\helpers\Url;
 /* @var $this yii\web\View */
 /* @var $model common\models\p\Contratistas */
 /* @var $form yii\widgets\ActiveForm */
-
 $tip_persona = [
     ['id' => '0', 'name' => 'PERSONA NATURAL'],
     ['id' => '1', 'name' => 'PERSONA JURIDICA'],

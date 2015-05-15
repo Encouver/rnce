@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-
+$url = \yii\helpers\Url::to(['contratistas-contactos/personacontacto']);
 /* @var $this yii\web\View */
 /* @var $model common\models\p\PersonasNaturales */
 /* @var $form yii\widgets\ActiveForm */
@@ -64,7 +64,7 @@ $script = <<< JS
                 e.stopImmediatePropagation();
                $.ajax({
                    
-                    url: 'http://localhost/rnce/frontend/web/index.php?r=contratistas-contactos/personacontacto',
+                    url: '$url',
                     type: 'post',
                     data: $('form#p_contacto').serialize(),
                     success: function(data) {
