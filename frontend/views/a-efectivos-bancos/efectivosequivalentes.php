@@ -52,6 +52,8 @@ $this->params['breadcrumbs'][] = $this->title;
     $columns = [
         ['class'=>'kartik\grid\SerialColumn', 'order'=>DynaGrid::ORDER_FIX_LEFT],
         //'id',
+        'tipo_caja',
+        'modena',
         [
           'attribute' => 'nombre_caja_id',
           'label' => 'Nombre caja',
@@ -95,6 +97,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'theme'=>'panel-danger',
         'gridOptions'=>[
             'dataProvider'=>$dataProvider_ec,
+            'showPageSummary'=>true,
             //'filterModel'=>AEfectivosBancosSearch,
             'panel'=>['heading'=>'<h3 class="panel-title">Efectivo en caja</h3>'],
             'toolbar' =>  [
@@ -167,6 +170,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'theme'=>'panel-danger',
         'gridOptions'=>[
             'dataProvider'=>$dataProvider_eb,
+            'showPageSummary'=>true,
             //'filterModel'=>AEfectivosBancosSearch,
             'panel'=>['heading'=>'<h3 class="panel-title">Efectivo en bancos</h3>'],
 
@@ -240,6 +244,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'theme'=>'panel-danger',
         'gridOptions'=>[
             'dataProvider'=>$dataProvider_in,
+            'showPageSummary'=>true,
             //'filterModel'=>AEfectivosBancosSearch,
             'panel'=>['heading'=>'<h3 class="panel-title">Inversiones para negociar</h3>'],
 

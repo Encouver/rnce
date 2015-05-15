@@ -405,3 +405,9 @@ ALTER TABLE nombres_cajas ADD COLUMN tipo_caja character varying(255);
 ALTER TABLE nombres_cajas ALTER COLUMN tipo_caja SET NOT NULL;
 COMMENT ON COLUMN nombres_cajas.tipo_caja IS 'Campo que indica si la caja es Caja o Caja chica';
 
+ALTER TABLE cuentas.a_efectivos_bancos ALTER COLUMN total_id DROP NOT NULL;
+ALTER TABLE cuentas.a_efectivos_cajas ALTER COLUMN total_id DROP NOT NULL;
+ALTER TABLE cuentas.a_inversiones_negociar ALTER COLUMN total_id DROP NOT NULL;
+
+
+
