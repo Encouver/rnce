@@ -227,13 +227,14 @@ class ActivosBienes extends \common\components\BaseActiveRecord
                 'type'=>Form::INPUT_HIDDEN,
                 'columnOptions'=>['hidden'=>true]
             ],
-            'sys_tipo_bien_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(ActivosSysTiposBienes::find()->asArray()->all(),'id','nombre',function($model){ return ActivosSysTiposBienes::findOne($model['sys_clasificacion_bien_id'])->sysClasificacionBien->nombre;}),'options'=>['onchange'=>'js:location.reload();']]],
+            'sys_tipo_bien_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(ActivosSysTiposBienes::find()->asArray()->all(),'id','nombre',function($model){ return ActivosSysTiposBienes::findOne($model['sys_clasificacion_bien_id'])->sysClasificacionBien->nombre;}),'options'=>['onchange'=>'js:this.form.submit();']]],
 
             'depreciable'=>['type'=>Form::INPUT_CHECKBOX,],
             'deterioro'=>['type'=>Form::INPUT_CHECKBOX,],
             'detalle'=>['type'=>Form::INPUT_TEXT,],
             'origen'=>['type'=>Form::INPUT_TEXT,],
             'propio'=>['type'=>Form::INPUT_CHECKBOX,],
+            'principio_contable'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>ArrayHelper::map(ActivosSysFormasOrg::find()->asArray()->all(),'id','nombre'),],
             'fecha_origen'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>DatePicker::className(),'options'=>['options' => ['placeholder' => 'Seleccione fecha ...'],
                 'convertFormat' => true,
                 'pluginOptions' => [

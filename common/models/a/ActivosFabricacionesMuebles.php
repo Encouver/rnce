@@ -2,6 +2,7 @@
 
 namespace common\models\a;
 
+use kartik\builder\Form;
 use Yii;
 
 /**
@@ -78,7 +79,7 @@ class ActivosFabricacionesMuebles extends \common\components\BaseActiveRecord
         ],
         'cantidad'=>['type'=>Form::INPUT_TEXT,],
         'porcentaje_fabricacion'=>['type'=>Form::INPUT_TEXT,],
-        'monton_ejecutado'=>['type'=>Form::INPUT_TEXT,],
+        'monto_ejecutado'=>['type'=>Form::INPUT_TEXT,],
 
     ];
 }

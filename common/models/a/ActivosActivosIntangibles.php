@@ -2,6 +2,8 @@
 
 namespace common\models\a;
 
+use kartik\builder\Form;
+use kartik\widgets\DatePicker;
 use Yii;
 
 /**
@@ -86,7 +88,6 @@ class ActivosActivosIntangibles extends \common\components\BaseActiveRecord
                 'columnOptions'=>['hidden'=>true]
             ],
             'certificado_registro'=>['type'=>Form::INPUT_TEXT,],
-            'origen'=>['type'=>Form::INPUT_TEXT,],
             'fecha_registro'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>DatePicker::className(),'options'=>['options' => ['placeholder' => 'Seleccione fecha ...'],
                 'convertFormat' => true,
                 'pluginOptions' => [
@@ -94,7 +95,13 @@ class ActivosActivosIntangibles extends \common\components\BaseActiveRecord
                     //'startDate' => date('d-m-Y h:i A'),//'01-Mar-2014 12:00 AM',
                     'todayHighlight' => true
                 ]]],
-
+            'vigencia'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>DatePicker::className(),'options'=>['options' => ['placeholder' => 'Seleccione fecha ...'],
+                'convertFormat' => true,
+                'pluginOptions' => [
+                    'format' => 'd-M-yyyy ',
+                    //'startDate' => date('d-m-Y h:i A'),//'01-Mar-2014 12:00 AM',
+                    'todayHighlight' => true
+                ]]],
             //'contratista_id'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>ArrayHelper::map(Contratistas::find()->asArray()->all(),'id','nombre'),],
 
         ];

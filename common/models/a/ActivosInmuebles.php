@@ -4,6 +4,7 @@ namespace common\models\a;
 
 use kartik\builder\Form;
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "activos.inmuebles".
@@ -77,18 +78,19 @@ class ActivosInmuebles extends \common\components\BaseActiveRecord
         return $this->hasOne(ActivosBienes::className(), ['id' => 'bien_id']);
     }
 
-    public function getFormAttribs() {
-        return [
+    public function getFormAttribs($model) {
+        $formAttribs =  [
             // primary key column
             'id'=>[ // primary key attribute
                 'type'=>Form::INPUT_HIDDEN,
                 'columnOptions'=>['hidden'=>true]
             ],
+            'descripcion'=>['type'=>Form::INPUT_TEXT,],
+            'direccion_ubicacion'=>['type'=>Form::INPUT_TEXT,],
             'ficha_catastral'=>['type'=>Form::INPUT_TEXT,],
             'zonificacion'=>['type'=>Form::INPUT_TEXT,],
             'extension'=>['type'=>Form::INPUT_TEXT,],
-//            if($model->)
-            'titulo_supletorio'=>['type'=>Form::INPUT_TEXT,],
+            //'titulo_supletorio'=>isset($model) && $model->sys_tipo_bien_id == 9?['type'=>Form::INPUT_TEXT,'label'=>'hola']:[],
             /*'sys_tipo_bien_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(ActivosSysTiposBienes::find()->asArray()->all(),'id','nombre',function($model){ return ActivosSysTiposBienes::findOne($model['sys_clasificacion_bien_id'])->sysClasificacionBien->nombre;}),]],
 
             'depreciable'=>['type'=>Form::INPUT_CHECKBOX,],
@@ -106,5 +108,9 @@ class ActivosInmuebles extends \common\components\BaseActiveRecord
             //'contratista_id'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>ArrayHelper::map(Contratistas::find()->asArray()->all(),'id','nombre'),],
 
         ];
+
+        if(isset($model) && $model->sys_tipo_bien_id == 2)
+            $formAttribs['titulo_supletorio'] =['type'=>Form::INPUT_TEXT,];
+        return $formAttribs;
     }
 }

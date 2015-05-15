@@ -23,15 +23,21 @@ use kartik\widgets\ActiveForm;
             'attributes'=>$model->getFormAttribs()
         ]);
 
-        if($bienTipo != null)
+        if($modelBienTipo != null)
         echo Form::widget([       // 3 column layout
-            'model'=>$bienTipo,
+            'model'=>$modelBienTipo,
             'form'=>$form,
             'columns'=>4,
             'columnSize'=>'xs',
-            'attributes'=>$bienTipo->getFormAttribs()
+            'attributes'=>$modelBienTipo->getFormAttribs($model)
         ]);
 
+        echo '<label class="cbx-label" for="s_2">Left</label>';
+        echo CheckboxX::widget([
+            'name'=>'s_2',
+            'value'=>1,
+            'options'=>['id'=>'s_2']
+        ]);
     ?>
 <!--
     <?/*= $form->field($model, 'sys_tipo_bien_id')->textInput() */?>
@@ -61,7 +67,7 @@ use kartik\widgets\ActiveForm;
     <?/*= $form->field($model, 'sys_finalizado_el')->textInput() */?>
     -->
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['id'=>'crear','class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

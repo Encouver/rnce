@@ -16,6 +16,7 @@ use Yii;
 use common\models\a\ActivosBienes;
 use app\models\ActivosBienesSearch;
 use common\components\BaseController;
+use yii\db\Exception;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -72,35 +73,52 @@ class ActivosBienesController extends BaseController
     {
         $model = new ActivosBienes();
 
-        $bienTipo = null;
+        $modelBienTipo = null;
 
         $model->contratista_id = Yii::$app->user->identity->contratista_id;
-        $model->principio_contable = 1;
+        //$model->principio_contable = 1;
 
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+        if ($model->load(Yii::$app->request->post())) {
             switch($model->sysTipoBien->sys_clasificacion_bien_id){
                 case 1:
-                    $bienTipo = new ActivosInmuebles();
+                    $modelBienTipo = new ActivosInmuebles();
                     break;
                 case 2:
-                    $bienTipo = new ActivosMuebles();
+                    $modelBienTipo = new ActivosMuebles();
                     break;
                 case 3:
                     if($model->sys_tipo_bien_id == 8)
-                        $bienTipo = new ActivosConstruccionesInmuebles();
+                        $modelBienTipo = new ActivosConstruccionesInmuebles();
                     if($model->sys_tipo_bien_id == 9)
-                        $bienTipo = new ActivosFabricacionesMuebles();
+                        $modelBienTipo = new ActivosFabricacionesMuebles();
                     break;
                 case 4:
-                    $bienTipo = new ActivosActivosBiologicos();
+                    $modelBienTipo = new ActivosActivosBiologicos();
                     break;
                 case 5:
-                    $bienTipo = new ActivosActivosIntangibles();
+                    $modelBienTipo = new ActivosActivosIntangibles();
                     break;
                 default:
                     break;
             }
-            if ($bienTipo->load(Yii::$app->request->post()) && $model->validate()) {
+            if ($modelBienTipo->load(Yii::$app->request->post()) && $model->validate() ) {
+
+                $transaction = \Yii::$app->db->beginTransaction();
+                try {
+                    if($model->save()){
+
+                        $modelBienTipo->bien_id = $model->id;
+                        if($modelBienTipo->save()) {
+                            $transaction->commit();
+                            return $this->redirect(['view', 'id' => $model->id]);
+                        }else
+                            $transaction->rollBack();
+
+                    }
+
+                } catch (Exception $e) {
+                    $transaction->rollBack();
+                }
 
 
             }
@@ -108,7 +126,7 @@ class ActivosBienesController extends BaseController
         } //else {
 
             return $this->render('create', [
-                'model' => $model,'bienTipo'=> $bienTipo
+                'model' => $model,'modelBienTipo'=> $modelBienTipo
             ]);
        // }
     }

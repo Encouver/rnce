@@ -2,6 +2,7 @@
 
 namespace common\models\a;
 
+use common\models\p\PersonasNaturales;
 use Yii;
 
 /**
