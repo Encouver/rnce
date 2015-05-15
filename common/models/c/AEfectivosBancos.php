@@ -51,7 +51,7 @@ class AEfectivosBancos extends \common\components\BaseActiveRecord
     {
         return 'cuentas.a_efectivos_bancos';
     }
-
+    
     /**
      * @inheritdoc
      */

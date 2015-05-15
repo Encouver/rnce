@@ -11,6 +11,7 @@ use kartik\builder\ActiveFormEvent;
 use yii\helpers\Html;
 use common\models\p\BancosContratistas;
 use common\models\p\SysDivisas;
+use kartik\widgets\DatePicker;
 
 /**
  * This is the model class for table "cuentas.a_inversiones_negociar".
@@ -157,8 +158,23 @@ class AInversionesNegociar extends \common\components\BaseActiveRecord
                     'columnOptions'=>['hidden'=>true]
                 ],
                 'banco_id'=>['type'=>Form::INPUT_DROPDOWN_LIST, 'items'=>ArrayHelper::map($array, 'id', 'nombre'), 'label'=>'Banco'],
-                'fecha_inversion'=>['type'=>Form::INPUT_TEXT,'label'=>'Fecha inversión'],
-                'fecha_finalizacion'=>['type'=>Form::INPUT_TEXT,'label'=>'Fecha finalización'],
+                //'fecha_inversion'=>['type'=>Form::INPUT_TEXT,'label'=>'Fecha inversión'],
+
+                'fecha_inversion'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>DatePicker::className(),'options'=>['options' => ['placeholder' => 'Seleccione fecha ...'],
+                'convertFormat' => true,
+                'pluginOptions' => [
+                'format' => 'd-M-yyyy ',
+                //'startDate' => date('d-m-Y h:i A'),//'01-Mar-2014 12:00 AM',
+                'todayHighlight' => true
+                ]]],
+                //'fecha_finalizacion'=>['type'=>Form::INPUT_TEXT,'label'=>'Fecha finalización'],
+                'fecha_finalizacion'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>DatePicker::className(),'options'=>['options' => ['placeholder' => 'Seleccione fecha ...'],
+                'convertFormat' => true,
+                'pluginOptions' => [
+                'format' => 'd-M-yyyy ',
+                //'startDate' => date('d-m-Y h:i A'),//'01-Mar-2014 12:00 AM',
+                'todayHighlight' => true
+                ]]],
                 'tasa'=>['type'=>Form::INPUT_TEXT,'label'=>'Tasa'],
                 'plazo'=>['type'=>Form::INPUT_TEXT,'label'=>'Plazo'],
                 'costo_adquisicion'=>['type'=>Form::INPUT_TEXT,'label'=>'Costo adquisición'],
@@ -188,8 +204,21 @@ class AInversionesNegociar extends \common\components\BaseActiveRecord
                     'columnOptions'=>['hidden'=>true]
                 ],
                 'banco_id'=>['type'=>Form::INPUT_DROPDOWN_LIST, 'items'=>ArrayHelper::map($array, 'id', 'nombre'), 'label'=>'Banco'],
-                'fecha_inversion'=>['type'=>Form::INPUT_TEXT,'label'=>'Fecha inversión'],
-                'fecha_finalizacion'=>['type'=>Form::INPUT_TEXT,'label'=>'Fecha finalización'],
+                'fecha_inversion'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>DatePicker::className(),'options'=>['options' => ['placeholder' => 'Seleccione fecha ...'],
+                'convertFormat' => true,
+                'pluginOptions' => [
+                'format' => 'd-M-yyyy ',
+                //'startDate' => date('d-m-Y h:i A'),//'01-Mar-2014 12:00 AM',
+                'todayHighlight' => true
+                ]]],
+                //'fecha_finalizacion'=>['type'=>Form::INPUT_TEXT,'label'=>'Fecha finalización'],
+                'fecha_finalizacion'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>DatePicker::className(),'options'=>['options' => ['placeholder' => 'Seleccione fecha ...'],
+                'convertFormat' => true,
+                'pluginOptions' => [
+                'format' => 'd-M-yyyy ',
+                //'startDate' => date('d-m-Y h:i A'),//'01-Mar-2014 12:00 AM',
+                'todayHighlight' => true
+                ]]],
                 'tasa'=>['type'=>Form::INPUT_TEXT,'label'=>'Tasa'],
                 'plazo'=>['type'=>Form::INPUT_TEXT,'label'=>'Plazo'],
                 'costo_adquisicion'=>['type'=>Form::INPUT_TEXT,'label'=>'Costo adquisición'],
