@@ -28,7 +28,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'sys_finalizado_el')->textInput() ?>
 
-    <?= $form->field($model, 'tipo_accion')->dropDownList([ 'PRNCIPAL' => 'PRNCIPAL', 'PAGO_CAPITAL' => 'PAGO CAPITAL', 'APORTE_CAPITALIZAR' => 'APORTE CAPITALIZAR', 'AUMENTO_CAPITAL' => 'AUMENTO CAPITAL', 'DISMINUCION_CAPITAL' => 'DISMINUCION CAPITAL', 'FONDO_EMERGENCIA' => 'FONDO EMERGENCIA', 'REINTEGRO_PERDIDA' => 'REINTEGRO PERDIDA', 'VENTA_ACCION' => 'VENTA ACCION', 'FUSION_EMPRESARIAL' => 'FUSION EMPRESARIAL', ], ['prompt' => '']) ?>
+    <?= $form->field($model, 'tipo_accion')->dropDownList([ 'PRINCIPAL' => 'PRINCIPAL', 'PAGO_CAPITAL' => 'PAGO CAPITAL', 'APORTE_CAPITALIZAR' => 'APORTE CAPITALIZAR', 'AUMENTO_CAPITAL' => 'AUMENTO CAPITAL', 'DISMINUCION_CAPITAL' => 'DISMINUCION CAPITAL', 'FONDO_EMERGENCIA' => 'FONDO EMERGENCIA', 'REINTEGRO_PERDIDA' => 'REINTEGRO PERDIDA', 'VENTA_ACCION' => 'VENTA ACCION', 'FUSION_EMPRESARIAL' => 'FUSION EMPRESARIAL', ], ['prompt' => '']) ?>
 
     <?= $form->field($model, 'suscrito')->checkbox() ?>
 
