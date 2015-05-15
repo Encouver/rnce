@@ -8,7 +8,7 @@ use app\models\NombresCajasSearch;
 use common\components\BaseController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\helpers\Json;
+
 /**
  * NombresCajasController implements the CRUD actions for NombresCajas model.
  */
@@ -16,14 +16,14 @@ class NombresCajasController extends BaseController
 {
     public function behaviors()
     {
-        return [
+        return array_merge(parent::behaviors(),[
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['post'],
                 ],
             ],
-        ];
+        ]);
     }
 
     /**
@@ -39,12 +39,6 @@ class NombresCajasController extends BaseController
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
-    }
-
-
-    public function actionEfectivosequivalentes()
-    {
-        return $this->render("efectivosequivalentes");
     }
 
     /**
@@ -76,20 +70,6 @@ class NombresCajasController extends BaseController
             ]);
         }
     }
-
-     public function actionRaul()
-    {
-        $model = new NombresCajas();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return Json::encode($this->renderPartial('_form', [
-                'model' => $model,
-            ]));
-        }
-    }
-
 
     /**
      * Updates an existing NombresCajas model.

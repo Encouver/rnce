@@ -73,7 +73,7 @@ use kartik\builder\Form;
     ActiveForm::end();
 
 
-        echo 'nacional '. $nacional;
+        //echo 'nacional '. $nacional;
 
     ?>
 

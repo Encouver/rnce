@@ -55,7 +55,10 @@ SCRIPT;
     'attributes'=>$persona_juridica->formAttribsnacional
       ]); ?>
     
-    <div id="output16"></div>
+    <div id="output16">
+        
+    </div>
+    
     <div class="form-group">
          <?= Html::Button(Yii::t('app', 'Enviar'), ['class' => 'btn btn-success', 'id' => 'enviar16']) ?> 
     </div>

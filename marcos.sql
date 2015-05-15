@@ -799,3 +799,18 @@ ALTER TABLE cuentas.sys_totales RENAME ahno  TO anho;
 
 ALTER TABLE cuentas.aa_obligaciones_bancarias
 ALTER COLUMN total_imp_deu_int DROP NOT NULL;
+
+
+
+/**************     14/05/2015 *************/
+
+ALTER TABLE activos.bienes
+ADD FOREIGN KEY (sys_tipo_bien_id) REFERENCES activos.sys_tipos_bienes (id) ON UPDATE NO ACTION ON DELETE NO ACTION;
+
+ALTER TABLE activos.activos_biologicos RENAME catidad  TO cantidad;
+
+ALTER TABLE activos.fabricaciones_muebles
+ADD COLUMN tipo_bien_id integer NOT NULL;
+COMMENT ON COLUMN activos.fabricaciones_muebles.tipo_bien_id
+IS 'Tipo de bien mueble que esta fabricando.';
+

@@ -53,9 +53,12 @@ AppAsset::register($this);
                 ],
                 ['label' => 'Activos',
                     'items' => [
-                         ['label' => 'Crear bien', 'url' => ['/bienes/create']],
-                         ['label' => 'Activos', 'url' => ['/activos/index']],
-                         ['label' => 'Aqui van los otros', 'url' => ['#']],
+                         //['label' => 'Crear bien', 'url' => ['/activos-bienes/index']],
+                        ['label' => 'Bienes', 'url' => ['/activos-bienes/index']],
+                        ['label' => 'Facturas', 'url' => ['/activos-facturas/index']],
+                        ['label' => 'Avaluos', 'url' => ['/activos-avaluos/index']],
+                        //['label' => 'Datos', 'url' => ['/activos-avaluos/index']],
+                        //['label' => 'Aqui van los otros', 'url' => ['#']],
                     ],
                 ],
 /*                ['label' => 'Información general',
@@ -216,12 +219,12 @@ AppAsset::register($this);
 
 
         // Above
-        echo TabsX::widget([
+        /*echo TabsX::widget([
             'items'=>$items,
             'position'=>TabsX::POS_ABOVE,
             'encodeLabels'=>false,
             'options' => ['class' =>'nav-tabs '],
-        ]);
+        ]);*/
 
        /* echo GhostNav::widget([
                 'encodeLabels'=>false,

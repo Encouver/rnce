@@ -1,7 +1,9 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+//use yii\widgets\ActiveForm;
+use kartik\widgets\ActiveForm;
+use kartik\builder\Form;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\c\AInversionesNegociar */
@@ -9,7 +11,8 @@ use yii\widgets\ActiveForm;
 ?>
 
 <div class="ainversiones-negociar-form">
-
+<?php
+/*
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'banco_id')->textInput() ?>
@@ -56,6 +59,17 @@ use yii\widgets\ActiveForm;
         <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
-    <?php ActiveForm::end(); ?>
+    <?php ActiveForm::end(); ?> */
 
+    $form = ActiveForm::begin(['type'=>ActiveForm::TYPE_VERTICAL]);
+    echo Form::widget([
+        'model'=>$model,
+        'form'=>$form,
+        'columns'=>2,
+        //'columns'=>11,
+        'attributes'=> ($model->nacional) ? $model->getFormAttribs('nacional') : $model->getFormAttribs('extranjera')
+    ]);
+    echo Html::submitButton('Submit', ['type'=>'button', 'class'=>'btn btn-primary']);
+    ActiveForm::end();
+?>
 </div>

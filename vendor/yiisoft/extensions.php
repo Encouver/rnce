@@ -381,4 +381,13 @@ return array (
       '@kartik/money' => $vendorDir . '/kartik-v/yii2-money',
     ),
   ),
+  'kartik-v/yii2-checkbox-x' => 
+  array (
+    'name' => 'kartik-v/yii2-checkbox-x',
+    'version' => '1.0.0.0',
+    'alias' => 
+    array (
+      '@kartik/checkbox' => $vendorDir . '/kartik-v/yii2-checkbox-x',
+    ),
+  ),
 );
