@@ -90,7 +90,7 @@ class AEfectivosBancosController extends BaseController
     {
         //$nacional = true;
         $model = new AEfectivosBancos();
-
+        //$model->scenario = 'nacional';
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
@@ -109,7 +109,7 @@ class AEfectivosBancosController extends BaseController
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $model->scenario = 'extranjero';
+        //$model->scenario = 'extranjero';
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
