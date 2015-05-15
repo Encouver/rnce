@@ -13,7 +13,7 @@ class BaseActiveRecord extends ActiveRecord
     public function init() {
         parent::init();
     }
-    public function scenarios() {
+/*    public function scenarios() {
 
         $scenarios = parent::scenarios();
 
@@ -21,7 +21,7 @@ class BaseActiveRecord extends ActiveRecord
 
         return $scenarios;
 
-    }
+    }*/
 
 	public function behaviors()
     {
