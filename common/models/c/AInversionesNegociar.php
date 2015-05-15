@@ -60,8 +60,9 @@ class AInversionesNegociar extends \common\components\BaseActiveRecord
     public function rules()
     {
         return [
-            [['banco_id', 'fecha_inversion', 'fecha_finalizacion', 'tasa', 'plazo', 'costo_adquisicion', 'valorizacion', 'saldo_al_cierre', 'intereses_act_eco', 'tipo_moneda_id', 'total_id'], 'required'],
-            [['banco_id', 'plazo', 'tipo_moneda_id', 'contratista_id', 'creado_por', 'total_id'], 'integer'],
+            [['banco_id', 'fecha_inversion', 'fecha_finalizacion', 'tasa', 'plazo', 'costo_adquisicion', 'valorizacion', 'saldo_al_cierre', 'intereses_act_eco'], 'required', 'on' => 'nacional'],
+            [['banco_id', 'fecha_inversion', 'fecha_finalizacion', 'tasa', 'plazo', 'costo_adquisicion', 'valorizacion', 'saldo_al_cierre', 'intereses_act_eco', 'tipo_moneda_id', 'monto_moneda_extra', 'tipo_cambio_cierre'], 'required', 'on' => 'extranjero'],
+            [['banco_id', 'plazo', 'tipo_moneda_id', 'contratista_id', 'creado_por'], 'integer'],
             [['fecha_inversion', 'fecha_finalizacion', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['tasa', 'costo_adquisicion', 'valorizacion', 'saldo_al_cierre', 'intereses_act_eco', 'monto_moneda_extra', 'tipo_cambio_cierre'], 'number'],
             [['sys_status'], 'boolean'],
@@ -181,7 +182,7 @@ class AInversionesNegociar extends \common\components\BaseActiveRecord
                 'valorizacion'=>['type'=>Form::INPUT_TEXT,'label'=>'Valorización'],
                 'saldo_al_cierre'=>['type'=>Form::INPUT_TEXT,'label'=>'Saldo al cierre'],
                 'intereses_act_eco'=>['type'=>Form::INPUT_TEXT,'label'=>'Intereses durante actividad economica'],
-                'tipo_moneda_id'=>['type'=>Form::INPUT_DROPDOWN_LIST, 'items'=>ArrayHelper::map(SysDivisas::find()->orderBy('nombre')->asArray()->all(), 'id', 'nombre'), 'label'=>'Divisa'],
+                //'tipo_moneda_id'=>['type'=>Form::INPUT_DROPDOWN_LIST, 'items'=>ArrayHelper::map(SysDivisas::find()->orderBy('nombre')->asArray()->all(), 'id', 'nombre'), 'label'=>'Divisa'],
                 //'monto_moneda_extra'=>['type'=>Form::INPUT_TEXT,'label'=>'Monto moneda extranjera'],
                 //'tipo_cambio_cierre'=>['type'=>Form::INPUT_TEXT,'label'=>'Tipo de cambio al cierre'],
 
