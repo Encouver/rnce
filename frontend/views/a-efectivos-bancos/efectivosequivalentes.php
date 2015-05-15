@@ -61,7 +61,16 @@ $this->params['breadcrumbs'][] = $this->title;
               //return '<div>'.$efectivo_caja->bancoContratista->banco->nombre.'</div>';
           }
         ],
-        'saldo_cierre_ae',
+        [
+            'attribute' => 'saldo_cierre_ae',
+            'label' => 'Saldo al cierre',
+            'hAlign'=>'right',
+            'vAlign'=>'middle',
+            'width'=>'100px',
+            'format'=>['decimal', 2],
+            'pageSummary'=>true
+        ],
+        
         [
           'attribute' => 'tipo_moneda_id',
           'label' => 'Divisa',
@@ -90,7 +99,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'panel'=>['heading'=>'<h3 class="panel-title">Efectivo en caja</h3>'],
             'toolbar' =>  [
               ['content'=>
-                  Html::a(Yii::t('app', '<i class="glyphicon glyphicon-plus"></i>'), ['create'], ['class' => 'btn btn-success']),
+                  Html::a(Yii::t('app', '<i class="glyphicon glyphicon-plus"></i>'), ['a-efectivos-cajas/create'], ['class' => 'btn btn-success']),
                   //Html::a('<i class="glyphicon glyphicon-repeat"></i>', ['dynagrid-demo'], ['data-pjax'=>0, 'class' => 'btn btn-default', 'title'=>'Reset Grid'])
               ],
               ['content'=>'{dynagridFilter}{dynagridSort}{dynagrid}'],
@@ -236,7 +245,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'toolbar' =>  [
               ['content'=>
-                  Html::a(Yii::t('app', '<i class="glyphicon glyphicon-plus"></i>'), ['create'], ['class' => 'btn btn-success']),
+                  Html::a(Yii::t('app', '<i class="glyphicon glyphicon-plus"></i>'), ['a-inversiones-negociar/create'], ['class' => 'btn btn-success']),
                   //Html::a('<i class="glyphicon glyphicon-repeat"></i>', ['dynagrid-demo'], ['data-pjax'=>0, 'class' => 'btn btn-default', 'title'=>'Reset Grid'])
               ],
               ['content'=>'{dynagridFilter}{dynagridSort}{dynagrid}'],

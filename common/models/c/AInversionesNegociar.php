@@ -3,6 +3,14 @@
 namespace common\models\c;
 
 use Yii;
+use kartik\builder\TabularForm;
+use kartik\grid\GridView;
+use yii\helpers\ArrayHelper;
+use kartik\builder\Form;
+use kartik\builder\ActiveFormEvent;
+use yii\helpers\Html;
+use common\models\p\BancosContratistas;
+use common\models\p\SysDivisas;
 
 /**
  * This is the model class for table "cuentas.a_inversiones_negociar".
@@ -128,5 +136,71 @@ class AInversionesNegociar extends \common\components\BaseActiveRecord
     public function getTotal()
     {
         return $this->hasOne(SysTotales::className(), ['id' => 'total_id']);
+    }
+
+    public function getFormAttribs($id) {
+        
+        if($id=='nacional')
+        {
+            //where(['nacional' => true])->
+            $ban = BancosContratistas::find()->all();
+            $array = array();
+            foreach ($ban as $key => $value) {
+                if($value->banco->nacional)
+                $array[] = ['id' => $value->id, 'nombre' => $value->banco->nombre];
+            }
+
+            return [
+                // primary key column
+                'id'=>[ // primary key attribute
+                    'type'=>TabularForm::INPUT_HIDDEN,
+                    'columnOptions'=>['hidden'=>true]
+                ],
+                'banco_id'=>['type'=>Form::INPUT_DROPDOWN_LIST, 'items'=>ArrayHelper::map($array, 'id', 'nombre'), 'label'=>'Banco'],
+                'fecha_inversion'=>['type'=>Form::INPUT_TEXT,'label'=>'Fecha inversión'],
+                'fecha_finalizacion'=>['type'=>Form::INPUT_TEXT,'label'=>'Fecha finalización'],
+                'tasa'=>['type'=>Form::INPUT_TEXT,'label'=>'Tasa'],
+                'plazo'=>['type'=>Form::INPUT_TEXT,'label'=>'Plazo'],
+                'costo_adquisicion'=>['type'=>Form::INPUT_TEXT,'label'=>'Costo adquisición'],
+                'valorizacion'=>['type'=>Form::INPUT_TEXT,'label'=>'Valorización'],
+                'saldo_al_cierre'=>['type'=>Form::INPUT_TEXT,'label'=>'Saldo al cierre'],
+                'intereses_act_eco'=>['type'=>Form::INPUT_TEXT,'label'=>'Intereses durante actividad economica'],
+                'tipo_moneda_id'=>['type'=>Form::INPUT_DROPDOWN_LIST, 'items'=>ArrayHelper::map(SysDivisas::find()->orderBy('nombre')->asArray()->all(), 'id', 'nombre'), 'label'=>'Divisa'],
+                //'monto_moneda_extra'=>['type'=>Form::INPUT_TEXT,'label'=>'Monto moneda extranjera'],
+                //'tipo_cambio_cierre'=>['type'=>Form::INPUT_TEXT,'label'=>'Tipo de cambio al cierre'],
+
+            ];
+
+        }else
+        {
+            //where(['nacional' => true])->
+            $ban = BancosContratistas::find()->all();
+            $array = array();
+            foreach ($ban as $key => $value) {
+                if(!$value->banco->nacional)
+                $array[] = ['id' => $value->id, 'nombre' => $value->banco->nombre];
+            }
+
+           return [
+                // primary key column
+                'id'=>[ // primary key attribute
+                    'type'=>TabularForm::INPUT_HIDDEN,
+                    'columnOptions'=>['hidden'=>true]
+                ],
+                'banco_id'=>['type'=>Form::INPUT_DROPDOWN_LIST, 'items'=>ArrayHelper::map($array, 'id', 'nombre'), 'label'=>'Banco'],
+                'fecha_inversion'=>['type'=>Form::INPUT_TEXT,'label'=>'Fecha inversión'],
+                'fecha_finalizacion'=>['type'=>Form::INPUT_TEXT,'label'=>'Fecha finalización'],
+                'tasa'=>['type'=>Form::INPUT_TEXT,'label'=>'Tasa'],
+                'plazo'=>['type'=>Form::INPUT_TEXT,'label'=>'Plazo'],
+                'costo_adquisicion'=>['type'=>Form::INPUT_TEXT,'label'=>'Costo adquisición'],
+                'valorizacion'=>['type'=>Form::INPUT_TEXT,'label'=>'Valorización'],
+                'saldo_al_cierre'=>['type'=>Form::INPUT_TEXT,'label'=>'Saldo al cierre'],
+                'intereses_act_eco'=>['type'=>Form::INPUT_TEXT,'label'=>'Intereses durante actividad economica'],
+                'tipo_moneda_id'=>['type'=>Form::INPUT_DROPDOWN_LIST, 'items'=>ArrayHelper::map(SysDivisas::find()->orderBy('nombre')->asArray()->all(), 'id', 'nombre'), 'label'=>'Divisa'],
+                'monto_moneda_extra'=>['type'=>Form::INPUT_TEXT,'label'=>'Monto moneda extranjera'],
+                'tipo_cambio_cierre'=>['type'=>Form::INPUT_TEXT,'label'=>'Tipo de cambio al cierre'],
+
+            ];
+        }
     }
 }
