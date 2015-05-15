@@ -5,7 +5,7 @@ namespace common\models\p;
 use Yii;
 
 /**
- * This is the model class for table "nombres_cajas".
+ * This is the model class for table "public.nombres_cajas".
  *
  * @property integer $id
  * @property string $nombre
@@ -15,8 +15,7 @@ use Yii;
  * @property string $sys_actualizado_el
  * @property string $sys_finalizado_el
  * @property string $tipo_caja
- *
- * @property Contratistas $contratistas
+ * @property boolean $nacional
  */
 class NombresCajas extends \common\components\BaseActiveRecord
 {
@@ -25,7 +24,7 @@ class NombresCajas extends \common\components\BaseActiveRecord
      */
     public static function tableName()
     {
-        return 'nombres_cajas';
+        return 'public.nombres_cajas';
     }
 
     /**
@@ -36,10 +35,9 @@ class NombresCajas extends \common\components\BaseActiveRecord
         return [
             [['nombre', 'contratistas_id', 'tipo_caja'], 'required'],
             [['contratistas_id'], 'integer'],
-            [['sys_status'], 'boolean'],
+            [['sys_status', 'nacional'], 'boolean'],
             [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
-            [['tipo_caja'], 'string'],
-            [['nombre'], 'string', 'max' => 255],
+            [['nombre', 'tipo_caja'], 'string', 'max' => 255],
             [['nombre', 'contratistas_id'], 'unique', 'targetAttribute' => ['nombre', 'contratistas_id'], 'message' => 'The combination of Nombre and Contratistas ID has already been taken.']
         ];
     }
@@ -58,14 +56,7 @@ class NombresCajas extends \common\components\BaseActiveRecord
             'sys_actualizado_el' => Yii::t('app', 'Sys Actualizado El'),
             'sys_finalizado_el' => Yii::t('app', 'Sys Finalizado El'),
             'tipo_caja' => Yii::t('app', 'Tipo Caja'),
+            'nacional' => Yii::t('app', 'Nacional'),
         ];
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getContratistas()
-    {
-        return $this->hasOne(Contratistas::className(), ['id' => 'contratistas_id']);
     }
 }

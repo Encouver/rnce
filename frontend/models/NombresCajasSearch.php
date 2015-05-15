@@ -20,7 +20,7 @@ class NombresCajasSearch extends NombresCajas
         return [
             [['id', 'contratistas_id'], 'integer'],
             [['nombre', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el', 'tipo_caja'], 'safe'],
-            [['sys_status'], 'boolean'],
+            [['sys_status', 'nacional'], 'boolean'],
         ];
     }
 
@@ -51,7 +51,7 @@ class NombresCajasSearch extends NombresCajas
         $this->load($params);
 
         if (!$this->validate()) {
-            // uncomment the following line if you do not want to any records when validation fails
+            // uncomment the following line if you do not want to return any records when validation fails
             // $query->where('0=1');
             return $dataProvider;
         }
@@ -63,6 +63,7 @@ class NombresCajasSearch extends NombresCajas
             'sys_creado_el' => $this->sys_creado_el,
             'sys_actualizado_el' => $this->sys_actualizado_el,
             'sys_finalizado_el' => $this->sys_finalizado_el,
+            'nacional' => $this->nacional,
         ]);
 
         $query->andFilterWhere(['like', 'nombre', $this->nombre])

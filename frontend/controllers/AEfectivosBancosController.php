@@ -88,6 +88,7 @@ class AEfectivosBancosController extends BaseController
      */
     public function actionCreate()
     {
+        //$nacional = true;
         $model = new AEfectivosBancos();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {

@@ -36,6 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'sys_actualizado_el',
             'sys_finalizado_el',
             'tipo_caja',
+            'nacional:boolean',
         ],
     ]) ?>
 
