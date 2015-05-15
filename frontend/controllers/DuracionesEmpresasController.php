@@ -17,14 +17,14 @@ class DuracionesEmpresasController extends BaseController
 {
     public function behaviors()
     {
-        return [
+        return array_merge(parent::behaviors(),[
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['post'],
                 ],
             ],
-        ];
+        ]);
     }
 
     /**
@@ -88,7 +88,7 @@ class DuracionesEmpresasController extends BaseController
         $usuario= \common\models\p\User::findOne(Yii::$app->user->identity->id);
        
         if ( $duracion_acta->load(Yii::$app->request->post())) {
-            
+           
              $transaction = \Yii::$app->db->beginTransaction();
              
            try {
@@ -97,6 +97,10 @@ class DuracionesEmpresasController extends BaseController
             if($duracion_acta->fecha_vencimiento==null){
                  $transaction->rollBack();
                 return "Debe ingresar fecha vencimiento"; 
+            }
+             if($duracion_acta->duracion_anos==null){
+                 $transaction->rollBack();
+                return "Debe ingresar Duracion"; 
             }
            
             $duracion_acta->contratista_id = $usuario->contratista_id;

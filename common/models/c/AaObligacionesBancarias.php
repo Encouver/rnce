@@ -147,23 +147,28 @@ class AaObligacionesBancarias extends \common\components\BaseActiveRecord
                 'convertFormat' => true,
                 'pluginOptions' => [
                     'format' => 'd-M-yyyy ',
-                    'startDate' => date('d-m-Y h:i A'),//'01-Mar-2014 12:00 AM',
+                    //'startDate' => date('d-m-Y h:i A'),//'01-Mar-2014 12:00 AM',
                     'todayHighlight' => true
                 ]]],
             'fecha_vencimiento'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>DatePicker::className(), 'options'=>['options' => ['placeholder' => 'Seleccione fecha ...'],
                 'convertFormat' => true,
                 'pluginOptions' => [
                     'format' => 'd-M-yyyy ',
-                    'startDate' => date('d-m-Y h:i A'),//'01-Mar-2014 12:00 AM',
+                    //'startDate' => date('d-m-Y h:i A'),//'01-Mar-2014 12:00 AM',
                     'todayHighlight' => true
                 ]]],
             'tasa_interes'=>['type'=>Form::INPUT_CHECKBOX,],
             'condicion_pago_id'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>ArrayHelper::map(\common\models\c\AaCondicionesPagos::find()->asArray()->all(),'id','nombre'),],
-            'plazo'=>['type'=>Form::INPUT_WIDGET, 'widgetClass'=>MaskMoney::className(),'options'=>['pluginOptions' => [
+            'plazo'=>['type'=>Form::INPUT_TEXT, /*'widgetClass'=>MaskMoney::className(),'options'=>['pluginOptions' => [
                 'prefix' => '',
                 'suffix' => ' Día/s',
-                'allowNegative' => false
-            ],]],
+                //'affixesStay'=> false,
+                //'precision' => 0,
+                'allowNegative' => false,
+                //'thousands'=>'',
+                //'decimals'=>''
+                ],]*/
+            ],
             'tipo_garantia_id'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>ArrayHelper::map(\common\models\c\AaTiposGarantias::find()->asArray()->all(),'id','nombre')],
             'interes_ejer_econ'=>['type'=>Form::INPUT_WIDGET, 'widgetClass'=>MaskMoney::className()],
             'interes_pagar'=>['type'=>Form::INPUT_WIDGET, 'widgetClass'=>MaskMoney::className()],

@@ -3,6 +3,7 @@
 namespace frontend\controllers;
 
 use common\models\c\SysTotales;
+use webvimark\modules\UserManagement\components\GhostAccessControl;
 use Yii;
 use common\models\c\AaObligacionesBancarias;
 use app\models\AaObligacionesBancariasSearch;
@@ -18,14 +19,14 @@ class AaObligacionesBancariasController extends BaseController
 {
     public function behaviors()
     {
-        return [
+        return array_merge(parent::behaviors(),[
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['post'],
                 ],
             ],
-        ];
+        ]);
     }
 
     public function actionObligacionesbancarias(){
@@ -99,7 +100,7 @@ class AaObligacionesBancariasController extends BaseController
         if($model->load(Yii::$app->request->post()) /*&& $model->validate()*/)
         {
             $total = new SysTotales();
-            $total->contratista_id = $model->contratista_id = 1;
+            $total->contratista_id = $model->contratista_id = Yii::$app->user->identity->contratista_id;
             $total->classname = $model->className();
             $total->valor = "".($model->interes_pagar+$model->importe_deuda);
             $total->id_classname = 1;

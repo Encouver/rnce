@@ -17,14 +17,14 @@ class DenominacionesComercialesController extends BaseController
 {
     public function behaviors()
     {
-        return [
+        return array_merge(parent::behaviors(),[
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['post'],
                 ],
             ],
-        ];
+        ]);
     }
 
     /**
@@ -90,7 +90,16 @@ class DenominacionesComercialesController extends BaseController
     if ($denominacion_comercial->load(Yii::$app->request->post())) {
          $denominacion_comercial->contratista_id = $usuario->contratista_id;
         if($denominacion_comercial->tipo_denominacion == "PERSONA NATURAL" || $denominacion_comercial->tipo_denominacion =="FIRMA PERSONAL" || $denominacion_comercial->tipo_denominacion == "SOCIEDAD DE RESPONSABILIDAD LIMITADA" || $denominacion_comercial->tipo_denominacion== "COMPAÑIA NOMBRE COLECTIVO" || $denominacion_comercial->tipo_denominacion == "COMPAÑIA ANONIMA"){
+              
+       $denominaciones= DenominacionesComerciales::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id]);
 
+            
+            if(isset($denominaciones)){
+                   
+                      return "Usario ya posee una denominacion comercial asociada";
+                                   
+                               
+                   }
             if($denominacion_comercial->save()){
                 return "Datos guardados con exito";
             }else{
@@ -162,6 +171,17 @@ class DenominacionesComercialesController extends BaseController
                if($denominacion_comercial->tipo_denominacion=="ORGANIZACION SOCIOPRODUCTIVA" && $denominacion_comercial->codigo_situr==null){
               return "Faltan datos debe ingresar el codigo situr";
             }else{
+                
+                 $denominaciones= DenominacionesComerciales::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id]);
+
+            
+            if(isset($denominaciones)){
+                   
+                      return "Usario ya posee una denominacion comercial asociada";
+                                   
+                               
+                   }
+                
             if($denominacion_comercial->save()){
                 return "Datos guardados con exito";
             }else{

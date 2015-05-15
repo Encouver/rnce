@@ -53,9 +53,12 @@ AppAsset::register($this);
                 ],
                 ['label' => 'Activos',
                     'items' => [
-                         ['label' => 'Crear bien', 'url' => ['/bienes/create']],
-                         ['label' => 'Activos', 'url' => ['/activos/index']],
-                         ['label' => 'Aqui van los otros', 'url' => ['#']],
+                         //['label' => 'Crear bien', 'url' => ['/activos-bienes/index']],
+                        ['label' => 'Bienes', 'url' => ['/activos-bienes/index']],
+                        ['label' => 'Facturas', 'url' => ['/activos-facturas/index']],
+                        ['label' => 'Avaluos', 'url' => ['/activos-avaluos/index']],
+                        //['label' => 'Datos', 'url' => ['/activos-avaluos/index']],
+                        //['label' => 'Aqui van los otros', 'url' => ['#']],
                     ],
                 ],
 /*                ['label' => 'Información general',
@@ -91,7 +94,8 @@ AppAsset::register($this);
                         ['label' => 'Cierre ejercicio', 'url' => ['/cierres-ejercicios/crearcierreacta']],
                         ['label' => 'Duracion empresa', 'url' => ['/duraciones-empresas/crearduracionacta']],
                         ['label' => 'Actividades Economicas', 'url' => ['/actividades-economicas/crearactividadacta']],
-                        
+                        ['label' => 'Capital Suscrito', 'url' => ['/actas-constitutivas/crearcapitalsuscrito']],
+                        ['label' => 'Resumen', 'url' => ['/actas-constitutivas/resumenacta']],
                     ],
                 ],
                 

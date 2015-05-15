@@ -20,14 +20,14 @@ class ContratistasController extends BaseController
 {
     public function behaviors()
     {
-        return [
+        return array_merge(parent::behaviors(),[
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['post'],
                 ],
             ],
-        ];
+        ]);
     }
 
     /**
@@ -169,7 +169,12 @@ class ContratistasController extends BaseController
                        if($contratista->save()){
 
                            if ($usuario= \common\models\p\User::findOne(Yii::$app->user->identity->id)) {
-
+                             if($usuario->contratista_id!=null){
+                                   $transaction->rollBack();
+                                   return "Usuario ya tiene un contratista";
+                                   
+                               
+                               }
                            $usuario->contratista_id = $contratista->id;
                            if ($usuario->save()) {
 
@@ -239,7 +244,12 @@ class ContratistasController extends BaseController
                        if($contratista->save()){
 
                            if ($usuario= \common\models\p\User::findOne(Yii::$app->user->identity->id)) {
-
+                               if($usuario->contratista_id!=null){
+                                   $transaction->rollBack();
+                                   return "Usuario ya tiene un contratista";
+                                   
+                               
+                               }
                            $usuario->contratista_id = $contratista->id;
                            if ($usuario->save()) {
 

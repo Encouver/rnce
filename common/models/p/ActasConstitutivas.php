@@ -5,7 +5,7 @@ namespace common\models\p;
 use Yii;
 
 /**
- * This is the model class for table "public.actas_constitutivas".
+ * This is the model class for table "actas_constitutivas".
  *
  * @property integer $id
  * @property integer $contratista_id
@@ -38,34 +38,34 @@ use Yii;
  * @property boolean $decreto_div_excedente
  * @property boolean $modificacion_balance
  *
- * @property Capitales[] $capitales
- * @property Certificados[] $certificados
- * @property FondosReservas[] $fondosReservas
- * @property Suplementarios[] $suplementarios
- * @property AumentosCapitales[] $aumentosCapitales
- * @property CorreccionesMonetarias[] $correccionesMonetarias
- * @property AportesCapitalizar[] $aportesCapitalizars
  * @property Acciones[] $acciones
  * @property AccionesDisminuidas[] $accionesDisminuidas
- * @property Contratistas $contratista
- * @property DocumentosRegistrados $documentoRegistrado
- * @property DuracionesEmpresas $duracionEmpresa
+ * @property ActivosDocumentosRegistrados $documentoRegistrado
  * @property AccionistasOtros $accionistaOtro
  * @property CierresEjercicios $cierreEjercicio
  * @property ComisariosAuditores $comisarioAuditor
+ * @property Contratistas $contratista
  * @property DenominacionesComerciales $denominacionComercial
  * @property Domicilios $domicilio
+ * @property DuracionesEmpresas $duracionEmpresa
  * @property ObjetosSociales $objetoSocial
  * @property RazonesSociales $razonSocial
+ * @property AportesCapitalizar[] $aportesCapitalizars
+ * @property AumentosCapitales[] $aumentosCapitales
+ * @property Capitales[] $capitales
+ * @property Certificados[] $certificados
  * @property CertificadosDisminuidos[] $certificadosDisminuidos
+ * @property CorreccionesMonetarias[] $correccionesMonetarias
+ * @property DecretosDivExcedentes[] $decretosDivExcedentes
  * @property EmpresasFusionadas[] $empresasFusionadas
+ * @property FondosEmergencias[] $fondosEmergencias
+ * @property FondosReservas[] $fondosReservas
  * @property FusionesEmpresariales[] $fusionesEmpresariales
  * @property LimitacionesCapitales[] $limitacionesCapitales
- * @property SuplementariosDisminuidos[] $suplementariosDisminuidos
  * @property LimitacionesCapitalesAfectados[] $limitacionesCapitalesAfectados
- * @property FondosEmergencias[] $fondosEmergencias
- * @property DecretosDivExcedentes[] $decretosDivExcedentes
  * @property ModificacionesBalances[] $modificacionesBalances
+ * @property Suplementarios[] $suplementarios
+ * @property SuplementariosDisminuidos[] $suplementariosDisminuidos
  */
 class ActasConstitutivas extends \common\components\BaseActiveRecord
 {
@@ -74,7 +74,7 @@ class ActasConstitutivas extends \common\components\BaseActiveRecord
      */
     public static function tableName()
     {
-        return 'public.actas_constitutivas';
+        return 'actas_constitutivas';
     }
 
     /**
@@ -132,62 +132,6 @@ class ActasConstitutivas extends \common\components\BaseActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getCapitales()
-    {
-        return $this->hasMany(Capitales::className(), ['acta_constitutiva_id' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getCertificados()
-    {
-        return $this->hasMany(Certificados::className(), ['acta_constitutiva_id' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getFondosReservas()
-    {
-        return $this->hasMany(FondosReservas::className(), ['acta_constitutiva_id' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getSuplementarios()
-    {
-        return $this->hasMany(Suplementarios::className(), ['acta_constitutiva_id' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getAumentosCapitales()
-    {
-        return $this->hasMany(AumentosCapitales::className(), ['acta_constitutiva_id' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getCorreccionesMonetarias()
-    {
-        return $this->hasMany(CorreccionesMonetarias::className(), ['acta_constitutiva_id' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getAportesCapitalizars()
-    {
-        return $this->hasMany(AportesCapitalizar::className(), ['acta_constitutiva_id' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
     public function getAcciones()
     {
         return $this->hasMany(Acciones::className(), ['acta_constitutiva_id' => 'id']);
@@ -204,25 +148,9 @@ class ActasConstitutivas extends \common\components\BaseActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getContratista()
-    {
-        return $this->hasOne(Contratistas::className(), ['id' => 'contratista_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
     public function getDocumentoRegistrado()
     {
-        return $this->hasOne(DocumentosRegistrados::className(), ['id' => 'documento_registrado_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getDuracionEmpresa()
-    {
-        return $this->hasOne(DuracionesEmpresas::className(), ['id' => 'duracion_empresa_id']);
+        return $this->hasOne(ActivosDocumentosRegistrados::className(), ['id' => 'documento_registrado_id']);
     }
 
     /**
@@ -252,6 +180,14 @@ class ActasConstitutivas extends \common\components\BaseActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
+    public function getContratista()
+    {
+        return $this->hasOne(Contratistas::className(), ['id' => 'contratista_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getDenominacionComercial()
     {
         return $this->hasOne(DenominacionesComerciales::className(), ['id' => 'denominacion_comercial_id']);
@@ -263,6 +199,14 @@ class ActasConstitutivas extends \common\components\BaseActiveRecord
     public function getDomicilio()
     {
         return $this->hasOne(Domicilios::className(), ['id' => 'domicilio_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDuracionEmpresa()
+    {
+        return $this->hasOne(DuracionesEmpresas::className(), ['id' => 'duracion_empresa_id']);
     }
 
     /**
@@ -284,6 +228,38 @@ class ActasConstitutivas extends \common\components\BaseActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
+    public function getAportesCapitalizars()
+    {
+        return $this->hasMany(AportesCapitalizar::className(), ['acta_constitutiva_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAumentosCapitales()
+    {
+        return $this->hasMany(AumentosCapitales::className(), ['acta_constitutiva_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCapitales()
+    {
+        return $this->hasMany(Capitales::className(), ['acta_constitutiva_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCertificados()
+    {
+        return $this->hasMany(Certificados::className(), ['acta_constitutiva_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getCertificadosDisminuidos()
     {
         return $this->hasMany(CertificadosDisminuidos::className(), ['acta_constitutiva_id' => 'id']);
@@ -292,9 +268,41 @@ class ActasConstitutivas extends \common\components\BaseActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
+    public function getCorreccionesMonetarias()
+    {
+        return $this->hasMany(CorreccionesMonetarias::className(), ['acta_constitutiva_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDecretosDivExcedentes()
+    {
+        return $this->hasMany(DecretosDivExcedentes::className(), ['acta_constitutiva_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getEmpresasFusionadas()
     {
         return $this->hasMany(EmpresasFusionadas::className(), ['acta_constitutiva_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getFondosEmergencias()
+    {
+        return $this->hasMany(FondosEmergencias::className(), ['acta_constitutiva_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getFondosReservas()
+    {
+        return $this->hasMany(FondosReservas::className(), ['acta_constitutiva_id' => 'id']);
     }
 
     /**
@@ -316,14 +324,6 @@ class ActasConstitutivas extends \common\components\BaseActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getSuplementariosDisminuidos()
-    {
-        return $this->hasMany(SuplementariosDisminuidos::className(), ['acta_constitutiva_id' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
     public function getLimitacionesCapitalesAfectados()
     {
         return $this->hasMany(LimitacionesCapitalesAfectados::className(), ['acta_constitutiva_id' => 'id']);
@@ -332,24 +332,24 @@ class ActasConstitutivas extends \common\components\BaseActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getFondosEmergencias()
-    {
-        return $this->hasMany(FondosEmergencias::className(), ['acta_constitutiva_id' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getDecretosDivExcedentes()
-    {
-        return $this->hasMany(DecretosDivExcedentes::className(), ['acta_constitutiva_id' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
     public function getModificacionesBalances()
     {
         return $this->hasMany(ModificacionesBalances::className(), ['acta_constitutiva_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getSuplementarios()
+    {
+        return $this->hasMany(Suplementarios::className(), ['acta_constitutiva_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getSuplementariosDisminuidos()
+    {
+        return $this->hasMany(SuplementariosDisminuidos::className(), ['acta_constitutiva_id' => 'id']);
     }
 }
