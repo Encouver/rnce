@@ -19,6 +19,15 @@
         </tr>
        
     </table>
+     <table class="table table-bordered">
+        <tr>
+            <td><b>Aciones Suscritas: </b><?= $accion_suscrita->numero_comun?></td>
+            <td><b>Valor: </b><?= $accion_suscrita->valor_comun ?></td>
+             <td><b>Aciones Pagadas: </b><?= $accion_pagada->numero_comun?></td>
+            <td><b>Valor: </b><?= $accion_pagada->valor_comun ?></td>
+        </tr>
+       
+    </table>
     
     <table class="table table-bordered">
         <tr>

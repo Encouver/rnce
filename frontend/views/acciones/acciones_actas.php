@@ -13,7 +13,7 @@ $url = \yii\helpers\Url::to(['acciones/accionsuscritaacta']);
 
     <?php $form = ActiveForm::begin(['id'=>'accion_suscrita']); ?>
     
-<h3>Acciones o Participaciones Suscritas</h3>
+<h3>Acciones o Participaciones Suscritas y Pagadas</h3>
 <hr />
  <?php echo Form::widget([
     'model'=>$accion_acta,

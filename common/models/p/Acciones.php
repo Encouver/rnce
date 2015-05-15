@@ -18,14 +18,15 @@ use Yii;
  * @property string $sys_finalizado_el
  * @property string $tipo_accion
  * @property boolean $suscrito
- * @property integer $acta_constitutiva_id
+ * @property integer $documento_registrado_id
+ * @property integer $contratista_id
  *
  * @property ActasConstitutivas $actaConstitutiva
  */
 class Acciones extends \common\components\BaseActiveRecord
 {
-    public $numero_comun_pagado;
-    public $valor_comun_pagado;
+    public $numero_comun_pagada;
+    public $valor_comun_pagada;
     /**
      * @inheritdoc
      */
@@ -40,12 +41,12 @@ class Acciones extends \common\components\BaseActiveRecord
     public function rules()
     {
         return [
-            [['numero_comun', 'numero_preferencial', 'acta_constitutiva_id'], 'integer'],
-            [['valor_comun', 'valor_preferencial'], 'number'],
+            [['numero_comun', 'numero_comun_pagada','numero_preferencial', 'documento_registrado_id','contratista_id','suscrito'], 'integer'],
+            [['valor_comun', 'valor_preferencial','valor_comun_pagada'], 'number'],
             [['sys_status', 'suscrito'], 'boolean'],
             [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['tipo_accion'], 'string'],
-            [['suscrito', 'acta_constitutiva_id'], 'required']
+            [['suscrito', 'documento_registrado_id','contratista_id'], 'required']
         ];
     }
 
@@ -56,9 +57,9 @@ class Acciones extends \common\components\BaseActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'numero_comun' => Yii::t('app', 'Numero Accion o Participacion'),
+            'numero_comun' => Yii::t('app', 'Numero Accion o Participacion Suscrita'),
             'numero_preferencial' => Yii::t('app', 'Numero Preferencial'),
-            'valor_comun' => Yii::t('app', 'Valor Accion o Participacion'),
+            'valor_comun' => Yii::t('app', 'Valor Accion o Participacion Suscrita'),
             'valor_preferencial' => Yii::t('app', 'Valor Preferencial'),
             'sys_status' => Yii::t('app', 'Sys Status'),
             'sys_creado_el' => Yii::t('app', 'Sys Creado El'),
@@ -66,7 +67,10 @@ class Acciones extends \common\components\BaseActiveRecord
             'sys_finalizado_el' => Yii::t('app', 'Sys Finalizado El'),
             'tipo_accion' => Yii::t('app', 'Tipo Accion'),
             'suscrito' => Yii::t('app', 'Suscrito'),
-            'acta_constitutiva_id' => Yii::t('app', 'Acta Constitutiva ID'),
+            'documento_registrado_id' => Yii::t('app', 'Documento Registrado'),
+            'contratista_id' => Yii::t('app', 'COntratista'),
+            'numero_comun_pagada' => Yii::t('app', 'Numero Accion o Participacion Pagada'),
+            'valor_comun_pagada' => Yii::t('app', 'Valor Accion o Participacion Pagada'),
         ];
     }
 
@@ -85,6 +89,8 @@ class Acciones extends \common\components\BaseActiveRecord
     return [
             'numero_comun'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Numero de acciones o participaciones']],
             'valor_comun'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Valor']],
+            'numero_comun_pagada'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Numero de acciones o participaciones']],
+            'valor_comun_pagada'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Valor']],
           
       
     ];

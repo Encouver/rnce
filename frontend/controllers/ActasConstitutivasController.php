@@ -10,9 +10,9 @@ use common\models\p\ObjetosSociales;
 use common\models\p\DuracionesEmpresas;
 use common\models\p\ActividadesEconomicas;
 use common\models\a\DocumentosRegistrados;
+use common\models\p\Acciones;
 use common\models\p\SysCaev;;
 use common\models\p\SysNaturalesJuridicas;
-use common\models\p\Acciones;
 use common\models\p\Certificados;
 use common\models\p\Suplementarios;
 use common\models\p\DenominacionesComerciales;
@@ -104,13 +104,16 @@ class ActasConstitutivasController extends BaseController
          $cierre_ejercicio= CierresEjercicios::findOne(['documento_registrado_id'=>$registro->id]);
          $objeto_social= ObjetosSociales::findOne(['documento_registrado_id'=>$registro->id]);
          $actividad_economica= ActividadesEconomicas::findOne(['documento_registrado_id'=>$registro->id]);
-      
+         $accion_suscrita= Acciones::findOne(['documento_registrado_id'=>$registro->id, 'tipo_accion'=>'PRINCIPAL', 'suscrito'=>true]);
+         $accion_pagada= Acciones::findOne(['documento_registrado_id'=>$registro->id, 'tipo_accion'=>'PRINCIPAL', 'suscrito'=>false]);
          return $this->render('resumen', [
                'natural_juridica'=>$natural_juridica,
                 'duracion_empresa'=>$duracion_empresa,
                 'cierre_ejercicio'=>$cierre_ejercicio,
                 'objeto_social'=>$objeto_social,
                 'actividad_economica'=>$actividad_economica,
+                'accion_suscrita'=>$accion_suscrita,
+                'accion_pagada'=>$accion_pagada,
             ]);
     }
     /**
