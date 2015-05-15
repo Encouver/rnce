@@ -7,6 +7,7 @@ use common\models\p\SysEstados;
 use common\models\p\SysMunicipios;
 use common\models\p\SysParroquias;
 
+$url = \yii\helpers\Url::to(['domicilios/direccionprincipal']);
 /* @var $this yii\web\View */
 /* @var $model common\models\p\PersonasNaturales */
 /* @var $form yii\widgets\ActiveForm */
@@ -69,7 +70,7 @@ $script = <<< JS
                 e.stopImmediatePropagation();
                $.ajax({
                    
-                    url: 'http://localhost/rnce/frontend/web/index.php?r=domicilios/direccionprincipal',
+                    url: '$url',
                     type: 'post',
                     data: $('form#d_principal').serialize(),
                     success: function(data) {

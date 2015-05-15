@@ -9,7 +9,7 @@ use common\models\p\SysNaturalesJuridicas;
 /* @var $this yii\web\View */
 /* @var $model common\models\p\Contratistas */
 /* @var $form yii\widgets\ActiveForm */
-
+$url = \yii\helpers\Url::to(['denominaciones-comerciales/denominacion']);
 $contratista= Contratistas::findOne( ['id' => $id_contratista]);
 $natural_juridica= SysNaturalesJuridicas::findOne(['id' => $contratista->natural_juridica_id]);
 if($natural_juridica->juridica && $contratista->tipo_sector != "PRIVADO"){
@@ -84,7 +84,7 @@ $script = <<< JS
                 e.stopImmediatePropagation();
                $.ajax({
                    
-                    url: 'http://localhost/rnce/frontend/web/index.php?r=denominaciones-comerciales/denominacion',
+                    url: '$url',
                     type: 'post',
                     data: $('form#d_comercial').serialize(),
                     success: function(data) {

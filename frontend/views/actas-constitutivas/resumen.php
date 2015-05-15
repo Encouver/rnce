@@ -9,16 +9,44 @@
 </div>
 
 <div class="col-sm-10">
-    <dl class="dl-horizontal">
-        <dt>Duracion:</dt>
-            <dd><?= $duracion_empresa->duracion_anos.' Años' ?></dd>
-        <dt>Fecha de Vencimiento:</dt>
-            <dd><?= $duracion_empresa->fecha_vencimiento ?></dd>
-        <dt>Cierre Ejercicio Economico:</dt>
-            <dd><?= $cierre_ejercicio->fecha_cierre ?></dd>
-         <dt>Objeto Social:</dt>
-            <dd><?= $objeto_social->descripcion ?></dd>
-    </dl>
-  
+    
+    
+    <table class="table table-bordered">
+        <tr>
+            <td><b>Duracion Empresa: </b><?= $duracion_empresa->duracion_anos.' Años' ?></td>
+            <td><b>Fecha Vencimiento: </b><?= $duracion_empresa->fecha_vencimiento ?></td>
+            <td><b>Cierre Ejercicio Economico: </b><?= $cierre_ejercicio->fecha_cierre ?></td>
+        </tr>
+       
+    </table>
+    
+    <table class="table table-bordered">
+        <tr>
+            <th>Objeto Social</th>
+        </tr>
+          <tr>
+            <td><?= $objeto_social->descripcion ?></td>
+        </tr>
+    </table>
+     <table class="table table-bordered">
+          <tr>
+              
+             <td><b>Actividad Economica principal: </b><?=$actividad_economica->ppalCaev->denominacion?></td>
+            <td><b>Experiencia: </b><?= $actividad_economica->ppal_experiencia.' años'?></td>
+            
+            </tr>
+            <tr>
+              
+             <td><b>Actividad Economica principal: </b><?= $actividad_economica->comp1Caev->denominacion?></td>
+            <td><b>Experiencia: </b><?= $actividad_economica->comp1_experiencia.' años'?></td>
+            
+            </tr>
+            <tr>
+              
+             <td><b>Actividad Economica principal: </b><?= $actividad_economica->comp2Caev->denominacion ?></td>
+            <td><b>Experiencia: </b><?= $actividad_economica->comp2_experiencia.' años'?></td>
+            
+            </tr>
+    </table>
 </div>
 

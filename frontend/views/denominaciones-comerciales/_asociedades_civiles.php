@@ -7,7 +7,7 @@ use yii\widgets\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $model common\models\p\Contratistas */
 /* @var $form yii\widgets\ActiveForm */
-
+$url = \yii\helpers\Url::to(['denominaciones-comerciales/denominacioncomercial']);
 $tip_sub_denominacion = [
     ['id' => 'CON FINES DE LUCRO', 'name' => 'CON FINES DE LUCRO'],
     ['id' => 'SIN FINES DE LUCRO', 'name' => 'SIN FINES DE LUCRO'],
@@ -48,7 +48,7 @@ $script = <<< JS
                 e.stopImmediatePropagation();
                $.ajax({
                    
-                    url: 'http://localhost/rnce/frontend/web/index.php?r=denominaciones-comerciales/denominacioncomercial',
+                    url: '$url',
                     type: 'post',
                     data: $('form#dc_asociedades').serialize(),
                     success: function(data) {

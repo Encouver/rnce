@@ -10,7 +10,7 @@ use kartik\widgets\Select2;
 /* @var $form yii\widgets\ActiveForm */
 
 
-
+$url = \yii\helpers\Url::to(['objetos-empresas/objetoempresa']);
 
 $data = [
  'PROVEEDOR'=> ['PRODUCTOR'=>'PRODUCTOR', 'FABRICANTE'=>'FABRICANTE','FABRICANTE IMPORTADOR'=>'FABRICANTE IMPORTADOR', 'DISTRIBUIDOR'=>'DISTRIBUIDOR','DISTRIBUIDOR AUTORIZADO'=>'DISTRIBUIDOR AUTORIZADO','DISTRIBUIDOR IMPORTADOR'=>'DITRIBUIDOR IMPORTADOR','DISTRIBUIDOR IMPORTADOR AUTORIZADO'=>'DISTRIBUIDOR IMPORTADOR AUTORIZADO'],
@@ -64,7 +64,7 @@ $script = <<< JS
                 e.stopImmediatePropagation();
                $.ajax({
                    
-                    url: 'http://localhost/rnce/frontend/web/index.php?r=objetos-empresas/objetoempresa',
+                    url: '$url',
                     type: 'post',
                     data: $('form#o_empresas').serialize(),
                     success: function(data) {

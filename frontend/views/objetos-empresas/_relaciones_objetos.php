@@ -10,6 +10,8 @@ use common\models\p\SysPaises;
 /* @var $this yii\web\View */
 /* @var $model common\models\p\ObjetosAutorizaciones */
 /* @var $form yii\widgets\ActiveForm */
+
+$url = \yii\helpers\Url::to(['objetos-empresas/objetoautorizacion']);
 ?>
 
 <div class="objetos-autorizaciones-form">
@@ -218,7 +220,7 @@ $script = <<< JS
                 e.stopImmediatePropagation();
                $.ajax({
                    
-                    url: 'http://localhost/rnce/frontend/web/index.php?r=objetos-empresas/objetoautorizacion',
+                    url: '$url',
                     type: 'post',
                     data: $('form#r_objetos').serialize(),
                     success: function(data) {

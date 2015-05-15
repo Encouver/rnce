@@ -7,7 +7,7 @@ use yii\widgets\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $model common\models\p\Contratistas */
 /* @var $form yii\widgets\ActiveForm */
-
+$url = \yii\helpers\Url::to(['denominaciones-comerciales/denominacioncomercial']);
 $tip_sub_denominacion = [
     ['id' => 'EMPRESA DE PROPIEDAD SOCIAL DIRECTA COMUNAL', 'name' => 'EMPRESA DE PROPIEDAD SOCIAL DIRECTA COMUNAL'],
     ['id' => 'EMPRESA DE PROPIEDAD SOCIAL INDIRECTA COMUNAL', 'name' => 'EMPRESA DE PROPIEDAD SOCIAL INDIRECTA COMUNAL'],
@@ -52,7 +52,7 @@ $script = <<< JS
                 e.stopImmediatePropagation();
                $.ajax({
                    
-                    url: 'http://localhost/rnce/frontend/web/index.php?r=denominaciones-comerciales/denominacioncomercial',
+                    url: '$url',
                     type: 'post',
                     data: $('form#dc_socioproductivas').serialize(),
                     success: function(data) {

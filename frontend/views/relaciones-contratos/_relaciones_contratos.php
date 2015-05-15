@@ -22,6 +22,8 @@ use wbraganca\dynamicform\DynamicFormWidget;
 //$natural_juridica= SysNaturalesJuridicas::findOne(['id' => $contratista->natural_juridica_id]);
 
 $url = \yii\helpers\Url::to(['accionistas-otros/naturaljuridicalist']);
+$url2 = \yii\helpers\Url::to(['personas-juridicas/crearpersonajuridicanacional']);
+$url3 = \yii\helpers\Url::to(['relaciones-contratos/relacioncontrato']);
 $persona_juridica = new PersonasJuridicas();
 
 
@@ -129,7 +131,7 @@ $script = <<< JS
                 e.stopImmediatePropagation();
                $.ajax({
                    
-                    url: 'http://localhost/rnce/frontend/web/index.php?r=personas-juridicas/crearpersonajuridicanacional',
+                    url: '$url2',
                     type: 'post',
                     data: $('form#modal_pjuridica').serialize(),
                     success: function(data) {
@@ -160,7 +162,7 @@ $script = <<< JS
                 e.stopImmediatePropagation();
                $.ajax({
                    
-                    url: 'http://localhost/rnce/frontend/web/index.php?r=relaciones-contratos/relacioncontrato',
+                    url: '$url3',
                     type: 'post',
                     data: fa+ '&' + fb,
                     success: function(data) {

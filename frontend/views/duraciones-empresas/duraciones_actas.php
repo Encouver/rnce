@@ -7,6 +7,7 @@ $url = \yii\helpers\Url::to(['duraciones-empresas/duracionacta']);
 /* @var $this yii\web\View */
 /* @var $model common\models\p\ObjetosSociales */
 /* @var $form yii\widgets\ActiveForm */
+
 ?>
 
 <div class="objetos-actas-form col-sm-9">
