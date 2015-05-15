@@ -3,17 +3,17 @@
 namespace frontend\controllers;
 
 use Yii;
-use common\models\p\DuracionesEmpresas;
+use common\models\p\Acciones;
 use common\models\a\DocumentosRegistrados;
-use app\models\DuracionesEmpresasSearch;
+use app\models\AccionesSearch;
 use common\components\BaseController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * DuracionesEmpresasController implements the CRUD actions for DuracionesEmpresas model.
+ * AccionesController implements the CRUD actions for Acciones model.
  */
-class DuracionesEmpresasController extends BaseController
+class AccionesController extends BaseController
 {
     public function behaviors()
     {
@@ -28,12 +28,12 @@ class DuracionesEmpresasController extends BaseController
     }
 
     /**
-     * Lists all DuracionesEmpresas models.
+     * Lists all Acciones models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new DuracionesEmpresasSearch();
+        $searchModel = new AccionesSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -43,7 +43,7 @@ class DuracionesEmpresasController extends BaseController
     }
 
     /**
-     * Displays a single DuracionesEmpresas model.
+     * Displays a single Acciones model.
      * @param integer $id
      * @return mixed
      */
@@ -55,13 +55,13 @@ class DuracionesEmpresasController extends BaseController
     }
 
     /**
-     * Creates a new DuracionesEmpresas model.
+     * Creates a new Acciones model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new DuracionesEmpresas();
+        $model = new Acciones();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -71,42 +71,27 @@ class DuracionesEmpresasController extends BaseController
             ]);
         }
     }
-     public function actionCrearduracionacta()
+    public function actionAccionsuscritaacta()
     {
-        $duracion_empresa = new DuracionesEmpresas();
-            
-          
-            return $this->render('duraciones_actas', [
-                'duracion_empresa' => $duracion_empresa,
-            ]);
-        
-    }
-     public function actionDuracionacta(){
-        
-       $duracion_acta= new DuracionesEmpresas();
-      
-        $usuario= \common\models\p\User::findOne(Yii::$app->user->identity->id);
+        $suscrita_acta = new Acciones();
+
        
-        if ( $duracion_acta->load(Yii::$app->request->post())) {
-           
+        if ( $suscrita_acta->load(Yii::$app->request->post())) {
+            
              $transaction = \Yii::$app->db->beginTransaction();
              
            try {
-                $registro = DocumentosRegistrados::findOne(['contratista_id'=>$usuario->contratista_id, 'sys_tipo_registro_id'=>1]);
+                $registro = DocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id, 'sys_tipo_registro_id'=>1]);
                 
-            if($duracion_acta->fecha_vencimiento==null){
+            if($suscrita_acta->numero_comun==null || $suscrita_acta->valor_comun==null){
                  $transaction->rollBack();
-                return "Debe ingresar fecha vencimiento"; 
-            }
-             if($duracion_acta->duracion_anos==null){
-                 $transaction->rollBack();
-                return "Debe ingresar Duracion"; 
+                return "Debe ingresar ambos datos"; 
             }
            
-            $duracion_acta->contratista_id = $usuario->contratista_id;
-            $duracion_acta->documento_registrado_id= $registro->id;
+            $suscrita_acta->contratista_id = $usuario->contratista_id;
+            $suscrita_acta->documento_registrado_id= $registro->id;
             
-               if ($duracion_acta->save()) {
+               if ($cierre_acta->save()) {
            
 
                                $transaction->commit();
@@ -124,11 +109,10 @@ class DuracionesEmpresasController extends BaseController
                $transaction->rollBack();
            }
         }
-        
-        
     }
+
     /**
-     * Updates an existing DuracionesEmpresas model.
+     * Updates an existing Acciones model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -147,7 +131,7 @@ class DuracionesEmpresasController extends BaseController
     }
 
     /**
-     * Deletes an existing DuracionesEmpresas model.
+     * Deletes an existing Acciones model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -160,15 +144,15 @@ class DuracionesEmpresasController extends BaseController
     }
 
     /**
-     * Finds the DuracionesEmpresas model based on its primary key value.
+     * Finds the Acciones model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return DuracionesEmpresas the loaded model
+     * @return Acciones the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = DuracionesEmpresas::findOne($id)) !== null) {
+        if (($model = Acciones::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

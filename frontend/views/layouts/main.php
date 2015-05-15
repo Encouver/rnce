@@ -91,7 +91,8 @@ AppAsset::register($this);
                         ['label' => 'Cierre ejercicio', 'url' => ['/cierres-ejercicios/crearcierreacta']],
                         ['label' => 'Duracion empresa', 'url' => ['/duraciones-empresas/crearduracionacta']],
                         ['label' => 'Actividades Economicas', 'url' => ['/actividades-economicas/crearactividadacta']],
-                        
+                        ['label' => 'Capital Suscrito', 'url' => ['/actas-constitutivas/crearcapitalsuscrito']],
+                        ['label' => 'Resumen', 'url' => ['/actas-constitutivas/resumenacta']],
                     ],
                 ],
                 
