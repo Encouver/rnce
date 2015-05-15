@@ -46,7 +46,6 @@ $array[] = ['id' => 2, 'nombre' => 'Extranjero'];
 	    ]) ?>
 	</div>
 </div>
-
 <?php
 $script = <<< JS
     $('#tipo_cuenta').click(function(e){
@@ -64,5 +63,4 @@ $script = <<< JS
     });
 JS;
 $this->registerJs($script);
-
 ?>
