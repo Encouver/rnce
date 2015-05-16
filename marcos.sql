@@ -891,3 +891,8 @@ ALTER TABLE nombres_cajas
   DROP CONSTRAINT nombres_cajas_nombre_contratistas_id_key;
 ALTER TABLE nombres_cajas
   ADD UNIQUE (nombre, contratistas_id, nacional);
+
+
+ALTER TABLE activos.bienes
+  ADD COLUMN carga_completa boolean DEFAULT false;
+COMMENT ON COLUMN activos.bienes.carga_completa IS 'Indica si el bien fue cargado completamente.';
