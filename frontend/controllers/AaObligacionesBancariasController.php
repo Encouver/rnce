@@ -118,14 +118,14 @@ class AaObligacionesBancariasController extends BaseController
                         return $this->redirect(['view', 'id' => $model->id]);
                 }
             }
-            print_r($model->getErrors());
-            die;
+ /*           print_r($total->getErrors());
+            die;*/
         }
         else {
-            print_r($model->getErrors());
+/*            print_r($model->getErrors());
             echo '<br>';
             print_r($model->anho);
-            //die;
+            //die;*/
             return $this->render('create', [
                 'model' => $model,
             ]);

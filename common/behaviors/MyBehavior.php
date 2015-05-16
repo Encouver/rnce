@@ -18,10 +18,12 @@ class MyBehavior extends AttributeBehavior
     public function events()
     {
         return [
-           // ActiveRecord::EVENT_BEFORE_INSERT => ['creadoPor','actualizadoPor'],
+            ActiveRecord::EVENT_BEFORE_INSERT => 'creadoPor',
+            //ActiveRecord::EVENT_BEFORE_INSERT => 'actualizadoPor',
+            ActiveRecord::EVENT_BEFORE_UPDATE => 'actualizadoPor',
             ActiveRecord::EVENT_BEFORE_VALIDATE => 'contratistaId',
-            //ActiveRecord::EVENT_BEFORE_UPDATE => 'actualizadoPor',
-            ActiveRecord::EVENT_BEFORE_INSERT => 'anho',
+            ActiveRecord::EVENT_BEFORE_VALIDATE => 'anho',
+            ActiveRecord::EVENT_BEFORE_VALIDATE => 'sysStatus',
         ];
     }
     /**
@@ -39,26 +41,45 @@ class MyBehavior extends AttributeBehavior
            }
        }*/
 
+    public function sysStatus()
+    {
+        if($this->owner->hasAttribute('sys_status'))
+            $this->owner->sys_status = true;//Yii::$app->get('user',false)->identity->contratista_id;
+    }
+
     public function contratistaId()
     {
-        //if(gproperty_exists(et_class($this), 'contratista_id'))
-
-            $this->owner->contratista_id = Yii::$app->get('user',false)->identity->contratista_id;
+        if($this->owner->hasAttribute('contratista_id'))
+            $this->owner->contratista_id = Yii::$app->user->identity->contratista_id;
     }
-/*    public function creadoPor()
+    public function creadoPor()
     {
-        //if(property_exists($this.owner, 'creado_por'))
-            $this->creado_por = Yii::$app()->user->identity->id;
+        $dateTime = date('Y-m-d H:i:m');
+        //if($this->owner->isNewRecord) {
+            if ($this->owner->hasAttribute('creado_por'))
+                $this->owner->creado_por = Yii::$app->user->identity->id;
+            if ($this->owner->hasAttribute('sys_creado_el'))
+                //$this->owner->touch('sys_creado_el');
+                $this->owner->sys_creado_el = $dateTime;
+            if($this->owner->hasAttribute('actualizado_por'))
+                $this->owner->actualizado_por = Yii::$app->user->identity->id;
+            if($this->owner->hasAttribute('sys_actualizado_el'))
+                //$this->owner->touch('sys_actualizado_el');
+                $this->owner->sys_actualizado_el = $dateTime;
+        //}
     }
 
     public function actualizadoPor()
     {
-        //if(property_exists(get_class($this), 'actualizado_por'))
-            $this->actualizado_por = Yii::$app()->user->identity->id;
-    }*/
+        if($this->owner->hasAttribute('actualizado_por'))
+            $this->owner->actualizado_por = Yii::$app->user->identity->id;
+        if($this->owner->hasAttribute('sys_actualizado_el'))
+            //$this->owner->touch('sys_actualizado_el');
+            $this->owner->sys_actualizado_el = date('Y-m-d H:i:m');
+    }
     public function anho()
     {
-        //if(property_exists(get_class($this), 'anho'))
+        if($this->owner->hasAttribute('anho'))
             $this->owner->anho = date('m-Y');
     }
 }

@@ -3149,58 +3149,6 @@
         ]
     },
     {
-        "name": "kartik-v/yii2-money",
-        "version": "v1.2.0",
-        "version_normalized": "1.2.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/kartik-v/yii2-money.git",
-            "reference": "70e7275a7015fabc9d9428276242862df936c2e2"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/kartik-v/yii2-money/zipball/70e7275a7015fabc9d9428276242862df936c2e2",
-            "reference": "70e7275a7015fabc9d9428276242862df936c2e2",
-            "shasum": ""
-        },
-        "require": {
-            "kartik-v/yii2-krajee-base": "*"
-        },
-        "time": "2014-11-25 09:21:12",
-        "type": "yii2-extension",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "kartik\\money\\": ""
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "BSD 3-Clause"
-        ],
-        "authors": [
-            {
-                "name": "Kartik Visweswaran",
-                "email": "kartikv2@gmail.com",
-                "homepage": "http://www.krajee.com/"
-            }
-        ],
-        "description": "An advanced money mask input for Yii 2.0 based on jquery maskmoney plugin styled for Bootstrap 3.",
-        "homepage": "https://github.com/kartik-v/yii2-money",
-        "keywords": [
-            "bootstrap",
-            "bootstrap 3",
-            "currency",
-            "extension",
-            "format",
-            "jquery",
-            "mask",
-            "money",
-            "widget",
-            "yii2"
-        ]
-    },
-    {
         "name": "kartik-v/bootstrap-popover-x",
         "version": "v1.4.1",
         "version_normalized": "1.4.1.0",
@@ -3450,120 +3398,6 @@
             "widget",
             "yii2"
         ]
-<<<<<<< HEAD
-=======
-    },
-    {
-        "name": "symfony/css-selector",
-        "version": "v2.6.7",
-        "version_normalized": "2.6.7.0",
-        "target-dir": "Symfony/Component/CssSelector",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/symfony/CssSelector.git",
-            "reference": "189cf0f7f56d7c4be3b778df15a7f16a29f3680d"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/symfony/CssSelector/zipball/189cf0f7f56d7c4be3b778df15a7f16a29f3680d",
-            "reference": "189cf0f7f56d7c4be3b778df15a7f16a29f3680d",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.3"
-        },
-        "require-dev": {
-            "symfony/phpunit-bridge": "~2.7"
-        },
-        "time": "2015-05-02 15:18:45",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "2.6-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "Symfony\\Component\\CssSelector\\": ""
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Jean-François Simon",
-                "email": "jeanfrancois.simon@sensiolabs.com"
-            },
-            {
-                "name": "Fabien Potencier",
-                "email": "fabien@symfony.com"
-            },
-            {
-                "name": "Symfony Community",
-                "homepage": "https://symfony.com/contributors"
-            }
-        ],
-        "description": "Symfony CssSelector Component",
-        "homepage": "https://symfony.com"
-    },
-    {
-        "name": "symfony/dom-crawler",
-        "version": "v2.6.7",
-        "version_normalized": "2.6.7.0",
-        "target-dir": "Symfony/Component/DomCrawler",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/symfony/DomCrawler.git",
-            "reference": "adef13fb8d305d95e1fb8324d6b5895c8e79d332"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/symfony/DomCrawler/zipball/adef13fb8d305d95e1fb8324d6b5895c8e79d332",
-            "reference": "adef13fb8d305d95e1fb8324d6b5895c8e79d332",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.3"
-        },
-        "require-dev": {
-            "symfony/css-selector": "~2.3",
-            "symfony/phpunit-bridge": "~2.7"
-        },
-        "suggest": {
-            "symfony/css-selector": ""
-        },
-        "time": "2015-05-02 15:18:45",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "2.6-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "Symfony\\Component\\DomCrawler\\": ""
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Fabien Potencier",
-                "email": "fabien@symfony.com"
-            },
-            {
-                "name": "Symfony Community",
-                "homepage": "https://symfony.com/contributors"
-            }
-        ],
-        "description": "Symfony DomCrawler Component",
-        "homepage": "https://symfony.com"
     },
     {
         "name": "kartik-v/yii2-money",
@@ -3712,6 +3546,5 @@
             "state",
             "three"
         ]
->>>>>>> 6f8b7bb24bf7d459fae0603bdf9531e1dcda941f
     }
 ]
