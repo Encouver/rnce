@@ -197,10 +197,6 @@ class BaseActiveRecord extends ActiveRecord
     /**
      * @return bool
      */
-    public function getDelCosto()
-    {
-        return true;
-    }
 
     /**
      * @return bool
@@ -237,9 +233,4 @@ class BaseActiveRecord extends ActiveRecord
     /**
      * @return bool
      */
-    public function getRevaluacion()
-    {
-        return true;
-    }
-
 }
