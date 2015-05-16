@@ -880,3 +880,14 @@ ADD UNIQUE (bien_id);
 
 ALTER TABLE cuentas.aa_condiciones_pagos
 ALTER COLUMN "descripción" DROP NOT NULL;
+
+
+
+
+/**************     16/05/2015 *************/
+
+
+ALTER TABLE nombres_cajas
+  DROP CONSTRAINT nombres_cajas_nombre_contratistas_id_key;
+ALTER TABLE nombres_cajas
+  ADD UNIQUE (nombre, contratistas_id, nacional);
