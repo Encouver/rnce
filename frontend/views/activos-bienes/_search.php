@@ -19,7 +19,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'sys_tipo_bien_id') ?>
 
-    <?= $form->field($model, 'principio_contable') ?>
+    <?= $form->field($model, 'principio_contable_id') ?>
 
     <?= $form->field($model, 'depreciable')->checkbox() ?>
 

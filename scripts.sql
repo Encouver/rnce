@@ -17,6 +17,8 @@ ALTER TABLE TABLA ADD COLUMN anho character varying(100);
 ALTER TABLE TABLA ALTER COLUMN anho SET NOT NULL;
 COMMENT ON COLUMN TABLA.anho IS 'Año contable y mes';
 
+
+
 -- Column: creado_por
 
 ALTER TABLE TABLA DROP COLUMN IF EXISTS creado_por;

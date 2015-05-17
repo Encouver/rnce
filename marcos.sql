@@ -896,3 +896,65 @@ ALTER TABLE nombres_cajas
 ALTER TABLE activos.bienes
   ADD COLUMN carga_completa boolean DEFAULT false;
 COMMENT ON COLUMN activos.bienes.carga_completa IS 'Indica si el bien fue cargado completamente.';
+
+
+
+/**************     17/05/2015 *************/
+
+
+-- Table: activos.sys_modelos
+
+-- DROP TABLE activos.sys_modelos;
+
+CREATE TABLE activos.sys_modelos
+(
+  id integer NOT NULL DEFAULT nextval('activos.sys_modelos_id_seq1'::regclass), -- Clave primaria.
+  nombre character varying(255) NOT NULL, -- Nombre del modelo.
+  descripcion character varying(255), -- Descripción del modelo.
+  CONSTRAINT sys_modelos_pkey PRIMARY KEY (id),
+  CONSTRAINT sys_modelos_nombre_key UNIQUE (nombre)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE activos.sys_modelos
+  OWNER TO eureka;
+COMMENT ON TABLE activos.sys_modelos
+  IS 'Contiene la lista de modelos.';
+COMMENT ON COLUMN activos.sys_modelos.id IS 'Clave primaria.';
+COMMENT ON COLUMN activos.sys_modelos.nombre IS 'Nombre del modelo.';
+COMMENT ON COLUMN activos.sys_modelos.descripcion IS 'Descripción del modelo.';
+
+
+-- Table: activos.sys_metodos
+
+-- DROP TABLE activos.sys_metodos;
+
+CREATE TABLE activos.sys_metodos
+(
+  id serial NOT NULL, -- Clave primaria.
+  nombre character varying(255) NOT NULL, -- Nombre del método.
+  descripcion character varying(255), -- Descripción del método.
+  modelo_id integer NOT NULL, -- Clave foránea a la tabla sys_modelo_id.
+  CONSTRAINT sys_metodos_pkey PRIMARY KEY (id),
+  CONSTRAINT sys_metodos_modelo_id_fkey FOREIGN KEY (modelo_id)
+      REFERENCES activos.sys_modelos (id) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE NO ACTION,
+  CONSTRAINT sys_metodos_nombre_key UNIQUE (nombre)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE activos.sys_metodos
+  OWNER TO eureka;
+COMMENT ON TABLE activos.sys_metodos
+  IS 'Lista de métodos contables.';
+COMMENT ON COLUMN activos.sys_metodos.id IS 'Clave primaria.';
+COMMENT ON COLUMN activos.sys_metodos.nombre IS 'Nombre del método.';
+COMMENT ON COLUMN activos.sys_metodos.descripcion IS 'Descripción del método.';
+COMMENT ON COLUMN activos.sys_metodos.modelo_id IS 'Clave foránea a la tabla sys_modelo_id.';
+
+
+ALTER TABLE activos.bienes RENAME principio_contable  TO principio_contable_id;
+COMMENT ON COLUMN activos.bienes.principio_contable_id
+  IS 'Clave foránea a la tabla sys_formas_org. Principio contable que aplica para el bien.';

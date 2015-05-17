@@ -15,7 +15,7 @@ use yii\helpers\ArrayHelper;
  *
  * @property integer $id
  * @property integer $sys_tipo_bien_id
- * @property integer $principio_contable
+ * @property integer $principio_contable_id
  * @property boolean $depreciable
  * @property boolean $deterioro
  * @property string $detalle
@@ -63,8 +63,8 @@ class ActivosBienes extends \common\components\BaseActiveRecord
     public function rules()
     {
         return [
-            [['sys_tipo_bien_id', 'principio_contable', 'contratista_id', 'origen_id'], 'required'],
-            [['sys_tipo_bien_id', 'principio_contable', 'contratista_id', 'origen_id'], 'integer'],
+            [['sys_tipo_bien_id', 'principio_contable_id', 'contratista_id', 'origen_id'], 'required'],
+            [['sys_tipo_bien_id', 'principio_contable_id', 'contratista_id', 'origen_id'], 'integer'],
             [['depreciable', 'deterioro', 'propio', 'sys_status', 'nacional'], 'boolean'],
             [['fecha_origen', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['detalle'], 'string', 'max' => 255]
@@ -79,7 +79,7 @@ class ActivosBienes extends \common\components\BaseActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'sys_tipo_bien_id' => Yii::t('app', 'Tipo de Bien'),
-            'principio_contable' => Yii::t('app', 'Principio Contable'),
+            'principio_contable_id' => Yii::t('app', 'Principio Contable'),
             'depreciable' => Yii::t('app', 'Depreciable'),
             'deterioro' => Yii::t('app', 'Deterioro'),
             'detalle' => Yii::t('app', 'Detalle'),
@@ -132,7 +132,7 @@ class ActivosBienes extends \common\components\BaseActiveRecord
      */
     public function getPrincipioContable()
     {
-        return $this->hasOne(ActivosSysFormasOrg::className(), ['id' => 'principio_contable']);
+        return $this->hasOne(ActivosSysFormasOrg::className(), ['id' => 'principio_contable_id']);
     }
 
     /**
@@ -245,7 +245,7 @@ class ActivosBienes extends \common\components\BaseActiveRecord
             'detalle'=>['type'=>Form::INPUT_TEXT,],
             'origen_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(ActivosSysOrigenesBienes::find()->asArray()->all(),'id','nombre'),'options'=>['id'=>'origen','onchange'=>'js: $("#nacional").hide(true); $("#nacional").hide(); if($("#origen").attr()==1 || $("#origen").attr()==3)$("#fecha_origen").show(); if($("#origen").attr()==2)$("#nacional").show();']]],
             'propio'=>['type'=>Form::INPUT_CHECKBOX,],
-            'principio_contable'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>ArrayHelper::map(ActivosSysFormasOrg::find()->asArray()->all(),'id','nombre'),],
+            'principio_contable_id'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>ArrayHelper::map(ActivosSysFormasOrg::find()->asArray()->all(),'id','nombre'),],
             'fecha_origen'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>DatePicker::className(),'options'=>['options' => ['placeholder' => 'Seleccione fecha ...'],
                 'convertFormat' => true,
                 'pluginOptions' => [
