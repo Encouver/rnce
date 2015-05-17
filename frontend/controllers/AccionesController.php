@@ -153,18 +153,14 @@ class AccionesController extends BaseController
         if ( $suscrita_acta->load(Yii::$app->request->post())) {
             
             
-            
-			 $suscrita_acta->contratista_id = 39;
-            $suscrita_acta->documento_registrado_id=1;
-            $suscrita_acta->suscrito=true;
-           $suscrita_acta->tipo_accion="PRINCIPAL";
-              /*$usuario= \common\models\p\User::findOne(Yii::$app->user->identity->id);
+          
+              $usuario= \common\models\p\User::findOne(Yii::$app->user->identity->id);
               $registro = DocumentosRegistrados::findOne(['contratista_id'=>$usuario->contratista_id, 'sys_tipo_registro_id'=>1]);
    
               $suscrita_acta->suscrito=true;
               $suscrita_acta->tipo_accion="PRINCIPAL";
               $suscrita_acta->contratista_id = $usuario->contratista_id;
-              $suscrita_acta->documento_registrado_id = $registro->id;*/
+              $suscrita_acta->documento_registrado_id = $registro->id;
      
             if($suscrita_acta->validate()){
                 
