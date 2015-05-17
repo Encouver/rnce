@@ -141,41 +141,44 @@ class ActivosBienesController extends BaseController
     {
         $model = $this->findModel($id);
 
-        $modelBienTipo = $model->getBienTipo();
+        $modelActualBienTipo = $model->getBienTipo();
 
         if ($model->load(Yii::$app->request->post())) {
             switch($model->sysTipoBien->sys_clasificacion_bien_id){
                 case 1:
-                    $modelBienTipo = new ActivosInmuebles();
+                    $modelNuevoBienTipo = new ActivosInmuebles();
                     break;
                 case 2:
-                    $modelBienTipo = new ActivosMuebles();
+                    $modelNuevoBienTipo = new ActivosMuebles();
                     break;
                 case 3:
                     if($model->sys_tipo_bien_id == 8)
-                        $modelBienTipo = new ActivosConstruccionesInmuebles();
+                        $modelNuevoBienTipo = new ActivosConstruccionesInmuebles();
                     if($model->sys_tipo_bien_id == 9)
-                        $modelBienTipo = new ActivosFabricacionesMuebles();
+                        $modelNuevoBienTipo = new ActivosFabricacionesMuebles();
                     break;
                 case 4:
-                    $modelBienTipo = new ActivosActivosBiologicos();
+                    $modelNuevoBienTipo = new ActivosActivosBiologicos();
                     break;
                 case 5:
-                    $modelBienTipo = new ActivosActivosIntangibles();
+                    $modelNuevoBienTipo = new ActivosActivosIntangibles();
                     break;
                 default:
                     break;
             }
-            if ($modelBienTipo->load(Yii::$app->request->post()) && $model->validate() ) {
+            if ($modelNuevoBienTipo->load(Yii::$app->request->post()) && $model->validate() ) {
 
                 $transaction = \Yii::$app->db->beginTransaction();
                 try {
-                    if($model->save()){
 
-                        $modelBienTipo->bien_id = $model->id;
-                        if($modelBienTipo->save()) {
-                            $transaction->commit();
-                            return $this->redirect(['view', 'id' => $model->id]);
+                    if($model->save() && $modelActualBienTipo->delete()){
+
+                        $modelNuevoBienTipo->bien_id = $model->id;
+                        if($modelNuevoBienTipo->save()) {
+                            $modelActualBienTipo = $modelNuevoBienTipo;
+                                $transaction->commit();
+                                return $this->redirect(['view', 'id' => $model->id]);
+
                         }else
                             $transaction->rollBack();
 
@@ -194,7 +197,7 @@ class ActivosBienesController extends BaseController
             return $this->redirect(['view', 'id' => $model->id]);
         } else {*/
             return $this->render('update', [
-                'model' => $model,'modelBienTipo'=> $modelBienTipo
+                'model' => $model,'modelBienTipo'=> $modelActualBienTipo
             ]);
     //    }
     }
