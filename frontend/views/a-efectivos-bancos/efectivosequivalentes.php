@@ -28,39 +28,31 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <center><h1><?= Html::encode($this->title) ?></h1>
       <br/>
-   
-   <?php
-   			/*
-                $menuItems[] =  ['label'=>'Efectivos en bancos', 'url'=>['/a-efectivos-bancos/create']];
-                $menuItems[] =   ['label'=>'Efectivos en caja', 'url'=>['/a-efectivos-cajas/create']];
-                         $menuItems[] =   ['label'=>'Inversiones para negociar', 'url'=>['/a-inversiones-negociar/create']];
-   				$menuItems[] = ['label'=>'Ver resumen', 'url'=>['/a-efectivos-bancos/efectivosequivalentes']];
-   					$navBarOptions = array();
-            NavBar::begin($navBarOptions);
-					echo NavX::widget([
-					    'options' => ['class' => 'navbar-nav'],
-					    'items' => $menuItems,
-					    'activateParents' => true,
-					    'encodeLabels' => false
-					]);
-					NavBar::end();
-          */
-        ?>
     </center>
 
     <?php
+    echo $efectivo_caja->getPromedio(1,3);
+
     $columns = [
         ['class'=>'kartik\grid\SerialColumn', 'order'=>DynaGrid::ORDER_FIX_LEFT],
         //'id',
-        'tipo_caja',
-        'modena',
+        [
+          'attribute' => 'nombre_caja_id',
+          'label' => 'Tipo caja',
+          'format' => 'html',
+          'value' => function ($efectivo_caja)
+          {
+              return '<div>'.$efectivo_caja->nombreCaja->tipo_caja.'</div>';
+          }
+        ],
+        //'modena',
         [
           'attribute' => 'nombre_caja_id',
           'label' => 'Nombre caja',
           'format' => 'html',
           'value' => function ($efectivo_caja)
           {
-              //return '<div>'.$efectivo_caja->bancoContratista->banco->nombre.'</div>';
+               return '<div>'.$efectivo_caja->nombreCaja->nombre.'</div>';
           }
         ],
         [
@@ -79,7 +71,11 @@ $this->params['breadcrumbs'][] = $this->title;
           'format' => 'html',
           'value' => function ($efectivo_caja)
           {
-              //return '<div>'.$efectivo_caja->bancoContratista->banco->nombre.'</div>';
+            if($efectivo_caja->tipoMoneda->nombre)
+            {
+                return '<div>'.$efectivo_caja->tipoMoneda->nombre.'</div>';  
+            }
+            return '<span class="not-set">(no definido)</span>';  
           }
         ],
         'monto_me',
@@ -87,7 +83,9 @@ $this->params['breadcrumbs'][] = $this->title;
         [
             'class'=>'kartik\grid\ActionColumn',
             'dropdown'=>false,
-            'order'=>DynaGrid::ORDER_FIX_RIGHT
+            'order'=>DynaGrid::ORDER_FIX_RIGHT,
+            'template' => '{update}{delete}',
+            'controller' => 'a-efectivos-cajas'
         ],
         ['class'=>'kartik\grid\CheckboxColumn', 'order'=>DynaGrid::ORDER_FIX_RIGHT],
     ];
@@ -98,6 +96,8 @@ $this->params['breadcrumbs'][] = $this->title;
         'gridOptions'=>[
             'dataProvider'=>$dataProvider_ec,
             'showPageSummary'=>true,
+            'summary' => '',
+            //'not-set' => 'N/A',
             //'filterModel'=>AEfectivosBancosSearch,
             'panel'=>['heading'=>'<h3 class="panel-title">Efectivo en caja</h3>'],
             'toolbar' =>  [
@@ -116,7 +116,7 @@ $this->params['breadcrumbs'][] = $this->title;
               ],
             ],
         ],
-        'options'=>['id'=>'dynagrid-1'] // a unique identifier is important
+        'options'=>['id'=>'dynagrid-1', 'summaryText'=>''] // a unique identifier is important
     ]);
 
     ?>
@@ -137,13 +137,69 @@ $this->params['breadcrumbs'][] = $this->title;
               return '<div>'.$efectivo_bancos->bancoContratista->banco->nombre.'</div>';
           }
         ],
-        'saldo_segun_b',
-        'nd_no_cont',
-        'depo_transito',
-        'nc_no_cont',
-        'cheques_transito',
-        'saldo_al_cierre',
-        'intereses_act_eco',
+        [
+            'attribute' => 'saldo_segun_b',
+            'label' => 'Saldo en banco',
+            'hAlign'=>'right',
+            'vAlign'=>'middle',
+            'width'=>'100px',
+            'format'=>['decimal', 2],
+            'pageSummary'=>true
+        ],
+        [
+            'attribute' => 'nd_no_cont',
+            'label' => 'Nd no cont',
+            'hAlign'=>'right',
+            'vAlign'=>'middle',
+            'width'=>'100px',
+            'format'=>['decimal', 2],
+            'pageSummary'=>true
+        ],
+        [
+            'attribute' => 'depo_transito',
+            'label' => 'Deposito en transito',
+            'hAlign'=>'right',
+            'vAlign'=>'middle',
+            'width'=>'100px',
+            'format'=>['decimal', 2],
+            'pageSummary'=>true
+        ],
+        [
+            'attribute' => 'nc_no_cont',
+            'label' => 'Nd no cont',
+            'hAlign'=>'right',
+            'vAlign'=>'middle',
+            'width'=>'100px',
+            'format'=>['decimal', 2],
+            'pageSummary'=>true
+        ],
+        [
+            'attribute' => 'cheques_transito',
+            'label' => 'Cheques en transito',
+            'hAlign'=>'right',
+            'vAlign'=>'middle',
+            'width'=>'100px',
+            'format'=>['decimal', 2],
+            'pageSummary'=>true
+        ],
+        [
+            'attribute' => 'saldo_al_cierre',
+            'label' => 'Saldo al cierre actividad economica',
+            'hAlign'=>'right',
+            'vAlign'=>'middle',
+            'width'=>'100px',
+            'format'=>['decimal', 2],
+            'pageSummary'=>true
+        ],
+        [
+            'attribute' => 'intereses_act_eco',
+            'label' => 'Intereses acti economica',
+            'hAlign'=>'right',
+            'vAlign'=>'middle',
+            'width'=>'100px',
+            'format'=>['decimal', 2],
+            'pageSummary'=>true
+        ],
         [
           'attribute' => 'tipo_moneda_id',
           'label' => 'Tipo moneda',
@@ -159,7 +215,9 @@ $this->params['breadcrumbs'][] = $this->title;
         [
             'class'=>'kartik\grid\ActionColumn',
             'dropdown'=>false,
-            'order'=>DynaGrid::ORDER_FIX_RIGHT
+            'order'=>DynaGrid::ORDER_FIX_RIGHT,
+            'template' => '{update}{delete}'
+            //'controller' => 'a-efectivos-cajas'
         ],
         ['class'=>'kartik\grid\CheckboxColumn', 'order'=>DynaGrid::ORDER_FIX_RIGHT],
     ];
@@ -171,6 +229,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'gridOptions'=>[
             'dataProvider'=>$dataProvider_eb,
             'showPageSummary'=>true,
+            'summary' => '',
             //'filterModel'=>AEfectivosBancosSearch,
             'panel'=>['heading'=>'<h3 class="panel-title">Efectivo en bancos</h3>'],
 
@@ -216,8 +275,24 @@ $this->params['breadcrumbs'][] = $this->title;
         'plazo',
         'costo_adquisicion',
         'valorizacion',
-        'saldo_al_cierre',
-        'intereses_act_eco',
+        [
+            'attribute' => 'saldo_al_cierre',
+            'label' => 'Saldo al cierre',
+            'hAlign'=>'right',
+            'vAlign'=>'middle',
+            'width'=>'100px',
+            'format'=>['decimal', 2],
+            'pageSummary'=>true
+        ],
+         [
+            'attribute' => 'intereses_act_eco',
+            'label' => 'Intereses actividad economica',
+            'hAlign'=>'right',
+            'vAlign'=>'middle',
+            'width'=>'100px',
+            'format'=>['decimal', 2],
+            'pageSummary'=>true
+        ],
         [
           'attribute' => 'tipo_moneda_id',
           'label' => 'Tipo moneda',
@@ -227,13 +302,14 @@ $this->params['breadcrumbs'][] = $this->title;
               return '<div>'.$inversiones->tipoMoneda->nombre.'</div>';
           }
         ],
-      
         'monto_moneda_extra',
         'tipo_cambio_cierre',
         [
             'class'=>'kartik\grid\ActionColumn',
             'dropdown'=>false,
-            'order'=>DynaGrid::ORDER_FIX_RIGHT
+            'order'=>DynaGrid::ORDER_FIX_RIGHT,
+            'template' => '{update}{delete}',
+            'controller' => 'a-inversiones-negociar'
         ],
         ['class'=>'kartik\grid\CheckboxColumn', 'order'=>DynaGrid::ORDER_FIX_RIGHT],
     ];
@@ -245,6 +321,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'gridOptions'=>[
             'dataProvider'=>$dataProvider_in,
             'showPageSummary'=>true,
+            'summary' => '',
             //'filterModel'=>AEfectivosBancosSearch,
             'panel'=>['heading'=>'<h3 class="panel-title">Inversiones para negociar</h3>'],
 
