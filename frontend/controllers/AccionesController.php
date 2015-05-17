@@ -167,46 +167,55 @@ class AccionesController extends BaseController
               $suscrita_acta->documento_registrado_id = $registro->id;*/
      
             if($suscrita_acta->validate()){
-                 
-                 $paga_acta = new Acciones();
-                 $paga_acta->numero_comun= $suscrita_acta->numero_comun_pagada;
-                 $paga_acta->valor_comun=$suscrita_acta->valor_comun_pagada;
-             
-                $paga_acta->contratista_id = $suscrita_acta->contratista_id;
-                $paga_acta->documento_registrado_id= $suscrita_acta->documento_registrado_id;
-                $paga_acta->suscrito=false;
-                $paga_acta->tipo_accion=$suscrita_acta->tipo_accion;
                 
-                $transaction = \Yii::$app->db->beginTransaction();
-             
-                try {
-                    if (! ($flag =  $paga_acta->save(false))) {
-           
-                        $transaction->rollBack();
-                        $msg= "Error en la carga de las acciones suscritas";
+                $acciones= Acciones::findOne(['contratista_id'=>$suscrita_acta->contratista_id ,'documento_registrado_id'=>$suscrita_acta->documento_registrado_id]);
+          
+                if(isset($acciones)){
+                   
+                     $msg = "Usuario ya posee accones suscritas y pagadas asociadas";
+                                   
                                
-                    }
-                    if ($suscrita_acta->save()) {
-           
-                            $msg="Datos guardados correctamente";
-                            $suscrita_acta->numero_comun=null;
-                            $suscrita_acta->valor_comun=null;
-                            $suscrita_acta->numero_comun_pagada=null;
-                            $suscrita_acta->valor_comun_pagada=null;
-                               
-                            $transaction->commit();
-
                    }else{
-                        $transaction->rollBack();
+                 
+                        $paga_acta = new Acciones();
+                        $paga_acta->numero_comun= $suscrita_acta->numero_comun_pagada;
+                        $paga_acta->valor_comun=$suscrita_acta->valor_comun_pagada;
+             
+                        $paga_acta->contratista_id = $suscrita_acta->contratista_id;
+                        $paga_acta->documento_registrado_id= $suscrita_acta->documento_registrado_id;
+                        $paga_acta->suscrito=false;
+                        $paga_acta->tipo_accion=$suscrita_acta->tipo_accion;
+                
+                        $transaction = \Yii::$app->db->beginTransaction();
+             
+                        try {
+                            if (! ($flag =  $paga_acta->save(false))) {
+           
+                            $transaction->rollBack();
+                            $msg= "Error en la carga de las acciones suscritas";
+                               
+                        }
+                        if ($suscrita_acta->save()) {
+           
+                                $msg="Datos guardados correctamente";
+                                $suscrita_acta->numero_comun=null;
+                                $suscrita_acta->valor_comun=null;
+                                $suscrita_acta->numero_comun_pagada=null;
+                                $suscrita_acta->valor_comun_pagada=null;
+                               
+                                $transaction->commit();
+
+                        }else{
+                            $transaction->rollBack();
                         
-                       $msg= "Acciones suscritas no guardas con exito";
-                   }
+                        $msg= "Acciones suscritas no guardas con exito";
+                        }
                     
-                } catch (Exception $e) {
-                    $transaction->rollBack();
+                    } catch (Exception $e) {
+                         $transaction->rollBack();
+                    }
+                
                 }
-                
-                
             }else{
                $suscrita_acta->getErrors();
                 $msg= "Error en la cargade datos";
