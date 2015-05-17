@@ -47,3 +47,8 @@ ALTER TABLE activos.documentos_registrados
 -- Marcoos debes eliminar el campo que tienes ahi señalado como tipo_documento_id si mal no recuerdo y dentro de la tabla
 -- sys_tipos_registros agregar un registro llamado ACTA CONSTITUTIVA de id 1
 
+
+
+--17 mayo 2015
+
+ALTER TABLE acciones ALTER COLUMN tipo_accion SET NOT NULL;

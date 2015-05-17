@@ -11,7 +11,11 @@ $url = \yii\helpers\Url::to(['acciones/accionsuscritaacta']);
 
 <div class="objetos-actas-form col-sm-9">
 
-    <?php $form = ActiveForm::begin(['id'=>'accion_suscrita']); ?>
+    <?php $form = ActiveForm::begin(['id'=>'accion_suscrita',
+        'method'=>'post',
+        'action'=>['acciones/accionsuscritaacta'],
+        'enableClientValidation'=>false,
+        'enableAjaxValidation'=>true]); ?>
     
 <h3>Acciones o Participaciones Suscritas y Pagadas</h3>
 <hr />
@@ -21,14 +25,15 @@ $url = \yii\helpers\Url::to(['acciones/accionsuscritaacta']);
     'columns'=>2,
     'attributes'=>$accion_acta->formAttribsactas
       ]); ?>
+ <h3><?= $msg ?></h3>
     <div id="output17"></div>
      <div class="form-group">
-         <?= Html::Button(Yii::t('app', 'Enviar'), ['class' => 'btn btn-success', 'id' => 'enviar']) ?> 
+         <?= Html::submitButton(Yii::t('app', 'Enviar'), ['class' => 'btn btn-success', 'id' => 'enviar']) ?> 
     </div>
 
     <?php ActiveForm::end(); ?>
        <?php
-$script = <<< JS
+/*$script = <<< JS
    
      $('#enviar').click(function(e){
           
@@ -53,7 +58,7 @@ $script = <<< JS
             }
     });
 JS;
-$this->registerJs($script);
+$this->registerJs($script);*/
 
 ?>
 </div>

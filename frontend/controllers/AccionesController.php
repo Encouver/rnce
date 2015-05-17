@@ -9,6 +9,9 @@ use app\models\AccionesSearch;
 use common\components\BaseController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\widgets\ActiveForm;
+use yii\web\Response;
+
 
 /**
  * AccionesController implements the CRUD actions for Acciones model.
@@ -74,16 +77,21 @@ class AccionesController extends BaseController
     public function actionAccionsuscritaacta()
     {
         $suscrita_acta = new Acciones();
+         $suscrita_acta->scenario='principal';
+         $msg=null;
 
        
-        if ( $suscrita_acta->load(Yii::$app->request->post())) {
+        if ( $suscrita_acta->load(Yii::$app->request->post()) && Yii::$app->request->isAjax) {
             
-             $transaction = \Yii::$app->db->beginTransaction();
+            Yii::$app->response->format= Response::FORMAT_JSON;
+            return ActiveForm::validate($suscrita_acta);
+            
+             /*$transaction = \Yii::$app->db->beginTransaction();
              
            try {
                $usuario= \common\models\p\User::findOne(Yii::$app->user->identity->id);
                 $registro = DocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id, 'sys_tipo_registro_id'=>1]);
-               
+            
           $acciones= Acciones::findOne(['contratista_id'=>$usuario->contratista_id ,'documento_registrado_id'=>$registro->id ]);
           
             if(isset($acciones)){
@@ -92,11 +100,7 @@ class AccionesController extends BaseController
                                    
                                
                    }
-                    
-            if($suscrita_acta->numero_comun==null || $suscrita_acta->valor_comun==null || $suscrita_acta->numero_comun_pagada==null|| $suscrita_acta->valor_comun_pagada==null){
-                 $transaction->rollBack();
-                return "Debe ingresar todos los datos"; 
-            }
+          
             
             if($suscrita_acta->numero_comun< $suscrita_acta->numero_comun_pagada){
                 return "Numero de acciones pagadas incorrecto";
@@ -144,8 +148,71 @@ class AccionesController extends BaseController
              
            } catch (Exception $e) {
                $transaction->rollBack();
-           }
+           }*/
         }
+        if ( $suscrita_acta->load(Yii::$app->request->post())) {
+            
+            
+            
+			 $suscrita_acta->contratista_id = 39;
+            $suscrita_acta->documento_registrado_id=1;
+            $suscrita_acta->suscrito=true;
+           $suscrita_acta->tipo_accion="PRINCIPAL";
+              /*$usuario= \common\models\p\User::findOne(Yii::$app->user->identity->id);
+              $registro = DocumentosRegistrados::findOne(['contratista_id'=>$usuario->contratista_id, 'sys_tipo_registro_id'=>1]);
+   
+              $suscrita_acta->suscrito=true;
+              $suscrita_acta->tipo_accion="PRINCIPAL";
+              $suscrita_acta->contratista_id = $usuario->contratista_id;
+              $suscrita_acta->documento_registrado_id = $registro->id;*/
+     
+            if($suscrita_acta->validate()){
+                 
+                 $paga_acta = new Acciones();
+                 $paga_acta->numero_comun= $suscrita_acta->numero_comun_pagada;
+                 $paga_acta->valor_comun=$suscrita_acta->valor_comun_pagada;
+             
+                $paga_acta->contratista_id = $suscrita_acta->contratista_id;
+                $paga_acta->documento_registrado_id= $suscrita_acta->documento_registrado_id;
+                $paga_acta->suscrito=false;
+                $paga_acta->tipo_accion=$suscrita_acta->tipo_accion;
+                
+                $transaction = \Yii::$app->db->beginTransaction();
+             
+                try {
+                    if (! ($flag =  $paga_acta->save(false))) {
+           
+                        $transaction->rollBack();
+                        $msg= "Error en la carga de las acciones suscritas";
+                               
+                    }
+                    if ($suscrita_acta->save()) {
+           
+                            $msg="Datos guardados correctamente";
+                            $suscrita_acta->numero_comun=null;
+                            $suscrita_acta->valor_comun=null;
+                            $suscrita_acta->numero_comun_pagada=null;
+                            $suscrita_acta->valor_comun_pagada=null;
+                               
+                            $transaction->commit();
+
+                   }else{
+                        $transaction->rollBack();
+                        
+                       $msg= "Acciones suscritas no guardas con exito";
+                   }
+                    
+                } catch (Exception $e) {
+                    $transaction->rollBack();
+                }
+                
+                
+            }else{
+               $suscrita_acta->getErrors();
+                $msg= "Error en la cargade datos";
+            }
+        }
+        return $this->render("acciones_actas",['accion_acta'=>$suscrita_acta,'msg'=>$msg]);
     }
 
     /**

@@ -41,14 +41,31 @@ class Acciones extends \common\components\BaseActiveRecord
     public function rules()
     {
         return [
+            [['suscrito', 'documento_registrado_id','contratista_id','tipo_accion'], 'required'],
             [['numero_comun', 'numero_comun_pagada','numero_preferencial', 'documento_registrado_id','contratista_id','suscrito'], 'integer'],
+            ['numero_comun_pagada', 'validarnumeropagada'],
+            ['valor_comun_pagada', 'validarvalorpagada'],
+          
             [['valor_comun', 'valor_preferencial','valor_comun_pagada'], 'number'],
             [['sys_status', 'suscrito'], 'boolean'],
             [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['tipo_accion'], 'string'],
-            [['suscrito', 'documento_registrado_id','contratista_id'], 'required']
+            [['numero_comun', 'valor_comun','numero_comun_pagada','valor_comun_pagada'], 'required', 'on' => 'principal']
+            
         ];
     }
+      public function validarnumeropagada($attribute){
+          if($this->numero_comun_pagada>$this->numero_comun){
+               $this->addError($attribute,'Numero Comun pagada invalido');
+          } 
+    }
+    public function validarvalorpagada($attribute){
+          if($this->valor_comun_pagada>$this->valor_comun){
+               $this->addError($attribute,'Valor Comun pagada invalido');
+          } 
+    }
+    
+
 
     /**
      * @inheritdoc

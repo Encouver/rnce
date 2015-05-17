@@ -84,12 +84,14 @@ class ActasConstitutivasController extends BaseController
     }
     public function actionCrearcapitalsuscrito()
     {
-      
-         $denominacion_comercial= DenominacionesComerciales::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id]);
+       $usuario= \common\models\p\User::findOne(Yii::$app->user->identity->id);
+         $denominacion_comercial= DenominacionesComerciales::findOne(['contratista_id'=>$usuario->contratista_id]);
       
          if($denominacion_comercial->tipo_denominacion!="COOPERATIVA"){
              $accion_acta = new Acciones();
-              return $this->render('/acciones/acciones_actas', ['accion_acta'=>$accion_acta
+             $msg=null;
+             $accion_acta->scenario = 'principal';
+              return $this->render('/acciones/acciones_actas', ['accion_acta'=>$accion_acta, 'msg'=>$msg
             ]);
          }
 
