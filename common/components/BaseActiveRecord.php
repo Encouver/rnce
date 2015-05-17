@@ -9,6 +9,7 @@ use yii\behaviors\TimestampBehavior;
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\AttributeBehavior;
 use yii\db\Expression;
+use common\models\p\SysInpc;
 
 class BaseActiveRecord extends ActiveRecord
 {
@@ -219,10 +220,25 @@ class BaseActiveRecord extends ActiveRecord
 
     /**
      * @return bool
+     *desde y hasta son los meses a calcular incluyendolos, van del 1 al 12
      */
-    public function getPromedio()
+    public function getPromedio($desde, $hasta, $anho=2015)
     {
-        return true;
+        $elementos = 0;
+
+        for ($i=$desde; $i <= $hasta; $i++) { 
+            $elementos++;
+            $arreglo[] = $i;
+        }
+
+        $inpcs = SysInpc::find()->where(['mes' => $arreglo, 'anho' => $anho])->all();
+        
+        $valor = 0;
+        foreach ($inpcs as $key => $value) {
+             $valor +=$value->indice;
+        }
+
+        return ($valor/$elementos);
     }
 
     /**
@@ -270,6 +286,20 @@ class BaseActiveRecord extends ActiveRecord
     }
 
     /**
-     * @return bool
-     */
+    * @return int
+    */
+    public function getSumar($arreglo)
+    {
+        return array_sum($arreglo);
+    }
+
+    /**
+    * @return float
+    */
+    public function getInpcCierre()
+    {
+        //preguntar a raul donde se guarda el cierre del ejer. economico
+        $valor = SysInpc::find()->where(['mes' => '', 'anho' => ''])->all();
+        return $valor['indice'];
+    }
 }

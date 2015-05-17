@@ -31,6 +31,8 @@ $this->params['breadcrumbs'][] = $this->title;
     </center>
 
     <?php
+    echo $efectivo_caja->getPromedio(1,3);
+
     $columns = [
         ['class'=>'kartik\grid\SerialColumn', 'order'=>DynaGrid::ORDER_FIX_LEFT],
         //'id',
@@ -81,7 +83,9 @@ $this->params['breadcrumbs'][] = $this->title;
         [
             'class'=>'kartik\grid\ActionColumn',
             'dropdown'=>false,
-            'order'=>DynaGrid::ORDER_FIX_RIGHT
+            'order'=>DynaGrid::ORDER_FIX_RIGHT,
+            'template' => '{update}{delete}',
+            'controller' => 'a-efectivos-cajas'
         ],
         ['class'=>'kartik\grid\CheckboxColumn', 'order'=>DynaGrid::ORDER_FIX_RIGHT],
     ];
@@ -92,6 +96,8 @@ $this->params['breadcrumbs'][] = $this->title;
         'gridOptions'=>[
             'dataProvider'=>$dataProvider_ec,
             'showPageSummary'=>true,
+            'summary' => '',
+            //'not-set' => 'N/A',
             //'filterModel'=>AEfectivosBancosSearch,
             'panel'=>['heading'=>'<h3 class="panel-title">Efectivo en caja</h3>'],
             'toolbar' =>  [
@@ -110,7 +116,7 @@ $this->params['breadcrumbs'][] = $this->title;
               ],
             ],
         ],
-        'options'=>['id'=>'dynagrid-1'] // a unique identifier is important
+        'options'=>['id'=>'dynagrid-1', 'summaryText'=>''] // a unique identifier is important
     ]);
 
     ?>
@@ -209,7 +215,9 @@ $this->params['breadcrumbs'][] = $this->title;
         [
             'class'=>'kartik\grid\ActionColumn',
             'dropdown'=>false,
-            'order'=>DynaGrid::ORDER_FIX_RIGHT
+            'order'=>DynaGrid::ORDER_FIX_RIGHT,
+            'template' => '{update}{delete}'
+            //'controller' => 'a-efectivos-cajas'
         ],
         ['class'=>'kartik\grid\CheckboxColumn', 'order'=>DynaGrid::ORDER_FIX_RIGHT],
     ];
@@ -221,6 +229,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'gridOptions'=>[
             'dataProvider'=>$dataProvider_eb,
             'showPageSummary'=>true,
+            'summary' => '',
             //'filterModel'=>AEfectivosBancosSearch,
             'panel'=>['heading'=>'<h3 class="panel-title">Efectivo en bancos</h3>'],
 
@@ -293,13 +302,14 @@ $this->params['breadcrumbs'][] = $this->title;
               return '<div>'.$inversiones->tipoMoneda->nombre.'</div>';
           }
         ],
-      
         'monto_moneda_extra',
         'tipo_cambio_cierre',
         [
             'class'=>'kartik\grid\ActionColumn',
             'dropdown'=>false,
-            'order'=>DynaGrid::ORDER_FIX_RIGHT
+            'order'=>DynaGrid::ORDER_FIX_RIGHT,
+            'template' => '{update}{delete}',
+            'controller' => 'a-inversiones-negociar'
         ],
         ['class'=>'kartik\grid\CheckboxColumn', 'order'=>DynaGrid::ORDER_FIX_RIGHT],
     ];
@@ -311,6 +321,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'gridOptions'=>[
             'dataProvider'=>$dataProvider_in,
             'showPageSummary'=>true,
+            'summary' => '',
             //'filterModel'=>AEfectivosBancosSearch,
             'panel'=>['heading'=>'<h3 class="panel-title">Inversiones para negociar</h3>'],
 

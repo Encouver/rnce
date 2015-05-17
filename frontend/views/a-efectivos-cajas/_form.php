@@ -14,14 +14,13 @@ use kartik\builder\Form;
 
 <?php
 
-
     $form = ActiveForm::begin(['type'=>ActiveForm::TYPE_VERTICAL]);
     echo Form::widget([
         'model'=>$model,
         'form'=>$form,
         'columns'=>2,
         //'columns'=>11,
-        'attributes'=> ($model->scenario== 'nacional') ? $model->getFormAttribs('nacional') : $model->getFormAttribs('extranjero')
+        'attributes'=> $model->getFormAttribs($model->scenario)
     ]);
     echo Html::submitButton('Submit', ['type'=>'button', 'class'=>'btn btn-primary']);
     ActiveForm::end();
