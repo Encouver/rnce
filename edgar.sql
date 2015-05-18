@@ -411,3 +411,12 @@ ALTER TABLE cuentas.a_inversiones_negociar ALTER COLUMN total_id DROP NOT NULL;
 
 -- MARCOS
 
+
+-------------------------18/05/2015-------------------------------
+
+ALTER TABLE cierres_ejercicios
+  DROP COLUMN fecha_cierre;
+ALTER TABLE cierres_ejercicios
+  ADD COLUMN fecha_cierre character varying(100);
+COMMENT ON COLUMN cierres_ejercicios.fecha_cierre IS 'Fecha en formato año y mes del ejercicio economico del contratista';
+

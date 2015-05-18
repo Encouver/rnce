@@ -22,7 +22,7 @@ $url = \yii\helpers\Url::to(['cierres-ejercicios/cierreacta']);
                             //'template' => '<div class="well well-sm" style="background-color: #fff; width:250px">{input}</div>',
                             'pluginOptions' => [
                             'autoclose' => true,
-                            'format' => 'yyyy-mm-dd'
+                            'format' => 'yyyy-mm'
                                 ]
                                 ]);?>
      <div id="output17"></div>

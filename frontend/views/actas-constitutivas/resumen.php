@@ -1,16 +1,10 @@
 <?php
-
 ?>
-
-<div class="col-md-9 center-block">
+<div class="row">
+  <div class="col-md-8">
     <h2><?= $natural_juridica->denominacion ?></h2>
     <hr />
-    
-</div>
 
-<div class="col-sm-10">
-    
-    
     <table class="table table-bordered">
         <tr>
             <td><b>Duracion Empresa: </b><?= $duracion_empresa->duracion_anos.' Años' ?></td>
@@ -19,6 +13,7 @@
         </tr>
        
     </table>
+
      <table class="table table-bordered">
         <tr>
             <td><b>Aciones Suscritas: </b><?= $accion_suscrita->numero_comun?></td>
@@ -58,4 +53,4 @@
             </tr>
     </table>
 </div>
-
+</div>

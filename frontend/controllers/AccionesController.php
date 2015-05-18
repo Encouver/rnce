@@ -81,7 +81,7 @@ class AccionesController extends BaseController
          $msg=null;
 
        
-        if ( $suscrita_acta->load(Yii::$app->request->post()) && Yii::$app->request->isAjax) {
+        /*if ( $suscrita_acta->load(Yii::$app->request->post()) && Yii::$app->request->isAjax) {
             
             Yii::$app->response->format= Response::FORMAT_JSON;
             return ActiveForm::validate($suscrita_acta);
@@ -148,8 +148,8 @@ class AccionesController extends BaseController
              
            } catch (Exception $e) {
                $transaction->rollBack();
-           }*/
-        }
+           }
+        }*/
         if ( $suscrita_acta->load(Yii::$app->request->post())) {
             
             
@@ -212,9 +212,6 @@ class AccionesController extends BaseController
                     }
                 
                 }
-            }else{
-               $suscrita_acta->getErrors();
-                $msg= "Error en la cargade datos";
             }
         }
         return $this->render("acciones_actas",['accion_acta'=>$suscrita_acta,'msg'=>$msg]);

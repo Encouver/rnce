@@ -14,8 +14,8 @@ $url = \yii\helpers\Url::to(['acciones/accionsuscritaacta']);
     <?php $form = ActiveForm::begin(['id'=>'accion_suscrita',
         'method'=>'post',
         'action'=>['acciones/accionsuscritaacta'],
-        'enableClientValidation'=>false,
-        'enableAjaxValidation'=>true]); ?>
+        'enableClientValidation'=>true,
+        'enableAjaxValidation'=>false]); ?>
     
 <h3>Acciones o Participaciones Suscritas y Pagadas</h3>
 <hr />
