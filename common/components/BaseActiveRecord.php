@@ -248,6 +248,7 @@ class BaseActiveRecord extends ActiveRecord
      */
     public function getPorCapas()
     {
+
         return true;
     }
 
@@ -298,9 +299,11 @@ class BaseActiveRecord extends ActiveRecord
     /**
     * @return float
     */
+
     public function getInpcCierre()
     {
-        //preguntar a raul donde se guarda el cierre del ejer. economico
+
+        //preguntar a raul donde se guarda el cierre del ejer. economico 
         $valor = SysInpc::find()->where(['mes' => '', 'anho' => ''])->all();
         return $valor['indice'];
     }

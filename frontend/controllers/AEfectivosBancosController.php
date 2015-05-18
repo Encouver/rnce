@@ -91,6 +91,11 @@ class AEfectivosBancosController extends BaseController
         //$nacional = true;
         $model = new AEfectivosBancos();
         //$model->scenario = 'nacional';
+        if($model->scenario == 'nacional')
+        {
+            $model->nacional = true;
+        }else  $model->nacional = false;
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
