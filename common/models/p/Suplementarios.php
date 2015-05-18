@@ -1,33 +1,39 @@
 <?php
 
 namespace common\models\p;
-
+use kartik\builder\Form;
 use Yii;
 
 /**
- * This is the model class for table "public.suplementarios".
+ * This is the model class for table "suplementarios".
  *
  * @property integer $id
  * @property integer $numero
  * @property string $valor
+ * @property string $tipo_suplementario
+ * @property boolean $suscrito
+ * @property integer $creado_por
+ * @property integer $actualizado_por
  * @property boolean $sys_status
  * @property string $sys_creado_el
  * @property string $sys_actualizado_el
  * @property string $sys_finalizado_el
- * @property boolean $suscrito
- * @property integer $acta_constitutiva_id
- * @property string $tipo_suplementario
+ * @property integer $documento_registrado_id
+ * @property integer $contratista_id
  *
- * @property ActasConstitutivas $actaConstitutiva
+ * @property ActivosDocumentosRegistrados $documentoRegistrado
+ * @property Contratistas $contratista
  */
 class Suplementarios extends \common\components\BaseActiveRecord
 {
     /**
      * @inheritdoc
      */
+    public $numero_pagada;
+    public $valor_pagada;
     public static function tableName()
     {
-        return 'public.suplementarios';
+        return 'suplementarios';
     }
 
     /**
@@ -36,13 +42,26 @@ class Suplementarios extends \common\components\BaseActiveRecord
     public function rules()
     {
         return [
-            [['numero', 'acta_constitutiva_id'], 'integer'],
-            [['valor'], 'number'],
-            [['sys_status', 'suscrito'], 'boolean'],
-            [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
-            [['suscrito', 'acta_constitutiva_id'], 'required'],
-            [['tipo_suplementario'], 'string']
+            [['numero','numero_pagada', 'creado_por', 'actualizado_por', 'documento_registrado_id', 'contratista_id'], 'integer'],
+            [['valor','valor_pagada'], 'number'],
+            [['tipo_suplementario'], 'string'],
+            ['numero_pagada', 'validarnumeropagada'],
+            ['valor_pagada', 'validarvalorpagada'],
+            [['numero', 'valor','numero_pagada','valor_pagada'], 'required', 'on' => 'principal'],
+            [['suscrito', 'documento_registrado_id', 'contratista_id'], 'required'],
+            [['suscrito', 'sys_status'], 'boolean'],
+            [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe']
         ];
+    }
+    public function validarnumeropagada($attribute){
+          if($this->numero_pagada>$this->numero){
+               $this->addError($attribute,'Numero pagada invalido');
+          } 
+    }
+    public function validarvalorpagada($attribute){
+          if($this->valor_pagada>$this->valor){
+               $this->addError($attribute,'Valor pagada invalido');
+          } 
     }
 
     /**
@@ -54,21 +73,53 @@ class Suplementarios extends \common\components\BaseActiveRecord
             'id' => Yii::t('app', 'ID'),
             'numero' => Yii::t('app', 'Numero'),
             'valor' => Yii::t('app', 'Valor'),
+            'tipo_suplementario' => Yii::t('app', 'Tipo Suplementario'),
+            'suscrito' => Yii::t('app', 'Suscrito'),
+            'creado_por' => Yii::t('app', 'Creado Por'),
+            'actualizado_por' => Yii::t('app', 'Actualizado Por'),
             'sys_status' => Yii::t('app', 'Sys Status'),
             'sys_creado_el' => Yii::t('app', 'Sys Creado El'),
             'sys_actualizado_el' => Yii::t('app', 'Sys Actualizado El'),
             'sys_finalizado_el' => Yii::t('app', 'Sys Finalizado El'),
-            'suscrito' => Yii::t('app', 'Suscrito'),
-            'acta_constitutiva_id' => Yii::t('app', 'Acta Constitutiva ID'),
-            'tipo_suplementario' => Yii::t('app', 'Tipo Suplementario'),
+            'documento_registrado_id' => Yii::t('app', 'Documento Registrado ID'),
+            'contratista_id' => Yii::t('app', 'Contratista ID'),
+            'numero_pagada' => Yii::t('app', 'Numero Pagada'),
+            'valor_pagada' => Yii::t('app', 'Valor Pagada'),
         ];
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getActaConstitutiva()
+    public function getDocumentoRegistrado()
     {
-        return $this->hasOne(ActasConstitutivas::className(), ['id' => 'acta_constitutiva_id']);
+        return $this->hasOne(ActivosDocumentosRegistrados::className(), ['id' => 'documento_registrado_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getContratista()
+    {
+        return $this->hasOne(Contratistas::className(), ['id' => 'contratista_id']);
+    }
+    
+     public function getFormAttribs($id) {
+        
+        if($id=='principal')
+        {
+            
+
+            return [
+              
+               'numero'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Numero de Certificados Suplementarios']],
+               'valor'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Valor']],
+               'numero_pagada'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Numero de Certificados Suplementarios']],
+               'valor_pagada'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Valor']],
+              
+            ];
+        
+        }
+        return false;
     }
 }
