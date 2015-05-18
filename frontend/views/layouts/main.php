@@ -50,6 +50,7 @@ AppAsset::register($this);
                          ['label' => 'Efectivos y sus equivalentes', 'url' => ['/a-efectivos-bancos/efectivosequivalentes']],
                          ['label' => 'Obligaciones Bancarias', 'url' => ['/aa-obligaciones-bancarias/index']],
                          ['label' => 'Inventarios', 'url' => ['/cuentas-c-inventarios/inventarios']],
+                         ['label' => 'Pasivo laboral', 'url' => ['']],
                     ],
                 ],
                 ['label' => 'Activos',
