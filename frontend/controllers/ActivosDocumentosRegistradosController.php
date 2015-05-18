@@ -72,7 +72,7 @@ class ActivosDocumentosRegistradosController extends BaseController
     }
     public function actionCrearacta()
     {
-        $registro_acta = new DocumentosRegistrados();
+        $registro_acta = new ActivosDocumentosRegistrados();
             
           
             return $this->render('registros_actas', [
