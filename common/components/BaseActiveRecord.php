@@ -154,6 +154,8 @@ class BaseActiveRecord extends ActiveRecord
             $this->sys_status = true;*/
 
        // die;
+         if($this->hasAttribute('anho'))//property_exists($this->className(),'anho'))
+            $this->anho = date('mm-Y');
         return parent::beforeValidate();
     }
 	public function beforeSave($insert){
@@ -246,6 +248,7 @@ class BaseActiveRecord extends ActiveRecord
      */
     public function getPorCapas()
     {
+
         return true;
     }
 
@@ -296,9 +299,11 @@ class BaseActiveRecord extends ActiveRecord
     /**
     * @return float
     */
+
     public function getInpcCierre()
     {
-        //preguntar a raul donde se guarda el cierre del ejer. economico
+
+        //preguntar a raul donde se guarda el cierre del ejer. economico 
         $valor = SysInpc::find()->where(['mes' => '', 'anho' => ''])->all();
         return $valor['indice'];
     }

@@ -4,7 +4,7 @@ namespace frontend\controllers;
 
 use Yii;
 use common\models\p\ActividadesEconomicas;
-use common\models\a\DocumentosRegistrados;
+use common\models\a\ActivosDocumentosRegistrados;
 use app\models\ActividadesEconomicasSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -92,7 +92,7 @@ class ActividadesEconomicasController extends Controller
              $transaction = \Yii::$app->db->beginTransaction();
              
            try {
-                $registro = DocumentosRegistrados::findOne(['contratista_id'=>$usuario->contratista_id, 'sys_tipo_registro_id'=>1]);
+                $registro = ActivosDocumentosRegistrados::findOne(['contratista_id'=>$usuario->contratista_id, 'tipo_documento_id'=>1]);
                 
             if($actividad_acta->ppal_caev_id==null || $actividad_acta->comp1_caev_id==null || $actividad_acta->comp2_caev_id==null){
                  $transaction->rollBack();

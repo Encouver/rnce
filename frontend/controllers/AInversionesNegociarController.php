@@ -61,6 +61,10 @@ class AInversionesNegociarController extends BaseController
     public function actionCreate()
     {
         $model = new AInversionesNegociar();
+        if($model->scenario == 'nacional')
+        {
+            $model->nacional = true;
+        }else  $model->nacional = false;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);

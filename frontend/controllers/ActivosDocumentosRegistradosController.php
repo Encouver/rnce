@@ -3,37 +3,36 @@
 namespace frontend\controllers;
 
 use Yii;
-use common\models\p\CierresEjercicios;
 use common\models\a\ActivosDocumentosRegistrados;
-use app\models\CierresEjerciciosSearch;
-use yii\web\Controller;
+use app\models\ActivosDocumentosRegistrados as ActivosDocumentosRegistradosSearch;
+use common\components\BaseController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * CierresEjerciciosController implements the CRUD actions for CierresEjercicios model.
+ * ActivosDocumentosRegistradosController implements the CRUD actions for ActivosDocumentosRegistrados model.
  */
-class CierresEjerciciosController extends Controller
+class ActivosDocumentosRegistradosController extends BaseController
 {
     public function behaviors()
     {
-        return array_merge(parent::behaviors(),[
+        return [
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['post'],
                 ],
             ],
-        ]);
+        ];
     }
 
     /**
-     * Lists all CierresEjercicios models.
+     * Lists all ActivosDocumentosRegistrados models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new CierresEjerciciosSearch();
+        $searchModel = new ActivosDocumentosRegistradosSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -43,7 +42,7 @@ class CierresEjerciciosController extends Controller
     }
 
     /**
-     * Displays a single CierresEjercicios model.
+     * Displays a single ActivosDocumentosRegistrados model.
      * @param integer $id
      * @return mixed
      */
@@ -55,19 +54,15 @@ class CierresEjerciciosController extends Controller
     }
 
     /**
-     * Creates a new CierresEjercicios model.
+     * Creates a new ActivosDocumentosRegistrados model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new CierresEjercicios();
+        $model = new ActivosDocumentosRegistrados();
 
-        if ($model->load(Yii::$app->request->post())) {
-            
-            $model->contratista_id=2;
-            $model->documento_registrado_id=1;
-            $model->save();
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
@@ -75,38 +70,41 @@ class CierresEjerciciosController extends Controller
             ]);
         }
     }
-     public function actionCrearcierreacta()
+    public function actionCrearacta()
     {
-        $cierre_ejercicio = new CierresEjercicios();
+        $registro_acta = new ActivosDocumentosRegistrados();
             
           
-            return $this->render('cierres_actas', [
-                'cierre_ejercicio' => $cierre_ejercicio,
+            return $this->render('registros_actas', [
+                'registro_acta' => $registro_acta,
             ]);
         
     }
-     public function actionCierreacta(){
+     public function actionRegistroacta(){
         
-        $cierre_acta = new CierresEjercicios();
+       $registro_acta = new ActivosDocumentosRegistrados();
       
         $usuario= \common\models\p\User::findOne(Yii::$app->user->identity->id);
-       
-        if ( $cierre_acta->load(Yii::$app->request->post())) {
+        if ( $registro_acta->load(Yii::$app->request->post())) {
             
              $transaction = \Yii::$app->db->beginTransaction();
              
            try {
-                $registro = ActivosDocumentosRegistrados::findOne(['contratista_id'=>$usuario->contratista_id, 'tipo_documento_id'=>1]);
-                
-            if($cierre_acta->fecha_cierre==null){
+               
+            if($registro_acta->fecha_asamblea==null){
                  $transaction->rollBack();
-                return "Debe ingresar fecha de cierre"; 
+                return "Debe ingresar fecha asamblea"; 
             }
-           
-            $cierre_acta->contratista_id = $usuario->contratista_id;
-            $cierre_acta->documento_registrado_id= $registro->id;
-            
-               if ($cierre_acta->save()) {
+           $registros = ActivosDocumentosRegistrados::findOne(['contratista_id'=>$usuario->contratista_id, 'tipo_documento_id'=>1]);
+           if(isset($registros)){
+               $transaction->rollBack();
+                return "Ya tiene un documento registrado"; 
+           }
+            $registro_acta->contratista_id = $usuario->contratista_id;
+            $registro_acta->sys_tipo_registro_id=1;
+            $registro_acta->tipo_documento_id=1;
+         
+               if ( $registro_acta->save()) {
            
 
                                $transaction->commit();
@@ -127,8 +125,10 @@ class CierresEjerciciosController extends Controller
         
         
     }
+
+
     /**
-     * Updates an existing CierresEjercicios model.
+     * Updates an existing ActivosDocumentosRegistrados model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -147,7 +147,7 @@ class CierresEjerciciosController extends Controller
     }
 
     /**
-     * Deletes an existing CierresEjercicios model.
+     * Deletes an existing ActivosDocumentosRegistrados model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -160,15 +160,15 @@ class CierresEjerciciosController extends Controller
     }
 
     /**
-     * Finds the CierresEjercicios model based on its primary key value.
+     * Finds the ActivosDocumentosRegistrados model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return CierresEjercicios the loaded model
+     * @return ActivosDocumentosRegistrados the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = CierresEjercicios::findOne($id)) !== null) {
+        if (($model = ActivosDocumentosRegistrados::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
