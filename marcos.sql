@@ -1010,3 +1010,15 @@ COMMENT ON COLUMN activos.documentos_registrados.tipo_documento_id IS 'Clave for
 
 ALTER TABLE activos.documentos_registrados
 ADD FOREIGN KEY (tipo_documento_id) REFERENCES activos.sys_tipos_documentos (id) ON UPDATE NO ACTION ON DELETE NO ACTION;
+
+
+-- Column: bien_id
+
+-- ALTER TABLE activos.documentos_registrados DROP COLUMN bien_id;
+
+ALTER TABLE activos.documentos_registrados ADD COLUMN bien_id integer;
+COMMENT ON COLUMN activos.documentos_registrados.bien_id IS 'Clave foránea a la tabla bienes.';
+
+
+ALTER TABLE activos.documentos_registrados
+ADD FOREIGN KEY (bien_id) REFERENCES activos.bienes (id) ON UPDATE NO ACTION ON DELETE NO ACTION;

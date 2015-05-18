@@ -56,7 +56,7 @@ class ActivosDocumentosRegistrados extends \common\components\BaseActiveRecord
     {
         return [
             [['contratista_id', 'sys_tipo_registro_id', 'num_registro_notaria', 'tomo', 'folio', 'fecha_registro', 'sys_circunscripcion_id'], 'required'],
-            [['contratista_id', 'sys_tipo_registro_id', 'sys_circunscripcion_id'], 'integer'],
+            [['contratista_id', 'sys_tipo_registro_id', 'sys_circunscripcion_id', 'bien_id'], 'integer'],
             [['fecha_registro', 'fecha_asamblea', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['sys_status'], 'boolean'],
             [['num_registro_notaria'], 'string', 'max' => 255],
@@ -84,6 +84,12 @@ class ActivosDocumentosRegistrados extends \common\components\BaseActiveRecord
             'sys_finalizado_el' => Yii::t('app', 'Sys Finalizado El'),
             'sys_circunscripcion_id' => Yii::t('app', 'Sys Circunscripcion ID'),
         ];
+    }
+    public function scenarios()
+    {
+        $scenarios = parent::scenarios();
+        $scenarios['bien'] = [];//Scenario Values Only Accepted
+        return $scenarios;
     }
 
     /**
@@ -189,7 +195,8 @@ class ActivosDocumentosRegistrados extends \common\components\BaseActiveRecord
                 'type'=>Form::INPUT_HIDDEN,
                 'columnOptions'=>['hidden'=>true]
             ],
-            'sys_tipo_registro_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(ActivosSysTiposBienes::find()->all(),'id','nombre',function($model){ return $model->sysClasificacionBien->nombre;}),'options'=>['onchange'=>'js:this.form.submit();']]],
+            'tipo_documento_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(ActivosSysTiposDocumentos::find()->all(),'id','nombre'),'options'=>['onchange'=>'']]],
+            'sys_tipo_registro_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(ActivosSysTiposRegistros::find()->all(),'id','nombre'),'options'=>['onchange'=>'']]],
             'num_registro_notaria'=>['type'=>Form::INPUT_TEXT,],
             'tomo'=>['type'=>Form::INPUT_TEXT,],
             'folio'=>['type'=>Form::INPUT_TEXT,],

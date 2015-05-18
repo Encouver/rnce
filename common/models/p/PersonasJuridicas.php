@@ -117,7 +117,7 @@ class PersonasJuridicas extends \common\components\BaseActiveRecord
       
     ];
     }
-    public function getEtiqueta(){
+    public function obtenerEtiqueta(){
         return $this->rif." - ".$this->razon_social;
     }
 }
