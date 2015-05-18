@@ -18,8 +18,8 @@ class ActivosBienesSearch extends ActivosBienes
     public function rules()
     {
         return [
-            [['id', 'sys_tipo_bien_id', 'principio_contable_id', 'contratista_id'], 'integer'],
-            [['depreciable', 'deterioro', 'propio', 'sys_status'], 'boolean'],
+            [['id', 'sys_tipo_bien_id', 'contratista_id'], 'integer'],
+            [['propio', 'sys_status'], 'boolean'],
             [['detalle', 'origen', 'fecha_origen', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
         ];
     }
@@ -59,9 +59,6 @@ class ActivosBienesSearch extends ActivosBienes
         $query->andFilterWhere([
             'id' => $this->id,
             'sys_tipo_bien_id' => $this->sys_tipo_bien_id,
-            'principio_contable_id' => $this->principio_contable_id,
-            'depreciable' => $this->depreciable,
-            'deterioro' => $this->deterioro,
             'fecha_origen' => $this->fecha_origen,
             'contratista_id' => Yii::$app->user->identity->contratista_id,
             'propio' => $this->propio,

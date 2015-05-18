@@ -27,9 +27,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
             //'id',
             'sys_tipo_bien_id',
-            'principio_contable_id',
-            'depreciable:boolean',
-            'deterioro:boolean',
             'detalle',
             'origen_id',
             'fecha_origen',

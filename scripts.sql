@@ -9,6 +9,9 @@ ALTER TABLE TABLA ADD COLUMN contratista_id integer;
 ALTER TABLE TABLA ALTER COLUMN contratista_id SET NOT NULL;
 COMMENT ON COLUMN TABLA.contratista_id IS 'Clave foranea al contratista';
 
+ALTER TABLE TABLA
+ADD FOREIGN KEY (contratista_id) REFERENCES contratistas (id) ON UPDATE CASCADE ON DELETE NO ACTION;
+
 -- Column: anho
 
 ALTER TABLE TABLA DROP COLUMN IF EXISTS anho;

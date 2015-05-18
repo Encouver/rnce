@@ -958,3 +958,55 @@ COMMENT ON COLUMN activos.sys_metodos.modelo_id IS 'Clave foránea a la tabla sy
 ALTER TABLE activos.bienes RENAME principio_contable  TO principio_contable_id;
 COMMENT ON COLUMN activos.bienes.principio_contable_id
   IS 'Clave foránea a la tabla sys_formas_org. Principio contable que aplica para el bien.';
+
+
+
+
+ALTER TABLE activos.bienes
+DROP COLUMN principio_contable_id;
+ALTER TABLE activos.bienes
+DROP COLUMN depreciable;
+ALTER TABLE activos.bienes
+DROP COLUMN deterioro;
+ALTER TABLE activos.bienes
+DROP CONSTRAINT bienes_principio_contable_fkey;
+
+
+-- Column: depreciacion
+
+-- ALTER TABLE activos.sys_tipos_bienes DROP COLUMN depreciacion;
+
+ALTER TABLE activos.sys_tipos_bienes ADD COLUMN depreciacion boolean;
+ALTER TABLE activos.sys_tipos_bienes ALTER COLUMN depreciacion SET DEFAULT true;
+COMMENT ON COLUMN activos.sys_tipos_bienes.depreciacion IS 'Tipo de bien depreciable o amortizable.';
+
+
+-- Column: deterioro
+
+-- ALTER TABLE activos.sys_tipos_bienes DROP COLUMN deterioro;
+
+ALTER TABLE activos.sys_tipos_bienes ADD COLUMN deterioro boolean;
+ALTER TABLE activos.sys_tipos_bienes ALTER COLUMN deterioro SET DEFAULT true;
+COMMENT ON COLUMN activos.sys_tipos_bienes.deterioro IS 'Tipo de bien deteriorable.';
+
+
+-- Column: valor_adquisicion
+
+-- ALTER TABLE activos.documentos_registrados DROP COLUMN valor_adquisicion;
+
+ALTER TABLE activos.documentos_registrados ADD COLUMN valor_adquisicion numeric(38,6);
+ALTER TABLE activos.documentos_registrados ALTER COLUMN valor_adquisicion SET NOT NULL;
+COMMENT ON COLUMN activos.documentos_registrados.valor_adquisicion IS 'Valor de adquisición.';
+
+
+
+-- Column: tipo_documento_id
+
+-- ALTER TABLE activos.documentos_registrados DROP COLUMN tipo_documento_id;
+
+ALTER TABLE activos.documentos_registrados ADD COLUMN tipo_documento_id integer;
+COMMENT ON COLUMN activos.documentos_registrados.tipo_documento_id IS 'Clave foránea a la tabla sys_tipos_documentos.';
+
+
+ALTER TABLE activos.documentos_registrados
+ADD FOREIGN KEY (tipo_documento_id) REFERENCES activos.sys_tipos_documentos (id) ON UPDATE NO ACTION ON DELETE NO ACTION;

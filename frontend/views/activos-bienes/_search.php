@@ -19,12 +19,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'sys_tipo_bien_id') ?>
 
-    <?= $form->field($model, 'principio_contable_id') ?>
-
-    <?= $form->field($model, 'depreciable')->checkbox() ?>
-
-    <?= $form->field($model, 'deterioro')->checkbox() ?>
-
     <?php // echo $form->field($model, 'detalle') ?>
 
     <?php // echo $form->field($model, 'origen') ?>

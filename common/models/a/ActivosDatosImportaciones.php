@@ -2,7 +2,12 @@
 
 namespace common\models\a;
 
+use common\models\p\SysDivisas;
+use common\models\p\SysPaises;
+use kartik\builder\Form;
+use kartik\widgets\Select2;
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "activos.datos_importaciones".
@@ -59,16 +64,16 @@ class ActivosDatosImportaciones extends \common\components\BaseActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'bien_id' => Yii::t('app', 'Bien ID'),
-            'num_guia_nac' => Yii::t('app', 'Num Guia Nac'),
-            'costo_adquisicion' => Yii::t('app', 'Costo Adquisicion'),
-            'gastos_mon_extranjera' => Yii::t('app', 'Gastos Mon Extranjera'),
-            'sys_divisa_id' => Yii::t('app', 'Sys Divisa ID'),
-            'tasa_cambio' => Yii::t('app', 'Tasa Cambio'),
-            'gastos_imp_nacional' => Yii::t('app', 'Gastos Imp Nacional'),
-            'otros_costros_imp_instalacion' => Yii::t('app', 'Otros Costros Imp Instalacion'),
-            'total_costo_adquisicion' => Yii::t('app', 'Total Costo Adquisicion'),
-            'pais_origen_id' => Yii::t('app', 'Pais Origen ID'),
+            //'bien_id' => Yii::t('app', 'Bien'),
+            'num_guia_nac' => Yii::t('app', 'Número de guía o documento de Nacionalización'),
+            'costo_adquisicion' => Yii::t('app', 'Costo de Adquisición (en Bs)'),
+            'gastos_mon_extranjera' => Yii::t('app', 'Gasto de Importación en Moneda Extranjera'),
+            'sys_divisa_id' => Yii::t('app', 'Moneda de Adquisición'),
+            'tasa_cambio' => Yii::t('app', 'Tasa de cambio'),
+            'gastos_imp_nacional' => Yii::t('app', 'Gastos de Importación Nacionales'),
+            'otros_costros_imp_instalacion' => Yii::t('app', 'Otros Costos generados producto de la Importación / Instalación'),
+            'total_costo_adquisicion' => Yii::t('app', 'Total Costo de Adquisición (En Bs.):'),
+            'pais_origen_id' => Yii::t('app', 'País de Origen'),
             'sys_status' => Yii::t('app', 'Sys Status'),
             'sys_creado_el' => Yii::t('app', 'Sys Creado El'),
             'sys_actualizado_el' => Yii::t('app', 'Sys Actualizado El'),
@@ -99,4 +104,50 @@ class ActivosDatosImportaciones extends \common\components\BaseActiveRecord
     {
         return $this->hasOne(SysPaises::className(), ['id' => 'pais_origen_id']);
     }
+
+    public function getFormAttribs() {
+        $attributes = [
+            // primary key column
+            'id'=>[ // primary key attribute
+                'type'=>Form::INPUT_HIDDEN,
+                'columnOptions'=>['hidden'=>true]
+            ],
+
+            'num_guia_nac'=>['type'=>Form::INPUT_TEXT,],
+            'costo_adquisicion'=>['type'=>Form::INPUT_TEXT,],
+            'gastos_mon_extranjera'=>['type'=>Form::INPUT_TEXT,],
+            'sys_divisa_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(SysDivisas::find()->all(),'id','nombre'),'options'=>[]]],
+            'tasa_cambio'=>['type'=>Form::INPUT_TEXT,],
+            'gastos_imp_nacional'=>['type'=>Form::INPUT_TEXT,],
+            'otros_costros_imp_instalacion'=>['type'=>Form::INPUT_TEXT,],
+            'total_costo_adquisicion'=>['type'=>Form::INPUT_TEXT,],
+            'pais_origen_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(SysPaises::find()->all(),'id','nombre'),'options'=>[]]],
+
+
+
+
+/*            //'depreciable'=>['type'=>Form::INPUT_CHECKBOX,],
+            //'deterioro'=>['type'=>Form::INPUT_CHECKBOX,],
+            'detalle'=>['type'=>Form::INPUT_TEXT,],
+            'origen_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(ActivosSysOrigenesBienes::find()->asArray()->all(),'id','nombre'),'options'=>['id'=>'origen','onchange'=>'js: this.form.submit();']]],
+            'propio'=>['type'=>Form::INPUT_CHECKBOX,],
+            //'principio_contable_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(ActivosSysFormasOrg::find()->asArray()->all(),'id','nombre')]],
+            'fecha_origen'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>DatePicker::className(),'options'=>['options' => ['placeholder' => 'Seleccione fecha ...'],
+                'convertFormat' => true,
+                'pluginOptions' => [
+                    'format' => 'd-M-yyyy ',
+                    //'startDate' => date('d-m-Y h:i A'),//'01-Mar-2014 12:00 AM',
+                    'todayHighlight' => true
+                ]],
+                'columnOptions'=>['hidden'=>true]
+            ],
+            //'nacional'=>['type'=>Form::INPUT_CHECKBOX,'columnOptions'=>['hidden'=>true]],
+            //'contratista_id'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>ArrayHelper::map(Contratistas::find()->asArray()->all(),'id','nombre'),],*/
+
+        ];
+
+
+        return $attributes;
+    }
+
 }

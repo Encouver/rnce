@@ -23,14 +23,59 @@ use kartik\widgets\ActiveForm;
             'attributes'=>$model->getFormAttribs()
         ]);
 
+        if($model->origen_id == 2 && !$model->nacional )
+            echo Form::widget([       // 3 column layout
+                'model'=>$modelDatosImportacion,
+                'form'=>$form,
+                'columns'=>4,
+                'columnSize'=>'xs',
+                'attributes'=>$modelDatosImportacion->getFormAttribs($model)
+            ]);
+
+
         if($modelBienTipo != null)
-        echo Form::widget([       // 3 column layout
-            'model'=>$modelBienTipo,
-            'form'=>$form,
-            'columns'=>4,
-            'columnSize'=>'xs',
-            'attributes'=>$modelBienTipo->getFormAttribs($model)
-        ]);
+            echo Form::widget([       // 3 column layout
+                'model'=>$modelBienTipo,
+                'form'=>$form,
+                'columns'=>4,
+                'columnSize'=>'xs',
+                'attributes'=>$modelBienTipo->getFormAttribs($model)
+            ]);
+
+        if($model->factura)
+            echo Form::widget([       // 3 column layout
+                'model'=>$modelFactura,
+                'form'=>$form,
+                'columns'=>4,
+                'columnSize'=>'xs',
+                'attributes'=>$modelFactura->getFormAttribs($model)
+            ]);
+
+        if($model->documento)
+            echo Form::widget([       // 3 column layout
+                'model'=>$modelDocumento,
+                'form'=>$form,
+                'columns'=>4,
+                'columnSize'=>'xs',
+                'attributes'=>$modelDocumento->getFormAttribs($model)
+            ]);
+
+    $script = <<< JS
+        $('#origen').change(function(e){
+                if($('#origen').val()== 1 || $('#origen').val()==4){
+                    $('#fecha_origen').show();
+                    $('#nacional').hide();
+                }else if ($('#origen').val()==2) {
+                    $('#fecha_origen').hide();
+                    $('#nacional').show();
+                }else
+                {
+                    $('#fecha_origen').hide();
+                    $('#nacional').hide();
+                }
+        });
+JS;
+    $this->registerJs($script);
 
 /*        echo '<label class="cbx-label" for="s_2">Left</label>';
         echo CheckboxX::widget([

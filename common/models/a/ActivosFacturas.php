@@ -2,6 +2,11 @@
 
 namespace common\models\a;
 
+use common\models\p\PersonasJuridicas;
+use common\models\p\SysNaturalesJuridicas;
+use kartik\builder\Form;
+use kartik\widgets\DatePicker;
+use kartik\widgets\Select2;
 use Yii;
 
 /**
@@ -119,5 +124,63 @@ class ActivosFacturas extends \common\components\BaseActiveRecord
     public function getComprador()
     {
         return $this->hasOne(SysNaturalesJuridicas::className(), ['id' => 'comprador_id']);
+    }
+
+
+    public function getFormAttribs() {
+        $attributes = [
+            // primary key column
+            'id'=>[ // primary key attribute
+                'type'=>Form::INPUT_HIDDEN,
+                'columnOptions'=>['hidden'=>true]
+            ],
+            'num_factura'=>['type'=>Form::INPUT_TEXT,],
+            'fecha_emision'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>DatePicker::className(),'options'=>['options' => ['placeholder' => 'Seleccione fecha ...'],
+                'convertFormat' => true,
+                'pluginOptions' => [
+                    'format' => 'd-M-yyyy ',
+                    //'startDate' => date('d-m-Y h:i A'),//'01-Mar-2014 12:00 AM',
+                    'todayHighlight' => true
+                ]],
+                'columnOptions'=>['hidden'=>true]
+            ],
+            'proveedor_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(PersonasJuridicas::find()->all(),'rif',function($model){return $model->etiqueta(); }),'options'=>[]]],
+            'imprenta_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(PersonasJuridicas::find()->all(),'rif',function($model){return $model->etiqueta(); }),'options'=>[]]],
+            'fecha_emision_talonario'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>DatePicker::className(),'options'=>['options' => ['placeholder' => 'Seleccione fecha ...'],
+                'convertFormat' => true,
+                'pluginOptions' => [
+                    'format' => 'd-M-yyyy ',
+                    //'startDate' => date('d-m-Y h:i A'),//'01-Mar-2014 12:00 AM',
+                    'todayHighlight' => true
+                ]],
+                'columnOptions'=>['hidden'=>true]
+            ],
+            'comprador_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(SysNaturalesJuridicas::find()->all(),'id','nombre',function($model){ return $model->sysClasificacionBien->nombre;}),'options'=>[]]],
+            'base_imponible_gravable'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),],
+            'exento'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),],
+            'iva'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),],
+
+
+            'origen_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(ActivosSysOrigenesBienes::find()->asArray()->all(),'id','nombre'),'options'=>['id'=>'origen','onchange'=>'js: this.form.submit();'/*'js: $("#nacional").hide(true); $("#nacional").hide(); if($("#origen").attr()==1 || $("#origen").attr()==3)$("#fecha_origen").show(); if($("#origen").attr()==2)$("#nacional").show();'*/]]],
+            'propio'=>['type'=>Form::INPUT_CHECKBOX,],
+            'factura'=>['type'=>Form::INPUT_CHECKBOX,],
+            'documento'=>['type'=>Form::INPUT_CHECKBOX,],
+            //'principio_contable_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(ActivosSysFormasOrg::find()->asArray()->all(),'id','nombre')]],
+            /*'fecha_origen'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>DatePicker::className(),'options'=>['options' => ['placeholder' => 'Seleccione fecha ...'],
+                'convertFormat' => true,
+                'pluginOptions' => [
+                    'format' => 'd-M-yyyy ',
+                    //'startDate' => date('d-m-Y h:i A'),//'01-Mar-2014 12:00 AM',
+                    'todayHighlight' => true
+                ]],
+                'columnOptions'=>['hidden'=>true]
+            ],*/
+            //'nacional'=>['type'=>Form::INPUT_CHECKBOX,'columnOptions'=>['hidden'=>true]],
+            //'contratista_id'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>ArrayHelper::map(Contratistas::find()->asArray()->all(),'id','nombre'),],
+
+        ];
+
+
+        return $attributes;
     }
 }

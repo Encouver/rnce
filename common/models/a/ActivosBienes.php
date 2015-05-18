@@ -15,9 +15,6 @@ use yii\helpers\ArrayHelper;
  *
  * @property integer $id
  * @property integer $sys_tipo_bien_id
- * @property integer $principio_contable_id
- * @property boolean $depreciable
- * @property boolean $deterioro
  * @property string $detalle
  * @property string $fecha_origen
  * @property integer $contratista_id
@@ -32,7 +29,6 @@ use yii\helpers\ArrayHelper;
  * @property ActivosActivosBiologicos[] $activosActivosBiologicos
  * @property ActivosActivosIntangibles[] $activosActivosIntangibles
  * @property ActivosAvaluos[] $activosAvaluos
- * @property ActivosSysFormasOrg $principioContable
  * @property ActivosSysOrigenesBienes $origen
  * @property ActivosSysTiposBienes $sysTipoBien
  * @property Contratistas $contratista
@@ -49,6 +45,9 @@ use yii\helpers\ArrayHelper;
  */
 class ActivosBienes extends \common\components\BaseActiveRecord
 {
+    public $factura;
+    public $documento;
+
     /**
      * @inheritdoc
      */
@@ -63,9 +62,9 @@ class ActivosBienes extends \common\components\BaseActiveRecord
     public function rules()
     {
         return [
-            [['sys_tipo_bien_id', 'principio_contable_id', 'contratista_id', 'origen_id'], 'required'],
-            [['sys_tipo_bien_id', 'principio_contable_id', 'contratista_id', 'origen_id'], 'integer'],
-            [['depreciable', 'deterioro', 'propio', 'sys_status', 'nacional'], 'boolean'],
+            [['sys_tipo_bien_id', 'contratista_id', 'origen_id'], 'required'],
+            [['sys_tipo_bien_id', 'contratista_id', 'origen_id'], 'integer'],
+            [['propio', 'sys_status', 'nacional','documento','factura'], 'boolean'],
             [['fecha_origen', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['detalle'], 'string', 'max' => 255]
         ];
@@ -79,9 +78,6 @@ class ActivosBienes extends \common\components\BaseActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'sys_tipo_bien_id' => Yii::t('app', 'Tipo de Bien'),
-            'principio_contable_id' => Yii::t('app', 'Principio Contable'),
-            'depreciable' => Yii::t('app', 'Depreciable'),
-            'deterioro' => Yii::t('app', 'Deterioro'),
             'detalle' => Yii::t('app', 'Detalle'),
             'fecha_origen' => Yii::t('app', 'Fecha Origen'),
             'contratista_id' => Yii::t('app', 'Contratista ID'),
@@ -125,14 +121,6 @@ class ActivosBienes extends \common\components\BaseActiveRecord
     public function getOrigen()
     {
         return $this->hasOne(ActivosSysOrigenesBienes::className(), ['id' => 'origen_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getPrincipioContable()
-    {
-        return $this->hasOne(ActivosSysFormasOrg::className(), ['id' => 'principio_contable_id']);
     }
 
     /**
@@ -232,7 +220,7 @@ class ActivosBienes extends \common\components\BaseActiveRecord
     }
 
     public function getFormAttribs() {
-        return [
+         $attributes = [
             // primary key column
             'id'=>[ // primary key attribute
                 'type'=>Form::INPUT_HIDDEN,
@@ -240,13 +228,15 @@ class ActivosBienes extends \common\components\BaseActiveRecord
             ],
             'sys_tipo_bien_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(ActivosSysTiposBienes::find()->all(),'id','nombre',function($model){ return $model->sysClasificacionBien->nombre;}),'options'=>['onchange'=>'js:this.form.submit();']]],
 
-            'depreciable'=>['type'=>Form::INPUT_CHECKBOX,],
-            'deterioro'=>['type'=>Form::INPUT_CHECKBOX,],
+            //'depreciable'=>['type'=>Form::INPUT_CHECKBOX,],
+            //'deterioro'=>['type'=>Form::INPUT_CHECKBOX,],
             'detalle'=>['type'=>Form::INPUT_TEXT,],
-            'origen_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(ActivosSysOrigenesBienes::find()->asArray()->all(),'id','nombre'),'options'=>['id'=>'origen','onchange'=>'js: $("#nacional").hide(true); $("#nacional").hide(); if($("#origen").attr()==1 || $("#origen").attr()==3)$("#fecha_origen").show(); if($("#origen").attr()==2)$("#nacional").show();']]],
+            'origen_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(ActivosSysOrigenesBienes::find()->asArray()->all(),'id','nombre'),'options'=>['id'=>'origen','onchange'=>'js: this.form.submit();'/*'js: $("#nacional").hide(true); $("#nacional").hide(); if($("#origen").attr()==1 || $("#origen").attr()==3)$("#fecha_origen").show(); if($("#origen").attr()==2)$("#nacional").show();'*/]]],
             'propio'=>['type'=>Form::INPUT_CHECKBOX,],
-            'principio_contable_id'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>ArrayHelper::map(ActivosSysFormasOrg::find()->asArray()->all(),'id','nombre'),],
-            'fecha_origen'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>DatePicker::className(),'options'=>['options' => ['placeholder' => 'Seleccione fecha ...'],
+            'factura'=>['type'=>Form::INPUT_CHECKBOX,],
+             'documento'=>['type'=>Form::INPUT_CHECKBOX,],
+            //'principio_contable_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(ActivosSysFormasOrg::find()->asArray()->all(),'id','nombre')]],
+            /*'fecha_origen'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>DatePicker::className(),'options'=>['options' => ['placeholder' => 'Seleccione fecha ...'],
                 'convertFormat' => true,
                 'pluginOptions' => [
                     'format' => 'd-M-yyyy ',
@@ -254,11 +244,26 @@ class ActivosBienes extends \common\components\BaseActiveRecord
                     'todayHighlight' => true
                 ]],
                 'columnOptions'=>['hidden'=>true]
-            ],
-            'nacional'=>['type'=>Form::INPUT_CHECKBOX,'columnOptions'=>['hidden'=>true]],
+            ],*/
+            //'nacional'=>['type'=>Form::INPUT_CHECKBOX,'columnOptions'=>['hidden'=>true]],
             //'contratista_id'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>ArrayHelper::map(Contratistas::find()->asArray()->all(),'id','nombre'),],
 
         ];
+
+        if($this->origen_id==1 or $this->origen_id ==4)
+        $attributes['fecha_origen'] = ['type'=>Form::INPUT_WIDGET,'widgetClass'=>DatePicker::className(),'label'=>$this->origen_id==1?'Fecha de la Asamblea':'Fecha de incorporacion en el inventario de activos','options'=>['options' => ['placeholder' => 'Seleccione fecha ...'],
+            'convertFormat' => true,
+            'pluginOptions' => [
+                'format' => 'd-M-yyyy ',
+                //'startDate' => date('d-m-Y h:i A'),//'01-Mar-2014 12:00 AM',
+                'todayHighlight' => true
+            ]],
+            'columnOptions'=>[]
+        ];
+        if($this->origen_id==2)
+            $attributes['nacional'] = ['type'=>Form::INPUT_CHECKBOX,'columnOptions'=>[],'options'=>['onchange'=>'js: this.form.submit()']];
+
+        return $attributes;
     }
 
     public function getBienTipo()

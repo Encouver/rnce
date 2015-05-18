@@ -2,7 +2,12 @@
 
 namespace common\models\a;
 
+use kartik\builder\Form;
+use kartik\money\MaskMoney;
+use kartik\widgets\DatePicker;
+use kartik\widgets\Select2;
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "activos.documentos_registrados".
@@ -176,4 +181,64 @@ class ActivosDocumentosRegistrados extends \common\components\BaseActiveRecord
     {
         return $this->hasMany(ObjetosSociales::className(), ['documento_registrado_id' => 'id']);
     }
+
+    public function getFormAttribs() {
+        $attributes = [
+            // primary key column
+            'id'=>[ // primary key attribute
+                'type'=>Form::INPUT_HIDDEN,
+                'columnOptions'=>['hidden'=>true]
+            ],
+            'sys_tipo_registro_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(ActivosSysTiposBienes::find()->all(),'id','nombre',function($model){ return $model->sysClasificacionBien->nombre;}),'options'=>['onchange'=>'js:this.form.submit();']]],
+            'num_registro_notaria'=>['type'=>Form::INPUT_TEXT,],
+            'tomo'=>['type'=>Form::INPUT_TEXT,],
+            'folio'=>['type'=>Form::INPUT_TEXT,],
+            'valor_adquisicion'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),],
+
+            //'principio_contable_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(ActivosSysFormasOrg::find()->asArray()->all(),'id','nombre')]],
+            /*'fecha_origen'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>DatePicker::className(),'options'=>['options' => ['placeholder' => 'Seleccione fecha ...'],
+                'convertFormat' => true,
+                'pluginOptions' => [
+                    'format' => 'd-M-yyyy ',
+                    //'startDate' => date('d-m-Y h:i A'),//'01-Mar-2014 12:00 AM',
+                    'todayHighlight' => true
+                ]],
+                'columnOptions'=>['hidden'=>true]
+            ],*/
+            //'nacional'=>['type'=>Form::INPUT_CHECKBOX,'columnOptions'=>['hidden'=>true]],
+            //'contratista_id'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>ArrayHelper::map(Contratistas::find()->asArray()->all(),'id','nombre'),],
+
+        ];
+
+        if($this->scenario == 'bien')
+            return $attributes;
+
+       // if($this->scenario == 'actas')
+            //Actas
+            return [
+                'sys_circunscripcion_id'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>ArrayHelper::map(SysCircunscripciones::find()->all(),'id','nombre') , 'options'=>['prompt'=>'Seleccione circunscripcion']],
+                'num_registro_notaria'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Numero de colegiatura']],
+                'tomo'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Numero de colegiatura']],
+                'folio'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Numero de colegiatura']],
+                'fecha_registro'=>[
+                    'type'=>Form::INPUT_WIDGET,
+                    'widgetClass'=>'\kartik\widgets\DatePicker',
+                    'options'=>['pluginOptions' => [
+                        'autoclose'=>true,
+                        'format' => 'yyyy-mm-dd'
+                    ]],
+                ],
+                'fecha_asamblea'=>[
+                    'type'=>Form::INPUT_WIDGET,
+                    'widgetClass'=>'\kartik\widgets\DatePicker',
+                    'options'=>['pluginOptions' => [
+                        'autoclose'=>true,
+                        'format' => 'yyyy-mm-dd'
+                    ]],
+                ],
+
+            ];
+
+    }
+
 }
