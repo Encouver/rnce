@@ -1022,3 +1022,28 @@ COMMENT ON COLUMN activos.documentos_registrados.bien_id IS 'Clave foránea a la
 
 ALTER TABLE activos.documentos_registrados
 ADD FOREIGN KEY (bien_id) REFERENCES activos.bienes (id) ON UPDATE NO ACTION ON DELETE NO ACTION;
+
+
+
+
+/**************     18/05/2015 *************/
+
+
+ALTER TABLE cuentas.e_inversiones_info_adicional
+ADD FOREIGN KEY (sys_metodo_id) REFERENCES activos.sys_metodos (id) ON UPDATE NO ACTION ON DELETE NO ACTION;
+
+
+ALTER TABLE cuentas.e_inversiones RENAME e_inversion_info_adicional  TO e_inversion_info_adicional_id;
+
+
+ALTER TABLE cuentas.e_inversiones
+ADD FOREIGN KEY (contratista_id) REFERENCES contratistas (id) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE cuentas.e_inversiones
+ADD FOREIGN KEY (empresa_relacionada_id) REFERENCES personas_juridicas (id) ON UPDATE NO ACTION ON DELETE NO ACTION;
+
+
+
+ALTER TABLE cuentas.e_inversiones
+ADD COLUMN fecha_motivo date NOT NULL;
+COMMENT ON COLUMN cuentas.e_inversiones.fecha_motivo
+IS 'Fecha de Adquisición, Adición o Retiro.';
