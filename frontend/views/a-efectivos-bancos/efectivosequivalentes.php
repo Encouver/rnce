@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
     </center>
 
     <?php
-    echo $efectivo_caja->getPromedio(1,3);
+    //echo $efectivo_caja->getPromedio(1,3);
 
     $columns = [
         ['class'=>'kartik\grid\SerialColumn', 'order'=>DynaGrid::ORDER_FIX_LEFT],

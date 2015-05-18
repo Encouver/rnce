@@ -1,6 +1,7 @@
 <?php
 ?>
-<div class="">
+<div class="row">
+  <div class="col-md-8">
     <h2><?= $natural_juridica->denominacion ?></h2>
     <hr />
 
@@ -51,4 +52,5 @@
             
             </tr>
     </table>
+</div>
 </div>

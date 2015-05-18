@@ -15,7 +15,7 @@ use yii\jui\DatePicker;
 
      <?= $form->field($model, 'fecha_cierre')->widget(\yii\jui\DatePicker::classname(), [
     //'language' => 'ru',
-    'dateFormat' => 'yyyy-MM-dd',
+    'dateFormat' => 'yyyy-MM',
     ])  ?>
 
 

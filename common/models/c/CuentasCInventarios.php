@@ -4,6 +4,17 @@ namespace common\models\c;
 
 use Yii;
 
+use common\models\c\CuentasCInventarios;
+use common\models\c\CuentasCTiposInventarios;
+use common\models\c\CuentasSysFormulasTecnicas;
+
+use kartik\builder\TabularForm;
+use kartik\grid\GridView;
+use yii\helpers\ArrayHelper;
+use kartik\builder\Form;
+use kartik\builder\ActiveFormEvent;
+use yii\helpers\Html;
+
 /**
  * This is the model class for table "cuentas.c_inventarios".
  *
@@ -83,6 +94,32 @@ class CuentasCInventarios extends \common\components\BaseActiveRecord
             'sys_creado_el' => Yii::t('app', 'Sys Creado El'),
             'sys_actualizado_el' => Yii::t('app', 'Sys Actualizado El'),
             'sys_finalizado_el' => Yii::t('app', 'Sys Finalizado El'),
+        ];
+    }
+
+     public function getFormAttribs() 
+    {
+        return [
+                // primary key column
+            'id'=>[ // primary key attribute
+                'type'=>TabularForm::INPUT_HIDDEN,
+                'columnOptions'=>['hidden'=>true]
+            ],
+            'tipo_inventario_id'=>['type'=>Form::INPUT_DROPDOWN_LIST, 'items'=>ArrayHelper::map(CuentasSysFormulasTecnicas::find()->orderBy('nombre')->asArray()->all(), 'id', 'nombre'), 'label'=>'Tipo inventario'],
+            'detalle_inventario'=>['type'=>Form::INPUT_TEXT,'label'=>'Detalle'],
+            'tecnica_medicion_id'=>['type'=>Form::INPUT_TEXT,'label'=>'Tecnica de medición'],  //apunta a la relacion
+            'formula_tecnica_id'=>['type'=>Form::INPUT_TEXT,'label'=>'Formula tecnica'],   //apunta a la relacion
+            'inventario_inicial'=>['type'=>Form::INPUT_TEXT,'label'=>'Inventario inicial'],
+            'compra_ejercicio'=>['type'=>Form::INPUT_TEXT,'label'=>'Compras'],
+            'ventas_ejercicio'=>['type'=>Form::INPUT_TEXT,'label'=>'Ventas'],
+            'inventario_final'=>['type'=>Form::INPUT_TEXT,'label'=>'Inventario final'],
+            'valor_neto_realizacion'=>['type'=>Form::INPUT_TEXT,'label'=>'Valor neto'],
+            'frecuencia_rotacion'=>['type'=>Form::INPUT_TEXT,'label'=>'Frecuencia de rotación'],
+            'variacion_inflacion'=>['type'=>Form::INPUT_TEXT,'label'=>'Variacion por inflación'],
+            'costo_ajustado'=>['type'=>Form::INPUT_TEXT,'label'=>'Costo ajustado'],
+            'deterioro'=>['type'=>Form::INPUT_TEXT,'label'=>'Deterioro'],
+            'reverso_deterioro'=>['type'=>Form::INPUT_TEXT,'label'=>'Reverso deterioro'],
+            'valor_neto_ajus_cierre'=>['type'=>Form::INPUT_TEXT,'label'=>'Valor neto ajustado al cierre'],
         ];
     }
 }
