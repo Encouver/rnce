@@ -4,7 +4,7 @@ namespace frontend\controllers;
 
 use Yii;
 use common\models\p\DuracionesEmpresas;
-use common\models\a\DocumentosRegistrados;
+use common\models\a\ActivosDocumentosRegistrados;
 use app\models\DuracionesEmpresasSearch;
 use common\components\BaseController;
 use yii\web\NotFoundHttpException;
@@ -92,7 +92,7 @@ class DuracionesEmpresasController extends BaseController
              $transaction = \Yii::$app->db->beginTransaction();
              
            try {
-                $registro = DocumentosRegistrados::findOne(['contratista_id'=>$usuario->contratista_id, 'sys_tipo_registro_id'=>1]);
+                $registro = ActivosDocumentosRegistrados::findOne(['contratista_id'=>$usuario->contratista_id, 'tipo_documento_id'=>1]);
                 
             if($duracion_acta->fecha_vencimiento==null){
                  $transaction->rollBack();

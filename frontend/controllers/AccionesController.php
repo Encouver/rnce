@@ -4,7 +4,7 @@ namespace frontend\controllers;
 
 use Yii;
 use common\models\p\Acciones;
-use common\models\a\DocumentosRegistrados;
+use common\models\a\ActivosDocumentosRegistrados;
 use app\models\AccionesSearch;
 use common\components\BaseController;
 use yii\web\NotFoundHttpException;
@@ -155,7 +155,7 @@ class AccionesController extends BaseController
             
           
               $usuario= \common\models\p\User::findOne(Yii::$app->user->identity->id);
-              $registro = DocumentosRegistrados::findOne(['contratista_id'=>$usuario->contratista_id, 'sys_tipo_registro_id'=>1]);
+              $registro = ActivosDocumentosRegistrados::findOne(['contratista_id'=>$usuario->contratista_id, 'tipo_documento_id'=>1]);
    
               $suscrita_acta->suscrito=true;
               $suscrita_acta->tipo_accion="PRINCIPAL";

@@ -4,7 +4,7 @@ namespace frontend\controllers;
 
 use Yii;
 use common\models\p\ObjetosSociales;
-use common\models\a\DocumentosRegistrados;
+use common\models\a\ActivosDocumentosRegistrados;
 use app\models\ObjetosSocialesSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -97,7 +97,7 @@ class ObjetosSocialesController extends Controller
              $transaction = \Yii::$app->db->beginTransaction();
              
            try {
-                $registro = DocumentosRegistrados::findOne(['contratista_id'=>$usuario->contratista_id, 'sys_tipo_registro_id'=>1]);
+                $registro = ActivosDocumentosRegistrados::findOne(['contratista_id'=>$usuario->contratista_id, 'tipo_documento_id'=>1]);
                 
             if($objeto_acta->descripcion==null){
                  $transaction->rollBack();

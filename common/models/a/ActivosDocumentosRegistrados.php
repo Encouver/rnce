@@ -25,6 +25,7 @@ use yii\helpers\ArrayHelper;
  * @property string $sys_actualizado_el
  * @property string $sys_finalizado_el
  * @property integer $sys_circunscripcion_id
+ * @property integer $tipo_documento_id
  *
  * @property ActivosSysTiposRegistros $sysTipoRegistro
  * @property Contratistas $contratista
@@ -55,8 +56,8 @@ class ActivosDocumentosRegistrados extends \common\components\BaseActiveRecord
     public function rules()
     {
         return [
-            [['contratista_id', 'sys_tipo_registro_id', 'num_registro_notaria', 'tomo', 'folio', 'fecha_registro', 'sys_circunscripcion_id'], 'required'],
-            [['contratista_id', 'sys_tipo_registro_id', 'sys_circunscripcion_id'], 'integer'],
+            [['contratista_id', 'sys_tipo_registro_id', 'num_registro_notaria', 'tomo', 'folio', 'fecha_registro', 'sys_circunscripcion_id',], 'required'],
+            [['contratista_id', 'sys_tipo_registro_id', 'sys_circunscripcion_id','tipo_documento_id'], 'integer'],
             [['fecha_registro', 'fecha_asamblea', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['sys_status'], 'boolean'],
             [['num_registro_notaria'], 'string', 'max' => 255],
@@ -83,6 +84,7 @@ class ActivosDocumentosRegistrados extends \common\components\BaseActiveRecord
             'sys_actualizado_el' => Yii::t('app', 'Sys Actualizado El'),
             'sys_finalizado_el' => Yii::t('app', 'Sys Finalizado El'),
             'sys_circunscripcion_id' => Yii::t('app', 'Sys Circunscripcion ID'),
+            'tipo_documento_id' => Yii::t('app', 'Tipo Documento ID'),
         ];
     }
 
