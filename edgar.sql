@@ -684,5 +684,5 @@ COMMENT ON COLUMN cuentas.ii1_gastos_operacionales.sys_actualizado_el IS 'Fecha 
 COMMENT ON COLUMN cuentas.ii1_gastos_operacionales.sys_finalizado_el IS 'Fecha de "eliminado" el registro.';
 
 
-
+--- MARCOS
 
