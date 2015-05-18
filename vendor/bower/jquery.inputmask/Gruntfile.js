@@ -46,7 +46,7 @@ module.exports = function (grunt) {
     }
     function wrapModuleLoaders(src, dst, dependencies) {
         function stripClosureExecution() {
-            return srcFile.replace(new RegExp("\\(jQuery\\)[\\s\\S]*$"), "");
+            return srcFile.replace(new RegExp("\\(jQuery\\).*$"), "");
         }
 
         function createCommonJsRequires(dependencies) {
