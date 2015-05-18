@@ -1,11 +1,11 @@
 <?php
 
 namespace common\models\p;
-
+use kartik\builder\Form;
 use Yii;
 
 /**
- * This is the model class for table "public.certificados".
+ * This is the model class for table "certificados".
  *
  * @property integer $id
  * @property integer $numero_asociacion
@@ -16,24 +16,36 @@ use Yii;
  * @property string $valor_aportacion
  * @property string $valor_rotativo
  * @property string $valor_inversion
+ * @property string $tipo_certificado
+ * @property boolean $suscrito
+ * @property integer $creado_por
+ * @property integer $actualizado_por
  * @property boolean $sys_status
  * @property string $sys_creado_el
  * @property string $sys_actualizado_el
  * @property string $sys_finalizado_el
- * @property boolean $suscrito
- * @property integer $acta_constitutiva_id
- * @property string $tipo_certificado
+ * @property integer $documento_registrado_id
+ * @property integer $contratista_id
  *
- * @property ActasConstitutivas $actaConstitutiva
+ * @property ActivosDocumentosRegistrados $documentoRegistrado
+ * @property Contratistas $contratista
  */
 class Certificados extends \common\components\BaseActiveRecord
 {
     /**
      * @inheritdoc
      */
+    public $numero_asociacion_pagada;
+    public $numero_aportacion_pagada;
+    public $numero_rotativo_pagada;
+    public $numero_inversion_pagada;
+    public $valor_asociacion_pagada;
+    public $valor_aportacion_pagada;
+    public $valor_rotativo_pagada;
+    public $valor_inversion_pagada;
     public static function tableName()
     {
-        return 'public.certificados';
+        return 'certificados';
     }
 
     /**
@@ -42,15 +54,64 @@ class Certificados extends \common\components\BaseActiveRecord
     public function rules()
     {
         return [
-            [['numero_asociacion', 'numero_aportacion', 'numero_rotativo', 'numero_inversion', 'acta_constitutiva_id'], 'integer'],
-            [['valor_asociacion', 'valor_aportacion', 'valor_rotativo', 'valor_inversion'], 'number'],
-            [['sys_status', 'suscrito'], 'boolean'],
-            [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
-            [['suscrito', 'acta_constitutiva_id'], 'required'],
-            [['tipo_certificado'], 'string']
+            [['numero_asociacion', 'numero_aportacion', 'numero_rotativo', 'numero_inversion','numero_asociacion_pagada', 'numero_aportacion_pagada', 'numero_rotativo_pagada', 'numero_inversion_pagada', 'creado_por', 'actualizado_por', 'documento_registrado_id', 'contratista_id'], 'integer'],
+            [['valor_asociacion', 'valor_aportacion', 'valor_rotativo', 'valor_inversion','valor_asociacion_pagada', 'valor_aportacion_pagada', 'valor_rotativo_pagada','valor_inversion_pagada'], 'number'],
+            [['tipo_certificado'], 'string'],
+            ['numero_asociacion_pagada', 'validarnumeroasociacionpagada'],
+            ['valor_asociacion_pagada', 'validarvalorasociacionpagada'],
+            ['numero_aportacion_pagada', 'validarnumeroaportacionpagada'],
+            ['valor_aportacion_pagada', 'validarvaloraportacionpagada'],
+            ['numero_rotativo_pagada', 'validarnumerorotativopagada'],
+            ['valor_rotativo_pagada', 'validarvalorrotativopagada'],
+            ['numero_inversion_pagada', 'validarnumeroinversionpagada'],
+            ['valor_inversion_pagada', 'validarvalorinversionpagada'],
+            [['numero_asociacion', 'numero_aportacion', 'numero_rotativo', 'numero_inversion', 'valor_asociacion', 'valor_aportacion', 'valor_rotativo','valor_inversion','numero_asociacion_pagada', 'numero_aportacion_pagada', 'numero_rotativo_pagada', 'numero_inversion_pagada', 'valor_asociacion_pagada', 'valor_aportacion_pagada', 'valor_rotativo_pagada','valor_inversion_pagada'], 'required','on'=>'principal'],
+            [['suscrito', 'documento_registrado_id', 'contratista_id'], 'required'],
+            [['suscrito', 'sys_status'], 'boolean'],
+            [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe']
         ];
     }
-
+     public function validarnumeroasociacionpagada($attribute){
+          if($this->numero_asociacion_pagada>$this->numero_asociacion){
+               $this->addError($attribute,'Numero Asociacion pagada invalido');
+          } 
+    }
+    public function validarvalorasociacionpagada($attribute){
+          if($this->valor_asociacion_pagada>$this->valor_asociacion){
+               $this->addError($attribute,'Valor Asociacion pagada invalido');
+          } 
+    }
+    public function validarnumeroaportacionpagada($attribute){
+          if($this->numero_aportacion_pagada>$this->numero_aportacion){
+               $this->addError($attribute,'Numero Aportacion pagada invalido');
+          } 
+    }
+    public function validarvaloraportacionpagada($attribute){
+          if($this->valor_aportacion_pagada>$this->valor_aportacion){
+               $this->addError($attribute,'Valor Aportacion pagada invalido');
+          } 
+    }
+    public function validarnumerorotativopagada($attribute){
+          if($this->numero_rotativo_pagada>$this->numero_rotativo){
+               $this->addError($attribute,'Numero Rotativo pagada invalido');
+          } 
+    }
+    public function validarvalorrotativopagada($attribute){
+          if($this->valor_rotativo_pagada>$this->valor_rotativo){
+               $this->addError($attribute,'Valor rotativo pagada invalido');
+          } 
+    }
+            
+     public function validarnumeroinversionpagada($attribute){
+          if($this->numero_inversion_pagada>$this->numero_inversion){
+               $this->addError($attribute,'Numero Inversion pagada invalido');
+          } 
+    }
+    public function validarvalorinversionpagada($attribute){
+          if($this->valor_inversion_pagada>$this->valor_inversion){
+               $this->addError($attribute,'Valor Inversion pagada invalido');
+          } 
+    }
     /**
      * @inheritdoc
      */
@@ -66,21 +127,71 @@ class Certificados extends \common\components\BaseActiveRecord
             'valor_aportacion' => Yii::t('app', 'Valor Aportacion'),
             'valor_rotativo' => Yii::t('app', 'Valor Rotativo'),
             'valor_inversion' => Yii::t('app', 'Valor Inversion'),
+            'tipo_certificado' => Yii::t('app', 'Tipo Certificado'),
+            'suscrito' => Yii::t('app', 'Suscrito'),
+            'creado_por' => Yii::t('app', 'Creado Por'),
+            'actualizado_por' => Yii::t('app', 'Actualizado Por'),
             'sys_status' => Yii::t('app', 'Sys Status'),
             'sys_creado_el' => Yii::t('app', 'Sys Creado El'),
             'sys_actualizado_el' => Yii::t('app', 'Sys Actualizado El'),
             'sys_finalizado_el' => Yii::t('app', 'Sys Finalizado El'),
-            'suscrito' => Yii::t('app', 'Suscrito'),
-            'acta_constitutiva_id' => Yii::t('app', 'Acta Constitutiva ID'),
-            'tipo_certificado' => Yii::t('app', 'Tipo Certificado'),
+            'documento_registrado_id' => Yii::t('app', 'Documento Registrado ID'),
+            'contratista_id' => Yii::t('app', 'Contratista ID'),
+            'numero_asociacion_pagada' => Yii::t('app', 'Numero Asociacion Pagada'),
+            'numero_aportacion_pagada' => Yii::t('app', 'Numero Aportacion Pagada'),
+            'numero_rotativo_pagada' => Yii::t('app', 'Numero Rotativo Pagada'),
+            'numero_inversion_pagada' => Yii::t('app', 'Numero Inversion Pagada'),
+            'valor_asociacion_pagada' => Yii::t('app', 'Valor Asociacion Pagada'),
+            'valor_aportacion_pagada' => Yii::t('app', 'Valor Aportacion Pagada'),
+            'valor_rotativo_pagada' => Yii::t('app', 'Valor Rotativo Pagada'),
+            'valor_inversion_pagada' => Yii::t('app', 'Valor Inversion Pagada'),
         ];
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getActaConstitutiva()
+    public function getDocumentoRegistrado()
     {
-        return $this->hasOne(ActasConstitutivas::className(), ['id' => 'acta_constitutiva_id']);
+        return $this->hasOne(ActivosDocumentosRegistrados::className(), ['id' => 'documento_registrado_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getContratista()
+    {
+        return $this->hasOne(Contratistas::className(), ['id' => 'contratista_id']);
+    }
+    
+     public function getFormAttribs($id) {
+        
+        if($id=='principal')
+        {
+            
+
+            return [
+              
+               'numero_asociacion'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Numero de Certificados ']],
+               'valor_asociacion'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Valor']],
+               'numero_aportacion'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Numero de Certificados ']],
+               'valor_aportacion'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Valor']],
+               'numero_rotativo'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Numero de Certificados ']],
+               'valor_rotativo'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Valor']],
+               'numero_inversion'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Numero de Certificados ']],
+               'valor_inversion'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Valor']],
+               'numero_asociacion_pagada'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Numero de Certificados ']],
+               'valor_asociacion_pagada'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Valor']],
+               'numero_aportacion_pagada'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Numero de Certificados ']],
+               'valor_aportacion_pagada'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Valor']],
+               'numero_rotativo_pagada'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Numero de Certificados ']],
+               'valor_rotativo_pagada'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Valor']],
+               'numero_inversion_pagada'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Numero de Certificados ']],
+               'valor_inversion_pagada'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Valor']],
+              
+            ];
+        
+        }
+        return false;
     }
 }

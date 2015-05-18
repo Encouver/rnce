@@ -3,18 +3,17 @@
 namespace frontend\controllers;
 
 use Yii;
-use common\models\p\Acciones;
+use common\models\p\Suplementarios;
 use common\models\a\ActivosDocumentosRegistrados;
-use app\models\AccionesSearch;
+use app\models\SuplementariosSearch;
 use common\components\BaseController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
-
 /**
- * AccionesController implements the CRUD actions for Acciones model.
+ * SuplementariosController implements the CRUD actions for Suplementarios model.
  */
-class AccionesController extends BaseController
+class SuplementariosController extends BaseController
 {
     public function behaviors()
     {
@@ -29,12 +28,12 @@ class AccionesController extends BaseController
     }
 
     /**
-     * Lists all Acciones models.
+     * Lists all Suplementarios models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new AccionesSearch();
+        $searchModel = new SuplementariosSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -44,7 +43,7 @@ class AccionesController extends BaseController
     }
 
     /**
-     * Displays a single Acciones model.
+     * Displays a single Suplementarios model.
      * @param integer $id
      * @return mixed
      */
@@ -56,13 +55,13 @@ class AccionesController extends BaseController
     }
 
     /**
-     * Creates a new Acciones model.
+     * Creates a new Suplementarios model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Acciones();
+        $model = new Suplementarios();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -71,10 +70,9 @@ class AccionesController extends BaseController
                 'model' => $model,
             ]);
         }
-    }
-    public function actionAccionsuscritaacta()
+    }    public function actionSuplementariosuscritaacta()
     {
-        $suscrita_acta = new Acciones();
+        $suscrita_acta = new Suplementarios();
          $suscrita_acta->scenario='principal';
          $msg=null;
 
@@ -86,29 +84,29 @@ class AccionesController extends BaseController
               $registro = ActivosDocumentosRegistrados::findOne(['contratista_id'=>$usuario->contratista_id, 'tipo_documento_id'=>1]);
    
               $suscrita_acta->suscrito=true;
-              $suscrita_acta->tipo_accion="PRINCIPAL";
+              $suscrita_acta->tipo_suplementario="PRINCIPAL";
               $suscrita_acta->contratista_id = $usuario->contratista_id;
               $suscrita_acta->documento_registrado_id = $registro->id;
      
             if($suscrita_acta->validate()){
                 
-                $acciones= Acciones::findOne(['contratista_id'=>$suscrita_acta->contratista_id ,'documento_registrado_id'=>$suscrita_acta->documento_registrado_id]);
+                $suplementarios= Suplementarios::findOne(['contratista_id'=>$suscrita_acta->contratista_id ,'documento_registrado_id'=>$suscrita_acta->documento_registrado_id]);
           
-                if(isset($acciones)){
+                if(isset($suplementarios)){
                    
-                     $msg = "Usuario ya posee accones suscritas y pagadas asociadas";
+                     $msg = "Usuario ya posee certificados suplementarios suscritas y pagadas asociadas";
                                    
-                               
+                              
                    }else{
                  
-                        $paga_acta = new Acciones();
-                        $paga_acta->numero_comun= $suscrita_acta->numero_comun_pagada;
-                        $paga_acta->valor_comun=$suscrita_acta->valor_comun_pagada;
+                        $paga_acta = new Suplementarios();
+                        $paga_acta->numero= $suscrita_acta->numero_pagada;
+                        $paga_acta->valor=$suscrita_acta->valor_pagada;
              
                         $paga_acta->contratista_id = $suscrita_acta->contratista_id;
                         $paga_acta->documento_registrado_id= $suscrita_acta->documento_registrado_id;
                         $paga_acta->suscrito=false;
-                        $paga_acta->tipo_accion=$suscrita_acta->tipo_accion;
+                        $paga_acta->tipo_suplementario=$suscrita_acta->tipo_suplementario;
                 
                         $transaction = \Yii::$app->db->beginTransaction();
              
@@ -116,13 +114,13 @@ class AccionesController extends BaseController
                             if (! ($flag =  $paga_acta->save(false))) {
            
                             $transaction->rollBack();
-                            $msg= "Error en la carga de las acciones suscritas";
+                            $msg= "Error en la carga de certificados ciosomplementarios pagadas";
                                
                         }
                         if ($suscrita_acta->save()) {
            
-                                $msg="Datos guardados correctamente";
-                                $suscrita_acta=new Acciones();
+                                $msg="Datos guardados correctamentee";
+                                $suscrita_acta=new Suplementarios();
                                 $suscrita_acta->scenario='principal';
                                
                                 $transaction->commit();
@@ -130,7 +128,7 @@ class AccionesController extends BaseController
                         }else{
                             $transaction->rollBack();
                         
-                        $msg= "Acciones suscritas no guardas con exito";
+                        $msg= "Certificados suplementarios suscritas no guardas con exito";
                         }
                     
                     } catch (Exception $e) {
@@ -140,11 +138,13 @@ class AccionesController extends BaseController
                 }
             }
         }
-        return $this->render("acciones_actas",['accion_acta'=>$suscrita_acta,'msg'=>$msg]);
+        return $this->render("suplementarios_actas",['suplementario_acta'=>$suscrita_acta,'msg'=>$msg]);
     }
+    
+    
 
     /**
-     * Updates an existing Acciones model.
+     * Updates an existing Suplementarios model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -163,7 +163,7 @@ class AccionesController extends BaseController
     }
 
     /**
-     * Deletes an existing Acciones model.
+     * Deletes an existing Suplementarios model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -176,15 +176,15 @@ class AccionesController extends BaseController
     }
 
     /**
-     * Finds the Acciones model based on its primary key value.
+     * Finds the Suplementarios model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Acciones the loaded model
+     * @return Suplementarios the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Acciones::findOne($id)) !== null) {
+        if (($model = Suplementarios::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
