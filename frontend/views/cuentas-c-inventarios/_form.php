@@ -1,7 +1,8 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use kartik\widgets\ActiveForm;
+use kartik\builder\Form;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\c\CuentasCInventarios */
@@ -10,54 +11,18 @@ use yii\widgets\ActiveForm;
 
 <div class="cuentas-cinventarios-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+   <?php
 
-    <?= $form->field($model, 'tipo_inventario_id')->textInput() ?>
-
-    <?= $form->field($model, 'detalle_inventario')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'tecnica_medicion_id')->textInput() ?>
-
-    <?= $form->field($model, 'formula_tecnica_id')->textInput() ?>
-
-    <?= $form->field($model, 'inventario_inicial')->textInput() ?>
-
-    <?= $form->field($model, 'compra_ejercicio')->textInput() ?>
-
-    <?= $form->field($model, 'ventas_ejercicio')->textInput() ?>
-
-    <?= $form->field($model, 'inventario_final')->textInput() ?>
-
-    <?= $form->field($model, 'valor_neto_realizacion')->textInput() ?>
-
-    <?= $form->field($model, 'frecuencia_rotacion')->textInput() ?>
-
-    <?= $form->field($model, 'variacion_inflacion')->textInput() ?>
-
-    <?= $form->field($model, 'costo_ajustado')->textInput() ?>
-
-    <?= $form->field($model, 'deterioro')->textInput() ?>
-
-    <?= $form->field($model, 'reverso_deterioro')->textInput() ?>
-
-    <?= $form->field($model, 'valor_neto_ajus_cierre')->textInput() ?>
-
-    <?= $form->field($model, 'creado_por')->textInput() ?>
-
-    <?= $form->field($model, 'actualizado_por')->textInput() ?>
-
-    <?= $form->field($model, 'sys_status')->checkbox() ?>
-
-    <?= $form->field($model, 'sys_creado_el')->textInput() ?>
-
-    <?= $form->field($model, 'sys_actualizado_el')->textInput() ?>
-
-    <?= $form->field($model, 'sys_finalizado_el')->textInput() ?>
-
-    <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-    </div>
-
-    <?php ActiveForm::end(); ?>
-
+    //$model->scenario = 'extranjero';
+    $form = ActiveForm::begin(['type'=>ActiveForm::TYPE_VERTICAL]);
+    echo Form::widget([
+        'model'=>$model,
+        'form'=>$form,
+        'columns'=>3,
+        //'columns'=>11,
+        'attributes'=> $model->getFormAttribs(),
+    ]);
+    echo Html::submitButton('Submit', ['type'=>'button', 'class'=>'btn btn-primary']);
+    ActiveForm::end();
+    ?>
 </div>

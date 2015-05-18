@@ -49,7 +49,7 @@ AppAsset::register($this);
                          ['label' => 'Estado de resultados', 'url' => ['/site/edoresultados']],
                          ['label' => 'Efectivos y sus equivalentes', 'url' => ['/a-efectivos-bancos/efectivosequivalentes']],
                          ['label' => 'Obligaciones Bancarias', 'url' => ['/aa-obligaciones-bancarias/index']],
-                         ['label' => 'Inventarios', 'url' => ['/cuentas-c-inventarios/index']],
+                         ['label' => 'Inventarios', 'url' => ['/cuentas-c-inventarios/inventarios']],
                     ],
                 ],
                 ['label' => 'Activos',
