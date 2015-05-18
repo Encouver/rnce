@@ -154,6 +154,8 @@ class BaseActiveRecord extends ActiveRecord
             $this->sys_status = true;*/
 
        // die;
+         if($this->hasAttribute('anho'))//property_exists($this->className(),'anho'))
+            $this->anho = date('mm-Y');
         return parent::beforeValidate();
     }
 	public function beforeSave($insert){

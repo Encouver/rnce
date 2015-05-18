@@ -9,7 +9,7 @@ use common\models\p\CierresEjercicios;
 use common\models\p\ObjetosSociales;
 use common\models\p\DuracionesEmpresas;
 use common\models\p\ActividadesEconomicas;
-use common\models\a\DocumentosRegistrados;
+use common\models\a\ActivosDocumentosRegistrados;
 use common\models\p\Acciones;
 use common\models\p\SysCaev;;
 use common\models\p\SysNaturalesJuridicas;
@@ -101,7 +101,7 @@ class ActasConstitutivasController extends BaseController
  
          $contratista = Contratistas::findOne(['id'=>Yii::$app->user->identity->contratista_id]);
          $natural_juridica = SysNaturalesJuridicas::findOne(['id'=>$contratista->natural_juridica_id]);
-         $registro = DocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id, 'sys_tipo_registro_id'=>1]);
+         $registro = ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id, 'tipo_documento_id'=>1]);
          $duracion_empresa = DuracionesEmpresas::findOne(['documento_registrado_id'=>$registro->id]);
          $cierre_ejercicio= CierresEjercicios::findOne(['documento_registrado_id'=>$registro->id]);
          $objeto_social= ObjetosSociales::findOne(['documento_registrado_id'=>$registro->id]);

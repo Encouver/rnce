@@ -72,7 +72,7 @@ class ActivosDocumentosRegistradosController extends BaseController
     }
     public function actionCrearacta()
     {
-        $registro_acta = new DocumentosRegistrados();
+        $registro_acta = new ActivosDocumentosRegistrados();
             
           
             return $this->render('registros_actas', [
@@ -95,7 +95,11 @@ class ActivosDocumentosRegistradosController extends BaseController
                  $transaction->rollBack();
                 return "Debe ingresar fecha asamblea"; 
             }
-           
+           $registros = ActivosDocumentosRegistrados::findOne(['contratista_id'=>$usuario->contratista_id, 'tipo_documento_id'=>1]);
+           if(isset($registros)){
+               $transaction->rollBack();
+                return "Ya tiene un documento registrado"; 
+           }
             $registro_acta->contratista_id = $usuario->contratista_id;
             $registro_acta->sys_tipo_registro_id=1;
             $registro_acta->tipo_documento_id=1;
