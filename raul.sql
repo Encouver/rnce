@@ -137,3 +137,8 @@ COMMENT ON COLUMN origenes_capitales.sys_creado_el IS 'Fecha de creación del re
 COMMENT ON COLUMN origenes_capitales.sys_actualizado_el IS 'Fecha de última actualización del registro.';
 COMMENT ON COLUMN origenes_capitales.sys_finalizado_el IS 'Fecha de "eliminado" el registro.';
 
+
+
+
+ALTER TABLE origenes_capitales ADD COLUMN numero_transaccion integer;
+COMMENT ON COLUMN origenes_capitales.numero_transaccion IS 'Numero de transaccion en caso de ser efectivo en banco';
