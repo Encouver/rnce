@@ -724,6 +724,8 @@ INSERT INTO hh_concepto VALUES (2, 'Prestaciones Sociales', NULL);
 INSERT INTO hh_concepto VALUES (3, 'Indemnizaciones', NULL);
 INSERT INTO hh_concepto VALUES (4, 'Vacaciones', NULL);
 INSERT INTO hh_concepto VALUES (5, 'Otros', NULL);
-  
+ 
+ALTER TABLE cuentas.hh_pasivo_laboral
+   ALTER COLUMN saldo_al_cierre DROP NOT NULL;
 
 
