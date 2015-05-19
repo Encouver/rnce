@@ -178,3 +178,36 @@ ALTER TABLE fondos_reservas
       REFERENCES contratistas (id) MATCH SIMPLE
       ON UPDATE CASCADE ON DELETE CASCADE;
 
+----- 19 mayo 10:27----
+
+ALTER TABLE certificaciones_aportes ADD COLUMN documento_registrado_id integer;
+ALTER TABLE certificaciones_aportes ALTER COLUMN documento_registrado_id SET NOT NULL;
+COMMENT ON COLUMN certificaciones_aportes.documento_registrado_id IS 'Clave foranea a la tabla documentos_registrados';
+
+
+ALTER TABLE certificaciones_aportes ADD COLUMN contratista_id integer;
+ALTER TABLE certificaciones_aportes ALTER COLUMN contratista_id SET NOT NULL;
+COMMENT ON COLUMN certificaciones_aportes.contratista_id IS 'Clave foranea a la tabla contratistas';
+
+
+ALTER TABLE certificaciones_aportes
+  ADD CONSTRAINT certificaciones_aportes_contratista_id_pkey FOREIGN KEY (contratista_id)
+      REFERENCES contratistas (id) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+ALTER TABLE certificaciones_aportes
+  ADD CONSTRAINT certificaciones_aportes_documento_registrado_id_pkey FOREIGN KEY (documento_registrado_id)
+      REFERENCES activos.documentos_registrados (id) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE CASCADE;
+
+ALTER TABLE certificaciones_aportes DROP COLUMN persona_natural_id;
+
+ALTER TABLE certificaciones_aportes ADD COLUMN natural_juridica_id integer;
+ALTER TABLE certificaciones_aportes ALTER COLUMN natural_juridica_id SET NOT NULL;
+COMMENT ON COLUMN certificaciones_aportes.natural_juridica_id IS 'Clave foranea a la tabla sys_naturales_juridicas';
+
+ALTER TABLE certificaciones_aportes
+  ADD CONSTRAINT certificaciones_aportes_natural_juridica_id_pkey FOREIGN KEY (natural_juridica_id)
+      REFERENCES sys_naturales_juridicas (id) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE CASCADE;

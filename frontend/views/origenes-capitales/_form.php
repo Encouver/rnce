@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use kartik\widgets\ActiveForm;
 use kartik\builder\Form;
 
+
 /* @var $this yii\web\View */
 /* @var $model common\models\p\OrigenesCapitales */
 /* @var $form yii\widgets\ActiveForm */
@@ -15,6 +16,8 @@ use kartik\builder\Form;
 	max-width: 400px;
 }
 </style>
+
+
 <div class="origenes-capitales-form">
 
     <?php
