@@ -11,10 +11,14 @@ use Yii;
  * @property string $nombre
  * @property string $descripcion
  * @property integer $sys_clasificacion_bien_id
+ * @property integer $creado_por
+ * @property integer $actualizado_por
  * @property boolean $sys_status
  * @property string $sys_creado_el
  * @property string $sys_actualizado_el
  * @property string $sys_finalizado_el
+ * @property boolean $depreciacion
+ * @property boolean $deterioro
  *
  * @property ActivosBienes[] $activosBienes
  * @property ActivosMejorasPropiedades[] $activosMejorasPropiedades
@@ -37,8 +41,8 @@ class ActivosSysTiposBienes extends \common\components\BaseActiveRecord
     {
         return [
             [['nombre', 'sys_clasificacion_bien_id'], 'required'],
-            [['sys_clasificacion_bien_id'], 'integer'],
-            [['sys_status'], 'boolean'],
+            [['sys_clasificacion_bien_id', 'creado_por', 'actualizado_por'], 'integer'],
+            [['sys_status', 'depreciacion', 'deterioro'], 'boolean'],
             [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['nombre', 'descripcion'], 'string', 'max' => 255],
             [['nombre'], 'unique']
@@ -55,10 +59,14 @@ class ActivosSysTiposBienes extends \common\components\BaseActiveRecord
             'nombre' => Yii::t('app', 'Nombre'),
             'descripcion' => Yii::t('app', 'Descripcion'),
             'sys_clasificacion_bien_id' => Yii::t('app', 'Sys Clasificacion Bien ID'),
+            'creado_por' => Yii::t('app', 'Creado Por'),
+            'actualizado_por' => Yii::t('app', 'Actualizado Por'),
             'sys_status' => Yii::t('app', 'Sys Status'),
             'sys_creado_el' => Yii::t('app', 'Sys Creado El'),
             'sys_actualizado_el' => Yii::t('app', 'Sys Actualizado El'),
             'sys_finalizado_el' => Yii::t('app', 'Sys Finalizado El'),
+            'depreciacion' => Yii::t('app', 'Depreciacion'),
+            'deterioro' => Yii::t('app', 'Deterioro'),
         ];
     }
 

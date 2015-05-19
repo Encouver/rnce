@@ -1047,3 +1047,47 @@ ALTER TABLE cuentas.e_inversiones
 ADD COLUMN fecha_motivo date NOT NULL;
 COMMENT ON COLUMN cuentas.e_inversiones.fecha_motivo
 IS 'Fecha de Adquisición, Adición o Retiro.';
+
+
+ALTER TABLE cuentas.e_inversiones
+ADD COLUMN monto_nominal_motivo numeric(38,6) NOT NULL;
+COMMENT ON COLUMN cuentas.e_inversiones.monto_nominal_motivo
+IS 'Monto Nominal de Adquisición / Adición / Retiro.';
+
+ALTER TABLE cuentas.e_inversiones
+ADD COLUMN monto_nominal_motivo_ajus numeric(38,6) NOT NULL;
+COMMENT ON COLUMN cuentas.e_inversiones.monto_nominal_motivo_ajus IS 'Monto Nominal de Adquisición / Adición / Retiro (ajustado)
+';
+
+
+-- Table: activos.sys_clasificaciones_motivos
+
+-- DROP TABLE activos.sys_clasificaciones_motivos;
+
+CREATE TABLE activos.sys_clasificaciones_motivos
+(
+  id serial NOT NULL, -- Clave primaria.
+  nombre character varying(255) NOT NULL, -- Nombre de la clasificación.
+  descripcion character varying(255), -- Descripción de la clasificación del motivo.
+  CONSTRAINT sys_clasificaciones_motivos_pkey PRIMARY KEY (id),
+  CONSTRAINT sys_clasificaciones_motivos_nombre_key UNIQUE (nombre)
+)
+WITH (
+OIDS=FALSE
+);
+ALTER TABLE activos.sys_clasificaciones_motivos
+OWNER TO eureka;
+COMMENT ON TABLE activos.sys_clasificaciones_motivos
+IS 'Lista de clasificaciones de los motivos.';
+COMMENT ON COLUMN activos.sys_clasificaciones_motivos.id IS 'Clave primaria.';
+COMMENT ON COLUMN activos.sys_clasificaciones_motivos.nombre IS 'Nombre de la clasificación.';
+COMMENT ON COLUMN activos.sys_clasificaciones_motivos.descripcion IS 'Descripción de la clasificación del motivo.';
+
+
+
+
+ALTER TABLE activos.sys_motivos
+ADD COLUMN sys_clasificacion_motivo_id integer;
+ALTER TABLE activos.sys_motivos
+ADD FOREIGN KEY (sys_clasificacion_motivo_id) REFERENCES activos.sys_clasificaciones_motivos (id) ON UPDATE NO ACTION ON DELETE NO ACTION;
+COMMENT ON COLUMN activos.sys_motivos.sys_clasificacion_motivo_id IS 'Clave foránea a la tabla sys_clasificaciones_motivos_id.';

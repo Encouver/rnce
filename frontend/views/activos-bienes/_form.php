@@ -59,6 +59,15 @@ use kartik\widgets\ActiveForm;
                 'columnSize'=>'xs',
                 'attributes'=>$modelDocumento->getFormAttribs($model)
             ]);
+        if($model->sysTipoBien->deterioro)
+            echo Form::widget([       // 3 column layout
+                'model'=>$modelDeterioro,
+                'form'=>$form,
+                'columns'=>4,
+                'columnSize'=>'xs',
+                'attributes'=>$modelDeterioro->getFormAttribs()
+            ]);
+
 
     $script = <<< JS
         $('#origen').change(function(e){

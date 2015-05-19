@@ -3,36 +3,36 @@
 namespace frontend\controllers;
 
 use Yii;
-use common\models\a\ActivosBienes;
-use app\models\ActivosBienesSearch;
+use common\models\a\ActivosDesincorporacionActivos;
+use app\models\ActivosDesincorporacionActivosSearch;
 use common\components\BaseController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * BienesController implements the CRUD actions for ActivosBienes model.
+ * ActivosDesincorporacionActivosController implements the CRUD actions for ActivosDesincorporacionActivos model.
  */
-class BienesController extends BaseController
+class ActivosDesincorporacionActivosController extends BaseController
 {
     public function behaviors()
     {
-        return array_merge(parent::behaviors(),[
+        return [
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['post'],
                 ],
             ],
-        ]);
+        ];
     }
 
     /**
-     * Lists all ActivosBienes models.
+     * Lists all ActivosDesincorporacionActivos models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new ActivosBienesSearch();
+        $searchModel = new ActivosDesincorporacionActivosSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -42,7 +42,7 @@ class BienesController extends BaseController
     }
 
     /**
-     * Displays a single ActivosBienes model.
+     * Displays a single ActivosDesincorporacionActivos model.
      * @param integer $id
      * @return mixed
      */
@@ -54,13 +54,13 @@ class BienesController extends BaseController
     }
 
     /**
-     * Creates a new ActivosBienes model.
+     * Creates a new ActivosDesincorporacionActivos model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new ActivosBienes();
+        $model = new ActivosDesincorporacionActivos();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -72,7 +72,7 @@ class BienesController extends BaseController
     }
 
     /**
-     * Updates an existing ActivosBienes model.
+     * Updates an existing ActivosDesincorporacionActivos model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -91,7 +91,7 @@ class BienesController extends BaseController
     }
 
     /**
-     * Deletes an existing ActivosBienes model.
+     * Deletes an existing ActivosDesincorporacionActivos model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -104,15 +104,15 @@ class BienesController extends BaseController
     }
 
     /**
-     * Finds the ActivosBienes model based on its primary key value.
+     * Finds the ActivosDesincorporacionActivos model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return ActivosBienes the loaded model
+     * @return ActivosDesincorporacionActivos the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = ActivosBienes::findOne($id)) !== null) {
+        if (($model = ActivosDesincorporacionActivos::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

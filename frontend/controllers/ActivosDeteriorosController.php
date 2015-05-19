@@ -2,18 +2,17 @@
 
 namespace frontend\controllers;
 
-use common\models\c\CuentasEInversionesInfoAdicional;
 use Yii;
-use common\models\c\CuentasEInversiones;
-use app\models\CuentasEInversionesSearch;
+use common\models\a\ActivosDeterioros;
+use app\models\ActivosDeteriorosSearch;
 use common\components\BaseController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * CuentasEInversionesController implements the CRUD actions for CuentasEInversiones model.
+ * ActivosDeteriorosController implements the CRUD actions for ActivosDeterioros model.
  */
-class CuentasEInversionesController extends BaseController
+class ActivosDeteriorosController extends BaseController
 {
     public function behaviors()
     {
@@ -28,12 +27,12 @@ class CuentasEInversionesController extends BaseController
     }
 
     /**
-     * Lists all CuentasEInversiones models.
+     * Lists all ActivosDeterioros models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new CuentasEInversionesSearch();
+        $searchModel = new ActivosDeteriorosSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -43,7 +42,7 @@ class CuentasEInversionesController extends BaseController
     }
 
     /**
-     * Displays a single CuentasEInversiones model.
+     * Displays a single ActivosDeterioros model.
      * @param integer $id
      * @return mixed
      */
@@ -55,27 +54,25 @@ class CuentasEInversionesController extends BaseController
     }
 
     /**
-     * Creates a new CuentasEInversiones model.
+     * Creates a new ActivosDeterioros model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new CuentasEInversiones();
-
-        $modelInfoAdicional = new CuentasEInversionesInfoAdicional();
+        $model = new ActivosDeterioros();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
-                'model' => $model, 'modelInfoAdicional'=>$modelInfoAdicional
+                'model' => $model,
             ]);
         }
     }
 
     /**
-     * Updates an existing CuentasEInversiones model.
+     * Updates an existing ActivosDeterioros model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -94,7 +91,7 @@ class CuentasEInversionesController extends BaseController
     }
 
     /**
-     * Deletes an existing CuentasEInversiones model.
+     * Deletes an existing ActivosDeterioros model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -107,15 +104,15 @@ class CuentasEInversionesController extends BaseController
     }
 
     /**
-     * Finds the CuentasEInversiones model based on its primary key value.
+     * Finds the ActivosDeterioros model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return CuentasEInversiones the loaded model
+     * @return ActivosDeterioros the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = CuentasEInversiones::findOne($id)) !== null) {
+        if (($model = ActivosDeterioros::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
