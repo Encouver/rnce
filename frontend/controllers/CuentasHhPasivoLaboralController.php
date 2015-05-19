@@ -83,7 +83,7 @@ class CuentasHhPasivoLaboralController extends BaseController
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             $model->saldo_al_cierre = $model->saldo_p_anterior + $model->importe_gasto_ejer_eco +  $model->importe_pago_ejer_eco;
             $model->save();
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['cuentas-hh-pasivo-laboral/pasivolaboral']);
         } else {
             return $this->render('create', [
                 'model' => $model, 
@@ -104,7 +104,7 @@ class CuentasHhPasivoLaboralController extends BaseController
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             $model->saldo_al_cierre = $model->saldo_p_anterior + $model->importe_gasto_ejer_eco +  $model->importe_pago_ejer_eco;
             $model->save();
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['cuentas-hh-pasivo-laboral/pasivolaboral']);
         } else {
             return $this->render('update', [
                 'model' => $model,
