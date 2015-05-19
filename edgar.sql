@@ -718,12 +718,12 @@ ALTER TABLE cuentas.hh_pasivo_laboral
    ON UPDATE NO ACTION ON DELETE NO ACTION;
 CREATE INDEX "fki_Fk_concepto_hh_id"
   ON cuentas.hh_pasivo_laboral(hh_concepto_id);
-  
-INSERT INTO hh_concepto VALUES (1, 'Remuneraciones', NULL);
-INSERT INTO hh_concepto VALUES (2, 'Prestaciones Sociales', NULL);
-INSERT INTO hh_concepto VALUES (3, 'Indemnizaciones', NULL);
-INSERT INTO hh_concepto VALUES (4, 'Vacaciones', NULL);
-INSERT INTO hh_concepto VALUES (5, 'Otros', NULL);
+
+INSERT INTO cuentas.hh_concepto VALUES (1, 'Remuneraciones', NULL);
+INSERT INTO cuentas.hh_concepto VALUES (2, 'Prestaciones Sociales', NULL);
+INSERT INTO cuentas.hh_concepto VALUES (3, 'Indemnizaciones', NULL);
+INSERT INTO cuentas.hh_concepto VALUES (4, 'Vacaciones', NULL);
+INSERT INTO cuentas.hh_concepto VALUES (5, 'Otros', NULL);
  
 ALTER TABLE cuentas.hh_pasivo_laboral
    ALTER COLUMN saldo_al_cierre DROP NOT NULL;
@@ -733,3 +733,4 @@ ALTER TABLE cuentas.hh_pasivo_laboral ADD COLUMN otro_nombre character varying(2
 COMMENT ON COLUMN cuentas.hh_pasivo_laboral.otro_nombre IS 'Nombre que debe indicar el contratista si selecciona la opcion de Otros';
 
 
+--MARCOS

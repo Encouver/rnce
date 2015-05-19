@@ -86,7 +86,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'vAlign'=>'middle',
                 'width'=>'100px',
                 'format'=>['decimal', 2],
-                'pageSummary'=>true
+                //'pageSummary'=>true
             ],
             'tipo_instrumento',
             'nombre_instrumento',
@@ -97,7 +97,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'vAlign'=>'middle',
                 'width'=>'100px',
                 'format'=>['decimal', 2],
-                'pageSummary'=>true
+                //'pageSummary'=>true
             ],
             [
                 'attribute'=>'fecha_motivo',
@@ -306,7 +306,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
             ],
-            'options'=>['id'=>'dynagrid-C'] // a unique identifier is important
+            'options'=>['id'=>'dynagrid-inversiones-e'] // a unique identifier is important
         ]);
 
     if (substr($dynagrid->theme, 0, 6) == 'simple') {

@@ -2,8 +2,14 @@
 
 namespace common\models\a;
 
+use common\models\p\PersonasJuridicas;
 use common\models\p\PersonasNaturales;
+use kartik\builder\Form;
+use kartik\money\MaskMoney;
+use kartik\widgets\DatePicker;
+use kartik\widgets\Select2;
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "activos.avaluos".
@@ -56,12 +62,12 @@ class ActivosAvaluos extends \common\components\BaseActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'bien_id' => Yii::t('app', 'Bien ID'),
+            'bien_id' => Yii::t('app', 'Bien'),
             'valor' => Yii::t('app', 'Valor'),
-            'fecha_informe' => Yii::t('app', 'Fecha Informe'),
-            'perito_id' => Yii::t('app', 'Perito ID'),
-            'gremio_id' => Yii::t('app', 'Gremio ID'),
-            'num_inscripcion_gremio' => Yii::t('app', 'Num Inscripcion Gremio'),
+            'fecha_informe' => Yii::t('app', 'Fecha de Informe'),
+            'perito_id' => Yii::t('app', 'Perito'),
+            'gremio_id' => Yii::t('app', 'Gremio'),
+            'num_inscripcion_gremio' => Yii::t('app', 'Número de Inscripción del Gremio'),
             'sys_status' => Yii::t('app', 'Sys Status'),
             'sys_creado_el' => Yii::t('app', 'Sys Creado El'),
             'sys_actualizado_el' => Yii::t('app', 'Sys Actualizado El'),
@@ -101,46 +107,22 @@ class ActivosAvaluos extends \common\components\BaseActiveRecord
                 'type'=>Form::INPUT_HIDDEN,
                 'columnOptions'=>['hidden'=>true]
             ],
+            'bien_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(ActivosBienes::find()->all(),'id','detalle',function($model){ return $model->sysTipoBien->nombre;}), ]],
 
+            'valor'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),'options'=>['pluginOptions'=>['prefix'=>'','precision'=>'0'],]],
+            'fecha_informe'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>DatePicker::className(),'options'=>['options' => ['placeholder' => 'Seleccione fecha ...'],
+                'convertFormat' => true,
+                'pluginOptions' => [
+                    'format' => 'd-M-yyyy ',
+                    //'startDate' => date('d-m-Y h:i A'),//'01-Mar-2014 12:00 AM',
+                    'todayHighlight' => true
+                ]],
+                'columnOptions'=>['hidden'=>false]
+            ],
+            'perito_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(PersonasNaturales::find()->all(),'id',function($model){return $model->etiqueta();}), ]],
+            'gremio_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(ActivosSysGremios::find()->all(),'id',function($model){return $model->etiqueta();}), ]],
+            'num_inscripcion_gremio'=>['type'=>Form::INPUT_TEXT,],
 
-
-            //Solo para retiroS
-            'precio_adquisicion'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),'options'=>['pluginOptions'=>['prefix'=>'','precision'=>'0'],]],
-
-            //Si tiene prima descuento
-            'prima_descuento'=>['type'=>Form::INPUT_CHECKBOX,],
-            'monto_prima_des'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),'options'=>['pluginOptions'=>[],]],
-
-            //Solo para Bonos
-            'plazo'=>['type'=>Form::INPUT_TEXT,],
-            'tasa'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),'options'=>['pluginOptions'=>[],]],
-
-            'cotiza_bolsa_valores'=>['type'=>Form::INPUT_CHECKBOX,],
-            //Vincula con Obligaciones Bancarias
-            'gtia_oblig_bancaria'=>['type'=>Form::INPUT_CHECKBOX,],
-
-            //Si cotizan en la bolsa debe ser el metodo del valor razonable
-            'sys_metodo_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(ActivosSysMetodos::find()->all(),'id','nombre'), ]],
-
-
-            'deterioro'=>['type'=>Form::INPUT_CHECKBOX,],
-
-            // Metodo del costo
-            'valor_razonable'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),'options'=>['pluginOptions'=>[],]],
-            'costos_disposicion'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),'options'=>['pluginOptions'=>[],]],
-            'valor_uso'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),'options'=>['pluginOptions'=>[],]],
-            //Metodo del valor razonable
-            'valor_mercado'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),'options'=>['pluginOptions'=>[],]],
-
-            'deterioro_acumulado'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),'options'=>['pluginOptions'=>[],]],
-
-            // Sistema
-            // 'varia_efecto_infla'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),'options'=>['pluginOptions'=>[],]],
-            // 'resultado_det_cam_val'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),'options'=>['pluginOptions'=>[],]],
-            //'sdo_cierre_ejer_econ'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),'options'=>['pluginOptions'=>[],]],
-
-
-            'intereses_gen_ejer_econ'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),'options'=>['pluginOptions'=>[],]],
 
 
         ];

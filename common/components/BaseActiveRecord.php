@@ -148,7 +148,7 @@ class BaseActiveRecord extends ActiveRecord
             $this->contratista_id = Yii::$app->user->identity->contratista_id;
             
         /* if($this->hasAttribute('anho'))//property_exists($this->className(),'anho'))
-            $this->anho = date('mmm-Y');
+            $this->anho = date('m-Y');
 
 
         if($this->hasAttribute('sys_status'))//(property_exists($this->className(),'sys_status'))
@@ -156,7 +156,7 @@ class BaseActiveRecord extends ActiveRecord
 
        // die;
          if($this->hasAttribute('anho'))//property_exists($this->className(),'anho'))
-            $this->anho = date('mm-Y');
+            $this->anho = date('m-Y');
         return parent::beforeValidate();
     }
 	public function beforeSave($insert){

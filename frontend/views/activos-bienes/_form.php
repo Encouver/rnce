@@ -12,9 +12,21 @@ use kartik\widgets\ActiveForm;
 <div class="activos-bienes-form">
 
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(/*[
+        'fieldConfig' => [
+            'template' => "<div class=\"row\">
+                                            <div class=\"col-xs-6\">{label}</div>\n<div class=\"col-xs-6 text-right\">{hint}</div>
+                                        \n<div class=\"col-xs-12\">{input}</div>
+                                        </div>",
+            ],
+        ]*/); ?>
+<!--
+    <?/*=$form->errorSummary($model);*/?>
 
+-->
     <?php
+
+        echo '<h2> Datos Básicos del Bien: </h2>';
         echo Form::widget([       // 3 column layout
             'model'=>$model,
             'form'=>$form,
@@ -23,64 +35,73 @@ use kartik\widgets\ActiveForm;
             'attributes'=>$model->getFormAttribs()
         ]);
 
-        if($model->origen_id == 2 && !$model->nacional )
+        if($model->origen_id == 2 && !$model->nacional ) {
+            echo '<h2> Datos de importación: </h2>';
             echo Form::widget([       // 3 column layout
-                'model'=>$modelDatosImportacion,
-                'form'=>$form,
-                'columns'=>4,
-                'columnSize'=>'xs',
-                'attributes'=>$modelDatosImportacion->getFormAttribs($model)
+                'model' => $modelDatosImportacion,
+                'form' => $form,
+                'columns' => 4,
+                'columnSize' => 'xs',
+                'attributes' => $modelDatosImportacion->getFormAttribs($model)
             ]);
+        }
 
+        if($modelBienTipo != null) {
+            echo '<h2> Datos Correspondientes al tipo de bien: </h2>';
+            echo Form::widget([       // 3 column layout
+                'model' => $modelBienTipo,
+                'form' => $form,
+                'columns' => 4,
+                'columnSize' => 'xs',
+                'attributes' => $modelBienTipo->getFormAttribs($model)
+            ]);
+        }
 
-        if($modelBienTipo != null)
+        if($model->factura) {
+            echo '<h2> Datos de la Factura: </h2>';
             echo Form::widget([       // 3 column layout
-                'model'=>$modelBienTipo,
-                'form'=>$form,
-                'columns'=>4,
-                'columnSize'=>'xs',
-                'attributes'=>$modelBienTipo->getFormAttribs($model)
+                'model' => $modelFactura,
+                'form' => $form,
+                'columns' => 4,
+                'columnSize' => 'xs',
+                'attributes' => $modelFactura->getFormAttribs($model)
             ]);
+        }
 
-        if($model->factura)
+        if($model->documento) {
+            echo '<h2> Datos del Documento Registrado: </h2>';
             echo Form::widget([       // 3 column layout
-                'model'=>$modelFactura,
-                'form'=>$form,
-                'columns'=>4,
-                'columnSize'=>'xs',
-                'attributes'=>$modelFactura->getFormAttribs($model)
+                'model' => $modelDocumento,
+                'form' => $form,
+                'columns' => 4,
+                'columnSize' => 'xs',
+                'attributes' => $modelDocumento->getFormAttribs($model)
             ]);
-
-        if($model->documento)
+        }
+        if($model->deterioro()) {
+            echo '<h2> Datos del Deterioro: </h2>';
             echo Form::widget([       // 3 column layout
-                'model'=>$modelDocumento,
-                'form'=>$form,
-                'columns'=>4,
-                'columnSize'=>'xs',
-                'attributes'=>$modelDocumento->getFormAttribs($model)
+                'model' => $modelDeterioro,
+                'form' => $form,
+                'columns' => 4,
+                'columnSize' => 'xs',
+                'attributes' => $modelDeterioro->getFormAttribs()
             ]);
-        if($model->sysTipoBien->deterioro)
-            echo Form::widget([       // 3 column layout
-                'model'=>$modelDeterioro,
-                'form'=>$form,
-                'columns'=>4,
-                'columnSize'=>'xs',
-                'attributes'=>$modelDeterioro->getFormAttribs()
-            ]);
+        }
 
 
     $script = <<< JS
         $('#origen').change(function(e){
                 if($('#origen').val()== 1 || $('#origen').val()==4){
-                    $('#fecha_origen').show();
-                    $('#nacional').hide();
+                    $('.field-activosbienes-fecha_origen').parent().show();
+                    $('.field-activosbienes-nacional').parent().hide();
                 }else if ($('#origen').val()==2) {
-                    $('#fecha_origen').hide();
-                    $('#nacional').show();
+                    $('.field-activosbienes-fecha_origen').parent().hide();
+                    $('.field-activosbienes-nacional').parent().show();
                 }else
                 {
-                    $('#fecha_origen').hide();
-                    $('#nacional').hide();
+                    $('.field-activosbienes-fecha_origen').parent().hide();
+                    $('.field-activosbienes-nacional').parent().hide();
                 }
         });
 JS;

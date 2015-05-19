@@ -11,25 +11,19 @@ use Yii;
  * @property string $rif
  * @property boolean $juridica
  * @property string $denominacion
+ * @property string $anho
+ * @property integer $creado_por
+ * @property integer $actualizado_por
  * @property boolean $sys_status
  * @property string $sys_creado_el
  * @property string $sys_actualizado_el
  * @property string $sys_finalizado_el
- *
- * @property AccionistasOtros[] $accionistasOtros
- * @property Clientes[] $clientes
- * @property PersonasJuridicas[] $personasJuridicas
- * @property RelacionesContratos[] $relacionesContratos
- * @property Contratistas[] $contratistas
- * @property PersonasNaturales[] $personasNaturales
  */
 class SysNaturalesJuridicas extends \common\components\BaseActiveRecord
 {
     /**
      * @inheritdoc
      */
-    
-   
     public static function tableName()
     {
         return 'public.sys_naturales_juridicas';
@@ -41,11 +35,13 @@ class SysNaturalesJuridicas extends \common\components\BaseActiveRecord
     public function rules()
     {
         return [
-            [['rif', 'juridica', 'denominacion'], 'required'],
+            [['rif', 'juridica', 'denominacion', 'anho'], 'required'],
             [['juridica', 'sys_status'], 'boolean'],
+            [['creado_por', 'actualizado_por'], 'integer'],
             [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['rif'], 'string', 'max' => 20],
             [['denominacion'], 'string', 'max' => 255],
+            [['anho'], 'string', 'max' => 100],
             [['rif'], 'unique']
         ];
     }
@@ -59,7 +55,10 @@ class SysNaturalesJuridicas extends \common\components\BaseActiveRecord
             'id' => Yii::t('app', 'ID'),
             'rif' => Yii::t('app', 'Rif'),
             'juridica' => Yii::t('app', 'Juridica'),
-            'denominacion' => Yii::t('app', 'Razon Social'),
+            'denominacion' => Yii::t('app', 'Denominacion'),
+            'anho' => Yii::t('app', 'Anho'),
+            'creado_por' => Yii::t('app', 'Creado Por'),
+            'actualizado_por' => Yii::t('app', 'Actualizado Por'),
             'sys_status' => Yii::t('app', 'Sys Status'),
             'sys_creado_el' => Yii::t('app', 'Sys Creado El'),
             'sys_actualizado_el' => Yii::t('app', 'Sys Actualizado El'),
@@ -113,5 +112,9 @@ class SysNaturalesJuridicas extends \common\components\BaseActiveRecord
     public function getPersonasNaturales()
     {
         return $this->hasMany(PersonasNaturales::className(), ['rif' => 'rif']);
+    }
+
+    public function obtenerEtiqueta(){
+        return $this->rif." - ".$this->denominacion;
     }
 }

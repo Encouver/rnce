@@ -10,12 +10,14 @@ use Yii;
  * @property integer $id
  * @property string $nombre
  * @property string $descripcion
+ * @property integer $modelo_id
+ * @property integer $clasificacion_id
+ * @property integer $creado_por
+ * @property integer $actualizado_por
  * @property boolean $sys_status
  * @property string $sys_creado_el
  * @property string $sys_actualizado_el
  * @property string $sys_finalizado_el
- * @property integer $modelo_id
- * @property integer $clasificacion_id
  *
  * @property ActivosMediciones[] $activosMediciones
  * @property ActivosSysClasificacionesMetodos $clasificacion
@@ -39,9 +41,9 @@ class ActivosSysMetodosMedicion extends \common\components\BaseActiveRecord
     {
         return [
             [['nombre', 'modelo_id', 'clasificacion_id'], 'required'],
+            [['modelo_id', 'clasificacion_id', 'creado_por', 'actualizado_por'], 'integer'],
             [['sys_status'], 'boolean'],
             [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
-            [['modelo_id', 'clasificacion_id'], 'integer'],
             [['nombre', 'descripcion'], 'string', 'max' => 255],
             [['nombre'], 'unique']
         ];
@@ -56,12 +58,14 @@ class ActivosSysMetodosMedicion extends \common\components\BaseActiveRecord
             'id' => Yii::t('app', 'ID'),
             'nombre' => Yii::t('app', 'Nombre'),
             'descripcion' => Yii::t('app', 'Descripcion'),
+            'modelo_id' => Yii::t('app', 'Modelo ID'),
+            'clasificacion_id' => Yii::t('app', 'Clasificacion ID'),
+            'creado_por' => Yii::t('app', 'Creado Por'),
+            'actualizado_por' => Yii::t('app', 'Actualizado Por'),
             'sys_status' => Yii::t('app', 'Sys Status'),
             'sys_creado_el' => Yii::t('app', 'Sys Creado El'),
             'sys_actualizado_el' => Yii::t('app', 'Sys Actualizado El'),
             'sys_finalizado_el' => Yii::t('app', 'Sys Finalizado El'),
-            'modelo_id' => Yii::t('app', 'Modelo ID'),
-            'clasificacion_id' => Yii::t('app', 'Clasificacion ID'),
         ];
     }
 

@@ -15,7 +15,7 @@ use Yii;
  * @property integer $creado_por
  * @property string $primer_apellido
  * @property string $segundo_apellido
- * @property string $telefono_local
+ * @property string $telefosno_local
  * @property string $telefono_celular
  * @property string $fax
  * @property string $correo
@@ -23,20 +23,25 @@ use Yii;
  * @property string $facebook
  * @property string $twitter
  * @property string $instagram
+ * @property string $numero_identificacion
+ * @property string $nacionalidad
+ * @property string $estado_civil
+ * @property string $anho
+ * @property integer $actualizado_por
  * @property integer $sys_pais_id
  * @property boolean $sys_status
  * @property string $sys_creado_el
  * @property string $sys_actualizado_el
  * @property string $sys_finalizado_el
- * @property string $numero_identificacion
- * @property string $nacionalidad
- * * @property string $estado_civil
+
  *
- * @property EmpresasRelacionadas[] $empresasRelacionadas
- * @property Sucursales[] $sucursales
- * @property SysPaises $sysPais
- * @property SysNaturalesJuridicas $rif0
+ * @property ActivosAvaluos[] $activosAvaluos
  * @property ContratistasContactos[] $contratistasContactos
+ * @property EmpresasRelacionadas[] $empresasRelacionadas
+ * @property SysNaturalesJuridicas $rif0
+ * @property SysPaises $sysPais
+ * @property Sucursales[] $sucursales
+
  */
 class PersonasNaturales extends \common\components\BaseActiveRecord
 {
@@ -54,15 +59,16 @@ class PersonasNaturales extends \common\components\BaseActiveRecord
     public function rules()
     {
         return [
-            [['primer_nombre', 'segundo_nombre','creado_por', 'primer_apellido', 'segundo_apellido', 'sys_pais_id', 'nacionalidad'], 'required'],
-            [['ci', 'creado_por', 'sys_pais_id'], 'integer'],
+            [['primer_nombre', 'segundo_nombre', 'primer_apellido', 'segundo_apellido', 'sys_pais_id', 'nacionalidad', 'anho'], 'required'],
+            [['ci', 'sys_pais_id', 'creado_por', 'actualizado_por'], 'integer'],
+            [['nacionalidad', 'estado_civil'], 'string'],
             [['sys_status'], 'boolean'],
             [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
-            [['nacionalidad'], 'string'],
             [['primer_nombre', 'segundo_nombre', 'primer_apellido', 'segundo_apellido', 'pagina_web', 'facebook', 'twitter', 'instagram', 'numero_identificacion'], 'string', 'max' => 255],
             [['rif'], 'string', 'max' => 20],
-            [['telefono_local', 'telefono_celular','estado_civil', 'fax'], 'string', 'max' => 50],
+            [['telefono_local', 'telefono_celular', 'fax'], 'string', 'max' => 50],
             [['correo'], 'string', 'max' => 150],
+            [['anho'], 'string', 'max' => 100],
             [['rif'], 'unique'],
             [['ci'], 'unique']
         ];
@@ -79,7 +85,6 @@ class PersonasNaturales extends \common\components\BaseActiveRecord
             'segundo_nombre' => Yii::t('app', 'Segundo Nombre'),
             'rif' => Yii::t('app', 'Rif'),
             'ci' => Yii::t('app', 'Ci'),
-            'creado_por' => Yii::t('app', 'Creado Por'),
             'primer_apellido' => Yii::t('app', 'Primer Apellido'),
             'segundo_apellido' => Yii::t('app', 'Segundo Apellido'),
             'telefono_local' => Yii::t('app', 'Telefono Local'),
@@ -98,6 +103,9 @@ class PersonasNaturales extends \common\components\BaseActiveRecord
             'numero_identificacion' => Yii::t('app', 'Numero Identificacion'),
             'nacionalidad' => Yii::t('app', 'Nacionalidad'),
             'estado_civil' => Yii::t('app', 'Estado Civil'),
+            'anho' => Yii::t('app', 'Anho'),
+            'creado_por' => Yii::t('app', 'Creado Por'),
+            'actualizado_por' => Yii::t('app', 'Actualizado Por'),
         ];
     }
 
@@ -148,5 +156,8 @@ class PersonasNaturales extends \common\components\BaseActiveRecord
         'primer_apellido'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Enter username...']],
         'segundo_apellido'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Enter username...']],
     ];
+    }
+    public function etiqueta(){
+        return $this->ci.' - '.$this->primer_nombre.' '.$this->primer_apellido;
     }
 }

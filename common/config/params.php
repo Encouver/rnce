@@ -11,6 +11,6 @@ return [
         'decimal' => ',',
         'precision' => 2,
         'allowZero' => true,
-        'allowNegative' => false,
+        'allowNegative' => true,
     ]
 ];

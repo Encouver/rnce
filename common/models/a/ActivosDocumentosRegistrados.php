@@ -58,6 +58,8 @@ class ActivosDocumentosRegistrados extends \common\components\BaseActiveRecord
     {
         return [
             [['contratista_id', 'sys_tipo_registro_id', 'num_registro_notaria', 'tomo', 'folio', 'fecha_registro', 'sys_circunscripcion_id'], 'required'],
+            [['contratista_id', 'sys_tipo_registro_id', 'num_registro_notaria', 'tomo', 'folio', 'fecha_registro', 'sys_circunscripcion_id'], 'required', 'on'=>'bien-registro'],
+            [['contratista_id', 'sys_tipo_registro_id', 'num_registro_notaria', 'tomo', 'folio', 'fecha_registro', 'sys_circunscripcion_id'], 'required', 'on'=>'bien-notaria'],
             [['contratista_id', 'sys_tipo_registro_id', 'sys_circunscripcion_id','tipo_documento_id','bien_id'], 'integer'],
             [['fecha_registro', 'fecha_asamblea', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['sys_status'], 'boolean'],
@@ -74,8 +76,8 @@ class ActivosDocumentosRegistrados extends \common\components\BaseActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'contratista_id' => Yii::t('app', 'Contratista ID'),
-            'sys_tipo_registro_id' => Yii::t('app', 'Sys Tipo Registro ID'),
-            'num_registro_notaria' => Yii::t('app', 'Num Registro Notaria'),
+            'sys_tipo_registro_id' => Yii::t('app', 'Tipo de Registro'),
+            'num_registro_notaria' => Yii::t('app', 'Numero de Registro / Notaria'),
             'tomo' => Yii::t('app', 'Tomo'),
             'folio' => Yii::t('app', 'Folio'),
             'fecha_registro' => Yii::t('app', 'Fecha Registro'),
@@ -84,14 +86,14 @@ class ActivosDocumentosRegistrados extends \common\components\BaseActiveRecord
             'sys_creado_el' => Yii::t('app', 'Sys Creado El'),
             'sys_actualizado_el' => Yii::t('app', 'Sys Actualizado El'),
             'sys_finalizado_el' => Yii::t('app', 'Sys Finalizado El'),
-            'sys_circunscripcion_id' => Yii::t('app', 'Sys Circunscripcion ID'),
+            'sys_circunscripcion_id' => Yii::t('app', 'Circunscripcion'),
             'tipo_documento_id' => Yii::t('app', 'Tipo Documento ID'),
         ];
     }
     public function scenarios()
     {
         $scenarios = parent::scenarios();
-        $scenarios['bien'] = [];//Scenario Values Only Accepted
+       // $scenarios['bien-notaria'] = ['',];//Scenario Values Only Accepted
         return $scenarios;
     }
 

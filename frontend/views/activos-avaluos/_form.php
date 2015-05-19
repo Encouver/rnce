@@ -1,7 +1,9 @@
 <?php
 
+use kartik\builder\Form;
+use kartik\widgets\ActiveForm;
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+
 
 /* @var $this yii\web\View */
 /* @var $model common\models\a\ActivosAvaluos */
@@ -12,29 +14,42 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'bien_id')->textInput() ?>
+    <?php
+        echo '<h2> Avaluo(Agregar tantos como posea el bien): </h2>';
+        echo Form::widget([       // 3 column layout
+            'model'=>$model,
+            'form'=>$form,
+            'columns'=>4,
+            'columnSize'=>'xs',
+            'attributes'=>$model->getFormAttribs()
+        ]);
+    ?>
+<!--
+    <?/*= $form->field($model, 'bien_id')->textInput() */?>
 
-    <?= $form->field($model, 'valor')->textInput() ?>
+    <?/*= $form->field($model, 'valor')->textInput() */?>
 
-    <?= $form->field($model, 'fecha_informe')->textInput() ?>
+    <?/*= $form->field($model, 'fecha_informe')->textInput() */?>
 
-    <?= $form->field($model, 'perito_id')->textInput() ?>
+    <?/*= $form->field($model, 'perito_id')->textInput() */?>
 
-    <?= $form->field($model, 'gremio_id')->textInput() ?>
+    <?/*= $form->field($model, 'gremio_id')->textInput() */?>
 
-    <?= $form->field($model, 'num_inscripcion_gremio')->textInput(['maxlength' => true]) ?>
+    <?/*= $form->field($model, 'num_inscripcion_gremio')->textInput(['maxlength' => true]) */?>
 
-    <?= $form->field($model, 'sys_status')->checkbox() ?>
+    <?/*= $form->field($model, 'sys_status')->checkbox() */?>
 
-    <?= $form->field($model, 'sys_creado_el')->textInput() ?>
+    <?/*= $form->field($model, 'sys_creado_el')->textInput() */?>
 
-    <?= $form->field($model, 'sys_actualizado_el')->textInput() ?>
+    <?/*= $form->field($model, 'sys_actualizado_el')->textInput() */?>
 
-    <?= $form->field($model, 'sys_finalizado_el')->textInput() ?>
+    <?/*= $form->field($model, 'sys_finalizado_el')->textInput() */?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?/*= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) */?>
     </div>
+
+    -->
 
     <?php ActiveForm::end(); ?>
 

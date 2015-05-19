@@ -70,12 +70,12 @@ class ActivosFacturas extends \common\components\BaseActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'num_factura' => Yii::t('app', 'Num Factura'),
-            'proveedor_id' => Yii::t('app', 'Proveedor ID'),
-            'fecha_emision' => Yii::t('app', 'Fecha Emision'),
-            'imprenta_id' => Yii::t('app', 'Imprenta ID'),
-            'fecha_emision_talonario' => Yii::t('app', 'Fecha Emision Talonario'),
-            'comprador_id' => Yii::t('app', 'Comprador ID'),
+            'num_factura' => Yii::t('app', 'Número de Factura'),
+            'proveedor_id' => Yii::t('app', 'Proveedor'),
+            'fecha_emision' => Yii::t('app', 'Fecha de Emisión'),
+            'imprenta_id' => Yii::t('app', 'Imprenta'),
+            'fecha_emision_talonario' => Yii::t('app', 'Fecha de Emision del Talonario'),
+            'comprador_id' => Yii::t('app', 'Comprador'),
             'base_imponible_gravable' => Yii::t('app', 'Base Imponible Gravable'),
             'exento' => Yii::t('app', 'Exento'),
             'iva' => Yii::t('app', 'Iva'),
@@ -146,8 +146,8 @@ class ActivosFacturas extends \common\components\BaseActiveRecord
                 ]],
                 'columnOptions'=>['hidden'=>true]
             ],
-            'proveedor_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(PersonasJuridicas::find()->all(),'rif',function($model){return $model->obtenerEtiqueta(); }),'options'=>[]]],
-            'imprenta_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(PersonasJuridicas::find()->all(),'rif',function($model){return $model->obtenerEtiqueta(); }),'options'=>[]]],
+            'proveedor_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(PersonasJuridicas::find()->all(),'id',function($model){return $model->obtenerEtiqueta(); }),'options'=>[]]],
+            'imprenta_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(PersonasJuridicas::find()->all(),'id',function($model){return $model->obtenerEtiqueta(); }),'options'=>[]]],
             'fecha_emision_talonario'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>DatePicker::className(),'options'=>['options' => ['placeholder' => 'Seleccione fecha ...'],
                 'convertFormat' => true,
                 'pluginOptions' => [
@@ -155,9 +155,9 @@ class ActivosFacturas extends \common\components\BaseActiveRecord
                     //'startDate' => date('d-m-Y h:i A'),//'01-Mar-2014 12:00 AM',
                     'todayHighlight' => true
                 ]],
-                'columnOptions'=>['hidden'=>true]
+                'columnOptions'=>['hidden'=>false]
             ],
-            'comprador_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(SysNaturalesJuridicas::find()->all(),'rif','denominacion'),'options'=>[]]],
+            'comprador_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(SysNaturalesJuridicas::find()->all(),'id',function($model){return $model->obtenerEtiqueta(); }),'options'=>[]]],
             'base_imponible_gravable'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),],
             'exento'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),],
             'iva'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),],

@@ -9,7 +9,7 @@ BEGIN
         EXECUTE 
 '
 ALTER TABLE '|| quote_ident(row.schemaname) || '.' || quote_ident(row.tablename) || ' OWNER TO eureka;
-TRUNCATE TABLE '|| quote_ident(row.schemaname) || '.' || quote_ident(row.tablename) || ' CASCADE;
+--TRUNCATE TABLE '|| quote_ident(row.schemaname) || '.' || quote_ident(row.tablename) || ' CASCADE;
 
 -- Column: creado_por
 
@@ -17,7 +17,7 @@ ALTER TABLE '|| quote_ident(row.schemaname) || '.' || quote_ident(row.tablename)
 
 ALTER TABLE '|| quote_ident(row.schemaname) || '.' || quote_ident(row.tablename) || ' ADD COLUMN creado_por integer;
 --ALTER TABLE '|| quote_ident(row.schemaname) || '.' || quote_ident(row.tablename) || ' ALTER COLUMN creado_por SET NOT NULL;
-COMMENT ON COLUMN '|| quote_ident(row.schemaname) || '.' || quote_ident(row.tablename) || '.creado_por IS ''Clave foranea al usuario'';
+COMMENT ON COLUMN '|| quote_ident(row.schemaname) || '.' || quote_ident(row.tablename) || '.creado_por IS ''Clave foranea al usuario que creo el registro.'';
 
 -- Column: actualizado_por
 
@@ -25,7 +25,7 @@ ALTER TABLE '|| quote_ident(row.schemaname) || '.' || quote_ident(row.tablename)
 
 ALTER TABLE '|| quote_ident(row.schemaname) || '.' || quote_ident(row.tablename) || ' ADD COLUMN actualizado_por integer;
 --ALTER TABLE '|| quote_ident(row.schemaname) || '.' || quote_ident(row.tablename) || ' ALTER COLUMN actualizado_por SET NOT NULL;
-COMMENT ON COLUMN '|| quote_ident(row.schemaname) || '.' || quote_ident(row.tablename) || '.actualizado_por IS ''Clave foranea al usuario'';
+COMMENT ON COLUMN '|| quote_ident(row.schemaname) || '.' || quote_ident(row.tablename) || '.actualizado_por IS ''Clave foranea al usuario que actualizo el registro por última vez.'';
 
 
 -- Column: sys_status
@@ -35,7 +35,7 @@ COMMENT ON COLUMN '|| quote_ident(row.schemaname) || '.' || quote_ident(row.tabl
 ALTER TABLE '|| quote_ident(row.schemaname) || '.' || quote_ident(row.tablename) || ' ADD COLUMN sys_status boolean;
 ALTER TABLE '|| quote_ident(row.schemaname) || '.' || quote_ident(row.tablename) || ' ALTER COLUMN sys_status SET DEFAULT true;
 ALTER TABLE '|| quote_ident(row.schemaname) || '.' || quote_ident(row.tablename) || ' ALTER COLUMN sys_status SET NOT NULL;
-COMMENT ON COLUMN '|| quote_ident(row.schemaname) ||'.' || quote_ident(row.tablename) || '.sys_status IS ''Estatus interno del sistema'';
+COMMENT ON COLUMN '|| quote_ident(row.schemaname) ||'.' || quote_ident(row.tablename) || '.sys_status IS ''Estatus interno del sistema.'';
 
 
 ALTER TABLE '|| quote_ident(row.schemaname) || '.' || quote_ident(row.tablename) || ' DROP COLUMN IF EXISTS sys_fecha;

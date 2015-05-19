@@ -3,6 +3,7 @@
 namespace common\models\a;
 
 use common\models\p\Contratistas;
+use common\models\p\PrincipiosContables;
 use kartik\builder\Form;
 use kartik\money\MaskMoney;
 use kartik\widgets\DatePicker;
@@ -19,29 +20,34 @@ use yii\helpers\ArrayHelper;
  * @property string $fecha_origen
  * @property integer $contratista_id
  * @property boolean $propio
+ * @property integer $origen_id
+ * @property boolean $nacional
+ * @property boolean $carga_completa
+ * @property integer $creado_por
+ * @property integer $actualizado_por
  * @property boolean $sys_status
  * @property string $sys_creado_el
  * @property string $sys_actualizado_el
  * @property string $sys_finalizado_el
- * @property integer $origen_id
- * @property boolean $nacional
  *
- * @property ActivosActivosBiologicos[] $activosActivosBiologicos
- * @property ActivosActivosIntangibles[] $activosActivosIntangibles
+ * @property ActivosActivosBiologicos $activosActivosBiologicos
+ * @property ActivosActivosIntangibles $activosActivosIntangibles
  * @property ActivosAvaluos[] $activosAvaluos
  * @property ActivosSysOrigenesBienes $origen
  * @property ActivosSysTiposBienes $sysTipoBien
  * @property Contratistas $contratista
- * @property ActivosConstruccionesInmuebles[] $activosConstruccionesInmuebles
- * @property ActivosDatosImportaciones[] $activosDatosImportaciones
+ * @property ActivosConstruccionesInmuebles $activosConstruccionesInmuebles
+ * @property ActivosDatosImportaciones $activosDatosImportaciones
  * @property ActivosDepreciacionesAmortizaciones[] $activosDepreciacionesAmortizaciones
  * @property ActivosDeterioros[] $activosDeterioros
- * @property ActivosFabricacionesMuebles[] $activosFabricacionesMuebles
+ * @property ActivosDocumentosRegistrados[] $activosDocumentosRegistrados
+ * @property ActivosFabricacionesMuebles $activosFabricacionesMuebles
  * @property ActivosFacturas[] $activosFacturas
- * @property ActivosInmuebles[] $activosInmuebles
+ * @property ActivosInmuebles $activosInmuebles
  * @property ActivosMediciones[] $activosMediciones
  * @property ActivosMejorasPropiedades[] $activosMejorasPropiedades
- * @property ActivosMuebles[] $activosMuebles
+ * @property ActivosMuebles $activosMuebles
+ * @property OrigenesCapitales[] $origenesCapitales
  */
 class ActivosBienes extends \common\components\BaseActiveRecord
 {
@@ -62,11 +68,13 @@ class ActivosBienes extends \common\components\BaseActiveRecord
     public function rules()
     {
         return [
+
             [['sys_tipo_bien_id', 'contratista_id', 'origen_id'], 'required'],
-            [['sys_tipo_bien_id', 'contratista_id', 'origen_id'], 'integer'],
-            [['propio', 'sys_status', 'nacional','documento','factura'], 'boolean'],
+            [['sys_tipo_bien_id', 'contratista_id', 'origen_id', 'creado_por', 'actualizado_por'], 'integer'],
             [['fecha_origen', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
-            [['detalle'], 'string', 'max' => 255]
+            [['propio', 'nacional', 'carga_completa', 'sys_status','documento','factura'], 'boolean'],
+            [['detalle'], 'string', 'max' => 255],
+            [['sys_tipo_bien_id', 'detalle', 'contratista_id'], 'unique', 'targetAttribute' => ['sys_tipo_bien_id', 'detalle', 'contratista_id'], 'message' => 'El nombre de detalle debe ser único para entre todos sus bienes.']
         ];
     }
 
@@ -82,13 +90,23 @@ class ActivosBienes extends \common\components\BaseActiveRecord
             'fecha_origen' => Yii::t('app', 'Fecha Origen'),
             'contratista_id' => Yii::t('app', 'Contratista ID'),
             'propio' => Yii::t('app', 'Propio'),
+            'origen_id' => Yii::t('app', 'Origen'),
+            'nacional' => Yii::t('app', 'Nacional'),
+            'carga_completa' => Yii::t('app', 'Carga Completa'),
+            'creado_por' => Yii::t('app', 'Creado Por'),
+            'actualizado_por' => Yii::t('app', 'Actualizado Por'),
             'sys_status' => Yii::t('app', 'Sys Status'),
             'sys_creado_el' => Yii::t('app', 'Sys Creado El'),
             'sys_actualizado_el' => Yii::t('app', 'Sys Actualizado El'),
             'sys_finalizado_el' => Yii::t('app', 'Sys Finalizado El'),
-            'origen_id' => Yii::t('app', 'Origen'),
-            'nacional' => Yii::t('app', 'Nacional'),
         ];
+    }
+    /**
+     * @return boolean
+     */
+    public function getPrincipioContable()
+    {
+        return $this->hasOne(PrincipiosContables::className(), ['contratista_id' => 'contratista_id']);
     }
 
     /**
@@ -131,38 +149,36 @@ class ActivosBienes extends \common\components\BaseActiveRecord
         return $this->hasOne(ActivosSysTiposBienes::className(), ['id' => 'sys_tipo_bien_id']);
     }
 
-//    /**
-//     * @return boolean
-//     */
-//    public function deterioro()
-//    {
-//        if(($tipoBien = $this->hasOne(ActivosSysTiposBienes::className(), ['id' => 'sys_tipo_bien_id']))!=null)
-//            return $tipoBien->deterioro;
-//
-//        return null;
-//    }
-//    /**
-//     * @return boolean
-//     */
-//    public function depreciacion()
-//    {
-//        if($tipoBien = $this->hasOne(ActivosSysTiposBienes::className(), ['id' => 'sys_tipo_bien_id']))
-//            return $tipoBien->depreciacion;
-//
-//        return null;
-//    }
-//
-//    /**
-//     * @return string
-//     */
-//    public function principioContable()
-//    {
-//        // Por hacer
-//        /* if($tipoBien = $this->hasOne(ActivosSysTiposBienes::className(), ['id' => 'sys_tipo_bien_id']))
-//             return $tipoBien->deterioro;*/
-//
-//        return null;
-//    }
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getActivosDocumentosRegistrados()
+    {
+        return $this->hasMany(ActivosDocumentosRegistrados::className(), ['bien_id' => 'id']);
+    }
+
+    /**
+     * @return boolean
+     */
+    public function Deterioro()
+    {
+        return $this->sysTipoBien->deterioro;
+    }
+    /**
+     * @return boolean
+     */
+    public function Depreciacion()
+    {
+        return $this->sysTipoBien->depreciacion;
+    }
+
+    /**
+     * @return string
+     */
+    public function principioContable()
+    {
+        return PrincipiosContables::findOne(['contratista_id'=>'contratista_id'])->principio_contable;
+    }
 
 
     /**
@@ -253,6 +269,14 @@ class ActivosBienes extends \common\components\BaseActiveRecord
         return $this->hasOne(ActivosMuebles::className(), ['bien_id' => 'id']);
     }
 
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getOrigenesCapitales()
+    {
+        return $this->hasMany(OrigenesCapitales::className(), ['bien_id' => 'id']);
+    }
+
     public function getFormAttribs() {
          $attributes = [
             // primary key column
@@ -260,12 +284,12 @@ class ActivosBienes extends \common\components\BaseActiveRecord
                 'type'=>Form::INPUT_HIDDEN,
                 'columnOptions'=>['hidden'=>true]
             ],
-            'sys_tipo_bien_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(ActivosSysTiposBienes::find()->all(),'id','nombre',function($model){ return $model->sysClasificacionBien->nombre;}),'options'=>['onchange'=>'js:this.form.submit();']]],
+            'sys_tipo_bien_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(ActivosSysTiposBienes::find()->all(),'id','nombre',function($model){ return $model->sysClasificacionBien->nombre;}),'options'=>['onchange'=>'js:location.reload(true);']]],
 
             //'depreciable'=>['type'=>Form::INPUT_CHECKBOX,],
             //'deterioro'=>['type'=>Form::INPUT_CHECKBOX,],
             'detalle'=>['type'=>Form::INPUT_TEXT,],
-            'origen_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(ActivosSysOrigenesBienes::find()->asArray()->all(),'id','nombre'),'options'=>['id'=>'origen','onchange'=>'js: this.form.submit();'/*'js: $("#nacional").hide(true); $("#nacional").hide(); if($("#origen").attr()==1 || $("#origen").attr()==3)$("#fecha_origen").show(); if($("#origen").attr()==2)$("#nacional").show();'*/]]],
+            'origen_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(ActivosSysOrigenesBienes::find()->asArray()->all(),'id','nombre'),'options'=>['id'=>'origen','onchange'=>'js:'/*'js: $("#nacional").hide(true); $("#nacional").hide(); if($("#origen").attr()==1 || $("#origen").attr()==3)$("#fecha_origen").show(); if($("#origen").attr()==2)$("#nacional").show();'*/]]],
             'propio'=>['type'=>Form::INPUT_CHECKBOX,],
             'factura'=>['type'=>Form::INPUT_CHECKBOX,],
              'documento'=>['type'=>Form::INPUT_CHECKBOX,],
@@ -284,18 +308,19 @@ class ActivosBienes extends \common\components\BaseActiveRecord
 
         ];
 
-        if($this->origen_id==1 or $this->origen_id ==4)
+        //if($this->origen_id==1 or $this->origen_id ==4)
         $attributes['fecha_origen'] = ['type'=>Form::INPUT_WIDGET,'widgetClass'=>DatePicker::className(),'label'=>$this->origen_id==1?'Fecha de la Asamblea':'Fecha de incorporacion en el inventario de activos','options'=>['options' => ['placeholder' => 'Seleccione fecha ...'],
             'convertFormat' => true,
+
             'pluginOptions' => [
                 'format' => 'd-M-yyyy ',
                 //'startDate' => date('d-m-Y h:i A'),//'01-Mar-2014 12:00 AM',
                 'todayHighlight' => true
             ]],
-            'columnOptions'=>[]
+            'columnOptions'=>[ 'hidden'=>false,]
         ];
-        if($this->origen_id==2)
-            $attributes['nacional'] = ['type'=>Form::INPUT_CHECKBOX,'columnOptions'=>[],'options'=>['onchange'=>'js: this.form.submit()']];
+        //if($this->origen_id==2)
+            $attributes['nacional'] = ['type'=>Form::INPUT_CHECKBOX,'columnOptions'=>['hidden'=>true,],'options'=>['onchange'=>'js: this.form.submit()']];
 
         return $attributes;
     }
@@ -316,5 +341,9 @@ class ActivosBienes extends \common\components\BaseActiveRecord
             return $this->activosActivosIntangibles;
 
         return null;
+    }
+
+    public function etiqueta(){
+        return $this->sysTipoBien->nombre.' - '.$this->detalle;
     }
 }

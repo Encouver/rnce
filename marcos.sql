@@ -1091,3 +1091,24 @@ ADD COLUMN sys_clasificacion_motivo_id integer;
 ALTER TABLE activos.sys_motivos
 ADD FOREIGN KEY (sys_clasificacion_motivo_id) REFERENCES activos.sys_clasificaciones_motivos (id) ON UPDATE NO ACTION ON DELETE NO ACTION;
 COMMENT ON COLUMN activos.sys_motivos.sys_clasificacion_motivo_id IS 'Clave foránea a la tabla sys_clasificaciones_motivos_id.';
+
+
+ALTER TABLE activos.bienes
+ADD UNIQUE (sys_tipo_bien_id, detalle, contratista_id);
+
+ALTER TABLE cuentas.e_movimientos
+ADD COLUMN descripcion character varying(255);
+COMMENT ON COLUMN cuentas.e_movimientos.descripcion IS 'Descripción del movimiento.';
+
+
+
+/**************     19/05/2015 *************/
+
+
+ALTER TABLE principios_contables
+ADD UNIQUE (principio_contable, contratista_id);
+
+
+ALTER TABLE activos.sys_tipos_registros
+ADD COLUMN descripcion character varying(255);
+COMMENT ON COLUMN activos.sys_tipos_registros.descripcion IS 'Descripcion del tipo de Registro.';

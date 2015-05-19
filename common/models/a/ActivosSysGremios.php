@@ -2,6 +2,7 @@
 
 namespace common\models\a;
 
+use common\models\p\PersonasJuridicas;
 use Yii;
 
 /**
@@ -10,6 +11,8 @@ use Yii;
  * @property integer $id
  * @property integer $persona_juridica_id
  * @property string $direccion
+ * @property integer $creado_por
+ * @property integer $actualizado_por
  * @property boolean $sys_status
  * @property string $sys_creado_el
  * @property string $sys_actualizado_el
@@ -35,7 +38,7 @@ class ActivosSysGremios extends \common\components\BaseActiveRecord
     {
         return [
             [['persona_juridica_id'], 'required'],
-            [['persona_juridica_id'], 'integer'],
+            [['persona_juridica_id', 'creado_por', 'actualizado_por'], 'integer'],
             [['direccion'], 'string'],
             [['sys_status'], 'boolean'],
             [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe']
@@ -51,6 +54,8 @@ class ActivosSysGremios extends \common\components\BaseActiveRecord
             'id' => Yii::t('app', 'ID'),
             'persona_juridica_id' => Yii::t('app', 'Persona Juridica ID'),
             'direccion' => Yii::t('app', 'Direccion'),
+            'creado_por' => Yii::t('app', 'Creado Por'),
+            'actualizado_por' => Yii::t('app', 'Actualizado Por'),
             'sys_status' => Yii::t('app', 'Sys Status'),
             'sys_creado_el' => Yii::t('app', 'Sys Creado El'),
             'sys_actualizado_el' => Yii::t('app', 'Sys Actualizado El'),
@@ -72,5 +77,9 @@ class ActivosSysGremios extends \common\components\BaseActiveRecord
     public function getPersonaJuridica()
     {
         return $this->hasOne(PersonasJuridicas::className(), ['id' => 'persona_juridica_id']);
+    }
+
+    public function etiqueta(){
+        return $this->personaJuridica->etiqueta();
     }
 }
