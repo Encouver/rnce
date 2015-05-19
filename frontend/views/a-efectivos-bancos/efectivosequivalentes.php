@@ -7,7 +7,6 @@ use yii\bootstrap\NavBar;
 use kartik\widgets\ActiveForm;
 use kartik\builder\TabularForm;
 use kartik\grid\GridView;
-use kartik\popover\PopoverX;
 
 use app\models\AEfectivosCajaSearch;
 use app\models\AEfectivosBancosSearch;

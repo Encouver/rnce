@@ -26,11 +26,10 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'concepto',
             'saldo_p_anterior',
             'importe_gasto_ejer_eco',
             'importe_pago_ejer_eco',
-            // 'saldo_al_cierre',
+            'saldo_al_cierre',
             // 'corriente:boolean',
             // 'contratista_id',
             // 'anho',
@@ -40,6 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'sys_creado_el',
             // 'sys_actualizado_el',
             // 'sys_finalizado_el',
+            // 'hh_concepto_id',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

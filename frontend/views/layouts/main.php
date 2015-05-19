@@ -51,10 +51,7 @@ AppAsset::register($this);
                          ['label' => 'Obligaciones Bancarias', 'url' => ['/aa-obligaciones-bancarias/index']],
                          ['label' => 'Inversiones', 'url' => ['cuentas-e-inversiones/index']],
                          ['label' => 'Inventarios', 'url' => ['/cuentas-c-inventarios/inventarios']],
-
-                         //['label' => 'Pasivo laboral', 'url' => ['']],
-
-                         ['label' => 'Pasivo laboral', 'url' => ['/cuentas-hh-pasivo-laboral/index']],
+                         ['label' => 'Pasivo laboral', 'url' => ['/cuentas-hh-pasivo-laboral/pasivolaboral']],
                          ['label' => 'Provisiones', 'url' => ['/cuentas-jj-proviciones/index']],
                          ['label' => 'Otros tributos por pagar', 'url' => ['/cuentas-dd3-otros-tributos/index']],
 
