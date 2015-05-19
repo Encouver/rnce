@@ -3,16 +3,16 @@
 namespace frontend\controllers;
 
 use Yii;
-use common\models\c\CuentasHhPasivoLaboral;
-use app\models\CuentasHhPasivoLaboralSearch;
+use common\models\a\ActivosDeterioros;
+use app\models\ActivosDeteriorosSearch;
 use common\components\BaseController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * CuentasHhPasivoLaboralController implements the CRUD actions for CuentasHhPasivoLaboral model.
+ * ActivosDeteriorosController implements the CRUD actions for ActivosDeterioros model.
  */
-class CuentasHhPasivoLaboralController extends BaseController
+class ActivosDeteriorosController extends BaseController
 {
     public function behaviors()
     {
@@ -27,12 +27,12 @@ class CuentasHhPasivoLaboralController extends BaseController
     }
 
     /**
-     * Lists all CuentasHhPasivoLaboral models.
+     * Lists all ActivosDeterioros models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new CuentasHhPasivoLaboralSearch();
+        $searchModel = new ActivosDeteriorosSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -41,25 +41,8 @@ class CuentasHhPasivoLaboralController extends BaseController
         ]);
     }
 
-    public function actionPasivolaboral()
-    {
-        $searchModel = new CuentasHhPasivoLaboralSearch();
-        
-        $searchModel->corriente = true;
-        $dataProvider_c = $searchModel->search(Yii::$app->request->queryParams);
-        $searchModel->corriente = false;
-        $dataProvider_nc = $searchModel->search(Yii::$app->request->queryParams);
-
-
-        return $this->render('pasivo_laboral', [
-            'model' => $searchModel,
-            'dataProvider_c' => $dataProvider_c,
-            'dataProvider_nc' => $dataProvider_nc,
-        ]);
-    }
-
     /**
-     * Displays a single CuentasHhPasivoLaboral model.
+     * Displays a single ActivosDeterioros model.
      * @param integer $id
      * @return mixed
      */
@@ -71,28 +54,25 @@ class CuentasHhPasivoLaboralController extends BaseController
     }
 
     /**
-     * Creates a new CuentasHhPasivoLaboral model.
+     * Creates a new ActivosDeterioros model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new CuentasHhPasivoLaboral();
-        //Yii::app::end();
+        $model = new ActivosDeterioros();
 
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            $model->saldo_al_cierre = $model->saldo_p_anterior + $model->importe_gasto_ejer_eco +  $model->importe_pago_ejer_eco;
-            $model->save();
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
-                'model' => $model, 
+                'model' => $model,
             ]);
         }
     }
 
     /**
-     * Updates an existing CuentasHhPasivoLaboral model.
+     * Updates an existing ActivosDeterioros model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -101,9 +81,7 @@ class CuentasHhPasivoLaboralController extends BaseController
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            $model->saldo_al_cierre = $model->saldo_p_anterior + $model->importe_gasto_ejer_eco +  $model->importe_pago_ejer_eco;
-            $model->save();
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
@@ -113,7 +91,7 @@ class CuentasHhPasivoLaboralController extends BaseController
     }
 
     /**
-     * Deletes an existing CuentasHhPasivoLaboral model.
+     * Deletes an existing ActivosDeterioros model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -126,15 +104,15 @@ class CuentasHhPasivoLaboralController extends BaseController
     }
 
     /**
-     * Finds the CuentasHhPasivoLaboral model based on its primary key value.
+     * Finds the ActivosDeterioros model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return CuentasHhPasivoLaboral the loaded model
+     * @return ActivosDeterioros the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = CuentasHhPasivoLaboral::findOne($id)) !== null) {
+        if (($model = ActivosDeterioros::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

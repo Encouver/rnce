@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use common\models\c\CuentasEInversionesInfoAdicional;
 use Yii;
 use common\models\c\CuentasEInversiones;
 use app\models\CuentasEInversionesSearch;
@@ -62,11 +63,13 @@ class CuentasEInversionesController extends BaseController
     {
         $model = new CuentasEInversiones();
 
+        $modelInfoAdicional = new CuentasEInversionesInfoAdicional();
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
-                'model' => $model,
+                'model' => $model, 'modelInfoAdicional'=>$modelInfoAdicional
             ]);
         }
     }

@@ -7,6 +7,7 @@ use yii\bootstrap\NavBar;
 use kartik\widgets\ActiveForm;
 use kartik\builder\TabularForm;
 use kartik\grid\GridView;
+//use common\models\c\CuentasHhConcepto;
 
 
 $this->title = Yii::t('app', 'Pasivo laboral');
@@ -31,13 +32,25 @@ $this->params['breadcrumbs'][] = $this->title;
             'attribute'=>'corriente',
             'vAlign'=>'middle',
         ],
-        //'modena',
         [
-          'attribute' => 'saldo_p_anterior',
-          'label' => 'Saldo del periodo anterior',
-          'format' => 'html'
-          
+          'attribute' => 'hh_concepto_id',
+          'label' => 'Concepto',
+          'format' => 'html',
+          'value' => function ($model)
+          {
+              return '<div>'.$model->hhConcepto->nombre.'</div>';
+          }
         ],
+        [
+            'attribute' => 'saldo_p_anterior',
+            'label' => 'Saldo del periodo anterior',
+            'hAlign'=>'right',
+            'vAlign'=>'middle',
+            'width'=>'100px',
+            'format'=>['decimal', 2],
+            'pageSummary'=>true
+        ],
+
         [
             'attribute' => 'importe_gasto_ejer_eco',
             'label' => 'Importe gasto del ejercicio económico',
@@ -119,7 +132,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'panel'=>['heading'=>'<h3 class="panel-title">Pasivo laboral no corriente</h3>'],
             'toolbar' =>  [
               ['content'=>
-                  Html::a(Yii::t('app', '<i class="glyphicon glyphicon-plus"></i>'), ['a-efectivos-cajas/create'], ['class' => 'btn btn-success']),
+                  Html::a(Yii::t('app', '<i class="glyphicon glyphicon-plus"></i>'), ['create'], ['class' => 'btn btn-success']),
                   //Html::a('<i class="glyphicon glyphicon-repeat"></i>', ['dynagrid-demo'], ['data-pjax'=>0, 'class' => 'btn btn-default', 'title'=>'Reset Grid'])
               ],
               ['content'=>'{dynagridFilter}{dynagridSort}{dynagrid}'],

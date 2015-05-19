@@ -51,7 +51,7 @@ class CuentasHhPasivoLaboral extends \common\components\BaseActiveRecord
     public function rules()
     {
         return [
-            [['saldo_p_anterior', 'importe_gasto_ejer_eco', 'importe_pago_ejer_eco', 'saldo_al_cierre', 'contratista_id', 'anho', 'hh_concepto_id'], 'required'],
+            [['saldo_p_anterior', 'importe_gasto_ejer_eco', 'importe_pago_ejer_eco', 'contratista_id', 'anho', 'hh_concepto_id'], 'required'],
             [['saldo_p_anterior', 'importe_gasto_ejer_eco', 'importe_pago_ejer_eco', 'saldo_al_cierre'], 'number'],
             [['corriente', 'sys_status'], 'boolean'],
             [['contratista_id', 'creado_por', 'actualizado_por', 'hh_concepto_id'], 'integer'],
@@ -113,7 +113,7 @@ class CuentasHhPasivoLaboral extends \common\components\BaseActiveRecord
                 'saldo_p_anterior'=>['type'=>Form::INPUT_TEXT, 'label'=>'Saldo del período anterior'],
                 'importe_gasto_ejer_eco'=>['type'=>Form::INPUT_TEXT,'label'=>'Importe gasto'],
                 'importe_pago_ejer_eco'=>['type'=>Form::INPUT_TEXT,'label'=>'Importe pago'],
-                'saldo_al_cierre'=>['type'=>Form::INPUT_TEXT,'label'=>'Saldo al cierre'],
+                //'saldo_al_cierre'=>['type'=>Form::INPUT_TEXT,'label'=>'Saldo al cierre'],
             ];
     }
 }

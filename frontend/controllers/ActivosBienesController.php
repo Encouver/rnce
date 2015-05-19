@@ -6,6 +6,7 @@ use common\models\a\ActivosActivosBiologicos;
 use common\models\a\ActivosActivosIntangibles;
 use common\models\a\ActivosConstruccionesInmuebles;
 use common\models\a\ActivosDatosImportaciones;
+use common\models\a\ActivosDeterioros;
 use common\models\a\ActivosDocumentosRegistrados;
 use common\models\a\ActivosFabricacionesMuebles;
 use common\models\a\ActivosFacturas;
@@ -80,10 +81,13 @@ class ActivosBienesController extends BaseController
         $modelDatosImportacion = null;
 
         $modelBienTipo = new ActivosInmuebles();
+        $model->sys_tipo_bien_id = 1;
 
         $modelFactura = null;
 
         $modelDocumento = null;
+
+        $modelDeterioro = new ActivosDeterioros();
 
         //$model->contratista_id = Yii::$app->user->identity->contratista_id;
         //$model->principio_contable = 1;
@@ -119,6 +123,7 @@ class ActivosBienesController extends BaseController
 
             $modelDocumento = new ActivosDocumentosRegistrados(['scenario'=>'bien']);
 
+            $modelDeterioro = new ActivosDeterioros();
 
             $flag = true;
             $transaction = \Yii::$app->db->beginTransaction();
@@ -144,6 +149,14 @@ class ActivosBienesController extends BaseController
                         $flag = $flag and $modelDatosImportacion->save();
                     }
 
+                    // Tipo de Bien
+                    if ($modelBienTipo->load(Yii::$app->request->post())) {
+
+                        $modelBienTipo->bien_id = $model->id;
+                        $flag = $flag && $modelBienTipo->save();
+                    }
+
+                    // Deterioro
                     if ($modelBienTipo->load(Yii::$app->request->post())) {
 
                         $modelBienTipo->bien_id = $model->id;
@@ -165,7 +178,8 @@ class ActivosBienesController extends BaseController
         } //else {
 
             return $this->render('create', [
-                'model' => $model,'modelBienTipo'=> $modelBienTipo, 'modelDatosImportacion'=>$modelDatosImportacion, 'modelFactura'=>$modelFactura,'modelDocumento'=>$modelDocumento
+                'model' => $model,'modelBienTipo'=> $modelBienTipo, 'modelDatosImportacion'=>$modelDatosImportacion, 'modelFactura'=>$modelFactura,'modelDocumento'=>$modelDocumento,
+                'modelDeterioro'=>$modelDeterioro,
             ]);
        // }
     }

@@ -727,5 +727,9 @@ INSERT INTO hh_concepto VALUES (5, 'Otros', NULL);
  
 ALTER TABLE cuentas.hh_pasivo_laboral
    ALTER COLUMN saldo_al_cierre DROP NOT NULL;
+   
+   
+ALTER TABLE cuentas.hh_pasivo_laboral ADD COLUMN otro_nombre character varying(255);
+COMMENT ON COLUMN cuentas.hh_pasivo_laboral.otro_nombre IS 'Nombre que debe indicar el contratista si selecciona la opcion de Otros';
 
 

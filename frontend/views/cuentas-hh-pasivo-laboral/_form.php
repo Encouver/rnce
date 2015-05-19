@@ -10,8 +10,9 @@ use kartik\builder\Form;
 ?>
 
 <div class="cuentas-hh-pasivo-laboral-form">
-
 <?php
+
+
     $form = ActiveForm::begin(['type'=>ActiveForm::TYPE_VERTICAL]);
     echo Form::widget([
         'model'=>$model,
