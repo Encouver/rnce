@@ -5,35 +5,28 @@ use kartik\widgets\ActiveForm;
 use kartik\builder\Form;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\p\OrigenesCapitales */
+/* @var $model common\models\p\FondosReservas */
 /* @var $form yii\widgets\ActiveForm */
 ?>
-<style type="text/css">
-.tamano
-{
-	width: 400px;
-	max-width: 400px;
-}
-</style>
-<div class="origenes-capitales-form">
+
+<div class="fondos-reservas-form">
 
     <?php
 
     //$model->scenario = 'extranjero';
     $form = ActiveForm::begin([
-        'action'=>['origenes-capitales/crearcapital'],
         'type'=>ActiveForm::TYPE_VERTICAL]);?>
     
-     <?= $form->field($origen_capital, 'tipo_origen')->hiddenInput()->label(false) ?>
    <?php echo Form::widget([
-        'model'=>$origen_capital,
+        'model'=>$fondo_reserva,
         'form'=>$form,
         'columns'=>2,
         //'columns'=>11,
-        'attributes'=> ($origen_capital->scenario== 'efectivo') ? $origen_capital->getFormAttribs('efectivo') : $origen_capital->getFormAttribs('efectivoenbanco')
+        'attributes'=> $fondo_reserva->getFormAttribs()
     ]);
     echo Html::submitButton('Enviar', ['type'=>'button', 'class'=>'btn btn-primary']);
     ActiveForm::end();
     ?>
+
 
 </div>
