@@ -683,6 +683,47 @@ COMMENT ON COLUMN cuentas.ii1_gastos_operacionales.sys_creado_el IS 'Fecha de cr
 COMMENT ON COLUMN cuentas.ii1_gastos_operacionales.sys_actualizado_el IS 'Fecha de última actualización del registro.';
 COMMENT ON COLUMN cuentas.ii1_gastos_operacionales.sys_finalizado_el IS 'Fecha de "eliminado" el registro.';
 
+ALTER TABLE cuentas.hh_pasivo_laboral DROP COLUMN concepto;
 
+ALTER TABLE cuentas.hh_pasivo_laboral ADD COLUMN hh_concepto_id integer;
+ALTER TABLE cuentas.hh_pasivo_laboral ALTER COLUMN hh_concepto_id SET NOT NULL;
+COMMENT ON COLUMN cuentas.hh_pasivo_laboral.hh_concepto_id IS 'Clave foranea a la tabla hh_concepto';
+
+-- Table: cuentas.hh_concepto
+
+-- DROP TABLE cuentas.hh_concepto;
+
+CREATE TABLE cuentas.hh_concepto
+(
+  id serial NOT NULL, -- Clave primaria
+  nombre character varying(255) NOT NULL, -- Nombre del concepto de la cuenta hh
+  descripcion character varying(255), -- Descripcion del concepto
+  CONSTRAINT hh_concepto_pkey PRIMARY KEY (id),
+  CONSTRAINT hh_concepto_nombre_key UNIQUE (nombre)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE cuentas.hh_concepto
+  OWNER TO eureka;
+COMMENT ON TABLE cuentas.hh_concepto
+  IS 'Tabla que almacena los conceptos de la cuenta hh';
+COMMENT ON COLUMN cuentas.hh_concepto.id IS 'Clave primaria';
+COMMENT ON COLUMN cuentas.hh_concepto.nombre IS 'Nombre del concepto de la cuenta hh';
+COMMENT ON COLUMN cuentas.hh_concepto.descripcion IS 'Descripcion del concepto';
+
+
+ALTER TABLE cuentas.hh_pasivo_laboral
+  ADD CONSTRAINT "Fk_concepto_hh_id" FOREIGN KEY (hh_concepto_id) REFERENCES cuentas.hh_concepto (id)
+   ON UPDATE NO ACTION ON DELETE NO ACTION;
+CREATE INDEX "fki_Fk_concepto_hh_id"
+  ON cuentas.hh_pasivo_laboral(hh_concepto_id);
+  
+INSERT INTO hh_concepto VALUES (1, 'Remuneraciones', NULL);
+INSERT INTO hh_concepto VALUES (2, 'Prestaciones Sociales', NULL);
+INSERT INTO hh_concepto VALUES (3, 'Indemnizaciones', NULL);
+INSERT INTO hh_concepto VALUES (4, 'Vacaciones', NULL);
+INSERT INTO hh_concepto VALUES (5, 'Otros', NULL);
+  
 
 

@@ -41,6 +41,23 @@ class CuentasHhPasivoLaboralController extends BaseController
         ]);
     }
 
+    public function actionPasivolaboral()
+    {
+        $searchModel = new CuentasHhPasivoLaboralSearch();
+        
+        $searchModel->corriente = true;
+        $dataProvider_c = $searchModel->search(Yii::$app->request->queryParams);
+        $searchModel->corriente = false;
+        $dataProvider_nc = $searchModel->search(Yii::$app->request->queryParams);
+
+
+        return $this->render('pasivo_laboral', [
+            'model' => $searchModel,
+            'dataProvider_c' => $dataProvider_c,
+            'dataProvider_nc' => $dataProvider_nc,
+        ]);
+    }
+
     /**
      * Displays a single CuentasHhPasivoLaboral model.
      * @param integer $id

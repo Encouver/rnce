@@ -50,7 +50,7 @@ AppAsset::register($this);
                          ['label' => 'Efectivos y sus equivalentes', 'url' => ['/a-efectivos-bancos/efectivosequivalentes']],
                          ['label' => 'Obligaciones Bancarias', 'url' => ['/aa-obligaciones-bancarias/index']],
                          ['label' => 'Inventarios', 'url' => ['/cuentas-c-inventarios/inventarios']],
-                         ['label' => 'Pasivo laboral', 'url' => ['/cuentas-hh-pasivo-laboral/index']],
+                         ['label' => 'Pasivo laboral', 'url' => ['/cuentas-hh-pasivo-laboral/pasivolaboral']],
                          ['label' => 'Provisiones', 'url' => ['/cuentas-jj-proviciones/index']],
                          ['label' => 'Otros tributos por pagar', 'url' => ['/cuentas-dd3-otros-tributos/index']],
                     ],

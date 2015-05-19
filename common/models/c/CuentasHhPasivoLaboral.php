@@ -3,12 +3,20 @@
 namespace common\models\c;
 
 use Yii;
+use kartik\builder\TabularForm;
+use kartik\grid\GridView;
+use yii\helpers\ArrayHelper;
+use kartik\builder\Form;
+use kartik\builder\ActiveFormEvent;
+use yii\helpers\Html;
+
+use common\models\c\CuentasHhConcepto;
+
 
 /**
  * This is the model class for table "cuentas.hh_pasivo_laboral".
  *
  * @property integer $id
- * @property string $concepto
  * @property string $saldo_p_anterior
  * @property string $importe_gasto_ejer_eco
  * @property string $importe_pago_ejer_eco
@@ -22,7 +30,9 @@ use Yii;
  * @property string $sys_creado_el
  * @property string $sys_actualizado_el
  * @property string $sys_finalizado_el
+ * @property integer $hh_concepto_id
  *
+ * @property CuentasHhConcepto $hhConcepto
  * @property Contratistas $contratista
  */
 class CuentasHhPasivoLaboral extends \common\components\BaseActiveRecord
@@ -41,12 +51,11 @@ class CuentasHhPasivoLaboral extends \common\components\BaseActiveRecord
     public function rules()
     {
         return [
-            [['concepto', 'saldo_p_anterior', 'importe_gasto_ejer_eco', 'importe_pago_ejer_eco', 'saldo_al_cierre', 'contratista_id', 'anho'], 'required'],
+            [['saldo_p_anterior', 'importe_gasto_ejer_eco', 'importe_pago_ejer_eco', 'saldo_al_cierre', 'contratista_id', 'anho', 'hh_concepto_id'], 'required'],
             [['saldo_p_anterior', 'importe_gasto_ejer_eco', 'importe_pago_ejer_eco', 'saldo_al_cierre'], 'number'],
             [['corriente', 'sys_status'], 'boolean'],
-            [['contratista_id', 'creado_por', 'actualizado_por'], 'integer'],
+            [['contratista_id', 'creado_por', 'actualizado_por', 'hh_concepto_id'], 'integer'],
             [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
-            [['concepto'], 'string', 'max' => 255],
             [['anho'], 'string', 'max' => 100]
         ];
     }
@@ -58,7 +67,6 @@ class CuentasHhPasivoLaboral extends \common\components\BaseActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'concepto' => Yii::t('app', 'Concepto'),
             'saldo_p_anterior' => Yii::t('app', 'Saldo P Anterior'),
             'importe_gasto_ejer_eco' => Yii::t('app', 'Importe Gasto Ejer Eco'),
             'importe_pago_ejer_eco' => Yii::t('app', 'Importe Pago Ejer Eco'),
@@ -72,7 +80,16 @@ class CuentasHhPasivoLaboral extends \common\components\BaseActiveRecord
             'sys_creado_el' => Yii::t('app', 'Sys Creado El'),
             'sys_actualizado_el' => Yii::t('app', 'Sys Actualizado El'),
             'sys_finalizado_el' => Yii::t('app', 'Sys Finalizado El'),
+            'hh_concepto_id' => Yii::t('app', 'Hh Concepto ID'),
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getHhConcepto()
+    {
+        return $this->hasOne(CuentasHhConcepto::className(), ['id' => 'hh_concepto_id']);
     }
 
     /**
@@ -81,5 +98,22 @@ class CuentasHhPasivoLaboral extends \common\components\BaseActiveRecord
     public function getContratista()
     {
         return $this->hasOne(Contratistas::className(), ['id' => 'contratista_id']);
+    }
+
+    public function getFormAttribs(){
+        return [
+                // primary key column
+                'id'=>[ // primary key attribute
+                    'type'=>TabularForm::INPUT_HIDDEN,
+                    'columnOptions'=>['hidden'=>true]
+                ],
+                
+                'corriente'=>['type'=>Form::INPUT_CHECKBOX,'label'=>'Corriente'],
+                'hh_concepto_id'=>['type'=>Form::INPUT_DROPDOWN_LIST, 'items'=>ArrayHelper::map(CuentasHhConcepto::find()->orderBy('id')->asArray()->all(), 'id', 'nombre'), 'label'=>'Concepto'],                
+                'saldo_p_anterior'=>['type'=>Form::INPUT_TEXT, 'label'=>'Saldo del período anterior'],
+                'importe_gasto_ejer_eco'=>['type'=>Form::INPUT_TEXT,'label'=>'Importe gasto'],
+                'importe_pago_ejer_eco'=>['type'=>Form::INPUT_TEXT,'label'=>'Importe pago'],
+                'saldo_al_cierre'=>['type'=>Form::INPUT_TEXT,'label'=>'Saldo al cierre'],
+            ];
     }
 }
