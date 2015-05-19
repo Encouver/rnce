@@ -78,13 +78,6 @@ class OrigenesCapitalesController extends BaseController
           
           if ($origen_capital->load(Yii::$app->request->post())) {
            
-        
-           if ($origen_capital->scenario=="efectivo") {
-               $origen_capital->tipo_origen="EFECTIVO";
-           }else{
-              if ($origen_capital->scenario=="efectivoenbanco") {
-              $origen_capital->tipo_origen="EFECTIVO EN BANCO";}
-           }
               
                      
               

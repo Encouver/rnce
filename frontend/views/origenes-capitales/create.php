@@ -30,7 +30,9 @@ $array[] = ['id' => 2, 'nombre' => 'EFECTIVO EN BANCO'];
             ) ?>
     <br>
     <div id="efectivo" style="display:none">
-    	<?php $origen_capital->scenario = 'efectivo'; ?>
+    	<?php $origen_capital->scenario = 'efectivo';
+                $origen_capital->tipo_origen='EFECTIVO';
+        ?>
 
 	    <?= $this->render('_form', [
 	        'origen_capital' => $origen_capital,
@@ -38,7 +40,9 @@ $array[] = ['id' => 2, 'nombre' => 'EFECTIVO EN BANCO'];
 	</div>
 
 	<div id="efectivoenbanco" style="display:none">
-    	<?php $origen_capital->scenario = 'efectivoenbanco'; ?>
+    	<?php $origen_capital->scenario = 'efectivoenbanco';
+              $origen_capital->tipo_origen='EFECTIVO EN BANCO';
+        ?>
 	    <?= $this->render('_form', [
 	        'origen_capital' => $origen_capital,
 	    ]) ?>

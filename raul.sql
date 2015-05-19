@@ -142,3 +142,6 @@ COMMENT ON COLUMN origenes_capitales.sys_finalizado_el IS 'Fecha de "eliminado" 
 
 ALTER TABLE origenes_capitales ADD COLUMN numero_transaccion integer;
 COMMENT ON COLUMN origenes_capitales.numero_transaccion IS 'Numero de transaccion en caso de ser efectivo en banco';
+
+
+ALTER TYPE tipo_origen ADD VALUE 'EFECTIVO EN BANCO' AFTER 'EECTIVO EN BANCO';

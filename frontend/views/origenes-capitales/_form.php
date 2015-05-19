@@ -16,8 +16,10 @@ use kartik\builder\Form;
     //$model->scenario = 'extranjero';
     $form = ActiveForm::begin([
         'action'=>['origenes-capitales/crearcapital'],
-        'type'=>ActiveForm::TYPE_VERTICAL]);
-    echo Form::widget([
+        'type'=>ActiveForm::TYPE_VERTICAL]);?>
+    
+     <?= $form->field($origen_capital, 'tipo_origen')->hiddenInput()->label(false) ?>
+   <?php echo Form::widget([
         'model'=>$origen_capital,
         'form'=>$form,
         'columns'=>2,
