@@ -144,9 +144,10 @@ class BaseActiveRecord extends ActiveRecord
 
     public  function  beforeValidate(){
 
-/*        if($this->hasAttribute('contratista_id'))//property_exists($this->className(),'contratista_id'))
+       if($this->hasAttribute('contratista_id'))//property_exists($this->className(),'contratista_id'))
             $this->contratista_id = Yii::$app->user->identity->contratista_id;
-        if($this->hasAttribute('anho'))//property_exists($this->className(),'anho'))
+            
+        /* if($this->hasAttribute('anho'))//property_exists($this->className(),'anho'))
             $this->anho = date('mmm-Y');
 
 

@@ -78,12 +78,15 @@ class CuentasHhPasivoLaboralController extends BaseController
     public function actionCreate()
     {
         $model = new CuentasHhPasivoLaboral();
+        //Yii::app::end();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            $model->saldo_al_cierre = $model->saldo_p_anterior + $model->importe_gasto_ejer_eco +  $model->importe_pago_ejer_eco;
+            $model->save();
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
-                'model' => $model,
+                'model' => $model, 
             ]);
         }
     }
@@ -98,7 +101,9 @@ class CuentasHhPasivoLaboralController extends BaseController
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            $model->saldo_al_cierre = $model->saldo_p_anterior + $model->importe_gasto_ejer_eco +  $model->importe_pago_ejer_eco;
+            $model->save();
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
