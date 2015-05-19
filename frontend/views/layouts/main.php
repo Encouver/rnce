@@ -49,8 +49,15 @@ AppAsset::register($this);
                          ['label' => 'Estado de resultados', 'url' => ['/site/edoresultados']],
                          ['label' => 'Efectivos y sus equivalentes', 'url' => ['/a-efectivos-bancos/efectivosequivalentes']],
                          ['label' => 'Obligaciones Bancarias', 'url' => ['/aa-obligaciones-bancarias/index']],
+                         ['label' => 'Inversiones', 'url' => ['cuentas-e-inversiones/index']],
                          ['label' => 'Inventarios', 'url' => ['/cuentas-c-inventarios/inventarios']],
+
                          //['label' => 'Pasivo laboral', 'url' => ['']],
+
+                         ['label' => 'Pasivo laboral', 'url' => ['/cuentas-hh-pasivo-laboral/index']],
+                         ['label' => 'Provisiones', 'url' => ['/cuentas-jj-proviciones/index']],
+                         ['label' => 'Otros tributos por pagar', 'url' => ['/cuentas-dd3-otros-tributos/index']],
+
                     ],
                 ],
                 ['label' => 'Activos',

@@ -420,3 +420,269 @@ ALTER TABLE cierres_ejercicios
   ADD COLUMN fecha_cierre character varying(100);
 COMMENT ON COLUMN cierres_ejercicios.fecha_cierre IS 'Fecha en formato año y mes del ejercicio economico del contratista';
 
+
+---------------Mas nuevo del mismo 18-------------------------------
+
+-- Table: cuentas.d1_d2_beneficiario
+
+-- DROP TABLE cuentas.d1_d2_beneficiario;
+
+CREATE TABLE cuentas.d1_d2_beneficiario
+(
+  id serial NOT NULL, -- Clave primaria
+  nro_planilla character varying(255) NOT NULL, -- Numero de planilla
+  periodo character varying(200) NOT NULL,
+  monto numeric(38,6) NOT NULL, -- Monto cedido en el ejercicio economico
+  sys_naturales_juridicas_id integer NOT NULL, -- Clave foranea a la tabla sys_naturales_juridicas
+  tipo_beneficio character varying(255) NOT NULL, -- Campo que indica si el registro viene de la cuenta d-1 o d-2
+  CONSTRAINT d1_beneficierio_pkey PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE cuentas.d1_d2_beneficiario
+  OWNER TO eureka;
+COMMENT ON TABLE cuentas.d1_d2_beneficiario
+  IS 'Tabla intermedia de la cuenta D-1 y D-2 que almacena el beneficiario del importe cedido';
+COMMENT ON COLUMN cuentas.d1_d2_beneficiario.id IS 'Clave primaria';
+COMMENT ON COLUMN cuentas.d1_d2_beneficiario.nro_planilla IS 'Numero de planilla';
+COMMENT ON COLUMN cuentas.d1_d2_beneficiario.monto IS 'Monto cedido en el ejercicio economico';
+COMMENT ON COLUMN cuentas.d1_d2_beneficiario.sys_naturales_juridicas_id IS 'Clave foranea a la tabla sys_naturales_juridicas';
+COMMENT ON COLUMN cuentas.d1_d2_beneficiario.tipo_beneficio IS 'Campo que indica si el registro viene de la cuenta d-1 o d-2';
+
+
+-- Table: cuentas.d1_islr_pagado_anticipo
+
+-- DROP TABLE cuentas.d1_islr_pagado_anticipo;
+
+CREATE TABLE cuentas.d1_islr_pagado_anticipo
+(
+  id serial NOT NULL, -- Clave primaria
+  isrl_pagado character varying(255) NOT NULL, -- Islr pagado por anticipado
+  nro_documento character varying, -- Numero de documento del islr
+  saldo_ph numeric(38,6) NOT NULL, -- Saldo del periodo anterior Historico
+  importe_pagado_ejer_econo numeric(38,6) NOT NULL, -- Importe pagado en el ejercicio economico
+  importe_aplicado_ejer_econo numeric(38,6) NOT NULL, -- Importe aplicado en el ejercicio economico
+  saldo_cierre numeric(38,6), -- Saldo al cierre del ejercicio economico.
+  monto numeric(38,6), -- Monto del importe cedido en el ejercicio economico
+  contratista_id integer NOT NULL, -- Clave foranea al contratista
+  anho character varying(100) NOT NULL, -- Año contable y mes
+  creado_por integer, -- Clave foranea al usuario
+  actualizado_por integer, -- Clave foranea al usuario
+  sys_status boolean NOT NULL DEFAULT true, -- Estatus interno del sistema
+  sys_creado_el timestamp with time zone DEFAULT now(), -- Fecha de creación del registro.
+  sys_actualizado_el timestamp with time zone DEFAULT now(), -- Fecha de última actualización del registro.
+  sys_finalizado_el timestamp with time zone, -- Fecha de "eliminado" el registro.
+  CONSTRAINT d1_islr_pagado_anticipo_pkey PRIMARY KEY (id),
+  CONSTRAINT d1_islr_pagado_anticipo_contratista_id_fkey FOREIGN KEY (contratista_id)
+      REFERENCES contratistas (id) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE NO ACTION
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE cuentas.d1_islr_pagado_anticipo
+  OWNER TO eureka;
+COMMENT ON TABLE cuentas.d1_islr_pagado_anticipo
+  IS 'Tabla que almacena el islr pagado por anticipado';
+COMMENT ON COLUMN cuentas.d1_islr_pagado_anticipo.id IS 'Clave primaria';
+COMMENT ON COLUMN cuentas.d1_islr_pagado_anticipo.isrl_pagado IS 'Islr pagado por anticipado';
+COMMENT ON COLUMN cuentas.d1_islr_pagado_anticipo.nro_documento IS 'Numero de documento del islr';
+COMMENT ON COLUMN cuentas.d1_islr_pagado_anticipo.saldo_ph IS 'Saldo del periodo anterior Historico';
+COMMENT ON COLUMN cuentas.d1_islr_pagado_anticipo.importe_pagado_ejer_econo IS 'Importe pagado en el ejercicio economico';
+COMMENT ON COLUMN cuentas.d1_islr_pagado_anticipo.importe_aplicado_ejer_econo IS 'Importe aplicado en el ejercicio economico';
+COMMENT ON COLUMN cuentas.d1_islr_pagado_anticipo.saldo_cierre IS 'Saldo al cierre del ejercicio economico.';
+COMMENT ON COLUMN cuentas.d1_islr_pagado_anticipo.monto IS 'Monto del importe cedido en el ejercicio economico';
+COMMENT ON COLUMN cuentas.d1_islr_pagado_anticipo.contratista_id IS 'Clave foranea al contratista';
+COMMENT ON COLUMN cuentas.d1_islr_pagado_anticipo.anho IS 'Año contable y mes';
+COMMENT ON COLUMN cuentas.d1_islr_pagado_anticipo.creado_por IS 'Clave foranea al usuario';
+COMMENT ON COLUMN cuentas.d1_islr_pagado_anticipo.actualizado_por IS 'Clave foranea al usuario';
+COMMENT ON COLUMN cuentas.d1_islr_pagado_anticipo.sys_status IS 'Estatus interno del sistema';
+COMMENT ON COLUMN cuentas.d1_islr_pagado_anticipo.sys_creado_el IS 'Fecha de creación del registro.';
+COMMENT ON COLUMN cuentas.d1_islr_pagado_anticipo.sys_actualizado_el IS 'Fecha de última actualización del registro.';
+COMMENT ON COLUMN cuentas.d1_islr_pagado_anticipo.sys_finalizado_el IS 'Fecha de "eliminado" el registro.';
+
+
+-- Table: cuentas.d2_otros_tributos_pag
+
+-- DROP TABLE cuentas.d2_otros_tributos_pag;
+
+CREATE TABLE cuentas.d2_otros_tributos_pag
+(
+  id serial NOT NULL, -- Clave primaria
+  saldo_pah numeric(38,6) NOT NULL, -- Saldo del periodo anterior historico
+  credito_fiscal numeric(38,6) NOT NULL, -- Crédito Fiscal generado en el Ejercicio Económico
+  monto numeric(38,6) NOT NULL, -- Monto del importe cedido en el ejercicio economico
+  debito_fiscal numeric(38,6) NOT NULL, -- Debito fiscal generado en el ejercicio economico
+  debito_fiscal_no numeric(38,6) NOT NULL, -- Debito fiscal no enterado
+  importe_pagado numeric(38,6) NOT NULL, -- Importe pagado en el ejercicio economico
+  saldo_cierre numeric(38,6), -- Saldo al cierre del ejercicio economico
+  CONSTRAINT d2_otros_tributos_pag_pkey PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE cuentas.d2_otros_tributos_pag
+  OWNER TO eureka;
+COMMENT ON TABLE cuentas.d2_otros_tributos_pag
+  IS 'Tabla que representa la cuenta D-2 OTROS TRIBUTOS PAGADOS / COBRADOS POR ANTICIPADO';
+COMMENT ON COLUMN cuentas.d2_otros_tributos_pag.id IS 'Clave primaria';
+COMMENT ON COLUMN cuentas.d2_otros_tributos_pag.saldo_pah IS 'Saldo del periodo anterior historico';
+COMMENT ON COLUMN cuentas.d2_otros_tributos_pag.credito_fiscal IS 'Crédito Fiscal generado en el Ejercicio Económico';
+COMMENT ON COLUMN cuentas.d2_otros_tributos_pag.monto IS 'Monto del importe cedido en el ejercicio economico';
+COMMENT ON COLUMN cuentas.d2_otros_tributos_pag.debito_fiscal IS 'Debito fiscal generado en el ejercicio economico';
+COMMENT ON COLUMN cuentas.d2_otros_tributos_pag.debito_fiscal_no IS 'Debito fiscal no enterado';
+COMMENT ON COLUMN cuentas.d2_otros_tributos_pag.importe_pagado IS 'Importe pagado en el ejercicio economico';
+COMMENT ON COLUMN cuentas.d2_otros_tributos_pag.saldo_cierre IS 'Saldo al cierre del ejercicio economico';
+
+
+
+-- Table: cuentas.dd3_otros_tributos
+
+-- DROP TABLE cuentas.dd3_otros_tributos;
+
+CREATE TABLE cuentas.dd3_otros_tributos
+(
+  id serial NOT NULL, -- Clave primaria
+  tributo character varying(255) NOT NULL, -- Tipo de tributo que tiene el contratista
+  saldo_p_anterior numeric(38,6) NOT NULL, -- Saldo del periodo anterior
+  importe_gasto_ejer_eco numeric(38,6) NOT NULL, -- Importe Gasto del Ejercicio Económico
+  importe_pago_ejer_eco numeric(38,6) NOT NULL, -- Importe Pago del Ejercicio Económico
+  saldo_al_cierre numeric(38,6) NOT NULL, -- Saldo al cierre del ejercicio economico, calculado por el sistema
+  contratista_id integer NOT NULL, -- Clave foranea al contratista
+  anho character varying(100) NOT NULL, -- Año contable y mes
+  creado_por integer, -- Clave foranea al usuario
+  actualizado_por integer, -- Clave foranea al usuario
+  sys_status boolean NOT NULL DEFAULT true, -- Estatus interno del sistema
+  sys_creado_el timestamp with time zone DEFAULT now(), -- Fecha de creación del registro.
+  sys_actualizado_el timestamp with time zone DEFAULT now(), -- Fecha de última actualización del registro.
+  sys_finalizado_el timestamp with time zone, -- Fecha de "eliminado" el registro.
+  CONSTRAINT dd3_otros_tributos_pkey PRIMARY KEY (id),
+  CONSTRAINT dd3_otros_tributos_contratista_id_fkey FOREIGN KEY (contratista_id)
+      REFERENCES contratistas (id) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE NO ACTION
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE cuentas.dd3_otros_tributos
+  OWNER TO eureka;
+COMMENT ON TABLE cuentas.dd3_otros_tributos
+  IS 'Tabla  pasivo laboral cuenta HH';
+COMMENT ON COLUMN cuentas.dd3_otros_tributos.id IS 'Clave primaria';
+COMMENT ON COLUMN cuentas.dd3_otros_tributos.tributo IS 'Tipo de tributo que tiene el contratista';
+COMMENT ON COLUMN cuentas.dd3_otros_tributos.saldo_p_anterior IS 'Saldo del periodo anterior';
+COMMENT ON COLUMN cuentas.dd3_otros_tributos.importe_gasto_ejer_eco IS 'Importe Gasto del Ejercicio Económico';
+COMMENT ON COLUMN cuentas.dd3_otros_tributos.importe_pago_ejer_eco IS 'Importe Pago del Ejercicio Económico';
+COMMENT ON COLUMN cuentas.dd3_otros_tributos.saldo_al_cierre IS 'Saldo al cierre del ejercicio economico, calculado por el sistema';
+COMMENT ON COLUMN cuentas.dd3_otros_tributos.contratista_id IS 'Clave foranea al contratista';
+COMMENT ON COLUMN cuentas.dd3_otros_tributos.anho IS 'Año contable y mes';
+COMMENT ON COLUMN cuentas.dd3_otros_tributos.creado_por IS 'Clave foranea al usuario';
+COMMENT ON COLUMN cuentas.dd3_otros_tributos.actualizado_por IS 'Clave foranea al usuario';
+COMMENT ON COLUMN cuentas.dd3_otros_tributos.sys_status IS 'Estatus interno del sistema';
+COMMENT ON COLUMN cuentas.dd3_otros_tributos.sys_creado_el IS 'Fecha de creación del registro.';
+COMMENT ON COLUMN cuentas.dd3_otros_tributos.sys_actualizado_el IS 'Fecha de última actualización del registro.';
+COMMENT ON COLUMN cuentas.dd3_otros_tributos.sys_finalizado_el IS 'Fecha de "eliminado" el registro.';
+
+
+-- Table: cuentas.hh_pasivo_laboral
+
+-- DROP TABLE cuentas.hh_pasivo_laboral;
+
+CREATE TABLE cuentas.hh_pasivo_laboral
+(
+  id serial NOT NULL, -- Clave primaria
+  concepto character varying(255) NOT NULL, -- Tipo de pasivo laboral que tiene el contratista
+  saldo_p_anterior numeric(38,6) NOT NULL, -- Saldo del periodo anterior
+  importe_gasto_ejer_eco numeric(38,6) NOT NULL, -- Importe Gasto del Ejercicio Económico
+  importe_pago_ejer_eco numeric(38,6) NOT NULL, -- Importe Pago del Ejercicio Económico
+  saldo_al_cierre numeric(38,6) NOT NULL, -- Saldo al cierre del ejercicio economico, calculado por el sistema
+  corriente boolean NOT NULL DEFAULT true, -- Indica si el registro es corriente o no
+  contratista_id integer NOT NULL, -- Clave foranea al contratista
+  anho character varying(100) NOT NULL, -- Año contable y mes
+  creado_por integer, -- Clave foranea al usuario
+  actualizado_por integer, -- Clave foranea al usuario
+  sys_status boolean NOT NULL DEFAULT true, -- Estatus interno del sistema
+  sys_creado_el timestamp with time zone DEFAULT now(), -- Fecha de creación del registro.
+  sys_actualizado_el timestamp with time zone DEFAULT now(), -- Fecha de última actualización del registro.
+  sys_finalizado_el timestamp with time zone, -- Fecha de "eliminado" el registro.
+  CONSTRAINT hh_pasivo_laboral_pkey PRIMARY KEY (id),
+  CONSTRAINT hh_pasivo_laboral_contratista_id_fkey FOREIGN KEY (contratista_id)
+      REFERENCES contratistas (id) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE NO ACTION
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE cuentas.hh_pasivo_laboral
+  OWNER TO eureka;
+COMMENT ON TABLE cuentas.hh_pasivo_laboral
+  IS 'Tabla  pasivo laboral cuenta HH';
+COMMENT ON COLUMN cuentas.hh_pasivo_laboral.id IS 'Clave primaria';
+COMMENT ON COLUMN cuentas.hh_pasivo_laboral.concepto IS 'Tipo de pasivo laboral que tiene el contratista';
+COMMENT ON COLUMN cuentas.hh_pasivo_laboral.saldo_p_anterior IS 'Saldo del periodo anterior';
+COMMENT ON COLUMN cuentas.hh_pasivo_laboral.importe_gasto_ejer_eco IS 'Importe Gasto del Ejercicio Económico';
+COMMENT ON COLUMN cuentas.hh_pasivo_laboral.importe_pago_ejer_eco IS 'Importe Pago del Ejercicio Económico';
+COMMENT ON COLUMN cuentas.hh_pasivo_laboral.saldo_al_cierre IS 'Saldo al cierre del ejercicio economico, calculado por el sistema';
+COMMENT ON COLUMN cuentas.hh_pasivo_laboral.corriente IS 'Indica si el registro es corriente o no';
+COMMENT ON COLUMN cuentas.hh_pasivo_laboral.contratista_id IS 'Clave foranea al contratista';
+COMMENT ON COLUMN cuentas.hh_pasivo_laboral.anho IS 'Año contable y mes';
+COMMENT ON COLUMN cuentas.hh_pasivo_laboral.creado_por IS 'Clave foranea al usuario';
+COMMENT ON COLUMN cuentas.hh_pasivo_laboral.actualizado_por IS 'Clave foranea al usuario';
+COMMENT ON COLUMN cuentas.hh_pasivo_laboral.sys_status IS 'Estatus interno del sistema';
+COMMENT ON COLUMN cuentas.hh_pasivo_laboral.sys_creado_el IS 'Fecha de creación del registro.';
+COMMENT ON COLUMN cuentas.hh_pasivo_laboral.sys_actualizado_el IS 'Fecha de última actualización del registro.';
+COMMENT ON COLUMN cuentas.hh_pasivo_laboral.sys_finalizado_el IS 'Fecha de "eliminado" el registro.';
+
+
+-- Table: cuentas.ii1_gastos_operacionales
+
+-- DROP TABLE cuentas.ii1_gastos_operacionales;
+
+CREATE TABLE cuentas.ii1_gastos_operacionales
+(
+  id serial NOT NULL, -- Clave primaria
+  tipo_gasto character varying(255) NOT NULL, -- Tipo de gasto, tomando valores como: Gastos de personal Gastos de Funcionamiento Depreciación y amortización Tributos
+  ventas_hist numeric(38,6) NOT NULL, -- Ventas historico
+  ventas_ajustado numeric(38,6) NOT NULL, -- Ventas ajustado por inflacion
+  admin_hist numeric(38,6) NOT NULL, -- Administracion historico
+  admin_ajustado numeric(38,6) NOT NULL, -- Administracion ajustado por inflacion
+  contratista_id integer NOT NULL, -- Clave foranea al contratista
+  anho character varying(100) NOT NULL, -- Año contable y mes
+  creado_por integer, -- Clave foranea al usuario
+  actualizado_por integer, -- Clave foranea al usuario
+  sys_status boolean NOT NULL DEFAULT true, -- Estatus interno del sistema
+  sys_creado_el timestamp with time zone DEFAULT now(), -- Fecha de creación del registro.
+  sys_actualizado_el timestamp with time zone DEFAULT now(), -- Fecha de última actualización del registro.
+  sys_finalizado_el timestamp with time zone, -- Fecha de "eliminado" el registro.
+  CONSTRAINT ii1_gastos_operacionales_pkey PRIMARY KEY (id),
+  CONSTRAINT ii1_gastos_operacionales_contratista_id_fkey FOREIGN KEY (contratista_id)
+      REFERENCES contratistas (id) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE NO ACTION
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE cuentas.ii1_gastos_operacionales
+  OWNER TO eureka;
+COMMENT ON TABLE cuentas.ii1_gastos_operacionales
+  IS 'Cuenta de Gastos operaciones II-1';
+COMMENT ON COLUMN cuentas.ii1_gastos_operacionales.id IS 'Clave primaria';
+COMMENT ON COLUMN cuentas.ii1_gastos_operacionales.tipo_gasto IS 'Tipo de gasto, tomando valores como: Gastos de personal Gastos de Funcionamiento Depreciación y amortización Tributos
+';
+COMMENT ON COLUMN cuentas.ii1_gastos_operacionales.ventas_hist IS 'Ventas historico';
+COMMENT ON COLUMN cuentas.ii1_gastos_operacionales.ventas_ajustado IS 'Ventas ajustado por inflacion';
+COMMENT ON COLUMN cuentas.ii1_gastos_operacionales.admin_hist IS 'Administracion historico';
+COMMENT ON COLUMN cuentas.ii1_gastos_operacionales.admin_ajustado IS 'Administracion ajustado por inflacion';
+COMMENT ON COLUMN cuentas.ii1_gastos_operacionales.contratista_id IS 'Clave foranea al contratista';
+COMMENT ON COLUMN cuentas.ii1_gastos_operacionales.anho IS 'Año contable y mes';
+COMMENT ON COLUMN cuentas.ii1_gastos_operacionales.creado_por IS 'Clave foranea al usuario';
+COMMENT ON COLUMN cuentas.ii1_gastos_operacionales.actualizado_por IS 'Clave foranea al usuario';
+COMMENT ON COLUMN cuentas.ii1_gastos_operacionales.sys_status IS 'Estatus interno del sistema';
+COMMENT ON COLUMN cuentas.ii1_gastos_operacionales.sys_creado_el IS 'Fecha de creación del registro.';
+COMMENT ON COLUMN cuentas.ii1_gastos_operacionales.sys_actualizado_el IS 'Fecha de última actualización del registro.';
+COMMENT ON COLUMN cuentas.ii1_gastos_operacionales.sys_finalizado_el IS 'Fecha de "eliminado" el registro.';
+
+
+--- MARCOS
+
