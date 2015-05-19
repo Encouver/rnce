@@ -58,10 +58,10 @@ class CuentasHhPasivoLaboral extends \common\components\BaseActiveRecord
             [['contratista_id', 'creado_por', 'actualizado_por', 'hh_concepto_id'], 'integer'],
             [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['anho'], 'string', 'max' => 100],
-             ['otro_nombre', 'required', 'when' => function ($model) {
+            ['otro_nombre', 'required', 'when' => function ($model) {
                 return $model->hh_concepto_id == 5;
             }, 'whenClient' => "function (attribute, value) {
-                return $('#cuentashhpasivolaboral-hh_concepto_id').val() == 'Otros';
+                return $('#cuentashhpasivolaboral-hh_concepto_id').val() == 5;
             }"],
         ];
     }
@@ -69,6 +69,7 @@ class CuentasHhPasivoLaboral extends \common\components\BaseActiveRecord
     /**
      * @inheritdoc
      */
+
     public function attributeLabels()
     {
         return [
