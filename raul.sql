@@ -145,3 +145,36 @@ COMMENT ON COLUMN origenes_capitales.numero_transaccion IS 'Numero de transaccio
 
 
 ALTER TYPE tipo_origen ADD VALUE 'EFECTIVO EN BANCO' AFTER 'EECTIVO EN BANCO';
+
+
+
+
+
+
+
+
+-------------19 mayo 08:53---------
+
+
+ALTER TABLE fondos_reservas DROP COLUMN acta_constitutiva_id;
+
+ALTER TABLE fondos_reservas ADD COLUMN documento_registrado_id integer;
+ALTER TABLE fondos_reservas ALTER COLUMN documento_registrado_id SET NOT NULL;
+COMMENT ON COLUMN fondos_reservas.documento_registrado_id IS 'Clave foranea a la tabla documentos_registrados';
+
+ALTER TABLE fondos_reservas ADD COLUMN contratista_id integer;
+ALTER TABLE fondos_reservas ALTER COLUMN contratista_id SET NOT NULL;
+COMMENT ON COLUMN fondos_reservas.contratista_id IS 'Clave foranea a la tabla contratistas';
+
+
+
+ALTER TABLE fondos_reservas
+  ADD CONSTRAINT fondos_reserva_documento_registrado_id_pkey FOREIGN KEY (documento_registrado_id)
+      REFERENCES activos.documentos_registrados (id) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE CASCADE;
+
+ALTER TABLE fondos_reservas
+  ADD CONSTRAINT fondos_reservas_contratista_id_pkey FOREIGN KEY (contratista_id)
+      REFERENCES contratistas (id) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE CASCADE;
+
