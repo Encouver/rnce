@@ -30,6 +30,7 @@ use Yii;
  * @property string $sys_creado_el
  * @property string $sys_actualizado_el
  * @property string $sys_finalizado_el
+ * @property string $numero_transaccion
  *
  * @property ActivosBienes $bien
  * @property ActivosDocumentosRegistrados $documentoRegistrado
@@ -54,7 +55,9 @@ class OrigenesCapitales extends \common\components\BaseActiveRecord
         return [
             [['tipo_origen', 'monto', 'contratista_id', 'documento_registrado_id'], 'required'],
             [['tipo_origen'], 'string'],
-            [['bien_id', 'banco_contratista_id', 'numero_accion', 'contratista_id', 'documento_registrado_id', 'creado_por', 'actualizado_por'], 'integer'],
+            [['monto'], 'required', 'on' => 'efectivo'],
+            [['monto','banco_contratista_id','fecha','numero_transaccion'], 'required', 'on' => 'efectivoenbanco'],
+            [['bien_id', 'banco_contratista_id', 'numero_accion', 'contratista_id', 'documento_registrado_id', 'creado_por', 'actualizado_por','numero_transaccion'], 'integer'],
             [['monto', 'saldo_cierre_anterior', 'saldo_corte', 'monto_aumento', 'saldo_aumento', 'valor_acciones', 'saldo_cierre_ajustado'], 'number'],
             [['fecha', 'fecha_corte', 'fecha_aumento', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['sys_status'], 'boolean']
@@ -90,6 +93,7 @@ class OrigenesCapitales extends \common\components\BaseActiveRecord
             'sys_creado_el' => Yii::t('app', 'Sys Creado El'),
             'sys_actualizado_el' => Yii::t('app', 'Sys Actualizado El'),
             'sys_finalizado_el' => Yii::t('app', 'Sys Finalizado El'),
+            'numero_transaccion' => Yii::t('app', 'Numero Transaccion'),
         ];
     }
 
@@ -123,5 +127,43 @@ class OrigenesCapitales extends \common\components\BaseActiveRecord
     public function getContratista()
     {
         return $this->hasOne(Contratistas::className(), ['id' => 'contratista_id']);
+    }
+    public function getFormAttribs($id){
+        
+        if($id=='efectivo')
+        {
+
+            return [
+                // primary key column
+                'id'=>[ // primary key attribute
+                    'type'=>TabularForm::INPUT_HIDDEN,
+                    'columnOptions'=>['hidden'=>true]
+                ],
+                'nombre_caja_id'=>['type'=>Form::INPUT_DROPDOWN_LIST, 'items'=>ArrayHelper::map(NombresCajas::find()->where(['nacional' => true])->orderBy('nombre')->asArray()->all(), 'id', 'nombre'), 'label'=>'Nombre caja'],
+                'saldo_cierre_ae'=>['type'=>Form::INPUT_TEXT,'label'=>'Saldo cierre'],
+                //'tipo_moneda_id'=>['type'=>Form::INPUT_DROPDOWN_LIST, 'items'=>ArrayHelper::map(SysDivisas::find()->orderBy('nombre')->asArray()->all(), 'id', 'nombre'), 'label'=>'Divisa'],
+                //'monto_me'=>['type'=>Form::INPUT_TEXT,'label'=>'Depositos en transito'],
+                //'tipo_cambio_cierre'=>['type'=>Form::INPUT_TEXT,'label'=>'Nc no contabilizadas'],
+            ];
+
+        }
+        if($id=='efectivoenbanco'){
+            $ban = BancosContratistas::find()->all();
+            $array = array();
+            foreach ($ban as $key => $value) {
+                if($value->banco->nacional)
+                $array[] = ['id' => $value->id, 'nombre' => $value->banco->nombre];
+            }
+
+           return [
+                'banco_contratista_id'=>['type'=>Form::INPUT_DROPDOWN_LIST, 'items'=>ArrayHelper::map($array, 'id', 'nombre'), 'label'=>'Banco'],
+                
+                'nombre_caja_id'=>['type'=>Form::INPUT_DROPDOWN_LIST, 'items'=>ArrayHelper::map(NombresCajas::find()->where(['nacional' => false])->orderBy('nombre')->asArray()->all(), 'id', 'nombre'), 'label'=>'Nombre caja'],
+                'saldo_cierre_ae'=>['type'=>Form::INPUT_TEXT,'label'=>'Saldo cierre'],
+                'tipo_moneda_id'=>['type'=>Form::INPUT_DROPDOWN_LIST, 'items'=>ArrayHelper::map(SysDivisas::find()->orderBy('nombre')->asArray()->all(), 'id', 'nombre'), 'label'=>'Divisa'],
+                'monto_me'=>['type'=>Form::INPUT_TEXT,'label'=>'Monto moneda extranjera'],
+                'tipo_cambio_cierre'=>['type'=>Form::INPUT_TEXT,'label'=>'Tipo de cambio al cierre'],
+            ];
+        }
     }
 }

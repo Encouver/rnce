@@ -4,6 +4,7 @@ namespace frontend\controllers;
 
 use Yii;
 use common\models\p\BancosContratistas;
+use common\models\p\Model;
 use app\models\BancosContratistasSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
