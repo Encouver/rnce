@@ -42,6 +42,18 @@ $this->params['breadcrumbs'][] = $this->title;
           }
         ],
         [
+          'attribute' => 'otro_nombre',
+          'label' => 'Otros especifique',
+          'format' => 'html',
+          'value' => function ($model)
+          {
+              if($model->hhConcepto->nombre=="Otros")
+              {
+                return '<div>'.$model->otro_nombre.'</div>';
+              }
+          }
+        ],
+        [
             'attribute' => 'saldo_p_anterior',
             'label' => 'Saldo del periodo anterior',
             'hAlign'=>'right',

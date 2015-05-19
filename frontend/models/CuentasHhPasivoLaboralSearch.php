@@ -22,8 +22,11 @@ class CuentasHhPasivoLaboralSearch extends CuentasHhPasivoLaboral
             [['saldo_p_anterior', 'importe_gasto_ejer_eco', 'importe_pago_ejer_eco', 'saldo_al_cierre'], 'number'],
             [['corriente', 'sys_status'], 'boolean'],
             [['anho', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
+           
         ];
     }
+
+
 
     /**
      * @inheritdoc
@@ -72,6 +75,7 @@ class CuentasHhPasivoLaboralSearch extends CuentasHhPasivoLaboral
             'sys_actualizado_el' => $this->sys_actualizado_el,
             'sys_finalizado_el' => $this->sys_finalizado_el,
             'hh_concepto_id' => $this->hh_concepto_id,
+            'otro_nombre' => $this->otro_nombre,
         ]);
 
         $query->andFilterWhere(['like', 'anho', $this->anho]);

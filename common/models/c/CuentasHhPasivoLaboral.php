@@ -31,6 +31,7 @@ use common\models\c\CuentasHhConcepto;
  * @property string $sys_actualizado_el
  * @property string $sys_finalizado_el
  * @property integer $hh_concepto_id
+ * @property string $otro_nombre
  *
  * @property CuentasHhConcepto $hhConcepto
  * @property Contratistas $contratista
@@ -56,7 +57,12 @@ class CuentasHhPasivoLaboral extends \common\components\BaseActiveRecord
             [['corriente', 'sys_status'], 'boolean'],
             [['contratista_id', 'creado_por', 'actualizado_por', 'hh_concepto_id'], 'integer'],
             [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
-            [['anho'], 'string', 'max' => 100]
+            [['anho'], 'string', 'max' => 100],
+             ['otro_nombre', 'required', 'when' => function ($model) {
+                return $model->hh_concepto_id == 5;
+            }, 'whenClient' => "function (attribute, value) {
+                return $('#cuentashhpasivolaboral-hh_concepto_id').val() == 'Otros';
+            }"],
         ];
     }
 
@@ -81,6 +87,7 @@ class CuentasHhPasivoLaboral extends \common\components\BaseActiveRecord
             'sys_actualizado_el' => Yii::t('app', 'Sys Actualizado El'),
             'sys_finalizado_el' => Yii::t('app', 'Sys Finalizado El'),
             'hh_concepto_id' => Yii::t('app', 'Hh Concepto ID'),
+            'otro_nombre' => Yii::t('app', 'Otro especifique'),
         ];
     }
 
@@ -110,10 +117,10 @@ class CuentasHhPasivoLaboral extends \common\components\BaseActiveRecord
                 
                 'corriente'=>['type'=>Form::INPUT_CHECKBOX,'label'=>'Corriente'],
                 'hh_concepto_id'=>['type'=>Form::INPUT_DROPDOWN_LIST, 'items'=>ArrayHelper::map(CuentasHhConcepto::find()->orderBy('id')->asArray()->all(), 'id', 'nombre'), 'label'=>'Concepto'],                
+                'otro_nombre'=>['type'=>Form::INPUT_TEXT,'label'=>'Especifique'],
                 'saldo_p_anterior'=>['type'=>Form::INPUT_TEXT, 'label'=>'Saldo del período anterior'],
                 'importe_gasto_ejer_eco'=>['type'=>Form::INPUT_TEXT,'label'=>'Importe gasto'],
                 'importe_pago_ejer_eco'=>['type'=>Form::INPUT_TEXT,'label'=>'Importe pago'],
-                //'saldo_al_cierre'=>['type'=>Form::INPUT_TEXT,'label'=>'Saldo al cierre'],
             ];
     }
 }
