@@ -28,16 +28,31 @@ use kartik\builder\Form;
 </div>
 
 <?php
+
 $script = <<< JS
 $( document ).ready(function() {
-    $('.field-cuentashhpasivolaboral-otro_nombre').css('display','none');
-    $('#cuentashhpasivolaboral-hh_concepto_id').click(function(e){
-            if($('#cuentashhpasivolaboral-hh_concepto_id').val()==5){
-              $('.field-cuentashhpasivolaboral-otro_nombre').css('display','inherit'); 
-            }else{
-              $('.field-cuentashhpasivolaboral-otro_nombre').css('display','none');                 
-            }
-    });
+    if(window.location.href.indexOf("update") > -1)
+    {
+        $('#cuentashhpasivolaboral-hh_concepto_id').click(function(e){
+                if($('#cuentashhpasivolaboral-hh_concepto_id').val()==5){
+                  $('.field-cuentashhpasivolaboral-otro_nombre').css('display','inherit'); 
+                }else{
+                  $('.field-cuentashhpasivolaboral-otro_nombre').css('display','none');                 
+                }
+        });
+
+    }else
+    {
+
+        $('.field-cuentashhpasivolaboral-otro_nombre').css('display','none');
+        $('#cuentashhpasivolaboral-hh_concepto_id').click(function(e){
+                if($('#cuentashhpasivolaboral-hh_concepto_id').val()==5){
+                  $('.field-cuentashhpasivolaboral-otro_nombre').css('display','inherit'); 
+                }else{
+                  $('.field-cuentashhpasivolaboral-otro_nombre').css('display','none');                 
+                }
+        });
+    }   
 });
 JS;
 $this->registerJs($script);
