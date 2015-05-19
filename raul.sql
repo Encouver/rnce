@@ -69,7 +69,7 @@ CREATE TYPE tipo_origen as enum ('EFECTIVO','EECTIVO EN BANCO','PROPIEDADES PLAN
 
 CREATE TABLE origenes_capitales
 (
-  id integer NOT NULL DEFAULT nextval('"origenes _capitales_id_seq"'::regclass), -- Clave Primaria
+  id serial NOT NULL, -- Clave primaria
   tipo_origen tipo_origen NOT NULL, -- tipo origen puede ser  EFECTIVO, EECTIVO EN BANCO, PROPIEDADES PLANTAS Y EQUIPOS, INVENTARIO DE MERCANCIA, ACTIVOS BIOLOGICOS, ACTIVOS INTANGIBLES, CUENTAS POR PAGAR ACCIONISTAS
   bien_id integer, -- Clave foranea a la tabla bienes
   banco_contratista_id integer, -- Clave foranea a la tabla bancos_contratistas
