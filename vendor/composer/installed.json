@@ -237,6 +237,11 @@
         ]
     },
     {
+<<<<<<< HEAD
+        "name": "bower-asset/jquery",
+        "version": "2.1.4",
+        "version_normalized": "2.1.4.0",
+=======
         "name": "amnah/yii2-classes",
         "version": "dev-master",
         "version_normalized": "9999999-dev",
@@ -286,6 +291,7 @@
         "name": "kartik-v/mpdf",
         "version": "v1.0.2",
         "version_normalized": "1.0.2.0",
+>>>>>>> 30e9d30ab17dd96566744a72b424e942bd5907bf
         "source": {
             "type": "git",
             "url": "https://github.com/kartik-v/mpdf.git",
@@ -3294,9 +3300,64 @@
         ]
     },
     {
+<<<<<<< HEAD
+        "name": "yiisoft/yii2-composer",
+        "version": "2.0.3",
+        "version_normalized": "2.0.3.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/yiisoft/yii2-composer.git",
+            "reference": "ca8d23707ae47d20b0454e4b135c156f6da6d7be"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/yiisoft/yii2-composer/zipball/ca8d23707ae47d20b0454e4b135c156f6da6d7be",
+            "reference": "ca8d23707ae47d20b0454e4b135c156f6da6d7be",
+            "shasum": ""
+        },
+        "require": {
+            "composer-plugin-api": "1.0.0"
+        },
+        "time": "2015-03-01 06:22:44",
+        "type": "composer-plugin",
+        "extra": {
+            "class": "yii\\composer\\Plugin",
+            "branch-alias": {
+                "dev-master": "2.0.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "yii\\composer\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Qiang Xue",
+                "email": "qiang.xue@gmail.com"
+            }
+        ],
+        "description": "The composer plugin for Yii extension installer",
+        "keywords": [
+            "composer",
+            "extension installer",
+            "yii2"
+        ]
+    },
+    {
+        "name": "yiisoft/yii2",
+        "version": "2.0.4",
+        "version_normalized": "2.0.4.0",
+=======
         "name": "bower-asset/jquery.inputmask",
         "version": "3.1.63",
         "version_normalized": "3.1.63.0",
+>>>>>>> 30e9d30ab17dd96566744a72b424e942bd5907bf
         "source": {
             "type": "git",
             "url": "https://github.com/RobinHerbots/jquery.inputmask.git",
@@ -3544,6 +3605,55 @@
         "keywords": [
             "code generator",
             "gii",
+            "yii2"
+        ]
+    },
+    {
+        "name": "yiisoft/yii2-faker",
+        "version": "2.0.3",
+        "version_normalized": "2.0.3.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/yiisoft/yii2-faker.git",
+            "reference": "b88ca69ee226a3610b2c26c026c3203d7ac50f6c"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/yiisoft/yii2-faker/zipball/b88ca69ee226a3610b2c26c026c3203d7ac50f6c",
+            "reference": "b88ca69ee226a3610b2c26c026c3203d7ac50f6c",
+            "shasum": ""
+        },
+        "require": {
+            "fzaninotto/faker": "*",
+            "yiisoft/yii2": "*"
+        },
+        "time": "2015-03-01 06:22:44",
+        "type": "yii2-extension",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.0.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "yii\\faker\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Mark Jebri",
+                "email": "mark.github@yandex.ru"
+            }
+        ],
+        "description": "Fixture generator. The Faker integration for the Yii framework.",
+        "keywords": [
+            "Fixture",
+            "faker",
             "yii2"
         ]
     }

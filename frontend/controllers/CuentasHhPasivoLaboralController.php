@@ -41,6 +41,23 @@ class CuentasHhPasivoLaboralController extends BaseController
         ]);
     }
 
+    public function actionPasivolaboral()
+    {
+        $searchModel = new CuentasHhPasivoLaboralSearch();
+        
+        $searchModel->corriente = true;
+        $dataProvider_c = $searchModel->search(Yii::$app->request->queryParams);
+        $searchModel->corriente = false;
+        $dataProvider_nc = $searchModel->search(Yii::$app->request->queryParams);
+
+
+        return $this->render('pasivo_laboral', [
+            'model' => $searchModel,
+            'dataProvider_c' => $dataProvider_c,
+            'dataProvider_nc' => $dataProvider_nc,
+        ]);
+    }
+
     /**
      * Displays a single CuentasHhPasivoLaboral model.
      * @param integer $id
@@ -61,12 +78,15 @@ class CuentasHhPasivoLaboralController extends BaseController
     public function actionCreate()
     {
         $model = new CuentasHhPasivoLaboral();
+        //Yii::app::end();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            $model->saldo_al_cierre = $model->saldo_p_anterior + $model->importe_gasto_ejer_eco +  $model->importe_pago_ejer_eco;
+            $model->save();
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
-                'model' => $model,
+                'model' => $model, 
             ]);
         }
     }
@@ -81,7 +101,9 @@ class CuentasHhPasivoLaboralController extends BaseController
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            $model->saldo_al_cierre = $model->saldo_p_anterior + $model->importe_gasto_ejer_eco +  $model->importe_pago_ejer_eco;
+            $model->save();
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [

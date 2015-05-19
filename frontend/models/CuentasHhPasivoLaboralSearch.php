@@ -18,10 +18,10 @@ class CuentasHhPasivoLaboralSearch extends CuentasHhPasivoLaboral
     public function rules()
     {
         return [
-            [['id', 'contratista_id', 'creado_por', 'actualizado_por'], 'integer'],
-            [['concepto', 'anho', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
+            [['id', 'contratista_id', 'creado_por', 'actualizado_por', 'hh_concepto_id'], 'integer'],
             [['saldo_p_anterior', 'importe_gasto_ejer_eco', 'importe_pago_ejer_eco', 'saldo_al_cierre'], 'number'],
             [['corriente', 'sys_status'], 'boolean'],
+            [['anho', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
         ];
     }
 
@@ -71,10 +71,10 @@ class CuentasHhPasivoLaboralSearch extends CuentasHhPasivoLaboral
             'sys_creado_el' => $this->sys_creado_el,
             'sys_actualizado_el' => $this->sys_actualizado_el,
             'sys_finalizado_el' => $this->sys_finalizado_el,
+            'hh_concepto_id' => $this->hh_concepto_id,
         ]);
 
-        $query->andFilterWhere(['like', 'concepto', $this->concepto])
-            ->andFilterWhere(['like', 'anho', $this->anho]);
+        $query->andFilterWhere(['like', 'anho', $this->anho]);
 
         return $dataProvider;
     }
