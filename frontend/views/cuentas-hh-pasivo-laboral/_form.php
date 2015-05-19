@@ -33,6 +33,10 @@ $script = <<< JS
 $( document ).ready(function() {
     if(window.location.href.indexOf("update") > -1)
     {
+        if($('#cuentashhpasivolaboral-hh_concepto_id').val()!=5){
+           $('.field-cuentashhpasivolaboral-otro_nombre').css('display','none');  
+        }
+
         $('#cuentashhpasivolaboral-hh_concepto_id').click(function(e){
                 if($('#cuentashhpasivolaboral-hh_concepto_id').val()==5){
                   $('.field-cuentashhpasivolaboral-otro_nombre').css('display','inherit'); 
