@@ -61,8 +61,8 @@ AppAsset::register($this);
                     'items' => [
                          //['label' => 'Crear bien', 'url' => ['/activos-bienes/index']],
                         ['label' => 'Bienes', 'url' => ['/activos-bienes/index']],
-                        ['label' => 'Facturas', 'url' => ['/activos-facturas/index']],
                         ['label' => 'Avaluos', 'url' => ['/activos-avaluos/index']],
+                        ['label' => 'Desincorporación', 'url' => ['/activos-desincorporacion-activos/index']],
                         //['label' => 'Datos', 'url' => ['/activos-avaluos/index']],
                         //['label' => 'Aqui van los otros', 'url' => ['#']],
                     ],

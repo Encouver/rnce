@@ -2,6 +2,8 @@
 
 namespace common\models\a;
 
+use kartik\builder\Form;
+use kartik\money\MaskMoney;
 use Yii;
 
 /**
@@ -71,5 +73,23 @@ class ActivosDeterioros extends \common\components\BaseActiveRecord
     public function getBien()
     {
         return $this->hasOne(ActivosBienes::className(), ['id' => 'bien_id']);
+    }
+
+
+    public function getFormAttribs() {
+        return [
+            // primary key column
+            'id'=>[ // primary key attribute
+                'type'=>Form::INPUT_HIDDEN,
+                'columnOptions'=>['hidden'=>true]
+            ],
+
+            'valor_razonable'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),'options'=>['pluginOptions'=>['prefix'=>'','precision'=>'0'],]],
+            'costo_disposicion'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),'options'=>['pluginOptions'=>[],]],
+            'valor_uso'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),'options'=>['pluginOptions'=>[],]],
+            'acumulado_ejer_ant'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),'options'=>['pluginOptions'=>[],]],
+            'ejercicios_anteriores'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),'options'=>['pluginOptions'=>[],]],
+
+        ];
     }
 }

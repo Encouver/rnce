@@ -92,4 +92,57 @@ class ActivosAvaluos extends \common\components\BaseActiveRecord
     {
         return $this->hasOne(PersonasNaturales::className(), ['id' => 'perito_id']);
     }
+
+
+    public function getFormAttribs() {
+        return [
+            // primary key column
+            'id'=>[ // primary key attribute
+                'type'=>Form::INPUT_HIDDEN,
+                'columnOptions'=>['hidden'=>true]
+            ],
+
+
+
+            //Solo para retiroS
+            'precio_adquisicion'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),'options'=>['pluginOptions'=>['prefix'=>'','precision'=>'0'],]],
+
+            //Si tiene prima descuento
+            'prima_descuento'=>['type'=>Form::INPUT_CHECKBOX,],
+            'monto_prima_des'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),'options'=>['pluginOptions'=>[],]],
+
+            //Solo para Bonos
+            'plazo'=>['type'=>Form::INPUT_TEXT,],
+            'tasa'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),'options'=>['pluginOptions'=>[],]],
+
+            'cotiza_bolsa_valores'=>['type'=>Form::INPUT_CHECKBOX,],
+            //Vincula con Obligaciones Bancarias
+            'gtia_oblig_bancaria'=>['type'=>Form::INPUT_CHECKBOX,],
+
+            //Si cotizan en la bolsa debe ser el metodo del valor razonable
+            'sys_metodo_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(ActivosSysMetodos::find()->all(),'id','nombre'), ]],
+
+
+            'deterioro'=>['type'=>Form::INPUT_CHECKBOX,],
+
+            // Metodo del costo
+            'valor_razonable'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),'options'=>['pluginOptions'=>[],]],
+            'costos_disposicion'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),'options'=>['pluginOptions'=>[],]],
+            'valor_uso'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),'options'=>['pluginOptions'=>[],]],
+            //Metodo del valor razonable
+            'valor_mercado'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),'options'=>['pluginOptions'=>[],]],
+
+            'deterioro_acumulado'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),'options'=>['pluginOptions'=>[],]],
+
+            // Sistema
+            // 'varia_efecto_infla'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),'options'=>['pluginOptions'=>[],]],
+            // 'resultado_det_cam_val'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),'options'=>['pluginOptions'=>[],]],
+            //'sdo_cierre_ejer_econ'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),'options'=>['pluginOptions'=>[],]],
+
+
+            'intereses_gen_ejer_econ'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),'options'=>['pluginOptions'=>[],]],
+
+
+        ];
+    }
 }

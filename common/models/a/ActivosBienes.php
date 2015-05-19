@@ -131,6 +131,40 @@ class ActivosBienes extends \common\components\BaseActiveRecord
         return $this->hasOne(ActivosSysTiposBienes::className(), ['id' => 'sys_tipo_bien_id']);
     }
 
+//    /**
+//     * @return boolean
+//     */
+//    public function deterioro()
+//    {
+//        if(($tipoBien = $this->hasOne(ActivosSysTiposBienes::className(), ['id' => 'sys_tipo_bien_id']))!=null)
+//            return $tipoBien->deterioro;
+//
+//        return null;
+//    }
+//    /**
+//     * @return boolean
+//     */
+//    public function depreciacion()
+//    {
+//        if($tipoBien = $this->hasOne(ActivosSysTiposBienes::className(), ['id' => 'sys_tipo_bien_id']))
+//            return $tipoBien->depreciacion;
+//
+//        return null;
+//    }
+//
+//    /**
+//     * @return string
+//     */
+//    public function principioContable()
+//    {
+//        // Por hacer
+//        /* if($tipoBien = $this->hasOne(ActivosSysTiposBienes::className(), ['id' => 'sys_tipo_bien_id']))
+//             return $tipoBien->deterioro;*/
+//
+//        return null;
+//    }
+
+
     /**
      * @return \yii\db\ActiveQuery
      */
