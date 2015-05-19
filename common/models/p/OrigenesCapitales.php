@@ -1,7 +1,8 @@
 <?php
 
 namespace common\models\p;
-
+use kartik\builder\Form;
+use yii\helpers\ArrayHelper;
 use Yii;
 
 /**
@@ -134,35 +135,33 @@ class OrigenesCapitales extends \common\components\BaseActiveRecord
         {
 
             return [
-                // primary key column
-                'id'=>[ // primary key attribute
-                    'type'=>TabularForm::INPUT_HIDDEN,
-                    'columnOptions'=>['hidden'=>true]
-                ],
-                'nombre_caja_id'=>['type'=>Form::INPUT_DROPDOWN_LIST, 'items'=>ArrayHelper::map(NombresCajas::find()->where(['nacional' => true])->orderBy('nombre')->asArray()->all(), 'id', 'nombre'), 'label'=>'Nombre caja'],
-                'saldo_cierre_ae'=>['type'=>Form::INPUT_TEXT,'label'=>'Saldo cierre'],
-                //'tipo_moneda_id'=>['type'=>Form::INPUT_DROPDOWN_LIST, 'items'=>ArrayHelper::map(SysDivisas::find()->orderBy('nombre')->asArray()->all(), 'id', 'nombre'), 'label'=>'Divisa'],
-                //'monto_me'=>['type'=>Form::INPUT_TEXT,'label'=>'Depositos en transito'],
-                //'tipo_cambio_cierre'=>['type'=>Form::INPUT_TEXT,'label'=>'Nc no contabilizadas'],
+             
+                'monto'=>['type'=>Form::INPUT_TEXT,'label'=>'Monto Efectivo'],
+                
             ];
 
         }
         if($id=='efectivoenbanco'){
             $ban = BancosContratistas::find()->all();
             $array = array();
-            foreach ($ban as $key => $value) {
-                if($value->banco->nacional)
-                $array[] = ['id' => $value->id, 'nombre' => $value->banco->nombre];
+              foreach ($ban as $banco) {
+                
+                $array[] = ['id' => $banco->id, 'nombre' => $banco->banco->nombre.' '.$banco->num_cuenta];
             }
 
+
            return [
-                'banco_contratista_id'=>['type'=>Form::INPUT_DROPDOWN_LIST, 'items'=>ArrayHelper::map($array, 'id', 'nombre'), 'label'=>'Banco'],
-                
-                'nombre_caja_id'=>['type'=>Form::INPUT_DROPDOWN_LIST, 'items'=>ArrayHelper::map(NombresCajas::find()->where(['nacional' => false])->orderBy('nombre')->asArray()->all(), 'id', 'nombre'), 'label'=>'Nombre caja'],
-                'saldo_cierre_ae'=>['type'=>Form::INPUT_TEXT,'label'=>'Saldo cierre'],
-                'tipo_moneda_id'=>['type'=>Form::INPUT_DROPDOWN_LIST, 'items'=>ArrayHelper::map(SysDivisas::find()->orderBy('nombre')->asArray()->all(), 'id', 'nombre'), 'label'=>'Divisa'],
-                'monto_me'=>['type'=>Form::INPUT_TEXT,'label'=>'Monto moneda extranjera'],
-                'tipo_cambio_cierre'=>['type'=>Form::INPUT_TEXT,'label'=>'Tipo de cambio al cierre'],
+                'banco_contratista_id'=>['type'=>Form::INPUT_DROPDOWN_LIST, 'items'=>ArrayHelper::map($array, 'id', 'nombre'), 'label'=>'Banco Numero de Cuenta'],
+                'numero_transaccion'=>['type'=>Form::INPUT_TEXT,'label'=>'Numero de transaccion'],
+                'fecha'=>[
+                'type'=>Form::INPUT_WIDGET, 
+                'widgetClass'=>'\kartik\widgets\DatePicker', 
+                'options'=>['pluginOptions' => [
+                    'autoclose'=>true,
+                    'format' => 'yyyy-mm-dd'
+                ]],
+                ],
+                'monto'=>['type'=>Form::INPUT_TEXT,'label'=>'Monto transaccion'],
             ];
         }
     }

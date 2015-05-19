@@ -4,6 +4,7 @@ namespace frontend\controllers;
 
 use Yii;
 use common\models\p\OrigenesCapitales;
+use common\models\a\ActivosDocumentosRegistrados;
 use app\models\OrigenesCapitalesSearch;
 use common\components\BaseController;
 use yii\web\NotFoundHttpException;
@@ -60,16 +61,55 @@ class OrigenesCapitalesController extends BaseController
      */
     public function actionCreate()
     {
-        $model = new OrigenesCapitales();
+        $origen_capital = new OrigenesCapitales();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($origen_capital->load(Yii::$app->request->post()) && $origen_capital->save()) {
+            return $this->redirect(['view', 'id' => $origen_capital->id]);
         } else {
             return $this->render('create', [
-                'model' => $model,
+                'origen_capital' => $origen_capital,
             ]);
         }
     }
+     public function actionCrearcapital()
+    {
+          $origen_capital = new OrigenesCapitales();
+          
+          
+          if ($origen_capital->load(Yii::$app->request->post())) {
+           
+        
+           if ($origen_capital->scenario=="efectivo") {
+               $origen_capital->tipo_origen="EFECTIVO";
+           }else{
+              if ($origen_capital->scenario=="efectivoenbanco") {
+              $origen_capital->tipo_origen="EFECTIVO EN BANCO";}
+           }
+              
+                     
+              
+                    $usuario= \common\models\p\User::findOne(Yii::$app->user->identity->id);
+                    $registro = ActivosDocumentosRegistrados::findOne(['contratista_id'=>$usuario->contratista_id, 'tipo_documento_id'=>1]);
+                    $origen_capital->contratista_id=$usuario->contratista_id;
+                    $origen_capital->documento_registrado_id=$registro->id;
+                    if($origen_capital->save()){
+                        return $this->redirect(['view', 'id' => $origen_capital->id]);
+                    }else{
+                       
+                        return print_r($origen_capital->getErrors());
+                    }
+                    
+                     
+            }else{
+                $origen_capital->getErrors();
+                        return $this->render('create', [
+                            'origen_capital' => $origen_capital,
+                            ]);
+            }
+    }
+    
+    
+   
 
     /**
      * Updates an existing OrigenesCapitales model.
