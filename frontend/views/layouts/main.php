@@ -54,6 +54,7 @@ AppAsset::register($this);
                          ['label' => 'Pasivo laboral', 'url' => ['/cuentas-hh-pasivo-laboral/pasivolaboral']],
                          ['label' => 'Provisiones', 'url' => ['/cuentas-jj-proviciones/index']],
                          ['label' => 'Otros tributos por pagar', 'url' => ['/cuentas-dd3-otros-tributos/index']],
+                         ['label' => 'Gastos operacionales', 'url' => ['cuentas-ii1-gastos-operacionales/index']],
 
                     ],
                 ],
