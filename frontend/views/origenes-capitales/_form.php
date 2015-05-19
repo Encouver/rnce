@@ -8,7 +8,13 @@ use kartik\builder\Form;
 /* @var $model common\models\p\OrigenesCapitales */
 /* @var $form yii\widgets\ActiveForm */
 ?>
-
+<style type="text/css">
+.tamano
+{
+	width: 400px;
+	max-width: 400px;
+}
+</style>
 <div class="origenes-capitales-form">
 
     <?php

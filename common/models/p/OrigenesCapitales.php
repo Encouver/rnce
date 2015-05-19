@@ -1,6 +1,11 @@
 <?php
 
 namespace common\models\p;
+use common\models\a\ActivosDocumentosRegistrados;
+use common\models\p\DenominacionesComerciales;
+use common\models\p\Certificados;
+use common\models\p\Suplementarios;
+use common\models\p\Acciones;
 use kartik\builder\Form;
 use yii\helpers\ArrayHelper;
 use Yii;
@@ -56,13 +61,42 @@ class OrigenesCapitales extends \common\components\BaseActiveRecord
         return [
             [['tipo_origen', 'monto', 'contratista_id', 'documento_registrado_id'], 'required'],
             [['tipo_origen'], 'string'],
+            ['monto', 'validarmonto'],
             [['monto'], 'required', 'on' => 'efectivo'],
+            [['monto','banco_contratista_id','fecha','numero_transaccion'], 'required', 'on' => 'efectivoenbanco'],
             [['monto','banco_contratista_id','fecha','numero_transaccion'], 'required', 'on' => 'efectivoenbanco'],
             [['bien_id', 'banco_contratista_id', 'numero_accion', 'contratista_id', 'documento_registrado_id', 'creado_por', 'actualizado_por','numero_transaccion'], 'integer'],
             [['monto', 'saldo_cierre_anterior', 'saldo_corte', 'monto_aumento', 'saldo_aumento', 'valor_acciones', 'saldo_cierre_ajustado'], 'number'],
             [['fecha', 'fecha_corte', 'fecha_aumento', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['sys_status'], 'boolean']
         ];
+    }
+    public function validarmonto($attribute){
+        
+        $monto_pagado;
+        $usuario= \common\models\p\User::findOne(Yii::$app->user->identity->id);
+        $registro = ActivosDocumentosRegistrados::findOne(['contratista_id'=>$usuario->contratista_id, 'tipo_documento_id'=>1]);
+
+         $denominacion_comercial= DenominacionesComerciales::findOne(['contratista_id'=>$usuario->contratista_id]);
+            if($denominacion_comercial->tipo_denominacion!="COOPERATIVA"){
+            
+             $accion= Acciones::findOne(['contratista_id'=>$usuario->contratista_id ,'documento_registrado_id'=>$registro->id,'suscrito'=>false]);
+             $monto_pagado = $accion->valor_comun;
+         }
+         if($denominacion_comercial->tipo_denominacion=="COOPERATIVA" && $denominacion_comercial->cooperativa_capital=='LIMITADO'){
+           
+             $certificado= Certificados::findOne(['contratista_id'=>$usuario->contratista_id ,'documento_registrado_id'=>$registro->id,'suscrito'=>false]);
+             $monto_pagado = $certificado->valor_asociacion+$certificado->valor_aportacion+$certificado->valor_rotativo+$certificado->valor_inversion;
+         }
+         if($denominacion_comercial->tipo_denominacion=="COOPERATIVA" && $denominacion_comercial->cooperativa_capital=='SUPLEMENTARIO'){
+             $suplementario= Suplementarios::findOne(['contratista_id'=>$usuario->contratista_id ,'documento_registrado_id'=>$registro->id,'suscrito'=>false]);
+             $monto_pagado = $suplementario->valor;
+         }
+          $monto_actual= $this->sumarmonto()+$this->monto;
+          
+          if($monto_actual>$monto_pagado){
+               $this->addError($attribute,'Monto excedente');
+          }
     }
 
     /**
@@ -97,7 +131,21 @@ class OrigenesCapitales extends \common\components\BaseActiveRecord
             'numero_transaccion' => Yii::t('app', 'Numero Transaccion'),
         ];
     }
-
+   
+    public function sumarmonto()
+    {
+        $suma=0;
+        
+        $usuario= \common\models\p\User::findOne(Yii::$app->user->identity->id);
+        $registro = ActivosDocumentosRegistrados::findOne(['contratista_id'=>$usuario->contratista_id, 'tipo_documento_id'=>1]);
+                   
+        $capitales= OrigenesCapitales::findAll(['contratista_id'=>$usuario->contratista_id, 'documento_registrado_id'=>$registro->id]);
+         foreach ($capitales as $capital) {
+                $suma=$suma+$capital->monto;
+            }
+        
+        return $suma;
+    }
     /**
      * @return \yii\db\ActiveQuery
      */

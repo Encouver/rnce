@@ -89,12 +89,15 @@ class OrigenesCapitalesController extends BaseController
                         return $this->redirect(['view', 'id' => $origen_capital->id]);
                     }else{
                        
-                        return print_r($origen_capital->getErrors());
+             
+                        return $this->render('create', [
+                            'origen_capital' => $origen_capital,
+                            ]);
                     }
                     
                      
             }else{
-                $origen_capital->getErrors();
+                
                         return $this->render('create', [
                             'origen_capital' => $origen_capital,
                             ]);
