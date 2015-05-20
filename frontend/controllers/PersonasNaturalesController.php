@@ -85,7 +85,7 @@ class PersonasNaturalesController extends Controller
             $natural_juridica->juridica= false;
             $natural_juridica->denominacion=$persona_natural->primer_nombre.' '.$persona_natural->primer_apellido;
             $natural_juridica->sys_status=true;
-            if (! ($flag = $natural_juridica->save(false))) {
+            if (! ($flag = $natural_juridica->save())) {
 
                                         $transaction->rollBack();
                                     return "faltan datos de natural juridica";
@@ -141,7 +141,7 @@ class PersonasNaturalesController extends Controller
             $natural_juridica->juridica= false;
             $natural_juridica->denominacion=$persona_natural->primer_nombre.' '.$persona_natural->primer_apellido;
             $natural_juridica->sys_status=true;
-            if (! ($flag = $natural_juridica->save(true))) {
+            if (! ($flag = $natural_juridica->save())) {
 
                                         $transaction->rollBack();
                                     return "faltan datos de natural juridica";
