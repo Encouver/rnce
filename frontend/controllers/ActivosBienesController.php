@@ -6,12 +6,15 @@ use common\models\a\ActivosActivosBiologicos;
 use common\models\a\ActivosActivosIntangibles;
 use common\models\a\ActivosConstruccionesInmuebles;
 use common\models\a\ActivosDatosImportaciones;
+use common\models\a\ActivosDepreciacionesAmortizaciones;
 use common\models\a\ActivosDeterioros;
 use common\models\a\ActivosDocumentosRegistrados;
 use common\models\a\ActivosFabricacionesMuebles;
 use common\models\a\ActivosFacturas;
 use common\models\a\ActivosInmuebles;
+use common\models\a\ActivosLicencias;
 use common\models\a\ActivosMuebles;
+use common\models\a\ActivosVehiculos;
 use common\models\a\ConstruccionesInmuebles;
 use common\models\a\DatosImportaciones;
 use common\models\a\FabricacionesMuebles;
@@ -83,11 +86,17 @@ class ActivosBienesController extends BaseController
         $modelBienTipo = new ActivosInmuebles();
         $model->sys_tipo_bien_id = 1;
 
+        $modelVehiculo = null;
+
+        $modelLicencia = null;
+
         $modelFactura = null;
 
         $modelDocumento = null;
 
         $modelDeterioro = new ActivosDeterioros();
+
+        $modelDepreciacion = new ActivosDepreciacionesAmortizaciones();
 
 
         if ($model->load(Yii::$app->request->post())) {
@@ -100,6 +109,8 @@ class ActivosBienesController extends BaseController
                     break;
                 case 2:
                     $modelBienTipo = new ActivosMuebles();
+                    if($model->sys_tipo_bien_id == 3)
+                        $modelVehiculo = new ActivosVehiculos();
                     break;
                 case 3:
                     if($model->sys_tipo_bien_id == 8)
@@ -112,6 +123,8 @@ class ActivosBienesController extends BaseController
                     break;
                 case 5:
                     $modelBienTipo = new ActivosActivosIntangibles();
+                    if($model->sys_tipo_bien_id == 15)
+                        $modelLicencia = new ActivosLicencias();
                     break;
                 default:
                     break;
@@ -138,6 +151,26 @@ class ActivosBienesController extends BaseController
 
                         $modelBienTipo->bien_id = $model->id;
                         $flag = $flag && $modelBienTipo->save();
+
+                        if($model->sys_tipo_bien_id == 3 )
+                            if($modelVehiculo->load(Yii::$app->request->post()) and $flag)
+                            {
+                                $modelVehiculo->mueble_id = $modelBienTipo->id;
+                                $flag = $flag && $modelVehiculo->save();
+                            }
+                        if($model->sys_tipo_bien_id == 15)
+                            if($modelLicencia->load(Yii::$app->request->post()) and $flag)
+                            {
+                                $modelLicencia->activo_intangible_id = $modelBienTipo->id;
+                                $flag = $flag && $modelLicencia->save();
+                            }
+                    }
+
+                    // Depreciación
+                    if ($modelDepreciacion->load(Yii::$app->request->post()) and $flag) {
+
+                        $modelDepreciacion->bien_id = $model->id;
+                        $flag = $flag && $modelDepreciacion->save();
                     }
 
                     // Factura.
@@ -181,7 +214,7 @@ class ActivosBienesController extends BaseController
 
             return $this->render('create', [
                 'model' => $model,'modelBienTipo'=> $modelBienTipo, 'modelDatosImportacion'=>$modelDatosImportacion, 'modelFactura'=>$modelFactura,'modelDocumento'=>$modelDocumento,
-                'modelDeterioro'=>$modelDeterioro,
+                'modelDeterioro'=>$modelDeterioro, 'modelDepreciacion'=>$modelDepreciacion
             ]);
        // }
     }

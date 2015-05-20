@@ -20,6 +20,10 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'valor_neto_libro')->textInput() ?>
 
+    <?= $form->field($model, 'creado_por')->textInput() ?>
+
+    <?= $form->field($model, 'actualizado_por')->textInput() ?>
+
     <?= $form->field($model, 'sys_status')->checkbox() ?>
 
     <?= $form->field($model, 'sys_creado_el')->textInput() ?>

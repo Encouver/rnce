@@ -15,6 +15,7 @@ use Yii;
  * @property string $sys_creado_el
  * @property string $sys_actualizado_el
  * @property string $sys_finalizado_el
+ * @property string $descripcion
  *
  * @property ActivosDocumentosRegistrados[] $activosDocumentosRegistrados
  */
@@ -38,7 +39,7 @@ class ActivosSysTiposRegistros extends \common\components\BaseActiveRecord
             [['creado_por', 'actualizado_por'], 'integer'],
             [['sys_status'], 'boolean'],
             [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
-            [['nombre'], 'string', 'max' => 255],
+            [['nombre', 'descripcion'], 'string', 'max' => 255],
             [['nombre'], 'unique']
         ];
     }
@@ -57,6 +58,7 @@ class ActivosSysTiposRegistros extends \common\components\BaseActiveRecord
             'sys_creado_el' => Yii::t('app', 'Sys Creado El'),
             'sys_actualizado_el' => Yii::t('app', 'Sys Actualizado El'),
             'sys_finalizado_el' => Yii::t('app', 'Sys Finalizado El'),
+            'descripcion' => Yii::t('app', 'Descripcion'),
         ];
     }
 

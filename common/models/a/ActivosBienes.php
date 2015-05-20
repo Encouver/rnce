@@ -343,7 +343,7 @@ class ActivosBienes extends \common\components\BaseActiveRecord
         return null;
     }
 
-    public function etiqueta(){
+    public function Etiqueta(){
         return $this->sysTipoBien->nombre.' - '.$this->detalle;
     }
 }

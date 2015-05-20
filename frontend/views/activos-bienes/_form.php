@@ -90,6 +90,16 @@ use kartik\widgets\ActiveForm;
         }
 
 
+        echo '<h2> Depreciación/Amortización: </h2>';
+        echo Form::widget([       // 3 column layout
+            'model' => $modelDeterioro,
+            'form' => $form,
+            'columns' => 4,
+            'columnSize' => 'xs',
+            'attributes' => $modelDeterioro->getFormAttribs()
+        ]);
+
+
     $script = <<< JS
         $('#origen').change(function(e){
                 if($('#origen').val()== 1 || $('#origen').val()==4){

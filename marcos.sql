@@ -1112,3 +1112,15 @@ ADD UNIQUE (principio_contable, contratista_id);
 ALTER TABLE activos.sys_tipos_registros
 ADD COLUMN descripcion character varying(255);
 COMMENT ON COLUMN activos.sys_tipos_registros.descripcion IS 'Descripcion del tipo de Registro.';
+
+
+ALTER TABLE personas_juridicas
+  DROP CONSTRAINT personas_juridicas_rif_fkey;
+ALTER TABLE personas_juridicas
+  ADD FOREIGN KEY (rif) REFERENCES sys_naturales_juridicas (rif) ON UPDATE CASCADE ON DELETE NO ACTION;
+
+
+ALTER TABLE personas_naturales
+  DROP CONSTRAINT personas_naturales_rif_fkey;
+ALTER TABLE personas_naturales
+  ADD FOREIGN KEY (rif) REFERENCES sys_naturales_juridicas (rif) ON UPDATE CASCADE ON DELETE NO ACTION;

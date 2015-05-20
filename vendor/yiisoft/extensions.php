@@ -3,16 +3,6 @@
 $vendorDir = dirname(__DIR__);
 
 return array (
-
-  'yiisoft/yii2-faker' => 
-  array (
-    'name' => 'yiisoft/yii2-faker',
-    'version' => '2.0.3.0',
-    'alias' => 
-    array (
-      '@yii/faker' => $vendorDir . '/yiisoft/yii2-faker',
-    ),
-  ),
   'yiisoft/yii2-bootstrap' => 
   array (
     'name' => 'yiisoft/yii2-bootstrap',
@@ -22,7 +12,6 @@ return array (
       '@yii/bootstrap' => $vendorDir . '/yiisoft/yii2-bootstrap',
     ),
   ),
-
   'yiisoft/yii2-swiftmailer' => 
   array (
     'name' => 'yiisoft/yii2-swiftmailer',
@@ -68,13 +57,13 @@ return array (
       '@yii/gii' => $vendorDir . '/yiisoft/yii2-gii',
     ),
   ),
-  'yiisoft/yii2-faker' => 
+  'amnah/yii2-classes' => 
   array (
-    'name' => 'yiisoft/yii2-faker',
-    'version' => '2.0.3.0',
+    'name' => 'amnah/yii2-classes',
+    'version' => '9999999-dev',
     'alias' => 
     array (
-      '@yii/faker' => $vendorDir . '/yiisoft/yii2-faker',
+      '@amnah/yii2' => $vendorDir . '/amnah/yii2-classes/amnah/yii2',
     ),
   ),
 );
