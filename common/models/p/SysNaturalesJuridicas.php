@@ -55,7 +55,7 @@ class SysNaturalesJuridicas extends \common\components\BaseActiveRecord
             'id' => Yii::t('app', 'ID'),
             'rif' => Yii::t('app', 'Rif'),
             'juridica' => Yii::t('app', 'Juridica'),
-            'denominacion' => Yii::t('app', 'Denominacion'),
+            'denominacion' => Yii::t('app', 'Denominación'),
             'anho' => Yii::t('app', 'Anho'),
             'creado_por' => Yii::t('app', 'Creado Por'),
             'actualizado_por' => Yii::t('app', 'Actualizado Por'),

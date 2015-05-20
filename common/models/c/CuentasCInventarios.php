@@ -97,6 +97,9 @@ class CuentasCInventarios extends \common\components\BaseActiveRecord
         ];
     }
 
+
+
+
      public function getFormAttribs() 
     {
         return [
@@ -105,7 +108,7 @@ class CuentasCInventarios extends \common\components\BaseActiveRecord
                 'type'=>TabularForm::INPUT_HIDDEN,
                 'columnOptions'=>['hidden'=>true]
             ],
-            'tipo_inventario_id'=>['type'=>Form::INPUT_DROPDOWN_LIST, 'items'=>ArrayHelper::map(CuentasSysFormulasTecnicas::find()->orderBy('nombre')->asArray()->all(), 'id', 'nombre'), 'label'=>'Tipo inventario'],
+            'tipo_inventario_id'=>['type'=>Form::INPUT_DROPDOWN_LIST, 'items'=>ArrayHelper::map(CuentasCTiposInventarios::find()->orderBy('nombre')->asArray()->all(), 'id', 'nombre'), 'label'=>'Tipo inventario'],
             'detalle_inventario'=>['type'=>Form::INPUT_TEXT,'label'=>'Detalle'],
             'tecnica_medicion_id'=>['type'=>Form::INPUT_TEXT,'label'=>'Tecnica de medición'],  //apunta a la relacion
             'formula_tecnica_id'=>['type'=>Form::INPUT_TEXT,'label'=>'Formula tecnica'],   //apunta a la relacion
@@ -121,5 +124,14 @@ class CuentasCInventarios extends \common\components\BaseActiveRecord
             'reverso_deterioro'=>['type'=>Form::INPUT_TEXT,'label'=>'Reverso deterioro'],
             'valor_neto_ajus_cierre'=>['type'=>Form::INPUT_TEXT,'label'=>'Valor neto ajustado al cierre'],
         ];
+    }
+
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCuentasCTiposInventarios()
+    {
+        return $this->hasOne(CuentasCTiposInventarios::className(), ['id' => 'tipo_inventario_id']);
     }
 }

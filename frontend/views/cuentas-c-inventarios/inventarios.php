@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
           'format' => 'html',
           'value' => function ($model)
           {
-              //return '<div>'.$efectivo_bancos->bancoContratista->banco->nombre.'</div>';
+              return '<div>'.$model->cuentasCTiposInventarios->nombre.'</div>';
           }
         ],
         [

@@ -66,7 +66,7 @@ class ActivosDocumentosRegistrados extends \common\components\BaseActiveRecord
             }"],
             [['contratista_id', 'sys_tipo_registro_id', 'num_registro_notaria', 'tomo', 'folio', 'fecha_registro', 'sys_circunscripcion_id'], 'required', 'on'=>'bien-registro'],
             [['contratista_id', 'sys_tipo_registro_id', 'num_registro_notaria', 'tomo', 'folio', 'fecha_registro', 'sys_circunscripcion_id'], 'required', 'on'=>'bien-notaria'],
-            [['contratista_id', 'sys_tipo_registro_id', 'sys_circunscripcion_id','tipo_documento_id','bien_id'], 'integer'],
+            [['contratista_id', 'sys_tipo_registro_id', 'sys_circunscripcion_id','tipo_documento_id'], 'integer'],
             [['fecha_registro', 'fecha_asamblea', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['sys_status'], 'boolean'],
             [['num_registro_notaria'], 'string', 'max' => 255],

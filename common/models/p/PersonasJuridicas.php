@@ -42,7 +42,7 @@ class PersonasJuridicas extends \common\components\BaseActiveRecord
             [['creado_por'], 'required'],
             [['creado_por'], 'integer'],
             [['sys_status'], 'boolean'],
-            [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
+            [['anho','sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['tipo_nacionalidad'], 'string'],
             [['rif'], 'string', 'max' => 20],
             [['razon_social', 'numero_identificacion'], 'string', 'max' => 255],

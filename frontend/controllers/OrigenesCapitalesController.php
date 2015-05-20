@@ -71,6 +71,8 @@ class OrigenesCapitalesController extends BaseController
             ]);
         }
     }
+
+    
      public function actionCrearcapital()
     {
           $origen_capital = new OrigenesCapitales();
