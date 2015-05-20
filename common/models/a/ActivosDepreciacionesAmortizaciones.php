@@ -2,6 +2,9 @@
 
 namespace common\models\a;
 
+use kartik\builder\Form;
+use kartik\money\MaskMoney;
+use kartik\widgets\DatePicker;
 use Yii;
 
 /**
@@ -45,7 +48,7 @@ class ActivosDepreciacionesAmortizaciones extends \common\components\BaseActiveR
     public function rules()
     {
         return [
-            [['bien_id', 'costo_adquisicion_avaluo', 'fecha_adquisicion_avaluo'], 'required'],
+            [['bien_id', 'costo_adquisicion_avaluo', 'fecha_adquisicion_avaluo','costo_adquisicion_avaluo', 'valor_residual', 'valor_depreciar', 'tasa_anual', 'bs_unidad', 'costo_avaluo','vida_util', 'unidades_estimadas', 'unidades_producidas_periodo', 'unidades_consumidas'], 'required'],
             [['bien_id', 'vida_util', 'unidades_estimadas', 'unidades_producidas_periodo', 'unidades_consumidas', 'creado_por', 'actualizado_por'], 'integer'],
             [['costo_adquisicion_avaluo', 'valor_residual', 'valor_depreciar', 'tasa_anual', 'bs_unidad', 'costo_avaluo'], 'number'],
             [['fecha_adquisicion_avaluo', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],

@@ -81,7 +81,7 @@ class ActivosBienesController extends BaseController
     {
         $model = new ActivosBienes();
 
-        $modelDatosImportacion = null;
+        $modelDatosImportacion = new ActivosDatosImportaciones();;
 
         $modelBienTipo = new ActivosInmuebles();
         $model->sys_tipo_bien_id = 1;
@@ -90,9 +90,9 @@ class ActivosBienesController extends BaseController
 
         $modelLicencia = null;
 
-        $modelFactura = null;
+        $modelFactura = new ActivosFacturas();
 
-        $modelDocumento = null;
+        $modelDocumento = new ActivosDocumentosRegistrados(['scenario'=>'bien-registro']);
 
         $modelDeterioro = new ActivosDeterioros();
 
@@ -143,59 +143,66 @@ class ActivosBienesController extends BaseController
 
                 $flag = $model->save();
 
-
                  if($flag)
                 {
                     // Tipo de Bien
-                    if ($modelBienTipo->load(Yii::$app->request->post()) and $flag) {
+                    if ($modelBienTipo->load(Yii::$app->request->post()) ) {
+                        $flag = $flag and $modelBienTipo->validate();
+                        if($flag) {
+                            $modelBienTipo->bien_id = $model->id;
+                            $flag = $flag && $modelBienTipo->save();
 
-                        $modelBienTipo->bien_id = $model->id;
-                        $flag = $flag && $modelBienTipo->save();
-
-                        if($model->sys_tipo_bien_id == 3 )
-                            if($modelVehiculo->load(Yii::$app->request->post()) and $flag)
-                            {
-                                $modelVehiculo->mueble_id = $modelBienTipo->id;
-                                $flag = $flag && $modelVehiculo->save();
-                            }
-                        if($model->sys_tipo_bien_id == 15)
-                            if($modelLicencia->load(Yii::$app->request->post()) and $flag)
-                            {
-                                $modelLicencia->activo_intangible_id = $modelBienTipo->id;
-                                $flag = $flag && $modelLicencia->save();
-                            }
+                            if ($model->sys_tipo_bien_id == 3)
+                                if ($modelVehiculo->load(Yii::$app->request->post()) and $flag) {
+                                    $modelVehiculo->mueble_id = $modelBienTipo->id;
+                                    $flag = $flag && $modelVehiculo->save();
+                                }
+                            if ($model->sys_tipo_bien_id == 15)
+                                if ($modelLicencia->load(Yii::$app->request->post()) and $flag) {
+                                    $modelLicencia->activo_intangible_id = $modelBienTipo->id;
+                                    $flag = $flag && $modelLicencia->save();
+                                }
+                        }
                     }
 
                     // Depreciación
-                    if ($modelDepreciacion->load(Yii::$app->request->post()) and $flag) {
-
-                        $modelDepreciacion->bien_id = $model->id;
-                        $flag = $flag && $modelDepreciacion->save();
+                    if ($modelDepreciacion->load(Yii::$app->request->post()) && $modelDepreciacion->validate()) {
+                        if($flag) {
+                            $modelDepreciacion->bien_id = $model->id;
+                            $flag = $flag && $modelDepreciacion->save();
+                        }
                     }
 
                     // Factura.
-                    if($model->factura && $modelFactura->load(Yii::$app->request->post())) {
-                        $modelFactura->bien_id = $model->id;
-                        $flag = $flag and $modelFactura->save();
+                    if($model->factura && $modelFactura->load(Yii::$app->request->post()) && $modelFactura->validate()) {
+                        if($flag) {
+                            $modelFactura->bien_id = $model->id;
+                            $flag = $flag and $modelFactura->save();
+                        }
                     }
 
                     // Documento Registrado
-                    if($model->documento && $modelDocumento->load(Yii::$app->request->post())) {
-                        $modelDocumento->bien_id = $model->id;
-                        $flag = $flag and $modelDocumento->save();
+                    if($model->documento && $modelDocumento->load(Yii::$app->request->post()) && $modelDocumento->validate()) {
+                        if($flag) {
+                            $modelDocumento->bien_id = $model->id;
+                            $flag = $flag and $modelDocumento->save();
+                        }
                     }
 
                     // En caso de Adquisición Datos de Importación.
-                    if($model->origen_id ==2 && !$model->nacional && $modelDatosImportacion->load(Yii::$app->request->post())) {
-                        $modelDatosImportacion->bien_id = $model->id;
-                        $flag = $flag and $modelDatosImportacion->save();
+                    if($model->origen_id ==2 && !$model->nacional && $modelDatosImportacion->load(Yii::$app->request->post()) && $modelDatosImportacion->validate()) {
+                        if($flag) {
+                            $modelDatosImportacion->bien_id = $model->id;
+                            $flag = $flag and $modelDatosImportacion->save();
+                        }
                     }
 
                     // Deterioro
-                    if ($modelDeterioro->load(Yii::$app->request->post())) {
-
-                        $modelDeterioro->bien_id = $model->id;
-                        $flag = $flag && $modelDeterioro->save();
+                    if ($modelDeterioro->load(Yii::$app->request->post()) && $modelDeterioro->validate()) {
+                        if($flag) {
+                            $modelDeterioro->bien_id = $model->id;
+                            $flag = $flag && $modelDeterioro->save();
+                        }
                     }
                 }
 

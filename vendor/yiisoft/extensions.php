@@ -66,4 +66,13 @@ return array (
       '@amnah/yii2' => $vendorDir . '/amnah/yii2-classes/amnah/yii2',
     ),
   ),
+  'yiisoft/yii2-faker' => 
+  array (
+    'name' => 'yiisoft/yii2-faker',
+    'version' => '2.0.3.0',
+    'alias' => 
+    array (
+      '@yii/faker' => $vendorDir . '/yiisoft/yii2-faker',
+    ),
+  ),
 );

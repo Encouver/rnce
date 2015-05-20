@@ -57,7 +57,13 @@ class ActivosDocumentosRegistrados extends \common\components\BaseActiveRecord
     public function rules()
     {
         return [
-            [['contratista_id', 'sys_tipo_registro_id', 'num_registro_notaria', 'tomo', 'folio', 'fecha_registro', 'sys_circunscripcion_id'], 'required'],
+            [['contratista_id', 'sys_tipo_registro_id', 'num_registro_notaria', 'tomo', 'folio', 'fecha_registro', 'sys_circunscripcion_id'], 'required'
+               , 'whenClient' => "function (attribute, value) {
+               if($('#activosbienes-nacional').is(':checked'))
+                    return true;
+                 else
+                     return false;
+            }"],
             [['contratista_id', 'sys_tipo_registro_id', 'num_registro_notaria', 'tomo', 'folio', 'fecha_registro', 'sys_circunscripcion_id'], 'required', 'on'=>'bien-registro'],
             [['contratista_id', 'sys_tipo_registro_id', 'num_registro_notaria', 'tomo', 'folio', 'fecha_registro', 'sys_circunscripcion_id'], 'required', 'on'=>'bien-notaria'],
             [['contratista_id', 'sys_tipo_registro_id', 'sys_circunscripcion_id','tipo_documento_id','bien_id'], 'integer'],

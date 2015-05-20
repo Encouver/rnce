@@ -11,8 +11,10 @@ return array(
     'yii\\gii\\' => array($vendorDir . '/yiisoft/yii2-gii'),
     'yii\\faker\\' => array($vendorDir . '/yiisoft/yii2-faker'),
     'yii\\debug\\' => array($vendorDir . '/yiisoft/yii2-debug'),
+    'yii\\composer\\' => array($vendorDir . '/yiisoft/yii2-composer'),
     'yii\\codeception\\' => array($vendorDir . '/yiisoft/yii2-codeception'),
     'yii\\bootstrap\\' => array($vendorDir . '/yiisoft/yii2-bootstrap'),
+    'yii\\' => array($vendorDir . '/yiisoft/yii2'),
     'webvimark\\modules\\UserManagement\\' => array($vendorDir . '/webvimark/module-user-management'),
     'webvimark\\image\\' => array($vendorDir . '/webvimark/image'),
     'webvimark\\helpers\\' => array($vendorDir . '/webvimark/helpers'),
@@ -62,4 +64,5 @@ return array(
     'kartik\\alert\\' => array($vendorDir . '/kartik-v/yii2-widget-alert'),
     'kartik\\affix\\' => array($vendorDir . '/kartik-v/yii2-widget-affix'),
     'demogorgorn\\ajax\\' => array($vendorDir . '/demogorgorn/yii2-ajax-submit-button'),
+    'cebe\\markdown\\' => array($vendorDir . '/cebe/markdown'),
 );

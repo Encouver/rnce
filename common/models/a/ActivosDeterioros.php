@@ -39,7 +39,7 @@ class ActivosDeterioros extends \common\components\BaseActiveRecord
     public function rules()
     {
         return [
-            [['bien_id', 'valor_razonable', 'costo_disposicion', 'valor_uso'], 'required'],
+            [['bien_id', 'valor_razonable', 'costo_disposicion', 'valor_uso', 'acumulado_ejer_ant', 'ejercicios_anteriores'], 'required'],
             [['bien_id'], 'integer'],
             [['valor_razonable', 'costo_disposicion', 'valor_uso', 'acumulado_ejer_ant', 'ejercicios_anteriores'], 'number'],
             [['sys_status'], 'boolean'],
