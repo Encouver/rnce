@@ -5,6 +5,10 @@ namespace frontend\controllers;
 use Yii;
 use common\models\p\ObjetosEmpresas;
 use common\models\p\User;
+use common\models\p\Model;
+use common\models\p\SysNaturalesJuridicas;
+use common\models\p\PersonasJuridicas;
+use common\models\p\ObjetosAutorizaciones;
 use common\models\p\RelacionesObjetos;
 use app\models\ObjetosEmpresasSearch;
 use common\components\BaseController;
@@ -174,7 +178,7 @@ class ObjetosEmpresasController extends BaseController
                    return "datos incompletos faltaron rellenar campos del tipo autorizacion";
                }else{
                 
-                     if (! ($flag = $objeto_empresa->save(false))) {
+                     if (! ($flag = $objeto_empresa->save())) {
 
                                             $transaction->rollBack();
                                             return "faltan datos del objeto empresa";
@@ -195,7 +199,7 @@ class ObjetosEmpresasController extends BaseController
                                  $natural_juridica->rif = $carga_objeto->numero_identificacion;
                                  $natural_juridica->denominacion= $carga_objeto->denominacion;
                                  $natural_juridica->juridica=true;
-                                  if (! ($flag = $natural_juridica->save(false))) {
+                                  if (! ($flag = $natural_juridica->save())) {
 
                                             $transaction->rollBack();
                                             return "faltan datos natural juridica";
@@ -206,7 +210,7 @@ class ObjetosEmpresasController extends BaseController
                                      $persona_juridica->razon_social=$natural_juridica->denominacion;
                                      $persona_juridica->tipo_nacionalidad="NACIONAL";
                                      $persona_juridica->creado_por=1;
-                                    if (! ($flag = $persona_juridica->save(false))) {
+                                    if (! ($flag = $persona_juridica->save())) {
 
                                         $transaction->rollBack();
                                     return "faltan datos de persona juridica";
@@ -219,7 +223,7 @@ class ObjetosEmpresasController extends BaseController
                                      $persona_juridica->razon_social=$carga_objeto->denominacion;
                                      $persona_juridica->tipo_nacionalidad="EXTRANJERA";
                                      $persona_juridica->creado_por=1;
-                                     if (! ($flag = $persona_juridica->save(false))) {
+                                     if (! ($flag = $persona_juridica->save())) {
 
                                         $transaction->rollBack();
                                     return "faltan datos de persona juridica extranjera";

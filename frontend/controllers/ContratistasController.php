@@ -251,7 +251,8 @@ class ContratistasController extends BaseController
                                
                                }
                            $usuario->contratista_id = $contratista->id;
-                           if ($usuario->save()) {
+                           //$usuario->username= "oasoososo";
+                           if ($usuario->save(false)){
 
                                $transaction->commit();
                                $flag = true;

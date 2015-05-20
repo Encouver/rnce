@@ -732,5 +732,17 @@ ALTER TABLE cuentas.hh_pasivo_laboral
 ALTER TABLE cuentas.hh_pasivo_laboral ADD COLUMN otro_nombre character varying(255);
 COMMENT ON COLUMN cuentas.hh_pasivo_laboral.otro_nombre IS 'Nombre que debe indicar el contratista si selecciona la opcion de Otros';
 
+-------19/05/2015--------------
 
---MARCOS
+ALTER TABLE cuentas.c_tipos_inventarios
+   ALTER COLUMN descripcion DROP NOT NULL;
+
+   INSERT INTO cuentas.c_tipos_inventarios VALUES (3, 'MERCANCÍAS', NULL, NULL, NULL, true, '2015-05-19 22:12:23.205-04:30', '2015-05-19 22:12:23.205-04:30', NULL);
+INSERT INTO cuentas.c_tipos_inventarios VALUES (4, 'MATERIAS PRIMAS', NULL, NULL, NULL, true, '2015-05-19 22:12:30.831-04:30', '2015-05-19 22:12:30.831-04:30', NULL);
+INSERT INTO cuentas.c_tipos_inventarios VALUES (5, 'MATERIALES Y SUMINISTROS', NULL, NULL, NULL, true, '2015-05-19 22:12:38.576-04:30', '2015-05-19 22:12:38.831-04:30',NULL);
+
+ALTER TABLE cuentas.c_inventarios
+  ADD CONSTRAINT tipo_inventario_fk_c FOREIGN KEY (tipo_inventario_id) REFERENCES cuentas.c_tipos_inventarios (id)
+   ON UPDATE NO ACTION ON DELETE NO ACTION;
+CREATE INDEX fki_tipo_inventario_fk_c
+  ON cuentas.c_inventarios(tipo_inventario_id);
