@@ -2643,12 +2643,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/webvimark/components.git",
-                "reference": "b748291eb2da676322047086e2af9cb11d1f19b4"
+                "reference": "b9af134f00fe0e3f0087d054b6683c673fd01acf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/webvimark/components/zipball/b748291eb2da676322047086e2af9cb11d1f19b4",
-                "reference": "b748291eb2da676322047086e2af9cb11d1f19b4",
+                "url": "https://api.github.com/repos/webvimark/components/zipball/b9af134f00fe0e3f0087d054b6683c673fd01acf",
+                "reference": "b9af134f00fe0e3f0087d054b6683c673fd01acf",
                 "shasum": ""
             },
             "require": {
@@ -2663,7 +2663,7 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "description": "Components for yii 2",
-            "time": "2015-01-30 13:54:36"
+            "time": "2015-05-16 21:57:45"
         },
         {
             "name": "webvimark/date-range-picker",
@@ -2743,12 +2743,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/webvimark/helpers.git",
-                "reference": "9e2c5295dfa0ff2ccace9b250a3c44927296ddc0"
+                "reference": "989a4ff7ae3499043d53b18ff81ac6a532ab0b07"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/webvimark/helpers/zipball/9e2c5295dfa0ff2ccace9b250a3c44927296ddc0",
-                "reference": "9e2c5295dfa0ff2ccace9b250a3c44927296ddc0",
+                "url": "https://api.github.com/repos/webvimark/helpers/zipball/989a4ff7ae3499043d53b18ff81ac6a532ab0b07",
+                "reference": "989a4ff7ae3499043d53b18ff81ac6a532ab0b07",
                 "shasum": ""
             },
             "type": "library",
@@ -2759,7 +2759,7 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "description": "Helpers for yii 2",
-            "time": "2014-10-23 13:10:07"
+            "time": "2015-05-17 01:23:37"
         },
         {
             "name": "webvimark/image",
@@ -2791,12 +2791,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/webvimark/user-management.git",
-                "reference": "3cae5ec39843485c8286bf8a0d3690fcee41cd91"
+                "reference": "ce94062806e8f9d8326c0446f20bca0953917771"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/webvimark/user-management/zipball/3cae5ec39843485c8286bf8a0d3690fcee41cd91",
-                "reference": "3cae5ec39843485c8286bf8a0d3690fcee41cd91",
+                "url": "https://api.github.com/repos/webvimark/user-management/zipball/ce94062806e8f9d8326c0446f20bca0953917771",
+                "reference": "ce94062806e8f9d8326c0446f20bca0953917771",
                 "shasum": ""
             },
             "require": {
@@ -2816,7 +2816,7 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "description": "User with improved RBAC",
-            "time": "2015-04-02 14:57:44"
+            "time": "2015-05-19 06:22:36"
         },
         {
             "name": "yiisoft/yii2",
