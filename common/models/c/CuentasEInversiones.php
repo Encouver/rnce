@@ -79,8 +79,8 @@ class CuentasEInversiones extends \common\components\BaseActiveRecord
             'tipo_instrumento' => Yii::t('app', 'Tipo Instrumento'),
             'nombre_instrumento' => Yii::t('app', 'Nombre Instrumento'),
             'motivo_retiro' => Yii::t('app', 'Motivo Retiro'),
-            'numero_acc_bon' => Yii::t('app', 'Numero Acc Bon'),
-            'e_inversion_info_adicional_id' => Yii::t('app', 'E Inversion Info Adicional ID'),
+            'numero_acc_bon' => Yii::t('app', 'Numero Acciones / Bonos'),
+            'e_inversion_info_adicional_id' => Yii::t('app', 'E Inversion Información Adicional'),
             'contratista_id' => Yii::t('app', 'Contratista ID'),
             'anho' => Yii::t('app', 'Anho'),
             'creado_por' => Yii::t('app', 'Creado Por'),
@@ -91,7 +91,7 @@ class CuentasEInversiones extends \common\components\BaseActiveRecord
             'sys_finalizado_el' => Yii::t('app', 'Sys Finalizado El'),
             'fecha_motivo' => Yii::t('app', 'Fecha Motivo'),
             'monto_nominal_motivo' => Yii::t('app', 'Monto Nominal Motivo'),
-            'monto_nominal_motivo_ajus' => Yii::t('app', 'Monto Nominal Motivo Ajus'),
+            'monto_nominal_motivo_ajus' => Yii::t('app', 'Monto Nominal Motivo Ajustado'),
         ];
     }
 
@@ -134,12 +134,12 @@ class CuentasEInversiones extends \common\components\BaseActiveRecord
                 'type'=>Form::INPUT_HIDDEN,
                 'columnOptions'=>['hidden'=>true]
             ],
-            'empresa_relacionada_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(PersonasJuridicas::find()->all(),'rif',function($model){ return $model->obtenerEtiqueta();}),'options'=>['onchange'=>'']]],
+            'empresa_relacionada_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(PersonasJuridicas::find()->all(),'rif',function($model){ return $model->etiqueta();}),'options'=>['onchange'=>'']]],
             'corriente'=>['type'=>Form::INPUT_CHECKBOX,],
             'disponibilidad'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>['DISPONIBLES PARA LA VENTA'=>'DISPONIBLES PARA LA VENTA','NO DISPONIBLES PARA LA VENTA'=>'NO DISPONIBLES PARA LA VENTA', 'SUBSIDIARIAS, NEGOCIOS CONJUNTOS Y ASOCIADAS'=>'SUBSIDIARIAS, NEGOCIOS CONJUNTOS Y ASOCIADAS',],'options'=>['onchange'=>'']]],
             'tipo_instrumento'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>['BONOS'=>'BONOS','ACCIONES'=>'ACCIONES',],'options'=>['onchange'=>'']]],
             'nombre_instrumento'=>['type'=>Form::INPUT_TEXT,],
-            'motivo_retiro'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>['VENTA'=>'VENTA','CESION'=>'CESION','DETERIORO'=>'DETERIORO'],'options'=>['multiple'=>true,'onchange'=>'']]],
+            'motivo_retiro'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>['VENTA'=>'VENTA','CESION'=>'CESION','DETERIORO'=>'DETERIORO'],'options'=>['multiple'=>false,'onchange'=>'']]],
             'fecha_motivo'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>DatePicker::className(), 'options'=>['options' => ['placeholder' => 'Seleccione fecha ...'],
                 'convertFormat' => true,
                 'pluginOptions' => [

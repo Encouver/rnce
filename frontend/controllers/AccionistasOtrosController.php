@@ -99,9 +99,9 @@ class AccionistasOtrosController extends BaseController
             if($accionista_otro->rep_legal=="1" && $accionista_otro->repr_legal_vigencia==null){
                return "Datos incompletos debe ingresar la fecha de vigencia";
             }
-              
+
             if($accionista_otro->rep_legal=="0" && $accionista_otro->repr_legal_vigencia!=null){
-               return "Datos seleccionar el campo representante legal";
+                return "Datos seleccionar el campo representante legal";
             }
             $accionista_otro->contratista_id = $usuario->contratista_id;
            

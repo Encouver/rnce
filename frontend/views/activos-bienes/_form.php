@@ -111,14 +111,17 @@ use kartik\widgets\ActiveForm;
 
     $script = <<< JS
 
+    function datosImportados(){
+            if($('#activosbienes-nacional').is(':checked') ){
+                $('#datos-importacion-container').show();
+            }//alert($('#activosbienes-nacional').val());
+            if(!$('#activosbienes-nacional').is(':checked')){
+                $('#datos-importacion-container').hide();
+        }
+    }
      $('#activosbienes-nacional').change(function(e){
 
-                if($('#activosbienes-nacional').is(':checked') ){
-                    $('#datos-importacion-container').show();
-                }//alert($('#activosbienes-nacional').val());
-                if(!$('#activosbienes-nacional').is(':checked')){
-                    $('#datos-importacion-container').hide();
-                }
+               datosImportados();
         });
      $('#activosbienes-factura').change(function(e){
 
@@ -142,9 +145,12 @@ use kartik\widgets\ActiveForm;
                 if($('#origen').val()== 1 || $('#origen').val()==4){
                     $('.field-activosbienes-fecha_origen').parent().show();
                     $('.field-activosbienes-nacional').parent().hide();
+                    $('#datos-importacion-container').hide();
+
                 }else if ($('#origen').val()==2) {
                     $('.field-activosbienes-fecha_origen').parent().hide();
                     $('.field-activosbienes-nacional').parent().show();
+                    datosImportados();
                 }else
                 {
                     $('.field-activosbienes-fecha_origen').parent().hide();

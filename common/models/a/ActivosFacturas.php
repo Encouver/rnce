@@ -144,7 +144,7 @@ class ActivosFacturas extends \common\components\BaseActiveRecord
                     //'startDate' => date('d-m-Y h:i A'),//'01-Mar-2014 12:00 AM',
                     'todayHighlight' => true
                 ]],
-                'columnOptions'=>['hidden'=>true]
+                'columnOptions'=>['hidden'=>false]
             ],
             'proveedor_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(PersonasJuridicas::find()->all(),'id',function($model){return $model->etiqueta(); }),'options'=>[]]],
             'imprenta_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(PersonasJuridicas::find()->all(),'id',function($model){return $model->etiqueta(); }),'options'=>[]]],

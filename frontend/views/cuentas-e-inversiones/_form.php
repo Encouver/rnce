@@ -12,7 +12,7 @@ use yii\helpers\Html;
 
 <div class="cuentas-einversiones-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['options'=> ['enctype'=>'multipart/form-data']]); ?>
 
     <?php
     echo Form::widget([       // 3 column layout

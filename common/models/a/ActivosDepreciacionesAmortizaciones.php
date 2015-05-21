@@ -66,7 +66,7 @@ class ActivosDepreciacionesAmortizaciones extends \common\components\BaseActiveR
             'bien_id' => Yii::t('app', 'Bien ID'),
             'costo_adquisicion_avaluo' => Yii::t('app', 'Costo Adquisicion Avaluo'),
             'fecha_adquisicion_avaluo' => Yii::t('app', 'Fecha Adquisicion Avaluo'),
-            'vida_util' => Yii::t('app', 'Vida Util'),
+            'vida_util' => Yii::t('app', 'Vida útil en meses'),
             'valor_residual' => Yii::t('app', 'Valor Residual'),
             'valor_depreciar' => Yii::t('app', 'Valor Depreciar'),
             'tasa_anual' => Yii::t('app', 'Tasa Anual'),
