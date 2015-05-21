@@ -2525,12 +2525,21 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/webvimark/helpers.git",
+<<<<<<< HEAD
+                "reference": "989a4ff7ae3499043d53b18ff81ac6a532ab0b07"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/webvimark/helpers/zipball/989a4ff7ae3499043d53b18ff81ac6a532ab0b07",
+                "reference": "989a4ff7ae3499043d53b18ff81ac6a532ab0b07",
+=======
                 "reference": "366eda7a7a7cd2fc5db65e5e399ef7dd5df3210c"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/webvimark/helpers/zipball/366eda7a7a7cd2fc5db65e5e399ef7dd5df3210c",
                 "reference": "366eda7a7a7cd2fc5db65e5e399ef7dd5df3210c",
+>>>>>>> bc2da756fdd2c4ea1011f8ce8d9c8155efe24912
                 "shasum": ""
             },
             "type": "library",
@@ -2541,7 +2550,11 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "description": "Helpers for yii 2",
+<<<<<<< HEAD
+            "time": "2015-05-17 01:23:37"
+=======
             "time": "2015-05-21 10:16:40"
+>>>>>>> bc2da756fdd2c4ea1011f8ce8d9c8155efe24912
         },
         {
             "name": "webvimark/image",
