@@ -1,52 +1,5 @@
 [
     {
-        "name": "ezyang/htmlpurifier",
-        "version": "v4.6.0",
-        "version_normalized": "4.6.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/ezyang/htmlpurifier.git",
-            "reference": "6f389f0f25b90d0b495308efcfa073981177f0fd"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/ezyang/htmlpurifier/zipball/6f389f0f25b90d0b495308efcfa073981177f0fd",
-            "reference": "6f389f0f25b90d0b495308efcfa073981177f0fd",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.2"
-        },
-        "time": "2013-11-30 08:25:19",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "HTMLPurifier": "library/"
-            },
-            "files": [
-                "library/HTMLPurifier.composer.php"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "LGPL"
-        ],
-        "authors": [
-            {
-                "name": "Edward Z. Yang",
-                "email": "admin@htmlpurifier.org",
-                "homepage": "http://ezyang.com",
-                "role": "Developer"
-            }
-        ],
-        "description": "Standards compliant HTML filter written in PHP",
-        "homepage": "http://htmlpurifier.org/",
-        "keywords": [
-            "html"
-        ]
-    },
-    {
         "name": "phpspec/php-diff",
         "version": "v1.0.2",
         "version_normalized": "1.0.2.0",
@@ -249,6 +202,7 @@
         ]
     },
     {
+<<<<<<< HEAD
         "name": "yiisoft/yii2",
         "version": "2.0.4",
         "version_normalized": "2.0.4.0",
@@ -342,6 +296,11 @@
         "name": "yiisoft/yii2-bootstrap",
         "version": "2.0.4",
         "version_normalized": "2.0.4.0",
+=======
+        "name": "kartik-v/mpdf",
+        "version": "v1.0.2",
+        "version_normalized": "1.0.2.0",
+>>>>>>> bc2da756fdd2c4ea1011f8ce8d9c8155efe24912
         "source": {
             "type": "git",
             "url": "https://github.com/yiisoft/yii2-bootstrap.git",
@@ -2226,6 +2185,7 @@
         ]
     },
     {
+<<<<<<< HEAD
         "name": "kartik-v/yii2-widget-rangeinput",
         "version": "v1.0.0",
         "version_normalized": "1.0.0.0",
@@ -2433,6 +2393,11 @@
         "name": "kartik-v/dependent-dropdown",
         "version": "v1.4.0",
         "version_normalized": "1.4.0.0",
+=======
+        "name": "yiisoft/yii2-bootstrap",
+        "version": "2.0.4",
+        "version_normalized": "2.0.4.0",
+>>>>>>> bc2da756fdd2c4ea1011f8ce8d9c8155efe24912
         "source": {
             "type": "git",
             "url": "https://github.com/kartik-v/dependent-dropdown.git",
@@ -2894,6 +2859,7 @@
         ]
     },
     {
+<<<<<<< HEAD
         "name": "kartik-v/yii2-nav-x",
         "version": "v1.2.0",
         "version_normalized": "1.2.0.0",
@@ -2951,6 +2917,15 @@
             "type": "git",
             "url": "https://github.com/symfony/CssSelector.git",
             "reference": "189cf0f7f56d7c4be3b778df15a7f16a29f3680d"
+=======
+        "name": "webvimark/image",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/webvimark/image.git",
+            "reference": "18a3f257b55d0670086b4ccdac005fe376ad7c21"
+>>>>>>> bc2da756fdd2c4ea1011f8ce8d9c8155efe24912
         },
         "dist": {
             "type": "zip",
@@ -2999,6 +2974,7 @@
         "homepage": "https://symfony.com"
     },
     {
+<<<<<<< HEAD
         "name": "symfony/dom-crawler",
         "version": "v2.6.7",
         "version_normalized": "2.6.7.0",
@@ -3106,6 +3082,11 @@
         "name": "kartik-v/yii2-grid",
         "version": "v3.0.2",
         "version_normalized": "3.0.2.0",
+=======
+        "name": "bower-asset/jquery",
+        "version": "2.1.4",
+        "version_normalized": "2.1.4.0",
+>>>>>>> bc2da756fdd2c4ea1011f8ce8d9c8155efe24912
         "source": {
             "type": "git",
             "url": "https://github.com/kartik-v/yii2-grid.git",
@@ -3149,6 +3130,7 @@
         ]
     },
     {
+<<<<<<< HEAD
         "name": "kartik-v/bootstrap-checkbox-x",
         "version": "v1.5.2",
         "version_normalized": "1.5.2.0",
@@ -3207,6 +3189,20 @@
             "type": "zip",
             "url": "https://api.github.com/repos/kartik-v/yii2-checkbox-x/zipball/0b759f5c40f0f87d94174a894e430a085c97d544",
             "reference": "0b759f5c40f0f87d94174a894e430a085c97d544",
+=======
+        "name": "yiisoft/yii2",
+        "version": "2.0.4",
+        "version_normalized": "2.0.4.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/yiisoft/yii2-framework.git",
+            "reference": "c40c7287eadc31e341ebbf0c02352eb55b9cbc48"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/726867caee3f23aa7a6975c801e64b6021e14f86",
+            "reference": "c40c7287eadc31e341ebbf0c02352eb55b9cbc48",
+>>>>>>> bc2da756fdd2c4ea1011f8ce8d9c8155efe24912
             "shasum": ""
         },
         "require": {
@@ -3393,6 +3389,7 @@
         ]
     },
     {
+<<<<<<< HEAD
         "name": "kartik-v/yii2-builder",
         "version": "v1.6.0",
         "version_normalized": "1.6.0.0",
@@ -3445,6 +3442,11 @@
         "name": "kartik-v/yii2-sortable",
         "version": "v1.1.0",
         "version_normalized": "1.1.0.0",
+=======
+        "name": "yiisoft/yii2-gii",
+        "version": "2.0.4",
+        "version_normalized": "2.0.4.0",
+>>>>>>> bc2da756fdd2c4ea1011f8ce8d9c8155efe24912
         "source": {
             "type": "git",
             "url": "https://github.com/kartik-v/yii2-sortable.git",
@@ -3546,5 +3548,142 @@
             "widget",
             "yii2"
         ]
+    },
+    {
+        "name": "amnah/yii2-classes",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "target-dir": "amnah/yii2",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/amnah/yii2-classes.git",
+            "reference": "7f3ab904b16258c794eccff31e5777faab07d879"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/amnah/yii2-classes/zipball/7f3ab904b16258c794eccff31e5777faab07d879",
+            "reference": "7f3ab904b16258c794eccff31e5777faab07d879",
+            "shasum": ""
+        },
+        "require": {
+            "yiisoft/yii2": "*"
+        },
+        "time": "2014-01-22 16:22:51",
+        "type": "yii2-extension",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "amnah\\yii2\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "amnah",
+                "email": "amnah.dev@gmail.com"
+            }
+        ],
+        "description": "Yii2 classes",
+        "keywords": [
+            "Fixture",
+            "soft-delete",
+            "softdelete",
+            "yii",
+            "yii2"
+        ]
+    },
+    {
+        "name": "webvimark/helpers",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/webvimark/helpers.git",
+            "reference": "366eda7a7a7cd2fc5db65e5e399ef7dd5df3210c"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/webvimark/helpers/zipball/366eda7a7a7cd2fc5db65e5e399ef7dd5df3210c",
+            "reference": "366eda7a7a7cd2fc5db65e5e399ef7dd5df3210c",
+            "shasum": ""
+        },
+        "time": "2015-05-21 10:16:40",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "webvimark\\helpers\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "description": "Helpers for yii 2"
+    },
+    {
+        "name": "webvimark/components",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/webvimark/components.git",
+            "reference": "b9af134f00fe0e3f0087d054b6683c673fd01acf"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/webvimark/components/zipball/b9af134f00fe0e3f0087d054b6683c673fd01acf",
+            "reference": "b9af134f00fe0e3f0087d054b6683c673fd01acf",
+            "shasum": ""
+        },
+        "require": {
+            "webvimark/helpers": "dev-master",
+            "webvimark/image": "dev-master"
+        },
+        "time": "2015-05-16 21:57:45",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "webvimark\\components\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "description": "Components for yii 2"
+    },
+    {
+        "name": "webvimark/module-user-management",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/webvimark/user-management.git",
+            "reference": "ce94062806e8f9d8326c0446f20bca0953917771"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/webvimark/user-management/zipball/ce94062806e8f9d8326c0446f20bca0953917771",
+            "reference": "ce94062806e8f9d8326c0446f20bca0953917771",
+            "shasum": ""
+        },
+        "require": {
+            "ikimea/browser": "dev-master",
+            "webvimark/bootstrap-switch": "dev-master",
+            "webvimark/components": "dev-master",
+            "webvimark/date-range-picker": "dev-master",
+            "webvimark/grid-bulk-actions": "dev-master",
+            "webvimark/grid-page-size": "dev-master",
+            "webvimark/helpers": "dev-master"
+        },
+        "time": "2015-05-19 06:22:36",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "webvimark\\modules\\UserManagement\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "description": "User with improved RBAC"
     }
 ]

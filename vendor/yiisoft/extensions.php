@@ -57,6 +57,7 @@ return array (
       '@yii/gii' => $vendorDir . '/yiisoft/yii2-gii',
     ),
   ),
+<<<<<<< HEAD
   'demogorgorn/yii2-ajax-submit-button' => 
   array (
     'name' => 'demogorgorn/yii2-ajax-submit-button',
@@ -379,6 +380,15 @@ return array (
     'alias' => 
     array (
       '@kartik/dynagrid' => $vendorDir . '/kartik-v/yii2-dynagrid',
+=======
+  'amnah/yii2-classes' => 
+  array (
+    'name' => 'amnah/yii2-classes',
+    'version' => '9999999-dev',
+    'alias' => 
+    array (
+      '@amnah/yii2' => $vendorDir . '/amnah/yii2-classes/amnah/yii2',
+>>>>>>> bc2da756fdd2c4ea1011f8ce8d9c8155efe24912
     ),
   ),
 );
