@@ -17,15 +17,13 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'id') ?>
 
-    <?= $form->field($model, 'tipo_origen') ?>
-
     <?= $form->field($model, 'bien_id') ?>
 
     <?= $form->field($model, 'banco_contratista_id') ?>
 
     <?= $form->field($model, 'monto') ?>
 
-    <?php // echo $form->field($model, 'fecha') ?>
+    <?= $form->field($model, 'fecha') ?>
 
     <?php // echo $form->field($model, 'saldo_cierre_anterior') ?>
 
@@ -60,6 +58,18 @@ use yii\widgets\ActiveForm;
     <?php // echo $form->field($model, 'sys_actualizado_el') ?>
 
     <?php // echo $form->field($model, 'sys_finalizado_el') ?>
+
+    <?php // echo $form->field($model, 'numero_transaccion') ?>
+
+    <?php // echo $form->field($model, 'efectivo')->checkbox() ?>
+
+    <?php // echo $form->field($model, 'banco')->checkbox() ?>
+
+    <?php // echo $form->field($model, 'bien')->checkbox() ?>
+
+    <?php // echo $form->field($model, 'cuenta_pagar')->checkbox() ?>
+
+    <?php // echo $form->field($model, 'decreto')->checkbox() ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>

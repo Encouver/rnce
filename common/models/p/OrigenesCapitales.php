@@ -3,6 +3,7 @@
 namespace common\models\p;
 use common\models\a\ActivosDocumentosRegistrados;
 use common\models\p\DenominacionesComerciales;
+use common\models\a\ActivosBienes;
 use common\models\p\Certificados;
 use common\models\p\Suplementarios;
 use common\models\p\Acciones;
@@ -17,7 +18,6 @@ use Yii;
  * This is the model class for table "origenes_capitales".
  *
  * @property integer $id
- * @property string $tipo_origen
  * @property integer $bien_id
  * @property integer $banco_contratista_id
  * @property string $monto
@@ -39,9 +39,14 @@ use Yii;
  * @property string $sys_creado_el
  * @property string $sys_actualizado_el
  * @property string $sys_finalizado_el
- * @property string $numero_transaccion
+ * @property integer $numero_transaccion
+ * @property boolean $efectivo
+ * @property boolean $banco
+ * @property boolean $bien
+ * @property boolean $cuenta_pagar
+ * @property boolean $decreto
  *
- * @property ActivosBienes $bien
+ * @property ActivosBienes $bien0
  * @property ActivosDocumentosRegistrados $documentoRegistrado
  * @property BancosContratistas $bancoContratista
  * @property Contratistas $contratista
@@ -62,16 +67,54 @@ class OrigenesCapitales extends \common\components\BaseActiveRecord
     public function rules()
     {
         return [
-            [['tipo_origen', 'monto', 'contratista_id', 'documento_registrado_id'], 'required'],
-            [['tipo_origen'], 'string'],
+            [['bien_id', 'banco_contratista_id', 'numero_accion', 'contratista_id', 'documento_registrado_id', 'creado_por', 'actualizado_por', 'numero_transaccion'], 'integer'],
+            [['monto', 'contratista_id', 'documento_registrado_id'], 'required'],
             ['monto', 'validarmonto'],
-            [['monto','fecha'], 'required', 'on' => 'EFECTIVO'],
-            [['monto','banco_contratista_id','numero_transaccion'], 'required', 'on' => 'EFECTIVO EN BANCO'],
-            [['monto','bien_id','fecha'], 'required', 'on' => 'PROPIEDADES PLANTAS Y EQUIPOS'],
-            [['bien_id', 'banco_contratista_id', 'numero_accion', 'contratista_id', 'documento_registrado_id', 'creado_por', 'actualizado_por','numero_transaccion'], 'integer'],
+            [['monto','fecha'], 'required', 'on' => 'efectivo'],
+            [['monto','banco_contratista_id','numero_transaccion'], 'required', 'on' => 'banco'],
+            [['monto','bien_id','fecha'], 'required', 'on' => 'bien'],
             [['monto', 'saldo_cierre_anterior', 'saldo_corte', 'monto_aumento', 'saldo_aumento', 'valor_acciones', 'saldo_cierre_ajustado'], 'number'],
             [['fecha', 'fecha_corte', 'fecha_aumento', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
-            [['sys_status'], 'boolean']
+            [['sys_status', 'efectivo', 'banco', 'bien', 'cuenta_pagar', 'decreto'], 'boolean'],
+            [['efectivo', 'banco', 'bien', 'cuenta_pagar', 'decreto'],'default','value'=>false],
+
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => Yii::t('app', 'ID'),
+            'bien_id' => Yii::t('app', 'Bien ID'),
+            'banco_contratista_id' => Yii::t('app', 'Banco Contratista ID'),
+            'monto' => Yii::t('app', 'Monto'),
+            'fecha' => Yii::t('app', 'Fecha'),
+            'saldo_cierre_anterior' => Yii::t('app', 'Saldo Cierre Anterior'),
+            'saldo_corte' => Yii::t('app', 'Saldo Corte'),
+            'fecha_corte' => Yii::t('app', 'Fecha Corte'),
+            'monto_aumento' => Yii::t('app', 'Monto Aumento'),
+            'saldo_aumento' => Yii::t('app', 'Saldo Aumento'),
+            'numero_accion' => Yii::t('app', 'Numero Accion'),
+            'valor_acciones' => Yii::t('app', 'Valor Acciones'),
+            'saldo_cierre_ajustado' => Yii::t('app', 'Saldo Cierre Ajustado'),
+            'fecha_aumento' => Yii::t('app', 'Fecha Aumento'),
+            'contratista_id' => Yii::t('app', 'Contratista ID'),
+            'documento_registrado_id' => Yii::t('app', 'Documento Registrado ID'),
+            'creado_por' => Yii::t('app', 'Creado Por'),
+            'actualizado_por' => Yii::t('app', 'Actualizado Por'),
+            'sys_status' => Yii::t('app', 'Sys Status'),
+            'sys_creado_el' => Yii::t('app', 'Sys Creado El'),
+            'sys_actualizado_el' => Yii::t('app', 'Sys Actualizado El'),
+            'sys_finalizado_el' => Yii::t('app', 'Sys Finalizado El'),
+            'numero_transaccion' => Yii::t('app', 'Numero Transaccion'),
+            'efectivo' => Yii::t('app', 'Efectivo'),
+            'banco' => Yii::t('app', 'Banco'),
+            'bien' => Yii::t('app', 'Bien'),
+            'cuenta_pagar' => Yii::t('app', 'Cuenta Pagar'),
+            'decreto' => Yii::t('app', 'Decreto'),
         ];
     }
     public function validarmonto($attribute){
@@ -101,40 +144,7 @@ class OrigenesCapitales extends \common\components\BaseActiveRecord
                $this->addError($attribute,'Monto excedente');
           }
     }
-
-    /**
-     * @inheritdoc
-     */
-    public function attributeLabels()
-    {
-        return [
-            'id' => Yii::t('app', 'ID'),
-            'tipo_origen' => Yii::t('app', 'Tipo Origen'),
-            'bien_id' => Yii::t('app', 'Bien'),
-            'banco_contratista_id' => Yii::t('app', 'Banco Contratista ID'),
-            'monto' => Yii::t('app', 'Monto'),
-            'fecha' => Yii::t('app', 'Fecha'),
-            'saldo_cierre_anterior' => Yii::t('app', 'Saldo Cierre Anterior'),
-            'saldo_corte' => Yii::t('app', 'Saldo Corte'),
-            'fecha_corte' => Yii::t('app', 'Fecha Corte'),
-            'monto_aumento' => Yii::t('app', 'Monto Aumento'),
-            'saldo_aumento' => Yii::t('app', 'Saldo Aumento'),
-            'numero_accion' => Yii::t('app', 'Numero Accion'),
-            'valor_acciones' => Yii::t('app', 'Valor Acciones'),
-            'saldo_cierre_ajustado' => Yii::t('app', 'Saldo Cierre Ajustado'),
-            'fecha_aumento' => Yii::t('app', 'Fecha Aumento'),
-            'contratista_id' => Yii::t('app', 'Contratista ID'),
-            'documento_registrado_id' => Yii::t('app', 'Documento Registrado ID'),
-            'creado_por' => Yii::t('app', 'Creado Por'),
-            'actualizado_por' => Yii::t('app', 'Actualizado Por'),
-            'sys_status' => Yii::t('app', 'Sys Status'),
-            'sys_creado_el' => Yii::t('app', 'Sys Creado El'),
-            'sys_actualizado_el' => Yii::t('app', 'Sys Actualizado El'),
-            'sys_finalizado_el' => Yii::t('app', 'Sys Finalizado El'),
-            'numero_transaccion' => Yii::t('app', 'Numero Transaccion'),
-        ];
-    }
-   
+    
     public function sumarmonto()
     {
         $suma=0;
@@ -149,10 +159,11 @@ class OrigenesCapitales extends \common\components\BaseActiveRecord
         
         return $suma;
     }
+	
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getBien()
+    public function getBien0()
     {
         return $this->hasOne(ActivosBienes::className(), ['id' => 'bien_id']);
     }
@@ -182,11 +193,11 @@ class OrigenesCapitales extends \common\components\BaseActiveRecord
     }
     public function getFormAttribs($id){
         
-        if($id=='EFECTIVO')
+        if($id=='efectivo')
         {
-
+           
             return [
-             
+                
                 'monto'=>['type'=>Form::INPUT_TEXT,'label'=>'Monto Efectivo'],
                 'fecha'=>[
                 'type'=>Form::INPUT_WIDGET, 
@@ -200,7 +211,7 @@ class OrigenesCapitales extends \common\components\BaseActiveRecord
             ];
 
         }
-        if($id=='EFECTIVO EN BANCO'){
+        if($id=='banco'){
             $ban = BancosContratistas::find()->all();
             $array = array();
               foreach ($ban as $banco) {
@@ -224,7 +235,7 @@ class OrigenesCapitales extends \common\components\BaseActiveRecord
             ];
         }
   
-
+        if($id=='bien'){
            return [
                 'bien_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>[//'data'=>ArrayHelper::map(PersonasJuridicas::find()->all(),'id',function($model){return $model->etiqueta(); }),
                 'options'=>[],'pluginOptions' => [
@@ -242,6 +253,6 @@ class OrigenesCapitales extends \common\components\BaseActiveRecord
                
                'monto'=>['type'=>Form::INPUT_TEXT,'label'=>'Monto bien'],
             ];
-        
+        }
     }
 }

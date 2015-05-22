@@ -44,18 +44,22 @@ class OrigenesCapitalesController extends BaseController
     public function actionOrigen()
     {
        $searchModel = new OrigenesCapitalesSearch();
-         $searchModel->tipo_origen = 'EFECTIVO';
+         $searchModel->efectivo = true;
         $dataProvider_efectivo = $searchModel->search(Yii::$app->request->queryParams);
-        
-        $searchModel->tipo_origen = 'EFECTIVO EN BANCO';
+        $searchModel->efectivo = false;
+        $searchModel->banco = true;
         $dataProvider_banco = $searchModel->search(Yii::$app->request->queryParams);
+        $searchModel->efectivo = false;
+        $searchModel->banco = false;
+        $searchModel->bien = true;
+        $dataProvider_bien = $searchModel->search(Yii::$app->request->queryParams);
 
 
 
         return $this->render('origen_capital', [
-            'searchModel' => $searchModel,
             'dataProvider_efectivo' => $dataProvider_efectivo,
             'dataProvider_banco' => $dataProvider_banco,
+            'dataProvider_bien' => $dataProvider_bien,
         ]);
     }
 
@@ -88,7 +92,36 @@ class OrigenesCapitalesController extends BaseController
             ]);
         }
     }
-
+     public function actionCrearefectivo()
+    {
+        $model = new OrigenesCapitales();
+        $model->efectivo=true;
+        $model->scenario='efectivo';
+            return $this->render('create', [
+                'model' => $model,
+            ]);
+        
+    }
+     public function actionCrearefectivobanco()
+    {
+        $model = new OrigenesCapitales();
+        $model->banco=true;
+        $model->scenario='banco';
+            return $this->render('create', [
+                'model' => $model,
+            ]);
+        
+    }
+     public function actionCrearbien()
+    {
+        $model = new OrigenesCapitales();
+        $model->bien=true;
+        $model->scenario='bien';
+            return $this->render('create', [
+                'model' => $model,
+            ]);
+        
+    }
     
      public function actionCrearcapital()
     {
@@ -104,13 +137,14 @@ class OrigenesCapitalesController extends BaseController
                     $registro = ActivosDocumentosRegistrados::findOne(['contratista_id'=>$usuario->contratista_id, 'tipo_documento_id'=>1]);
                     $origen_capital->contratista_id=$usuario->contratista_id;
                     $origen_capital->documento_registrado_id=$registro->id;
+                    
                     if($origen_capital->save()){
-                        return $this->redirect(['view', 'id' => $origen_capital->id]);
+                        return $this->redirect(['origen']);
                     }else{
                        
              
                         return $this->render('create', [
-                            'origen_capital' => $origen_capital,
+                            'model' => $origen_capital,
                             ]);
                     }
                     
@@ -118,7 +152,7 @@ class OrigenesCapitalesController extends BaseController
             }else{
                 
                         return $this->render('create', [
-                            'origen_capital' => $origen_capital,
+                            'model' => $origen_capital,
                             ]);
             }
     }

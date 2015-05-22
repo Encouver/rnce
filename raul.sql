@@ -211,3 +211,34 @@ ALTER TABLE certificaciones_aportes
   ADD CONSTRAINT certificaciones_aportes_natural_juridica_id_pkey FOREIGN KEY (natural_juridica_id)
       REFERENCES sys_naturales_juridicas (id) MATCH SIMPLE
       ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+
+-----22 mayo 2015-----
+
+
+ALTER TABLE origenes_capitales DROP COLUMN tipo_origen;
+
+ALTER TABLE origenes_capitales ADD COLUMN efectivo boolean;
+ALTER TABLE origenes_capitales ALTER COLUMN efectivo SET NOT NULL;
+COMMENT ON COLUMN origenes_capitales.efectivo IS 'Booleano efectivo';
+
+
+
+ALTER TABLE origenes_capitales ADD COLUMN banco boolean;
+ALTER TABLE origenes_capitales ALTER COLUMN banco SET NOT NULL;
+COMMENT ON COLUMN origenes_capitales.banco IS 'Boolean efectivo en banco';
+
+
+ALTER TABLE origenes_capitales ADD COLUMN bien boolean;
+ALTER TABLE origenes_capitales ALTER COLUMN bien SET NOT NULL;
+COMMENT ON COLUMN origenes_capitales.bien IS 'Boolean bien';
+
+ALTER TABLE origenes_capitales ADD COLUMN cuenta_pagar boolean;
+ALTER TABLE origenes_capitales ALTER COLUMN cuenta_pagar SET NOT NULL;
+COMMENT ON COLUMN origenes_capitales.cuenta_pagar IS 'boolean cuenta por pagar';
+
+
+ALTER TABLE origenes_capitales ADD COLUMN decreto boolean;
+ALTER TABLE origenes_capitales ALTER COLUMN decreto SET NOT NULL;
+COMMENT ON COLUMN origenes_capitales.decreto IS 'Bollean decreto diviendo';

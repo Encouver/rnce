@@ -29,7 +29,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'tipo_origen',
             'bien_id',
             'banco_contratista_id',
             'monto',
@@ -51,6 +50,12 @@ $this->params['breadcrumbs'][] = $this->title;
             'sys_creado_el',
             'sys_actualizado_el',
             'sys_finalizado_el',
+            'numero_transaccion',
+            'efectivo:boolean',
+            'banco:boolean',
+            'bien:boolean',
+            'cuenta_pagar:boolean',
+            'decreto:boolean',
         ],
     ]) ?>
 

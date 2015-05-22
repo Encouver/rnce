@@ -15,9 +15,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <p>
-        <?= Html::a(Yii::t('app', 'Create Origenes Capitales'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
     <h3>Efectivo</h3>
     <?= GridView::widget([
         'dataProvider' => $dataProvider_efectivo,
@@ -52,6 +49,9 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
+     <p>
+        <?= Html::a(Yii::t('app', 'Agregar Efectivo'), ['crearefectivo'], ['class' => 'btn btn-success']) ?>
+    </p>
     <hr />
     <h3>Efectivo en banco</h3>
     <?= GridView::widget([
@@ -97,4 +97,60 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
+    <p>
+        <?= Html::a(Yii::t('app', 'Agregar Efectivo Banco'), ['crearefectivobanco'], ['class' => 'btn btn-success']) ?>
+    </p>
+    <hr />
+    <h3>Bienes</h3>
+    <?= GridView::widget([
+        'dataProvider' => $dataProvider_bien,
+        //'filterModel' => $searchModel,
+        'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
+             [
+                'attribute' => 'bien_id',
+                'label' => 'Tipo Bien',
+                'value' => 'bien0.sysTipoBien.nombre',
+            ],
+            [
+                'attribute' => 'bien_id',
+                'label' => 'Detalle Bien',
+                'value' => 'bien0.detalle',
+            ],
+            [
+                'attribute' => 'bien_id',
+                'label' => 'Fecha Origen',
+                'value' => 'bien0.fecha_origen',
+            ],
+            //'id',
+            //'tipo_origen',
+            //'bien_id',
+            //'numero_transaccion',
+            //'banco_contratista_id',
+            'monto',
+            //'fecha',
+            // 'saldo_cierre_anterior',
+            // 'saldo_corte',
+            // 'fecha_corte',
+            // 'monto_aumento',
+            // 'saldo_aumento',
+            // 'numero_accion',
+            // 'valor_acciones',
+            // 'saldo_cierre_ajustado',
+            // 'fecha_aumento',
+            // 'contratista_id',
+            // 'documento_registrado_id',
+            // 'creado_por',
+            // 'actualizado_por',
+            // 'sys_status:boolean',
+            // 'sys_creado_el',
+            // 'sys_actualizado_el',
+            // 'sys_finalizado_el',
+
+            ['class' => 'yii\grid\ActionColumn'],
+        ],
+    ]); ?>
+    <p>
+        <?= Html::a(Yii::t('app', 'Agregar Bien'), ['crearbien'], ['class' => 'btn btn-success']) ?>
+    </p>
 </div>
