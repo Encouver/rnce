@@ -157,7 +157,7 @@ class PersonasNaturales extends \common\components\BaseActiveRecord
         'segundo_apellido'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Enter username...']],
     ];
     }
-    public function etiqueta(){
+    public function Etiqueta(){
         return $this->ci.' - '.$this->primer_nombre.' '.$this->primer_apellido;
     }
 }

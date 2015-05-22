@@ -4,21 +4,21 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\a\ActivosDesincorporacionActivos */
+/* @var $model common\models\p\SysNaturalesJuridicas */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="activos-desincorporacion-activos-form">
+<div class="sys-naturales-juridicas-form">
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'sys_motivo_id')->textInput() ?>
+    <?= $form->field($model, 'rif')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'fecha')->textInput() ?>
+    <?= $form->field($model, 'juridica')->checkbox() ?>
 
-    <?= $form->field($model, 'precio_venta')->textInput() ?>
+    <?= $form->field($model, 'denominacion')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'valor_neto_libro')->textInput() ?>
+    <?= $form->field($model, 'anho')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'creado_por')->textInput() ?>
 

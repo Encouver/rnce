@@ -5,6 +5,7 @@ namespace frontend\controllers;
 use Yii;
 use common\models\p\PersonasNaturales;
 use app\models\PersonasNaturalesSearch;
+use yii\db\Query;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -24,6 +25,25 @@ class PersonasNaturalesController extends Controller
                 ],
             ],
         ]);
+    }
+
+    public function actionNaturalesLista($q = null, $id = null) {
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $out = ['results' => ['id' => '', 'text' => '']];
+        if (!is_null($q)) {
+            $query = new Query;
+            $query->select('id, (rif || \' - \' || primer_nombre ||  segundo_nombre ||  primer_apellido ||  segundo_apellido ) AS text')
+                ->from('personas_juridicas')
+                ->where('rif LIKE \'%' . $q .'%\' or ci LIKE \'%' . $q .'%\' or (primer_nombre ||  segundo_nombre ||  primer_apellido ||  segundo_apellido) ILIKE \'%'.$q .'%\'')
+                ->limit(20);
+            $command = $query->createCommand();
+            $data = $command->queryAll();
+            $out['results'] = array_values($data);
+        }
+        elseif ($id > 0) {
+            $out['results'] = ['id' => $id, 'text' => PersonasNaturales::find($id)->etiqueta()];
+        }
+        return $out;
     }
 
     /**

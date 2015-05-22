@@ -15,7 +15,7 @@ use yii\helpers\Html;
     <?php $form = ActiveForm::begin(); ?>
 
     <?php
-        echo '<h2> Avaluo(Agregar tantos como posea el bien): </h2>';
+        echo '<h2> Carga de Avaluo): </h2>';
         echo Form::widget([       // 3 column layout
             'model'=>$model,
             'form'=>$form,
@@ -44,12 +44,12 @@ use yii\helpers\Html;
     <?/*= $form->field($model, 'sys_actualizado_el')->textInput() */?>
 
     <?/*= $form->field($model, 'sys_finalizado_el')->textInput() */?>
-
+    -->
     <div class="form-group">
-        <?/*= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) */?>
+        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
-    -->
+
 
     <?php ActiveForm::end(); ?>
 

@@ -6,12 +6,15 @@ use common\models\a\ActivosActivosBiologicos;
 use common\models\a\ActivosActivosIntangibles;
 use common\models\a\ActivosConstruccionesInmuebles;
 use common\models\a\ActivosDatosImportaciones;
+use common\models\a\ActivosDepreciacionesAmortizaciones;
 use common\models\a\ActivosDeterioros;
 use common\models\a\ActivosDocumentosRegistrados;
 use common\models\a\ActivosFabricacionesMuebles;
 use common\models\a\ActivosFacturas;
 use common\models\a\ActivosInmuebles;
+use common\models\a\ActivosLicencias;
 use common\models\a\ActivosMuebles;
+use common\models\a\ActivosVehiculos;
 use common\models\a\ConstruccionesInmuebles;
 use common\models\a\DatosImportaciones;
 use common\models\a\FabricacionesMuebles;
@@ -78,16 +81,22 @@ class ActivosBienesController extends BaseController
     {
         $model = new ActivosBienes();
 
-        $modelDatosImportacion = null;
+        $modelDatosImportacion = new ActivosDatosImportaciones();;
 
         $modelBienTipo = new ActivosInmuebles();
         $model->sys_tipo_bien_id = 1;
 
-        $modelFactura = null;
+        $modelVehiculo = null;
 
-        $modelDocumento = null;
+        $modelLicencia = null;
+
+        $modelFactura = new ActivosFacturas();
+
+        $modelDocumento = new ActivosDocumentosRegistrados(['scenario'=>'bien-registro']);
 
         $modelDeterioro = new ActivosDeterioros();
+
+        $modelDepreciacion = new ActivosDepreciacionesAmortizaciones();
 
 
         if ($model->load(Yii::$app->request->post())) {
@@ -100,6 +109,8 @@ class ActivosBienesController extends BaseController
                     break;
                 case 2:
                     $modelBienTipo = new ActivosMuebles();
+                    if($model->sys_tipo_bien_id == 3)
+                        $modelVehiculo = new ActivosVehiculos();
                     break;
                 case 3:
                     if($model->sys_tipo_bien_id == 8)
@@ -112,6 +123,8 @@ class ActivosBienesController extends BaseController
                     break;
                 case 5:
                     $modelBienTipo = new ActivosActivosIntangibles();
+                    if($model->sys_tipo_bien_id == 15)
+                        $modelLicencia = new ActivosLicencias();
                     break;
                 default:
                     break;
@@ -130,39 +143,66 @@ class ActivosBienesController extends BaseController
 
                 $flag = $model->save();
 
-
                  if($flag)
                 {
                     // Tipo de Bien
-                    if ($modelBienTipo->load(Yii::$app->request->post()) and $flag) {
+                    if ($modelBienTipo->load(Yii::$app->request->post()) ) {
+                        $flag = $flag and $modelBienTipo->validate();
+                        if($flag) {
+                            $modelBienTipo->bien_id = $model->id;
+                            $flag = $flag && $modelBienTipo->save();
 
-                        $modelBienTipo->bien_id = $model->id;
-                        $flag = $flag && $modelBienTipo->save();
+                            if ($model->sys_tipo_bien_id == 3)
+                                if ($modelVehiculo->load(Yii::$app->request->post()) and $flag) {
+                                    $modelVehiculo->mueble_id = $modelBienTipo->id;
+                                    $flag = $flag && $modelVehiculo->save();
+                                }
+                            if ($model->sys_tipo_bien_id == 15)
+                                if ($modelLicencia->load(Yii::$app->request->post()) and $flag) {
+                                    $modelLicencia->activo_intangible_id = $modelBienTipo->id;
+                                    $flag = $flag && $modelLicencia->save();
+                                }
+                        }
+                    }
+
+                    // Depreciación
+                    if ($modelDepreciacion->load(Yii::$app->request->post()) && $modelDepreciacion->validate()) {
+                        if($flag) {
+                            $modelDepreciacion->bien_id = $model->id;
+                            $flag = $flag && $modelDepreciacion->save();
+                        }
                     }
 
                     // Factura.
-                    if($model->factura && $modelFactura->load(Yii::$app->request->post())) {
-                        $modelFactura->bien_id = $model->id;
-                        $flag = $flag and $modelFactura->save();
+                    if($model->factura && $modelFactura->load(Yii::$app->request->post()) && $modelFactura->validate()) {
+                        if($flag) {
+                            $modelFactura->bien_id = $model->id;
+                            $flag = $flag and $modelFactura->save();
+                        }
                     }
 
                     // Documento Registrado
-                    if($model->documento && $modelDocumento->load(Yii::$app->request->post())) {
-                        $modelDocumento->bien_id = $model->id;
-                        $flag = $flag and $modelDocumento->save();
+                    if($model->documento && $modelDocumento->load(Yii::$app->request->post()) && $modelDocumento->validate()) {
+                        if($flag) {
+                            $modelDocumento->bien_id = $model->id;
+                            $flag = $flag and $modelDocumento->save();
+                        }
                     }
 
                     // En caso de Adquisición Datos de Importación.
-                    if($model->origen_id ==2 && !$model->nacional && $modelDatosImportacion->load(Yii::$app->request->post())) {
-                        $modelDatosImportacion->bien_id = $model->id;
-                        $flag = $flag and $modelDatosImportacion->save();
+                    if($model->origen_id ==2 && !$model->nacional && $modelDatosImportacion->load(Yii::$app->request->post()) && $modelDatosImportacion->validate()) {
+                        if($flag) {
+                            $modelDatosImportacion->bien_id = $model->id;
+                            $flag = $flag and $modelDatosImportacion->save();
+                        }
                     }
 
                     // Deterioro
-                    if ($modelDeterioro->load(Yii::$app->request->post())) {
-
-                        $modelDeterioro->bien_id = $model->id;
-                        $flag = $flag && $modelDeterioro->save();
+                    if ($modelDeterioro->load(Yii::$app->request->post()) && $modelDeterioro->validate()) {
+                        if($flag) {
+                            $modelDeterioro->bien_id = $model->id;
+                            $flag = $flag && $modelDeterioro->save();
+                        }
                     }
                 }
 
@@ -181,7 +221,7 @@ class ActivosBienesController extends BaseController
 
             return $this->render('create', [
                 'model' => $model,'modelBienTipo'=> $modelBienTipo, 'modelDatosImportacion'=>$modelDatosImportacion, 'modelFactura'=>$modelFactura,'modelDocumento'=>$modelDocumento,
-                'modelDeterioro'=>$modelDeterioro,
+                'modelDeterioro'=>$modelDeterioro, 'modelDepreciacion'=>$modelDepreciacion
             ]);
        // }
     }
@@ -253,7 +293,28 @@ class ActivosBienesController extends BaseController
             ]);
     //    }
     }
-
+     public function actionBieneslist($q = null, $id = null) {
+    $buscar_bien= "detalle ILIKE "."'%" . $q ."%'";   
+       
+    \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+     $out = ['results' => ['id' => '', 'text' => '']];
+    if (!is_null($q)) {
+        $query = new \yii\db\Query;
+        
+        $query->select("id, detalle AS text")
+            ->from('activos.bienes')
+            ->where($buscar_bien)
+            ->limit(20);
+        $command = $query->createCommand();
+        $data = $command->queryAll();
+        $out['results'] = array_values($data);
+    }
+    elseif ($id > 0) {
+        $out['results'] = ['id' => $id, 'text' => ActivosBienes::find($id)->detalle];
+    }
+  
+    return $out;
+}
     /**
      * Deletes an existing ActivosBienes model.
      * If deletion is successful, the browser will be redirected to the 'index' page.

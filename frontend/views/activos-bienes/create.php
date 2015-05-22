@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\a\ActivosBienes */
 
-$this->title = Yii::t('app', 'Create Activos Bienes');
+$this->title = Yii::t('app', 'Cargar Bien');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Activos Bienes'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= $this->render('_form', [
         'model' => $model, 'modelBienTipo'=>$modelBienTipo, 'modelDatosImportacion'=>$modelDatosImportacion, 'modelFactura'=>$modelFactura,'modelDocumento'=>$modelDocumento,
-        'modelDeterioro'=>$modelDeterioro,
+        'modelDeterioro'=>$modelDeterioro, 'modelDepreciacion'=>$modelDepreciacion
     ]) ?>
 
 </div>

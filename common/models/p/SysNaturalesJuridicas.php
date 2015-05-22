@@ -114,7 +114,7 @@ class SysNaturalesJuridicas extends \common\components\BaseActiveRecord
         return $this->hasMany(PersonasNaturales::className(), ['rif' => 'rif']);
     }
 
-    public function obtenerEtiqueta(){
+    public function etiqueta(){
         return $this->rif." - ".$this->denominacion;
     }
 }

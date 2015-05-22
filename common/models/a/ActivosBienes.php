@@ -69,7 +69,7 @@ class ActivosBienes extends \common\components\BaseActiveRecord
     {
         return [
 
-            [['sys_tipo_bien_id', 'contratista_id', 'origen_id'], 'required'],
+            [['sys_tipo_bien_id', 'contratista_id', 'origen_id', 'detalle'], 'required'],
             [['sys_tipo_bien_id', 'contratista_id', 'origen_id', 'creado_por', 'actualizado_por'], 'integer'],
             [['fecha_origen', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['propio', 'nacional', 'carga_completa', 'sys_status','documento','factura'], 'boolean'],
@@ -284,7 +284,7 @@ class ActivosBienes extends \common\components\BaseActiveRecord
                 'type'=>Form::INPUT_HIDDEN,
                 'columnOptions'=>['hidden'=>true]
             ],
-            'sys_tipo_bien_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(ActivosSysTiposBienes::find()->all(),'id','nombre',function($model){ return $model->sysClasificacionBien->nombre;}),'options'=>['onchange'=>'js:location.reload(true);']]],
+            'sys_tipo_bien_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(ActivosSysTiposBienes::find()->all(),'id','nombre',function($model){ return $model->sysClasificacionBien->nombre;}),'options'=>['onchange'=>'js:this.form.submit();']]],
 
             //'depreciable'=>['type'=>Form::INPUT_CHECKBOX,],
             //'deterioro'=>['type'=>Form::INPUT_CHECKBOX,],
@@ -320,7 +320,7 @@ class ActivosBienes extends \common\components\BaseActiveRecord
             'columnOptions'=>[ 'hidden'=>false,]
         ];
         //if($this->origen_id==2)
-            $attributes['nacional'] = ['type'=>Form::INPUT_CHECKBOX,'columnOptions'=>['hidden'=>true,],'options'=>['onchange'=>'js: this.form.submit()']];
+            $attributes['nacional'] = ['type'=>Form::INPUT_CHECKBOX,'columnOptions'=>['hidden'=>true,],'options'=>['onchange'=>'']];
 
         return $attributes;
     }
@@ -343,7 +343,7 @@ class ActivosBienes extends \common\components\BaseActiveRecord
         return null;
     }
 
-    public function etiqueta(){
+    public function Etiqueta(){
         return $this->sysTipoBien->nombre.' - '.$this->detalle;
     }
 }

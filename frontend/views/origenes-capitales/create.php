@@ -13,6 +13,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
 $array[] = ['id' => 1, 'nombre' => 'EFECTIVO'];
 $array[] = ['id' => 2, 'nombre' => 'EFECTIVO EN BANCO'];
+$array[] = ['id' => 3, 'nombre' => 'PROPIEDADES PLANTAS Y EQUIPOS'];
+$array[] = ['id' => 4, 'nombre' => 'ACTIVOS BIOLOGICOS'];
+$array[] = ['id' => 5, 'nombre' => 'ACTIVOS INTANGIBLES'];
+$array[] = ['id' => 6, 'nombre' => 'INVENTARIO DE MERCANCIA'];
 ?>
 <style type="text/css">
 .tamano
@@ -25,12 +29,12 @@ $array[] = ['id' => 2, 'nombre' => 'EFECTIVO EN BANCO'];
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <?= Html::dropDownList("Origen Capital","", ArrayHelper::map($array, 'id', 'nombre'), ['id' => 'tipo_origen','class' => 'form-control tamano', 'prompt' => 'Seleccione tipo de banco',
+    <?= Html::dropDownList("Origen Capital","", ArrayHelper::map($array, 'id', 'nombre'), ['id' => 'tipo_origen','class' => 'form-control tamano', 'prompt' => 'Seleccione origen',
                 ]
             ) ?>
     <br>
     <div id="efectivo" style="display:none">
-    	<?php $origen_capital->scenario = 'efectivo';
+    	<?php $origen_capital->scenario = 'EFECTIVO';
                 $origen_capital->tipo_origen='EFECTIVO';
         ?>
 
@@ -40,8 +44,16 @@ $array[] = ['id' => 2, 'nombre' => 'EFECTIVO EN BANCO'];
 	</div>
 
 	<div id="efectivoenbanco" style="display:none">
-    	<?php $origen_capital->scenario = 'efectivoenbanco';
+    	<?php $origen_capital->scenario = 'EFECTIVO EN BANCO';
               $origen_capital->tipo_origen='EFECTIVO EN BANCO';
+        ?>
+	    <?= $this->render('_form', [
+	        'origen_capital' => $origen_capital,
+	    ]) ?>
+	</div>
+    <div id="bien" style="display:none">
+    	<?php $origen_capital->scenario = 'BIEN';
+              $origen_capital->tipo_origen='PROPIEDADES PLANTAS Y EQUIPOS';
         ?>
 	    <?= $this->render('_form', [
 	        'origen_capital' => $origen_capital,
@@ -55,14 +67,28 @@ $script = <<< JS
             if($('#tipo_origen').val()==1){
                	$('#efectivo').css('display','inherit');
                	$('#efectivoenbanco').css('display','none');
-            }else if ($('#tipo_origen').val()==2) {
-            	$('#efectivoenbanco').css('display','inherit');
-            	$('#efectivo').css('display','none');
-            }else
-            {
-            	$('#efectivo').css('display','none');
-            	$('#efectivoenbanco').css('display','none');
-            }
+                $('#bien').css('display','none');
+            }else {
+                
+                    if ($('#tipo_origen').val()==2) {
+                    $('#efectivoenbanco').css('display','inherit');
+                    $('#efectivo').css('display','none');
+                    $('#bien').css('display','none');
+                    }else
+                    {   
+                         if ($('#tipo_origen').val()>=3 && $('#tipo_origen').val()<=6) {
+                              $('#bien').css('display','inherit');
+                               $('#efectivo').css('display','none');
+                               $('#efectivoenbanco').css('display','none');
+                        }else{
+        
+                        $('#efectivo').css('display','none');
+                        $('#efectivoenbanco').css('display','none');
+                        $('#bien').css('display','none');
+                        }
+                    }
+        
+        }
     });
 JS;
 $this->registerJs($script);

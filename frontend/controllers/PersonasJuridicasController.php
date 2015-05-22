@@ -6,6 +6,7 @@ use Yii;
 use common\models\p\PersonasJuridicas;
 use app\models\PersonasJuridicasSearch;
 use common\components\BaseController;
+use yii\db\Query;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -24,6 +25,25 @@ class PersonasJuridicasController extends BaseController
                 ],
             ],
         ]);
+    }
+
+    public function actionJuridicasLista($q = null, $id = null) {
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $out = ['results' => ['id' => '', 'text' => '']];
+        if (!is_null($q)) {
+            $query = new Query;
+            $query->select('id, (rif || \' - \' || razon_social) AS text')
+                ->from('personas_juridicas')
+                ->where('rif LIKE \'%' . $q .'%\' or razon_social ILIKE \'%'.$q .'%\'')
+                ->limit(20);
+            $command = $query->createCommand();
+            $data = $command->queryAll();
+            $out['results'] = array_values($data);
+        }
+        elseif ($id > 0) {
+            $out['results'] = ['id' => $id, 'text' => PersonasJuridicas::find($id)->etiqueta()];
+        }
+        return $out;
     }
 
     /**

@@ -40,7 +40,7 @@ class ActivosInmuebles extends \common\components\BaseActiveRecord
     public function rules()
     {
         return [
-            [['bien_id', 'direccion_ubicacion', 'ficha_catastral', 'zonificacion', 'extension'], 'required'],
+            [['bien_id', 'direccion_ubicacion', 'ficha_catastral', 'zonificacion', 'extension', 'descripcion'], 'required'],
             [['bien_id'], 'integer'],
             [['descripcion'], 'string'],
             [['sys_status'], 'boolean'],

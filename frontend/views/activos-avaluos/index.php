@@ -54,7 +54,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 //'header'=>'Banco',
                 'vAlign'=>'middle',
                 'value'=>function ($model, $key, $index, $widget) {
-                    return $model->etiqueta();
+                    return $model->bien->etiqueta();
                 },
                 //'filterType'=>GridView::FILTER_SELECT2,
                 //'filter'=>ArrayHelper::map(Author::find()->orderBy('name')->asArray()->all(), 'id', 'name'),
@@ -73,7 +73,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'pageSummary'=>true
             ],
             [
-                'attribute'=>'fecha_origen',
+                'attribute'=>'fecha_informe',
                 'filterType'=>GridView::FILTER_DATE,
                 'format'=>'raw',
                 'width'=>'170px',
@@ -86,7 +86,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 //'header'=>'Banco',
                 'vAlign'=>'middle',
                 'value'=>function ($model, $key, $index, $widget) {
-                    return $model->etiqueta();
+                    return $model->perito->etiqueta();
                 },
                 //'filterType'=>GridView::FILTER_SELECT2,
                 //'filter'=>ArrayHelper::map(Author::find()->orderBy('name')->asArray()->all(), 'id', 'name'),
@@ -101,7 +101,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 //'header'=>'Banco',
                 'vAlign'=>'middle',
                 'value'=>function ($model, $key, $index, $widget) {
-                    return $model->etiqueta();
+                    return $model->gremio->etiqueta();
                 },
                 //'filterType'=>GridView::FILTER_SELECT2,
                 //'filter'=>ArrayHelper::map(Author::find()->orderBy('name')->asArray()->all(), 'id', 'name'),

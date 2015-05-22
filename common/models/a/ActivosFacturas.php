@@ -10,6 +10,7 @@ use kartik\widgets\DatePicker;
 use kartik\widgets\Select2;
 use Yii;
 use yii\helpers\ArrayHelper;
+use yii\web\JsExpression;
 
 /**
  * This is the model class for table "activos.facturas".
@@ -144,10 +145,34 @@ class ActivosFacturas extends \common\components\BaseActiveRecord
                     //'startDate' => date('d-m-Y h:i A'),//'01-Mar-2014 12:00 AM',
                     'todayHighlight' => true
                 ]],
-                'columnOptions'=>['hidden'=>true]
+                'columnOptions'=>['hidden'=>false]
             ],
-            'proveedor_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(PersonasJuridicas::find()->all(),'id',function($model){return $model->obtenerEtiqueta(); }),'options'=>[]]],
-            'imprenta_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(PersonasJuridicas::find()->all(),'id',function($model){return $model->obtenerEtiqueta(); }),'options'=>[]]],
+            'proveedor_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>[//'data'=>ArrayHelper::map(PersonasJuridicas::find()->all(),'id',function($model){return $model->etiqueta(); }),
+                'options'=>[],'pluginOptions' => [
+                'allowClear' => true,
+                'minimumInputLength' => 3,
+                'ajax' => [
+                    'url' => \yii\helpers\Url::to(['personas-juridicas/juridicas-lista']),
+                    'dataType' => 'json',
+                    'data' => new JsExpression('function(params) { return {q:params.term}; }')
+                ],
+                'escapeMarkup' => new JsExpression('function (markup) { return markup; }'),
+                'templateResult' => new JsExpression('function(city) { return city.text; }'),
+                'templateSelection' => new JsExpression('function (city) { return city.text; }'),
+            ],]],
+            'imprenta_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>[//'data'=>ArrayHelper::map(PersonasJuridicas::find()->all(),'id',function($model){return $model->etiqueta(); }),
+                'options'=>[],'pluginOptions' => [
+            'allowClear' => true,
+            'minimumInputLength' => 3,
+            'ajax' => [
+                'url' => \yii\helpers\Url::to(['personas-juridicas/juridicas-lista']),
+                'dataType' => 'json',
+                'data' => new JsExpression('function(params) { return {q:params.term}; }')
+            ],
+            'escapeMarkup' => new JsExpression('function (markup) { return markup; }'),
+            'templateResult' => new JsExpression('function(city) { return city.text; }'),
+            'templateSelection' => new JsExpression('function (city) { return city.text; }'),
+         ],]],
             'fecha_emision_talonario'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>DatePicker::className(),'options'=>['options' => ['placeholder' => 'Seleccione fecha ...'],
                 'convertFormat' => true,
                 'pluginOptions' => [
@@ -157,7 +182,19 @@ class ActivosFacturas extends \common\components\BaseActiveRecord
                 ]],
                 'columnOptions'=>['hidden'=>false]
             ],
-            'comprador_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(SysNaturalesJuridicas::find()->all(),'id',function($model){return $model->obtenerEtiqueta(); }),'options'=>[]]],
+            'comprador_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>[//'data'=>ArrayHelper::map(SysNaturalesJuridicas::find()->all(),'id',function($model){return $model->etiqueta(); }),
+                'options'=>[],'pluginOptions' => [
+                    'allowClear' => true,
+                    'minimumInputLength' => 3,
+                    'ajax' => [
+                        'url' => \yii\helpers\Url::to(['sys-naturales-juridicas/naturales-juridicas-lista']),
+                        'dataType' => 'json',
+                        'data' => new JsExpression('function(params) { return {q:params.term}; }')
+                    ],
+                    'escapeMarkup' => new JsExpression('function (markup) { return markup; }'),
+                    'templateResult' => new JsExpression('function(city) { return city.text; }'),
+                    'templateSelection' => new JsExpression('function (city) { return city.text; }'),
+                ],]],
             'base_imponible_gravable'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),],
             'exento'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),],
             'iva'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),],

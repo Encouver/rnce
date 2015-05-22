@@ -63,7 +63,7 @@ class ActivosAvaluos extends \common\components\BaseActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'bien_id' => Yii::t('app', 'Bien'),
-            'valor' => Yii::t('app', 'Valor'),
+            'valor' => Yii::t('app', 'Valor según avaluo'),
             'fecha_informe' => Yii::t('app', 'Fecha de Informe'),
             'perito_id' => Yii::t('app', 'Perito'),
             'gremio_id' => Yii::t('app', 'Gremio'),
@@ -122,8 +122,6 @@ class ActivosAvaluos extends \common\components\BaseActiveRecord
             'perito_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(PersonasNaturales::find()->all(),'id',function($model){return $model->etiqueta();}), ]],
             'gremio_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(ActivosSysGremios::find()->all(),'id',function($model){return $model->etiqueta();}), ]],
             'num_inscripcion_gremio'=>['type'=>Form::INPUT_TEXT,],
-
-
 
         ];
     }

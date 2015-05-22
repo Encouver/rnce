@@ -6,6 +6,9 @@ use kartik\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\a\ActivosBienes */
+/* @var $modelDatosImportacion common\models\a\ActivosDatosImportaciones */
+
+
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
@@ -35,7 +38,8 @@ use kartik\widgets\ActiveForm;
             'attributes'=>$model->getFormAttribs()
         ]);
 
-        if($model->origen_id == 2 && !$model->nacional ) {
+        //if($model->origen_id == 2 && !$model->nacional ) {
+            echo '<div id="datos-importacion-container" style="display: none;">';
             echo '<h2> Datos de importación: </h2>';
             echo Form::widget([       // 3 column layout
                 'model' => $modelDatosImportacion,
@@ -44,7 +48,8 @@ use kartik\widgets\ActiveForm;
                 'columnSize' => 'xs',
                 'attributes' => $modelDatosImportacion->getFormAttribs($model)
             ]);
-        }
+            echo '</div>';
+       // }
 
         if($modelBienTipo != null) {
             echo '<h2> Datos Correspondientes al tipo de bien: </h2>';
@@ -57,7 +62,8 @@ use kartik\widgets\ActiveForm;
             ]);
         }
 
-        if($model->factura) {
+        //if($model->factura) {
+            echo '<div id="factura-container" style="display: none;">';
             echo '<h2> Datos de la Factura: </h2>';
             echo Form::widget([       // 3 column layout
                 'model' => $modelFactura,
@@ -66,9 +72,11 @@ use kartik\widgets\ActiveForm;
                 'columnSize' => 'xs',
                 'attributes' => $modelFactura->getFormAttribs($model)
             ]);
-        }
+            echo '</div>';
+        //}
 
-        if($model->documento) {
+        //if($model->documento) {
+            echo '<div id="documento-container" style="display: none;">';
             echo '<h2> Datos del Documento Registrado: </h2>';
             echo Form::widget([       // 3 column layout
                 'model' => $modelDocumento,
@@ -77,7 +85,8 @@ use kartik\widgets\ActiveForm;
                 'columnSize' => 'xs',
                 'attributes' => $modelDocumento->getFormAttribs($model)
             ]);
-        }
+            echo '</div>';
+        //}
         if($model->deterioro()) {
             echo '<h2> Datos del Deterioro: </h2>';
             echo Form::widget([       // 3 column layout
@@ -90,14 +99,58 @@ use kartik\widgets\ActiveForm;
         }
 
 
+        echo '<h2> Depreciación/Amortización: </h2>';
+        echo Form::widget([       // 3 column layout
+                'model' => $modelDepreciacion,
+                'form' => $form,
+                'columns' => 4,
+                'columnSize' => 'xs',
+                'attributes' => $modelDepreciacion->getFormAttribs()
+            ]);
+
+
     $script = <<< JS
+
+    function datosImportados(){
+            if($('#activosbienes-nacional').is(':checked') ){
+                $('#datos-importacion-container').show();
+            }//alert($('#activosbienes-nacional').val());
+            if(!$('#activosbienes-nacional').is(':checked')){
+                $('#datos-importacion-container').hide();
+        }
+    }
+     $('#activosbienes-nacional').change(function(e){
+
+               datosImportados();
+        });
+     $('#activosbienes-factura').change(function(e){
+
+                if($('#activosbienes-factura').is(':checked')){
+                    $('#factura-container').show();
+                }
+                if(!$('#activosbienes-factura').is(':checked')){
+                    $('#factura-container').hide();
+                }
+        });
+     $('#activosbienes-documento').change(function(e){
+
+                if($('#activosbienes-documento').is(':checked')){
+                    $('#documento-container').show();
+                }
+                if(!$('#activosbienes-documento').is(':checked')){
+                    $('#documento-container').hide();
+                }
+        });
         $('#origen').change(function(e){
                 if($('#origen').val()== 1 || $('#origen').val()==4){
                     $('.field-activosbienes-fecha_origen').parent().show();
                     $('.field-activosbienes-nacional').parent().hide();
+                    $('#datos-importacion-container').hide();
+
                 }else if ($('#origen').val()==2) {
                     $('.field-activosbienes-fecha_origen').parent().hide();
                     $('.field-activosbienes-nacional').parent().show();
+                    datosImportados();
                 }else
                 {
                     $('.field-activosbienes-fecha_origen').parent().hide();
