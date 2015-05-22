@@ -72,7 +72,7 @@ class SysNaturalesJuridicasController extends BaseController
     }
     
     
-    public function actionNaturaljuridicalist($q = null, $id = null,$juridica=null) {
+    public function actionNaturalesJuridicasLista($q = null, $id = null,$juridica=null) {
     $buscar_juridica= "rif ILIKE "."'%" . $q ."%' or denominacion ILIKE "."'%" . $q ."%'";   
       
     \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;

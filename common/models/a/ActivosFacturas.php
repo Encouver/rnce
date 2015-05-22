@@ -182,8 +182,8 @@ class ActivosFacturas extends \common\components\BaseActiveRecord
                 ]],
                 'columnOptions'=>['hidden'=>false]
             ],
-            'comprador_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(SysNaturalesJuridicas::find()->all(),'id',function($model){return $model->etiqueta(); }),
-                'options'=>[],/*'pluginOptions' => [
+            'comprador_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>[//'data'=>ArrayHelper::map(SysNaturalesJuridicas::find()->all(),'id',function($model){return $model->etiqueta(); }),
+                'options'=>[],'pluginOptions' => [
                     'allowClear' => true,
                     'minimumInputLength' => 3,
                     'ajax' => [
@@ -194,7 +194,7 @@ class ActivosFacturas extends \common\components\BaseActiveRecord
                     'escapeMarkup' => new JsExpression('function (markup) { return markup; }'),
                     'templateResult' => new JsExpression('function(city) { return city.text; }'),
                     'templateSelection' => new JsExpression('function (city) { return city.text; }'),
-                ],*/]],
+                ],]],
             'base_imponible_gravable'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),],
             'exento'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),],
             'iva'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),],
