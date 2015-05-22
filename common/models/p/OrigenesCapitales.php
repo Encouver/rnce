@@ -65,7 +65,7 @@ class OrigenesCapitales extends \common\components\BaseActiveRecord
             [['tipo_origen', 'monto', 'contratista_id', 'documento_registrado_id'], 'required'],
             [['tipo_origen'], 'string'],
             ['monto', 'validarmonto'],
-            [['monto'], 'required', 'on' => 'EFECTIVO'],
+            [['monto','fecha'], 'required', 'on' => 'EFECTIVO'],
             [['monto','banco_contratista_id','numero_transaccion'], 'required', 'on' => 'EFECTIVO EN BANCO'],
             [['monto','bien_id','fecha'], 'required', 'on' => 'PROPIEDADES PLANTAS Y EQUIPOS'],
             [['bien_id', 'banco_contratista_id', 'numero_accion', 'contratista_id', 'documento_registrado_id', 'creado_por', 'actualizado_por','numero_transaccion'], 'integer'],
@@ -188,6 +188,14 @@ class OrigenesCapitales extends \common\components\BaseActiveRecord
             return [
              
                 'monto'=>['type'=>Form::INPUT_TEXT,'label'=>'Monto Efectivo'],
+                'fecha'=>[
+                'type'=>Form::INPUT_WIDGET, 
+                'widgetClass'=>'\kartik\widgets\DatePicker', 
+                'options'=>['pluginOptions' => [
+                    'autoclose'=>true,
+                    'format' => 'yyyy-mm-dd'
+                ]],
+                ],
                 
             ];
 
@@ -202,7 +210,7 @@ class OrigenesCapitales extends \common\components\BaseActiveRecord
 
 
            return [
-                'banco_contratista_id'=>['type'=>Form::INPUT_DROPDOWN_LIST, 'items'=>ArrayHelper::map($array, 'id', 'nombre'), 'label'=>'Banco Numero de Cuenta'],
+                'banco_contratista_id'=>['type'=>Form::INPUT_DROPDOWN_LIST, 'items'=>ArrayHelper::map($array, 'id', 'nombre'), 'label'=>'Banco Numero de Cuenta','options'=>['prompt'=>'Seleccione una cuenta']],
                 'numero_transaccion'=>['type'=>Form::INPUT_TEXT,'label'=>'Numero de transaccion'],
                 'fecha'=>[
                 'type'=>Form::INPUT_WIDGET, 
@@ -223,7 +231,7 @@ class OrigenesCapitales extends \common\components\BaseActiveRecord
                 'allowClear' => true,
                 'minimumInputLength' => 3,
                 'ajax' => [
-                    'url' => \yii\helpers\Url::to(['activos-bienes/bieneslist']),
+                    'url' => \yii\helpers\Url::to(['activos-bienes/bienes-lista']),
                     'dataType' => 'json',
                     'data' => new JsExpression('function(params) { return {q:params.term}; }')
                 ],

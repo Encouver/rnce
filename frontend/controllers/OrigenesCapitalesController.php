@@ -41,6 +41,23 @@ class OrigenesCapitalesController extends BaseController
             'dataProvider' => $dataProvider,
         ]);
     }
+    public function actionOrigen()
+    {
+       $searchModel = new OrigenesCapitalesSearch();
+         $searchModel->tipo_origen = 'EFECTIVO';
+        $dataProvider_efectivo = $searchModel->search(Yii::$app->request->queryParams);
+        
+        $searchModel->tipo_origen = 'EFECTIVO EN BANCO';
+        $dataProvider_banco = $searchModel->search(Yii::$app->request->queryParams);
+
+
+
+        return $this->render('origen_capital', [
+            'searchModel' => $searchModel,
+            'dataProvider_efectivo' => $dataProvider_efectivo,
+            'dataProvider_banco' => $dataProvider_banco,
+        ]);
+    }
 
     /**
      * Displays a single OrigenesCapitales model.

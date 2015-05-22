@@ -293,7 +293,7 @@ class ActivosBienesController extends BaseController
             ]);
     //    }
     }
-     public function actionBieneslist($q = null, $id = null) {
+     public function actionBienesLista($q = null, $id = null) {
     $buscar_bien= "detalle ILIKE "."'%" . $q ."%'";   
        
     \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
