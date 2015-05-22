@@ -24,7 +24,7 @@ use yii\helpers\ArrayHelper;
 
 $natural_juridica = new SysNaturalesJuridicas();
 $persona_juridica = new PersonasJuridicas();
-$url = \yii\helpers\Url::to(['sys-naturales-juridicas/naturaljuridicalist']);
+$url = \yii\helpers\Url::to(['sys-naturales-juridicas/naturales-juridicas-lista']);
 $persona_natural = new PersonasNaturales();
 $accionista = new common\models\p\AccionistasOtros();
 

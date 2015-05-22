@@ -21,7 +21,7 @@ use common\models\p\SysPaises;
 //$contratista= Contratistas::findOne( ['id' => $id_contratista]);
 //$natural_juridica= SysNaturalesJuridicas::findOne(['id' => $contratista->natural_juridica_id]);
 
-$url = \yii\helpers\Url::to(['sys-naturales-juridicas/naturaljuridicalist']);
+$url = \yii\helpers\Url::to(['sys-naturales-juridicas/naturales-juridicas-lista']);
 $url2 = \yii\helpers\Url::to(['comisarios-auditores/profesionalinforme']);
 $url3 = \yii\helpers\Url::to(['personas-naturales/crearpersonanatural']);
 $persona_natural = new PersonasNaturales();

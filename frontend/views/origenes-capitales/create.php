@@ -32,6 +32,7 @@ $array[] = ['id' => 6, 'nombre' => 'INVENTARIO DE MERCANCIA'];
     <?= Html::dropDownList("Origen Capital","", ArrayHelper::map($array, 'id', 'nombre'), ['id' => 'tipo_origen','class' => 'form-control tamano', 'prompt' => 'Seleccione origen',
                 ]
             ) ?>
+ 
     <br>
     <div id="efectivo" style="display:none">
     	<?php $origen_capital->scenario = 'EFECTIVO';

@@ -18,8 +18,9 @@ class OrigenesCapitalesSearch extends OrigenesCapitales
     public function rules()
     {
         return [
-            [['id', 'bien_id', 'banco_contratista_id', 'numero_accion', 'contratista_id', 'documento_registrado_id', 'creado_por', 'actualizado_por'], 'integer'],
-            [['tipo_origen', 'fecha', 'fecha_corte', 'fecha_aumento', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
+            [['id', 'bien_id', 'banco_contratista_id', 'numero_accion', 'contratista_id', 'documento_registrado_id', 'creado_por', 'actualizado_por','numero_transaccion'], 'integer'],
+            [['tipo_origen'], 'string'],
+            [['fecha', 'fecha_corte', 'fecha_aumento', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['monto', 'saldo_cierre_anterior', 'saldo_corte', 'monto_aumento', 'saldo_aumento', 'valor_acciones', 'saldo_cierre_ajustado'], 'number'],
             [['sys_status'], 'boolean'],
         ];
@@ -59,10 +60,12 @@ class OrigenesCapitalesSearch extends OrigenesCapitales
 
         $query->andFilterWhere([
             'id' => $this->id,
+            'tipo_origen' => $this->tipo_origen,
             'bien_id' => $this->bien_id,
             'banco_contratista_id' => $this->banco_contratista_id,
             'monto' => $this->monto,
             'fecha' => $this->fecha,
+            'numero_transaccion' => $this->numero_transaccion,
             'saldo_cierre_anterior' => $this->saldo_cierre_anterior,
             'saldo_corte' => $this->saldo_corte,
             'fecha_corte' => $this->fecha_corte,
@@ -72,7 +75,7 @@ class OrigenesCapitalesSearch extends OrigenesCapitales
             'valor_acciones' => $this->valor_acciones,
             'saldo_cierre_ajustado' => $this->saldo_cierre_ajustado,
             'fecha_aumento' => $this->fecha_aumento,
-            'contratista_id' => $this->contratista_id,
+            'contratista_id' => Yii::$app->user->identity->contratista_id,
             'documento_registrado_id' => $this->documento_registrado_id,
             'creado_por' => $this->creado_por,
             'actualizado_por' => $this->actualizado_por,
@@ -82,7 +85,7 @@ class OrigenesCapitalesSearch extends OrigenesCapitales
             'sys_finalizado_el' => $this->sys_finalizado_el,
         ]);
 
-        $query->andFilterWhere(['like', 'tipo_origen', $this->tipo_origen]);
+      //  $query->andFilterWhere(['like', 'tipo_origen', $this->tipo_origen]);
 
         return $dataProvider;
     }
