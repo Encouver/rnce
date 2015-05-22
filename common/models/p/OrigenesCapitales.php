@@ -10,6 +10,7 @@ use kartik\money\MaskMoney;
 use kartik\widgets\Select2;
 use kartik\builder\Form;
 use yii\helpers\ArrayHelper;
+use yii\web\JsExpression;
 use Yii;
 
 /**
@@ -64,9 +65,9 @@ class OrigenesCapitales extends \common\components\BaseActiveRecord
             [['tipo_origen', 'monto', 'contratista_id', 'documento_registrado_id'], 'required'],
             [['tipo_origen'], 'string'],
             ['monto', 'validarmonto'],
-            [['monto'], 'required', 'on' => 'efectivo'],
-            [['monto','banco_contratista_id','fecha','numero_transaccion'], 'required', 'on' => 'efectivoenbanco'],
-            [['monto','bien_id','fecha'], 'required', 'on' => 'bien'],
+            [['monto'], 'required', 'on' => 'EFECTIVO'],
+            [['monto','banco_contratista_id','numero_transaccion'], 'required', 'on' => 'EFECTIVO EN BANCO'],
+            [['monto','bien_id','fecha'], 'required', 'on' => 'PROPIEDADES PLANTAS Y EQUIPOS'],
             [['bien_id', 'banco_contratista_id', 'numero_accion', 'contratista_id', 'documento_registrado_id', 'creado_por', 'actualizado_por','numero_transaccion'], 'integer'],
             [['monto', 'saldo_cierre_anterior', 'saldo_corte', 'monto_aumento', 'saldo_aumento', 'valor_acciones', 'saldo_cierre_ajustado'], 'number'],
             [['fecha', 'fecha_corte', 'fecha_aumento', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
@@ -109,7 +110,7 @@ class OrigenesCapitales extends \common\components\BaseActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'tipo_origen' => Yii::t('app', 'Tipo Origen'),
-            'bien_id' => Yii::t('app', 'Bien ID'),
+            'bien_id' => Yii::t('app', 'Bien'),
             'banco_contratista_id' => Yii::t('app', 'Banco Contratista ID'),
             'monto' => Yii::t('app', 'Monto'),
             'fecha' => Yii::t('app', 'Fecha'),
@@ -181,7 +182,7 @@ class OrigenesCapitales extends \common\components\BaseActiveRecord
     }
     public function getFormAttribs($id){
         
-        if($id=='efectivo')
+        if($id=='EFECTIVO')
         {
 
             return [
@@ -191,7 +192,7 @@ class OrigenesCapitales extends \common\components\BaseActiveRecord
             ];
 
         }
-        if($id=='efectivoenbanco'){
+        if($id=='EFECTIVO EN BANCO'){
             $ban = BancosContratistas::find()->all();
             $array = array();
               foreach ($ban as $banco) {
@@ -214,10 +215,10 @@ class OrigenesCapitales extends \common\components\BaseActiveRecord
                 'monto'=>['type'=>Form::INPUT_TEXT,'label'=>'Monto transaccion'],
             ];
         }
-        if($id=='bien'){
+  
 
            return [
-                'proveedor_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>[//'data'=>ArrayHelper::map(PersonasJuridicas::find()->all(),'id',function($model){return $model->etiqueta(); }),
+                'bien_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>[//'data'=>ArrayHelper::map(PersonasJuridicas::find()->all(),'id',function($model){return $model->etiqueta(); }),
                 'options'=>[],'pluginOptions' => [
                 'allowClear' => true,
                 'minimumInputLength' => 3,
@@ -230,16 +231,9 @@ class OrigenesCapitales extends \common\components\BaseActiveRecord
                 'templateResult' => new JsExpression('function(bien_id) { return bien_id.text; }'),
                 'templateSelection' => new JsExpression('function (bien_id) { return bien_id.text; }'),
                 ],]],
-                'fecha'=>[
-                'type'=>Form::INPUT_WIDGET, 
-                'widgetClass'=>'\kartik\widgets\DatePicker', 
-                'options'=>['pluginOptions' => [
-                    'autoclose'=>true,
-                    'format' => 'yyyy-mm-dd'
-                ]],
-                ],
-               'monto'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),'label'=>'Monto'],
+               
+               'monto'=>['type'=>Form::INPUT_TEXT,'label'=>'Monto bien'],
             ];
-        }
+        
     }
 }
