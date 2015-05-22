@@ -20,23 +20,15 @@ use yii\grid\GridView;
 //$contratista= Contratistas::findOne( ['id' => $id_contratista]);
 //$natural_juridica= SysNaturalesJuridicas::findOne(['id' => $contratista->natural_juridica_id]);
 
-$url = \yii\helpers\Url::to(['accionistas-otros/naturaljuridicalist']);
+$url = \yii\helpers\Url::to(['sys-naturales-juridicas/naturaljuridicalist']);
 $url2 = \yii\helpers\Url::to(['personas-naturales/crearcomisario']);
 $url3 = \yii\helpers\Url::to(['comisarios-auditores/comisario']);
 $persona_natural = new PersonasNaturales();
+$persona = empty($model->natural_juridica_id) ? '' : City::findOne($model->natural_juridica_id)->denominacion;
 
 
-$initScript = <<< SCRIPT
-function (element, callback) {
-    var id=\$(element).val();
-    if (id !== "") {
-        \$.ajax("{$url}?id=" + id, {
-            dataType: "json"
-        }).done(function(data) { callback(data.results);});
-    }
-}
-SCRIPT;
-        
+
+
 ?>
 <div class="col-sm-12">
     
@@ -77,6 +69,7 @@ SCRIPT;
      
  
 <?= $form->field($comisario, 'natural_juridica_id')->widget(Select2::classname(), [
+     'initValueText' => $persona, // set the initial display text
     'options' => ['placeholder' => 'Numero de identificacion ...'],
     'pluginOptions' => [
         'allowClear' => true,
@@ -84,10 +77,11 @@ SCRIPT;
         'ajax' => [
             'url' => $url,
             'dataType' => 'json',
-            'data' => new JsExpression('function(term,page) { return {search:term}; }'),
-            'results' => new JsExpression('function(data,page) { return {results:data.results}; }'),
+            'data' => new JsExpression('function(params) { return {q:params.term,juridica:false}; }')
         ],
-        'initSelection' => new JsExpression($initScript)
+       'escapeMarkup' => new JsExpression('function (markup) { return markup; }'),
+        'templateResult' => new JsExpression('function(natural_juridica_id) { return natural_juridica_id.text; }'),
+        'templateSelection' => new JsExpression('function (natural_juridica_id) { return natural_juridica_id.text; }'),
     ],
 ]);?>
      <?php echo Form::widget([
