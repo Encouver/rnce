@@ -28,17 +28,7 @@ $url = \yii\helpers\Url::to(['naturaljuridicalist']);
 $persona_natural = new PersonasNaturales();
 $accionista = new common\models\p\AccionistasOtros();
 
-
-$initScript = <<< SCRIPT
-function (element, callback) {
-    var id=\$(element).val();
-    if (id !== "") {
-        \$.ajax("{$url}?id=" + id, {
-            dataType: "json"
-        }).done(function(data) { callback(data.results);});
-    }
-}
-SCRIPT;
+$persona = empty($model->natural_juridica_id) ? '' : City::findOne($model->natural_juridica_id)->denominacion;
         
 ?>
 <div class="col-md-12">
@@ -117,6 +107,7 @@ SCRIPT;
      
  
 <?= $form->field($accionista, 'natural_juridica_id')->widget(Select2::classname(), [
+    'initValueText' => $persona, // set the initial display text
     'options' => ['placeholder' => 'Numero de identificacion ...'],
     'pluginOptions' => [
         'allowClear' => true,
@@ -124,10 +115,11 @@ SCRIPT;
         'ajax' => [
             'url' => $url,
             'dataType' => 'json',
-            'data' => new JsExpression('function(term,page) { return {search:term}; }'),
-            'results' => new JsExpression('function(data,page) { return {results:data.results}; }'),
+            'data' => new JsExpression('function(params) { return {q:params.term}; }')
         ],
-        'initSelection' => new JsExpression($initScript)
+       'escapeMarkup' => new JsExpression('function (markup) { return markup; }'),
+        'templateResult' => new JsExpression('function(natural_juridica_id) { return natural_juridica_id.text; }'),
+        'templateSelection' => new JsExpression('function (natural_juridica_id) { return natural_juridica_id.text; }'),
     ],
 ]);?>
     
