@@ -134,7 +134,7 @@ class AccionistasOtrosController extends BaseController
      $out = ['results' => ['id' => '', 'text' => '']];
     if (!is_null($q)) {
         $query = new \yii\db\Query;
-        $query->select('id, rif AS text')
+        $query->select("id, (rif || ' ' || denominacion)  AS text")
             ->from('sys_naturales_juridicas')
             ->where("rif ILIKE "."'%" . $q ."%'")
             ->limit(20);
