@@ -6,6 +6,8 @@ use common\models\p\DenominacionesComerciales;
 use common\models\p\Certificados;
 use common\models\p\Suplementarios;
 use common\models\p\Acciones;
+use kartik\money\MaskMoney;
+use kartik\widgets\Select2;
 use kartik\builder\Form;
 use yii\helpers\ArrayHelper;
 use Yii;
@@ -64,7 +66,7 @@ class OrigenesCapitales extends \common\components\BaseActiveRecord
             ['monto', 'validarmonto'],
             [['monto'], 'required', 'on' => 'efectivo'],
             [['monto','banco_contratista_id','fecha','numero_transaccion'], 'required', 'on' => 'efectivoenbanco'],
-            [['monto','banco_contratista_id','fecha','numero_transaccion'], 'required', 'on' => 'efectivoenbanco'],
+            [['monto','bien_id','fecha'], 'required', 'on' => 'bien'],
             [['bien_id', 'banco_contratista_id', 'numero_accion', 'contratista_id', 'documento_registrado_id', 'creado_por', 'actualizado_por','numero_transaccion'], 'integer'],
             [['monto', 'saldo_cierre_anterior', 'saldo_corte', 'monto_aumento', 'saldo_aumento', 'valor_acciones', 'saldo_cierre_ajustado'], 'number'],
             [['fecha', 'fecha_corte', 'fecha_aumento', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
@@ -210,6 +212,33 @@ class OrigenesCapitales extends \common\components\BaseActiveRecord
                 ]],
                 ],
                 'monto'=>['type'=>Form::INPUT_TEXT,'label'=>'Monto transaccion'],
+            ];
+        }
+        if($id=='bien'){
+
+           return [
+                'proveedor_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>[//'data'=>ArrayHelper::map(PersonasJuridicas::find()->all(),'id',function($model){return $model->etiqueta(); }),
+                'options'=>[],'pluginOptions' => [
+                'allowClear' => true,
+                'minimumInputLength' => 3,
+                'ajax' => [
+                    'url' => \yii\helpers\Url::to(['activos-bienes/bieneslist']),
+                    'dataType' => 'json',
+                    'data' => new JsExpression('function(params) { return {q:params.term}; }')
+                ],
+                'escapeMarkup' => new JsExpression('function (markup) { return markup; }'),
+                'templateResult' => new JsExpression('function(bien_id) { return bien_id.text; }'),
+                'templateSelection' => new JsExpression('function (bien_id) { return bien_id.text; }'),
+                ],]],
+                'fecha'=>[
+                'type'=>Form::INPUT_WIDGET, 
+                'widgetClass'=>'\kartik\widgets\DatePicker', 
+                'options'=>['pluginOptions' => [
+                    'autoclose'=>true,
+                    'format' => 'yyyy-mm-dd'
+                ]],
+                ],
+               'monto'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),'label'=>'Monto'],
             ];
         }
     }

@@ -13,6 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 $array[] = ['id' => 1, 'nombre' => 'EFECTIVO'];
 $array[] = ['id' => 2, 'nombre' => 'EFECTIVO EN BANCO'];
+$array[] = ['id' => 3, 'nombre' => 'PROPIEDADES PLANTAS Y EQUIPOS'];
 ?>
 <style type="text/css">
 .tamano

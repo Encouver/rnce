@@ -28,7 +28,7 @@ $url = \yii\helpers\Url::to(['sys-naturales-juridicas/naturaljuridicalist']);
 $persona_natural = new PersonasNaturales();
 $accionista = new common\models\p\AccionistasOtros();
 
-$persona = empty($model->natural_juridica_id) ? '' : City::findOne($model->natural_juridica_id)->denominacion;
+$persona = empty($accionista->natural_juridica_id) ? '' : City::findOne($accionista->natural_juridica_id)->denominacion;
         
 ?>
 <div class="col-md-12">

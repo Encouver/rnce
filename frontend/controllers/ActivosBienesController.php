@@ -293,7 +293,28 @@ class ActivosBienesController extends BaseController
             ]);
     //    }
     }
-
+     public function actionBieneslist($q = null, $id = null) {
+    $buscar_bien= "detalle ILIKE "."'%" . $q ."%'";   
+       
+    \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+     $out = ['results' => ['id' => '', 'text' => '']];
+    if (!is_null($q)) {
+        $query = new \yii\db\Query;
+        
+        $query->select("id, detalle AS text")
+            ->from('activos.bienes')
+            ->where($buscar_bien)
+            ->limit(20);
+        $command = $query->createCommand();
+        $data = $command->queryAll();
+        $out['results'] = array_values($data);
+    }
+    elseif ($id > 0) {
+        $out['results'] = ['id' => $id, 'text' => ActivosBienes::find($id)->detalle];
+    }
+  
+    return $out;
+}
     /**
      * Deletes an existing ActivosBienes model.
      * If deletion is successful, the browser will be redirected to the 'index' page.

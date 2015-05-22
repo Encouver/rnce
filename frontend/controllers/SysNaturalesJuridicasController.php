@@ -73,8 +73,8 @@ class SysNaturalesJuridicasController extends BaseController
     
     
     public function actionNaturaljuridicalist($q = null, $id = null,$juridica=null) {
-    $buscar_juridica= "rif ILIKE "."'%" . $q ."%'";   
-       
+    $buscar_juridica= "rif ILIKE "."'%" . $q ."%' or denominacion ILIKE "."'%" . $q ."%'";   
+      
     \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
      $out = ['results' => ['id' => '', 'text' => '']];
     if (!is_null($q)) {
@@ -82,7 +82,7 @@ class SysNaturalesJuridicasController extends BaseController
         if(!is_null($juridica)){
              $buscar_juridica= "rif ILIKE "."'%" . $q ."%' and juridica=".$juridica;
         }
-        $query->select("id, (rif || ' ' || denominacion)  AS text")
+        $query->select("id, (rif || ' - ' || denominacion)  AS text")
             ->from('sys_naturales_juridicas')
             ->where($buscar_juridica)
             ->limit(20);
