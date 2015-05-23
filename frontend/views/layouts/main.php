@@ -102,7 +102,7 @@ AppAsset::register($this);
                         ['label' => 'Duracion empresa', 'url' => ['/duraciones-empresas/crearduracionacta']],
                         ['label' => 'Actividades Economicas', 'url' => ['/actividades-economicas/crearactividadacta']],
                         ['label' => 'Capital', 'url' => ['/actas-constitutivas/crearcapitalsuscrito']],
-                        ['label' => 'Origen Capital', 'url' => ['/origenes-capitales/origen']],
+                        ['label' => 'Origen Capital', 'url' => ['/origenes-capitales/index']],
                         ['label' => 'Certificacion Aportes', 'url' => ['/certificaciones-aportes/create']],
                         ['label' => 'Fondos Reservas', 'url' => ['/fondos-reservas/create']],
                         ['label' => 'Resumen', 'url' => ['/actas-constitutivas/resumenacta']],

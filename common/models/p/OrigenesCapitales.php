@@ -127,16 +127,16 @@ class OrigenesCapitales extends \common\components\BaseActiveRecord
             if($denominacion_comercial->tipo_denominacion!="COOPERATIVA"){
             
              $accion= Acciones::findOne(['contratista_id'=>$usuario->contratista_id ,'documento_registrado_id'=>$registro->id,'suscrito'=>false]);
-             $monto_pagado = $accion->valor_comun;
+             $monto_pagado = $accion->capital;
          }
          if($denominacion_comercial->tipo_denominacion=="COOPERATIVA" && $denominacion_comercial->cooperativa_capital=='LIMITADO'){
            
              $certificado= Certificados::findOne(['contratista_id'=>$usuario->contratista_id ,'documento_registrado_id'=>$registro->id,'suscrito'=>false]);
-             $monto_pagado = $certificado->valor_asociacion+$certificado->valor_aportacion+$certificado->valor_rotativo+$certificado->valor_inversion;
+             $monto_pagado = $certificado->capital;
          }
          if($denominacion_comercial->tipo_denominacion=="COOPERATIVA" && $denominacion_comercial->cooperativa_capital=='SUPLEMENTARIO'){
              $suplementario= Suplementarios::findOne(['contratista_id'=>$usuario->contratista_id ,'documento_registrado_id'=>$registro->id,'suscrito'=>false]);
-             $monto_pagado = $suplementario->valor;
+             $monto_pagado = $suplementario->capital;
          }
           $monto_actual= $this->sumarmonto()+$this->monto;
           

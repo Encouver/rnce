@@ -103,7 +103,7 @@ class AccionesController extends BaseController
                  
                         $paga_acta = new Acciones();
                         $paga_acta->numero_comun= $suscrita_acta->numero_comun_pagada;
-                        $paga_acta->valor_comun=$suscrita_acta->valor_comun_pagada;
+                        $paga_acta->capital=$suscrita_acta->capital_pagado;
              
                         $paga_acta->contratista_id = $suscrita_acta->contratista_id;
                         $paga_acta->documento_registrado_id= $suscrita_acta->documento_registrado_id;

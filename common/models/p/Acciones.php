@@ -26,7 +26,7 @@ use Yii;
 class Acciones extends \common\components\BaseActiveRecord
 {
     public $numero_comun_pagada;
-    public $valor_comun_pagada;
+    public $capital_pagado;
     /**
      * @inheritdoc
      */
@@ -44,24 +44,35 @@ class Acciones extends \common\components\BaseActiveRecord
             [['suscrito', 'documento_registrado_id','contratista_id','tipo_accion'], 'required'],
             [['numero_comun', 'numero_comun_pagada','numero_preferencial', 'documento_registrado_id','contratista_id','suscrito'], 'integer'],
             ['numero_comun_pagada', 'validarnumeropagada'],
-            ['valor_comun_pagada', 'validarvalorpagada'],
-          
-            [['valor_comun', 'valor_preferencial','valor_comun_pagada'], 'number'],
+             ['numero_comun_pagada', 'validarmaximopagada'],
+            ['capital_pagado', 'validarcapital'],
+            ['valor_comun', 'validarvalor'],
+            [['valor_comun', 'valor_preferencial','capital'], 'number'],
             [['sys_status', 'suscrito'], 'boolean'],
             [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['tipo_accion'], 'string'],
-            [['numero_comun', 'valor_comun','numero_comun_pagada','valor_comun_pagada'], 'required', 'on' => 'principal']
+            [['numero_comun', 'valor_comun','numero_comun_pagada','capital','capital_pagado'], 'required', 'on' => 'principal']
             
         ];
     }
-      public function validarnumeropagada($attribute){
-          if($this->numero_comun_pagada>$this->numero_comun){
-               $this->addError($attribute,'Numero Comun pagada invalido');
+    public function validarmaximopagada($attribute){
+          if($this->capital== $this->capital_pagado && $this->numero_comun_pagada<$this->numero_comun){
+               $this->addError($attribute,'Numero Accion pagada menor al valor valido');
           } 
     }
-    public function validarvalorpagada($attribute){
-          if($this->valor_comun_pagada>$this->valor_comun){
-               $this->addError($attribute,'Valor Comun pagada invalido');
+      public function validarnumeropagada($attribute){
+          if($this->numero_comun_pagada>$this->numero_comun){
+               $this->addError($attribute,'Numero Accion pagada invalido');
+          } 
+    }
+    public function validarcapital($attribute){
+          if($this->capital_pagado>$this->capital){
+               $this->addError($attribute,'Valor Capital pagada invalido');
+          } 
+    }
+    public function validarvalor($attribute){
+          if($this->valor_comun*$this->numero_comun > $this->capital){
+               $this->addError($attribute,'Valor accion suscrita invalida');
           } 
     }
     
@@ -87,7 +98,8 @@ class Acciones extends \common\components\BaseActiveRecord
             'documento_registrado_id' => Yii::t('app', 'Documento Registrado'),
             'contratista_id' => Yii::t('app', 'COntratista'),
             'numero_comun_pagada' => Yii::t('app', 'Numero Accion o Participacion Pagada'),
-            'valor_comun_pagada' => Yii::t('app', 'Valor Accion o Participacion Pagada'),
+            'capital' => Yii::t('app', 'Capital Suscrito'),
+            'capital_pagado' => Yii::t('app', 'Capital Pagado'),
         ];
     }
 
@@ -104,10 +116,11 @@ class Acciones extends \common\components\BaseActiveRecord
         
        
     return [
+            'capital'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Capital Suscrito']],
             'numero_comun'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Numero de acciones o participaciones']],
             'valor_comun'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Valor']],
+            'capital_pagado'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Capital Pagado']],
             'numero_comun_pagada'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Numero de acciones o participaciones']],
-            'valor_comun_pagada'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Valor']],
           
       
     ];

@@ -39,10 +39,8 @@ class Certificados extends \common\components\BaseActiveRecord
     public $numero_aportacion_pagada;
     public $numero_rotativo_pagada;
     public $numero_inversion_pagada;
-    public $valor_asociacion_pagada;
-    public $valor_aportacion_pagada;
-    public $valor_rotativo_pagada;
-    public $valor_inversion_pagada;
+    public $capital_pagado;
+
     public static function tableName()
     {
         return 'certificados';
@@ -55,7 +53,7 @@ class Certificados extends \common\components\BaseActiveRecord
     {
         return [
             [['numero_asociacion', 'numero_aportacion', 'numero_rotativo', 'numero_inversion','numero_asociacion_pagada', 'numero_aportacion_pagada', 'numero_rotativo_pagada', 'numero_inversion_pagada', 'creado_por', 'actualizado_por', 'documento_registrado_id', 'contratista_id'], 'integer'],
-            [['valor_asociacion', 'valor_aportacion', 'valor_rotativo', 'valor_inversion','valor_asociacion_pagada', 'valor_aportacion_pagada', 'valor_rotativo_pagada','valor_inversion_pagada'], 'number'],
+            [['valor_asociacion', 'valor_aportacion', 'valor_rotativo', 'valor_inversion','capital','capital_pagado'], 'number'],
             [['tipo_certificado'], 'string'],
             ['numero_asociacion_pagada', 'validarnumeroasociacionpagada'],
             ['valor_asociacion_pagada', 'validarvalorasociacionpagada'],
@@ -65,7 +63,7 @@ class Certificados extends \common\components\BaseActiveRecord
             ['valor_rotativo_pagada', 'validarvalorrotativopagada'],
             ['numero_inversion_pagada', 'validarnumeroinversionpagada'],
             ['valor_inversion_pagada', 'validarvalorinversionpagada'],
-            [['numero_asociacion', 'numero_aportacion', 'numero_rotativo', 'numero_inversion', 'valor_asociacion', 'valor_aportacion', 'valor_rotativo','valor_inversion','numero_asociacion_pagada', 'numero_aportacion_pagada', 'numero_rotativo_pagada', 'numero_inversion_pagada', 'valor_asociacion_pagada', 'valor_aportacion_pagada', 'valor_rotativo_pagada','valor_inversion_pagada'], 'required','on'=>'principal'],
+            [['capital','numero_asociacion', 'numero_aportacion', 'numero_rotativo', 'numero_inversion', 'valor_asociacion', 'valor_aportacion', 'valor_rotativo','valor_inversion','numero_asociacion_pagada', 'numero_aportacion_pagada', 'numero_rotativo_pagada', 'numero_inversion_pagada', 'capital_pagado'], 'required','on'=>'principal'],
             [['suscrito', 'documento_registrado_id', 'contratista_id'], 'required'],
             [['suscrito', 'sys_status'], 'boolean'],
             [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe']
@@ -141,10 +139,9 @@ class Certificados extends \common\components\BaseActiveRecord
             'numero_aportacion_pagada' => Yii::t('app', 'Numero Aportacion Pagada'),
             'numero_rotativo_pagada' => Yii::t('app', 'Numero Rotativo Pagada'),
             'numero_inversion_pagada' => Yii::t('app', 'Numero Inversion Pagada'),
-            'valor_asociacion_pagada' => Yii::t('app', 'Valor Asociacion Pagada'),
-            'valor_aportacion_pagada' => Yii::t('app', 'Valor Aportacion Pagada'),
-            'valor_rotativo_pagada' => Yii::t('app', 'Valor Rotativo Pagada'),
-            'valor_inversion_pagada' => Yii::t('app', 'Valor Inversion Pagada'),
+            'capital' => Yii::t('app', 'Capital Suscrito'),
+            'capital_pagado' => Yii::t('app', 'Capital pagado'),
+            
         ];
     }
 
@@ -171,7 +168,7 @@ class Certificados extends \common\components\BaseActiveRecord
             
 
             return [
-              
+               'capital'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Capital Suscrito']],
                'numero_asociacion'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Numero de Certificados ']],
                'valor_asociacion'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Valor']],
                'numero_aportacion'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Numero de Certificados ']],
@@ -180,14 +177,11 @@ class Certificados extends \common\components\BaseActiveRecord
                'valor_rotativo'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Valor']],
                'numero_inversion'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Numero de Certificados ']],
                'valor_inversion'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Valor']],
+               'capital_pagado'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Capital Pagado']],
                'numero_asociacion_pagada'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Numero de Certificados ']],
-               'valor_asociacion_pagada'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Valor']],
                'numero_aportacion_pagada'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Numero de Certificados ']],
-               'valor_aportacion_pagada'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Valor']],
                'numero_rotativo_pagada'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Numero de Certificados ']],
-               'valor_rotativo_pagada'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Valor']],
                'numero_inversion_pagada'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Numero de Certificados ']],
-               'valor_inversion_pagada'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Valor']],
               
             ];
         
