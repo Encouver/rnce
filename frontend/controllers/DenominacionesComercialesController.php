@@ -101,7 +101,7 @@ class DenominacionesComercialesController extends BaseController
                                
                    }
             if($denominacion_comercial->save()){
-                return "Datos guardados con exito";
+                return $this->redirect(['index']);
             }else{
                 return "Faltan datos por guardar";
             }
@@ -183,7 +183,7 @@ class DenominacionesComercialesController extends BaseController
                    }
                 
             if($denominacion_comercial->save()){
-                return "Datos guardados con exito";
+                return $this->redirect(['index']);
             }else{
                 return "Faltan datos por guardar";
             }
@@ -197,7 +197,7 @@ class DenominacionesComercialesController extends BaseController
                       return "Faltan datos debe competar los campos";
                  }else{
                      if($denominacion_comercial->save()){
-                            return "Datos guardados con exito";
+                             return $this->redirect(['index']);
                         }else{
                         return "Faltan datos por guardar";
                         }

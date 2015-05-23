@@ -15,30 +15,37 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <p>
-        <?= Html::a(Yii::t('app', 'Create Denominaciones Comerciales'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+ 
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+        //'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+            //'id',
+            'tipo_denominacion',
+            'tipo_subdenominacion',
+            ['attribute'=>'cooperativa_capital',
+             'label'=>'Cooperativa Tipo Capital',
+             'value'=>'cooperativa_capital'   
+             ],
+            ['attribute'=>'cooperativa_distribuicion',
+             'label'=>'Cooperativa Tipo Distribucion',
+             'value'=>'cooperativa_distribuicion'   
+             ],
             'codigo_situr',
-            'cooperativa_capital',
-            'cooperativa_distribuicion',
-            'contratista_id',
+            //'contratista_id',
             // 'sys_status:boolean',
             // 'sys_creado_el',
             // 'sys_actualizado_el',
             // 'sys_finalizado_el',
-            // 'tipo_denominacion',
-            // 'tipo_subdenominacion',
+            
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
-
+       <p>
+        <?= Html::a(Yii::t('app', 'Crear Denominacion Comercial'), ['creardenominacion'], ['class' => 'btn btn-success']) ?>
+    </p>
 </div>

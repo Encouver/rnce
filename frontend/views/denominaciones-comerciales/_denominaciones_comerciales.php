@@ -52,7 +52,13 @@ if($natural_juridica->juridica && $contratista->tipo_sector != "PRIVADO"){
 
 
 ?>
-
+<style type="text/css">
+.tamano
+{
+	width: 400px;
+	max-width: 400px;
+}
+</style>
 <div class="contratista-drop col-sm-9" style="margin-bottom: 10px;">
     
     <div id="output9"></div>
@@ -61,7 +67,7 @@ if($natural_juridica->juridica && $contratista->tipo_sector != "PRIVADO"){
   ]); ?>
     
     
-    <?= $form->field($denominacion_comercial, 'tipo_denominacion')->dropDownList(ArrayHelper::map($denominacion, 'id', 'name'), ['prompt' => 'Seleccione tipo de denominacion'])?>
+    <?= $form->field($denominacion_comercial, 'tipo_denominacion')->dropDownList(ArrayHelper::map($denominacion, 'id', 'name'), ['class' => 'form-control tamano','prompt' => 'Seleccione tipo de denominacion'])?>
     
 <!--    <div class="form-group centered">
          <?/*= Html::Button(Yii::t('app', 'Seleccionar'), ['class' => 'btn btn-success', 'id' => 'enviar8']) */?>

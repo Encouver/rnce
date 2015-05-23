@@ -25,7 +25,6 @@ $url = \yii\helpers\Url::to(['acciones/accionsuscritaacta']);
     'columns'=>3,
     'attributes'=>$accion_acta->formAttribsactas
       ]); ?>
- <h3><?= $msg ?></h3>
     <div id="output17"></div>
      <div class="form-group">
          <?= Html::submitButton(Yii::t('app', 'Enviar'), ['class' => 'btn btn-success', 'id' => 'enviar']) ?> 

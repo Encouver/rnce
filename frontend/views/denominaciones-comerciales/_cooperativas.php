@@ -10,7 +10,13 @@ use yii\widgets\ActiveForm;
 $url = \yii\helpers\Url::to(['denominaciones-comerciales/denominacioncomercial']);
 
 ?>
-
+<style type="text/css">
+.tamano
+{
+	width: 400px;
+	max-width: 400px;
+}
+</style>
 <div class="sociedad-drop" style="margin-bottom: 10px;">
     
     
@@ -19,9 +25,9 @@ $url = \yii\helpers\Url::to(['denominaciones-comerciales/denominacioncomercial']
         'id' => "dc_cooperativas",]); ?>
 
  
-    <?= $form->field($d_comercial, 'cooperativa_capital')->dropDownList([ 'SUPLEMENTARIO' => 'SUPLEMENTARIO', 'LIMITADO' => 'LIMITADO', ], ['prompt' => '']) ?>
+    <?= $form->field($d_comercial, 'cooperativa_capital')->dropDownList([ 'SUPLEMENTARIO' => 'SUPLEMENTARIO', 'LIMITADO' => 'LIMITADO', ], ['class' => 'form-control tamano','prompt' => 'Seleccione']) ?>
 
-    <?= $form->field($d_comercial, 'cooperativa_distribuicion')->dropDownList([ 'UTILIDADES' => 'UTILIDADES', 'EXCEDENTES' => 'EXCEDENTES', ], ['prompt' => '']) ?> 
+    <?= $form->field($d_comercial, 'cooperativa_distribuicion')->dropDownList([ 'UTILIDADES' => 'UTILIDADES', 'EXCEDENTES' => 'EXCEDENTES', ], ['class' => 'form-control tamano','prompt' => 'Seleccione']) ?> 
    
     
     <?= $form->field($d_comercial, 'tipo_denominacion')->hiddenInput()->label(false) ?>

@@ -15,7 +15,13 @@ $tip_sub_denominacion = [
     ['id' => 'GRUPO DE INTERCAMBIO SOLIDARIO', 'name' => 'GRUPO DE INTERCAMBIO SOLIDARIO'],
 ];
 ?>
-
+<style type="text/css">
+.tamano
+{
+	width: 400px;
+	max-width: 400px;
+}
+</style>
 <div class="sociedad-drop" style="margin-bottom: 10px;">
     
     
@@ -24,9 +30,9 @@ $tip_sub_denominacion = [
         'id' => "dc_socioproductivas",]); ?>
 
  
-    <?= $form->field($d_comercial, 'tipo_subdenominacion')->dropDownList(ArrayHelper::map($tip_sub_denominacion, 'id', 'name'), ['prompt' => 'Seleccione sub denominacion']) ?>
+    <?= $form->field($d_comercial, 'tipo_subdenominacion')->dropDownList(ArrayHelper::map($tip_sub_denominacion, 'id', 'name'), ['class' => 'form-control tamano','prompt' => 'Seleccione sub denominacion']) ?>
  
-    <?= $form->field($d_comercial, 'codigo_situr')->textInput(['maxlength' => 255]) ?>
+    <?= $form->field($d_comercial, 'codigo_situr')->textInput(['class' => 'form-control tamano','maxlength' => 255]) ?>
     
     <?= $form->field($d_comercial, 'tipo_denominacion')->hiddenInput()->label(false) ?>    
        

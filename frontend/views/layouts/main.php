@@ -81,8 +81,7 @@ AppAsset::register($this);
                          ['label' => 'Informacion de contacto', 'url' => ['/contratistas-contactos/crearcontacto']],
                          ['label' => 'Sucursales', 'url' => ['/sucursales/crearsucursal']],
                          ['label' => 'Bancos', 'url' => ['/bancos-contratistas/crearbanco']],
-                         ['label' => 'Denominaciones Comerciales', 'url' => ['/denominaciones-comerciales/creardenominacion']],
-          
+                        
                          ['label' => 'Objeto empresa', 'url' => ['/objetos-empresas/crearobjeto']],
                          ['label' => 'Accionistas Representante Legal o Junta Directiva', 'url' => ['/accionistas-otros/crearaccionistaotro']],
                          ['label' => 'Comisarios', 'url' => ['/comisarios-auditores/crearcomisario']],
@@ -97,6 +96,7 @@ AppAsset::register($this);
                  ['label' => 'Acta Constitutiva',
                     'items' => [
                          ['label' => 'Registro documento', 'url' => ['/activos-documentos-registrados/crearacta']],
+                         ['label' => 'Denominaciones Comerciales', 'url' => ['/denominaciones-comerciales/index']],
                         ['label' => 'Objeto Social', 'url' => ['/objetos-sociales/crearobjetoacta']],
                         ['label' => 'Cierre ejercicio', 'url' => ['/cierres-ejercicios/crearcierreacta']],
                         ['label' => 'Duracion empresa', 'url' => ['/duraciones-empresas/crearduracionacta']],

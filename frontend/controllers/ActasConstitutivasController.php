@@ -89,24 +89,21 @@ class ActasConstitutivasController extends BaseController
       
          if($denominacion_comercial->tipo_denominacion!="COOPERATIVA"){
              $accion_acta = new Acciones();
-             $msg=null;
+           
              $accion_acta->scenario = 'principal';
-              return $this->render('/acciones/acciones_actas', ['accion_acta'=>$accion_acta, 'msg'=>$msg
-            ]);
+              return $this->redirect(['acciones/index']);
          }
          if($denominacion_comercial->tipo_denominacion=="COOPERATIVA" && $denominacion_comercial->cooperativa_capital=='LIMITADO'){
              $certificado_acta = new Certificados();
              $msg=null;
              $certificado_acta->scenario = 'principal';
-              return $this->render('/certificados/certificados_actas', ['certificado_acta'=>$certificado_acta, 'msg'=>$msg
-            ]);
+              return $this->redirect(['certificados/index']);
          }
          if($denominacion_comercial->tipo_denominacion=="COOPERATIVA" && $denominacion_comercial->cooperativa_capital=='SUPLEMENTARIO'){
              $suplementario_acta = new Suplementarios();
              $msg=null;
              $suplementario_acta->scenario = 'principal';
-              return $this->render('/suplementarios/suplementarios_actas', ['suplementario_acta'=>$suplementario_acta, 'msg'=>$msg
-            ]);
+              return $this->redirect(['suplementarios/index']);;
          }
 
     }

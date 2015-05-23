@@ -68,7 +68,7 @@ class Acciones extends \common\components\BaseActiveRecord
           if($this->numero_comun_pagada>$this->numero_comun){
                $this->addError($attribute,'Numero Accion pagada invalido');
           }else{
-             if($this->numero_comun_pagada * $this->valor_comun >$this->numero_comun){
+             if($this->numero_comun_pagada * $this->valor_comun >$this->capital_pagado){
                   $this->addError($attribute,'Numero Accion pagada sobrepasa el valor valido');
              }
           }
@@ -110,7 +110,7 @@ class Acciones extends \common\components\BaseActiveRecord
             'documento_registrado_id' => Yii::t('app', 'Documento Registrado'),
             'contratista_id' => Yii::t('app', 'COntratista'),
             'numero_comun_pagada' => Yii::t('app', 'Numero Accion o Participacion Pagada'),
-            'capital' => Yii::t('app', 'Capital Suscrito'),
+            'capital' => Yii::t('app', 'Capital'),
             'capital_pagado' => Yii::t('app', 'Capital Pagado'),
         ];
     }

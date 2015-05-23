@@ -74,7 +74,7 @@ class SuplementariosController extends BaseController
     {
         $suscrita_acta = new Suplementarios();
          $suscrita_acta->scenario='principal';
-         $msg=null;
+        
 
         if ( $suscrita_acta->load(Yii::$app->request->post())) {
             
@@ -114,21 +114,17 @@ class SuplementariosController extends BaseController
                             if (! ($flag =  $paga_acta->save(false))) {
            
                             $transaction->rollBack();
-                            $msg= "Error en la carga de certificados ciosomplementarios pagadas";
+                           
                                
                         }
                         if ($suscrita_acta->save()) {
            
-                                $msg="Datos guardados correctamentee";
-                                $suscrita_acta=new Suplementarios();
-                                $suscrita_acta->scenario='principal';
-                               
+                              
                                 $transaction->commit();
-
+                                return $this->redirect(['index']);
                         }else{
                             $transaction->rollBack();
-                        
-                        $msg= "Certificados suplementarios suscritas no guardas con exito";
+     
                         }
                     
                     } catch (Exception $e) {
@@ -138,7 +134,7 @@ class SuplementariosController extends BaseController
                 }
             }
         }
-        return $this->render("suplementarios_actas",['suplementario_acta'=>$suscrita_acta,'msg'=>$msg]);
+        return $this->render("suplementarios_actas",['suplementario_acta'=>$suscrita_acta]);
     }
     
     

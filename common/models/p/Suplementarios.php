@@ -67,7 +67,7 @@ class Suplementarios extends \common\components\BaseActiveRecord
           if($this->numero_pagada>$this->numero){
                $this->addError($attribute,'Numero certificado suplementario pagado invalido');
           }else{
-             if($this->numero_pagada * $this->valor >$this->numero){
+             if($this->numero_pagada * $this->valor >$this->capital_pagado){
                   $this->addError($attribute,'Numero certificado suplementario pagado sobrepasa el valor valido');
              }
           }

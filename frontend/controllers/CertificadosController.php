@@ -75,7 +75,7 @@ class CertificadosController extends BaseController
     {
         $suscrita_acta = new Certificados();
          $suscrita_acta->scenario='principal';
-         $msg=null;
+    
 
         if ( $suscrita_acta->load(Yii::$app->request->post())) {
             
@@ -125,17 +125,13 @@ class CertificadosController extends BaseController
                                
                         }
                         if ($suscrita_acta->save()) {
-           
-                                $msg="Datos guardados correctamente";
-                                $suscrita_acta=new Certificados();
-                                $suscrita_acta->scenario='principal';
-                               
-                                $transaction->commit();
 
+                                $transaction->commit();
+                                  return $this->redirect(['index']);
                         }else{
                             $transaction->rollBack();
                         
-                        $msg= "Certificados suscritas no guardas con exito";
+                       
                         }
                     
                     } catch (Exception $e) {
@@ -145,7 +141,7 @@ class CertificadosController extends BaseController
                 }
             }
         }
-        return $this->render("certificados_actas",['certificado_acta'=>$suscrita_acta,'msg'=>$msg]);
+        return $this->render("certificados_actas",['certificado_acta'=>$suscrita_acta]);
     }
 
     /**

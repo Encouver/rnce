@@ -25,40 +25,11 @@ $url = \yii\helpers\Url::to(['acciones/accionsuscritaacta']);
     'columns'=>3,
     'attributes'=>$certificado_acta->getFormAttribs('principal')
       ]); ?>
- <h3><?= $msg ?></h3>
     <div id="output17"></div>
      <div class="form-group">
          <?= Html::submitButton(Yii::t('app', 'Enviar'), ['class' => 'btn btn-success', 'id' => 'enviar']) ?> 
     </div>
 
     <?php ActiveForm::end(); ?>
-       <?php
-/*$script = <<< JS
-   
-     $('#enviar').click(function(e){
-          
-            if($('form#accion_suscrita').find('.has-error').length!=0){
-              
-                return false;
-            }else
-            {
-                //$('form#accion_suscrita').submit();
-                e.preventDefault();
-                e.stopImmediatePropagation();
-               $.ajax({
-                   
-                    url: '$url',
-                    type: 'post',
-                    data: $('form#accion_suscrita').serialize(),
-                    success: function(data) {
-                             $( "#output17" ).html( data ); 
-                    }
-                });
-                
-            }
-    });
-JS;
-$this->registerJs($script);*/
-
-?>
+ 
 </div>

@@ -15,25 +15,24 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <p>
-        <?= Html::a(Yii::t('app', 'Create Certificados'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+        //'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+            //'id',
+            'suscrito:boolean',
+            'capital',
             'numero_asociacion',
+            'valor_asociacion',
             'numero_aportacion',
+            'valor_aportacion',
             'numero_rotativo',
+            'valor_rotativo',
             'numero_inversion',
-            // 'valor_asociacion',
-            // 'valor_aportacion',
-            // 'valor_rotativo',
-            // 'valor_inversion',
+            'valor_inversion',
             // 'tipo_certificado',
             // 'suscrito:boolean',
             // 'creado_por',
@@ -48,5 +47,8 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
+    <p>
+        <?= Html::a(Yii::t('app', 'Crear Certificado'), ['certificadosuscritaacta'], ['class' => 'btn btn-success']) ?>
+    </p>
 
 </div>

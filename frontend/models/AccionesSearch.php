@@ -19,7 +19,7 @@ class AccionesSearch extends Acciones
     {
         return [
             [['id', 'numero_comun', 'numero_preferencial'], 'integer'],
-            [['valor_comun', 'valor_preferencial'], 'number'],
+            [['valor_comun', 'valor_preferencial','capital'], 'number'],
             [['sys_status', 'suscrito'], 'boolean'],
             [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el', 'tipo_accion'], 'safe'],
         ];
@@ -63,6 +63,7 @@ class AccionesSearch extends Acciones
             'numero_preferencial' => $this->numero_preferencial,
             'valor_comun' => $this->valor_comun,
             'valor_preferencial' => $this->valor_preferencial,
+            'capital' => $this->capital,
             'sys_status' => $this->sys_status,
             'sys_creado_el' => $this->sys_creado_el,
             'sys_actualizado_el' => $this->sys_actualizado_el,

@@ -76,8 +76,7 @@ class AccionesController extends BaseController
     {
         $suscrita_acta = new Acciones();
          $suscrita_acta->scenario='principal';
-         $msg=null;
-
+        
         if ( $suscrita_acta->load(Yii::$app->request->post())) {
             
             
@@ -120,12 +119,9 @@ class AccionesController extends BaseController
                                
                         }
                         if ($suscrita_acta->save()) {
-           
-                                $msg="Datos guardados correctamente";
-                                $suscrita_acta=new Acciones();
-                                $suscrita_acta->scenario='principal';
                                
                                 $transaction->commit();
+                                 return $this->redirect(['index']);
 
                         }else{
                             $transaction->rollBack();
@@ -140,7 +136,7 @@ class AccionesController extends BaseController
                 }
             }
         }
-        return $this->render("acciones_actas",['accion_acta'=>$suscrita_acta,'msg'=>$msg]);
+        return $this->render("acciones_actas",['accion_acta'=>$suscrita_acta]);
     }
 
     /**
