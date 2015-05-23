@@ -28,6 +28,8 @@ class PersonasJuridicas extends \common\components\BaseActiveRecord
     /**
      * @inheritdoc
      */
+    public $sigla;
+    public $tipo_sector;
     public static function tableName()
     {
         return 'public.personas_juridicas';
@@ -39,12 +41,15 @@ class PersonasJuridicas extends \common\components\BaseActiveRecord
     public function rules()
     {
         return [
-            [['creado_por'], 'required'],
+            [['creado_por','razon_social'], 'required'],
             [['creado_por'], 'integer'],
             [['sys_status'], 'boolean'],
             [['anho','sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['tipo_nacionalidad'], 'string'],
             [['rif'], 'string', 'max' => 20],
+            [['tipo_sector'], 'string'],
+            [['sigla'], 'string', 'max' => 50],
+            [['tipo_sector','sigla','rif'],'required','on'=>'conbasico'],
             [['razon_social', 'numero_identificacion'], 'string', 'max' => 255],
             [['rif'], 'unique']
         ];
@@ -66,6 +71,8 @@ class PersonasJuridicas extends \common\components\BaseActiveRecord
             'sys_actualizado_el' => Yii::t('app', 'Sys Actualizado El'),
             'sys_finalizado_el' => Yii::t('app', 'Sys Finalizado El'),
             'tipo_nacionalidad' => Yii::t('app', 'Tipo Nacionalidad'),
+            'sigla' => Yii::t('app', 'Sigla'),
+            'tipo_sector' => Yii::t('app', 'Tipo sector'),
         ];
     }
 
@@ -101,20 +108,26 @@ class PersonasJuridicas extends \common\components\BaseActiveRecord
         return $this->hasMany(PolizasContratadas::className(), ['aseguradora_id' => 'id']);
     }
     
-    public function getFormAttribs() {
+    public function getFormAttribs($id) {
         //$data=[ 'NACIONAL' => 'NACIONAL', 'EXTRANJERA' => 'EXTRANJERA', ];
-    return [
+    if($id=="conbasico"){
+         return [
         //'tipo_nacionalidad'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>$data , 'options'=>['placeholder'=>'Enter username...']],
-        'razon_social'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Enter username...']],
-        'numero_identificacion'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Enter username...']],
+        
+        'rif'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Introduzca rif']],
+        'razon_social'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Introduzca razon social']],
+        'tipo_sector'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>[ 'PUBLICO' => 'PUBLICO', 'PRIVADO' => 'PRIVADO', 'MIXTO' => 'MIXTO' ],'options'=>['prompt'=>'Seleccione tipo']],
+        'sigla'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Introduzca sigla']],
     ];
+    }
+       
     }
     public function getFormAttribsnacional() {
       
     return [
         'rif'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'introduza su rif']],
         'razon_social'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Enter username...']],
-      
+       
     ];
     }
     public function Etiqueta(){

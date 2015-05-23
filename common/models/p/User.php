@@ -24,6 +24,7 @@ use Yii;
  *
  * @property AuthAssignment[] $authAssignments
  * @property AuthItem[] $itemNames
+ * @property Contratistas $contratista
  * @property UserVisitLog[] $userVisitLogs
  */
 class User extends \common\components\BaseActiveRecord
@@ -88,6 +89,14 @@ class User extends \common\components\BaseActiveRecord
     public function getItemNames()
     {
         return $this->hasMany(AuthItem::className(), ['name' => 'item_name'])->viaTable('auth_assignment', ['user_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getContratista()
+    {
+        return $this->hasOne(Contratistas::className(), ['id' => 'contratista_id']);
     }
 
     /**

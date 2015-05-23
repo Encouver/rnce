@@ -76,7 +76,7 @@ AppAsset::register($this);
                 ['label' => 'Contratistas',
                     'items' => [
                          //['label' => 'Acordeon', 'url' => ['/contratistas/acordeon']],
-                         ['label' => 'Datos basicos', 'url' => ['/contratistas/primerdato']],
+                         ['label' => 'Datos basicos', 'url' => ['/contratistas/index']],
                          ['label' => 'Direccion Principal', 'url' => ['/domicilios/crearprincipal']],
                          ['label' => 'Informacion de contacto', 'url' => ['/contratistas-contactos/crearcontacto']],
                          ['label' => 'Sucursales', 'url' => ['/sucursales/crearsucursal']],
