@@ -30,7 +30,7 @@ class Suplementarios extends \common\components\BaseActiveRecord
      * @inheritdoc
      */
     public $numero_pagada;
-    public $valor_pagada;
+    public $capital_pagado;
     public static function tableName()
     {
         return 'suplementarios';
@@ -43,26 +43,50 @@ class Suplementarios extends \common\components\BaseActiveRecord
     {
         return [
             [['numero','numero_pagada', 'creado_por', 'actualizado_por', 'documento_registrado_id', 'contratista_id'], 'integer'],
-            [['valor','valor_pagada'], 'number'],
+            [['valor','capital','capital_pagado'], 'number'],
             [['tipo_suplementario'], 'string'],
             ['numero_pagada', 'validarnumeropagada'],
-            ['valor_pagada', 'validarvalorpagada'],
-            [['numero', 'valor','numero_pagada','valor_pagada'], 'required', 'on' => 'principal'],
+            ['capital', 'validarcapital'],
+            ['capital_pagado', 'validarcapitalpagado'],
+            ['valor', 'validarvalor'],
+            [['capital','capital_pagado','numero', 'valor','numero_pagada'], 'required', 'on' => 'principal'],
             [['suscrito', 'documento_registrado_id', 'contratista_id'], 'required'],
             [['suscrito', 'sys_status'], 'boolean'],
             [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe']
         ];
     }
-    public function validarnumeropagada($attribute){
+    public function validarcapital($attribute){
+         
+              if($this->numero*$this->valor< $this->capital){
+                  $this->addError($attribute,'Faltan capital por fraccionar');
+              }
+          
+    }
+   
+      public function validarnumeropagada($attribute){
           if($this->numero_pagada>$this->numero){
-               $this->addError($attribute,'Numero pagada invalido');
+               $this->addError($attribute,'Numero certificado suplementario pagado invalido');
+          }else{
+             if($this->numero_pagada * $this->valor >$this->numero){
+                  $this->addError($attribute,'Numero certificado suplementario pagado sobrepasa el valor valido');
+             }
+          }
+    }
+    public function validarcapitalpagado($attribute){
+          if($this->capital_pagado>$this->capital){
+               $this->addError($attribute,'Valor certificado suplementario pagado invalido');
+          }else{
+              if($this->numero_pagada*$this->valor< $this->capital_pagado){
+                  $this->addError($attribute,'Faltan certificado suplementario pagado por fraccionar');
+              }
+          }
+    }
+    public function validarvalor($attribute){
+          if($this->valor*$this->numero > $this->capital){
+               $this->addError($attribute,'Valor certificado suscrito invalida');
           } 
     }
-    public function validarvalorpagada($attribute){
-          if($this->valor_pagada>$this->valor){
-               $this->addError($attribute,'Valor pagada invalido');
-          } 
-    }
+    
 
     /**
      * @inheritdoc
@@ -84,7 +108,8 @@ class Suplementarios extends \common\components\BaseActiveRecord
             'documento_registrado_id' => Yii::t('app', 'Documento Registrado ID'),
             'contratista_id' => Yii::t('app', 'Contratista ID'),
             'numero_pagada' => Yii::t('app', 'Numero Pagada'),
-            'valor_pagada' => Yii::t('app', 'Valor Pagada'),
+            'capital' => Yii::t('app', 'Capital Suscrito'),
+            'capital_pagado' => Yii::t('app', 'Capital Pagado'),
         ];
     }
 
@@ -111,11 +136,13 @@ class Suplementarios extends \common\components\BaseActiveRecord
             
 
             return [
-              
+            'capital'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Capital Suscrito']],
                'numero'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Numero de Certificados Suplementarios']],
                'valor'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Valor']],
-               'numero_pagada'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Numero de Certificados Suplementarios']],
-               'valor_pagada'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Valor']],
+            'capital_pagado'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Capital Pagado']],
+               
+             'numero_pagada'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Numero de Certificados Suplementarios']],
+          
               
             ];
         

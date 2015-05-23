@@ -101,7 +101,7 @@ class SuplementariosController extends BaseController
                  
                         $paga_acta = new Suplementarios();
                         $paga_acta->numero= $suscrita_acta->numero_pagada;
-                        $paga_acta->valor=$suscrita_acta->valor_pagada;
+                        $paga_acta->capital=$suscrita_acta->capital_pagado;
              
                         $paga_acta->contratista_id = $suscrita_acta->contratista_id;
                         $paga_acta->documento_registrado_id= $suscrita_acta->documento_registrado_id;

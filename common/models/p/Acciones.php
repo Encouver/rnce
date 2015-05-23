@@ -44,8 +44,9 @@ class Acciones extends \common\components\BaseActiveRecord
             [['suscrito', 'documento_registrado_id','contratista_id','tipo_accion'], 'required'],
             [['numero_comun', 'numero_comun_pagada','numero_preferencial', 'documento_registrado_id','contratista_id','suscrito'], 'integer'],
             ['numero_comun_pagada', 'validarnumeropagada'],
-             ['numero_comun_pagada', 'validarmaximopagada'],
-            ['capital_pagado', 'validarcapital'],
+        
+            ['capital', 'validarcapital'],
+            ['capital_pagado', 'validarcapitalpagado'],
             ['valor_comun', 'validarvalor'],
             [['valor_comun', 'valor_preferencial','capital'], 'number'],
             [['sys_status', 'suscrito'], 'boolean'],
@@ -55,20 +56,31 @@ class Acciones extends \common\components\BaseActiveRecord
             
         ];
     }
-    public function validarmaximopagada($attribute){
-          if($this->capital== $this->capital_pagado && $this->numero_comun_pagada<$this->numero_comun){
-               $this->addError($attribute,'Numero Accion pagada menor al valor valido');
-          } 
+     public function validarcapital($attribute){
+         
+              if($this->numero_comun*$this->valor_comun< $this->capital){
+                  $this->addError($attribute,'Faltan capital por fraccionar');
+              }
+          
     }
+   
       public function validarnumeropagada($attribute){
           if($this->numero_comun_pagada>$this->numero_comun){
                $this->addError($attribute,'Numero Accion pagada invalido');
-          } 
+          }else{
+             if($this->numero_comun_pagada * $this->valor_comun >$this->numero_comun){
+                  $this->addError($attribute,'Numero Accion pagada sobrepasa el valor valido');
+             }
+          }
     }
-    public function validarcapital($attribute){
+    public function validarcapitalpagado($attribute){
           if($this->capital_pagado>$this->capital){
                $this->addError($attribute,'Valor Capital pagada invalido');
-          } 
+          }else{
+              if($this->numero_comun_pagada*$this->valor_comun < $this->capital_pagado){
+                  $this->addError($attribute,'Faltan capital pagado por fraccionar');
+              }
+          }
     }
     public function validarvalor($attribute){
           if($this->valor_comun*$this->numero_comun > $this->capital){

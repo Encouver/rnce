@@ -22,7 +22,7 @@ use kartik\builder\Form;
  <?php echo Form::widget([
     'model'=>$suplementario_acta,
     'form'=>$form,
-    'columns'=>2,
+    'columns'=>3,
     'attributes'=>$suplementario_acta->getFormAttribs('principal')
       ]); ?>
  <h3><?= $msg ?></h3>

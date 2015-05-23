@@ -9,7 +9,7 @@ $url = \yii\helpers\Url::to(['acciones/accionsuscritaacta']);
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="objetos-actas-form col-sm-9">
+<div class="objetos-actas-form">
 
     <?php $form = ActiveForm::begin(['id'=>'certificados_suscrita',
         'method'=>'post',
@@ -22,7 +22,7 @@ $url = \yii\helpers\Url::to(['acciones/accionsuscritaacta']);
  <?php echo Form::widget([
     'model'=>$certificado_acta,
     'form'=>$form,
-    'columns'=>2,
+    'columns'=>3,
     'attributes'=>$certificado_acta->getFormAttribs('principal')
       ]); ?>
  <h3><?= $msg ?></h3>

@@ -102,13 +102,13 @@ class CertificadosController extends BaseController
                  
                         $paga_acta = new Certificados();
                         $paga_acta->numero_asociacion= $suscrita_acta->numero_asociacion_pagada;
-                        $paga_acta->valor_asociacion=$suscrita_acta->valor_asociacion_pagada;
+       
                         $paga_acta->numero_aportacion= $suscrita_acta->numero_aportacion_pagada;
-                        $paga_acta->valor_aportacion=$suscrita_acta->valor_aportacion_pagada;
+                    
                         $paga_acta->numero_rotativo= $suscrita_acta->numero_rotativo_pagada;
-                        $paga_acta->valor_rotativo=$suscrita_acta->valor_rotativo_pagada;
+                  
                         $paga_acta->numero_inversion= $suscrita_acta->numero_inversion_pagada;
-                        $paga_acta->valor_inversion=$suscrita_acta->valor_inversion_pagada;
+                        $paga_acta->capital=$suscrita_acta->capital_pagado;
              
                         $paga_acta->contratista_id = $suscrita_acta->contratista_id;
                         $paga_acta->documento_registrado_id= $suscrita_acta->documento_registrado_id;
