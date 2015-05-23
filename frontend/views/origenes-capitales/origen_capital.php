@@ -50,7 +50,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]); ?>
      <p>
-        <?= Html::a(Yii::t('app', 'Agregar Efectivo'), ['crearefectivo'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Agregar Efectivo'), ['create', 'identificador' => 'efectivo'], ['class' => 'btn btn-success']) ?>
     </p>
     <hr />
     <h3>Efectivo en banco</h3>
@@ -98,7 +98,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]); ?>
     <p>
-        <?= Html::a(Yii::t('app', 'Agregar Efectivo Banco'), ['crearefectivobanco'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Agregar Efectivo Banco'),['create', 'identificador' => 'banco'], ['class' => 'btn btn-success']) ?>
     </p>
     <hr />
     <h3>Bienes</h3>
@@ -151,6 +151,6 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]); ?>
     <p>
-        <?= Html::a(Yii::t('app', 'Agregar Bien'), ['crearbien'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Agregar Bien'), ['create', 'identificador' => 'bien'], ['class' => 'btn btn-success']) ?>
     </p>
 </div>

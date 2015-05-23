@@ -20,7 +20,6 @@ use yii\web\JsExpression;
 
     //$model->scenario = 'extranjero';
     $form = ActiveForm::begin([
-        'action'=>['origenes-capitales/crearcapital'],
         'type'=>ActiveForm::TYPE_VERTICAL]);?>
     
      <?= $form->field($model, 'efectivo')->hiddenInput()->label(false) ?>

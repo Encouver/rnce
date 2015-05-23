@@ -294,19 +294,20 @@ class ActivosBienesController extends BaseController
     //    }
     }
      public function actionBienesLista($q = null, $id = null) {
-    $buscar_bien= "detalle ILIKE "."'%" . $q ."%'";   
+    $buscar_bien= "bien.detalle ILIKE "."'%" . $q ."%' and bien.sys_tipo_bien_id=tipo.id";   
        
     \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
      $out = ['results' => ['id' => '', 'text' => '']];
     if (!is_null($q)) {
         $query = new \yii\db\Query;
         
-        $query->select("id, detalle AS text")
-            ->from('activos.bienes')
+        $query->select("bien.id, (tipo.nombre || ' - ' || bien.detalle) AS text")
+            ->from('activos.bienes as bien, activos.sys_tipos_bienes as tipo')
             ->where($buscar_bien)
             ->limit(20);
         $command = $query->createCommand();
         $data = $command->queryAll();
+        
         $out['results'] = array_values($data);
     }
     elseif ($id > 0) {

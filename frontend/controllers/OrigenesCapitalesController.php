@@ -33,12 +33,23 @@ class OrigenesCapitalesController extends BaseController
      */
     public function actionIndex()
     {
-        $searchModel = new OrigenesCapitalesSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+       $searchModel = new OrigenesCapitalesSearch();
+         $searchModel->efectivo = true;
+        $dataProvider_efectivo = $searchModel->search(Yii::$app->request->queryParams);
+        $searchModel->efectivo = false;
+        $searchModel->banco = true;
+        $dataProvider_banco = $searchModel->search(Yii::$app->request->queryParams);
+        $searchModel->efectivo = false;
+        $searchModel->banco = false;
+        $searchModel->bien = true;
+        $dataProvider_bien = $searchModel->search(Yii::$app->request->queryParams);
+
+
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'dataProvider_efectivo' => $dataProvider_efectivo,
+            'dataProvider_banco' => $dataProvider_banco,
+            'dataProvider_bien' => $dataProvider_bien,
         ]);
     }
     public function actionOrigen()
@@ -77,74 +88,50 @@ class OrigenesCapitalesController extends BaseController
 
     /**
      * Creates a new OrigenesCapitales model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
+     * @param integer $identificador
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($identificador=null)
     {
-        $origen_capital = new OrigenesCapitales();
-
-        if ($origen_capital->load(Yii::$app->request->post()) && $origen_capital->save()) {
-            return $this->redirect(['view', 'id' => $origen_capital->id]);
-        } else {
-            return $this->render('create', [
-                'origen_capital' => $origen_capital,
-            ]);
-        }
-    }
-     public function actionCrearefectivo()
-    {
-        $model = new OrigenesCapitales();
-        $model->efectivo=true;
-        $model->scenario='efectivo';
-            return $this->render('create', [
-                'model' => $model,
-            ]);
-        
-    }
-     public function actionCrearefectivobanco()
-    {
-        $model = new OrigenesCapitales();
-        $model->banco=true;
-        $model->scenario='banco';
-            return $this->render('create', [
-                'model' => $model,
-            ]);
-        
-    }
-     public function actionCrearbien()
-    {
-        $model = new OrigenesCapitales();
-        $model->bien=true;
-        $model->scenario='bien';
-            return $this->render('create', [
-                'model' => $model,
-            ]);
-        
-    }
     
-     public function actionCrearcapital()
-    {
-          $origen_capital = new OrigenesCapitales();
-          
-          
-          if ($origen_capital->load(Yii::$app->request->post())) {
+        $model = new OrigenesCapitales();
+        if (!is_null($identificador)){
+            switch ($identificador){
+            case "efectivo":
+                $model->scenario=$identificador;
+                $model->efectivo=true;
+                break;
+            case "banco":
+                $model->scenario=$identificador;
+                $model->banco=true;
+                break;
+            case "bien":
+                $model->scenario=$identificador;
+                $model->bien=true;
+                break;
+            default :
+                break;
+            }  
+        }
+
+        if ($model->load(Yii::$app->request->post())) {
            
               
                      
               
                     $usuario= \common\models\p\User::findOne(Yii::$app->user->identity->id);
                     $registro = ActivosDocumentosRegistrados::findOne(['contratista_id'=>$usuario->contratista_id, 'tipo_documento_id'=>1]);
-                    $origen_capital->contratista_id=$usuario->contratista_id;
-                    $origen_capital->documento_registrado_id=$registro->id;
+                    $model->contratista_id=$usuario->contratista_id;
                     
-                    if($origen_capital->save()){
-                        return $this->redirect(['origen']);
+                    $model->documento_registrado_id=$registro->id;
+                    
+                    if($model->save()){
+                        return $this->redirect(['index']);
                     }else{
                        
              
                         return $this->render('create', [
-                            'model' => $origen_capital,
+                            'model' => $model,
                             ]);
                     }
                     
@@ -152,10 +139,11 @@ class OrigenesCapitalesController extends BaseController
             }else{
                 
                         return $this->render('create', [
-                            'model' => $origen_capital,
+                            'model' => $model,
                             ]);
             }
     }
+    
     
     
    
@@ -169,9 +157,27 @@ class OrigenesCapitalesController extends BaseController
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+       
+           if($model->efectivo){
+               $model->scenario='efectivo';
+           }else{
+               
+               if($model->banco){
+               $model->scenario='banco';
+                }else{
+                    if($model->bien){
+                        $model->scenario='bien';
+                    }else{
+               
+               
+                    }
+                    
+                }
+           }
+        
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
