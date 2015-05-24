@@ -36,7 +36,6 @@ class CuentasDd3OtrosTributosController extends BaseController
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
@@ -62,8 +61,10 @@ class CuentasDd3OtrosTributosController extends BaseController
     {
         $model = new CuentasDd3OtrosTributos();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            $model->saldo_al_cierre = $model->saldo_p_anterior + $model->importe_gasto_ejer_eco +  $model->importe_pago_ejer_eco;
+            $model->save();
+            return $this->redirect(['index']);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -81,8 +82,10 @@ class CuentasDd3OtrosTributosController extends BaseController
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            $model->saldo_al_cierre = $model->saldo_p_anterior + $model->importe_gasto_ejer_eco +  $model->importe_pago_ejer_eco;
+            $model->save();
+            return $this->redirect(['index']);
         } else {
             return $this->render('update', [
                 'model' => $model,

@@ -1028,4 +1028,26 @@ ALTER TABLE cuentas.d1_d2_beneficiario
 COMMENT ON COLUMN cuentas.d1_d2_beneficiario.cuenta
   IS 'Campo que indica a que cuenta pertenece el registro';
 
+-------------------------------- 5:40----------------------
 
+ALTER TABLE cuentas.dd3_otros_tributos
+  DROP COLUMN tributo;
+ALTER TABLE cuentas.dd3_otros_tributos
+  ADD COLUMN concepto_id integer NOT NULL;
+ALTER TABLE cuentas.dd3_otros_tributos
+  ADD FOREIGN KEY (concepto_id) REFERENCES cuentas.conceptos (id) ON UPDATE NO ACTION ON DELETE NO ACTION;
+COMMENT ON COLUMN cuentas.dd3_otros_tributos.concepto_id IS 'Clave foranea a la tabla Conceptos';
+
+
+INSERT INTO conceptos VALUES (13, 'Aporte patronal IVSS', NULL, NULL, NULL, true, '2015-05-24 17:43:51.099-04:30', '2015-05-24 17:43:51.099-04:30', NULL, 'dd3');
+INSERT INTO conceptos VALUES (14, 'Aporte patronal FAOV', NULL, NULL, NULL, true, '2015-05-24 17:44:08.286-04:30', '2015-05-24 17:44:08.286-04:30', NULL, 'dd3');
+INSERT INTO conceptos VALUES (17, 'Aporte patronal INCES', NULL, NULL, NULL, true, '2015-05-24 17:44:21.279-04:30', '2015-05-24 17:44:21.279-04:30', NULL, 'dd3');
+INSERT INTO conceptos VALUES (20, 'Aporte patronal Vivienda y Hábitat', NULL, NULL, NULL, true, '2015-05-24 17:44:36.766-04:30', '2015-05-24 17:44:36.766-04:30', NULL, 'dd3');
+INSERT INTO conceptos VALUES (23, 'Retenciones por enterar', NULL, NULL, NULL, true, '2015-05-24 17:44:48.194-04:30', '2015-05-24 17:44:48.194-04:30', NULL, 'dd3');
+INSERT INTO conceptos VALUES (24, 'Otros', NULL, NULL, NULL, true, '2015-05-24 17:44:57.577-04:30', '2015-05-24 17:44:57.577-04:30', NULL, 'dd3');
+
+
+ALTER TABLE cuentas.dd3_otros_tributos
+   ADD COLUMN otro_nombre character varying(255);
+COMMENT ON COLUMN cuentas.dd3_otros_tributos.otro_nombre
+  IS 'Campo que almacena la especificación en caso de tildar Otros';

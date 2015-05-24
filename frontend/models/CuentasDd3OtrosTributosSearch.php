@@ -18,9 +18,9 @@ class CuentasDd3OtrosTributosSearch extends CuentasDd3OtrosTributos
     public function rules()
     {
         return [
-            [['id', 'contratista_id', 'creado_por', 'actualizado_por'], 'integer'],
-            [['tributo', 'anho', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
+            [['id', 'contratista_id', 'creado_por', 'actualizado_por', 'concepto_id'], 'integer'],
             [['saldo_p_anterior', 'importe_gasto_ejer_eco', 'importe_pago_ejer_eco', 'saldo_al_cierre'], 'number'],
+            [['otro_nombre','anho', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['sys_status'], 'boolean'],
         ];
     }
@@ -70,10 +70,10 @@ class CuentasDd3OtrosTributosSearch extends CuentasDd3OtrosTributos
             'sys_creado_el' => $this->sys_creado_el,
             'sys_actualizado_el' => $this->sys_actualizado_el,
             'sys_finalizado_el' => $this->sys_finalizado_el,
+            'concepto_id' => $this->concepto_id,
         ]);
 
-        $query->andFilterWhere(['like', 'tributo', $this->tributo])
-            ->andFilterWhere(['like', 'anho', $this->anho]);
+        $query->andFilterWhere(['like', 'anho', $this->anho]);
 
         return $dataProvider;
     }

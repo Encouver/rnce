@@ -29,7 +29,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'tributo',
             'saldo_p_anterior',
             'importe_gasto_ejer_eco',
             'importe_pago_ejer_eco',
@@ -42,6 +41,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'sys_creado_el',
             'sys_actualizado_el',
             'sys_finalizado_el',
+            'concepto_id',
         ],
     ]) ?>
 
