@@ -12,9 +12,21 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'nombre')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'contratistas_id')->textInput() ?>
+    <?= $form->field($model, 'nacional')->checkbox() ?>
+
+    <?= $form->field($model, 'nombre')->textInput(['maxlength' => true]) ?>    
+
+    <?= $form->field($model,'tipo_caja')->radioList(array('Caja'=>'Caja','Caja chica'=>'Caja chica'),array('separator'=>'  ', 'labelOptions'=>array('style'=>'display:inline'))); ?>
+
+<!--
+    <?= $form->field($model, 'contratista_id')->textInput() ?>
+
+    <?= $form->field($model, 'anho')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'creado_por')->textInput() ?>
+
+    <?= $form->field($model, 'actualizado_por')->textInput() ?>
 
     <?= $form->field($model, 'sys_status')->checkbox() ?>
 
@@ -23,11 +35,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'sys_actualizado_el')->textInput() ?>
 
     <?= $form->field($model, 'sys_finalizado_el')->textInput() ?>
-
-    <?= $form->field($model, 'tipo_caja')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'nacional')->checkbox() ?>
-
+-->
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>

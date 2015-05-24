@@ -746,3 +746,53 @@ ALTER TABLE cuentas.c_inventarios
    ON UPDATE NO ACTION ON DELETE NO ACTION;
 CREATE INDEX fki_tipo_inventario_fk_c
   ON cuentas.c_inventarios(tipo_inventario_id);
+  
+  
+  
+------23/05/2015------------------
+
+DROP TABLE nombres_cajas;
+
+-- Table: nombres_cajas
+
+-- DROP TABLE nombres_cajas;
+
+CREATE TABLE nombres_cajas
+(
+  id serial NOT NULL, -- Clave primaria
+  nombre character varying(255) NOT NULL, -- Nombre de la caja
+  nacional boolean NOT NULL DEFAULT true, -- Indica si la caja es para moneda nacional o extranjera
+  tipo_caja character varying(255) NOT NULL, -- Campo que indica si la caja es Caja o Caja chica
+  contratista_id integer NOT NULL, -- Clave foranea al contratista
+  anho character varying(100) NOT NULL, -- Año contable y mes
+  creado_por integer, -- Clave foranea al usuario
+  actualizado_por integer, -- Clave foranea al usuario
+  sys_status boolean NOT NULL DEFAULT true, -- Estatus interno del sistema
+  sys_creado_el timestamp with time zone DEFAULT now(), -- Fecha de creación del registro.
+  sys_actualizado_el timestamp with time zone DEFAULT now(), -- Fecha de última actualización del registro.
+  sys_finalizado_el timestamp with time zone, -- Fecha de "eliminado" el registro.
+  CONSTRAINT nombres_cajas_pkey PRIMARY KEY (id),
+  CONSTRAINT nombres_cajas_contratista_id_fkey FOREIGN KEY (contratista_id)
+      REFERENCES contratistas (id) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE NO ACTION,
+  CONSTRAINT nombres_cajas_nombre_nacional_tipo_caja_contratista_id_key UNIQUE (nombre, nacional, tipo_caja, contratista_id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE nombres_cajas
+  OWNER TO eureka;
+COMMENT ON TABLE nombres_cajas
+  IS 'Nombre de las cajas que tienen los contratistas';
+COMMENT ON COLUMN nombres_cajas.id IS 'Clave primaria';
+COMMENT ON COLUMN nombres_cajas.nombre IS 'Nombre de la caja';
+COMMENT ON COLUMN nombres_cajas.nacional IS 'Indica si la caja es para moneda nacional o extranjera';
+COMMENT ON COLUMN nombres_cajas.tipo_caja IS 'Campo que indica si la caja es Caja o Caja chica';
+COMMENT ON COLUMN nombres_cajas.contratista_id IS 'Clave foranea al contratista';
+COMMENT ON COLUMN nombres_cajas.anho IS 'Año contable y mes';
+COMMENT ON COLUMN nombres_cajas.creado_por IS 'Clave foranea al usuario';
+COMMENT ON COLUMN nombres_cajas.actualizado_por IS 'Clave foranea al usuario';
+COMMENT ON COLUMN nombres_cajas.sys_status IS 'Estatus interno del sistema';
+COMMENT ON COLUMN nombres_cajas.sys_creado_el IS 'Fecha de creación del registro.';
+COMMENT ON COLUMN nombres_cajas.sys_actualizado_el IS 'Fecha de última actualización del registro.';
+COMMENT ON COLUMN nombres_cajas.sys_finalizado_el IS 'Fecha de "eliminado" el registro.';
