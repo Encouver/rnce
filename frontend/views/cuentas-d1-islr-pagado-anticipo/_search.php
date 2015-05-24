@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\ActivosDocumentosRegistradosSearch */
+/* @var $model app\models\CuentasD1IslrPagadoAnticipoSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="activos-documentos-registrados-search">
+<div class="cuentas-d1-islr-pagado-anticipo-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
@@ -17,25 +17,23 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'id') ?>
 
-    <?= $form->field($model, 'contratista_id') ?>
+    <?= $form->field($model, 'isrl_pagado') ?>
 
-    <?= $form->field($model, 'sys_tipo_registro_id') ?>
+    <?= $form->field($model, 'nro_documento') ?>
 
-    <?= $form->field($model, 'num_registro_notaria') ?>
+    <?= $form->field($model, 'saldo_ph') ?>
 
-    <?= $form->field($model, 'tomo') ?>
+    <?= $form->field($model, 'importe_pagado_ejer_econo') ?>
 
-    <?php // echo $form->field($model, 'folio') ?>
+    <?php // echo $form->field($model, 'importe_aplicado_ejer_econo') ?>
 
-    <?php // echo $form->field($model, 'fecha_registro') ?>
+    <?php // echo $form->field($model, 'saldo_cierre') ?>
 
-    <?php // echo $form->field($model, 'fecha_asamblea') ?>
+    <?php // echo $form->field($model, 'monto') ?>
 
-    <?php // echo $form->field($model, 'sys_circunscripcion_id') ?>
+    <?php // echo $form->field($model, 'contratista_id') ?>
 
-    <?php // echo $form->field($model, 'valor_adquisicion') ?>
-
-    <?php // echo $form->field($model, 'tipo_documento_id') ?>
+    <?php // echo $form->field($model, 'anho') ?>
 
     <?php // echo $form->field($model, 'creado_por') ?>
 

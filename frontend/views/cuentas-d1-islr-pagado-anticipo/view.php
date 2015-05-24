@@ -4,13 +4,13 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\a\ActivosFacturas */
+/* @var $model common\models\c\CuentasD1IslrPagadoAnticipo */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Activos Facturas'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Cuentas D1 Islr Pagado Anticipos'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="activos-facturas-view">
+<div class="cuentas-d1-islr-pagado-anticipo-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -29,16 +29,15 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'num_factura',
-            'proveedor_id',
-            'fecha_emision',
-            'imprenta_id',
-            'fecha_emision_talonario',
-            'comprador_id',
-            'base_imponible_gravable',
-            'exento',
-            'iva',
+            'isrl_pagado',
+            'nro_documento',
+            'saldo_ph',
+            'importe_pagado_ejer_econo',
+            'importe_aplicado_ejer_econo',
+            'saldo_cierre',
+            'monto',
             'contratista_id',
+            'anho',
             'creado_por',
             'actualizado_por',
             'sys_status:boolean',

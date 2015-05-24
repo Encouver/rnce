@@ -4,33 +4,31 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\a\ActivosDocumentosRegistrados */
+/* @var $model common\models\c\CuentasD1IslrPagadoAnticipo */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="activos-documentos-registrados-form">
+<div class="cuentas-d1-islr-pagado-anticipo-form">
 
     <?php $form = ActiveForm::begin(); ?>
 
+    <?= $form->field($model, 'isrl_pagado')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'nro_documento')->textInput() ?>
+
+    <?= $form->field($model, 'saldo_ph')->textInput() ?>
+
+    <?= $form->field($model, 'importe_pagado_ejer_econo')->textInput() ?>
+
+    <?= $form->field($model, 'importe_aplicado_ejer_econo')->textInput() ?>
+
+    <?= $form->field($model, 'saldo_cierre')->textInput() ?>
+
+    <?= $form->field($model, 'monto')->textInput() ?>
+
     <?= $form->field($model, 'contratista_id')->textInput() ?>
 
-    <?= $form->field($model, 'sys_tipo_registro_id')->textInput() ?>
-
-    <?= $form->field($model, 'num_registro_notaria')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'tomo')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'folio')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'fecha_registro')->textInput() ?>
-
-    <?= $form->field($model, 'fecha_asamblea')->textInput() ?>
-
-    <?= $form->field($model, 'sys_circunscripcion_id')->textInput() ?>
-
-    <?= $form->field($model, 'valor_adquisicion')->textInput() ?>
-
-    <?= $form->field($model, 'tipo_documento_id')->textInput() ?>
+    <?= $form->field($model, 'anho')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'creado_por')->textInput() ?>
 

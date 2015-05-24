@@ -27,12 +27,12 @@ CREATE TABLE cuentas.e_movimientos
   CONSTRAINT sys_movimientos_nombre_key UNIQUE (nombre)
 )
 WITH (
-  OIDS=FALSE
+OIDS=FALSE
 );
 ALTER TABLE cuentas.e_movimientos
-  OWNER TO eureka;
+OWNER TO eureka;
 COMMENT ON TABLE cuentas.e_movimientos
-  IS 'Contiene los tipos de movimiento de una inversión.';
+IS 'Contiene los tipos de movimiento de una inversión.';
 COMMENT ON COLUMN cuentas.e_movimientos.id IS 'Clave primaria';
 COMMENT ON COLUMN cuentas.e_movimientos.nombre IS 'Nombre del tipo de movimiento.';
 COMMENT ON COLUMN cuentas.e_movimientos.creado_por IS 'Clave foranea al usuario';
@@ -65,19 +65,19 @@ CREATE TABLE cuentas.e_tipos_movimientos
   sys_finalizado_el timestamp with time zone, -- Fecha de "eliminado" el registro.
   CONSTRAINT e_tipos_movimientos_pkey PRIMARY KEY (id),
   CONSTRAINT e_tipos_movimientos_e_inversion_id_fkey FOREIGN KEY (e_inversion_id)
-      REFERENCES cuentas.e_inversiones (id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  REFERENCES cuentas.e_inversiones (id) MATCH SIMPLE
+  ON UPDATE NO ACTION ON DELETE NO ACTION,
   CONSTRAINT e_tipos_movimientos_sys_movimiento_id_fkey FOREIGN KEY (sys_movimiento_id)
-      REFERENCES cuentas.e_movimientos (id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION
+  REFERENCES cuentas.e_movimientos (id) MATCH SIMPLE
+  ON UPDATE NO ACTION ON DELETE NO ACTION
 )
 WITH (
-  OIDS=FALSE
+OIDS=FALSE
 );
 ALTER TABLE cuentas.e_tipos_movimientos
-  OWNER TO eureka;
+OWNER TO eureka;
 COMMENT ON TABLE cuentas.e_tipos_movimientos
-  IS 'Tabla relación para los tipos de movimiento de una inversión';
+IS 'Tabla relación para los tipos de movimiento de una inversión';
 COMMENT ON COLUMN cuentas.e_tipos_movimientos.id IS 'Clave primaria';
 COMMENT ON COLUMN cuentas.e_tipos_movimientos.e_inversion_id IS 'Clave foránea a la tabla e_inversiones';
 COMMENT ON COLUMN cuentas.e_tipos_movimientos.sys_movimiento_id IS 'Clave foránea a la tabla sys_movimientos.';
@@ -240,12 +240,12 @@ CREATE TABLE cuentas.e_movimientos
   CONSTRAINT sys_movimientos_nombre_key UNIQUE (nombre)
 )
 WITH (
-  OIDS=FALSE
+OIDS=FALSE
 );
 ALTER TABLE cuentas.e_movimientos
-  OWNER TO eureka;
+OWNER TO eureka;
 COMMENT ON TABLE cuentas.e_movimientos
-  IS 'Contiene los tipos de movimiento de una inversión.';
+IS 'Contiene los tipos de movimiento de una inversión.';
 COMMENT ON COLUMN cuentas.e_movimientos.id IS 'Clave primaria';
 COMMENT ON COLUMN cuentas.e_movimientos.nombre IS 'Nombre del tipo de movimiento.';
 COMMENT ON COLUMN cuentas.e_movimientos.creado_por IS 'Clave foranea al usuario';
@@ -278,19 +278,19 @@ CREATE TABLE cuentas.e_tipos_movimientos
   sys_finalizado_el timestamp with time zone, -- Fecha de "eliminado" el registro.
   CONSTRAINT e_tipos_movimientos_pkey PRIMARY KEY (id),
   CONSTRAINT e_tipos_movimientos_e_inversion_id_fkey FOREIGN KEY (e_inversion_id)
-      REFERENCES cuentas.e_inversiones (id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  REFERENCES cuentas.e_inversiones (id) MATCH SIMPLE
+  ON UPDATE NO ACTION ON DELETE NO ACTION,
   CONSTRAINT e_tipos_movimientos_sys_movimiento_id_fkey FOREIGN KEY (sys_movimiento_id)
-      REFERENCES cuentas.e_movimientos (id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION
+  REFERENCES cuentas.e_movimientos (id) MATCH SIMPLE
+  ON UPDATE NO ACTION ON DELETE NO ACTION
 )
 WITH (
-  OIDS=FALSE
+OIDS=FALSE
 );
 ALTER TABLE cuentas.e_tipos_movimientos
-  OWNER TO eureka;
+OWNER TO eureka;
 COMMENT ON TABLE cuentas.e_tipos_movimientos
-  IS 'Tabla relación para los tipos de movimiento de una inversión';
+IS 'Tabla relación para los tipos de movimiento de una inversión';
 COMMENT ON COLUMN cuentas.e_tipos_movimientos.id IS 'Clave primaria';
 COMMENT ON COLUMN cuentas.e_tipos_movimientos.e_inversion_id IS 'Clave foránea a la tabla e_inversiones';
 COMMENT ON COLUMN cuentas.e_tipos_movimientos.sys_movimiento_id IS 'Clave foránea a la tabla sys_movimientos.';
@@ -335,12 +335,12 @@ CREATE TABLE cuentas.aa_condiciones_pagos
   CONSTRAINT aa_condicion_pago_pkey PRIMARY KEY (id)
 )
 WITH (
-  OIDS=FALSE
+OIDS=FALSE
 );
 ALTER TABLE cuentas.aa_condiciones_pagos
-  OWNER TO eureka;
+OWNER TO eureka;
 COMMENT ON TABLE cuentas.aa_condiciones_pagos
-  IS 'Condiciones de pago.';
+IS 'Condiciones de pago.';
 COMMENT ON COLUMN cuentas.aa_condiciones_pagos.id IS 'Clave primaria.';
 COMMENT ON COLUMN cuentas.aa_condiciones_pagos.nombre IS 'Nombre de la condición de pago.';
 COMMENT ON COLUMN cuentas.aa_condiciones_pagos."descripción" IS 'Descripción detallada de la condición de pago.';
@@ -370,12 +370,12 @@ CREATE TABLE cuentas.aa_tipos_garantias
   CONSTRAINT "aa_tipo_garantía_pkey" PRIMARY KEY (id)
 )
 WITH (
-  OIDS=FALSE
+OIDS=FALSE
 );
 ALTER TABLE cuentas.aa_tipos_garantias
-  OWNER TO eureka;
+OWNER TO eureka;
 COMMENT ON TABLE cuentas.aa_tipos_garantias
-  IS 'Tipo de garantías.';
+IS 'Tipo de garantías.';
 COMMENT ON COLUMN cuentas.aa_tipos_garantias.id IS 'Clave primaria.';
 COMMENT ON COLUMN cuentas.aa_tipos_garantias.nombre IS 'Nombre del tipo de garantía.';
 COMMENT ON COLUMN cuentas.aa_tipos_garantias."descripción" IS 'Descripción del tipo de garantía.';
@@ -417,25 +417,25 @@ CREATE TABLE cuentas.aa_obligaciones_bancarias
   sys_finalizado_el timestamp with time zone, -- Fecha de "eliminado" el registro.
   CONSTRAINT aa_obligaciones_bancarias_pkey PRIMARY KEY (id),
   CONSTRAINT aa_obligaciones_bancarias_banco_id_fkey FOREIGN KEY (banco_id)
-      REFERENCES sys_bancos (id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  REFERENCES sys_bancos (id) MATCH SIMPLE
+  ON UPDATE NO ACTION ON DELETE NO ACTION,
   CONSTRAINT aa_obligaciones_bancarias_condicion_pago_id_fkey FOREIGN KEY (condicion_pago_id)
-      REFERENCES cuentas.aa_condiciones_pagos (id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  REFERENCES cuentas.aa_condiciones_pagos (id) MATCH SIMPLE
+  ON UPDATE NO ACTION ON DELETE NO ACTION,
   CONSTRAINT aa_obligaciones_bancarias_tipo_garantia_id_fkey FOREIGN KEY (tipo_garantia_id)
-      REFERENCES cuentas.aa_tipos_garantias (id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  REFERENCES cuentas.aa_tipos_garantias (id) MATCH SIMPLE
+  ON UPDATE NO ACTION ON DELETE NO ACTION,
   CONSTRAINT aa_obligaciones_bancarias_total_imp_deu_int_fkey FOREIGN KEY (total_imp_deu_int)
-      REFERENCES cuentas.sys_totales (id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION
+  REFERENCES cuentas.sys_totales (id) MATCH SIMPLE
+  ON UPDATE NO ACTION ON DELETE NO ACTION
 )
 WITH (
-  OIDS=FALSE
+OIDS=FALSE
 );
 ALTER TABLE cuentas.aa_obligaciones_bancarias
-  OWNER TO eureka;
+OWNER TO eureka;
 COMMENT ON TABLE cuentas.aa_obligaciones_bancarias
-  IS 'Cuenta AA - Obligaciones Bancarias';
+IS 'Cuenta AA - Obligaciones Bancarias';
 COMMENT ON COLUMN cuentas.aa_obligaciones_bancarias.id IS 'Clave primaria';
 COMMENT ON COLUMN cuentas.aa_obligaciones_bancarias.corriente IS 'La obligacion es corriente o no corriente.';
 COMMENT ON COLUMN cuentas.aa_obligaciones_bancarias.banco_id IS 'Clave foránea a la tabla bancos';
@@ -473,49 +473,49 @@ COMMENT ON COLUMN activos.depreciaciones_amortizaciones.costo_avaluo IS 'Costo s
 
 
 ALTER TABLE activos.depreciaciones_amortizaciones
-   ALTER COLUMN vida_util DROP NOT NULL;
+ALTER COLUMN vida_util DROP NOT NULL;
 
 
 ALTER TABLE activos.depreciaciones_amortizaciones
-   ALTER COLUMN valor_residual DROP NOT NULL;
+ALTER COLUMN valor_residual DROP NOT NULL;
 
 ALTER TABLE activos.depreciaciones_amortizaciones
-   ALTER COLUMN bs_unidad DROP NOT NULL;
+ALTER COLUMN bs_unidad DROP NOT NULL;
 
 ALTER TABLE activos.depreciaciones_amortizaciones
-   ALTER COLUMN unidades_estimadas DROP NOT NULL;
-
-   ALTER TABLE activos.depreciaciones_amortizaciones
-   ALTER COLUMN tasa_anual DROP NOT NULL;
+ALTER COLUMN unidades_estimadas DROP NOT NULL;
 
 ALTER TABLE activos.depreciaciones_amortizaciones
-   ALTER COLUMN valor_depreciar DROP NOT NULL;
+ALTER COLUMN tasa_anual DROP NOT NULL;
+
+ALTER TABLE activos.depreciaciones_amortizaciones
+ALTER COLUMN valor_depreciar DROP NOT NULL;
 
 COMMENT ON COLUMN activos.depreciaciones_amortizaciones.valor_residual
-  IS 'Valor residual.';
+IS 'Valor residual.';
 
 COMMENT ON COLUMN activos.depreciaciones_amortizaciones.valor_depreciar
-  IS 'Valor a depreciar.';
+IS 'Valor a depreciar.';
 
 COMMENT ON COLUMN activos.depreciaciones_amortizaciones.tasa_anual
-  IS 'Tasa anual.';
+IS 'Tasa anual.';
 
 COMMENT ON COLUMN activos.depreciaciones_amortizaciones.unidades_estimadas
-  IS 'Unidades estimadas.';
+IS 'Unidades estimadas.';
 
 COMMENT ON COLUMN activos.depreciaciones_amortizaciones.bs_unidad
-  IS 'Bs. por unidad.';
+IS 'Bs. por unidad.';
 
 
 ALTER TABLE activos.depreciaciones_amortizaciones
-   ALTER COLUMN unidades_producidas_periodo DROP NOT NULL;
+ALTER COLUMN unidades_producidas_periodo DROP NOT NULL;
 COMMENT ON COLUMN activos.depreciaciones_amortizaciones.unidades_producidas_periodo
-  IS 'Unidades producidas en el periodo.';
+IS 'Unidades producidas en el periodo.';
 
 ALTER TABLE activos.depreciaciones_amortizaciones
-   ALTER COLUMN unidades_consumidas DROP NOT NULL;
+ALTER COLUMN unidades_consumidas DROP NOT NULL;
 COMMENT ON COLUMN activos.depreciaciones_amortizaciones.unidades_consumidas
-  IS 'Unidades consumidas.';
+IS 'Unidades consumidas.';
 
 -- Column: directo
 
@@ -525,7 +525,7 @@ ALTER TABLE activos.mediciones ADD COLUMN directo boolean;
 COMMENT ON COLUMN activos.mediciones.directo IS 'Indica si es directo o indirecto  en tal caso que este vinculado al proceso productivo.';
 
 COMMENT ON TABLE activos.sys_metodos_medicion
-  IS 'Lista de metodos de depreciación y amortización.';
+IS 'Lista de metodos de depreciación y amortización.';
 
 -- Column: modelo_id
 
@@ -545,45 +545,45 @@ ALTER TABLE activos.sys_metodos_medicion ALTER COLUMN clasificacion_id SET NOT N
 COMMENT ON COLUMN activos.sys_metodos_medicion.clasificacion_id IS 'Clave foránea a la tabla sys_clasificaciones_bienes. Indica la clasificación del método o técnica.';
 
 COMMENT ON TABLE activos.sys_metodos_medicion
-  IS 'Lista de metodos y técnicas.';
+IS 'Lista de metodos y técnicas.';
 
 
 ALTER TABLE activos.sys_modelos_mediciones
-  DROP CONSTRAINT sys_modelos_pkey;
+DROP CONSTRAINT sys_modelos_pkey;
 ALTER TABLE activos.sys_modelos_mediciones
-  ADD PRIMARY KEY (id);
+ADD PRIMARY KEY (id);
 ALTER TABLE activos.sys_modelos_mediciones
-  ADD UNIQUE (nombre);
+ADD UNIQUE (nombre);
 
 
 
 ALTER TABLE activos.sys_metodos_medicion
-  ADD FOREIGN KEY (clasificacion_id) REFERENCES activos.sys_clasificaciones_metodos (id) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ADD FOREIGN KEY (clasificacion_id) REFERENCES activos.sys_clasificaciones_metodos (id) ON UPDATE NO ACTION ON DELETE NO ACTION;
 ALTER TABLE activos.sys_metodos_medicion
-  ADD FOREIGN KEY (modelo_id) REFERENCES activos.sys_modelos_mediciones (id) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ADD FOREIGN KEY (modelo_id) REFERENCES activos.sys_modelos_mediciones (id) ON UPDATE NO ACTION ON DELETE NO ACTION;
 
 COMMENT ON COLUMN activos.deterioros.acumulado_ejer_ant
-  IS 'Deterioro acumulado de ejercicios anteriores.';
+IS 'Deterioro acumulado de ejercicios anteriores.';
 
 COMMENT ON COLUMN activos.deterioros.ejercicios_anteriores
-  IS 'Ejercicios anteriores. Para el modelo de reavaluación.';
+IS 'Ejercicios anteriores. Para el modelo de reavaluación.';
 
 COMMENT ON COLUMN activos.deterioros.valor_uso
-  IS 'Valor de uso.';
+IS 'Valor de uso.';
 
-  ALTER TABLE cuentas.sys_formulas_tecnicas
-  DROP CONSTRAINT sys_formulas_tecnicas_tecnica_medicion_id_fkey;
 ALTER TABLE cuentas.sys_formulas_tecnicas
-  ADD FOREIGN KEY (tecnica_medicion_id) REFERENCES activos.sys_metodos_medicion (id) ON UPDATE NO ACTION ON DELETE NO ACTION;
+DROP CONSTRAINT sys_formulas_tecnicas_tecnica_medicion_id_fkey;
+ALTER TABLE cuentas.sys_formulas_tecnicas
+ADD FOREIGN KEY (tecnica_medicion_id) REFERENCES activos.sys_metodos_medicion (id) ON UPDATE NO ACTION ON DELETE NO ACTION;
 
 
 
 COMMENT ON COLUMN activos.facturas.comprador_id
-  IS 'Clave foranea a la tabla public.sys_naturales_juridicas';
+IS 'Clave foranea a la tabla public.sys_naturales_juridicas';
 ALTER TABLE activos.facturas
-  DROP CONSTRAINT facturas_comprador_id_fkey;
+DROP CONSTRAINT facturas_comprador_id_fkey;
 ALTER TABLE activos.facturas
-  ADD FOREIGN KEY (comprador_id) REFERENCES sys_naturales_juridicas (id) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ADD FOREIGN KEY (comprador_id) REFERENCES sys_naturales_juridicas (id) ON UPDATE NO ACTION ON DELETE NO ACTION;
 COMMENT ON COLUMN activos.facturas.comprador_id IS 'Clave foranea a la tabla public.sys_naturales_juridicas';
 
 
@@ -603,12 +603,12 @@ CREATE TABLE cuentas.mm2_descripciones
   CONSTRAINT mm2_descripciones_nombre_key UNIQUE (nombre)
 )
 WITH (
-  OIDS=FALSE
+OIDS=FALSE
 );
 ALTER TABLE cuentas.mm2_descripciones
-  OWNER TO eureka;
+OWNER TO eureka;
 COMMENT ON TABLE cuentas.mm2_descripciones
-  IS 'Lista de descripciones.';
+IS 'Lista de descripciones.';
 COMMENT ON COLUMN cuentas.mm2_descripciones.id IS 'Clave primaria.';
 COMMENT ON COLUMN cuentas.mm2_descripciones.nombre IS 'Contenido de la descripción.';
 COMMENT ON COLUMN cuentas.mm2_descripciones.descripcion IS 'Descripción de la descripción.';
@@ -628,12 +628,12 @@ CREATE TABLE cuentas.mm2_tipos_fondos_reservas
   CONSTRAINT mm2_tipos_fondos_reservas_nombre_key UNIQUE (nombre)
 )
 WITH (
-  OIDS=FALSE
+OIDS=FALSE
 );
 ALTER TABLE cuentas.mm2_tipos_fondos_reservas
-  OWNER TO eureka;
+OWNER TO eureka;
 COMMENT ON TABLE cuentas.mm2_tipos_fondos_reservas
-  IS 'Lista de los tipos de Fondos y Reservas.';
+IS 'Lista de los tipos de Fondos y Reservas.';
 COMMENT ON COLUMN cuentas.mm2_tipos_fondos_reservas.id IS 'Clave primaria.';
 COMMENT ON COLUMN cuentas.mm2_tipos_fondos_reservas.nombre IS 'Nombre del tipo de fondo y reserva.';
 COMMENT ON COLUMN cuentas.mm2_tipos_fondos_reservas.descripcion IS 'Descripción del tipo de fondo y reserva.';
@@ -647,32 +647,32 @@ COMMENT ON COLUMN cuentas.mm2_tipos_fondos_reservas.descripcion IS 'Descripción
 
 CREATE TABLE cuentas.mm2_fondos_reservas
 (
-   id serial NOT NULL, 
-   tipo_fondo_reserva_id integer NOT NULL, 
-   saldo_inicial_ejercicio numeric(38,6) NOT NULL, 
-   saldo_ajuscierre_ejercicio numeric(38,6) NOT NULL, 
-   descripcion_id integer NOT NULL, 
-   detalle character varying(255) NOT NULL, 
-   fecha_uso date, 
-   monto numeric(38,6) NOT NULL, 
-   monto_ajustado numeric(38,6) NOT NULL, 
-   reservas boolean NOT NULL, 
-   descripcion_apartado_id integer, 
-   ingreso_ejercicio numeric(38,6) NOT NULL, 
-   porcentaje_aplicado numeric(38,6) NOT NULL, 
-   monto_apartados numeric(38,6) NOT NULL, 
-   saldo_cierre_ejercicio numeric(38,6) NOT NULL, 
-   PRIMARY KEY (id), 
-   FOREIGN KEY (tipo_fondo_reserva_id) REFERENCES cuentas.mm2_tipos_fondos_reservas (id) ON UPDATE NO ACTION ON DELETE NO ACTION, 
-   FOREIGN KEY (descripcion_apartado_id) REFERENCES cuentas.mm2_descripciones (id) ON UPDATE NO ACTION ON DELETE NO ACTION, 
-   FOREIGN KEY (descripcion_id) REFERENCES cuentas.mm2_descripciones (id) ON UPDATE NO ACTION ON DELETE NO ACTION
-) 
+  id serial NOT NULL,
+  tipo_fondo_reserva_id integer NOT NULL,
+  saldo_inicial_ejercicio numeric(38,6) NOT NULL,
+  saldo_ajuscierre_ejercicio numeric(38,6) NOT NULL,
+  descripcion_id integer NOT NULL,
+  detalle character varying(255) NOT NULL,
+  fecha_uso date,
+  monto numeric(38,6) NOT NULL,
+  monto_ajustado numeric(38,6) NOT NULL,
+  reservas boolean NOT NULL,
+  descripcion_apartado_id integer,
+  ingreso_ejercicio numeric(38,6) NOT NULL,
+  porcentaje_aplicado numeric(38,6) NOT NULL,
+  monto_apartados numeric(38,6) NOT NULL,
+  saldo_cierre_ejercicio numeric(38,6) NOT NULL,
+  PRIMARY KEY (id),
+  FOREIGN KEY (tipo_fondo_reserva_id) REFERENCES cuentas.mm2_tipos_fondos_reservas (id) ON UPDATE NO ACTION ON DELETE NO ACTION,
+  FOREIGN KEY (descripcion_apartado_id) REFERENCES cuentas.mm2_descripciones (id) ON UPDATE NO ACTION ON DELETE NO ACTION,
+  FOREIGN KEY (descripcion_id) REFERENCES cuentas.mm2_descripciones (id) ON UPDATE NO ACTION ON DELETE NO ACTION
+)
 WITH (
-  OIDS = FALSE
+OIDS = FALSE
 )
 ;
 ALTER TABLE cuentas.mm2_fondos_reservas
-  OWNER TO eureka;
+OWNER TO eureka;
 COMMENT ON COLUMN cuentas.mm2_fondos_reservas.id IS 'Clave primaria.';
 COMMENT ON COLUMN cuentas.mm2_fondos_reservas.tipo_fondo_reserva_id IS 'Clave foránea a la tabla tipos_fondos_reservas. ';
 COMMENT ON COLUMN cuentas.mm2_fondos_reservas.saldo_inicial_ejercicio IS 'Saldo inicial del ejercicio económico.';
@@ -689,29 +689,29 @@ COMMENT ON COLUMN cuentas.mm2_fondos_reservas.porcentaje_aplicado IS 'Porcentaje
 COMMENT ON COLUMN cuentas.mm2_fondos_reservas.monto_apartados IS 'Monto de apartados durante el ejercicio.';
 COMMENT ON COLUMN cuentas.mm2_fondos_reservas.saldo_cierre_ejercicio IS 'Saldo al cierre del ejercicio económico.';
 COMMENT ON TABLE cuentas.mm2_fondos_reservas
-  IS 'Cuenta MM2 - Fondos y Reservas';
+IS 'Cuenta MM2 - Fondos y Reservas';
 
 
 
-  CREATE TABLE cuentas.mm1_ajustes_correciones_revals
+CREATE TABLE cuentas.mm1_ajustes_correciones_revals
 (
-   id serial NOT NULL, 
-   nombre character varying(255) NOT NULL, 
-   descripcion character varying(255), 
-   PRIMARY KEY (id), 
-   UNIQUE (nombre)
-) 
+  id serial NOT NULL,
+  nombre character varying(255) NOT NULL,
+  descripcion character varying(255),
+  PRIMARY KEY (id),
+  UNIQUE (nombre)
+)
 WITH (
-  OIDS = FALSE
+OIDS = FALSE
 )
 ;
 ALTER TABLE cuentas.mm1_ajustes_correciones_revals
-  OWNER TO eureka;
+OWNER TO eureka;
 COMMENT ON COLUMN cuentas.mm1_ajustes_correciones_revals.id IS 'Clave primaria.';
 COMMENT ON COLUMN cuentas.mm1_ajustes_correciones_revals.nombre IS 'Nombre del Ajuste / Correccion / Revalorizacion.';
 COMMENT ON COLUMN cuentas.mm1_ajustes_correciones_revals.descripcion IS 'Descripcion del Ajuste / Correccion / Revalorizacion.';
 COMMENT ON TABLE cuentas.mm1_ajustes_correciones_revals
-  IS 'Lista de Ajustes / Correcciones / Revalorizaciones';
+IS 'Lista de Ajustes / Correcciones / Revalorizaciones';
 
 
 
@@ -732,19 +732,19 @@ CREATE TABLE cuentas.mm1_resacum_ajus_correc
   ajuste_corre_reval_id integer NOT NULL, -- Clave foránea a la tabla mm1_ajustes_correciones_revals.
   CONSTRAINT mm1_resacum_ajus_correc_pkey PRIMARY KEY (id),
   CONSTRAINT mm1_resacum_ajus_correc_ajuste_corre_reval_id_fkey FOREIGN KEY (ajuste_corre_reval_id)
-      REFERENCES cuentas.mm1_ajustes_correciones_revals (id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  REFERENCES cuentas.mm1_ajustes_correciones_revals (id) MATCH SIMPLE
+  ON UPDATE NO ACTION ON DELETE NO ACTION,
   CONSTRAINT mm1_resacum_ajus_correc_resultado_acumulado_id_fkey FOREIGN KEY (resultado_acumulado_id)
-      REFERENCES cuentas.mm1_resultados_acumulados (id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION
+  REFERENCES cuentas.mm1_resultados_acumulados (id) MATCH SIMPLE
+  ON UPDATE NO ACTION ON DELETE NO ACTION
 )
 WITH (
-  OIDS=FALSE
+OIDS=FALSE
 );
 ALTER TABLE cuentas.mm1_resacum_ajus_correc
-  OWNER TO eureka;
+OWNER TO eureka;
 COMMENT ON TABLE cuentas.mm1_resacum_ajus_correc
-  IS 'Lista de ajuste correciones y revalorizaciones.';
+IS 'Lista de ajuste correciones y revalorizaciones.';
 COMMENT ON COLUMN cuentas.mm1_resacum_ajus_correc.id IS 'Clave primaria.';
 COMMENT ON COLUMN cuentas.mm1_resacum_ajus_correc.resultado_acumulado_id IS 'Clave foránea a la tabla mm1_resultados_acumulados.';
 COMMENT ON COLUMN cuentas.mm1_resacum_ajus_correc.ajuste_corre_reval_id IS 'Clave foránea a la tabla mm1_ajustes_correciones_revals.';
@@ -771,12 +771,12 @@ CREATE TABLE cuentas.mm1_resultados_acumulados
   CONSTRAINT mm1_resultados_acumulados_pkey PRIMARY KEY (id)
 )
 WITH (
-  OIDS=FALSE
+OIDS=FALSE
 );
 ALTER TABLE cuentas.mm1_resultados_acumulados
-  OWNER TO eureka;
+OWNER TO eureka;
 COMMENT ON TABLE cuentas.mm1_resultados_acumulados
-  IS 'Cuenta MM1 - Resultados Acumulados.';
+IS 'Cuenta MM1 - Resultados Acumulados.';
 COMMENT ON COLUMN cuentas.mm1_resultados_acumulados.id IS 'Clave primaria.';
 COMMENT ON COLUMN cuentas.mm1_resultados_acumulados.saldo_inicio_ejercicio IS 'Saldo al Inicio del Ejercicio Económico.';
 COMMENT ON COLUMN cuentas.mm1_resultados_acumulados.saldo_ajuscierre_ejercicio IS 'Saldo ajustado al cierre del ejercicio económico.';
@@ -888,13 +888,13 @@ ALTER COLUMN "descripción" DROP NOT NULL;
 
 
 ALTER TABLE nombres_cajas
-  DROP CONSTRAINT nombres_cajas_nombre_contratistas_id_key;
+DROP CONSTRAINT nombres_cajas_nombre_contratistas_id_key;
 ALTER TABLE nombres_cajas
-  ADD UNIQUE (nombre, contratistas_id, nacional);
+ADD UNIQUE (nombre, contratistas_id, nacional);
 
 
 ALTER TABLE activos.bienes
-  ADD COLUMN carga_completa boolean DEFAULT false;
+ADD COLUMN carga_completa boolean DEFAULT false;
 COMMENT ON COLUMN activos.bienes.carga_completa IS 'Indica si el bien fue cargado completamente.';
 
 
@@ -915,12 +915,12 @@ CREATE TABLE activos.sys_modelos
   CONSTRAINT sys_modelos_nombre_key UNIQUE (nombre)
 )
 WITH (
-  OIDS=FALSE
+OIDS=FALSE
 );
 ALTER TABLE activos.sys_modelos
-  OWNER TO eureka;
+OWNER TO eureka;
 COMMENT ON TABLE activos.sys_modelos
-  IS 'Contiene la lista de modelos.';
+IS 'Contiene la lista de modelos.';
 COMMENT ON COLUMN activos.sys_modelos.id IS 'Clave primaria.';
 COMMENT ON COLUMN activos.sys_modelos.nombre IS 'Nombre del modelo.';
 COMMENT ON COLUMN activos.sys_modelos.descripcion IS 'Descripción del modelo.';
@@ -938,17 +938,17 @@ CREATE TABLE activos.sys_metodos
   modelo_id integer NOT NULL, -- Clave foránea a la tabla sys_modelo_id.
   CONSTRAINT sys_metodos_pkey PRIMARY KEY (id),
   CONSTRAINT sys_metodos_modelo_id_fkey FOREIGN KEY (modelo_id)
-      REFERENCES activos.sys_modelos (id) MATCH SIMPLE
-      ON UPDATE CASCADE ON DELETE NO ACTION,
+  REFERENCES activos.sys_modelos (id) MATCH SIMPLE
+  ON UPDATE CASCADE ON DELETE NO ACTION,
   CONSTRAINT sys_metodos_nombre_key UNIQUE (nombre)
 )
 WITH (
-  OIDS=FALSE
+OIDS=FALSE
 );
 ALTER TABLE activos.sys_metodos
-  OWNER TO eureka;
+OWNER TO eureka;
 COMMENT ON TABLE activos.sys_metodos
-  IS 'Lista de métodos contables.';
+IS 'Lista de métodos contables.';
 COMMENT ON COLUMN activos.sys_metodos.id IS 'Clave primaria.';
 COMMENT ON COLUMN activos.sys_metodos.nombre IS 'Nombre del método.';
 COMMENT ON COLUMN activos.sys_metodos.descripcion IS 'Descripción del método.';
@@ -957,7 +957,7 @@ COMMENT ON COLUMN activos.sys_metodos.modelo_id IS 'Clave foránea a la tabla sy
 
 ALTER TABLE activos.bienes RENAME principio_contable  TO principio_contable_id;
 COMMENT ON COLUMN activos.bienes.principio_contable_id
-  IS 'Clave foránea a la tabla sys_formas_org. Principio contable que aplica para el bien.';
+IS 'Clave foránea a la tabla sys_formas_org. Principio contable que aplica para el bien.';
 
 
 
@@ -1115,15 +1115,15 @@ COMMENT ON COLUMN activos.sys_tipos_registros.descripcion IS 'Descripcion del ti
 
 
 ALTER TABLE personas_juridicas
-  DROP CONSTRAINT personas_juridicas_rif_fkey;
+DROP CONSTRAINT personas_juridicas_rif_fkey;
 ALTER TABLE personas_juridicas
-  ADD FOREIGN KEY (rif) REFERENCES sys_naturales_juridicas (rif) ON UPDATE CASCADE ON DELETE NO ACTION;
+ADD FOREIGN KEY (rif) REFERENCES sys_naturales_juridicas (rif) ON UPDATE CASCADE ON DELETE NO ACTION;
 
 
 ALTER TABLE personas_naturales
-  DROP CONSTRAINT personas_naturales_rif_fkey;
+DROP CONSTRAINT personas_naturales_rif_fkey;
 ALTER TABLE personas_naturales
-  ADD FOREIGN KEY (rif) REFERENCES sys_naturales_juridicas (rif) ON UPDATE CASCADE ON DELETE NO ACTION;
+ADD FOREIGN KEY (rif) REFERENCES sys_naturales_juridicas (rif) ON UPDATE CASCADE ON DELETE NO ACTION;
 
 
 
@@ -1150,3 +1150,176 @@ DROP COLUMN bien_id;
 ALTER TABLE activos.documentos_registrados
 DROP COLUMN bien_id;
 
+
+
+
+
+
+
+
+
+/**************     24/05/2015 *************/
+
+
+-- Table: activos.arrendamientos
+
+-- DROP TABLE activos.arrendamientos;
+
+CREATE TABLE activos.arrendamientos
+(
+  id serial NOT NULL, -- Clave primaria.
+  tipo_arrendamiento_id integer, -- Clave foránea  a la tabla sys_tipo_arrendamiento.
+  valor_bien_arrendado numeric(38,6), -- Valor del bien arrendado. (Solo para arrendamiento financiero).
+  propietario_id integer NOT NULL, -- Clave foránea a la tabla sys_naturales_juridicas.
+  num_doc_notariado character varying(255) NOT NULL, -- Número de documento notariado.
+  fecha_registro date NOT NULL, -- Fecha de registro.
+  fecha_inicio date NOT NULL, -- Fecha de Inicio.
+  fecha_finalizacion date NOT NULL, -- Fecha de finalización.
+  unidad_duracion_id integer NOT NULL, -- Clave foránea a la tabla sys_unidades.
+  numero_duracion integer NOT NULL, -- Número de duración del arrendamiento.
+  CONSTRAINT arrendamientos_pkey PRIMARY KEY (id)
+)
+WITH (
+OIDS=FALSE
+);
+ALTER TABLE activos.arrendamientos
+OWNER TO eureka;
+COMMENT ON TABLE activos.arrendamientos
+IS 'Información relevante al arrendamiento de un bien.';
+COMMENT ON COLUMN activos.arrendamientos.id IS 'Clave primaria.';
+COMMENT ON COLUMN activos.arrendamientos.tipo_arrendamiento_id IS 'Clave foránea  a la tabla sys_tipo_arrendamiento.';
+COMMENT ON COLUMN activos.arrendamientos.valor_bien_arrendado IS 'Valor del bien arrendado. (Solo para arrendamiento financiero).';
+COMMENT ON COLUMN activos.arrendamientos.propietario_id IS 'Clave foránea a la tabla sys_naturales_juridicas.';
+COMMENT ON COLUMN activos.arrendamientos.num_doc_notariado IS 'Número de documento notariado.';
+COMMENT ON COLUMN activos.arrendamientos.fecha_registro IS 'Fecha de registro.';
+COMMENT ON COLUMN activos.arrendamientos.fecha_inicio IS 'Fecha de Inicio.';
+COMMENT ON COLUMN activos.arrendamientos.fecha_finalizacion IS 'Fecha de finalización.';
+COMMENT ON COLUMN activos.arrendamientos.unidad_duracion_id IS 'Clave foránea a la tabla sys_unidades.';
+COMMENT ON COLUMN activos.arrendamientos.numero_duracion IS 'Número de duración del arrendamiento.';
+
+
+
+-- Table: activos.sys_unidades
+
+-- DROP TABLE activos.sys_unidades;
+
+CREATE TABLE activos.sys_unidades
+(
+  id serial NOT NULL, -- Clave primaria.
+  nombre character varying(255) NOT NULL, -- Nombre de la unidad.
+  descripcion character varying(255), -- Descripción de la unidad.
+  CONSTRAINT sys_unidades_pkey PRIMARY KEY (id),
+  CONSTRAINT sys_unidades_nombre_key UNIQUE (nombre)
+)
+WITH (
+OIDS=FALSE
+);
+ALTER TABLE activos.sys_unidades
+OWNER TO eureka;
+COMMENT ON TABLE activos.sys_unidades
+IS 'Lista de unidades.';
+COMMENT ON COLUMN activos.sys_unidades.id IS 'Clave primaria.';
+COMMENT ON COLUMN activos.sys_unidades.nombre IS 'Nombre de la unidad.';
+COMMENT ON COLUMN activos.sys_unidades.descripcion IS 'Descripción de la unidad.';
+
+
+-- Table: activos.sys_tipos_arrendamientos
+
+-- DROP TABLE activos.sys_tipos_arrendamientos;
+
+CREATE TABLE activos.sys_tipos_arrendamientos
+(
+  id serial NOT NULL, -- Clave primaria.
+  nombre character varying(255) NOT NULL, -- Nombre del tipo de arrendamiento.
+  descripcion character varying(255), -- Descripción del tipo de arrendamiento.
+  CONSTRAINT sys_tipos_arrendamientos_pkey PRIMARY KEY (id),
+  CONSTRAINT sys_tipos_arrendamientos_nombre_key UNIQUE (nombre)
+)
+WITH (
+OIDS=FALSE
+);
+ALTER TABLE activos.sys_tipos_arrendamientos
+OWNER TO eureka;
+COMMENT ON TABLE activos.sys_tipos_arrendamientos
+IS 'Lista tipos de arrendamientos.';
+COMMENT ON COLUMN activos.sys_tipos_arrendamientos.id IS 'Clave primaria.';
+COMMENT ON COLUMN activos.sys_tipos_arrendamientos.nombre IS 'Nombre del tipo de arrendamiento.';
+COMMENT ON COLUMN activos.sys_tipos_arrendamientos.descripcion IS 'Descripción del tipo de arrendamiento.';
+
+
+
+
+
+ALTER TABLE activos.arrendamientos
+ADD FOREIGN KEY (tipo_arrendamiento_id) REFERENCES activos.sys_tipos_arrendamientos (id) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE activos.arrendamientos
+ADD FOREIGN KEY (unidad_duracion_id) REFERENCES activos.sys_unidades (id) ON UPDATE NO ACTION ON DELETE NO ACTION;
+
+
+
+ALTER TABLE activos.bienes
+ADD COLUMN arrendamiento_id integer;
+ALTER TABLE activos.bienes
+ADD FOREIGN KEY (arrendamiento_id) REFERENCES activos.arrendamientos (id) ON UPDATE NO ACTION ON DELETE NO ACTION;
+COMMENT ON COLUMN activos.bienes.arrendamiento_id IS 'Clave foránea a la tabla arrendamientos.';
+
+
+ALTER TABLE activos.sys_metodos_medicion
+ALTER COLUMN clasificacion_id DROP NOT NULL;
+COMMENT ON COLUMN activos.sys_metodos_medicion.clasificacion_id IS 'Clave foránea a la tabla sys_clasificaciones_bienes. Indica la clasificación del método o técnica.';
+
+
+ALTER TABLE activos.bienes
+ADD COLUMN desincorporacion_id integer;
+COMMENT ON COLUMN activos.bienes.desincorporacion_id
+IS 'Clave foránea a la tabla desincorporacion_activos';
+
+ALTER TABLE activos.bienes
+ADD FOREIGN KEY (desincorporacion_id) REFERENCES activos.desincorporacion_activos (id) ON UPDATE CASCADE ON DELETE NO ACTION;
+
+
+ALTER TABLE activos.bienes
+ADD COLUMN mejora boolean NOT NULL DEFAULT false;
+COMMENT ON COLUMN activos.bienes.mejora
+IS 'Indica si el bien es una mejora.';
+
+
+
+
+ALTER TABLE activos.mejoras_propiedades
+DROP COLUMN clasificacion;
+ALTER TABLE activos.mejoras_propiedades
+DROP COLUMN sys_tipo_bien_id;
+ALTER TABLE activos.mejoras_propiedades
+DROP COLUMN principio_contable_id;
+ALTER TABLE activos.mejoras_propiedades
+DROP COLUMN depreciacion;
+ALTER TABLE activos.mejoras_propiedades
+DROP COLUMN deterioro;
+ALTER TABLE activos.mejoras_propiedades
+ADD COLUMN mejora_bien_id integer;
+COMMENT ON COLUMN activos.mejoras_propiedades.mejora_bien_id IS 'Clave foránea a la tabla bienes. Indica el bien que mejora a bien_id.';
+
+ALTER TABLE activos.mejoras_propiedades
+ADD FOREIGN KEY (mejora_bien_id) REFERENCES activos.bienes (id) ON UPDATE NO ACTION ON DELETE NO ACTION;
+
+
+ALTER TABLE activos.mejoras_propiedades
+ADD COLUMN descripcion character varying(255);
+COMMENT ON COLUMN activos.mejoras_propiedades.descripcion IS 'Breve descripción de la mejora.';
+
+
+ALTER TABLE activos.bienes
+ADD COLUMN proc_productivo boolean;
+ALTER TABLE activos.bienes
+ADD COLUMN directo boolean;
+ALTER TABLE activos.bienes
+ADD COLUMN proc_ventas boolean;
+ALTER TABLE activos.bienes
+ADD COLUMN metodo_medicion_id integer;
+ALTER TABLE activos.bienes
+ADD FOREIGN KEY (metodo_medicion_id) REFERENCES activos.sys_metodos_medicion (id) ON UPDATE NO ACTION ON DELETE NO ACTION;
+COMMENT ON COLUMN activos.bienes.proc_productivo IS 'Vinculado con el proceso productivo.';
+COMMENT ON COLUMN activos.bienes.directo IS 'Directo o indirecto.';
+COMMENT ON COLUMN activos.bienes.proc_ventas IS 'Vinculado con el proceso de ventas.';
+COMMENT ON COLUMN activos.bienes.metodo_medicion_id IS 'Clave foránea a la tabla sys_metodos_medicion.';

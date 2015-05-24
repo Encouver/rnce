@@ -5,12 +5,12 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\a\ActivosFacturas;
+use common\models\a\ActivosDocumentosRegistrados;
 
 /**
- * ActivosFacturasSearch represents the model behind the search form about `common\models\a\ActivosFacturas`.
+ * ActivosDocumentosRegistradosSearch represents the model behind the search form about `common\models\a\ActivosDocumentosRegistrados`.
  */
-class ActivosFacturasSearch extends ActivosFacturas
+class ActivosDocumentosRegistradosSearch extends ActivosDocumentosRegistrados
 {
     /**
      * @inheritdoc
@@ -18,9 +18,9 @@ class ActivosFacturasSearch extends ActivosFacturas
     public function rules()
     {
         return [
-            [['id', 'proveedor_id', 'imprenta_id', 'comprador_id', 'contratista_id', 'creado_por', 'actualizado_por'], 'integer'],
-            [['num_factura', 'fecha_emision', 'fecha_emision_talonario', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
-            [['base_imponible_gravable', 'exento', 'iva'], 'number'],
+            [['id', 'contratista_id', 'sys_tipo_registro_id', 'sys_circunscripcion_id', 'tipo_documento_id', 'creado_por', 'actualizado_por'], 'integer'],
+            [['num_registro_notaria', 'tomo', 'folio', 'fecha_registro', 'fecha_asamblea', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
+            [['valor_adquisicion'], 'number'],
             [['sys_status'], 'boolean'],
         ];
     }
@@ -43,7 +43,7 @@ class ActivosFacturasSearch extends ActivosFacturas
      */
     public function search($params)
     {
-        $query = ActivosFacturas::find();
+        $query = ActivosDocumentosRegistrados::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -59,15 +59,13 @@ class ActivosFacturasSearch extends ActivosFacturas
 
         $query->andFilterWhere([
             'id' => $this->id,
-            'proveedor_id' => $this->proveedor_id,
-            'fecha_emision' => $this->fecha_emision,
-            'imprenta_id' => $this->imprenta_id,
-            'fecha_emision_talonario' => $this->fecha_emision_talonario,
-            'comprador_id' => $this->comprador_id,
-            'base_imponible_gravable' => $this->base_imponible_gravable,
-            'exento' => $this->exento,
-            'iva' => $this->iva,
             'contratista_id' => $this->contratista_id,
+            'sys_tipo_registro_id' => $this->sys_tipo_registro_id,
+            'fecha_registro' => $this->fecha_registro,
+            'fecha_asamblea' => $this->fecha_asamblea,
+            'sys_circunscripcion_id' => $this->sys_circunscripcion_id,
+            'valor_adquisicion' => $this->valor_adquisicion,
+            'tipo_documento_id' => $this->tipo_documento_id,
             'creado_por' => $this->creado_por,
             'actualizado_por' => $this->actualizado_por,
             'sys_status' => $this->sys_status,
@@ -76,7 +74,9 @@ class ActivosFacturasSearch extends ActivosFacturas
             'sys_finalizado_el' => $this->sys_finalizado_el,
         ]);
 
-        $query->andFilterWhere(['like', 'num_factura', $this->num_factura]);
+        $query->andFilterWhere(['like', 'num_registro_notaria', $this->num_registro_notaria])
+            ->andFilterWhere(['like', 'tomo', $this->tomo])
+            ->andFilterWhere(['like', 'folio', $this->folio]);
 
         return $dataProvider;
     }
