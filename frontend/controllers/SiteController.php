@@ -66,6 +66,11 @@ class SiteController extends BaseController
         ];
     }
 
+    public function actionMetodos()
+    {
+        return $this->render('metodos');
+    }
+
     public function actionIndex()
     {
         return $this->render('index');
@@ -102,6 +107,11 @@ class SiteController extends BaseController
         Yii::$app->user->logout();
 
         return $this->goHome();
+    }
+
+    public function actionProbando()
+    {
+        echo "probando";
     }
 
     public function actionContact()
