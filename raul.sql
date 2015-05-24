@@ -31,3 +31,59 @@ ALTER TABLE "user"
 
 ALTER TABLE bancos_contratistas ALTER COLUMN tipo_moneda Drop NOT NULL;
 ALTER TABLE bancos_contratistas ALTER COLUMN tipo_cuenta Drop NOT NULL;
+
+
+
+--24 mayo 12:30 m ----
+
+ALTER TABLE objetos_autorizaciones DROP COLUMN objeto_empresa_id;
+create type tipo_objeto_empresa as enum ('PRODUCTOR','FABRICANTE','FABRICANTE IMPORTADOR','DISTRIBUIDOR','DISTRIBUIDOR IMPORTADOR','SERVICIOS BASICOS','SERVICIOS PROFESIONALES','SERVICIOS COMERCIALES','OBRAS');
+ALTER TABLE objetos_empresas DROP COLUMN distribuidor_importador;
+ALTER TABLE objetos_empresas DROP COLUMN servicio_basico;
+ALTER TABLE objetos_empresas DROP COLUMN dist_importador_aut;
+ALTER TABLE objetos_empresas DROP COLUMN servicio_comercial;
+ALTER TABLE objetos_empresas DROP COLUMN servicio_profesional;
+ALTER TABLE objetos_empresas DROP COLUMN obra;
+ALTER TABLE objetos_empresas DROP COLUMN productor;
+ALTER TABLE objetos_empresas DROP COLUMN fabricante;
+ALTER TABLE objetos_empresas DROP COLUMN fabricante_importado;
+ALTER TABLE objetos_empresas DROP COLUMN distribuidor;
+ALTER TABLE objetos_empresas DROP COLUMN ser_comercial_aut;
+ALTER TABLE objetos_empresas DROP COLUMN distribuidor_autorizado;
+ALTER TABLE objetos_empresas DROP COLUMN ser_comercial_aut;
+ALTER TABLE objetos_empresas ADD COLUMN objeto_empresa tipo_objeto_empresa;
+ALTER TABLE objetos_empresas ALTER COLUMN objeto_empresa SET NOT NULL;
+COMMENT ON COLUMN objetos_empresas.objeto_empresa IS 'Tipo objeto empresa puede ser PRODUCTOR, FABRICANTE, FABRICANTE IMPORTADOR, DISTRIBUIDOR, DISTRIBUIDOR IMPORTADOR, SERVICIOS BASICOS, SERVICIOS PROFESIONALES, SERVICIOS COMERCIALES , OBRAS';
+
+
+
+ALTER TABLE personas_juridicas ADD COLUMN sys_pais_id integer;
+COMMENT ON COLUMN personas_juridicas.sys_pais_id IS 'Clave foranea a la tabla paises en caso de ser de nacionalidad extranjera';
+
+
+ALTER TABLE personas_juridicas
+  ADD CONSTRAINT personas_juridicas_rif_fkey FOREIGN KEY (rif)
+      REFERENCES sys_naturales_juridicas (rif) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE NO ACTION;
+
+
+ALTER TABLE objetos_autorizaciones DROP COLUMN persona_juridica_id;
+
+ALTER TABLE objetos_autorizaciones ADD COLUMN natural_juridica_id integer;
+ALTER TABLE objetos_autorizaciones ALTER COLUMN natural_juridica_id SET NOT NULL;
+COMMENT ON COLUMN objetos_autorizaciones.natural_juridica_id IS 'Clave foranea ala tabla sys_naturales_juridicas';
+
+ALTER TABLE objetos_autorizaciones
+  ADD CONSTRAINT objetos_autorizaciones_natural_juridica_id_fkey FOREIGN KEY (natural_juridica_id)
+      REFERENCES sys_naturales_juridicas (id) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE NO ACTION;
+
+ALTER TABLE objetos_autorizaciones ADD COLUMN contratista_id integer;
+ALTER TABLE objetos_autorizaciones ALTER COLUMN contratista_id SET NOT NULL;
+COMMENT ON COLUMN objetos_autorizaciones.contratista_id IS 'clave foranea a la tabla contratistas';
+
+
+ALTER TABLE objetos_autorizaciones
+  ADD CONSTRAINT objetos_autorizaciones_contratista_id_fkey FOREIGN KEY (contratista_id)
+      REFERENCES contratistas (id) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE NO ACTION;

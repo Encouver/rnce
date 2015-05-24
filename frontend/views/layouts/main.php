@@ -82,7 +82,7 @@ AppAsset::register($this);
                          ['label' => 'Sucursales', 'url' => ['/sucursales/crearsucursal']],
                          ['label' => 'Bancos', 'url' => ['/bancos-contratistas/index']],
                         
-                         ['label' => 'Objeto empresa', 'url' => ['/objetos-empresas/crearobjeto']],
+                         ['label' => 'Objeto empresa', 'url' => ['/objetos-empresas/index']],
                          ['label' => 'Accionistas Representante Legal o Junta Directiva', 'url' => ['/accionistas-otros/crearaccionistaotro']],
                          ['label' => 'Comisarios', 'url' => ['/comisarios-auditores/crearcomisario']],
                          ['label' => 'Responsable Contabilidad', 'url' => ['/comisarios-auditores/crearresponsable']],

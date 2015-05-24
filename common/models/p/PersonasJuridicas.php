@@ -120,6 +120,14 @@ class PersonasJuridicas extends \common\components\BaseActiveRecord
         'sigla'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Introduzca sigla']],
     ];
     }
+    if($id=="posextranjero"){
+         return [
+        //'tipo_nacionalidad'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>$data , 'options'=>['placeholder'=>'Enter username...']],
+        
+        'numero_identificacion'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Introduzca rif']],
+        'razon_social'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Introduzca razon social']],
+    ];
+    }
        
     }
     public function getFormAttribsnacional() {
