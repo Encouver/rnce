@@ -19,7 +19,7 @@ class BancosContratistasSearch extends BancosContratistas
     {
         return [
             [['id', 'banco_id', 'contratista_id'], 'integer'],
-            [['num_cuenta', 'tipo_moneda', 'tipo_cuenta', 'estatus_cuenta', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
+            [['num_cuenta',  'estatus_cuenta', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['sys_status'], 'boolean'],
         ];
     }
@@ -59,7 +59,7 @@ class BancosContratistasSearch extends BancosContratistas
         $query->andFilterWhere([
             'id' => $this->id,
             'banco_id' => $this->banco_id,
-            'contratista_id' => $this->contratista_id,
+            'contratista_id' => Yii::$app->user->identity->contratista_id,
             'sys_status' => $this->sys_status,
             'sys_creado_el' => $this->sys_creado_el,
             'sys_actualizado_el' => $this->sys_actualizado_el,
