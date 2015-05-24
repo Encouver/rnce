@@ -5,12 +5,12 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\c\CuentasJjProviciones;
+use common\models\c\ActivosSysMetodosMedicion;
 
 /**
- * CuentasJjProvicionesSearch represents the model behind the search form about `common\models\c\CuentasJjProviciones`.
+ * ActivosSysMetodosMedicionSearch represents the model behind the search form about `common\models\c\ActivosSysMetodosMedicion`.
  */
-class CuentasJjProvicionesSearch extends CuentasJjProviciones
+class ActivosSysMetodosMedicionSearch extends ActivosSysMetodosMedicion
 {
     /**
      * @inheritdoc
@@ -18,10 +18,9 @@ class CuentasJjProvicionesSearch extends CuentasJjProviciones
     public function rules()
     {
         return [
-            [['id', 'concepto_id', 'contratista_id', 'creado_por', 'actualizado_por'], 'integer'],
-            [['anho', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el', 'otro_nombre'], 'safe'],
-            [['saldo_p_anterior', 'importe_provisionado_periodo', 'aplicacion_amortizacion', 'saldo_al_cierre'], 'number'],
-            [['corriente', 'sys_status'], 'boolean'],
+            [['id', 'modelo_id', 'clasificacion_id', 'creado_por', 'actualizado_por'], 'integer'],
+            [['nombre', 'descripcion', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
+            [['sys_status'], 'boolean'],
         ];
     }
 
@@ -43,7 +42,7 @@ class CuentasJjProvicionesSearch extends CuentasJjProviciones
      */
     public function search($params)
     {
-        $query = CuentasJjProviciones::find();
+        $query = ActivosSysMetodosMedicion::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -59,23 +58,18 @@ class CuentasJjProvicionesSearch extends CuentasJjProviciones
 
         $query->andFilterWhere([
             'id' => $this->id,
-            'saldo_p_anterior' => $this->saldo_p_anterior,
-            'importe_provisionado_periodo' => $this->importe_provisionado_periodo,
-            'aplicacion_amortizacion' => $this->aplicacion_amortizacion,
-            'saldo_al_cierre' => $this->saldo_al_cierre,
-            'corriente' => $this->corriente,
-            'contratista_id' => Yii::$app->user->identity->contratista_id,
+            'modelo_id' => $this->modelo_id,
+            'clasificacion_id' => $this->clasificacion_id,
             'creado_por' => $this->creado_por,
             'actualizado_por' => $this->actualizado_por,
             'sys_status' => $this->sys_status,
             'sys_creado_el' => $this->sys_creado_el,
             'sys_actualizado_el' => $this->sys_actualizado_el,
             'sys_finalizado_el' => $this->sys_finalizado_el,
-            'otro_nombre' => $this->otro_nombre,
         ]);
 
-        $query->andFilterWhere(['like', 'concepto_id', $this->concepto_id])
-            ->andFilterWhere(['like', 'anho', $this->anho]);
+        $query->andFilterWhere(['like', 'nombre', $this->nombre])
+            ->andFilterWhere(['like', 'descripcion', $this->descripcion]);
 
         return $dataProvider;
     }

@@ -276,6 +276,7 @@ class BaseActiveRecord extends ActiveRecord
     /**
      * @return bool
      */
+    
     public function getBasadoUso()
     {
         return true;
@@ -284,6 +285,7 @@ class BaseActiveRecord extends ActiveRecord
     /**
      * @return bool
      */
+
     public function getVarlorRazonable()
     {
         return true;

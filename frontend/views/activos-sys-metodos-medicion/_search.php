@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\NombresCajasSearch */
+/* @var $model app\models\ActivosSysMetodosMedicionSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="nombres-cajas-search">
+<div class="activos-sys-metodos-medicion-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
@@ -19,13 +19,11 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'nombre') ?>
 
-    <?= $form->field($model, 'nacional')->checkbox() ?>
+    <?= $form->field($model, 'descripcion') ?>
 
-    <?= $form->field($model, 'tipo_caja') ?>
+    <?= $form->field($model, 'modelo_id') ?>
 
-    <?= $form->field($model, 'contratista_id') ?>
-
-    <?php // echo $form->field($model, 'anho') ?>
+    <?= $form->field($model, 'clasificacion_id') ?>
 
     <?php // echo $form->field($model, 'creado_por') ?>
 

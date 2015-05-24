@@ -18,9 +18,9 @@ class NombresCajasSearch extends NombresCajas
     public function rules()
     {
         return [
-            [['id', 'contratistas_id'], 'integer'],
-            [['nombre', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el', 'tipo_caja'], 'safe'],
-            [['sys_status', 'nacional'], 'boolean'],
+            [['id', 'contratista_id', 'creado_por', 'actualizado_por'], 'integer'],
+            [['nombre', 'tipo_caja', 'anho', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
+            [['nacional', 'sys_status'], 'boolean'],
         ];
     }
 
@@ -58,16 +58,19 @@ class NombresCajasSearch extends NombresCajas
 
         $query->andFilterWhere([
             'id' => $this->id,
-            'contratistas_id' => $this->contratistas_id,
+            'nacional' => $this->nacional,
+            'contratista_id' => Yii::$app->user->identity->contratista_id,
+            'creado_por' => $this->creado_por,
+            'actualizado_por' => $this->actualizado_por,
             'sys_status' => $this->sys_status,
             'sys_creado_el' => $this->sys_creado_el,
             'sys_actualizado_el' => $this->sys_actualizado_el,
             'sys_finalizado_el' => $this->sys_finalizado_el,
-            'nacional' => $this->nacional,
         ]);
 
         $query->andFilterWhere(['like', 'nombre', $this->nombre])
-            ->andFilterWhere(['like', 'tipo_caja', $this->tipo_caja]);
+            ->andFilterWhere(['like', 'tipo_caja', $this->tipo_caja])
+            ->andFilterWhere(['like', 'anho', $this->anho]);
 
         return $dataProvider;
     }

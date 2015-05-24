@@ -47,6 +47,7 @@ AppAsset::register($this);
                     'items' => [
                          ['label' => 'Balance general', 'url' => ['/site/balancegeneral']],
                          ['label' => 'Estado de resultados', 'url' => ['/site/edoresultados']],
+                         ['label' => 'Cajas', 'url' => ['/nombres-cajas/index']],
                          ['label' => 'Efectivos y sus equivalentes', 'url' => ['/a-efectivos-bancos/efectivosequivalentes']],
                          ['label' => 'Obligaciones Bancarias', 'url' => ['/aa-obligaciones-bancarias/index']],
                          ['label' => 'Inversiones', 'url' => ['cuentas-e-inversiones/index']],

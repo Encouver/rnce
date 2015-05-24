@@ -3,16 +3,16 @@
 namespace frontend\controllers;
 
 use Yii;
-use common\models\c\CuentasJjProviciones;
-use app\models\CuentasJjProvicionesSearch;
+use common\models\c\ActivosSysMetodosMedicion;
+use app\models\ActivosSysMetodosMedicionSearch;
 use common\components\BaseController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * CuentasJjProvicionesController implements the CRUD actions for CuentasJjProviciones model.
+ * ActivosSysMetodosMedicionController implements the CRUD actions for ActivosSysMetodosMedicion model.
  */
-class CuentasJjProvicionesController extends BaseController
+class ActivosSysMetodosMedicionController extends BaseController
 {
     public function behaviors()
     {
@@ -27,28 +27,22 @@ class CuentasJjProvicionesController extends BaseController
     }
 
     /**
-     * Lists all CuentasJjProviciones models.
+     * Lists all ActivosSysMetodosMedicion models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new CuentasJjProvicionesSearch();
-        
-        $searchModel->corriente = true;
-        $dataProvider_c = $searchModel->search(Yii::$app->request->queryParams);
-        $searchModel->corriente = false;
-        $dataProvider_nc = $searchModel->search(Yii::$app->request->queryParams);
-
+        $searchModel = new ActivosSysMetodosMedicionSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
-            'model' => $searchModel,
-            'dataProvider_c' => $dataProvider_c,
-            'dataProvider_nc' => $dataProvider_nc,
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
         ]);
     }
 
     /**
-     * Displays a single CuentasJjProviciones model.
+     * Displays a single ActivosSysMetodosMedicion model.
      * @param integer $id
      * @return mixed
      */
@@ -60,18 +54,16 @@ class CuentasJjProvicionesController extends BaseController
     }
 
     /**
-     * Creates a new CuentasJjProviciones model.
+     * Creates a new ActivosSysMetodosMedicion model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new CuentasJjProviciones();
+        $model = new ActivosSysMetodosMedicion();
 
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            $model->saldo_al_cierre = $model->saldo_p_anterior + $model->importe_provisionado_periodo + $model->aplicacion_amortizacion; 
-            $model->save();
-            return $this->redirect(['index']);
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -80,7 +72,7 @@ class CuentasJjProvicionesController extends BaseController
     }
 
     /**
-     * Updates an existing CuentasJjProviciones model.
+     * Updates an existing ActivosSysMetodosMedicion model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -89,10 +81,8 @@ class CuentasJjProvicionesController extends BaseController
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            $model->saldo_al_cierre = $model->saldo_p_anterior + $model->importe_provisionado_periodo + $model->aplicacion_amortizacion; 
-            $model->save();
-            return $this->redirect(['index']);
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -101,7 +91,7 @@ class CuentasJjProvicionesController extends BaseController
     }
 
     /**
-     * Deletes an existing CuentasJjProviciones model.
+     * Deletes an existing ActivosSysMetodosMedicion model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -114,15 +104,15 @@ class CuentasJjProvicionesController extends BaseController
     }
 
     /**
-     * Finds the CuentasJjProviciones model based on its primary key value.
+     * Finds the ActivosSysMetodosMedicion model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return CuentasJjProviciones the loaded model
+     * @return ActivosSysMetodosMedicion the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = CuentasJjProviciones::findOne($id)) !== null) {
+        if (($model = ActivosSysMetodosMedicion::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

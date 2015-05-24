@@ -4,13 +4,13 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\p\NombresCajas */
+/* @var $model common\models\c\ActivosSysMetodosMedicion */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Nombres Cajas'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Activos Sys Metodos Medicions'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="nombres-cajas-view">
+<div class="activos-sys-metodos-medicion-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -30,10 +30,9 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'nombre',
-            'nacional:boolean',
-            'tipo_caja',
-            'contratista_id',
-            'anho',
+            'descripcion',
+            'modelo_id',
+            'clasificacion_id',
             'creado_por',
             'actualizado_por',
             'sys_status:boolean',
