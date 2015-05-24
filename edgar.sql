@@ -796,3 +796,52 @@ COMMENT ON COLUMN nombres_cajas.sys_status IS 'Estatus interno del sistema';
 COMMENT ON COLUMN nombres_cajas.sys_creado_el IS 'Fecha de creación del registro.';
 COMMENT ON COLUMN nombres_cajas.sys_actualizado_el IS 'Fecha de última actualización del registro.';
 COMMENT ON COLUMN nombres_cajas.sys_finalizado_el IS 'Fecha de "eliminado" el registro.';
+
+
+
+
+CREATE TABLE cuentas.jj_proviciones
+(
+  id serial NOT NULL, -- Clave primaria
+  concepto character varying(255) NOT NULL, -- Tipo de pasivo laboral que tiene el contratista
+  saldo_p_anterior numeric(38,6) NOT NULL, -- Saldo del periodo anterior
+  importe_provisionado_periodo numeric(38,6) NOT NULL, -- Importe Provisionado del periodo
+  aplicacion_amortizacion numeric(38,6) NOT NULL, -- Aplicación o Amortizacion del periodo
+  saldo_al_cierre numeric(38,6) NOT NULL, -- Saldo al cierre del ejercicio economico, calculado por el sistema
+  corriente boolean NOT NULL DEFAULT true, -- Indica si el registro es corriente o no
+  contratista_id integer NOT NULL, -- Clave foranea al contratista
+  anho character varying(100) NOT NULL, -- Año contable y mes
+  creado_por integer, -- Clave foranea al usuario
+  actualizado_por integer, -- Clave foranea al usuario
+  sys_status boolean NOT NULL DEFAULT true, -- Estatus interno del sistema
+  sys_creado_el timestamp with time zone DEFAULT now(), -- Fecha de creación del registro.
+  sys_actualizado_el timestamp with time zone DEFAULT now(), -- Fecha de última actualización del registro.
+  sys_finalizado_el timestamp with time zone, -- Fecha de "eliminado" el registro.
+  CONSTRAINT jj_proviciones_pkey PRIMARY KEY (id),
+  CONSTRAINT jj_proviciones_contratista_id_fkey FOREIGN KEY (contratista_id)
+      REFERENCES contratistas (id) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE NO ACTION
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE cuentas.jj_proviciones
+  OWNER TO eureka;
+COMMENT ON TABLE cuentas.jj_proviciones
+  IS 'Tabla  pasivo laboral cuenta HH';
+COMMENT ON COLUMN cuentas.jj_proviciones.id IS 'Clave primaria';
+COMMENT ON COLUMN cuentas.jj_proviciones.concepto IS 'Tipo de pasivo laboral que tiene el contratista';
+COMMENT ON COLUMN cuentas.jj_proviciones.saldo_p_anterior IS 'Saldo del periodo anterior';
+COMMENT ON COLUMN cuentas.jj_proviciones.importe_provisionado_periodo IS 'Importe Provisionado del periodo';
+COMMENT ON COLUMN cuentas.jj_proviciones.aplicacion_amortizacion IS 'Aplicación o Amortizacion del periodo';
+COMMENT ON COLUMN cuentas.jj_proviciones.saldo_al_cierre IS 'Saldo al cierre del ejercicio economico, calculado por el sistema';
+COMMENT ON COLUMN cuentas.jj_proviciones.corriente IS 'Indica si el registro es corriente o no';
+COMMENT ON COLUMN cuentas.jj_proviciones.contratista_id IS 'Clave foranea al contratista';
+COMMENT ON COLUMN cuentas.jj_proviciones.anho IS 'Año contable y mes';
+COMMENT ON COLUMN cuentas.jj_proviciones.creado_por IS 'Clave foranea al usuario';
+COMMENT ON COLUMN cuentas.jj_proviciones.actualizado_por IS 'Clave foranea al usuario';
+COMMENT ON COLUMN cuentas.jj_proviciones.sys_status IS 'Estatus interno del sistema';
+COMMENT ON COLUMN cuentas.jj_proviciones.sys_creado_el IS 'Fecha de creación del registro.';
+COMMENT ON COLUMN cuentas.jj_proviciones.sys_actualizado_el IS 'Fecha de última actualización del registro.';
+COMMENT ON COLUMN cuentas.jj_proviciones.sys_finalizado_el IS 'Fecha de "eliminado" el registro.';
+
