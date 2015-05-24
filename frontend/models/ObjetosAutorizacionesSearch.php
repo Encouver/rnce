@@ -18,8 +18,8 @@ class ObjetosAutorizacionesSearch extends ObjetosAutorizaciones
     public function rules()
     {
         return [
-            [['id', 'objeto_empresa_id', 'domicilio_fabricante_id', 'origen_producto_id', 'idioma_redacion_id', 'persona_juridica_id'], 'integer'],
-            [['productos', 'marcas', 'numero_identificacion', 'nombre_interprete', 'fecha_emision', 'fecha_vencimiento', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el', 'tipo_objeto'], 'safe'],
+            [['id', 'domicilio_fabricante_id','contratista_id' ,'origen_producto_id', 'idioma_redacion_id', 'creado_por', 'actualizado_por', 'natural_juridica_id'], 'integer'],
+            [['productos', 'marcas', 'numero_identificacion', 'nombre_interprete', 'fecha_emision', 'fecha_vencimiento', 'tipo_objeto', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['sello_firma', 'documento_traducido', 'sys_status'], 'boolean'],
         ];
     }
@@ -51,25 +51,27 @@ class ObjetosAutorizacionesSearch extends ObjetosAutorizaciones
         $this->load($params);
 
         if (!$this->validate()) {
-            // uncomment the following line if you do not want to any records when validation fails
+            // uncomment the following line if you do not want to return any records when validation fails
             // $query->where('0=1');
             return $dataProvider;
         }
 
         $query->andFilterWhere([
             'id' => $this->id,
-            'objeto_empresa_id' => $this->objeto_empresa_id,
             'domicilio_fabricante_id' => $this->domicilio_fabricante_id,
             'origen_producto_id' => $this->origen_producto_id,
             'sello_firma' => $this->sello_firma,
             'idioma_redacion_id' => $this->idioma_redacion_id,
             'documento_traducido' => $this->documento_traducido,
             'fecha_emision' => $this->fecha_emision,
+            'creado_por' => $this->creado_por,
+            'actualizado_por' => $this->actualizado_por,
             'sys_status' => $this->sys_status,
             'sys_creado_el' => $this->sys_creado_el,
             'sys_actualizado_el' => $this->sys_actualizado_el,
             'sys_finalizado_el' => $this->sys_finalizado_el,
-            'persona_juridica_id' => $this->persona_juridica_id,
+            'natural_juridica_id' => $this->natural_juridica_id,
+            'contratista_id' => Yii::$app->user->identity->contratista_id,
         ]);
 
         $query->andFilterWhere(['like', 'productos', $this->productos])

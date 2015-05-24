@@ -4,11 +4,12 @@ namespace frontend\controllers;
 
 use Yii;
 use common\models\p\ObjetosEmpresas;
+use common\models\p\ObjetosAutorizaciones;
+use app\models\ObjetosAutorizacionesSearch;
 use common\models\p\User;
 use common\models\p\Model;
 use common\models\p\SysNaturalesJuridicas;
 use common\models\p\PersonasJuridicas;
-use common\models\p\ObjetosAutorizaciones;
 use common\models\p\RelacionesObjetos;
 use app\models\ObjetosEmpresasSearch;
 use common\components\BaseController;
@@ -39,11 +40,15 @@ class ObjetosEmpresasController extends BaseController
     public function actionIndex()
     {
         $searchModel = new ObjetosEmpresasSearch();
+        $searchModel->contratista=true;
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+        $searchModelAutorizado = new ObjetosAutorizacionesSearch();
+        $dataProviderAutorizado = $searchModelAutorizado->search(Yii::$app->request->queryParams);
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'searchModelAutorizado' => $searchModelAutorizado,
+            'dataProviderAutorizado' => $dataProviderAutorizado,
         ]);
     }
 
@@ -66,15 +71,49 @@ class ObjetosEmpresasController extends BaseController
      */
     public function actionCreate()
     {
+       
         $model = new ObjetosEmpresas();
+        if(isset($_POST['objeto'])){
+             $valores=$_POST['objeto'];
+            $cantidad= count($valores);
+            
+             for ($i = 0; $i < $cantidad; $i++) {
+                  $objeto= ObjetosEmpresas::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'contratista'=>true,'objeto_empresa'=>$valores[$i]]);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                    if(isset($objeto)){
+                    Yii::$app->session->setFlash('error','Usuario ya posee '.$valores[$i].' asociada');
+                         return $this->render('create', [
+                            'model' => $model,
+                            ]);
+                            
+                     }else{
+                         $objeto_empresa= new ObjetosEmpresas();
+                         $objeto_empresa->contratista=true;
+                         $objeto_empresa->contratista_id = Yii::$app->user->identity->contratista_id;
+                         $objeto_empresa->objeto_empresa=$valores[$i];
+                         if(!$objeto_empresa->save()){
+                               Yii::$app->session->setFlash('error','Eror al cargar '.$valores[$i]);
+                         return $this->render('create', [
+                            'model' => $model,
+                            ]);
+                         break;
+                         }
+                     }
+             }
+             return $this->redirect(['index']);
+            }else{
+                 return $this->render('create', [
+                'model' => $model,
+            ]);
+            }
+     
+        /*if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
             ]);
-        }
+        }*/
     }
     
       public function actionCrearobjeto()

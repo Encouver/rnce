@@ -17,15 +17,13 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'id') ?>
 
-    <?= $form->field($model, 'objeto_empresa_id') ?>
-
     <?= $form->field($model, 'domicilio_fabricante_id') ?>
 
     <?= $form->field($model, 'productos') ?>
 
     <?= $form->field($model, 'marcas') ?>
 
-    <?php // echo $form->field($model, 'origen_producto_id') ?>
+    <?= $form->field($model, 'origen_producto_id') ?>
 
     <?php // echo $form->field($model, 'sello_firma')->checkbox() ?>
 
@@ -41,6 +39,12 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'fecha_vencimiento') ?>
 
+    <?php // echo $form->field($model, 'tipo_objeto') ?>
+
+    <?php // echo $form->field($model, 'creado_por') ?>
+
+    <?php // echo $form->field($model, 'actualizado_por') ?>
+
     <?php // echo $form->field($model, 'sys_status')->checkbox() ?>
 
     <?php // echo $form->field($model, 'sys_creado_el') ?>
@@ -49,9 +53,7 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'sys_finalizado_el') ?>
 
-    <?php // echo $form->field($model, 'persona_juridica_id') ?>
-
-    <?php // echo $form->field($model, 'tipo_objeto') ?>
+    <?php // echo $form->field($model, 'natural_juridica_id') ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>

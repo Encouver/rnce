@@ -18,9 +18,9 @@ class ObjetosEmpresasSearch extends ObjetosEmpresas
     public function rules()
     {
         return [
-            [['id', 'empresa_relacionada_id', 'contratista_id'], 'integer'],
-            [['contratista', 'sys_status', 'productor', 'fabricante', 'fabricante_importado', 'distribuidor', 'distribuidor_autorizado', 'distribuidor_importador', 'dist_importador_aut', 'servicio_basico', 'servicio_profesional', 'servicio_comercial', 'ser_comercial_aut', 'obra'], 'boolean'],
-            [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
+            [['id', 'empresa_relacionada_id', 'contratista_id', 'creado_por', 'actualizado_por'], 'integer'],
+            [['contratista', 'sys_status'], 'boolean'],
+            [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el', 'objeto_empresa'], 'safe'],
         ];
     }
 
@@ -51,7 +51,7 @@ class ObjetosEmpresasSearch extends ObjetosEmpresas
         $this->load($params);
 
         if (!$this->validate()) {
-            // uncomment the following line if you do not want to any records when validation fails
+            // uncomment the following line if you do not want to return any records when validation fails
             // $query->where('0=1');
             return $dataProvider;
         }
@@ -60,24 +60,16 @@ class ObjetosEmpresasSearch extends ObjetosEmpresas
             'id' => $this->id,
             'contratista' => $this->contratista,
             'empresa_relacionada_id' => $this->empresa_relacionada_id,
+            'contratista_id' => Yii::$app->user->identity->contratista_id,
+            'creado_por' => $this->creado_por,
+            'actualizado_por' => $this->actualizado_por,
             'sys_status' => $this->sys_status,
             'sys_creado_el' => $this->sys_creado_el,
             'sys_actualizado_el' => $this->sys_actualizado_el,
             'sys_finalizado_el' => $this->sys_finalizado_el,
-            'productor' => $this->productor,
-            'fabricante' => $this->fabricante,
-            'fabricante_importado' => $this->fabricante_importado,
-            'distribuidor' => $this->distribuidor,
-            'distribuidor_autorizado' => $this->distribuidor_autorizado,
-            'distribuidor_importador' => $this->distribuidor_importador,
-            'dist_importador_aut' => $this->dist_importador_aut,
-            'servicio_basico' => $this->servicio_basico,
-            'servicio_profesional' => $this->servicio_profesional,
-            'servicio_comercial' => $this->servicio_comercial,
-            'ser_comercial_aut' => $this->ser_comercial_aut,
-            'obra' => $this->obra,
-            'contratista_id' => $this->contratista_id,
         ]);
+
+        $query->andFilterWhere(['like', 'objeto_empresa', $this->objeto_empresa]);
 
         return $dataProvider;
     }

@@ -29,7 +29,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'objeto_empresa_id',
             'domicilio_fabricante_id',
             'productos:ntext',
             'marcas:ntext',
@@ -41,12 +40,14 @@ $this->params['breadcrumbs'][] = $this->title;
             'nombre_interprete',
             'fecha_emision',
             'fecha_vencimiento',
+            'tipo_objeto',
+            'creado_por',
+            'actualizado_por',
             'sys_status:boolean',
             'sys_creado_el',
             'sys_actualizado_el',
             'sys_finalizado_el',
-            'persona_juridica_id',
-            'tipo_objeto',
+            'natural_juridica_id',
         ],
     ]) ?>
 

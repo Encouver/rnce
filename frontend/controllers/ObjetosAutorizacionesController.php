@@ -16,14 +16,14 @@ class ObjetosAutorizacionesController extends BaseController
 {
     public function behaviors()
     {
-        return array_merge(parent::behaviors(),[
+        return [
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['post'],
                 ],
             ],
-        ]);
+        ];
     }
 
     /**
@@ -62,8 +62,17 @@ class ObjetosAutorizacionesController extends BaseController
     {
         $model = new ObjetosAutorizaciones();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            $model->contratista_id= Yii::$app->user->identity->contratista_id;
+            if($model->save()){
+                return $this->redirect(['objetos-empresas/index']);
+            }else{
+                Yii::$app->session->setFlash('error','error en la carga del objeto autorizado');
+                 return $this->render('create', [
+                'model' => $model,
+            ]);
+            }
+            
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -82,7 +91,7 @@ class ObjetosAutorizacionesController extends BaseController
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['objetos-empresas/index']);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -100,7 +109,7 @@ class ObjetosAutorizacionesController extends BaseController
     {
         $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect(['objetos-empresas/index']);
     }
 
     /**
