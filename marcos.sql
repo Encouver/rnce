@@ -1323,3 +1323,68 @@ COMMENT ON COLUMN activos.bienes.proc_productivo IS 'Vinculado con el proceso pr
 COMMENT ON COLUMN activos.bienes.directo IS 'Directo o indirecto.';
 COMMENT ON COLUMN activos.bienes.proc_ventas IS 'Vinculado con el proceso de ventas.';
 COMMENT ON COLUMN activos.bienes.metodo_medicion_id IS 'Clave foránea a la tabla sys_metodos_medicion.';
+
+
+
+
+
+
+
+
+-- Table: cuentas.d1_islr_pagado_anticipo
+
+DROP TABLE cuentas.d1_islr_pagado_anticipo;
+
+CREATE TABLE cuentas.d1_islr_pagado_anticipo
+(
+  id serial NOT NULL, -- Clave primaria
+  islr_pagado_id integer NOT NULL, -- Islr pagado por anticipado
+  nro_documento character varying, -- Numero de documento del islr
+  saldo_ph numeric(38,6) NOT NULL, -- Saldo del periodo anterior Historico
+  importe_pagado_ejer_econo numeric(38,6) NOT NULL, -- Importe pagado en el ejercicio economico
+  importe_aplicado_ejer_econo numeric(38,6) NOT NULL, -- Importe aplicado en el ejercicio economico
+  saldo_cierre numeric(38,6), -- Saldo al cierre del ejercicio economico.
+  monto numeric(38,6), -- Monto del importe cedido en el ejercicio economico
+  contratista_id integer NOT NULL, -- Clave foranea al contratista
+  anho character varying(100) NOT NULL, -- Año contable y mes
+  creado_por integer, -- Clave foranea al usuario
+  actualizado_por integer, -- Clave foranea al usuario
+  sys_status boolean NOT NULL DEFAULT true, -- Estatus interno del sistema
+  sys_creado_el timestamp with time zone DEFAULT now(), -- Fecha de creación del registro.
+  sys_actualizado_el timestamp with time zone DEFAULT now(), -- Fecha de última actualización del registro.
+  sys_finalizado_el timestamp with time zone, -- Fecha de "eliminado" el registro.
+  CONSTRAINT d1_islr_pagado_anticipo_pkey PRIMARY KEY (id),
+  CONSTRAINT d1_islr_pagado_anticipo_contratista_id_fkey FOREIGN KEY (contratista_id)
+  REFERENCES contratistas (id) MATCH SIMPLE
+  ON UPDATE CASCADE ON DELETE NO ACTION
+)
+WITH (
+OIDS=FALSE
+);
+ALTER TABLE cuentas.d1_islr_pagado_anticipo
+OWNER TO eureka;
+COMMENT ON TABLE cuentas.d1_islr_pagado_anticipo
+IS 'Tabla que almacena el islr pagado por anticipado';
+COMMENT ON COLUMN cuentas.d1_islr_pagado_anticipo.id IS 'Clave primaria';
+COMMENT ON COLUMN cuentas.d1_islr_pagado_anticipo.islr_pagado_id IS 'Clave foránea a la tabla conceptos';
+COMMENT ON COLUMN cuentas.d1_islr_pagado_anticipo.nro_documento IS 'Numero de documento del islr';
+COMMENT ON COLUMN cuentas.d1_islr_pagado_anticipo.saldo_ph IS 'Saldo del periodo anterior Historico';
+COMMENT ON COLUMN cuentas.d1_islr_pagado_anticipo.importe_pagado_ejer_econo IS 'Importe pagado en el ejercicio economico';
+COMMENT ON COLUMN cuentas.d1_islr_pagado_anticipo.importe_aplicado_ejer_econo IS 'Importe aplicado en el ejercicio economico';
+COMMENT ON COLUMN cuentas.d1_islr_pagado_anticipo.saldo_cierre IS 'Saldo al cierre del ejercicio economico.';
+COMMENT ON COLUMN cuentas.d1_islr_pagado_anticipo.monto IS 'Monto del importe cedido en el ejercicio economico';
+COMMENT ON COLUMN cuentas.d1_islr_pagado_anticipo.contratista_id IS 'Clave foranea al contratista';
+COMMENT ON COLUMN cuentas.d1_islr_pagado_anticipo.anho IS 'Año contable y mes';
+COMMENT ON COLUMN cuentas.d1_islr_pagado_anticipo.creado_por IS 'Clave foranea al usuario';
+COMMENT ON COLUMN cuentas.d1_islr_pagado_anticipo.actualizado_por IS 'Clave foranea al usuario';
+COMMENT ON COLUMN cuentas.d1_islr_pagado_anticipo.sys_status IS 'Estatus interno del sistema';
+COMMENT ON COLUMN cuentas.d1_islr_pagado_anticipo.sys_creado_el IS 'Fecha de creación del registro.';
+COMMENT ON COLUMN cuentas.d1_islr_pagado_anticipo.sys_actualizado_el IS 'Fecha de última actualización del registro.';
+COMMENT ON COLUMN cuentas.d1_islr_pagado_anticipo.sys_finalizado_el IS 'Fecha de "eliminado" el registro.';
+
+
+
+ALTER TABLE cuentas.d1_islr_pagado_anticipo
+ADD FOREIGN KEY (islr_pagado_id) REFERENCES cuentas.conceptos (id) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE cuentas.d1_islr_pagado_anticipo
+ADD UNIQUE (islr_pagado_id, contratista_id);

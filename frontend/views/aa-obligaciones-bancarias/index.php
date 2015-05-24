@@ -62,11 +62,11 @@ $this->params['breadcrumbs'][] = $this->title;
 $columns =
     [
         ['class'=>'kartik\grid\SerialColumn', 'order'=>DynaGrid::ORDER_FIX_LEFT],
-        [
+/*        [
             'class'=>'kartik\grid\BooleanColumn',
             'attribute'=>'corriente',
             'vAlign'=>'middle',
-        ],
+        ],*/
         [
             'attribute'=>'banco_id',
             //'header'=>'Banco',
