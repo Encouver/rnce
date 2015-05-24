@@ -34,13 +34,32 @@ class ActivosSysMetodosMedicion extends \common\components\BaseActiveRecord
         return 'activos.sys_metodos_medicion';
     }
 
+    public $enero;
+    public $febrero;
+    public $marzo;
+    public $abril;
+    public $mayo;
+    public $junio;
+    public $julio;
+    public $agosto;
+    public $septiembre;
+    public $octubre;
+    public $noviembre;
+    public $diciembre;
+
+    public $desde;
+    public $hasta;
+
+
     /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['nombre', 'modelo_id', 'clasificacion_id'], 'required'],
+            [['nombre', 'modelo_id', 'clasificacion_id'], 'required', 'on' => 'base'],
+            [['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'], 'required', 'on' => 'capas'],
+            [['desde','hasta'], 'required', 'on' => 'promedio'],
             [['modelo_id', 'clasificacion_id', 'creado_por', 'actualizado_por'], 'integer'],
             [['sys_status'], 'boolean'],
             [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
