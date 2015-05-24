@@ -18,10 +18,10 @@ class AccionesSearch extends Acciones
     public function rules()
     {
         return [
-            [['id', 'numero_comun', 'numero_preferencial'], 'integer'],
-            [['valor_comun', 'valor_preferencial','capital'], 'number'],
-            [['sys_status', 'suscrito'], 'boolean'],
-            [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el', 'tipo_accion'], 'safe'],
+            [['id', 'numero_comun', 'numero_preferencial', 'documento_registrado_id', 'contratista_id', 'creado_por', 'actualizado_por'], 'integer'],
+            [['valor_comun', 'valor_preferencial', 'capital'], 'number'],
+            [['tipo_accion', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
+            [['suscrito', 'sys_status'], 'boolean'],
         ];
     }
 
@@ -63,13 +63,16 @@ class AccionesSearch extends Acciones
             'numero_preferencial' => $this->numero_preferencial,
             'valor_comun' => $this->valor_comun,
             'valor_preferencial' => $this->valor_preferencial,
-            'capital' => $this->capital,
+            'suscrito' => $this->suscrito,
+            'documento_registrado_id' => $this->documento_registrado_id,
+            'contratista_id' => Yii::$app->user->identity->contratista_id,
+            'creado_por' => $this->creado_por,
+            'actualizado_por' => $this->actualizado_por,
             'sys_status' => $this->sys_status,
             'sys_creado_el' => $this->sys_creado_el,
             'sys_actualizado_el' => $this->sys_actualizado_el,
             'sys_finalizado_el' => $this->sys_finalizado_el,
-            'suscrito' => $this->suscrito,
- 
+            'capital' => $this->capital,
         ]);
 
         $query->andFilterWhere(['like', 'tipo_accion', $this->tipo_accion]);

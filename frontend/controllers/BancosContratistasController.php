@@ -65,9 +65,20 @@ class BancosContratistasController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
             
-            $model->contratista_id=2;
-            $model->save();
-            return $this->redirect(['view', 'id' => $model->id]);
+            $model->contratista_id=Yii::$app->user->identity->id;
+            if($model->tipo_nacionalidad=="EXTRANJERA"){
+                $model->tipo_moneda=null;
+                $model->tipo_cuenta=null;
+            }
+            if($model->save()){
+                 return $this->redirect(['index']);
+            }else{
+                Yii::$app->session->setFlash('error','Error en la carga del banco');
+                return $this->render('create', [
+                'model' => $model,
+            ]);
+            }
+           
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -76,51 +87,7 @@ class BancosContratistasController extends Controller
     }
     
     
-       public function actionCrearbanco()
-    {
-           
-            return $this->render('_bancos_contratistas',['banco_contratista' => (empty($banco_contratista)) ? [new BancosContratistas] : $banco_contratista]);
-    }
     
-    
-     public function actionBancocontratista()
-   {
-          $usuario= \common\models\p\User::findOne(Yii::$app->user->identity->id);
-        $banco_contratista = [new BancosContratistas];
-
-           $banco_contratista = Model::createMultiple(BancosContratistas::classname());
-            Model::loadMultiple($banco_contratista, Yii::$app->request->post());
-
-
-           $transaction = \Yii::$app->db->beginTransaction();
-           try {
-
-
-
-                foreach ($banco_contratista as $carga_banco) {
-                            $carga_banco->contratista_id = $usuario->contratista_id;
-                            $carga_banco->save();
-
-                            if (! ($flag = $carga_banco->save(false))) {
-
-                                $transaction->rollBack();
-                                return "error en la carga de de datos";
-                                break;
-                            }
-                        }
-
-
-                        $transaction->commit();
-                        return "Datos guardados con exito";
-
-           } catch (Exception $e) {
-               $transaction->rollBack();
-           }
-
-
-
-   }
-
 
     /**
      * Updates an existing BancosContratistas model.
@@ -132,8 +99,19 @@ class BancosContratistasController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+           if($model->tipo_nacionalidad=="EXTRANJERA"){
+                $model->tipo_moneda=null;
+                $model->tipo_cuenta=null;
+            }
+            if($model->save()){
+                 return $this->redirect(['index']);
+            }else{
+                Yii::$app->session->setFlash('error','Error en la carga del banco');
+                return $this->render('update', [
+                'model' => $model,
+            ]);
+            }
         } else {
             return $this->render('update', [
                 'model' => $model,

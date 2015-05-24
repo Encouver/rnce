@@ -15,30 +15,41 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <p>
-        <?= Html::a(Yii::t('app', 'Create Bancos Contratistas'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
+   
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+        //'filterModel' => $searchModel,
+         'summary'=>"",
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+           // ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'banco_id',
-            'contratista_id',
+            //'id',
+            [
+                'attribute'=>'banco_id',
+                'label'=>'Banco',
+                'value'=>'banco.nombre'
+            ],
             'num_cuenta',
+            [
+                'attribute'=>'banco_id',
+                'label'=>'Pais',
+                'value'=>'banco.sysPais.nombre'
+            ],
+            
             'tipo_moneda',
-            // 'tipo_cuenta',
+            'tipo_cuenta',
+            'estatus_cuenta',
             // 'estatus_cuenta',
             // 'sys_status:boolean',
             // 'sys_creado_el',
             // 'sys_actualizado_el',
             // 'sys_finalizado_el',
 
-            ['class' => 'yii\grid\ActionColumn'],
+             ['class' => 'yii\grid\ActionColumn', 'template' => '{update}{delete}'],
         ],
     ]); ?>
+ <p>
+        <?= Html::a(Yii::t('app', 'Crear Bancos Contratistas'), ['create'], ['class' => 'btn btn-success']) ?>
+    </p>
 
 </div>

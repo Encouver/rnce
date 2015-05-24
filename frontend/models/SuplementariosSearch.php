@@ -18,8 +18,8 @@ class SuplementariosSearch extends Suplementarios
     public function rules()
     {
         return [
-            [['id', 'numero', 'creado_por', 'actualizado_por', 'documento_registrado_id', 'contratista_id'], 'integer'],
-            [['valor'], 'number'],
+            [['id', 'numero', 'documento_registrado_id', 'contratista_id', 'creado_por', 'actualizado_por'], 'integer'],
+            [['valor', 'capital'], 'number'],
             [['tipo_suplementario', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['suscrito', 'sys_status'], 'boolean'],
         ];
@@ -62,14 +62,15 @@ class SuplementariosSearch extends Suplementarios
             'numero' => $this->numero,
             'valor' => $this->valor,
             'suscrito' => $this->suscrito,
+            'documento_registrado_id' => $this->documento_registrado_id,
+            'contratista_id' => Yii::$app->user->identity->contratista_id,
             'creado_por' => $this->creado_por,
             'actualizado_por' => $this->actualizado_por,
             'sys_status' => $this->sys_status,
             'sys_creado_el' => $this->sys_creado_el,
             'sys_actualizado_el' => $this->sys_actualizado_el,
             'sys_finalizado_el' => $this->sys_finalizado_el,
-            'documento_registrado_id' => $this->documento_registrado_id,
-            'contratista_id' => $this->contratista_id,
+            'capital' => $this->capital,
         ]);
 
         $query->andFilterWhere(['like', 'tipo_suplementario', $this->tipo_suplementario]);

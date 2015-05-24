@@ -33,14 +33,15 @@ $this->params['breadcrumbs'][] = $this->title;
             'valor',
             'tipo_suplementario',
             'suscrito:boolean',
+            'documento_registrado_id',
+            'contratista_id',
             'creado_por',
             'actualizado_por',
             'sys_status:boolean',
             'sys_creado_el',
             'sys_actualizado_el',
             'sys_finalizado_el',
-            'documento_registrado_id',
-            'contratista_id',
+            'capital',
         ],
     ]) ?>
 

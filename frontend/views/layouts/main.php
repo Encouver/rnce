@@ -80,7 +80,7 @@ AppAsset::register($this);
                          ['label' => 'Direccion Principal', 'url' => ['/domicilios/index']],
                          ['label' => 'Informacion de contacto', 'url' => ['/contratistas-contactos/crearcontacto']],
                          ['label' => 'Sucursales', 'url' => ['/sucursales/crearsucursal']],
-                         ['label' => 'Bancos', 'url' => ['/bancos-contratistas/crearbanco']],
+                         ['label' => 'Bancos', 'url' => ['/bancos-contratistas/index']],
                         
                          ['label' => 'Objeto empresa', 'url' => ['/objetos-empresas/crearobjeto']],
                          ['label' => 'Accionistas Representante Legal o Junta Directiva', 'url' => ['/accionistas-otros/crearaccionistaotro']],

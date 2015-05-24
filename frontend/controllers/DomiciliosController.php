@@ -159,11 +159,11 @@ class DomiciliosController extends Controller
     {
         $model = $this->findModel($id);
         $direccion = Direcciones::findOne($model->direccion_id);
-    
-        $model->fiscal=true;
-        if($direccion->referencia!=null){
+        if($model->fiscal==null){
             $direccion->scenario='principal';
             $model->fiscal=false;
+        }else{
+            $model->fiscal=true;
         }
         if ($model->load(Yii::$app->request->post()) && $direccion->load(Yii::$app->request->post())) {
             if($direccion->save()){
