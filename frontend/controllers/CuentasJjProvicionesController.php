@@ -33,11 +33,17 @@ class CuentasJjProvicionesController extends BaseController
     public function actionIndex()
     {
         $searchModel = new CuentasJjProvicionesSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        
+        $searchModel->corriente = true;
+        $dataProvider_c = $searchModel->search(Yii::$app->request->queryParams);
+        $searchModel->corriente = false;
+        $dataProvider_nc = $searchModel->search(Yii::$app->request->queryParams);
+
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'model' => $searchModel,
+            'dataProvider_c' => $dataProvider_c,
+            'dataProvider_nc' => $dataProvider_nc,
         ]);
     }
 
@@ -62,8 +68,10 @@ class CuentasJjProvicionesController extends BaseController
     {
         $model = new CuentasJjProviciones();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            $model->saldo_al_cierre = $model->saldo_p_anterior + $model->importe_provisionado_periodo + $model->aplicacion_amortizacion; 
+            $model->save();
+            return $this->redirect(['index']);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -81,8 +89,10 @@ class CuentasJjProvicionesController extends BaseController
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            $model->saldo_al_cierre = $model->saldo_p_anterior + $model->importe_provisionado_periodo + $model->aplicacion_amortizacion; 
+            $model->save();
+            return $this->redirect(['index']);
         } else {
             return $this->render('update', [
                 'model' => $model,

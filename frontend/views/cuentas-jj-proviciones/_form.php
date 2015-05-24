@@ -12,8 +12,6 @@ use kartik\builder\Form;
 <div class="cuentas-jj-proviciones-form">
 <?php
 
-
-
     $form = ActiveForm::begin(['type'=>ActiveForm::TYPE_VERTICAL]);
     echo Form::widget([
         'model'=>$model,

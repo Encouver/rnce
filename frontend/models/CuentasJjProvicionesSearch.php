@@ -18,8 +18,8 @@ class CuentasJjProvicionesSearch extends CuentasJjProviciones
     public function rules()
     {
         return [
-            [['id', 'contratista_id', 'creado_por', 'actualizado_por'], 'integer'],
-            [['concepto_id', 'anho', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
+            [['id', 'concepto_id', 'contratista_id', 'creado_por', 'actualizado_por'], 'integer'],
+            [['anho', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el', 'otro_nombre'], 'safe'],
             [['saldo_p_anterior', 'importe_provisionado_periodo', 'aplicacion_amortizacion', 'saldo_al_cierre'], 'number'],
             [['corriente', 'sys_status'], 'boolean'],
         ];
@@ -71,9 +71,10 @@ class CuentasJjProvicionesSearch extends CuentasJjProviciones
             'sys_creado_el' => $this->sys_creado_el,
             'sys_actualizado_el' => $this->sys_actualizado_el,
             'sys_finalizado_el' => $this->sys_finalizado_el,
+            'otro_nombre' => $this->otro_nombre,
         ]);
 
-        $query->andFilterWhere(['like', 'concepto_id', $this->concepto])
+        $query->andFilterWhere(['like', 'concepto_id', $this->concepto_id])
             ->andFilterWhere(['like', 'anho', $this->anho]);
 
         return $dataProvider;
