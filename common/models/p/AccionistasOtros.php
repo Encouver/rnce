@@ -49,7 +49,7 @@ class AccionistasOtros extends \common\components\BaseActiveRecord
     public function rules()
     {
         return [
-            [['contratista_id', 'natural_juridica_id', 'accionista', 'junta_directiva', 'rep_legal', 'tipo_obligacion'], 'required'],
+            [['contratista_id', 'natural_juridica_id', 'accionista', 'junta_directiva', 'rep_legal', 'tipo_obligacion','documento_registrado_id'], 'required'],
             [['contratista_id', 'natural_juridica_id', 'documento_registrado_id', 'empresa_fusionada_id'], 'integer'],
             [['porcentaje_accionario', 'valor_compra'], 'number'],
             [['fecha', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el', 'repr_legal_vigencia'], 'safe'],

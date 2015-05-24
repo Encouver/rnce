@@ -50,7 +50,6 @@ ALTER TABLE objetos_empresas DROP COLUMN fabricante_importado;
 ALTER TABLE objetos_empresas DROP COLUMN distribuidor;
 ALTER TABLE objetos_empresas DROP COLUMN ser_comercial_aut;
 ALTER TABLE objetos_empresas DROP COLUMN distribuidor_autorizado;
-ALTER TABLE objetos_empresas DROP COLUMN ser_comercial_aut;
 ALTER TABLE objetos_empresas ADD COLUMN objeto_empresa tipo_objeto_empresa;
 ALTER TABLE objetos_empresas ALTER COLUMN objeto_empresa SET NOT NULL;
 COMMENT ON COLUMN objetos_empresas.objeto_empresa IS 'Tipo objeto empresa puede ser PRODUCTOR, FABRICANTE, FABRICANTE IMPORTADOR, DISTRIBUIDOR, DISTRIBUIDOR IMPORTADOR, SERVICIOS BASICOS, SERVICIOS PROFESIONALES, SERVICIOS COMERCIALES , OBRAS';
@@ -60,11 +59,6 @@ COMMENT ON COLUMN objetos_empresas.objeto_empresa IS 'Tipo objeto empresa puede 
 ALTER TABLE personas_juridicas ADD COLUMN sys_pais_id integer;
 COMMENT ON COLUMN personas_juridicas.sys_pais_id IS 'Clave foranea a la tabla paises en caso de ser de nacionalidad extranjera';
 
-
-ALTER TABLE personas_juridicas
-  ADD CONSTRAINT personas_juridicas_rif_fkey FOREIGN KEY (rif)
-      REFERENCES sys_naturales_juridicas (rif) MATCH SIMPLE
-      ON UPDATE CASCADE ON DELETE NO ACTION;
 
 
 ALTER TABLE objetos_autorizaciones DROP COLUMN persona_juridica_id;
@@ -86,4 +80,16 @@ COMMENT ON COLUMN objetos_autorizaciones.contratista_id IS 'clave foranea a la t
 ALTER TABLE objetos_autorizaciones
   ADD CONSTRAINT objetos_autorizaciones_contratista_id_fkey FOREIGN KEY (contratista_id)
       REFERENCES contratistas (id) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE NO ACTION;
+
+
+
+
+-----24 mayo 05:21---
+
+ALTER TABLE accionistas_otros ALTER COLUMN documento_registrado_id SET NOT NULL;
+
+ALTER TABLE personas_juridicas
+  ADD CONSTRAINT personas_juridicas_sys_pais_id_fkey FOREIGN KEY (sys_pais_id)
+      REFERENCES sys_paises (id) MATCH SIMPLE
       ON UPDATE CASCADE ON DELETE NO ACTION;
