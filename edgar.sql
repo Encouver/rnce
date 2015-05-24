@@ -1015,3 +1015,17 @@ INSERT INTO conceptos VALUES (12, 'Otros', NULL, NULL, NULL, true, '2015-05-24 1
 
 SELECT pg_catalog.setval('hh_concepto_id_seq', 12, true);
 
+
+
+ALTER TABLE cuentas.d1_d2_beneficiario
+   ADD COLUMN cuenta_id integer;
+COMMENT ON COLUMN cuentas.d1_d2_beneficiario.cuenta_id
+  IS 'Identificador del registro que indica el beneficiario';
+
+  
+ALTER TABLE cuentas.d1_d2_beneficiario
+   ADD COLUMN cuenta character varying(50);
+COMMENT ON COLUMN cuentas.d1_d2_beneficiario.cuenta
+  IS 'Campo que indica a que cuenta pertenece el registro';
+
+
