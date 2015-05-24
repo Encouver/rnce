@@ -58,7 +58,7 @@ class DenominacionesComercialesSearch extends DenominacionesComerciales
 
         $query->andFilterWhere([
             'id' => $this->id,
-            'contratista_id' => $this->contratista_id,
+            'contratista_id' => Yii::$app->user->identity->contratista_id,
             'sys_status' => $this->sys_status,
             'sys_creado_el' => $this->sys_creado_el,
             'sys_actualizado_el' => $this->sys_actualizado_el,

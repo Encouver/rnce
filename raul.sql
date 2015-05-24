@@ -24,4 +24,10 @@ ALTER TABLE personas_naturales ALTER COLUMN segundo_apellido DROP NOT NULL;
 ALTER TABLE "user"
   ADD CONSTRAINT user_contratista_id_fkey FOREIGN KEY (contratista_id)
       REFERENCES contratistas (id) MATCH SIMPLE
-      ON UPDATE CASCADE ON DELETE CASCADE;
+      ON UPDATE CASCADE ON DELETE NO ACTION;
+
+
+-- 24 mayo 00:07 am ---
+
+ALTER TABLE bancos_contratistas ALTER COLUMN tipo_moneda Drop NOT NULL;
+ALTER TABLE bancos_contratistas ALTER COLUMN tipo_cuenta Drop NOT NULL;

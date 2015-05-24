@@ -22,6 +22,8 @@ use yii\helpers\ArrayHelper;
  * @property boolean $propio
  * @property integer $origen_id
  * @property boolean $nacional
+ * @property integer $factura_id
+ * @property integer $documento_registrado_id
  * @property boolean $carga_completa
  * @property integer $creado_por
  * @property integer $actualizado_por
@@ -33,6 +35,8 @@ use yii\helpers\ArrayHelper;
  * @property ActivosActivosBiologicos $activosActivosBiologicos
  * @property ActivosActivosIntangibles $activosActivosIntangibles
  * @property ActivosAvaluos[] $activosAvaluos
+ * @property ActivosDocumentosRegistrados $documentoRegistrado
+ * @property ActivosFacturas $factura
  * @property ActivosSysOrigenesBienes $origen
  * @property ActivosSysTiposBienes $sysTipoBien
  * @property Contratistas $contratista
@@ -40,9 +44,7 @@ use yii\helpers\ArrayHelper;
  * @property ActivosDatosImportaciones $activosDatosImportaciones
  * @property ActivosDepreciacionesAmortizaciones[] $activosDepreciacionesAmortizaciones
  * @property ActivosDeterioros[] $activosDeterioros
- * @property ActivosDocumentosRegistrados[] $activosDocumentosRegistrados
  * @property ActivosFabricacionesMuebles $activosFabricacionesMuebles
- * @property ActivosFacturas[] $activosFacturas
  * @property ActivosInmuebles $activosInmuebles
  * @property ActivosMediciones[] $activosMediciones
  * @property ActivosMejorasPropiedades[] $activosMejorasPropiedades
@@ -70,7 +72,7 @@ class ActivosBienes extends \common\components\BaseActiveRecord
         return [
 
             [['sys_tipo_bien_id', 'contratista_id', 'origen_id', 'detalle'], 'required'],
-            [['sys_tipo_bien_id', 'contratista_id', 'origen_id', 'creado_por', 'actualizado_por'], 'integer'],
+            [['sys_tipo_bien_id', 'contratista_id', 'origen_id', 'creado_por', 'actualizado_por', 'factura_id', 'documento_registrado_id'], 'integer'],
             [['fecha_origen', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['propio', 'nacional', 'carga_completa', 'sys_status','documento','factura'], 'boolean'],
             [['detalle'], 'string', 'max' => 255],
@@ -92,6 +94,8 @@ class ActivosBienes extends \common\components\BaseActiveRecord
             'propio' => Yii::t('app', 'Propio'),
             'origen_id' => Yii::t('app', 'Origen'),
             'nacional' => Yii::t('app', 'Nacional'),
+            'factura_id' => Yii::t('app', 'Factura'),
+            'documento_registrado_id' => Yii::t('app', 'Documento Registrado'),
             'carga_completa' => Yii::t('app', 'Carga Completa'),
             'creado_por' => Yii::t('app', 'Creado Por'),
             'actualizado_por' => Yii::t('app', 'Actualizado Por'),
@@ -136,6 +140,22 @@ class ActivosBienes extends \common\components\BaseActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
+    public function getDocumentoRegistrado()
+    {
+        return $this->hasOne(ActivosDocumentosRegistrados::className(), ['id' => 'documento_registrado_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getFactura()
+    {
+        return $this->hasOne(ActivosFacturas::className(), ['id' => 'factura_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getOrigen()
     {
         return $this->hasOne(ActivosSysOrigenesBienes::className(), ['id' => 'origen_id']);
@@ -147,14 +167,6 @@ class ActivosBienes extends \common\components\BaseActiveRecord
     public function getSysTipoBien()
     {
         return $this->hasOne(ActivosSysTiposBienes::className(), ['id' => 'sys_tipo_bien_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getActivosDocumentosRegistrados()
-    {
-        return $this->hasMany(ActivosDocumentosRegistrados::className(), ['bien_id' => 'id']);
     }
 
     /**
@@ -232,14 +244,6 @@ class ActivosBienes extends \common\components\BaseActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getActivosFacturas()
-    {
-        return $this->hasMany(ActivosFacturas::className(), ['bien_id' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
     public function getActivosInmuebles()
     {
         return $this->hasOne(ActivosInmuebles::className(), ['bien_id' => 'id']);
@@ -289,7 +293,9 @@ class ActivosBienes extends \common\components\BaseActiveRecord
             //'depreciable'=>['type'=>Form::INPUT_CHECKBOX,],
             //'deterioro'=>['type'=>Form::INPUT_CHECKBOX,],
             'detalle'=>['type'=>Form::INPUT_TEXT,],
-            'origen_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(ActivosSysOrigenesBienes::find()->asArray()->all(),'id','nombre'),'options'=>['id'=>'origen','onchange'=>'js:'/*'js: $("#nacional").hide(true); $("#nacional").hide(); if($("#origen").attr()==1 || $("#origen").attr()==3)$("#fecha_origen").show(); if($("#origen").attr()==2)$("#nacional").show();'*/]]],
+            'origen_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(ActivosSysOrigenesBienes::find()->asArray()->all(),'id','nombre'),'options'=>['id'=>'origen','onchange'=>'js:']]],
+             'factura_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(ActivosFacturas::contratista(),'id','nombre'), 'pluginOptions'=>['allowClear' => true],'options'=>['id'=>'factura','placeholder'=>'Seleccionar factura', 'onchange'=>'js:']]],
+             'documento_registrado_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(ActivosDocumentosRegistrados::contratista(),'id',function($model){ return $model->etiqueta();}), 'pluginOptions'=>['allowClear' => true],'options'=>['id'=>'documento-registrado','placeholder'=>'Seleccionar documento registrado', 'onchange'=>'js:']]],
             'propio'=>['type'=>Form::INPUT_CHECKBOX,],
             'factura'=>['type'=>Form::INPUT_CHECKBOX,],
              'documento'=>['type'=>Form::INPUT_CHECKBOX,],

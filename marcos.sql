@@ -1124,3 +1124,29 @@ ALTER TABLE personas_naturales
   DROP CONSTRAINT personas_naturales_rif_fkey;
 ALTER TABLE personas_naturales
   ADD FOREIGN KEY (rif) REFERENCES sys_naturales_juridicas (rif) ON UPDATE CASCADE ON DELETE NO ACTION;
+
+
+
+
+
+/**************     23/05/2015 *************/
+
+
+ALTER TABLE activos.bienes
+ADD COLUMN factura_id integer;
+ALTER TABLE activos.bienes
+ADD COLUMN documento_registrado_id integer;
+ALTER TABLE activos.bienes
+ADD FOREIGN KEY (factura_id) REFERENCES activos.facturas (id) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE activos.bienes
+ADD FOREIGN KEY (documento_registrado_id) REFERENCES activos.documentos_registrados (id) ON UPDATE NO ACTION ON DELETE NO ACTION;
+COMMENT ON COLUMN activos.bienes.factura_id IS 'Clave foránea a la tabla facturas.';
+COMMENT ON COLUMN activos.bienes.documento_registrado_id IS 'Clave foránea a la tabla documentos_registrados.';
+
+
+ALTER TABLE activos.facturas
+DROP COLUMN bien_id;
+
+ALTER TABLE activos.documentos_registrados
+DROP COLUMN bien_id;
+

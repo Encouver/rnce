@@ -26,13 +26,12 @@ use yii\web\JsExpression;
  * @property string $exento
  * @property string $iva
  * @property integer $contratista_id
- * @property integer $bien_id
  * @property boolean $sys_status
  * @property string $sys_creado_el
  * @property string $sys_actualizado_el
  * @property string $sys_finalizado_el
  *
- * @property ActivosBienes $bien
+ * @property ActivosBienes[] $activosBienes
  * @property PersonasJuridicas $proveedor
  * @property PersonasJuridicas $imprenta
  * @property PersonasJuridicas $contratista
@@ -48,14 +47,19 @@ class ActivosFacturas extends \common\components\BaseActiveRecord
         return 'activos.facturas';
     }
 
+    public static function Contratista()
+    {
+        return ActivosFacturas::find()->where(['contratista_id'=>Yii::$app->user->identity->contratista_id])->all();
+    }
+
     /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['num_factura', 'proveedor_id', 'fecha_emision', 'imprenta_id', 'fecha_emision_talonario', 'comprador_id', 'base_imponible_gravable', 'iva', 'contratista_id', 'bien_id'], 'required'],
-            [['proveedor_id', 'imprenta_id', 'comprador_id', 'contratista_id', 'bien_id'], 'integer'],
+            [['num_factura', 'proveedor_id', 'fecha_emision', 'imprenta_id', 'fecha_emision_talonario', 'comprador_id', 'base_imponible_gravable', 'iva', 'contratista_id'], 'required'],
+            [['proveedor_id', 'imprenta_id', 'comprador_id', 'contratista_id', 'creado_por', 'actualizado_por'], 'integer'],
             [['fecha_emision', 'fecha_emision_talonario', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['base_imponible_gravable', 'exento', 'iva'], 'number'],
             [['sys_status'], 'boolean'],
@@ -81,7 +85,8 @@ class ActivosFacturas extends \common\components\BaseActiveRecord
             'exento' => Yii::t('app', 'Exento'),
             'iva' => Yii::t('app', 'Iva'),
             'contratista_id' => Yii::t('app', 'Contratista ID'),
-            'bien_id' => Yii::t('app', 'Bien ID'),
+            'creado_por' => Yii::t('app', 'Creado Por'),
+            'actualizado_por' => Yii::t('app', 'Actualizado Por'),
             'sys_status' => Yii::t('app', 'Sys Status'),
             'sys_creado_el' => Yii::t('app', 'Sys Creado El'),
             'sys_actualizado_el' => Yii::t('app', 'Sys Actualizado El'),
@@ -92,9 +97,9 @@ class ActivosFacturas extends \common\components\BaseActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getBien()
+    public function getActivosBienes()
     {
-        return $this->hasOne(ActivosBienes::className(), ['id' => 'bien_id']);
+        return $this->hasMany(ActivosBienes::className(), ['factura_id' => 'id']);
     }
 
     /**

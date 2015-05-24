@@ -18,8 +18,8 @@ class CertificadosSearch extends Certificados
     public function rules()
     {
         return [
-            [['id', 'numero_asociacion', 'numero_aportacion', 'numero_rotativo', 'numero_inversion', 'creado_por', 'actualizado_por', 'documento_registrado_id', 'contratista_id'], 'integer'],
-            [['valor_asociacion', 'valor_aportacion', 'valor_rotativo', 'valor_inversion'], 'number'],
+            [['id', 'numero_asociacion', 'numero_aportacion', 'numero_rotativo', 'numero_inversion', 'documento_registrado_id', 'contratista_id', 'creado_por', 'actualizado_por'], 'integer'],
+            [['valor_asociacion', 'valor_aportacion', 'valor_rotativo', 'valor_inversion', 'capital'], 'number'],
             [['tipo_certificado', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['suscrito', 'sys_status'], 'boolean'],
         ];
@@ -68,14 +68,15 @@ class CertificadosSearch extends Certificados
             'valor_rotativo' => $this->valor_rotativo,
             'valor_inversion' => $this->valor_inversion,
             'suscrito' => $this->suscrito,
+            'documento_registrado_id' => $this->documento_registrado_id,
+            'contratista_id' => Yii::$app->user->identity->contratista_id,
             'creado_por' => $this->creado_por,
             'actualizado_por' => $this->actualizado_por,
             'sys_status' => $this->sys_status,
             'sys_creado_el' => $this->sys_creado_el,
             'sys_actualizado_el' => $this->sys_actualizado_el,
             'sys_finalizado_el' => $this->sys_finalizado_el,
-            'documento_registrado_id' => $this->documento_registrado_id,
-            'contratista_id' => $this->contratista_id,
+            'capital' => $this->capital,
         ]);
 
         $query->andFilterWhere(['like', 'tipo_certificado', $this->tipo_certificado]);

@@ -1,7 +1,9 @@
 <?php
 
 namespace common\models\p;
-
+use kartik\builder\Form;
+use yii\helpers\ArrayHelper;
+use common\models\p\SysBancos;
 use Yii;
 
 /**
@@ -27,6 +29,7 @@ class BancosContratistas extends \common\components\BaseActiveRecord
     /**
      * @inheritdoc
      */
+    public $tipo_nacionalidad;
     public static function tableName()
     {
         return 'public.bancos_contratistas';
@@ -38,12 +41,17 @@ class BancosContratistas extends \common\components\BaseActiveRecord
     public function rules()
     {
         return [
-            [['banco_id', 'contratista_id', 'num_cuenta', 'tipo_moneda', 'tipo_cuenta', 'estatus_cuenta'], 'required'],
+            [['banco_id', 'contratista_id', 'num_cuenta', 'estatus_cuenta','tipo_nacionalidad'], 'required'],
             [['banco_id', 'contratista_id'], 'integer'],
-            [['num_cuenta', 'tipo_moneda', 'tipo_cuenta', 'estatus_cuenta'], 'string'],
+            [['num_cuenta', 'tipo_moneda', 'tipo_cuenta', 'estatus_cuenta','tipo_nacionalidad'], 'string'],
             [['sys_status'], 'boolean'],
             [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
-            [['num_cuenta'], 'unique']
+            [['num_cuenta'], 'unique'],
+            [['tipo_moneda','tipo_cuenta'], 'required', 'when' => function ($model) {
+                return $model->tipo_nacionalidad == "NACIONAL";
+            }, 'whenClient' => "function (attribute, value) {
+                return $('#bancoscontratistas-tipo_nacionalidad').val() == 'NACIONAL';
+            }"]
         ];
     }
 
@@ -54,11 +62,12 @@ class BancosContratistas extends \common\components\BaseActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'banco_id' => Yii::t('app', 'Banco ID'),
+            'banco_id' => Yii::t('app', 'Banco'),
             'contratista_id' => Yii::t('app', 'Contratista ID'),
             'num_cuenta' => Yii::t('app', 'Num Cuenta'),
             'tipo_moneda' => Yii::t('app', 'Tipo Moneda'),
             'tipo_cuenta' => Yii::t('app', 'Tipo Cuenta'),
+            'tipo_nacionalidad' => Yii::t('app', 'Tipo Nacionalidad'),
             'estatus_cuenta' => Yii::t('app', 'Estatus Cuenta'),
             'sys_status' => Yii::t('app', 'Sys Status'),
             'sys_creado_el' => Yii::t('app', 'Sys Creado El'),
@@ -81,5 +90,18 @@ class BancosContratistas extends \common\components\BaseActiveRecord
     public function getBanco()
     {
         return $this->hasOne(SysBancos::className(), ['id' => 'banco_id']);
+    }
+    public function getFormAttribs() {
+
+         return [
+        'tipo_nacionalidad'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>[ 'NACIONAL' => 'NACIONAL', 'EXTRANJERA' => 'EXTRANJERA'],'options'=>['prompt'=>'Seleccione Nacionalidad']],
+        'banco_id'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>ArrayHelper::map(SysBancos::find()->all(),'id','nombre'),'options'=>['prompt'=>'Seleccione estado']],
+        'num_cuenta'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Introduzca numero cuenta']],
+        'tipo_moneda'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>['BOLIVARES' => 'BOLIVARES', 'DOLARES' => 'DOLARES', 'EUROS' => 'EUROS'],'options'=>['prompt'=>'Seleccione Moneda'],'hint'=>'Solo Bancos Venezolanos'],
+        'tipo_cuenta'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>[ 'CUENTA CORRIENTE' => 'CUENTA CORRIENTE', 'CUENTA CORRIENTE CON INTERESES / REMUNERADA' => 'CUENTA CORRIENTE CON INTERESES / REMUNERADA', 'CUENTA DE AHORROS' => 'CUENTA DE AHORROS', 'CUENTA EN MONEDA EXTRANGERA' => 'CUENTA EN MONEDA EXTRANGERA', ],'options'=>['prompt'=>'Seleccione tipo cuenta'],'hint'=>'Solo Bancos Venezolanos'],    
+        'estatus_cuenta'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>[ 'ACTIVA' => 'ACTIVA', 'INACTIVA' => 'INACTIVA', ],'options'=>['prompt'=>'Seleccione estatus']],
+    ];
+    
+       
     }
 }
