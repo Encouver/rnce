@@ -52,7 +52,7 @@ class ActivosDesincorporacionActivos extends \common\components\BaseActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'sys_motivo_id' => Yii::t('app', 'Sys Motivo ID'),
+            'sys_motivo_id' => Yii::t('app', 'Motivo'),
             'fecha' => Yii::t('app', 'Fecha'),
             'precio_venta' => Yii::t('app', 'Precio Venta'),
             'valor_neto_libro' => Yii::t('app', 'Valor Neto Libro'),

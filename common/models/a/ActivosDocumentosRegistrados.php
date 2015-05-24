@@ -21,25 +21,36 @@ use yii\helpers\ArrayHelper;
  * @property string $folio
  * @property string $fecha_registro
  * @property string $fecha_asamblea
+ * @property integer $sys_circunscripcion_id
+ * @property string $valor_adquisicion
+ * @property integer $tipo_documento_id
+ * @property integer $creado_por
+ * @property integer $actualizado_por
  * @property boolean $sys_status
  * @property string $sys_creado_el
  * @property string $sys_actualizado_el
  * @property string $sys_finalizado_el
- * @property integer $sys_circunscripcion_id
- * @property integer $tipo_documento_id
  *
+ * @property ActivosBienes[] $activosBienes
+ * @property ActivosSysTiposDocumentos $tipoDocumento
  * @property ActivosSysTiposRegistros $sysTipoRegistro
  * @property Contratistas $contratista
  * @property SysCircunscripciones $sysCircunscripcion
+ * @property Acciones[] $acciones
  * @property AccionistasOtros[] $accionistasOtros
  * @property ActasConstitutivas[] $actasConstitutivas
  * @property ActividadesEconomicas[] $actividadesEconomicas
  * @property CapitalesPropiedades[] $capitalesPropiedades
+ * @property CertificacionesAportes[] $certificacionesAportes
+ * @property Certificados[] $certificados
  * @property CierresEjercicios[] $cierresEjercicios
  * @property ComisariosAuditores[] $comisariosAuditores
  * @property DuracionesEmpresas[] $duracionesEmpresas
  * @property EmpresasFusionadas[] $empresasFusionadas
+ * @property FondosReservas[] $fondosReservas
  * @property ObjetosSociales[] $objetosSociales
+ * @property OrigenesCapitales[] $origenesCapitales
+ * @property Suplementarios[] $suplementarios
  */
 class ActivosDocumentosRegistrados extends \common\components\BaseActiveRecord
 {
@@ -49,6 +60,11 @@ class ActivosDocumentosRegistrados extends \common\components\BaseActiveRecord
     public static function tableName()
     {
         return 'activos.documentos_registrados';
+    }
+
+    public static function Contratista()
+    {
+        return ActivosDocumentosRegistrados::find()->where(['contratista_id'=>Yii::$app->user->identity->contratista_id])->all();
     }
 
     /**
@@ -64,8 +80,9 @@ class ActivosDocumentosRegistrados extends \common\components\BaseActiveRecord
             }"],
             [['contratista_id', 'sys_tipo_registro_id', 'num_registro_notaria', 'tomo', 'folio', 'fecha_registro', 'sys_circunscripcion_id'], 'required', 'on'=>'bien-registro'],
             [['contratista_id', 'sys_tipo_registro_id', 'num_registro_notaria', 'tomo', 'folio', 'fecha_registro', 'sys_circunscripcion_id'], 'required', 'on'=>'bien-notaria'],
-            [['contratista_id', 'sys_tipo_registro_id', 'sys_circunscripcion_id','tipo_documento_id'], 'integer'],
+            [['contratista_id', 'sys_tipo_registro_id', 'sys_circunscripcion_id', 'tipo_documento_id', 'creado_por', 'actualizado_por'], 'integer'],
             [['fecha_registro', 'fecha_asamblea', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
+            [['valor_adquisicion'], 'number'],
             [['sys_status'], 'boolean'],
             [['num_registro_notaria'], 'string', 'max' => 255],
             [['tomo', 'folio'], 'string', 'max' => 100]
@@ -86,12 +103,15 @@ class ActivosDocumentosRegistrados extends \common\components\BaseActiveRecord
             'folio' => Yii::t('app', 'Folio'),
             'fecha_registro' => Yii::t('app', 'Fecha Registro'),
             'fecha_asamblea' => Yii::t('app', 'Fecha Asamblea'),
+            'sys_circunscripcion_id' => Yii::t('app', 'Circunscripcion'),
+            'valor_adquisicion' => Yii::t('app', 'Valor Adquisicion'),
+            'tipo_documento_id' => Yii::t('app', 'Tipo Documento'),
+            'creado_por' => Yii::t('app', 'Creado Por'),
+            'actualizado_por' => Yii::t('app', 'Actualizado Por'),
             'sys_status' => Yii::t('app', 'Sys Status'),
             'sys_creado_el' => Yii::t('app', 'Sys Creado El'),
             'sys_actualizado_el' => Yii::t('app', 'Sys Actualizado El'),
             'sys_finalizado_el' => Yii::t('app', 'Sys Finalizado El'),
-            'sys_circunscripcion_id' => Yii::t('app', 'Circunscripcion'),
-            'tipo_documento_id' => Yii::t('app', 'Tipo Documento ID'),
         ];
     }
     public function scenarios()
@@ -99,6 +119,31 @@ class ActivosDocumentosRegistrados extends \common\components\BaseActiveRecord
         $scenarios = parent::scenarios();
        // $scenarios['bien-notaria'] = ['',];//Scenario Values Only Accepted
         return $scenarios;
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getActivosBienes()
+    {
+        return $this->hasMany(ActivosBienes::className(), ['documento_registrado_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAcciones()
+    {
+        return $this->hasMany(Acciones::className(), ['documento_registrado_id' => 'id']);
+    }
+
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTipoDocumento()
+    {
+        return $this->hasOne(ActivosSysTiposDocumentos::className(), ['id' => 'tipo_documento_id']);
     }
 
     /**
@@ -116,6 +161,31 @@ class ActivosDocumentosRegistrados extends \common\components\BaseActiveRecord
     {
         return $this->hasOne(Contratistas::className(), ['id' => 'contratista_id']);
     }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCertificacionesAportes()
+    {
+        return $this->hasMany(CertificacionesAportes::className(), ['documento_registrado_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCertificados()
+    {
+        return $this->hasMany(Certificados::className(), ['documento_registrado_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getFondosReservas()
+    {
+        return $this->hasMany(FondosReservas::className(), ['documento_registrado_id' => 'id']);
+    }
+
 
     /**
      * @return \yii\db\ActiveQuery
@@ -197,6 +267,22 @@ class ActivosDocumentosRegistrados extends \common\components\BaseActiveRecord
         return $this->hasMany(ObjetosSociales::className(), ['documento_registrado_id' => 'id']);
     }
 
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getOrigenesCapitales()
+    {
+        return $this->hasMany(OrigenesCapitales::className(), ['documento_registrado_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getSuplementarios()
+    {
+        return $this->hasMany(Suplementarios::className(), ['documento_registrado_id' => 'id']);
+    }
+
     public function getFormAttribs() {
         $attributes = [
             // primary key column
@@ -255,6 +341,10 @@ class ActivosDocumentosRegistrados extends \common\components\BaseActiveRecord
 
             ];
 
+    }
+
+    public function Etiqueta(){
+        return $this->sysTipoRegistro->nombre.' - '.$this->num_registro_notaria;
     }
 
 }

@@ -5,17 +5,23 @@ namespace common\models\p;
 use Yii;
 
 /**
- * This is the model class for table "public.nombres_cajas".
+ * This is the model class for table "nombres_cajas".
  *
  * @property integer $id
  * @property string $nombre
- * @property integer $contratistas_id
+ * @property boolean $nacional
+ * @property string $tipo_caja
+ * @property integer $contratista_id
+ * @property string $anho
+ * @property integer $creado_por
+ * @property integer $actualizado_por
  * @property boolean $sys_status
  * @property string $sys_creado_el
  * @property string $sys_actualizado_el
  * @property string $sys_finalizado_el
- * @property string $tipo_caja
- * @property boolean $nacional
+ *
+ * @property CuentasAEfectivosCajas[] $cuentasAEfectivosCajas
+ * @property Contratistas $contratista
  */
 class NombresCajas extends \common\components\BaseActiveRecord
 {
@@ -24,7 +30,7 @@ class NombresCajas extends \common\components\BaseActiveRecord
      */
     public static function tableName()
     {
-        return 'public.nombres_cajas';
+        return 'nombres_cajas';
     }
 
     /**
@@ -33,12 +39,13 @@ class NombresCajas extends \common\components\BaseActiveRecord
     public function rules()
     {
         return [
-            [['nombre', 'contratistas_id', 'tipo_caja'], 'required'],
-            [['contratistas_id'], 'integer'],
-            [['sys_status', 'nacional'], 'boolean'],
+            [['nombre', 'tipo_caja', 'contratista_id', 'anho'], 'required'],
+            [['nacional', 'sys_status'], 'boolean'],
+            [['contratista_id', 'creado_por', 'actualizado_por'], 'integer'],
             [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['nombre', 'tipo_caja'], 'string', 'max' => 255],
-            [['nombre', 'contratistas_id'], 'unique', 'targetAttribute' => ['nombre', 'contratistas_id'], 'message' => 'The combination of Nombre and Contratistas ID has already been taken.']
+            [['anho'], 'string', 'max' => 100],
+            [['nombre'], 'unique', 'targetAttribute' => ['nombre', 'tipo_caja', 'contratista_id', 'nacional']]
         ];
     }
 
@@ -50,13 +57,32 @@ class NombresCajas extends \common\components\BaseActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'nombre' => Yii::t('app', 'Nombre'),
-            'contratistas_id' => Yii::t('app', 'Contratistas ID'),
+            'nacional' => Yii::t('app', 'Nacional'),
+            'tipo_caja' => Yii::t('app', 'Tipo Caja'),
+            'contratista_id' => Yii::t('app', 'Contratista ID'),
+            'anho' => Yii::t('app', 'Anho'),
+            'creado_por' => Yii::t('app', 'Creado Por'),
+            'actualizado_por' => Yii::t('app', 'Actualizado Por'),
             'sys_status' => Yii::t('app', 'Sys Status'),
             'sys_creado_el' => Yii::t('app', 'Sys Creado El'),
             'sys_actualizado_el' => Yii::t('app', 'Sys Actualizado El'),
             'sys_finalizado_el' => Yii::t('app', 'Sys Finalizado El'),
-            'tipo_caja' => Yii::t('app', 'Tipo Caja'),
-            'nacional' => Yii::t('app', 'Nacional'),
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCuentasAEfectivosCajas()
+    {
+        return $this->hasMany(CuentasAEfectivosCajas::className(), ['nombre_caja_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getContratista()
+    {
+        return $this->hasOne(Contratistas::className(), ['id' => 'contratista_id']);
     }
 }

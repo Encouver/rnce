@@ -38,7 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
           'format' => 'html',
           'value' => function ($model)
           {
-              return '<div>'.$model->hhConcepto->nombre.'</div>';
+              return '<div>'.$model->concepto->nombre.'</div>';
           }
         ],
         [
@@ -47,7 +47,7 @@ $this->params['breadcrumbs'][] = $this->title;
           'format' => 'html',
           'value' => function ($model)
           {
-              if($model->hhConcepto->nombre=="Otros")
+              if($model->concepto->nombre=="Otros")
               {
                 return '<div>'.$model->otro_nombre.'</div>';
               }

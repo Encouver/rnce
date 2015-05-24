@@ -10,7 +10,7 @@ use kartik\builder\Form;
 use kartik\builder\ActiveFormEvent;
 use yii\helpers\Html;
 
-use common\models\c\CuentasHhConcepto;
+use common\models\c\CuentasConceptos;
 
 
 /**
@@ -95,9 +95,9 @@ class CuentasHhPasivoLaboral extends \common\components\BaseActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getHhConcepto()
+    public function getConcepto()
     {
-        return $this->hasOne(CuentasHhConcepto::className(), ['id' => 'hh_concepto_id']);
+        return $this->hasOne(CuentasConceptos::className(), ['id' => 'hh_concepto_id']);
     }
 
     /**
@@ -117,7 +117,7 @@ class CuentasHhPasivoLaboral extends \common\components\BaseActiveRecord
                 ],
                 
                 'corriente'=>['type'=>Form::INPUT_CHECKBOX,'label'=>'Corriente'],
-                'hh_concepto_id'=>['type'=>Form::INPUT_DROPDOWN_LIST, 'items'=>ArrayHelper::map(CuentasHhConcepto::find()->orderBy('id')->asArray()->all(), 'id', 'nombre'), 'label'=>'Concepto'],                
+                'hh_concepto_id'=>['type'=>Form::INPUT_DROPDOWN_LIST, 'items'=>ArrayHelper::map(CuentasConceptos::find()->where(['cuenta' => 'hh'])->orderBy('id')->asArray()->all(), 'id', 'nombre'), 'label'=>'Concepto'],                
                 'otro_nombre'=>['type'=>Form::INPUT_TEXT,'label'=>'Especifique'],
                 'saldo_p_anterior'=>['type'=>Form::INPUT_TEXT, 'label'=>'Saldo del período anterior'],
                 'importe_gasto_ejer_eco'=>['type'=>Form::INPUT_TEXT,'label'=>'Importe gasto'],
