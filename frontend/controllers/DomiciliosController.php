@@ -34,6 +34,7 @@ class DomiciliosController extends Controller
     public function actionIndex()
     {
         $searchModel = new DomiciliosSearch();
+        $searchModel->fiscal = false;
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -59,23 +60,89 @@ class DomiciliosController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($id=null)
     {
-        $model = new Domicilios();
-        $model2 = new Direcciones();
-
-        if ($model2->load(Yii::$app->request->post())) {
-            $model2->save();
-            $model->fiscal=false;
-            $model->direccion_id=$model2->id;
-            $model->contratista_id=2;
-            $model->save();
+     
+        $direccion = new Direcciones();
+         $model = new Domicilios();
+         if (!is_null($id)){
+            switch ($id){
+            case "principal":
+                $direccion->scenario=$id;
+                $model->fiscal=false;
+                break;
+            case "fiscal":
+                 $model->fiscal=true;
+                break;
+            default :
+                break;
+            }  
+        }
+        if ($model->load(Yii::$app->request->post()) && $direccion->load(Yii::$app->request->post())) {
+              $transaction = \Yii::$app->db->beginTransaction();
+           try {
+                $flag =false;
+               if ($direccion->save()) {
+           $model->direccion_id=$direccion->id;
+           $usuario= \common\models\p\User::findOne(Yii::$app->user->identity->id);
+            $model->contratista_id=  $usuario->contratista_id;
+             $domicilio= Domicilios::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'fiscal'=>false]);
+            if($model->fiscal){
+                 $domicilio= Domicilios::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'fiscal'=>true]);
+            }
             
-            return $this->redirect(['view', 'id' => $model->id]);
+
+            
+            if(isset($domicilio)){
+                   $opcion="Principal";
+                   if($domicilio->fiscal){
+                       $opcion="Fiscal";
+                   }
+                      Yii::$app->session->setFlash('error','Usuario ya posee una direccion '.$opcion.' asociada');
+                   return $this->render('create', [
+                        'model'=>$model,
+                        'direccion' => $direccion,
+                        ]);
+                   }
+                   if ($model->save()) {
+
+
+                               $transaction->commit();
+                                $flag = true;
+                                return $this->redirect(['index']);
+                              
+
+
+                   }else{
+                       Yii::$app->session->setFlash('error','Direccion Principal no guardada');
+                   return $this->render('create', [
+                        'model'=>$model,
+                        'direccion' => $direccion,
+                        ]);
+                   }
+               }else{
+                   Yii::$app->session->setFlash('error','Error en la carga de la direccion');
+                   return $this->render('create', [
+                        'model'=>$model,
+                        'direccion' => $direccion,
+                        ]);
+               }
+
+               if(!$flag)
+               {
+                   $transaction->rollBack();
+               }
+           } catch (Exception $e) {
+               $transaction->rollBack();
+           }
+         
+           
+            
+           
         } else {
             return $this->render('create', [
-                'model' => $model,
-                'model2' => $model2,
+                'model'=>$model,
+                'direccion' => $direccion,
             ]);
         }
     }

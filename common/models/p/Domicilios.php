@@ -37,10 +37,11 @@ class Domicilios extends \common\components\BaseActiveRecord
     public function rules()
     {
         return [
-            [['contratista_id', 'fiscal', 'direccion_id'], 'required'],
+            [['contratista_id', 'direccion_id'], 'required'],
             [['contratista_id', 'documento_registrado_id', 'direccion_id'], 'integer'],
             [['sys_status', 'fiscal'], 'boolean'],
-            [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe']
+            [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
+            [['fiscal'],'default','value'=>false]
         ];
     }
 
