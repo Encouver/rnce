@@ -6,6 +6,7 @@ use Yii;
 use common\models\a\ActivosDocumentosRegistrados;
 use app\models\ActivosDocumentosRegistrados as ActivosDocumentosRegistradosSearch;
 use common\components\BaseController;
+use yii\db\Query;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -25,7 +26,24 @@ class ActivosDocumentosRegistradosController extends BaseController
             ],
         ];
     }
-
+    public function actionDocumentosRegistradosLista($q = null, $id = null) {
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $out = ['results' => ['id' => '', 'text' => '']];
+        if (!is_null($q)) {
+            $query = new Query;
+            $query->select('doc.id, (tipo.nombre || \' - \' || num_registro_notaria) AS text')
+                ->from('activos.documentos_registrados as doc, activos.sys_tipos_registros as tipo')
+                ->where('num_registro_notaria LIKE \'%' . $q .'%\' and contratista_id='.Yii::$app->user->identity->contratista_id.' and tipo.id=doc.sys_tipo_registro_id')
+                ->limit(20);
+            $command = $query->createCommand();
+            $data = $command->queryAll();
+            $out['results'] = array_values($data);
+        }
+        elseif ($id > 0) {
+            $out['results'] = ['id' => $id, 'text' => ActivosDocumentosRegistrados::find($id)->etiqueta()];
+        }
+        return $out;
+    }
     /**
      * Lists all ActivosDocumentosRegistrados models.
      * @return mixed

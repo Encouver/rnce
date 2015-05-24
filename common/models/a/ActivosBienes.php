@@ -10,6 +10,7 @@ use kartik\widgets\DatePicker;
 use kartik\widgets\Select2;
 use Yii;
 use yii\helpers\ArrayHelper;
+use yii\web\JsExpression;
 
 /**
  * This is the model class for table "activos.bienes".
@@ -24,6 +25,14 @@ use yii\helpers\ArrayHelper;
  * @property boolean $nacional
  * @property integer $factura_id
  * @property integer $documento_registrado_id
+ * @property integer $arrendamiento_id
+ * @property integer $desincorporacion_id
+ * @property boolean $mejora
+ * @property boolean $perdida_reverso
+ * @property boolean $proc_productivo
+ * @property boolean $directo
+ * @property boolean $proc_ventas
+ * @property integer $metodo_medicion_id
  * @property boolean $carga_completa
  * @property integer $creado_por
  * @property integer $actualizado_por
@@ -35,8 +44,11 @@ use yii\helpers\ArrayHelper;
  * @property ActivosActivosBiologicos $activosActivosBiologicos
  * @property ActivosActivosIntangibles $activosActivosIntangibles
  * @property ActivosAvaluos[] $activosAvaluos
+ * @property ActivosArrendamientos $arrendamiento
+ * @property ActivosDesincorporacionActivos $desincorporacion
  * @property ActivosDocumentosRegistrados $documentoRegistrado
  * @property ActivosFacturas $factura
+ * @property ActivosSysMetodosMedicion $metodoMedicion
  * @property ActivosSysOrigenesBienes $origen
  * @property ActivosSysTiposBienes $sysTipoBien
  * @property Contratistas $contratista
@@ -48,6 +60,7 @@ use yii\helpers\ArrayHelper;
  * @property ActivosInmuebles $activosInmuebles
  * @property ActivosMediciones[] $activosMediciones
  * @property ActivosMejorasPropiedades[] $activosMejorasPropiedades
+ * @property ActivosMejorasPropiedades[] $activosMejorasPropiedades0
  * @property ActivosMuebles $activosMuebles
  * @property OrigenesCapitales[] $origenesCapitales
  */
@@ -72,9 +85,9 @@ class ActivosBienes extends \common\components\BaseActiveRecord
         return [
 
             [['sys_tipo_bien_id', 'contratista_id', 'origen_id', 'detalle'], 'required'],
-            [['sys_tipo_bien_id', 'contratista_id', 'origen_id', 'creado_por', 'actualizado_por', 'factura_id', 'documento_registrado_id'], 'integer'],
+            [['sys_tipo_bien_id', 'contratista_id', 'origen_id', 'creado_por', 'actualizado_por', 'factura_id', 'documento_registrado_id', 'arrendamiento_id', 'desincorporacion_id', 'metodo_medicion_id'], 'integer'],
             [['fecha_origen', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
-            [['propio', 'nacional', 'carga_completa', 'sys_status','documento','factura'], 'boolean'],
+            [['propio', 'nacional', 'carga_completa', 'sys_status','documento','factura', 'mejora', 'perdida_reverso', 'proc_productivo', 'directo', 'proc_ventas'], 'boolean'],
             [['detalle'], 'string', 'max' => 255],
             [['sys_tipo_bien_id', 'detalle', 'contratista_id'], 'unique', 'targetAttribute' => ['sys_tipo_bien_id', 'detalle', 'contratista_id'], 'message' => 'El nombre de detalle debe ser único para entre todos sus bienes.']
         ];
@@ -96,6 +109,14 @@ class ActivosBienes extends \common\components\BaseActiveRecord
             'nacional' => Yii::t('app', 'Nacional'),
             'factura_id' => Yii::t('app', 'Factura'),
             'documento_registrado_id' => Yii::t('app', 'Documento Registrado'),
+            'arrendamiento_id' => Yii::t('app', 'Arrendamiento'),
+            'desincorporacion_id' => Yii::t('app', 'Desincorporacion'),
+            'mejora' => Yii::t('app', 'Mejora'),
+            'perdida_reverso' => Yii::t('app', 'Perdida Reverso'),
+            'proc_productivo' => Yii::t('app', 'Proceso Productivo'),
+            'directo' => Yii::t('app', 'Directo'),
+            'proc_ventas' => Yii::t('app', 'Proceso Ventas'),
+            'metodo_medicion_id' => Yii::t('app', 'Metodo Medicion'),
             'carga_completa' => Yii::t('app', 'Carga Completa'),
             'creado_por' => Yii::t('app', 'Creado Por'),
             'actualizado_por' => Yii::t('app', 'Actualizado Por'),
@@ -140,9 +161,33 @@ class ActivosBienes extends \common\components\BaseActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
+    public function getArrendamiento()
+    {
+        return $this->hasOne(ActivosArrendamientos::className(), ['id' => 'arrendamiento_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDesincorporacion()
+    {
+        return $this->hasOne(ActivosDesincorporacionActivos::className(), ['id' => 'desincorporacion_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getDocumentoRegistrado()
     {
         return $this->hasOne(ActivosDocumentosRegistrados::className(), ['id' => 'documento_registrado_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getMetodoMedicion()
+    {
+        return $this->hasOne(ActivosSysMetodosMedicion::className(), ['id' => 'metodo_medicion_id']);
     }
 
     /**
@@ -268,6 +313,14 @@ class ActivosBienes extends \common\components\BaseActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
+    public function getActivosMejorasPropiedades0()
+    {
+        return $this->hasMany(ActivosMejorasPropiedades::className(), ['mejora_bien_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getActivosMuebles()
     {
         return $this->hasOne(ActivosMuebles::className(), ['bien_id' => 'id']);
@@ -294,11 +347,50 @@ class ActivosBienes extends \common\components\BaseActiveRecord
             //'deterioro'=>['type'=>Form::INPUT_CHECKBOX,],
             'detalle'=>['type'=>Form::INPUT_TEXT,],
             'origen_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(ActivosSysOrigenesBienes::find()->asArray()->all(),'id','nombre'),'options'=>['id'=>'origen','onchange'=>'js:']]],
-             'factura_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(ActivosFacturas::contratista(),'id','nombre'), 'pluginOptions'=>['allowClear' => true],'options'=>['id'=>'factura','placeholder'=>'Seleccionar factura', 'onchange'=>'js:']]],
-             'documento_registrado_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(ActivosDocumentosRegistrados::contratista(),'id',function($model){ return $model->etiqueta();}), 'pluginOptions'=>['allowClear' => true],'options'=>['id'=>'documento-registrado','placeholder'=>'Seleccionar documento registrado', 'onchange'=>'js:']]],
+
+             'factura_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>[//'data'=>ArrayHelper::map(PersonasJuridicas::find()->all(),'id',function($model){return $model->etiqueta(); }),
+                 'options'=>['id'=>'factura','placeholder'=>'Seleccionar factura', 'onchange'=>'js:'],'pluginOptions' => [
+                     'allowClear' => true,
+                     'minimumInputLength' => 1,
+                     'ajax' => [
+                         'url' => \yii\helpers\Url::to(['activos-facturas/facturas-lista']),
+                         'dataType' => 'json',
+                         'data' => new JsExpression('function(params) { return {q:params.term}; }')
+                     ],
+                     'escapeMarkup' => new JsExpression('function (markup) { return markup; }'),
+                     'templateResult' => new JsExpression('function(city) { return city.text; }'),
+                     'templateSelection' => new JsExpression('function (city) { return city.text; }'),
+                 ],]],
+
+             'documento_registrado_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>[//'data'=>ArrayHelper::map(PersonasJuridicas::find()->all(),'id',function($model){return $model->etiqueta(); }),
+                 'options'=>['id'=>'documento-registrado','placeholder'=>'Seleccionar documento registrado', 'onchange'=>'js:'],'pluginOptions' => [
+                     'allowClear' => true,
+                     'minimumInputLength' => 1,
+                     'ajax' => [
+                         'url' => \yii\helpers\Url::to(['activos-documentos-registrados/documentos-registrados-lista']),
+                         'dataType' => 'json',
+                         'data' => new JsExpression('function(params) { return {q:params.term}; }')
+                     ],
+                     'escapeMarkup' => new JsExpression('function (markup) { return markup; }'),
+                     'templateResult' => new JsExpression('function(city) { return city.text; }'),
+                     'templateSelection' => new JsExpression('function (city) { return city.text; }'),
+                 ],]],
             'propio'=>['type'=>Form::INPUT_CHECKBOX,],
             'factura'=>['type'=>Form::INPUT_CHECKBOX,],
              'documento'=>['type'=>Form::INPUT_CHECKBOX,],
+
+             'metodo_medicion_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(ActivosSysMetodosMedicion::find()->all(),'id','nombre',function($model){ return $model->modelo->nombre;}), 'pluginOptions'=>['allowClear' => true],'options'=>['id'=>'metodo-medicion','placeholder'=>'Seleccionar método de medición', 'onchange'=>'js:']]],
+             // Mejora
+             'mejora'=>['type'=>Form::INPUT_CHECKBOX,],
+             'perdida_reverso'=>['type'=>Form::INPUT_CHECKBOX,],
+
+             'proc_productivo'=>['type'=>Form::INPUT_CHECKBOX,],
+             // Si proc_productivo es true
+             'directo'=>['type'=>Form::INPUT_CHECKBOX,'columnOptions'=>['hidden'=>true,]],
+             // Si proceso productivo es false.
+             'proc_ventas'=>['type'=>Form::INPUT_CHECKBOX,'columnOptions'=>['hidden'=>false,]],
+
+
             //'principio_contable_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(ActivosSysFormasOrg::find()->asArray()->all(),'id','nombre')]],
             /*'fecha_origen'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>DatePicker::className(),'options'=>['options' => ['placeholder' => 'Seleccione fecha ...'],
                 'convertFormat' => true,
