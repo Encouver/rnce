@@ -3,7 +3,6 @@
 use yii\helpers\Html;
 use kartik\widgets\ActiveForm;
 use kartik\builder\Form;
-$url = \yii\helpers\Url::to(['acciones/accionsuscritaacta']);
 /* @var $this yii\web\View */
 /* @var $model common\models\p\ObjetosSociales */
 /* @var $form yii\widgets\ActiveForm */

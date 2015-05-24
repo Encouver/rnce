@@ -71,4 +71,5 @@ class ContratistasSearch extends Contratistas
 
         return $dataProvider;
     }
+    
 }

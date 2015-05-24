@@ -8,6 +8,7 @@ use common\models\p\SysNaturalesJuridicas;
 use common\models\p\PersonasNaturales;
 use common\models\p\PersonasJuridicas;
 use common\models\p\User;
+use app\models\UserSearch;
 use app\models\ContratistasSearch;
 use common\components\BaseController;
 use yii\web\NotFoundHttpException;
@@ -37,38 +38,15 @@ class ContratistasController extends BaseController
     public function actionIndex()
     {
       
-        $searchModel = new ContratistasSearch();
+        $searchModel = new UserSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
+            //'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
     
-    public function actionNaturaljuridicalist($search = null, $id = null) {
-        
-       
-    $out = ['more' => false];
-    if (!is_null($search)) {
-        $query = new \yii\db\Query;
-        $query->select('id, rif AS text')
-            ->from('sys_naturales_juridicas')
-            ->where("rif LIKE "."'%" . $search ."%'")
-            ->limit(20);
-        $command = $query->createCommand();
-        $data = $command->queryAll();
-        $out['results'] = array_values($data);
-    }
-    elseif ($id > 0) {
-        $out['results'] = ['id' => $id, 'text' => SysNaturalesJuridicas::find($id)->rif];
-    }
-    else {
-        $out['results'] = ['id' => 0, 'text' => 'No matching records found'];
-    }
-  
-    echo \yii\helpers\Json::encode($out);
-}
     
     /**
      * Displays a single Contratistas model.
@@ -81,10 +59,7 @@ class ContratistasController extends BaseController
             'model' => $this->findModel($id),
         ]);
     }
-      public function actionDatosbasicos()
-    {
-        return $this->render('datos_basicos');
-    }
+     
 
     /**
      * Creates a new Contratistas model.
@@ -96,68 +71,36 @@ class ContratistasController extends BaseController
     public function actionCreate()
     {
        
-
-    }
-
-     public function actionAcordeon()
-    {
-         $model = new Contratistas();
+        $model = new Contratistas();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
-            return $this->render('acordeon');
+            return $this->render('create', [
+                'model' => $model,
+            ]);
         }
     }
 
-
-
-     public function actionObtenertipopersona($id)
-   {
-     $contratista = new Contratistas();
-     $natural_juridica = new SysNaturalesJuridicas();
-        if ($id=='0'){
-             $persona_natural = new PersonasNaturales();
-
-
-             return $this->renderAjax('personas_naturales',
-                     array('persona_natural' => $persona_natural,
-                         'natural_juridica'=> $natural_juridica,
-
-                         ));
-         }
-         if($id=='1'){
-            return $this->renderAjax('personas_juridicas',
-                     array('contratista' => $contratista,
-                         'natural_juridica'=> $natural_juridica,
-
-                         ));
-
-         }
-
-
-
-
-   }
    
-    public function actionDatosnatural()
+    public function actionCreardatonatural()
    {
 
-        $contratista = new Contratistas();
-        $natural_juridica = new SysNaturalesJuridicas();
+     
         $persona_natural = new PersonasNaturales();
-       if ($natural_juridica->load(Yii::$app->request->post()) && $persona_natural->load(Yii::$app->request->post())) {
+        $persona_natural->scenario='basico';
+     
+       if ($persona_natural->load(Yii::$app->request->post())) {
 
-
+              $contratista = new Contratistas();
+        $natural_juridica = new SysNaturalesJuridicas();
            $transaction = \Yii::$app->db->beginTransaction();
            try {
                 $flag =false;
                 $natural_juridica->juridica=false;
                 $natural_juridica->denominacion = $persona_natural->primer_nombre.' '.$persona_natural->primer_apellido;
-
+                $natural_juridica->rif = $persona_natural->rif;
                 if ($natural_juridica->save()) {
 
-                   $persona_natural->rif = $natural_juridica->rif;
                    $persona_natural->sys_pais_id = 1;
                    $persona_natural->nacionalidad = "NACIONAL";
                    $persona_natural->creado_por = 1;
@@ -171,7 +114,9 @@ class ContratistasController extends BaseController
                            if ($usuario= \common\models\p\User::findOne(Yii::$app->user->identity->id)) {
                              if($usuario->contratista_id!=null){
                                    $transaction->rollBack();
-                                   return "Usuario ya tiene un contratista";
+                                   Yii::$app->session->setFlash('error', 'Usuario ya tiene contratista');
+                                return $this->render('crearnatural',
+                                array('persona_natural' => $persona_natural ));
                                    
                                
                                }
@@ -180,22 +125,35 @@ class ContratistasController extends BaseController
 
                                $transaction->commit();
                                $flag = true;
-                               return "Datos guardados con mucho exito";
-                               //return $this->redirect(['view', 'id' => $model->id]);
+                   
+                               return $this->redirect(['index']);
                            } else {
+                               
                                $transaction->rollBack();
-
+                                  Yii::$app->session->setFlash('error', 'Usuario no actualizado');
+                                return $this->render('crearnatural',
+                                array('persona_natural' => $persona_natural ));
                            }
                             }
-                       else return "guardado con exito";
+                       else{
+                           $transaction->rollBack();
+                                  Yii::$app->session->setFlash('error', 'Usuario no existe');
+                                return $this->render('crearnatural',
+                                array('persona_natural' => $persona_natural ));
+                       } 
                        }
 
                    }else{
-                       return "Persona natural no guardada";
+                         $transaction->rollBack();
+                                  Yii::$app->session->setFlash('error', 'Error al cargar la persona natural');
+                                return $this->render('crearnatural',
+                                array('persona_natural' => $persona_natural ));
                    }
                }else{
-
-                   return "Natural juridica no guardada";
+                        $transaction->rollBack();
+                                  Yii::$app->session->setFlash('error', 'Error al cargar natural jurdica');
+                                return $this->render('crearnatural',
+                                array('persona_natural' => $persona_natural ));
                }
 
                if(!$flag)
@@ -206,36 +164,36 @@ class ContratistasController extends BaseController
                $transaction->rollBack();
            }
        }else{
-
-           return "Datos incompleto";
+            return $this->render('crearnatural',
+                     array('persona_natural' => $persona_natural));
        }
 
 
 
    }
 
-    public function actionDatosjuridica()
+    public function actionCreardatojuridica()
    {
+
+       
+        $persona_juridica = new PersonasJuridicas();
+        $persona_juridica->scenario="conbasico";
+       if ($persona_juridica->load(Yii::$app->request->post())) {
 
         $contratista = new Contratistas();
         $natural_juridica = new SysNaturalesJuridicas();
-        $persona_juridica = new PersonasJuridicas();
-       if ($natural_juridica->load(Yii::$app->request->post()) && $contratista->load(Yii::$app->request->post())) {
-
-
            $transaction = \Yii::$app->db->beginTransaction();
            try {
                 $flag =false;
                 $natural_juridica->juridica=true;
-
+                $natural_juridica->rif=$persona_juridica->rif;
+                $natural_juridica->denominacion=$persona_juridica->razon_social;
 
                 if ($natural_juridica->save()) {
 
-                $persona_juridica->rif = $natural_juridica->rif;
-                $persona_juridica->razon_social = $natural_juridica->denominacion;
 
-                   $persona_juridica->tipo_nacionalidad = "NACIONAL";
-                 $persona_juridica->creado_por = 1;
+                $persona_juridica->tipo_nacionalidad = "NACIONAL";
+                $persona_juridica->creado_por = Yii::$app->user->identity->id;
                    if ($persona_juridica->save()) {
 
                        $contratista->estatus_contratista_id = 1;
@@ -246,33 +204,47 @@ class ContratistasController extends BaseController
                            if ($usuario= \common\models\p\User::findOne(Yii::$app->user->identity->id)) {
                                if($usuario->contratista_id!=null){
                                    $transaction->rollBack();
-                                   return "Usuario ya tiene un contratista";
+                                     Yii::$app->session->setFlash('error', 'Usuario ya tiene contratista');
+                                return $this->render('crearjuridica',
+                                array('persona_juridica' => $persona_juridica ));
+                                  
                                    
                                
                                }
                            $usuario->contratista_id = $contratista->id;
                            //$usuario->username= "oasoososo";
-                           if ($usuario->save(false)){
+                           if ($usuario->save()){
 
                                $transaction->commit();
                                $flag = true;
-                               return "Datos guardados con mucho exito";
-                               //return $this->redirect(['view', 'id' => $model->id]);
+                              return $this->redirect(['index']);
                            } else {
-                               return "Usuario noactualizado";
+                                 Yii::$app->session->setFlash('error', 'Usuario no acualizado');
+                                return $this->render('crearjuridica',
+                                array('persona_juridica' => $persona_juridica ));
+                     
                                $transaction->rollBack();
 
                            }
-                            }
-                       else return "guardado con exito";
+                           } else{
+                                Yii::$app->session->setFlash('error', 'Usuario no existe');
+                                return $this->render('crearjuridica',
+                                array('persona_juridica' => $persona_juridica ));
+                           }
+                      
                        }
 
                    }else{
-                       return "Persona juridica no guardada";
+                     Yii::$app->session->setFlash('error', 'Ha ocurrido un error al cargar la persona juridica');
+                     return $this->render('crearjuridica',
+                     array('persona_juridica' => $persona_juridica ));
+                      
                    }
                }else{
-
-                   return "Natural juridica no guardada";
+                    Yii::$app->session->setFlash('error', 'Ha ocurrido un error al cargar Natural Juridica');
+                  
+                         return $this->render('crearjuridica',
+                     array('persona_juridica' => $persona_juridica ));
                }
 
                if(!$flag)
@@ -284,7 +256,8 @@ class ContratistasController extends BaseController
            }
        }else{
 
-           return "Datos incompleto";
+            return $this->render('crearjuridica',
+                     array('persona_juridica' => $persona_juridica ));
        }
 
 

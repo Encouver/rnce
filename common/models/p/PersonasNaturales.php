@@ -59,12 +59,14 @@ class PersonasNaturales extends \common\components\BaseActiveRecord
     public function rules()
     {
         return [
-            [['primer_nombre', 'segundo_nombre', 'primer_apellido', 'segundo_apellido', 'sys_pais_id', 'nacionalidad', 'anho'], 'required'],
+            [['primer_nombre', 'primer_apellido','sys_pais_id', 'nacionalidad', 'anho'], 'required'],
             [['ci', 'sys_pais_id', 'creado_por', 'actualizado_por'], 'integer'],
             [['nacionalidad', 'estado_civil'], 'string'],
             [['sys_status'], 'boolean'],
             [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['primer_nombre', 'segundo_nombre', 'primer_apellido', 'segundo_apellido', 'pagina_web', 'facebook', 'twitter', 'instagram', 'numero_identificacion'], 'string', 'max' => 255],
+            [['rif'], 'required', 'on' => 'basico'],
+            [['rif','telefono_local','telefono_celular','correo'], 'required', 'on' => 'contacto'],
             [['rif'], 'string', 'max' => 20],
             [['telefono_local', 'telefono_celular', 'fax'], 'string', 'max' => 50],
             [['correo'], 'string', 'max' => 150],
@@ -149,13 +151,35 @@ class PersonasNaturales extends \common\components\BaseActiveRecord
         return $this->hasMany(ContratistasContactos::className(), ['contacto_id' => 'id']);
     }
     
-    public function getFormAttribs() {
-    return [
-        'primer_nombre'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Enter username...']],
-        'segundo_nombre'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Enter username...']],
-        'primer_apellido'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Enter username...']],
-        'segundo_apellido'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Enter username...']],
-    ];
+    public function getFormAttribs($id) {
+        
+        if($id=="basico"){
+            return [
+        'rif'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Introduzca rif']],
+        'primer_nombre'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Introduzca primer nombre']],
+        'segundo_nombre'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Introduzca segundo nombre']],
+        'primer_apellido'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Introduzca primer apellido']],
+        'segundo_apellido'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Introduzca segundo apellido']],
+            ];
+        }
+        if($id=="contacto"){
+            return [
+        'rif'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Enter rif']],
+        'primer_nombre'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Introduzca primer nombre']],
+        'segundo_nombre'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Introduzca segundo nombre']],
+        'primer_apellido'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Introduzca primer apellido']],
+        'segundo_apellido'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Introduzca segundo_apellido']],
+        'telefono_local'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Introduzca telefono local']],
+        'telefono_celular'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Introduzca telefono celular']],
+        'fax'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Introduzca fax']],
+        'correo'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Introduzca correo']],
+        'pagina_web'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Introduzca pagina_web']],
+        'facebook'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Introduzca fecabook']],
+        'twitter'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Introduzca twitter']],
+        'instagram'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Introduzca instagram']],
+            ];
+        }
+    
     }
     public function Etiqueta(){
         return $this->ci.' - '.$this->primer_nombre.' '.$this->primer_apellido;

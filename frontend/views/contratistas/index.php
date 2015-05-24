@@ -15,28 +15,52 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <p>
-        <?= Html::a(Yii::t('app', 'Create Contratistas'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+        //'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'natural_juridica_id',
-            'estatus_contratista_id',
-            'sigla',
-            'sys_status:boolean',
-            // 'sys_creado_el',
-            // 'sys_actualizado_el',
-            // 'sys_finalizado_el',
-            // 'tipo_sector',
+            [
+                'attribute'=>'contratista_id',
+                'label'=>'Nombre contratista',
+                'value'=>'contratista.naturalJuridica.denominacion'
+                ],
+             [
+                'attribute'=>'contratista_id',
+                'label'=>'Rif',
+                'value'=>'contratista.naturalJuridica.rif'
+                ],
+                
+             [
+                'attribute'=>'contratista_id',
+                'label'=>'Sector',
+                'value'=>'contratista.tipo_sector'
+                ],
+            [
+                'attribute'=>'contratista_id',
+                'label'=>'Sigla',
+                'value'=>'contratista.sigla'
+            ],
+            //'id',
+            //'username',
+            //'auth_key',
+            //'password_hash',
+            //'confirmation_token',
+            // 'status',
+            // 'superadmin',
+            // 'created_at',
+            // 'updated_at',
+            // 'registration_ip',
+            // 'bind_to_ip',
+            // 'email:email',
+            // 'email_confirmed:email',
+            // 'contratista_id',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
+  
+        <?= Html::a(Yii::t('app', 'Crear como persona natural'), ['creardatonatural'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Crear como persona jurdica'), ['creardatojuridica'], ['class' => 'btn btn-success']) ?>
 
 </div>
