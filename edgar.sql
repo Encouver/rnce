@@ -845,3 +845,173 @@ COMMENT ON COLUMN cuentas.jj_proviciones.sys_creado_el IS 'Fecha de creación de
 COMMENT ON COLUMN cuentas.jj_proviciones.sys_actualizado_el IS 'Fecha de última actualización del registro.';
 COMMENT ON COLUMN cuentas.jj_proviciones.sys_finalizado_el IS 'Fecha de "eliminado" el registro.';
 
+----------24/05/2015--------------
+
+DROP TABLE cuentas.jj_proviciones;
+DROP TABLE cuentas.hh_pasivo_laboral;
+DROP TABLE cuentas.hh_concepto;
+
+CREATE TABLE cuentas.conceptos
+(
+  id integer NOT NULL DEFAULT nextval('cuentas.hh_concepto_id_seq'::regclass), -- Clave primaria
+  nombre character varying(255) NOT NULL, -- Nombre del concepto de la cuenta hh
+  descripcion character varying(255), -- Descripcion del concepto
+  creado_por integer, -- Clave foranea al usuario
+  actualizado_por integer, -- Clave foranea al usuario
+  sys_status boolean NOT NULL DEFAULT true, -- Estatus interno del sistema
+  sys_creado_el timestamp with time zone DEFAULT now(), -- Fecha de creación del registro.
+  sys_actualizado_el timestamp with time zone DEFAULT now(), -- Fecha de última actualización del registro.
+  sys_finalizado_el timestamp with time zone, -- Fecha de "eliminado" el registro.
+  cuenta character varying(255), -- Indica a que cuenta pertence el concepto
+  CONSTRAINT hh_concepto_pkey PRIMARY KEY (id),
+  CONSTRAINT hh_concepto_nombre_cuenta_key UNIQUE (nombre, cuenta)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE cuentas.conceptos
+  OWNER TO eureka;
+COMMENT ON TABLE cuentas.conceptos
+  IS 'Tabla que almacena los conceptos de la cuenta hh';
+COMMENT ON COLUMN cuentas.conceptos.id IS 'Clave primaria';
+COMMENT ON COLUMN cuentas.conceptos.nombre IS 'Nombre del concepto de la cuenta hh';
+COMMENT ON COLUMN cuentas.conceptos.descripcion IS 'Descripcion del concepto';
+COMMENT ON COLUMN cuentas.conceptos.creado_por IS 'Clave foranea al usuario';
+COMMENT ON COLUMN cuentas.conceptos.actualizado_por IS 'Clave foranea al usuario';
+COMMENT ON COLUMN cuentas.conceptos.sys_status IS 'Estatus interno del sistema';
+COMMENT ON COLUMN cuentas.conceptos.sys_creado_el IS 'Fecha de creación del registro.';
+COMMENT ON COLUMN cuentas.conceptos.sys_actualizado_el IS 'Fecha de última actualización del registro.';
+COMMENT ON COLUMN cuentas.conceptos.sys_finalizado_el IS 'Fecha de "eliminado" el registro.';
+COMMENT ON COLUMN cuentas.conceptos.cuenta IS 'Indica a que cuenta pertence el concepto';
+
+-- Table: cuentas.hh_pasivo_laboral
+
+-- DROP TABLE cuentas.hh_pasivo_laboral;
+
+CREATE TABLE cuentas.hh_pasivo_laboral
+(
+  id serial NOT NULL, -- Clave primaria
+  saldo_p_anterior numeric(38,6) NOT NULL, -- Saldo del periodo anterior
+  importe_gasto_ejer_eco numeric(38,6) NOT NULL, -- Importe Gasto del Ejercicio Económico
+  importe_pago_ejer_eco numeric(38,6) NOT NULL, -- Importe Pago del Ejercicio Económico
+  saldo_al_cierre numeric(38,6), -- Saldo al cierre del ejercicio economico, calculado por el sistema
+  corriente boolean NOT NULL DEFAULT true, -- Indica si el registro es corriente o no
+  contratista_id integer NOT NULL, -- Clave foranea al contratista
+  anho character varying(100) NOT NULL, -- Año contable y mes
+  hh_concepto_id integer NOT NULL, -- Clave foranea a la tabla hh_concepto
+  otro_nombre character varying(255), -- Nombre que debe indicar el contratista si selecciona la opcion de Otros
+  creado_por integer, -- Clave foranea al usuario
+  actualizado_por integer, -- Clave foranea al usuario
+  sys_status boolean NOT NULL DEFAULT true, -- Estatus interno del sistema
+  sys_creado_el timestamp with time zone DEFAULT now(), -- Fecha de creación del registro.
+  sys_actualizado_el timestamp with time zone DEFAULT now(), -- Fecha de última actualización del registro.
+  sys_finalizado_el timestamp with time zone, -- Fecha de "eliminado" el registro.
+  CONSTRAINT hh_pasivo_laboral_pkey PRIMARY KEY (id),
+  CONSTRAINT "Fk_concepto_hh_id" FOREIGN KEY (hh_concepto_id)
+      REFERENCES cuentas.conceptos (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT hh_pasivo_laboral_contratista_id_fkey FOREIGN KEY (contratista_id)
+      REFERENCES contratistas (id) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE NO ACTION
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE cuentas.hh_pasivo_laboral
+  OWNER TO eureka;
+COMMENT ON TABLE cuentas.hh_pasivo_laboral
+  IS 'Tabla  pasivo laboral cuenta HH';
+COMMENT ON COLUMN cuentas.hh_pasivo_laboral.id IS 'Clave primaria';
+COMMENT ON COLUMN cuentas.hh_pasivo_laboral.saldo_p_anterior IS 'Saldo del periodo anterior';
+COMMENT ON COLUMN cuentas.hh_pasivo_laboral.importe_gasto_ejer_eco IS 'Importe Gasto del Ejercicio Económico';
+COMMENT ON COLUMN cuentas.hh_pasivo_laboral.importe_pago_ejer_eco IS 'Importe Pago del Ejercicio Económico';
+COMMENT ON COLUMN cuentas.hh_pasivo_laboral.saldo_al_cierre IS 'Saldo al cierre del ejercicio economico, calculado por el sistema';
+COMMENT ON COLUMN cuentas.hh_pasivo_laboral.corriente IS 'Indica si el registro es corriente o no';
+COMMENT ON COLUMN cuentas.hh_pasivo_laboral.contratista_id IS 'Clave foranea al contratista';
+COMMENT ON COLUMN cuentas.hh_pasivo_laboral.anho IS 'Año contable y mes';
+COMMENT ON COLUMN cuentas.hh_pasivo_laboral.hh_concepto_id IS 'Clave foranea a la tabla hh_concepto';
+COMMENT ON COLUMN cuentas.hh_pasivo_laboral.otro_nombre IS 'Nombre que debe indicar el contratista si selecciona la opcion de Otros';
+COMMENT ON COLUMN cuentas.hh_pasivo_laboral.creado_por IS 'Clave foranea al usuario';
+COMMENT ON COLUMN cuentas.hh_pasivo_laboral.actualizado_por IS 'Clave foranea al usuario';
+COMMENT ON COLUMN cuentas.hh_pasivo_laboral.sys_status IS 'Estatus interno del sistema';
+COMMENT ON COLUMN cuentas.hh_pasivo_laboral.sys_creado_el IS 'Fecha de creación del registro.';
+COMMENT ON COLUMN cuentas.hh_pasivo_laboral.sys_actualizado_el IS 'Fecha de última actualización del registro.';
+COMMENT ON COLUMN cuentas.hh_pasivo_laboral.sys_finalizado_el IS 'Fecha de "eliminado" el registro.';
+
+
+
+
+CREATE TABLE cuentas.jj_proviciones
+(
+  id serial NOT NULL, -- Clave primaria
+  saldo_p_anterior numeric(38,6) NOT NULL, -- Saldo del periodo anterior
+  importe_provisionado_periodo numeric(38,6) NOT NULL, -- Importe Provisionado del periodo
+  aplicacion_amortizacion numeric(38,6) NOT NULL, -- Aplicación o Amortizacion del periodo
+  saldo_al_cierre numeric(38,6) NOT NULL, -- Saldo al cierre del ejercicio economico, calculado por el sistema
+  corriente boolean NOT NULL DEFAULT true, -- Indica si el registro es corriente o no
+  contratista_id integer NOT NULL, -- Clave foranea al contratista
+  anho character varying(100) NOT NULL, -- Año contable y mes
+  creado_por integer, -- Clave foranea al usuario
+  actualizado_por integer, -- Clave foranea al usuario
+  sys_status boolean NOT NULL DEFAULT true, -- Estatus interno del sistema
+  sys_creado_el timestamp with time zone DEFAULT now(), -- Fecha de creación del registro.
+  sys_actualizado_el timestamp with time zone DEFAULT now(), -- Fecha de última actualización del registro.
+  sys_finalizado_el timestamp with time zone, -- Fecha de "eliminado" el registro.
+  concepto_id integer NOT NULL, -- Clave foranea a la tabla Concepto
+  CONSTRAINT jj_proviciones_pkey PRIMARY KEY (id),
+  CONSTRAINT jj_proviciones_concepto_id_fkey FOREIGN KEY (concepto_id)
+      REFERENCES cuentas.conceptos (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT jj_proviciones_contratista_id_fkey FOREIGN KEY (contratista_id)
+      REFERENCES contratistas (id) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE NO ACTION
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE cuentas.jj_proviciones
+  OWNER TO eureka;
+COMMENT ON TABLE cuentas.jj_proviciones
+  IS 'Tabla  pasivo laboral cuenta HH';
+COMMENT ON COLUMN cuentas.jj_proviciones.id IS 'Clave primaria';
+COMMENT ON COLUMN cuentas.jj_proviciones.saldo_p_anterior IS 'Saldo del periodo anterior';
+COMMENT ON COLUMN cuentas.jj_proviciones.importe_provisionado_periodo IS 'Importe Provisionado del periodo';
+COMMENT ON COLUMN cuentas.jj_proviciones.aplicacion_amortizacion IS 'Aplicación o Amortizacion del periodo';
+COMMENT ON COLUMN cuentas.jj_proviciones.saldo_al_cierre IS 'Saldo al cierre del ejercicio economico, calculado por el sistema';
+COMMENT ON COLUMN cuentas.jj_proviciones.corriente IS 'Indica si el registro es corriente o no';
+COMMENT ON COLUMN cuentas.jj_proviciones.contratista_id IS 'Clave foranea al contratista';
+COMMENT ON COLUMN cuentas.jj_proviciones.anho IS 'Año contable y mes';
+COMMENT ON COLUMN cuentas.jj_proviciones.creado_por IS 'Clave foranea al usuario';
+COMMENT ON COLUMN cuentas.jj_proviciones.actualizado_por IS 'Clave foranea al usuario';
+COMMENT ON COLUMN cuentas.jj_proviciones.sys_status IS 'Estatus interno del sistema';
+COMMENT ON COLUMN cuentas.jj_proviciones.sys_creado_el IS 'Fecha de creación del registro.';
+COMMENT ON COLUMN cuentas.jj_proviciones.sys_actualizado_el IS 'Fecha de última actualización del registro.';
+COMMENT ON COLUMN cuentas.jj_proviciones.sys_finalizado_el IS 'Fecha de "eliminado" el registro.';
+COMMENT ON COLUMN cuentas.jj_proviciones.concepto_id IS 'Clave foranea a la tabla Concepto';
+
+
+
+
+INSERT INTO conceptos VALUES (1, 'Remuneraciones', NULL, NULL, NULL, true, '2015-05-19 00:41:10.354-04:30', '2015-05-19 00:41:10.354-04:30', NULL, 'hh');
+INSERT INTO conceptos VALUES (2, 'Prestaciones Sociales', NULL, NULL, NULL, true, '2015-05-19 00:41:10.354-04:30', '2015-05-19 00:41:10.354-04:30', NULL, 'hh');
+INSERT INTO conceptos VALUES (3, 'Indemnizaciones', NULL, NULL, NULL, true, '2015-05-19 00:41:10.354-04:30', '2015-05-19 00:41:10.354-04:30', NULL, 'hh');
+INSERT INTO conceptos VALUES (4, 'Vacaciones', NULL, NULL, NULL, true, '2015-05-19 00:41:10.354-04:30', '2015-05-19 00:41:10.354-04:30', NULL, 'hh');
+INSERT INTO conceptos VALUES (5, 'Otros', NULL, NULL, NULL, true, '2015-05-19 00:41:10.354-04:30', '2015-05-19 00:41:10.354-04:30', NULL, 'hh');
+INSERT INTO conceptos VALUES (6, 'Utilidades', '
+', NULL, NULL, true, '2015-05-24 11:43:05.53-04:30', '2015-05-24 11:43:05.53-04:30', NULL, 'jj');
+INSERT INTO conceptos VALUES (7, 'Vacaciones', NULL, NULL, NULL, true, '2015-05-24 11:43:13.748-04:30', '2015-05-24 11:43:13.748-04:30', NULL, 'jj');
+INSERT INTO conceptos VALUES (8, 'Prestaciones sociales', NULL, NULL, NULL, true, '2015-05-24 11:43:24.668-04:30', '2015-05-24 11:43:24.668-04:30', NULL, 'jj');
+INSERT INTO conceptos VALUES (9, 'Otras retibuciones laborales', NULL, NULL, NULL, true, '2015-05-24 11:43:37.616-04:30', '2015-05-24 11:43:37.616-04:30', NULL, 'jj');
+INSERT INTO conceptos VALUES (10, 'Provisiones para litigios', NULL, NULL, NULL, true, '2015-05-24 11:43:51.544-04:30', '2015-05-24 11:43:51.544-04:30', NULL, 'jj');
+INSERT INTO conceptos VALUES (11, 'Provisiones para contingencias', NULL, NULL, NULL, true, '2015-05-24 11:44:03.463-04:30', '2015-05-24 11:44:03.463-04:30', NULL, 'jj');
+INSERT INTO conceptos VALUES (12, 'Otros', NULL, NULL, NULL, true, '2015-05-24 11:44:10.667-04:30', '2015-05-24 11:44:10.667-04:30', NULL, 'jj');
+
+
+--
+-- TOC entry 2766 (class 0 OID 0)
+-- Dependencies: 270
+-- Name: hh_concepto_id_seq; Type: SEQUENCE SET; Schema: cuentas; Owner: eureka
+--
+
+SELECT pg_catalog.setval('hh_concepto_id_seq', 12, true);
+
