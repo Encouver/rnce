@@ -86,4 +86,12 @@ class Domicilios extends \common\components\BaseActiveRecord
     {
         return $this->hasOne(DocumentosRegistrados::className(), ['id' => 'documento_registrado_id']);
     }
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDireccion()
+    {
+        return $this->hasOne(Direcciones::className(), ['id' => 'direccion_id']);
+    }
+
 }
