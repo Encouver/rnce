@@ -5,6 +5,7 @@ namespace common\models\a;
 use common\models\p\Contratistas;
 use common\models\p\PrincipiosContables;
 use kartik\builder\Form;
+use kartik\checkbox\CheckboxX;
 use kartik\money\MaskMoney;
 use kartik\widgets\DatePicker;
 use kartik\widgets\Select2;
@@ -375,16 +376,16 @@ class ActivosBienes extends \common\components\BaseActiveRecord
                      'templateResult' => new JsExpression('function(city) { return city.text; }'),
                      'templateSelection' => new JsExpression('function (city) { return city.text; }'),
                  ],]],
-            'propio'=>['type'=>Form::INPUT_CHECKBOX,],
-            'factura'=>['type'=>Form::INPUT_CHECKBOX,],
-             'documento'=>['type'=>Form::INPUT_CHECKBOX,],
+            'propio'=>['type'=>Form::INPUT_WIDGET, 'widgetClass'=>CheckboxX::className()],
+            'factura'=>['type'=>Form::INPUT_WIDGET, 'widgetClass'=>CheckboxX::className()],
+             'documento'=>['type'=>Form::INPUT_WIDGET, 'widgetClass'=>CheckboxX::className()],
 
              'metodo_medicion_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(ActivosSysMetodosMedicion::find()->all(),'id','nombre',function($model){ return $model->modelo->nombre;}), 'pluginOptions'=>['allowClear' => true],'options'=>['id'=>'metodo-medicion','placeholder'=>'Seleccionar método de medición', 'onchange'=>'js:']]],
              // Mejora
-             'mejora'=>['type'=>Form::INPUT_CHECKBOX,],
-             'perdida_reverso'=>['type'=>Form::INPUT_CHECKBOX,],
+             'mejora'=>['type'=>Form::INPUT_WIDGET, 'widgetClass'=>CheckboxX::className()],
+             'perdida_reverso'=>['type'=>Form::INPUT_WIDGET, 'widgetClass'=>CheckboxX::className()],
 
-             'proc_productivo'=>['type'=>Form::INPUT_CHECKBOX,],
+             'proc_productivo'=>['type'=>Form::INPUT_WIDGET, 'widgetClass'=>CheckboxX::className()],
              // Si proc_productivo es true
              'directo'=>['type'=>Form::INPUT_CHECKBOX,'columnOptions'=>['hidden'=>true,]],
              // Si proceso productivo es false.

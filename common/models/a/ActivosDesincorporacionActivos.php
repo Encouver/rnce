@@ -2,7 +2,11 @@
 
 namespace common\models\a;
 
+use kartik\builder\Form;
+use kartik\widgets\DatePicker;
+use kartik\widgets\Select2;
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "activos.desincorporacion_activos".
@@ -71,5 +75,31 @@ class ActivosDesincorporacionActivos extends \common\components\BaseActiveRecord
     public function getSysMotivo()
     {
         return $this->hasOne(ActivosSysMotivos::className(), ['id' => 'sys_motivo_id']);
+    }
+
+    public function getFormAttribs() {
+        return [
+            // primary key column
+            'id'=>[ // primary key attribute
+                'type'=>Form::INPUT_HIDDEN,
+                'columnOptions'=>['hidden'=>true]
+            ],
+
+            'sys_motivo_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(ActivosSysMotivos::find()->all(),'id','nombre'),
+                'options'=>['id'=>'','placeholder'=>'Seleccionar motivo', 'onchange'=>'js:'],'pluginOptions' => [
+                    'allowClear' => false,
+                ],]],
+
+            'fecha'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>DatePicker::className(),'options'=>['options' => ['placeholder' => 'Seleccione fecha ...'],
+                'convertFormat' => true,
+                'pluginOptions' => [
+                    'format' => 'd-M-yyyy ',
+                    //'startDate' => date('d-m-Y h:i A'),//'01-Mar-2014 12:00 AM',
+                    'todayHighlight' => true
+                ]]],
+            'precio_venta'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),],
+            'valor_neto_libro'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),],
+
+        ];
     }
 }

@@ -90,7 +90,7 @@ AppAsset::register($this);
                          ['label' => 'Bancos', 'url' => ['/bancos-contratistas/index']],
                         
                          ['label' => 'Objeto empresa', 'url' => ['/objetos-empresas/index']],
-                         ['label' => 'Accionistas Representante Legal o Junta Directiva', 'url' => ['/accionistas-otros/crearaccionistaotro']],
+                        
                          ['label' => 'Comisarios', 'url' => ['/comisarios-auditores/crearcomisario']],
                          ['label' => 'Responsable Contabilidad', 'url' => ['/comisarios-auditores/crearresponsable']],
                          ['label' => 'Contador Auditor', 'url' => ['/comisarios-auditores/crearcontador']],
@@ -111,6 +111,7 @@ AppAsset::register($this);
                         ['label' => 'Capital', 'url' => ['/actas-constitutivas/crearcapitalsuscrito']],
                         ['label' => 'Origen Capital', 'url' => ['/origenes-capitales/index']],
                         ['label' => 'Certificacion Aportes', 'url' => ['/certificaciones-aportes/create']],
+                         ['label' => 'Accionistas Representante Legal o Junta Directiva', 'url' => ['/accionistas-otros/index']],
                         ['label' => 'Fondos Reservas', 'url' => ['/fondos-reservas/create']],
                         ['label' => 'Resumen', 'url' => ['/actas-constitutivas/resumenacta']],
                     ],

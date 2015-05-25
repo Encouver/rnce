@@ -18,10 +18,10 @@ class AccionistasOtrosSearch extends AccionistasOtros
     public function rules()
     {
         return [
-            [['id', 'contratista_id', 'natural_juridica_id', 'documento_registrado_id', 'empresa_fusionada_id'], 'integer'],
+            [['id', 'contratista_id', 'natural_juridica_id', 'documento_registrado_id', 'empresa_fusionada_id', 'creado_por', 'actualizado_por'], 'integer'],
             [['porcentaje_accionario', 'valor_compra'], 'number'],
-            [['fecha', 'cargo', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el', 'repr_legal_vigencia', 'tipo_obligacion'], 'safe'],
-            [['accionista', 'junta_directiva', 'rep_legal', 'sys_status'], 'boolean'],
+            [['fecha', 'repr_legal_vigencia', 'tipo_obligacion', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el', 'tipo_cargo'], 'safe'],
+            [['accionista', 'junta_directiva', 'rep_legal', 'sys_status', 'empresa_relacionada'], 'boolean'],
         ];
     }
 
@@ -52,7 +52,7 @@ class AccionistasOtrosSearch extends AccionistasOtros
         $this->load($params);
 
         if (!$this->validate()) {
-            // uncomment the following line if you do not want to any records when validation fails
+            // uncomment the following line if you do not want to return any records when validation fails
             // $query->where('0=1');
             return $dataProvider;
         }
@@ -68,16 +68,19 @@ class AccionistasOtrosSearch extends AccionistasOtros
             'junta_directiva' => $this->junta_directiva,
             'rep_legal' => $this->rep_legal,
             'documento_registrado_id' => $this->documento_registrado_id,
+            'repr_legal_vigencia' => $this->repr_legal_vigencia,
+            'empresa_fusionada_id' => $this->empresa_fusionada_id,
+            'creado_por' => $this->creado_por,
+            'actualizado_por' => $this->actualizado_por,
             'sys_status' => $this->sys_status,
             'sys_creado_el' => $this->sys_creado_el,
             'sys_actualizado_el' => $this->sys_actualizado_el,
             'sys_finalizado_el' => $this->sys_finalizado_el,
-            'repr_legal_vigencia' => $this->repr_legal_vigencia,
-            'empresa_fusionada_id' => $this->empresa_fusionada_id,
+            'empresa_relacionada' => $this->empresa_relacionada,
         ]);
 
-        $query->andFilterWhere(['like', 'cargo', $this->cargo])
-            ->andFilterWhere(['like', 'tipo_obligacion', $this->tipo_obligacion]);
+        $query->andFilterWhere(['like', 'tipo_obligacion', $this->tipo_obligacion])
+            ->andFilterWhere(['like', 'tipo_cargo', $this->tipo_cargo]);
 
         return $dataProvider;
     }

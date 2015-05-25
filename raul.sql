@@ -93,3 +93,25 @@ ALTER TABLE personas_juridicas
   ADD CONSTRAINT personas_juridicas_sys_pais_id_fkey FOREIGN KEY (sys_pais_id)
       REFERENCES sys_paises (id) MATCH SIMPLE
       ON UPDATE CASCADE ON DELETE NO ACTION;
+
+
+
+---24 mayo 06-00 pm---
+
+
+ALTER TABLE accionistas_otros ADD COLUMN empresa_relacionada boolean;
+ALTER TABLE accionistas_otros ALTER COLUMN empresa_relacionada SET NOT NULL;
+ALTER TABLE accionistas_otros ALTER COLUMN empresa_relacionada SET DEFAULT false;
+COMMENT ON COLUMN accionistas_otros.empresa_relacionada IS 'Si el accionista proviene de una fusion empresarial';
+
+
+ALTER TABLE accionistas_otros DROP COLUMN cargo;
+
+create type tipo_accionista_carga as enum ('PRESIDENTE','DIRECTOR','VOCERO DE LA UNIDAD DE ADMINISTRACION','VOCERO DE LA UNIDAD DE GESTION PRODUCTIVA','VOCERO DE LA UNIDAD DE FORMACION','VOCERO DE LA UNIDAD DE CONTRALORIA SOCIAL','INSTANCIA DE ADMINISTRACION','INSTANCIA DE CONTROL Y EVALUACION','INSTANCIA DE EDUCACION');
+ALTER TABLE accionistas_otros ADD COLUMN tipo_cargo tipo_accionista_carga;
+COMMENT ON COLUMN accionistas_otros.tipo_cargo IS 'Tipo de cargo en caso de ser partede la junta directiva puede ser PRESIDENTE, DIRECTOR, VOCERO DE LA UNIDAD DE ADMINISTRACION, VOCERO DE LA UNIDAD DE GESTION PRODUCTIVA, VOCERO DE LA UNIDAD DE FORMACION,VOCERO DE LA UNIDAD DE CONTRALORIA SOCIAL,INSTANCIA DE ADMINISTRACION, INSTANCIA DE CONTROL Y EVALUACION INSTANCIA DE EDUCACION';
+
+ALTER TABLE accionistas_otros ALTER COLUMN accionista SET DEFAULT false;
+ALTER TABLE accionistas_otros ALTER COLUMN junta_directiva SET DEFAULT false;
+ALTER TABLE accionistas_otros ALTER COLUMN rep_legal SET DEFAULT false;
+

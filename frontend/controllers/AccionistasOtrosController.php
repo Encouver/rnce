@@ -5,6 +5,7 @@ namespace frontend\controllers;
 use Yii;
 use common\models\p\AccionistasOtros;
 use app\models\AccionistasOtrosSearch;
+use common\models\a\ActivosDocumentosRegistrados;
 use common\components\BaseController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -62,8 +63,29 @@ class AccionistasOtrosController extends BaseController
     {
         $model = new AccionistasOtros();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            $registro = ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id, 'tipo_documento_id'=>1]);
+            $model->documento_registrado_id=$registro->id;
+            $model->contratista_id = Yii::$app->user->identity->contratista_id;
+            if($model->tipo_cargo==""){
+                $model->tipo_cargo=null;
+            }
+            if($model->accionista==0 && $model->junta_directiva==0 && $model->rep_legal==0){
+                  Yii::$app->session->setFlash('error','Debe ingresar si es contratista, representante legal o junta directiva');
+                 return $this->render('create', [
+                'model' => $model,
+            ]);
+            }
+            if($model->save()){
+                         return $this->redirect(['index']);        
+
+            }else{
+                Yii::$app->session->setFlash('error','Error en la carga');
+                 return $this->render('create', [
+                'model' => $model,
+            ]);
+            }
+          
         } else {
             return $this->render('create', [
                 'model' => $model,
