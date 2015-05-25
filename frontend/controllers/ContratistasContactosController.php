@@ -63,101 +63,36 @@ class ContratistasContactosController extends Controller
     public function actionCreate()
     {
         $model = new ContratistasContactos();
-        $model2  = new PersonasNaturales();
-        $model3  = new SysNaturalesJuridicas();
 
-        if ($model2->load(Yii::$app->request->post())) {
-            
-            $model3->rif= $model2->rif;
-            $model3->juridica= false;
-            $model3->denominacion=$model2->primer_nombre.' '.$model2->primer_apellido;
-            $model3->sys_status=true;
-            $model3->save();
-            
-            
-            $model2->sys_pais_id = 1;
-            $model2->nacionalidad = "NACIONAL";
-            $model2->creado_por = 1;
-            
-            
-            
-            $model2->save();
-            $model->contacto_id = $model2->id;
-            $model->contratista_id = 1;
-            $model->save();
-            
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('create', [
+        if ($model->load(Yii::$app->request->post()) ) {
+         
+            $model->contratista_id=  Yii::$app->user->identity->contratista_id;
+            $contacto= ContratistasContactos::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id]);
+            if(isset($contacto)){
+                 Yii::$app->session->setFlash('error','Usuario ya posse una persona de contacto asociada');
+                       return $this->render('create', [
                 'model' => $model,
-                'model2' => $model2,
             ]);
-        }
-    }
-    public function actionPersonacontacto()
-   {
-
-        $contratista_contacto = new ContratistasContactos();
-        $persona_natural  = new PersonasNaturales();
-         $natural_juridica  = new SysNaturalesJuridicas();
-
-        if ($persona_natural->load(Yii::$app->request->post())) {
-           $transaction = \Yii::$app->db->beginTransaction();
-           try {
-                $flag =false;
-                $natural_juridica->rif= $persona_natural->rif;
-            $natural_juridica->juridica= false;
-            $natural_juridica->denominacion=$persona_natural->primer_nombre.' '.$persona_natural->primer_apellido;
-            $natural_juridica->sys_status=true;
-            $natural_juridica->save();
-
-                $persona_natural->sys_pais_id = 1;
-            $persona_natural->nacionalidad = "NACIONAL";
-            $persona_natural->creado_por = 1;
-               if ($persona_natural->save()) {
-                $contratista_contacto->contacto_id = $persona_natural->id;
-
-           $usuario= \common\models\p\User::findOne(Yii::$app->user->identity->id);
-            $contratista_contacto->contratista_id=  $usuario->contratista_id;
-                   if ($contratista_contacto->save()) {
-
-
-                               $transaction->commit();
-                               return "Dtos guardados con exito";
-                               $flag = true;
+            }
+            if('')
+                   if ($model->save()) {
+                return $this->redirect(['index']);
 
 
                    }else{
-                       return "Datos no guardados";
+                       Yii::$app->session->setFlash('error','Error en la carga');
+                       return $this->render('create', [
+                'model' => $model,
+            ]);
                    }
-               }else{
-
-                   return "Persona de contacto no guardada";
-               }
-
-               if(!$flag)
-               {
-                   $transaction->rollBack();
-               }
-           } catch (Exception $e) {
-               $transaction->rollBack();
-           }
-       }else{
-           return "Datos incompletos";
-       }
-
-
-
-   }
-   
-   
-   public function actionCrearcontacto()
+            
            
-    {
-        $persona_natural = new PersonasNaturales();
-        return $this->render('_personas_contactos',['persona_natural' => $persona_natural]);
+        } else {
+            return $this->render('create', [
+                'model' => $model,
+            ]);
+        }
     }
-   
     /**
      * Updates an existing ContratistasContactos model.
      * If update is successful, the browser will be redirected to the 'view' page.

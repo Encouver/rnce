@@ -140,7 +140,7 @@ class AccionistasOtrosController extends BaseController
     if (!is_null($q)) {
         $query = new \yii\db\Query;
         
-        $query->select("accionista.natural_juridica_id, natura.denominacion AS text")
+        $query->select("natura.id, natura.denominacion AS text")
             ->from('accionistas_otros as accionista, sys_naturales_juridicas as natura')
             ->where($buscar_accionista)
             ->limit(20);
@@ -150,7 +150,7 @@ class AccionistasOtrosController extends BaseController
         $out['results'] = array_values($data);
     }
     elseif ($id > 0) {
-        $out['results'] = ['id' => $id, 'text' => ActivosBienes::find($id)->detalle];
+        $out['results'] = ['id' => $id, 'text' => 'hola mundo'];
     }
   
     return $out;

@@ -133,3 +133,14 @@ ALTER TABLE comisarios_auditores ALTER COLUMN comisario SET DEFAULT false;
 ALTER TABLE comisarios_auditores ALTER COLUMN auditor SET DEFAULT false;
 ALTER TABLE comisarios_auditores ALTER COLUMN responsable_contabilidad SET DEFAULT false;
 ALTER TABLE comisarios_auditores ALTER COLUMN informe_conversion SET DEFAULT false;
+
+
+
+
+--25 mayo 08:00am--
+
+ALTER TABLE contratistas_contactos DROP CONSTRAINT contratistas_contactos_contacto_id_fkey;
+ALTER TABLE contratistas_contactos
+  ADD CONSTRAINT contratistas_contactos_contacto_id_fkey FOREIGN KEY (contacto_id)
+      REFERENCES sys_naturales_juridicas (id) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE NO ACTION;
