@@ -1401,3 +1401,12 @@ VALUES ('Anticipo por Enajenación de Inmuebles', 'd1');
 
 
 ALTER TABLE cuentas.d1_d2_beneficiario DROP COLUMN tipo_beneficio;
+
+
+
+
+/**************     25/05/2015 *************/
+
+
+ALTER TABLE activos.bienes ADD COLUMN perdida_reverso boolean;
+COMMENT ON COLUMN activos.bienes.perdida_reverso IS 'Perdida o reverso.';

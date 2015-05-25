@@ -101,4 +101,8 @@ class ActivosArrendamientos extends \common\components\BaseActiveRecord
     {
         return $this->hasMany(ActivosBienes::className(), ['arrendamiento_id' => 'id']);
     }
+
+    public function Etiqueta(){
+        return $this->tipoArrendamiento->nombre.' - Num Doc: '.$this->num_doc_notariado;
+    }
 }

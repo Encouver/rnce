@@ -182,6 +182,25 @@ $this->params['breadcrumbs'][] = $this->title;
                     'format'=>'raw'
                 ],
                 [
+                    'attribute'=>'arrendamiento_id',
+                    //'header'=>'Banco',
+                    'vAlign'=>'middle',
+                    'value'=>function ($model, $key, $index, $widget) {
+                        if(isset($model->arrendamiento))
+                            return Html::a($model->arrendamiento->etiqueta(), ['activos-arrendamientos','id'=>$model->arrendamiento->id], [
+                                'title'=>'Ver detalles sobre el arrendamiento.',
+                                //'onclick'=>'alert("This will open the author page.\n\nDisabled for this demo!")'
+                            ]);
+                    },
+                    //'filterType'=>GridView::FILTER_SELECT2,
+                    //'filter'=>ArrayHelper::map(Author::find()->orderBy('name')->asArray()->all(), 'id', 'name'),
+                    'filterWidgetOptions'=>[
+                        'pluginOptions'=>['allowClear'=>true],
+                    ],
+                    'filterInputOptions'=>['placeholder'=>'Origen'],
+                    'format'=>'raw'
+                ],
+                [
                     'attribute'=>'fecha_origen',
                     'filterType'=>GridView::FILTER_DATE,
                     'format'=>'raw',
