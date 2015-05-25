@@ -54,15 +54,16 @@ class AccionistasOtros extends \common\components\BaseActiveRecord
     {
         return [
             [['contratista_id', 'natural_juridica_id', 'documento_registrado_id', 'tipo_obligacion'], 'required'],
+            //[['accionista'], 'compare', 'operator'=> '==', 'compareValue'=>true, 'message'=> 'asdsad'],
             [['contratista_id', 'natural_juridica_id', 'documento_registrado_id', 'empresa_fusionada_id', 'creado_por', 'actualizado_por'], 'integer'],
             [['porcentaje_accionario', 'valor_compra'], 'number'],
             [['fecha', 'repr_legal_vigencia', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['accionista', 'junta_directiva', 'rep_legal', 'sys_status', 'empresa_relacionada'], 'boolean'],
             [['tipo_obligacion', 'tipo_cargo'], 'string'],
-            ['repr_legal_vigencia', 'required', 'when' => function ($model) {
-                return $model->porcentaje_accionario == null;
+            ['accionista', 'compare', 'message' => 'RAUL ME LO MAMA RICO RICO', 'operator'=> '==', 'compareValue'=>true, 'when' => function ($model) {
+                return $model->porcentaje_accionario != '';
             }, 'whenClient' => "function (attribute, value) {
-                return true;
+                return $('#accionistasotros-porcentaje_accionario').val() != '';
             }"]
         ];
     }
