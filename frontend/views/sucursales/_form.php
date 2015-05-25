@@ -11,6 +11,7 @@ use yii\web\JsExpression;
 /* @var $form yii\widgets\ActiveForm */
 $url = \yii\helpers\Url::to(['accionistas-otros/accionistas-otros-lista']);
 //$persona = empty($model->natural_juridica_id) ? '' : City::findOne($model->natural_juridica_id)->denominacion;
+$persona = empty($model->natural_juridica_id) ? '' : \common\models\p\SysNaturalesJuridicas::findOne($model->natural_juridica_id)->denominacion;
 
 
 ?>
@@ -20,7 +21,7 @@ $url = \yii\helpers\Url::to(['accionistas-otros/accionistas-otros-lista']);
     <?php $form = ActiveForm::begin(); ?>
 
    <?= $form->field($model, 'natural_juridica_id')->widget(Select2::classname(), [
-    'initValueText' => '', // set the initial display text
+    'initValueText' => $persona, // set the initial display text
     'options' => ['placeholder' => 'Numero de identificacion ...'],
     'pluginOptions' => [
         'allowClear' => true,

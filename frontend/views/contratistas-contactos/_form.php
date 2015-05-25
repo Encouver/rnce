@@ -11,7 +11,7 @@ $url = \yii\helpers\Url::to(['accionistas-otros/accionistas-otros-lista']);
 /* @var $this yii\web\View */
 /* @var $model common\models\p\ContratistasContactos */
 /* @var $form yii\widgets\ActiveForm */
-$persona = empty($model->contacto_id) ? '' : \common\models\p\AccionistasOtros::findOne($model->contacto_id);
+$persona = empty($model->contacto_id) ? '' : \common\models\p\SysNaturalesJuridicas::findOne($model->contacto_id)->denominacion;
 ?>
 
 <div class="contratistas-contactos-form">
@@ -19,7 +19,7 @@ $persona = empty($model->contacto_id) ? '' : \common\models\p\AccionistasOtros::
     <?php $form = ActiveForm::begin(); ?>
 
    <?= $form->field($model, 'contacto_id')->widget(Select2::classname(), [
-    //'initValueText' => $persona, // set the initial display text
+    'initValueText' => $persona, // set the initial display text
     'options' => ['placeholder' => 'Numero de identificacion ...'],
     'pluginOptions' => [
         'allowClear' => true,
