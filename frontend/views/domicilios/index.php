@@ -19,6 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
+        'summary'=>'',
         //'filterModel' => $searchModel,
         'columns' => [
             //['class' => 'yii\grid\SerialColumn'],
@@ -78,7 +79,7 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'fiscal:boolean',
             // 'direccion_id',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn', 'template'=>'{update}{delete}'],
         ],
     ]); ?>
      <p>

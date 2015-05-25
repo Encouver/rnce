@@ -15,25 +15,25 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'persona_natural_id') ?>
-
     <?= $form->field($model, 'direccion_id') ?>
 
     <?= $form->field($model, 'contratista_id') ?>
 
-    <?= $form->field($model, 'sys_status')->checkbox() ?>
+    <?= $form->field($model, 'id') ?>
 
-    <?= $form->field($model, 'sys_creado_el') ?>
+    <?= $form->field($model, 'creado_por') ?>
+
+    <?= $form->field($model, 'actualizado_por') ?>
+
+    <?php // echo $form->field($model, 'sys_status')->checkbox() ?>
+
+    <?php // echo $form->field($model, 'sys_creado_el') ?>
 
     <?php // echo $form->field($model, 'sys_actualizado_el') ?>
 
     <?php // echo $form->field($model, 'sys_finalizado_el') ?>
 
-    <?php // echo $form->field($model, 'id') ?>
-
-    <?php // echo $form->field($model, 'representante')->checkbox() ?>
-
-    <?php // echo $form->field($model, 'accionista')->checkbox() ?>
+    <?php // echo $form->field($model, 'natural_juridica_id') ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>

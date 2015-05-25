@@ -115,3 +115,12 @@ ALTER TABLE accionistas_otros ALTER COLUMN accionista SET DEFAULT false;
 ALTER TABLE accionistas_otros ALTER COLUMN junta_directiva SET DEFAULT false;
 ALTER TABLE accionistas_otros ALTER COLUMN rep_legal SET DEFAULT false;
 
+ALTER TABLE sucursales DROP COLUMN persona_natural_id;
+ALTER TABLE sucursales ADD COLUMN natural_juridica_id integer;
+ALTER TABLE sucursales ALTER COLUMN natural_juridica_id SET NOT NULL;
+COMMENT ON COLUMN sucursales.natural_juridica_id IS 'Clave foranea a la tabla sys_naturales_juridicas';
+ALTER TABLE sucursales
+  ADD CONSTRAINT sucursales_natural_juridica_id_fkey FOREIGN KEY (natural_juridica_id)
+      REFERENCES sys_naturales_juridicas (id) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE NO ACTION;
+

@@ -5,22 +5,22 @@ namespace common\models\p;
 use Yii;
 
 /**
- * This is the model class for table "public.sucursales".
+ * This is the model class for table "sucursales".
  *
- * @property integer $persona_natural_id
  * @property integer $direccion_id
  * @property integer $contratista_id
+ * @property integer $id
+ * @property integer $creado_por
+ * @property integer $actualizado_por
  * @property boolean $sys_status
  * @property string $sys_creado_el
  * @property string $sys_actualizado_el
  * @property string $sys_finalizado_el
- * @property integer $id
- * @property boolean $representante
- * @property boolean $accionista
+ * @property integer $natural_juridica_id
  *
  * @property Contratistas $contratista
  * @property Direcciones $direccion
- * @property PersonasNaturales $personaNatural
+ * @property SysNaturalesJuridicas $naturalJuridica
  */
 class Sucursales extends \common\components\BaseActiveRecord
 {
@@ -29,7 +29,7 @@ class Sucursales extends \common\components\BaseActiveRecord
      */
     public static function tableName()
     {
-        return 'public.sucursales';
+        return 'sucursales';
     }
 
     /**
@@ -38,9 +38,9 @@ class Sucursales extends \common\components\BaseActiveRecord
     public function rules()
     {
         return [
-            [['persona_natural_id', 'direccion_id', 'contratista_id', 'representante', 'accionista'], 'required'],
-            [['persona_natural_id', 'direccion_id', 'contratista_id'], 'integer'],
-            [['sys_status', 'representante', 'accionista'], 'boolean'],
+            [['direccion_id', 'contratista_id', 'natural_juridica_id'], 'required'],
+            [['direccion_id', 'contratista_id', 'creado_por', 'actualizado_por', 'natural_juridica_id'], 'integer'],
+            [['sys_status'], 'boolean'],
             [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe']
         ];
     }
@@ -51,16 +51,16 @@ class Sucursales extends \common\components\BaseActiveRecord
     public function attributeLabels()
     {
         return [
-            'persona_natural_id' => Yii::t('app', 'Persona Natural ID'),
             'direccion_id' => Yii::t('app', 'Direccion ID'),
             'contratista_id' => Yii::t('app', 'Contratista ID'),
+            'id' => Yii::t('app', 'ID'),
+            'creado_por' => Yii::t('app', 'Creado Por'),
+            'actualizado_por' => Yii::t('app', 'Actualizado Por'),
             'sys_status' => Yii::t('app', 'Sys Status'),
             'sys_creado_el' => Yii::t('app', 'Sys Creado El'),
             'sys_actualizado_el' => Yii::t('app', 'Sys Actualizado El'),
             'sys_finalizado_el' => Yii::t('app', 'Sys Finalizado El'),
-            'id' => Yii::t('app', 'ID'),
-            'representante' => Yii::t('app', 'Representante'),
-            'accionista' => Yii::t('app', 'Accionista'),
+            'natural_juridica_id' => Yii::t('app', 'Natural Juridica ID'),
         ];
     }
 
@@ -83,8 +83,8 @@ class Sucursales extends \common\components\BaseActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getPersonaNatural()
+    public function getNaturalJuridica()
     {
-        return $this->hasOne(PersonasNaturales::className(), ['id' => 'persona_natural_id']);
+        return $this->hasOne(SysNaturalesJuridicas::className(), ['id' => 'natural_juridica_id']);
     }
 }

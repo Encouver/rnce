@@ -21,15 +21,28 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+        //'filterModel' => $searchModel,
+        'summary'=>"",
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'contratista_id',
-            'natural_juridica_id',
+            //'id',
+            [
+                'attribute'=>'natural_juridica_id',
+                'label'=>'Nombre Accionista',
+                'value'=>'naturalJuridica.denominacion'
+            ],
+            'accionista:boolean',
             'porcentaje_accionario',
-            'valor_compra',
+            'junta_directiva:boolean',
+            'tipo_cargo',
+            'rep_legal:boolean',
+            'repr_legal_vigencia',
+            'tipo_obligacion',
+            
+            //'contratista_id',
+           // 'natural_juridica_id',
+            //'valor_compra',
             // 'fecha',
             // 'accionista:boolean',
             // 'junta_directiva:boolean',
@@ -47,7 +60,7 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'empresa_relacionada:boolean',
             // 'tipo_cargo',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn','template'=>'{update}{delete}'],
         ],
     ]); ?>
 

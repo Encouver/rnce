@@ -93,61 +93,7 @@ class AccionistasOtrosController extends BaseController
         }
     }
     
-     public function actionCrearaccionistaotro()
-    {
-       return $this->render('_accionistas');
-    }
-     public function actionCrearaccionista()
-    {
-        $accionista_otro = new AccionistasOtros();
-        $usuario= \common\models\p\User::findOne(Yii::$app->user->identity->id);
-        if ($accionista_otro->load(Yii::$app->request->post())) {
-            
-             $transaction = \Yii::$app->db->beginTransaction();
-           try {
-                
-            if($accionista_otro->accionista=="1" && $accionista_otro->porcentaje_accionario==null){
-               return "Datos incompletos debe ingresar el porcentaje accionario";
-            }
-             if($accionista_otro->accionista=="0" && $accionista_otro->porcentaje_accionario!=null){
-               return "Debe seleccionar el campo accionista";
-            }
-             if($accionista_otro->junta_directiva=="1" && $accionista_otro->cargo==null){
-               return "Datos incompletos debe ingresar el cargo";
-            }
-            if($accionista_otro->junta_directiva=="0" && $accionista_otro->cargo!=null){
-               return "Datos seleccionar el campo junta directiva";
-            }
-            if($accionista_otro->rep_legal=="1" && $accionista_otro->repr_legal_vigencia==null){
-               return "Datos incompletos debe ingresar la fecha de vigencia";
-            }
 
-            if($accionista_otro->rep_legal=="0" && $accionista_otro->repr_legal_vigencia!=null){
-                return "Datos seleccionar el campo representante legal";
-            }
-            $accionista_otro->contratista_id = $usuario->contratista_id;
-           
-               if ($accionista_otro->save()) {
-           
-
-                               $transaction->commit();
-                               return "Datos guardados con exito";
-                               
-
-
-                   }else{
-                        $transaction->rollBack();
-                       return "Datos no guardados";
-                   }
-             
-             
-           } catch (Exception $e) {
-               $transaction->rollBack();
-           }
-        }
-    }
-    
-    
      
     
     /**
@@ -160,8 +106,25 @@ class AccionistasOtrosController extends BaseController
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+             if($model->tipo_cargo==""){
+                $model->tipo_cargo=null;
+            }
+            if($model->accionista==0 && $model->junta_directiva==0 && $model->rep_legal==0){
+                  Yii::$app->session->setFlash('error','Debe ingresar si es contratista, representante legal o junta directiva');
+                 return $this->render('create', [
+                'model' => $model,
+            ]);
+            }
+            if($model->save()){
+                 return $this->redirect(['index']);
+            }else{
+                Yii::$app->session->setFlash('error','Error en la carga');
+                 return $this->render('update', [
+                'model' => $model,
+            ]);
+            }
+           
         } else {
             return $this->render('update', [
                 'model' => $model,

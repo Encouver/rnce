@@ -86,7 +86,7 @@ AppAsset::register($this);
                          ['label' => 'Datos basicos', 'url' => ['/contratistas/index']],
                          ['label' => 'Direccion Principal', 'url' => ['/domicilios/index']],
                          ['label' => 'Informacion de contacto', 'url' => ['/contratistas-contactos/crearcontacto']],
-                         ['label' => 'Sucursales', 'url' => ['/sucursales/crearsucursal']],
+                         ['label' => 'Sucursales', 'url' => ['/sucursales/index']],
                          ['label' => 'Bancos', 'url' => ['/bancos-contratistas/index']],
                         
                          ['label' => 'Objeto empresa', 'url' => ['/objetos-empresas/index']],
