@@ -16,6 +16,13 @@ use yii\helpers\Url;
 ?>
 
 <div class="activos-bienes-form">
+<?php
+$urlFactura = Url::to(['activos-facturas/create-ajax']);
+
+$urlDocumento = Url::to(['activos-documentos-registrados/create']);
+
+?>
+
 
 <?php  Modal::begin([
     'options'=>['id'=>'m1_factura'],
@@ -23,7 +30,7 @@ use yii\helpers\Url;
     'toggleButton' => ['label' => 'Agregar Factura', 'class'=>'btn btn-lg btn-primary','style'=>'margin-bottom:10px;'],
 ]);?>
 
-<?php $form2 = ActiveForm::begin(['id'=>'modal_factura', 'type'=>ActiveForm::TYPE_VERTICAL]); ?>
+<?php $form2 = ActiveForm::begin(['id'=>$modelFactura->formName(), 'type'=>ActiveForm::TYPE_VERTICAL,'action'=>$urlFactura]); ?>
 
     <?php echo Form::widget([
         'model'=>$modelFactura,
@@ -43,34 +50,37 @@ use yii\helpers\Url;
 
 
 
-<!--
-<?php /* Modal::begin([
+
+<?php  Modal::begin([
     'options'=>['id'=>'m1_documento'],
     'header' => '<h4 style="margin:0; padding:0">Agregar Documento Registrado</h4>',
     'toggleButton' => ['label' => 'Agregar Documento Registrado', 'class'=>'btn btn-lg btn-primary','style'=>'margin-bottom:10px;'],
-]);*/?>
+]);?>
 <div id="output-documento">
-    <?php /*$form2 = ActiveForm::begin(['id'=>'modal_documento', 'type'=>ActiveForm::TYPE_VERTICAL]); */?>
+    <?php $form2 = ActiveForm::begin(['id'=>$modelDocumento->formName(), 'type'=>ActiveForm::TYPE_VERTICAL,'action'=>$urlDocumento]); ?>
 
-    <?php /*echo Form::widget([
+    <?php echo Form::widget([
         'model'=>$modelDocumento,
         'form'=>$form2,
         'columns'=>3,
         'attributes'=>$modelDocumento->formAttribs
-    ]); */?>
+    ]); ?>
 
-    <div class="form-group">
+<!--    <div class="form-group">
         <?/*= Html::Button(Yii::t('app', 'Enviar'), ['class' => 'btn btn-success', 'id' => 'enviar-documento']) */?>
+    </div>-->
+    <div class="form-group">
+        <?= Html::submitButton(Yii::t('app', 'Enviar') , ['class' =>'btn btn-success' ]) ?>
     </div>
 </div>
-<?php /*ActiveForm::end(); */?>
-<?php /*Modal::end();*/?>
--->
+<?php ActiveForm::end(); ?>
+<?php Modal::end();?>
 
+<!--
 <div id="output-documento">
-    <?php $form2 = ActiveForm::begin(['id'=>'modal_documento', 'type'=>ActiveForm::TYPE_VERTICAL]); ?>
+    <?php /*$form2 = ActiveForm::begin(['id'=>'modal_documento', 'type'=>ActiveForm::TYPE_VERTICAL]); */?>
     <?php
-
+/*
     PopoverX::begin([
         'placement' => PopoverX::ALIGN_BOTTOM_LEFT,
         'size'=>'lg',
@@ -79,22 +89,24 @@ use yii\helpers\Url;
         'footer'=>Html::submitButton('Enviar', ['id'=>'enviar-documento', 'class'=>'btn btn-sm btn-primary']) .
             Html::resetButton('Resetear', ['class'=>'btn btn-sm btn-default'])
     ]);
-    ?>
-    <?php echo Form::widget([
+    */?>
+    <?php /*echo Form::widget([
         'model'=>$modelDocumento,
         'form'=>$form2,
         'columns'=>3,
         'attributes'=>$modelDocumento->formAttribs
-    ]); ?>
+    ]); */?>
     <?php
-    PopoverX::end();
+/*    PopoverX::end();
 
-    ?>
+    */?>
 
 </div>
-<?php ActiveForm::end(); ?>
+<?php /*ActiveForm::end(); */?>
 
-    <?php $form = ActiveForm::begin(/*[
+    -->
+
+        <?php $form = ActiveForm::begin(/*[
         'fieldConfig' => [
             'template' => "<div class=\"row\">
                                             <div class=\"col-xs-6\">{label}</div>\n<div class=\"col-xs-6 text-right\">{hint}</div>
@@ -139,6 +151,22 @@ use yii\helpers\Url;
                 'columnSize' => 'xs',
                 'attributes' => $modelBienTipo->getFormAttribs($model)
             ]);
+            if ($model->sys_tipo_bien_id == 3)
+                echo Form::widget([       // 3 column layout
+                    'model' => $modelVehiculo,
+                    'form' => $form,
+                    'columns' => 4,
+                    'columnSize' => 'xs',
+                    'attributes' => $modelVehiculo->getFormAttribs()
+                ]);
+            if ($model->sys_tipo_bien_id == 15)
+                echo Form::widget([       // 3 column layout
+                    'model' => $modelLicencia,
+                    'form' => $form,
+                    'columns' => 4,
+                    'columnSize' => 'xs',
+                    'attributes' => $modelLicencia->getFormAttribs()
+                 ]);
         }
 
         //if($model->factura) {
@@ -187,12 +215,30 @@ use yii\helpers\Url;
                 'attributes' => $modelDepreciacion->getFormAttribs()
             ]);
 
-    $urlFactura = Url::to(['activos-facturas/create-ajax']);
 
-    $urlDocumento = Url::to(['activos-documentos-registrados/createajax']);
 
     $script = <<< JS
 
+$('form#{$modelDocumento->formName()}').on('beforeSubmit', function(e){
+        var \$form = $(this);
+        $.post(
+            \$form.attr("action"), // serialize Yii2 form
+            \$form.serialize()
+        )
+        .done(function(result){
+            if(result == 1)
+            {
+                $(\$form).trigger("reset");
+
+            }else{
+            alert('Error');
+
+            }
+            $("#message").html(result.message);
+        }).fail(function(){
+            console.log("server errror");
+        });
+    });
 
     $('#enviar-documento').click(function(e){
 
@@ -202,9 +248,9 @@ use yii\helpers\Url;
         }else
         {
             //$('form#modal_pnatural').submit();
-            e.preventDefault();
-            e.stopImmediatePropagation();
-            $.ajax({
+            //e.preventDefault();
+            //e.stopImmediatePropagation();
+       /*     $.ajax({
 
                     url: '$urlDocumento',
                     type: 'post',
@@ -212,7 +258,7 @@ use yii\helpers\Url;
                     success: function(data) {
                     $( "#output-documento" ).html( data );
                 }
-                });
+                });*/
 
             }
     });

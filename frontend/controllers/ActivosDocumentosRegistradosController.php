@@ -80,10 +80,18 @@ class ActivosDocumentosRegistradosController extends BaseController
     {
         $model = new ActivosDocumentosRegistrados();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post()) ) {
+            $model->sys_tipo_registro_id = 2;
+            if($model->save()){
+                return 1;
+            }
+            else
+            {
+                return 0;
+            }
+            //return $this->redirect(['view', 'id' => $model->id]);
         } else {
-            return $this->render('create', [
+            return $this->renderAjax('create', [
                 'model' => $model,
             ]);
         }

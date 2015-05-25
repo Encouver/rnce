@@ -2,6 +2,7 @@
 
 namespace common\models\a;
 
+use kartik\builder\Form;
 use Yii;
 
 /**
@@ -66,6 +67,24 @@ class ActivosVehiculos extends \common\components\BaseActiveRecord
             'sys_actualizado_el' => Yii::t('app', 'Sys Actualizado El'),
             'sys_finalizado_el' => Yii::t('app', 'Sys Finalizado El'),
         ];
+    }
+
+    public function getFormAttribs() {
+        $attributes = [
+            // primary key column
+            'id'=>[ // primary key attribute
+                'type'=>Form::INPUT_HIDDEN,
+                'columnOptions'=>['hidden'=>true]
+            ],
+            'anho' => ['type'=>Form::INPUT_TEXT,],
+            'uso' => ['type'=>Form::INPUT_TEXT,],
+            'num_certificado' => ['type'=>Form::INPUT_TEXT,],
+            'placa' => ['type'=>Form::INPUT_TEXT,],
+
+        ];
+
+
+        return $attributes;
     }
 
     /**

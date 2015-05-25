@@ -87,6 +87,11 @@ class ActivosBienes extends \common\components\BaseActiveRecord
 
             [['sys_tipo_bien_id', 'contratista_id', 'origen_id', 'detalle'], 'required'],
             [['sys_tipo_bien_id', 'contratista_id', 'origen_id', 'creado_por', 'actualizado_por', 'factura_id', 'documento_registrado_id', 'arrendamiento_id', 'desincorporacion_id', 'metodo_medicion_id'], 'integer'],
+            [['arrendamiento_id'], 'required', 'when'=> function ($model) {
+                return !$model->propio;
+                    }, 'whenClient' => "function (attribute, value) {
+                return !$('#propio').is(':checked');
+            }"],
             [['fecha_origen', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['propio', 'nacional', 'carga_completa', 'sys_status','documento','factura', 'mejora', 'perdida_reverso', 'proc_productivo', 'directo', 'proc_ventas'], 'boolean'],
             [['detalle'], 'string', 'max' => 255],
@@ -377,8 +382,8 @@ class ActivosBienes extends \common\components\BaseActiveRecord
                      'templateSelection' => new JsExpression('function (city) { return city.text; }'),
                  ],]],
             'propio'=>['type'=>Form::INPUT_WIDGET, 'widgetClass'=>CheckboxX::className()],
-            'factura'=>['type'=>Form::INPUT_WIDGET, 'widgetClass'=>CheckboxX::className()],
-             'documento'=>['type'=>Form::INPUT_WIDGET, 'widgetClass'=>CheckboxX::className()],
+            //'factura'=>['type'=>Form::INPUT_WIDGET, 'widgetClass'=>CheckboxX::className()],
+             //'documento'=>['type'=>Form::INPUT_WIDGET, 'widgetClass'=>CheckboxX::className()],
 
              'metodo_medicion_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(ActivosSysMetodosMedicion::find()->all(),'id','nombre',function($model){ return $model->modelo->nombre;}), 'pluginOptions'=>['allowClear' => true],'options'=>['id'=>'metodo-medicion','placeholder'=>'Seleccionar método de medición', 'onchange'=>'js:']]],
              // Mejora

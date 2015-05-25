@@ -239,7 +239,7 @@ class ActivosBienesController extends BaseController
 
             return $this->render('create', [
                 'model' => $model,'modelBienTipo'=> $modelBienTipo, 'modelDatosImportacion'=>$modelDatosImportacion, 'modelFactura'=>$modelFactura,'modelDocumento'=>$modelDocumento,
-                'modelDeterioro'=>$modelDeterioro, 'modelDepreciacion'=>$modelDepreciacion
+                'modelDeterioro'=>$modelDeterioro, 'modelDepreciacion'=>$modelDepreciacion, 'modelVehiculo'=>$modelVehiculo, 'modelLicencia'=>$modelLicencia
             ]);
        // }
     }
