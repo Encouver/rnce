@@ -5,8 +5,10 @@ namespace common\models\c;
 use common\models\p\SysBancos;
 use kartik\builder\Form;
 use kartik\builder\TabularForm;
+use kartik\checkbox\CheckboxX;
 use kartik\money\MaskMoney;
 use kartik\widgets\DatePicker;
+use kartik\widgets\Select2;
 use Yii;
 use yii\helpers\ArrayHelper;
 
@@ -139,8 +141,12 @@ class AaObligacionesBancarias extends \common\components\BaseActiveRecord
                 'type'=>Form::INPUT_HIDDEN,
                 'columnOptions'=>['hidden'=>true]
             ],
-            'corriente'=>['type'=>Form::INPUT_CHECKBOX,],
-            'banco_id'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>ArrayHelper::map(SysBancos::find()->asArray()->all(),'id','nombre'),],
+            'corriente'=>['type'=>Form::INPUT_WIDGET, 'widgetClass'=>CheckboxX::className()],
+
+            'banco_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(SysBancos::find()->asArray()->all(),'id','nombre'),
+                'options'=>['id'=>'banco','placeholder'=>'Seleccionar banco', 'onchange'=>'js:'],'pluginOptions' => [
+                    'allowClear' => false,
+                ],]],
             'num_documento'=>['type'=>Form::INPUT_TEXT,],
             'monto_otorgado'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),],
             'fecha_prestamo'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>DatePicker::className(),'options'=>['options' => ['placeholder' => 'Seleccione fecha ...'],
@@ -157,7 +163,7 @@ class AaObligacionesBancarias extends \common\components\BaseActiveRecord
                     //'startDate' => date('d-m-Y h:i A'),//'01-Mar-2014 12:00 AM',
                     'todayHighlight' => true
                 ]]],
-            'tasa_interes'=>['type'=>Form::INPUT_CHECKBOX,],
+            'tasa_interes'=>['type'=>Form::INPUT_WIDGET, 'widgetClass'=>CheckboxX::className()],
             'condicion_pago_id'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>ArrayHelper::map(\common\models\c\AaCondicionesPagos::find()->asArray()->all(),'id','nombre'),],
             'plazo'=>['type'=>Form::INPUT_TEXT, /*'widgetClass'=>MaskMoney::className(),'options'=>['pluginOptions' => [
                 'prefix' => '',
@@ -169,7 +175,11 @@ class AaObligacionesBancarias extends \common\components\BaseActiveRecord
                 //'decimals'=>''
                 ],]*/
             ],
-            'tipo_garantia_id'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>ArrayHelper::map(\common\models\c\AaTiposGarantias::find()->asArray()->all(),'id','nombre')],
+
+            'tipo_garantia_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(\common\models\c\AaTiposGarantias::find()->asArray()->all(),'id','nombre'),
+                'options'=>['id'=>'tipo-garantia','placeholder'=>'Seleccionar tipo garantía', 'onchange'=>'js:'],'pluginOptions' => [
+                    'allowClear' => false,
+                ],]],
             'interes_ejer_econ'=>['type'=>Form::INPUT_WIDGET, 'widgetClass'=>MaskMoney::className()],
             'interes_pagar'=>['type'=>Form::INPUT_WIDGET, 'widgetClass'=>MaskMoney::className()],
             'importe_deuda'=>['type'=>Form::INPUT_WIDGET, 'widgetClass'=>MaskMoney::className()],

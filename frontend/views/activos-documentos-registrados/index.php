@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\ActivosDocumentosRegistrados */
+/* @var $searchModel app\models\ActivosDocumentosRegistradosSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = Yii::t('app', 'Activos Documentos Registrados');
@@ -34,14 +34,14 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'fecha_registro',
             // 'fecha_asamblea',
             // 'sys_circunscripcion_id',
+            // 'valor_adquisicion',
+            // 'tipo_documento_id',
             // 'creado_por',
             // 'actualizado_por',
             // 'sys_status:boolean',
             // 'sys_creado_el',
             // 'sys_actualizado_el',
             // 'sys_finalizado_el',
-            // 'valor_adquisicion',
-            // 'tipo_documento_id',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

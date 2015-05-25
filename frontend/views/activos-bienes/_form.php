@@ -1,8 +1,11 @@
 <?php
 
 use kartik\builder\Form;
+use kartik\popover\PopoverX;
+use yii\bootstrap\Modal;
 use yii\helpers\Html;
 use kartik\widgets\ActiveForm;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\a\ActivosBienes */
@@ -14,6 +17,82 @@ use kartik\widgets\ActiveForm;
 
 <div class="activos-bienes-form">
 
+<?php  Modal::begin([
+    'options'=>['id'=>'m1_factura'],
+    'header' => '<h4 style="margin:0; padding:0">Agregar Factura</h4>',
+    'toggleButton' => ['label' => 'Agregar Factura', 'class'=>'btn btn-lg btn-primary','style'=>'margin-bottom:10px;'],
+]);?>
+
+<?php $form2 = ActiveForm::begin(['id'=>'modal_factura', 'type'=>ActiveForm::TYPE_VERTICAL]); ?>
+
+    <?php echo Form::widget([
+        'model'=>$modelFactura,
+        'form'=>$form2,
+        'columns'=>3,
+        'attributes'=>$modelFactura->formAttribs
+    ]); ?>
+
+    <div class="form-group">
+        <?= Html::Button(Yii::t('app', 'Enviar'), ['class' => 'btn btn-success', 'id' => 'enviar-factura']) ?>
+    </div>
+<div id="output-factura">
+</div>
+<?php ActiveForm::end(); ?>
+
+<?php Modal::end();?>
+
+
+
+<!--
+<?php /* Modal::begin([
+    'options'=>['id'=>'m1_documento'],
+    'header' => '<h4 style="margin:0; padding:0">Agregar Documento Registrado</h4>',
+    'toggleButton' => ['label' => 'Agregar Documento Registrado', 'class'=>'btn btn-lg btn-primary','style'=>'margin-bottom:10px;'],
+]);*/?>
+<div id="output-documento">
+    <?php /*$form2 = ActiveForm::begin(['id'=>'modal_documento', 'type'=>ActiveForm::TYPE_VERTICAL]); */?>
+
+    <?php /*echo Form::widget([
+        'model'=>$modelDocumento,
+        'form'=>$form2,
+        'columns'=>3,
+        'attributes'=>$modelDocumento->formAttribs
+    ]); */?>
+
+    <div class="form-group">
+        <?/*= Html::Button(Yii::t('app', 'Enviar'), ['class' => 'btn btn-success', 'id' => 'enviar-documento']) */?>
+    </div>
+</div>
+<?php /*ActiveForm::end(); */?>
+<?php /*Modal::end();*/?>
+-->
+
+<div id="output-documento">
+    <?php $form2 = ActiveForm::begin(['id'=>'modal_documento', 'type'=>ActiveForm::TYPE_VERTICAL]); ?>
+    <?php
+
+    PopoverX::begin([
+        'placement' => PopoverX::ALIGN_BOTTOM_LEFT,
+        'size'=>'lg',
+        'toggleButton' => ['label'=>'Agregar Documento Registrado', 'class'=>'btn btn-default'],
+        'header' => '<i class="glyphicon glyphicon-lock"></i> Documento Registrado',
+        'footer'=>Html::submitButton('Enviar', ['id'=>'enviar-documento', 'class'=>'btn btn-sm btn-primary']) .
+            Html::resetButton('Resetear', ['class'=>'btn btn-sm btn-default'])
+    ]);
+    ?>
+    <?php echo Form::widget([
+        'model'=>$modelDocumento,
+        'form'=>$form2,
+        'columns'=>3,
+        'attributes'=>$modelDocumento->formAttribs
+    ]); ?>
+    <?php
+    PopoverX::end();
+
+    ?>
+
+</div>
+<?php ActiveForm::end(); ?>
 
     <?php $form = ActiveForm::begin(/*[
         'fieldConfig' => [
@@ -65,13 +144,13 @@ use kartik\widgets\ActiveForm;
         //if($model->factura) {
             echo '<div id="factura-container" style="display: none;">';
             echo '<h2> Datos de la Factura: </h2>';
-            echo Form::widget([       // 3 column layout
+   /*         echo Form::widget([       // 3 column layout
                 'model' => $modelFactura,
                 'form' => $form,
                 'columns' => 4,
                 'columnSize' => 'xs',
                 'attributes' => $modelFactura->getFormAttribs($model)
-            ]);
+            ]);*/
             echo '</div>';
         //}
 
@@ -108,8 +187,56 @@ use kartik\widgets\ActiveForm;
                 'attributes' => $modelDepreciacion->getFormAttribs()
             ]);
 
+    $urlFactura = Url::to(['activos-facturas/create-ajax']);
+
+    $urlDocumento = Url::to(['activos-documentos-registrados/createajax']);
 
     $script = <<< JS
+    $('#enviar-documento').click(function(e){
+
+        if($('form#modal_documento').find('.has-error').length!=0){
+
+            return false;
+        }else
+        {
+            //$('form#modal_pnatural').submit();
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            $.ajax({
+
+                    url: '$urlDocumento',
+                    type: 'post',
+                    data: $('form#modal_documento').serialize(),
+                    success: function(data) {
+                    $( "#output-documento" ).html( data );
+                }
+                });
+
+            }
+    });
+
+    $('#enviar-factura').click(function(e){
+
+        if($('form#modal_factura').find('.has-error').length!=0){
+            alert('Revise el formulario.');
+            return false;
+        }else
+        {
+            //$('form#modal_pnatural').submit();
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            $.ajax({
+
+                    url: '$urlFactura',
+                    type: 'post',
+                    data: $('form#modal_factura').serialize(),
+                    success: function(data) {
+                    $( "#output-factura" ).html( data );
+                }
+                });
+
+            }
+    });
 
     function datosImportados(){
             if($('#activosbienes-nacional').is(':checked') ){

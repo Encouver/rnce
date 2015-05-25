@@ -37,7 +37,9 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'contratista_id') ?>
 
-    <?php // echo $form->field($model, 'bien_id') ?>
+    <?php // echo $form->field($model, 'creado_por') ?>
+
+    <?php // echo $form->field($model, 'actualizado_por') ?>
 
     <?php // echo $form->field($model, 'sys_status')->checkbox() ?>
 

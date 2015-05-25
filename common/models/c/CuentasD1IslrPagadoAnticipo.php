@@ -2,6 +2,9 @@
 
 namespace common\models\c;
 
+use kartik\builder\Form;
+use kartik\checkbox\CheckboxX;
+use kartik\money\MaskMoney;
 use Yii;
 
 /**
@@ -84,5 +87,22 @@ class CuentasD1IslrPagadoAnticipo extends \common\components\BaseActiveRecord
     public function getContratista()
     {
         return $this->hasOne(Contratistas::className(), ['id' => 'contratista_id']);
+    }
+
+    public function getFormAttribs() {
+        return [
+            // primary key column
+            'id'=>[ // primary key attribute
+                'type'=>Form::INPUT_HIDDEN,
+                'columnOptions'=>['hidden'=>true]
+            ],
+            'nro_documento'=>['type'=>Form::INPUT_TEXT,],
+            'saldo_ph'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),],
+            'importe_pagado_ejer_econo'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),],
+            'importe_aplicado_ejer_econo'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),],
+            //'saldo_cierre'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),],
+
+
+        ];
     }
 }

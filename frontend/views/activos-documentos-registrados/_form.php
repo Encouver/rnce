@@ -28,6 +28,14 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'sys_circunscripcion_id')->textInput() ?>
 
+    <?= $form->field($model, 'valor_adquisicion')->textInput() ?>
+
+    <?= $form->field($model, 'tipo_documento_id')->textInput() ?>
+
+    <?= $form->field($model, 'creado_por')->textInput() ?>
+
+    <?= $form->field($model, 'actualizado_por')->textInput() ?>
+
     <?= $form->field($model, 'sys_status')->checkbox() ?>
 
     <?= $form->field($model, 'sys_creado_el')->textInput() ?>
@@ -35,8 +43,6 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'sys_actualizado_el')->textInput() ?>
 
     <?= $form->field($model, 'sys_finalizado_el')->textInput() ?>
-
-    <?= $form->field($model, 'tipo_documento_id')->textInput() ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

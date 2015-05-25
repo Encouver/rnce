@@ -8,23 +8,21 @@ use Yii;
  * This is the model class for table "activos.mejoras_propiedades".
  *
  * @property integer $id
- * @property string $clasificacion
- * @property integer $sys_tipo_bien_id
- * @property integer $principio_contable_id
- * @property boolean $depreciacion
- * @property boolean $deterioro
  * @property integer $bien_id
  * @property string $monto
  * @property string $fecha
  * @property boolean $capitalizable
+ * @property integer $creado_por
+ * @property integer $actualizado_por
  * @property boolean $sys_status
  * @property string $sys_creado_el
  * @property string $sys_actualizado_el
  * @property string $sys_finalizado_el
+ * @property integer $mejora_bien_id
+ * @property string $descripcion
  *
  * @property ActivosBienes $bien
- * @property ActivosSysFormasOrg $principioContable
- * @property ActivosSysTiposBienes $sysTipoBien
+ * @property ActivosBienes $mejoraBien
  */
 class ActivosMejorasPropiedades extends \common\components\BaseActiveRecord
 {
@@ -42,12 +40,12 @@ class ActivosMejorasPropiedades extends \common\components\BaseActiveRecord
     public function rules()
     {
         return [
-            [['clasificacion', 'sys_tipo_bien_id', 'principio_contable_id', 'bien_id', 'monto', 'fecha'], 'required'],
-            [['sys_tipo_bien_id', 'principio_contable_id', 'bien_id'], 'integer'],
-            [['depreciacion', 'deterioro', 'capitalizable', 'sys_status'], 'boolean'],
+            [['bien_id', 'monto', 'fecha'], 'required'],
+            [['bien_id', 'creado_por', 'actualizado_por', 'mejora_bien_id'], 'integer'],
             [['monto'], 'number'],
             [['fecha', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
-            [['clasificacion'], 'string', 'max' => 255]
+            [['capitalizable', 'sys_status'], 'boolean'],
+            [['descripcion'], 'string', 'max' => 255]
         ];
     }
 
@@ -58,19 +56,18 @@ class ActivosMejorasPropiedades extends \common\components\BaseActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'clasificacion' => Yii::t('app', 'Clasificacion'),
-            'sys_tipo_bien_id' => Yii::t('app', 'Sys Tipo Bien ID'),
-            'principio_contable_id' => Yii::t('app', 'Principio Contable ID'),
-            'depreciacion' => Yii::t('app', 'Depreciacion'),
-            'deterioro' => Yii::t('app', 'Deterioro'),
             'bien_id' => Yii::t('app', 'Bien ID'),
             'monto' => Yii::t('app', 'Monto'),
             'fecha' => Yii::t('app', 'Fecha'),
             'capitalizable' => Yii::t('app', 'Capitalizable'),
+            'creado_por' => Yii::t('app', 'Creado Por'),
+            'actualizado_por' => Yii::t('app', 'Actualizado Por'),
             'sys_status' => Yii::t('app', 'Sys Status'),
             'sys_creado_el' => Yii::t('app', 'Sys Creado El'),
             'sys_actualizado_el' => Yii::t('app', 'Sys Actualizado El'),
             'sys_finalizado_el' => Yii::t('app', 'Sys Finalizado El'),
+            'mejora_bien_id' => Yii::t('app', 'Mejora Bien ID'),
+            'descripcion' => Yii::t('app', 'Descripcion'),
         ];
     }
 
@@ -85,16 +82,8 @@ class ActivosMejorasPropiedades extends \common\components\BaseActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getPrincipioContable()
+    public function getMejoraBien()
     {
-        return $this->hasOne(ActivosSysFormasOrg::className(), ['id' => 'principio_contable_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getSysTipoBien()
-    {
-        return $this->hasOne(ActivosSysTiposBienes::className(), ['id' => 'sys_tipo_bien_id']);
+        return $this->hasOne(ActivosBienes::className(), ['id' => 'mejora_bien_id']);
     }
 }
