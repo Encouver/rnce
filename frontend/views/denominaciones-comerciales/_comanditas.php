@@ -14,6 +14,7 @@ $tip_sub_denominacion = [
    
 ];
 ?>
+<style>
 .tamano
 {
 	width: 400px;

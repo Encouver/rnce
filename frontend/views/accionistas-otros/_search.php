@@ -33,9 +33,17 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'rep_legal')->checkbox() ?>
 
-    <?php // echo $form->field($model, 'cargo') ?>
-
     <?php // echo $form->field($model, 'documento_registrado_id') ?>
+
+    <?php // echo $form->field($model, 'repr_legal_vigencia') ?>
+
+    <?php // echo $form->field($model, 'empresa_fusionada_id') ?>
+
+    <?php // echo $form->field($model, 'tipo_obligacion') ?>
+
+    <?php // echo $form->field($model, 'creado_por') ?>
+
+    <?php // echo $form->field($model, 'actualizado_por') ?>
 
     <?php // echo $form->field($model, 'sys_status')->checkbox() ?>
 
@@ -45,11 +53,9 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'sys_finalizado_el') ?>
 
-    <?php // echo $form->field($model, 'repr_legal_vigencia') ?>
+    <?php // echo $form->field($model, 'empresa_relacionada')->checkbox() ?>
 
-    <?php // echo $form->field($model, 'empresa_fusionada_id') ?>
-
-    <?php // echo $form->field($model, 'tipo_obligacion') ?>
+    <?php // echo $form->field($model, 'tipo_cargo') ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>
