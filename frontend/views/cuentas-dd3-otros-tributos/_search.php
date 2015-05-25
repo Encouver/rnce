@@ -17,15 +17,13 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'id') ?>
 
-    <?= $form->field($model, 'tributo') ?>
-
     <?= $form->field($model, 'saldo_p_anterior') ?>
 
     <?= $form->field($model, 'importe_gasto_ejer_eco') ?>
 
     <?= $form->field($model, 'importe_pago_ejer_eco') ?>
 
-    <?php // echo $form->field($model, 'saldo_al_cierre') ?>
+    <?= $form->field($model, 'saldo_al_cierre') ?>
 
     <?php // echo $form->field($model, 'contratista_id') ?>
 
@@ -42,6 +40,8 @@ use yii\widgets\ActiveForm;
     <?php // echo $form->field($model, 'sys_actualizado_el') ?>
 
     <?php // echo $form->field($model, 'sys_finalizado_el') ?>
+
+    <?php // echo $form->field($model, 'concepto_id') ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>

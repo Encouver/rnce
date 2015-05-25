@@ -21,6 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
  <p>
         <?= Html::a(Yii::t('app', 'Create Cuentas jj proviciones'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
+    
 <?php
     //echo $efectivo_caja->getPromedio(1,3);
 
