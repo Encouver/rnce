@@ -123,9 +123,11 @@ class RelacionesContratosController extends Controller
                
                $transaction = \Yii::$app->db->beginTransaction();
                try{
+                   if($relacion_contrato->tipo_sector==''){
+                       $relacion_contrato->tipo_sector=null;
+                   }
                    
-                   
-                   if (! ($flag = $relacion_contrato->save(false))) {
+                   if (! ($relacion_contrato->save())) {
 
                                 $transaction->rollBack();
                                 return "error en la carga de de datos de los contratos";
@@ -136,13 +138,14 @@ class RelacionesContratosController extends Controller
                         $contrato_valuacion = Model::createMultiple(ContratosValuaciones::classname());
                         Model::loadMultiple($contrato_valuacion, Yii::$app->request->post());
                          foreach ($contrato_valuacion as $carga_valuacion) {
+                             
                              $valuaciones= new ContratosValuaciones();
 
                               $valuaciones->orden_valuacion = $carga_valuacion->orden_valuacion;
                               $valuaciones->monto = $carga_valuacion->monto;
                               $valuaciones->relacion_contrato_id= $relacion_contrato->id;
 
-                             if (! ($flag = $valuaciones->save(false))) {
+                             if (! ($valuaciones->save())) {
 
                                 $transaction->rollBack();
                                 return "error en la carga de las valuaciones";
