@@ -20,7 +20,7 @@ $url = \yii\helpers\Url::to(['accionistas-otros/accionistas-otros-lista']);
     <?php $form = ActiveForm::begin(); ?>
 
    <?= $form->field($model, 'natural_juridica_id')->widget(Select2::classname(), [
-    // 'initValueText' => $persona, // set the initial display text
+    'initValueText' => '', // set the initial display text
     'options' => ['placeholder' => 'Numero de identificacion ...'],
     'pluginOptions' => [
         'allowClear' => true,

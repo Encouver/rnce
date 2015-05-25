@@ -6,9 +6,9 @@ use common\models\c\ActivosSysMetodosMedicion;
 use kartik\widgets\DatePicker;
 
 $url = \yii\helpers\Url::to(['site/probando']);
-
-$form = ActiveForm::begin(['fieldConfig'=>['showLabels'=>false], 'id' => 'form_metodos']);
-	$model = new ActivosSysMetodosMedicion();
+$model = new ActivosSysMetodosMedicion();
+$form = ActiveForm::begin(['fieldConfig'=>['showLabels'=>false], 'id' => $model->formName()]);
+	
 	
 
 PopoverX::begin([
@@ -16,7 +16,7 @@ PopoverX::begin([
     'size' => PopoverX::SIZE_LARGE,
     'toggleButton' => ['label'=>'Login', 'class'=>'btn btn-default'],
     'header' => 'Metodo -- ',
-    'footer'=>Html::Button('Submit', ['class'=>'btn btn-sm btn-primary']) .
+    'footer'=>Html::submitButton('Submit', ['class'=>'btn btn-sm btn-primary']) .
              Html::resetButton('Reset', ['class'=>'btn btn-sm btn-default'])
 ]);
 $tipo = 'promedio';
@@ -83,25 +83,21 @@ ActiveForm::end();
 <?php
 
 $script = <<< JS
-    $('#enviar15').click(function(e){
-            if($('form#modal_pnatural').find('.has-error').length!=0){
-                return false;
-            }else
-            {
-                //$('form#modal_pnatural').submit();
-                e.preventDefault();
-                e.stopImmediatePropagation();
-               $.ajax({
-                   
-                    url: 'http://localhost/rnce/frontend/web/index.php?r=personas-naturales/crearpersonanatural',
-                    type: 'post',
-                    data: $('form#modal_pnatural').serialize(),
-                    success: function(data) {
-                             $( "#output15" ).html( data ); 
-                    }
-                });
-            }
-    });
+	$('form#{$model->formName()}').on('beforeSubmit', function(e)
+	{
+		var \$form = $(this);
+		$.post(
+			\$form.attr("action"), \$form.serialize()
+		).done(function(result)
+		{
+			\$form.trigger("reset");
+			
+		}).fail(function()
+		{
+			console.log("error");
+		})
+		return false;
+	});
 JS;
 $this->registerJs($script);
 ?>
