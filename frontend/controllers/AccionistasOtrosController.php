@@ -133,7 +133,7 @@ class AccionistasOtrosController extends BaseController
     }
     
      public function actionAccionistasOtrosLista($q = null, $id = null) {
-    $buscar_accionista= "natural.denominacion ILIKE "."'%" . $q ."%' and accionista.accionista==true";   
+    $buscar_accionista= "natural.denominacion ILIKE "."'%" . $q ."%' and natural.id=accionista.natural_juridica_id and accionista.junta_directiva=false";   
        
     \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
      $out = ['results' => ['id' => '', 'text' => '']];
