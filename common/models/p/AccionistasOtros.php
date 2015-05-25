@@ -60,10 +60,10 @@ class AccionistasOtros extends \common\components\BaseActiveRecord
             [['fecha', 'repr_legal_vigencia', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['accionista', 'junta_directiva', 'rep_legal', 'sys_status', 'empresa_relacionada'], 'boolean'],
             [['tipo_obligacion', 'tipo_cargo'], 'string'],
-            ['accionista', 'compare', 'message' => 'RAUL ME LO MAMA RICO RICO', 'operator'=> '==', 'compareValue'=>true, 'when' => function ($model) {
+            ['accionista', 'compare', 'message' => 'Accionista no puede estar vacio', 'operator'=> '==', 'compareValue'=>true, 'when' => function ($model) {
                 return $model->porcentaje_accionario != '';
             }, 'whenClient' => "function (attribute, value) {
-                return $('#accionistasotros-porcentaje_accionario').val() =='';
+                return $('#accionistasotros-porcentaje_accionario').val() !='';
             }"],
            /* ['accionista', 'required', 'when' => function ($model) {
                return $model->porcentaje_accionario != "";

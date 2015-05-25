@@ -115,8 +115,7 @@ class SucursalesController extends BaseController
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $direccion = new Direcciones();
-
+        $direccion = Direcciones::findOne($model->direccion_id);
         if ($model->load(Yii::$app->request->post()) && $direccion->load(Yii::$app->request->post())) {
             $transaction = \Yii::$app->db->beginTransaction();
            try {
