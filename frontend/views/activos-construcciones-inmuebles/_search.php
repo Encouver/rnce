@@ -25,6 +25,10 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'monto_ejecutado') ?>
 
+    <?php // echo $form->field($model, 'creado_por') ?>
+
+    <?php // echo $form->field($model, 'actualizado_por') ?>
+
     <?php // echo $form->field($model, 'sys_status')->checkbox() ?>
 
     <?php // echo $form->field($model, 'sys_creado_el') ?>

@@ -8,9 +8,9 @@ use yii\data\ActiveDataProvider;
 use common\models\a\ActivosActivosBiologicos;
 
 /**
- * ActivosBiologicosSearch represents the model behind the search form about `common\models\a\ActivosActivosBiologicos`.
+ * ActivosActivosBiologicosSearch represents the model behind the search form about `common\models\a\ActivosActivosBiologicos`.
  */
-class ActivosBiologicosSearch extends ActivosActivosBiologicos
+class ActivosActivosBiologicosSearch extends ActivosActivosBiologicos
 {
     /**
      * @inheritdoc
@@ -18,7 +18,7 @@ class ActivosBiologicosSearch extends ActivosActivosBiologicos
     public function rules()
     {
         return [
-            [['id', 'bien_id', 'catidad'], 'integer'],
+            [['id', 'bien_id', 'cantidad', 'creado_por', 'actualizado_por'], 'integer'],
             [['certificado', 'sys_status'], 'boolean'],
             [['num_certificado', 'detalles', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
         ];
@@ -59,8 +59,10 @@ class ActivosBiologicosSearch extends ActivosActivosBiologicos
         $query->andFilterWhere([
             'id' => $this->id,
             'bien_id' => $this->bien_id,
-            'catidad' => $this->catidad,
+            'cantidad' => $this->cantidad,
             'certificado' => $this->certificado,
+            'creado_por' => $this->creado_por,
+            'actualizado_por' => $this->actualizado_por,
             'sys_status' => $this->sys_status,
             'sys_creado_el' => $this->sys_creado_el,
             'sys_actualizado_el' => $this->sys_actualizado_el,

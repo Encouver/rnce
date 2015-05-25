@@ -30,6 +30,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'area_construccion',
             'porcentaje_ejecucion',
             'monto_ejecutado',
+            // 'creado_por',
+            // 'actualizado_por',
             // 'sys_status:boolean',
             // 'sys_creado_el',
             // 'sys_actualizado_el',

@@ -14,6 +14,8 @@ use Yii;
  * @property string $certificado_registro
  * @property string $fecha_registro
  * @property string $vigencia
+ * @property integer $creado_por
+ * @property integer $actualizado_por
  * @property boolean $sys_status
  * @property string $sys_creado_el
  * @property string $sys_actualizado_el
@@ -39,10 +41,11 @@ class ActivosActivosIntangibles extends \common\components\BaseActiveRecord
     {
         return [
             [['bien_id', 'vigencia'], 'required'],
-            [['bien_id'], 'integer'],
+            [['bien_id', 'creado_por', 'actualizado_por'], 'integer'],
             [['fecha_registro', 'vigencia', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['sys_status'], 'boolean'],
-            [['certificado_registro'], 'string', 'max' => 255]
+            [['certificado_registro'], 'string', 'max' => 255],
+            [['bien_id'], 'unique']
         ];
     }
 
@@ -57,6 +60,8 @@ class ActivosActivosIntangibles extends \common\components\BaseActiveRecord
             'certificado_registro' => Yii::t('app', 'Certificado Registro'),
             'fecha_registro' => Yii::t('app', 'Fecha Registro'),
             'vigencia' => Yii::t('app', 'Vigencia'),
+            'creado_por' => Yii::t('app', 'Creado Por'),
+            'actualizado_por' => Yii::t('app', 'Actualizado Por'),
             'sys_status' => Yii::t('app', 'Sys Status'),
             'sys_creado_el' => Yii::t('app', 'Sys Creado El'),
             'sys_actualizado_el' => Yii::t('app', 'Sys Actualizado El'),

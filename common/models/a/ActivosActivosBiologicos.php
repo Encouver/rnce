@@ -14,6 +14,8 @@ use Yii;
  * @property boolean $certificado
  * @property string $num_certificado
  * @property string $detalles
+ * @property integer $creado_por
+ * @property integer $actualizado_por
  * @property boolean $sys_status
  * @property string $sys_creado_el
  * @property string $sys_actualizado_el
@@ -38,10 +40,11 @@ class ActivosActivosBiologicos extends \common\components\BaseActiveRecord
     {
         return [
             [['bien_id', 'cantidad', 'detalles'], 'required'],
-            [['bien_id', 'cantidad'], 'integer'],
+            [['bien_id', 'cantidad', 'creado_por', 'actualizado_por'], 'integer'],
             [['certificado', 'sys_status'], 'boolean'],
             [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
-            [['num_certificado', 'detalles'], 'string', 'max' => 255]
+            [['num_certificado', 'detalles'], 'string', 'max' => 255],
+            [['bien_id'], 'unique']
         ];
     }
 
@@ -57,6 +60,8 @@ class ActivosActivosBiologicos extends \common\components\BaseActiveRecord
             'certificado' => Yii::t('app', 'Certificado'),
             'num_certificado' => Yii::t('app', 'Num Certificado'),
             'detalles' => Yii::t('app', 'Detalles'),
+            'creado_por' => Yii::t('app', 'Creado Por'),
+            'actualizado_por' => Yii::t('app', 'Actualizado Por'),
             'sys_status' => Yii::t('app', 'Sys Status'),
             'sys_creado_el' => Yii::t('app', 'Sys Creado El'),
             'sys_actualizado_el' => Yii::t('app', 'Sys Actualizado El'),

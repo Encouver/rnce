@@ -4,13 +4,13 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\a\ActivosConstruccionesInmuebles */
+/* @var $model common\models\a\ActivosActivosIntangibles */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Activos Construcciones Inmuebles'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Activos Activos Intangibles'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="activos-construcciones-inmuebles-view">
+<div class="activos-activos-intangibles-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -30,9 +30,9 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'bien_id',
-            'area_construccion',
-            'porcentaje_ejecucion',
-            'monto_ejecutado',
+            'certificado_registro',
+            'fecha_registro',
+            'vigencia',
             'creado_por',
             'actualizado_por',
             'sys_status:boolean',

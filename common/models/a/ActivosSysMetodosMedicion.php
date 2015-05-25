@@ -100,4 +100,7 @@ class ActivosSysMetodosMedicion extends \common\components\BaseActiveRecord
     {
         return $this->hasMany(CuentasSysFormulasTecnicas::className(), ['tecnica_medicion_id' => 'id']);
     }
+    public function Etiqueta(){
+        return $this->modelo->nombre.' - '.$this->nombre;
+    }
 }

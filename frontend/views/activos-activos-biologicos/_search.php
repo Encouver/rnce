@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\ActivosBiologicosSearch */
+/* @var $model app\models\ActivosActivosBiologicosSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
@@ -19,13 +19,17 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'bien_id') ?>
 
-    <?= $form->field($model, 'catidad') ?>
+    <?= $form->field($model, 'cantidad') ?>
 
     <?= $form->field($model, 'certificado')->checkbox() ?>
 
     <?= $form->field($model, 'num_certificado') ?>
 
     <?php // echo $form->field($model, 'detalles') ?>
+
+    <?php // echo $form->field($model, 'creado_por') ?>
+
+    <?php // echo $form->field($model, 'actualizado_por') ?>
 
     <?php // echo $form->field($model, 'sys_status')->checkbox() ?>
 

@@ -17,6 +17,8 @@ use yii\helpers\ArrayHelper;
  * @property string $zonificacion
  * @property string $extension
  * @property string $titulo_supletorio
+ * @property integer $creado_por
+ * @property integer $actualizado_por
  * @property boolean $sys_status
  * @property string $sys_creado_el
  * @property string $sys_actualizado_el
@@ -40,12 +42,13 @@ class ActivosInmuebles extends \common\components\BaseActiveRecord
     public function rules()
     {
         return [
-            [['bien_id', 'direccion_ubicacion', 'ficha_catastral', 'zonificacion', 'extension', 'descripcion'], 'required'],
-            [['bien_id'], 'integer'],
+            [['bien_id', 'direccion_ubicacion', 'ficha_catastral', 'zonificacion', 'extension'], 'required'],
+            [['bien_id', 'creado_por', 'actualizado_por'], 'integer'],
             [['descripcion'], 'string'],
             [['sys_status'], 'boolean'],
             [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
-            [['direccion_ubicacion', 'ficha_catastral', 'zonificacion', 'extension', 'titulo_supletorio'], 'string', 'max' => 255]
+            [['direccion_ubicacion', 'ficha_catastral', 'zonificacion', 'extension', 'titulo_supletorio'], 'string', 'max' => 255],
+            [['bien_id'], 'unique']
         ];
     }
 
@@ -63,6 +66,8 @@ class ActivosInmuebles extends \common\components\BaseActiveRecord
             'zonificacion' => Yii::t('app', 'Zonificacion'),
             'extension' => Yii::t('app', 'Extension'),
             'titulo_supletorio' => Yii::t('app', 'Titulo Supletorio'),
+            'creado_por' => Yii::t('app', 'Creado Por'),
+            'actualizado_por' => Yii::t('app', 'Actualizado Por'),
             'sys_status' => Yii::t('app', 'Sys Status'),
             'sys_creado_el' => Yii::t('app', 'Sys Creado El'),
             'sys_actualizado_el' => Yii::t('app', 'Sys Actualizado El'),

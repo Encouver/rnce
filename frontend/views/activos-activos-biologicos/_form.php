@@ -4,21 +4,23 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\a\ActivosConstruccionesInmuebles */
+/* @var $model common\models\a\ActivosActivosBiologicos */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="activos-construcciones-inmuebles-form">
+<div class="activos-activos-biologicos-form">
 
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'bien_id')->textInput() ?>
 
-    <?= $form->field($model, 'area_construccion')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'cantidad')->textInput() ?>
 
-    <?= $form->field($model, 'porcentaje_ejecucion')->textInput() ?>
+    <?= $form->field($model, 'certificado')->checkbox() ?>
 
-    <?= $form->field($model, 'monto_ejecutado')->textInput() ?>
+    <?= $form->field($model, 'num_certificado')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'detalles')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'creado_por')->textInput() ?>
 

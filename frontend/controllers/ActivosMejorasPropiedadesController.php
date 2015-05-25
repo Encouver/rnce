@@ -3,16 +3,16 @@
 namespace frontend\controllers;
 
 use Yii;
-use common\models\a\ActivosActivosBiologicos;
-use app\models\ActivosBiologicosSearch;
+use common\models\a\ActivosMejorasPropiedades;
+use app\models\ActivosMejorasPropiedadesSearch;
 use common\components\BaseController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * ActivosBiologicosController implements the CRUD actions for ActivosActivosBiologicos model.
+ * ActivosMejorasPropiedadesController implements the CRUD actions for ActivosMejorasPropiedades model.
  */
-class ActivosBiologicosController extends BaseController
+class ActivosMejorasPropiedadesController extends BaseController
 {
     public function behaviors()
     {
@@ -27,12 +27,12 @@ class ActivosBiologicosController extends BaseController
     }
 
     /**
-     * Lists all ActivosActivosBiologicos models.
+     * Lists all ActivosMejorasPropiedades models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new ActivosBiologicosSearch();
+        $searchModel = new ActivosMejorasPropiedadesSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -42,7 +42,7 @@ class ActivosBiologicosController extends BaseController
     }
 
     /**
-     * Displays a single ActivosActivosBiologicos model.
+     * Displays a single ActivosMejorasPropiedades model.
      * @param integer $id
      * @return mixed
      */
@@ -54,13 +54,13 @@ class ActivosBiologicosController extends BaseController
     }
 
     /**
-     * Creates a new ActivosActivosBiologicos model.
+     * Creates a new ActivosMejorasPropiedades model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new ActivosActivosBiologicos();
+        $model = new ActivosMejorasPropiedades();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -72,7 +72,7 @@ class ActivosBiologicosController extends BaseController
     }
 
     /**
-     * Updates an existing ActivosActivosBiologicos model.
+     * Updates an existing ActivosMejorasPropiedades model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -91,7 +91,7 @@ class ActivosBiologicosController extends BaseController
     }
 
     /**
-     * Deletes an existing ActivosActivosBiologicos model.
+     * Deletes an existing ActivosMejorasPropiedades model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -104,15 +104,15 @@ class ActivosBiologicosController extends BaseController
     }
 
     /**
-     * Finds the ActivosActivosBiologicos model based on its primary key value.
+     * Finds the ActivosMejorasPropiedades model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return ActivosActivosBiologicos the loaded model
+     * @return ActivosMejorasPropiedades the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = ActivosActivosBiologicos::findOne($id)) !== null) {
+        if (($model = ActivosMejorasPropiedades::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

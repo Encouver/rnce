@@ -4,19 +4,19 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\ActivosInmueblesSearch */
+/* @var $searchModel app\models\ActivosActivosBiologicosSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Activos Inmuebles');
+$this->title = Yii::t('app', 'Activos Activos Biologicos');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="activos-inmuebles-index">
+<div class="activos-activos-biologicos-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a(Yii::t('app', 'Create Activos Inmuebles'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Create Activos Activos Biologicos'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
@@ -27,12 +27,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'bien_id',
-            'descripcion:ntext',
-            'direccion_ubicacion',
-            'ficha_catastral',
-            // 'zonificacion',
-            // 'extension',
-            // 'titulo_supletorio',
+            'cantidad',
+            'certificado:boolean',
+            'num_certificado',
+            // 'detalles',
             // 'creado_por',
             // 'actualizado_por',
             // 'sys_status:boolean',

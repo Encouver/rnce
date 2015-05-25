@@ -4,21 +4,21 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\a\ActivosConstruccionesInmuebles */
+/* @var $model common\models\a\ActivosActivosIntangibles */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="activos-construcciones-inmuebles-form">
+<div class="activos-activos-intangibles-form">
 
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'bien_id')->textInput() ?>
 
-    <?= $form->field($model, 'area_construccion')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'certificado_registro')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'porcentaje_ejecucion')->textInput() ?>
+    <?= $form->field($model, 'fecha_registro')->textInput() ?>
 
-    <?= $form->field($model, 'monto_ejecutado')->textInput() ?>
+    <?= $form->field($model, 'vigencia')->textInput() ?>
 
     <?= $form->field($model, 'creado_por')->textInput() ?>
 

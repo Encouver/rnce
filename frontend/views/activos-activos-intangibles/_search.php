@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\ActivosFabricacionesMueblesSearch */
+/* @var $model app\models\ActivosActivosIntangiblesSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="activos-fabricaciones-muebles-search">
+<div class="activos-activos-intangibles-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
@@ -19,13 +19,11 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'bien_id') ?>
 
-    <?= $form->field($model, 'cantidad') ?>
+    <?= $form->field($model, 'certificado_registro') ?>
 
-    <?= $form->field($model, 'porcentaje_fabricacion') ?>
+    <?= $form->field($model, 'fecha_registro') ?>
 
-    <?= $form->field($model, 'monto_ejecutado') ?>
-
-    <?php // echo $form->field($model, 'tipo_bien_id') ?>
+    <?= $form->field($model, 'vigencia') ?>
 
     <?php // echo $form->field($model, 'creado_por') ?>
 

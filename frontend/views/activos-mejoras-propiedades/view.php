@@ -4,13 +4,13 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\a\ActivosActivosBiologicos */
+/* @var $model common\models\a\ActivosMejorasPropiedades */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Activos Activos Biologicos'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Activos Mejoras Propiedades'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="activos-activos-biologicos-view">
+<div class="activos-mejoras-propiedades-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -30,14 +30,17 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'bien_id',
-            'catidad',
-            'certificado:boolean',
-            'num_certificado',
-            'detalles',
+            'monto',
+            'fecha',
+            'capitalizable:boolean',
+            'creado_por',
+            'actualizado_por',
             'sys_status:boolean',
             'sys_creado_el',
             'sys_actualizado_el',
             'sys_finalizado_el',
+            'mejora_bien_id',
+            'descripcion',
         ],
     ]) ?>
 

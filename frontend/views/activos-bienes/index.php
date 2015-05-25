@@ -60,6 +60,54 @@ $this->params['breadcrumbs'][] = $this->title;
                     'attribute'=>'nacional',
                     'vAlign'=>'middle',
                 ],
+                [
+                    'attribute'=>'sys_tipo_bien_id',
+                    //'header'=>'Banco',
+                    'vAlign'=>'middle',
+                    'value'=>function ($model, $key, $index, $widget) {
+                        if($model->sysTipoBien->sysClasificacionBien->id == 1)
+                            $tipoBien =  Html::a($model->sysTipoBien->etiqueta(), ['activos-inmuebles/view','id'=>$model->activosInmuebles->id], [
+                                'title'=>'Ver detalles del tipo de bien',
+                                //'onclick'=>'alert("This will open the author page.\n\nDisabled for this demo!")'
+                            ]);
+                        if($model->sysTipoBien->sysClasificacionBien->id == 2)
+                            $tipoBien =  Html::a($model->sysTipoBien->etiqueta(), ['activos-muebles/view','id'=>$model->activosMuebles->id], [
+                                'title'=>'Ver detalles del tipo de bien',
+                                //'onclick'=>'alert("This will open the author page.\n\nDisabled for this demo!")'
+                            ]);
+                        if($model->sysTipoBien->sysClasificacionBien->id == 3) {
+                            if($model->sysTipoBien->id == 8)
+                                $tipoBien = Html::a($model->sysTipoBien->etiqueta(), ['activos-contrucciones-inmuebles/view', 'id' => $model->activosContruccionesInmuebles->id], [
+                                    'title' => 'Ver detalles del tipo de bien',
+                                    //'onclick'=>'alert("This will open the author page.\n\nDisabled for this demo!")'
+                                ]);
+                            if($model->sysTipoBien->id == 9)
+                                $tipoBien = Html::a($model->sysTipoBien->etiqueta(), ['activos-fabricaciones-muebles/view', 'id' => $model->activosFabricacionesMuebles->id], [
+                                    'title' => 'Ver detalles del tipo de bien',
+                                    //'onclick'=>'alert("This will open the author page.\n\nDisabled for this demo!")'
+                                ]);
+
+                        }
+                        if($model->sysTipoBien->sysClasificacionBien->id == 4)
+                            $tipoBien =  Html::a($model->sysTipoBien->etiqueta(), ['activos-activos-biologicos/view','id'=>$model->activoActivosBiologicos->id], [
+                                'title'=>'Ver detalles del tipo de bien',
+                                //'onclick'=>'alert("This will open the author page.\n\nDisabled for this demo!")'
+                            ]);
+                        if($model->sysTipoBien->sysClasificacionBien->id == 5)
+                            $tipoBien =  Html::a($model->sysTipoBien->etiqueta(), ['activos-activos-intangibles/view','id'=>$model->activosActivosIntangibles->id], [
+                                'title'=>'Ver detalles del tipo de bien',
+                                //'onclick'=>'alert("This will open the author page.\n\nDisabled for this demo!")'
+                            ]);
+                        return $tipoBien;
+                    },
+                    //'filterType'=>GridView::FILTER_SELECT2,
+                    //'filter'=>ArrayHelper::map(Author::find()->orderBy('name')->asArray()->all(), 'id', 'name'),
+                    'filterWidgetOptions'=>[
+                        'pluginOptions'=>['allowClear'=>true],
+                    ],
+                    'filterInputOptions'=>['placeholder'=>'Tipo bien'],
+                    'format'=>'raw'
+                ],
                 'detalle',
                 [
                     'attribute'=>'origen_id',
@@ -73,7 +121,64 @@ $this->params['breadcrumbs'][] = $this->title;
                     'filterWidgetOptions'=>[
                         'pluginOptions'=>['allowClear'=>true],
                     ],
-                    'filterInputOptions'=>['placeholder'=>'Banco'],
+                    'filterInputOptions'=>['placeholder'=>'Origen'],
+                    'format'=>'raw'
+                ],
+                [
+                    'attribute'=>'factura_id',
+                    //'header'=>'Banco',
+                    'vAlign'=>'middle',
+                    'value'=>function ($model, $key, $index, $widget) {
+                        if(isset($model->factura))
+                        return Html::a($model->factura->num_factura, ['activos-facturas/view','id'=>$model->factura->id], [
+                            'title'=>'Ver detalles de la factura',
+                            //'onclick'=>'alert("This will open the author page.\n\nDisabled for this demo!")'
+                        ]);
+                    },
+                    //'filterType'=>GridView::FILTER_SELECT2,
+                    //'filter'=>ArrayHelper::map(Author::find()->orderBy('name')->asArray()->all(), 'id', 'name'),
+                    'filterWidgetOptions'=>[
+                        'pluginOptions'=>['allowClear'=>true],
+                    ],
+                    'filterInputOptions'=>['placeholder'=>'Origen'],
+                    'format'=>'raw'
+                ],
+                [
+                    'attribute'=>'documento_registrado_id',
+                    //'header'=>'Banco',
+                    'vAlign'=>'middle',
+                    'value'=>function ($model, $key, $index, $widget) {
+                        if(isset($model->documentoRegistrado))
+                            return Html::a($model->documentoRegistrado->etiqueta(), ['activos-documentos-registrados/view','id'=>$model->documentoRegistrado->id], [
+                                'title'=>'Ver detalles del documento registrado',
+                                //'onclick'=>'alert("This will open the author page.\n\nDisabled for this demo!")'
+                            ]);
+                    },
+                    //'filterType'=>GridView::FILTER_SELECT2,
+                    //'filter'=>ArrayHelper::map(Author::find()->orderBy('name')->asArray()->all(), 'id', 'name'),
+                    'filterWidgetOptions'=>[
+                        'pluginOptions'=>['allowClear'=>true],
+                    ],
+                    'filterInputOptions'=>['placeholder'=>'Origen'],
+                    'format'=>'raw'
+                ],
+                [
+                    'attribute'=>'metodo_medicion_id',
+                    //'header'=>'Banco',
+                    'vAlign'=>'middle',
+                    'value'=>function ($model, $key, $index, $widget) {
+                        if(isset($model->metodoMedicion))
+                            return Html::a($model->metodoMedicion->etiqueta(), '#', [
+                                'title'=>'Tipo de medición efectuada para la depreciacion/amortización del bien.',
+                                //'onclick'=>'alert("This will open the author page.\n\nDisabled for this demo!")'
+                            ]);
+                    },
+                    //'filterType'=>GridView::FILTER_SELECT2,
+                    //'filter'=>ArrayHelper::map(Author::find()->orderBy('name')->asArray()->all(), 'id', 'name'),
+                    'filterWidgetOptions'=>[
+                        'pluginOptions'=>['allowClear'=>true],
+                    ],
+                    'filterInputOptions'=>['placeholder'=>'Origen'],
                     'format'=>'raw'
                 ],
                 [
@@ -85,7 +190,26 @@ $this->params['breadcrumbs'][] = $this->title;
                         'pluginOptions'=>['format'=>'yyyy-mm-dd']
                     ],
                 ],
-
+                [
+                    'class'=>'kartik\grid\BooleanColumn',
+                    'attribute'=>'perdida_reverso',
+                    'vAlign'=>'middle',
+                ],
+                [
+                    'class'=>'kartik\grid\BooleanColumn',
+                    'attribute'=>'proc_productivo',
+                    'vAlign'=>'middle',
+                ],
+                [
+                    'class'=>'kartik\grid\BooleanColumn',
+                    'attribute'=>'directo',
+                    'vAlign'=>'middle',
+                ],
+                [
+                    'class'=>'kartik\grid\BooleanColumn',
+                    'attribute'=>'proc_ventas',
+                    'vAlign'=>'middle',
+                ],
 //
 //                [
 //                    'attribute'=>'monto_otorgado',
@@ -191,8 +315,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                      },*/
                     ],
                     'viewOptions'=>['title'=>"Ver", 'data-toggle'=>'tooltip'],
-                    'updateOptions'=>['title'=>"Actualizar", 'data-toggle'=>'tooltip'],
-                    'deleteOptions'=>['title'=>"Eliminar", 'data-toggle'=>'tooltip'],
+                    'updateOptions'=>['title'=>"Solicitar cambio", 'data-toggle'=>'tooltip'],
+                    'deleteOptions'=>['title'=>"Desincorporar", 'data-toggle'=>'tooltip'],
                     'order'=>DynaGrid::ORDER_FIX_RIGHT
                 ],
                 ['class'=>'kartik\grid\CheckboxColumn', 'order'=>DynaGrid::ORDER_FIX_RIGHT],

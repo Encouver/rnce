@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use app\models\ActivosMueblesSearch;
 use common\models\a\ActivosActivosBiologicos;
 use common\models\a\ActivosActivosIntangibles;
 use common\models\a\ActivosConstruccionesInmuebles;
@@ -59,6 +60,23 @@ class ActivosBienesController extends BaseController
             'dataProvider' => $dataProvider,
         ]);
     }
+    /**
+     * Lists all ActivosBienes models.
+     * @return mixed
+     */
+    public function actionMuebles()
+    {
+        $searchModel = new ActivosBienesSearch();
+        $searchModelMuebles = new ActivosMueblesSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('muebles', [
+            'searchModel' => $searchModel,
+            'searchModelMuebles' => $searchModelMuebles,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
 
     /**
      * Displays a single ActivosBienes model.

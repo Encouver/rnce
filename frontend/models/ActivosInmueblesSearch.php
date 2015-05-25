@@ -18,7 +18,7 @@ class ActivosInmueblesSearch extends ActivosInmuebles
     public function rules()
     {
         return [
-            [['id', 'bien_id'], 'integer'],
+            [['id', 'bien_id', 'creado_por', 'actualizado_por'], 'integer'],
             [['descripcion', 'direccion_ubicacion', 'ficha_catastral', 'zonificacion', 'extension', 'titulo_supletorio', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['sys_status'], 'boolean'],
         ];
@@ -59,6 +59,8 @@ class ActivosInmueblesSearch extends ActivosInmuebles
         $query->andFilterWhere([
             'id' => $this->id,
             'bien_id' => $this->bien_id,
+            'creado_por' => $this->creado_por,
+            'actualizado_por' => $this->actualizado_por,
             'sys_status' => $this->sys_status,
             'sys_creado_el' => $this->sys_creado_el,
             'sys_actualizado_el' => $this->sys_actualizado_el,

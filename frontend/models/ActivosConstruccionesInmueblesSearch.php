@@ -18,7 +18,7 @@ class ActivosConstruccionesInmueblesSearch extends ActivosConstruccionesInmueble
     public function rules()
     {
         return [
-            [['id', 'bien_id'], 'integer'],
+            [['id', 'bien_id', 'creado_por', 'actualizado_por'], 'integer'],
             [['area_construccion', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['porcentaje_ejecucion', 'monto_ejecutado'], 'number'],
             [['sys_status'], 'boolean'],
@@ -62,6 +62,8 @@ class ActivosConstruccionesInmueblesSearch extends ActivosConstruccionesInmueble
             'bien_id' => $this->bien_id,
             'porcentaje_ejecucion' => $this->porcentaje_ejecucion,
             'monto_ejecutado' => $this->monto_ejecutado,
+            'creado_por' => $this->creado_por,
+            'actualizado_por' => $this->actualizado_por,
             'sys_status' => $this->sys_status,
             'sys_creado_el' => $this->sys_creado_el,
             'sys_actualizado_el' => $this->sys_actualizado_el,

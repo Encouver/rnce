@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\ActivosFabricacionesMueblesSearch */
+/* @var $model app\models\ActivosMejorasPropiedadesSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="activos-fabricaciones-muebles-search">
+<div class="activos-mejoras-propiedades-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
@@ -19,13 +19,11 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'bien_id') ?>
 
-    <?= $form->field($model, 'cantidad') ?>
+    <?= $form->field($model, 'monto') ?>
 
-    <?= $form->field($model, 'porcentaje_fabricacion') ?>
+    <?= $form->field($model, 'fecha') ?>
 
-    <?= $form->field($model, 'monto_ejecutado') ?>
-
-    <?php // echo $form->field($model, 'tipo_bien_id') ?>
+    <?= $form->field($model, 'capitalizable')->checkbox() ?>
 
     <?php // echo $form->field($model, 'creado_por') ?>
 
@@ -38,6 +36,10 @@ use yii\widgets\ActiveForm;
     <?php // echo $form->field($model, 'sys_actualizado_el') ?>
 
     <?php // echo $form->field($model, 'sys_finalizado_el') ?>
+
+    <?php // echo $form->field($model, 'mejora_bien_id') ?>
+
+    <?php // echo $form->field($model, 'descripcion') ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>

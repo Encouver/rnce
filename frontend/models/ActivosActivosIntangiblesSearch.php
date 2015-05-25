@@ -5,12 +5,12 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\a\ActivosFabricacionesMuebles;
+use common\models\a\ActivosActivosIntangibles;
 
 /**
- * ActivosFabricacionesMueblesSearch represents the model behind the search form about `common\models\a\ActivosFabricacionesMuebles`.
+ * ActivosActivosIntangiblesSearch represents the model behind the search form about `common\models\a\ActivosActivosIntangibles`.
  */
-class ActivosFabricacionesMueblesSearch extends ActivosFabricacionesMuebles
+class ActivosActivosIntangiblesSearch extends ActivosActivosIntangibles
 {
     /**
      * @inheritdoc
@@ -18,10 +18,9 @@ class ActivosFabricacionesMueblesSearch extends ActivosFabricacionesMuebles
     public function rules()
     {
         return [
-            [['id', 'bien_id', 'tipo_bien_id', 'creado_por', 'actualizado_por'], 'integer'],
-            [['cantidad', 'porcentaje_fabricacion', 'monto_ejecutado'], 'number'],
+            [['id', 'bien_id', 'creado_por', 'actualizado_por'], 'integer'],
+            [['certificado_registro', 'fecha_registro', 'vigencia', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['sys_status'], 'boolean'],
-            [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
         ];
     }
 
@@ -43,7 +42,7 @@ class ActivosFabricacionesMueblesSearch extends ActivosFabricacionesMuebles
      */
     public function search($params)
     {
-        $query = ActivosFabricacionesMuebles::find();
+        $query = ActivosActivosIntangibles::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -60,10 +59,8 @@ class ActivosFabricacionesMueblesSearch extends ActivosFabricacionesMuebles
         $query->andFilterWhere([
             'id' => $this->id,
             'bien_id' => $this->bien_id,
-            'cantidad' => $this->cantidad,
-            'porcentaje_fabricacion' => $this->porcentaje_fabricacion,
-            'monto_ejecutado' => $this->monto_ejecutado,
-            'tipo_bien_id' => $this->tipo_bien_id,
+            'fecha_registro' => $this->fecha_registro,
+            'vigencia' => $this->vigencia,
             'creado_por' => $this->creado_por,
             'actualizado_por' => $this->actualizado_por,
             'sys_status' => $this->sys_status,
@@ -71,6 +68,8 @@ class ActivosFabricacionesMueblesSearch extends ActivosFabricacionesMuebles
             'sys_actualizado_el' => $this->sys_actualizado_el,
             'sys_finalizado_el' => $this->sys_finalizado_el,
         ]);
+
+        $query->andFilterWhere(['like', 'certificado_registro', $this->certificado_registro]);
 
         return $dataProvider;
     }

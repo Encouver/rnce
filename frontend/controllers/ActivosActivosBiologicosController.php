@@ -3,16 +3,16 @@
 namespace frontend\controllers;
 
 use Yii;
-use common\models\a\ActivosActivosIntangibles;
-use app\models\ActivosIntangiblesSearch;
+use common\models\a\ActivosActivosBiologicos;
+use app\models\ActivosActivosBiologicosSearch;
 use common\components\BaseController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * ActivosIntangiblesController implements the CRUD actions for ActivosActivosIntangibles model.
+ * ActivosActivosBiologicosController implements the CRUD actions for ActivosActivosBiologicos model.
  */
-class ActivosIntangiblesController extends BaseController
+class ActivosActivosBiologicosController extends BaseController
 {
     public function behaviors()
     {
@@ -27,12 +27,12 @@ class ActivosIntangiblesController extends BaseController
     }
 
     /**
-     * Lists all ActivosActivosIntangibles models.
+     * Lists all ActivosActivosBiologicos models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new ActivosIntangiblesSearch();
+        $searchModel = new ActivosActivosBiologicosSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -42,7 +42,7 @@ class ActivosIntangiblesController extends BaseController
     }
 
     /**
-     * Displays a single ActivosActivosIntangibles model.
+     * Displays a single ActivosActivosBiologicos model.
      * @param integer $id
      * @return mixed
      */
@@ -54,13 +54,13 @@ class ActivosIntangiblesController extends BaseController
     }
 
     /**
-     * Creates a new ActivosActivosIntangibles model.
+     * Creates a new ActivosActivosBiologicos model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new ActivosActivosIntangibles();
+        $model = new ActivosActivosBiologicos();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -72,7 +72,7 @@ class ActivosIntangiblesController extends BaseController
     }
 
     /**
-     * Updates an existing ActivosActivosIntangibles model.
+     * Updates an existing ActivosActivosBiologicos model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -91,7 +91,7 @@ class ActivosIntangiblesController extends BaseController
     }
 
     /**
-     * Deletes an existing ActivosActivosIntangibles model.
+     * Deletes an existing ActivosActivosBiologicos model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -104,15 +104,15 @@ class ActivosIntangiblesController extends BaseController
     }
 
     /**
-     * Finds the ActivosActivosIntangibles model based on its primary key value.
+     * Finds the ActivosActivosBiologicos model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return ActivosActivosIntangibles the loaded model
+     * @return ActivosActivosBiologicos the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = ActivosActivosIntangibles::findOne($id)) !== null) {
+        if (($model = ActivosActivosBiologicos::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

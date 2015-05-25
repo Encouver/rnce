@@ -66,11 +66,16 @@ AppAsset::register($this);
                         ['label' => 'Bienes', 'url' => ['/activos-bienes/index']],
                         ['label' => 'Avaluos', 'url' => ['/activos-avaluos/index']],
                         ['label' => 'Desincorporación', 'url' => ['/activos-desincorporacion-activos/index']],
-                        ['label' => 'Bienes Muebles', 'url' => ['/activos-bienes/muebles']],
-                        ['label' => 'Bienes Inmuebles', 'url' => ['/activos-bienes/inmuebles']],
-                        ['label' => 'Construcciones / Fabricaciones', 'url' => ['/activos-bienes/construcciones-fabricaciones']],
-                        ['label' => 'Bienes Biológicos', 'url' => ['/activos-bienes/biologicos']],
-                        ['label' => 'Bienes Intangibles', 'url' => ['/activos-bienes/intangibles']],
+                        ['label' => 'Mejoras propiedades', 'url' => ['/activos-mejoras-propiedades/index']],
+
+                        ['label' => 'Bienes Muebles', 'url' => ['/activos-muebles/index']],
+                        ['label' => 'Bienes Inmuebles', 'url' => ['/activos-inmuebles/index']],
+                        ['label' => 'Construcciones Inmuebles', 'url' => ['/activos-construcciones-inmuebles/index']],
+                        ['label' => 'Fabricaciones Muebles', 'url' => ['/activos-fabricaciones-muebles/index']],
+                        ['label' => 'Bienes Biológicos', 'url' => ['/activos-activos-biologicos/index']],
+                        ['label' => 'Bienes Intangibles', 'url' => ['/activos-activos-intangibles/index']],
+
+
                         //['label' => 'Datos', 'url' => ['/activos-avaluos/index']],
                         //['label' => 'Aqui van los otros', 'url' => ['#']],
                     ],

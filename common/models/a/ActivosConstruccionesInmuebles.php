@@ -5,6 +5,7 @@ namespace common\models\a;
 use kartik\builder\Form;
 use Yii;
 
+
 /**
  * This is the model class for table "activos.construcciones_inmuebles".
  *
@@ -13,6 +14,8 @@ use Yii;
  * @property string $area_construccion
  * @property string $porcentaje_ejecucion
  * @property string $monto_ejecutado
+ * @property integer $creado_por
+ * @property integer $actualizado_por
  * @property boolean $sys_status
  * @property string $sys_creado_el
  * @property string $sys_actualizado_el
@@ -37,11 +40,12 @@ class ActivosConstruccionesInmuebles extends \common\components\BaseActiveRecord
     {
         return [
             [['bien_id', 'area_construccion', 'porcentaje_ejecucion', 'monto_ejecutado'], 'required'],
-            [['bien_id'], 'integer'],
+            [['bien_id', 'creado_por', 'actualizado_por'], 'integer'],
             [['porcentaje_ejecucion', 'monto_ejecutado'], 'number'],
             [['sys_status'], 'boolean'],
             [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
-            [['area_construccion'], 'string', 'max' => 255]
+            [['area_construccion'], 'string', 'max' => 255],
+            [['bien_id'], 'unique']
         ];
     }
 
@@ -56,6 +60,8 @@ class ActivosConstruccionesInmuebles extends \common\components\BaseActiveRecord
             'area_construccion' => Yii::t('app', 'Area Construccion'),
             'porcentaje_ejecucion' => Yii::t('app', 'Porcentaje Ejecucion'),
             'monto_ejecutado' => Yii::t('app', 'Monto Ejecutado'),
+            'creado_por' => Yii::t('app', 'Creado Por'),
+            'actualizado_por' => Yii::t('app', 'Actualizado Por'),
             'sys_status' => Yii::t('app', 'Sys Status'),
             'sys_creado_el' => Yii::t('app', 'Sys Creado El'),
             'sys_actualizado_el' => Yii::t('app', 'Sys Actualizado El'),

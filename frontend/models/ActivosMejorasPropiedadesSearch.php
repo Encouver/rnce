@@ -5,12 +5,12 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\a\ActivosActivosIntangibles;
+use common\models\a\ActivosMejorasPropiedades;
 
 /**
- * ActivosIntangiblesSearch represents the model behind the search form about `common\models\a\ActivosActivosIntangibles`.
+ * ActivosMejorasPropiedadesSearch represents the model behind the search form about `common\models\a\ActivosMejorasPropiedades`.
  */
-class ActivosIntangiblesSearch extends ActivosActivosIntangibles
+class ActivosMejorasPropiedadesSearch extends ActivosMejorasPropiedades
 {
     /**
      * @inheritdoc
@@ -18,9 +18,10 @@ class ActivosIntangiblesSearch extends ActivosActivosIntangibles
     public function rules()
     {
         return [
-            [['id', 'bien_id'], 'integer'],
-            [['certificado_registro', 'fecha_registro', 'vigencia', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
-            [['sys_status'], 'boolean'],
+            [['id', 'bien_id', 'creado_por', 'actualizado_por', 'mejora_bien_id'], 'integer'],
+            [['monto'], 'number'],
+            [['fecha', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el', 'descripcion'], 'safe'],
+            [['capitalizable', 'sys_status'], 'boolean'],
         ];
     }
 
@@ -42,7 +43,7 @@ class ActivosIntangiblesSearch extends ActivosActivosIntangibles
      */
     public function search($params)
     {
-        $query = ActivosActivosIntangibles::find();
+        $query = ActivosMejorasPropiedades::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -59,15 +60,19 @@ class ActivosIntangiblesSearch extends ActivosActivosIntangibles
         $query->andFilterWhere([
             'id' => $this->id,
             'bien_id' => $this->bien_id,
-            'fecha_registro' => $this->fecha_registro,
-            'vigencia' => $this->vigencia,
+            'monto' => $this->monto,
+            'fecha' => $this->fecha,
+            'capitalizable' => $this->capitalizable,
+            'creado_por' => $this->creado_por,
+            'actualizado_por' => $this->actualizado_por,
             'sys_status' => $this->sys_status,
             'sys_creado_el' => $this->sys_creado_el,
             'sys_actualizado_el' => $this->sys_actualizado_el,
             'sys_finalizado_el' => $this->sys_finalizado_el,
+            'mejora_bien_id' => $this->mejora_bien_id,
         ]);
 
-        $query->andFilterWhere(['like', 'certificado_registro', $this->certificado_registro]);
+        $query->andFilterWhere(['like', 'descripcion', $this->descripcion]);
 
         return $dataProvider;
     }

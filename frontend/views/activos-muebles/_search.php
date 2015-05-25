@@ -27,6 +27,10 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'cantidad') ?>
 
+    <?php // echo $form->field($model, 'creado_por') ?>
+
+    <?php // echo $form->field($model, 'actualizado_por') ?>
+
     <?php // echo $form->field($model, 'sys_status')->checkbox() ?>
 
     <?php // echo $form->field($model, 'sys_creado_el') ?>

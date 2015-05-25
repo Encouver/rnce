@@ -93,4 +93,8 @@ class ActivosSysTiposBienes extends \common\components\BaseActiveRecord
     {
         return $this->hasOne(ActivosSysClasificacionesBienes::className(), ['id' => 'sys_clasificacion_bien_id']);
     }
+
+    public function Etiqueta(){
+        return $this->sysClasificacionBien->nombre.' - '.$this->nombre;
+    }
 }

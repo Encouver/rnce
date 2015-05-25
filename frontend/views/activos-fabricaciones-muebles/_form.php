@@ -20,6 +20,12 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'monto_ejecutado')->textInput() ?>
 
+    <?= $form->field($model, 'tipo_bien_id')->textInput() ?>
+
+    <?= $form->field($model, 'creado_por')->textInput() ?>
+
+    <?= $form->field($model, 'actualizado_por')->textInput() ?>
+
     <?= $form->field($model, 'sys_status')->checkbox() ?>
 
     <?= $form->field($model, 'sys_creado_el')->textInput() ?>

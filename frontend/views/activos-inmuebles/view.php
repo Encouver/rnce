@@ -36,6 +36,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'zonificacion',
             'extension',
             'titulo_supletorio',
+            'creado_por',
+            'actualizado_por',
             'sys_status:boolean',
             'sys_creado_el',
             'sys_actualizado_el',

@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use common\models\a\ActivosBienes;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
@@ -18,7 +19,7 @@ class ActivosMueblesSearch extends ActivosMuebles
     public function rules()
     {
         return [
-            [['id', 'bien_id', 'cantidad'], 'integer'],
+            [['id', 'bien_id', 'cantidad', 'creado_por', 'actualizado_por'], 'integer'],
             [['marca', 'modelo', 'serial', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['sys_status'], 'boolean'],
         ];
@@ -56,10 +57,14 @@ class ActivosMueblesSearch extends ActivosMuebles
             return $dataProvider;
         }
 
+        //$query->joinWith(ActivosBienes::tableName().' as bien');
+
         $query->andFilterWhere([
             'id' => $this->id,
             'bien_id' => $this->bien_id,
             'cantidad' => $this->cantidad,
+            'creado_por' => $this->creado_por,
+            'actualizado_por' => $this->actualizado_por,
             'sys_status' => $this->sys_status,
             'sys_creado_el' => $this->sys_creado_el,
             'sys_actualizado_el' => $this->sys_actualizado_el,
