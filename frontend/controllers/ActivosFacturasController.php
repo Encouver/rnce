@@ -103,12 +103,14 @@ class ActivosFacturasController extends BaseController
         if ($model->load(Yii::$app->request->post())) {
             $model->contratista_id = Yii::$app->user->identity->contratista_id;
             if($model->save())
-                return 'Factura Guardada';
+                echo 1;
             else
-                return 'Error guardando la Factura';
+                echo 0;
         } else {
-
-            return 'Debe llenar todos los campos requeridos';
+            return $this->renderAjax('create', [
+                'model' => $model,
+            ]);
+            //return 'Debe llenar todos los campos requeridos';
         }
     }
 

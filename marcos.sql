@@ -1388,3 +1388,16 @@ ALTER TABLE cuentas.d1_islr_pagado_anticipo
 ADD FOREIGN KEY (islr_pagado_id) REFERENCES cuentas.conceptos (id) ON UPDATE NO ACTION ON DELETE NO ACTION;
 ALTER TABLE cuentas.d1_islr_pagado_anticipo
 ADD UNIQUE (islr_pagado_id, contratista_id);
+
+
+INSERT INTO cuentas.conceptos(nombre,cuenta)
+VALUES ('Retenido en el ejercicio', 'd1');
+
+INSERT INTO cuentas.conceptos(nombre,cuenta)
+VALUES ('Declaración estimada', 'd1');
+
+INSERT INTO cuentas.conceptos(nombre,cuenta)
+VALUES ('Anticipo por Enajenación de Inmuebles', 'd1');
+
+
+ALTER TABLE cuentas.d1_d2_beneficiario DROP COLUMN tipo_beneficio;

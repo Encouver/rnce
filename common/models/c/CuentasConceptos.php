@@ -18,6 +18,7 @@ use Yii;
  * @property string $sys_finalizado_el
  * @property string $cuenta
  *
+ * @property CuentasD1IslrPagadoAnticipo[] $cuentasD1IslrPagadoAnticipos
  * @property CuentasHhPasivoLaboral[] $cuentasHhPasivoLaborals
  * @property CuentasJjProviciones[] $cuentasJjProviciones
  */
@@ -29,6 +30,11 @@ class CuentasConceptos extends \common\components\BaseActiveRecord
     public static function tableName()
     {
         return 'cuentas.conceptos';
+    }
+
+    public static function Concepto($cuenta = '')
+    {
+        return CuentasConceptos::find()->where(['cuenta'=>$cuenta])->all();
     }
 
     /**
@@ -63,6 +69,14 @@ class CuentasConceptos extends \common\components\BaseActiveRecord
             'sys_finalizado_el' => Yii::t('app', 'Sys Finalizado El'),
             'cuenta' => Yii::t('app', 'Cuenta'),
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCuentasD1IslrPagadoAnticipos()
+    {
+        return $this->hasMany(CuentasD1IslrPagadoAnticipo::className(), ['islr_pagado_id' => 'id']);
     }
 
     /**

@@ -153,7 +153,7 @@ class ActivosFacturas extends \common\components\BaseActiveRecord
                 'columnOptions'=>['hidden'=>false]
             ],
             'proveedor_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>[//'data'=>ArrayHelper::map(PersonasJuridicas::find()->all(),'id',function($model){return $model->etiqueta(); }),
-                'options'=>[],'pluginOptions' => [
+                'options'=>['id'=>'factura-proveedor'],'pluginOptions' => [
                 'allowClear' => true,
                 'minimumInputLength' => 3,
                 'ajax' => [
@@ -166,7 +166,7 @@ class ActivosFacturas extends \common\components\BaseActiveRecord
                 'templateSelection' => new JsExpression('function (city) { return city.text; }'),
             ],]],
             'imprenta_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>[//'data'=>ArrayHelper::map(PersonasJuridicas::find()->all(),'id',function($model){return $model->etiqueta(); }),
-                'options'=>[],'pluginOptions' => [
+                'options'=>['id'=>'factura-imprenta'],'pluginOptions' => [
             'allowClear' => true,
             'minimumInputLength' => 3,
             'ajax' => [
@@ -177,7 +177,7 @@ class ActivosFacturas extends \common\components\BaseActiveRecord
             'escapeMarkup' => new JsExpression('function (markup) { return markup; }'),
             'templateResult' => new JsExpression('function(city) { return city.text; }'),
             'templateSelection' => new JsExpression('function (city) { return city.text; }'),
-         ],]],
+            ],]],
             'fecha_emision_talonario'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>DatePicker::className(),'options'=>['options' => ['placeholder' => 'Seleccione fecha ...'],
                 'convertFormat' => true,
                 'pluginOptions' => [
@@ -188,7 +188,7 @@ class ActivosFacturas extends \common\components\BaseActiveRecord
                 'columnOptions'=>['hidden'=>false]
             ],
             'comprador_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>[//'data'=>ArrayHelper::map(SysNaturalesJuridicas::find()->all(),'id',function($model){return $model->etiqueta(); }),
-                'options'=>[],'pluginOptions' => [
+                'options'=>['id'=>'factura-comprador'],'pluginOptions' => [
                     'allowClear' => true,
                     'minimumInputLength' => 3,
                     'ajax' => [

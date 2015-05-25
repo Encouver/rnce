@@ -2,7 +2,11 @@
 
 namespace common\models\c;
 
+use kartik\builder\Form;
+use kartik\money\MaskMoney;
+use kartik\widgets\Select2;
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "cuentas.d1_d2_beneficiario".
@@ -12,7 +16,14 @@ use Yii;
  * @property string $periodo
  * @property string $monto
  * @property integer $sys_naturales_juridicas_id
- * @property string $tipo_beneficio
+ * @property integer $creado_por
+ * @property integer $actualizado_por
+ * @property boolean $sys_status
+ * @property string $sys_creado_el
+ * @property string $sys_actualizado_el
+ * @property string $sys_finalizado_el
+ * @property integer $cuenta_id
+ * @property string $cuenta
  */
 class CuentasD1D2Beneficiario extends \common\components\BaseActiveRecord
 {
@@ -30,13 +41,17 @@ class CuentasD1D2Beneficiario extends \common\components\BaseActiveRecord
     public function rules()
     {
         return [
-            [['nro_planilla', 'periodo', 'monto', 'sys_naturales_juridicas_id', 'tipo_beneficio'], 'required'],
+            [['nro_planilla', 'periodo', 'monto', 'sys_naturales_juridicas_id'], 'required'],
             [['monto'], 'number'],
-            [['sys_naturales_juridicas_id'], 'integer'],
-            [['nro_planilla', 'tipo_beneficio'], 'string', 'max' => 255],
-            [['periodo'], 'string', 'max' => 200]
+            [['sys_naturales_juridicas_id', 'creado_por', 'actualizado_por', 'cuenta_id'], 'integer'],
+            [['sys_status'], 'boolean'],
+            [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
+            [['nro_planilla'], 'string', 'max' => 255],
+            [['periodo'], 'string', 'max' => 200],
+            [['cuenta'], 'string', 'max' => 50]
         ];
     }
+
 
     /**
      * @inheritdoc
@@ -48,8 +63,45 @@ class CuentasD1D2Beneficiario extends \common\components\BaseActiveRecord
             'nro_planilla' => Yii::t('app', 'Nro Planilla'),
             'periodo' => Yii::t('app', 'Periodo'),
             'monto' => Yii::t('app', 'Monto'),
-            'sys_naturales_juridicas_id' => Yii::t('app', 'Sys Naturales Juridicas ID'),
-            'tipo_beneficio' => Yii::t('app', 'Tipo Beneficio'),
+            'sys_naturales_juridicas_id' => Yii::t('app', 'Beneficiario'),
+            'creado_por' => Yii::t('app', 'Creado Por'),
+            'actualizado_por' => Yii::t('app', 'Actualizado Por'),
+            'sys_status' => Yii::t('app', 'Sys Status'),
+            'sys_creado_el' => Yii::t('app', 'Sys Creado El'),
+            'sys_actualizado_el' => Yii::t('app', 'Sys Actualizado El'),
+            'sys_finalizado_el' => Yii::t('app', 'Sys Finalizado El'),
+            'cuenta_id' => Yii::t('app', 'Cuenta ID'),
+            'cuenta' => Yii::t('app', 'Cuenta'),
+        ];
+    }
+
+
+    public function getFormAttribs() {
+        return [
+            // primary key column
+            'id'=>[ // primary key attribute
+                'type'=>Form::INPUT_HIDDEN,
+                'columnOptions'=>['hidden'=>true]
+            ],
+            'sys_naturales_juridicas_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>[//'data'=>ArrayHelper::map(SysNaturalesJuridicas::find()->all(),'id',function($model){return $model->etiqueta(); }),
+                'options'=>[],'pluginOptions' => [
+                    'allowClear' => true,
+                    'minimumInputLength' => 3,
+                    'ajax' => [
+                        'url' => \yii\helpers\Url::to(['sys-naturales-juridicas/naturales-juridicas-lista']),
+                        'dataType' => 'json',
+                        'data' => new JsExpression('function(params) { return {q:params.term}; }')
+                    ],
+                    'escapeMarkup' => new JsExpression('function (markup) { return markup; }'),
+                    'templateResult' => new JsExpression('function(city) { return city.text; }'),
+                    'templateSelection' => new JsExpression('function (city) { return city.text; }'),
+                ],]],
+
+            'nro_planilla'=>['type'=>Form::INPUT_TEXT,],
+            'periodo'=>['type'=>Form::INPUT_TEXT,],
+            'monto'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),],
+
+
         ];
     }
 }

@@ -192,6 +192,8 @@ use yii\helpers\Url;
     $urlDocumento = Url::to(['activos-documentos-registrados/createajax']);
 
     $script = <<< JS
+
+
     $('#enviar-documento').click(function(e){
 
         if($('form#modal_documento').find('.has-error').length!=0){
@@ -213,6 +215,27 @@ use yii\helpers\Url;
                 });
 
             }
+    });
+
+    $('form#{$modelFactura->formName()}').on('beforeSubmit', function(e){
+        var \$form = $(this);
+        $.post(
+            \$form.attr("action"), // serialize Yii2 form
+            \$form.serialize()
+        )
+        .done(function(result){
+            if(result == 1)
+            {
+                $(\$form).trigger("reset");
+
+            }else{
+            alert('Error');
+
+            }
+            $("#message").html(result.message);
+        }).fail(function(){
+            console.log("server errror");
+        });
     });
 
     $('#enviar-factura').click(function(e){

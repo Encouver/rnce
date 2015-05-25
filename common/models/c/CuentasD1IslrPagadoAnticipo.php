@@ -5,13 +5,15 @@ namespace common\models\c;
 use kartik\builder\Form;
 use kartik\checkbox\CheckboxX;
 use kartik\money\MaskMoney;
+use kartik\widgets\Select2;
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "cuentas.d1_islr_pagado_anticipo".
  *
  * @property integer $id
- * @property string $isrl_pagado
+ * @property integer $islr_pagado_id
  * @property string $nro_documento
  * @property string $saldo_ph
  * @property string $importe_pagado_ejer_econo
@@ -27,6 +29,7 @@ use Yii;
  * @property string $sys_actualizado_el
  * @property string $sys_finalizado_el
  *
+ * @property CuentasConceptos $islrPagado
  * @property Contratistas $contratista
  */
 class CuentasD1IslrPagadoAnticipo extends \common\components\BaseActiveRecord
@@ -45,14 +48,14 @@ class CuentasD1IslrPagadoAnticipo extends \common\components\BaseActiveRecord
     public function rules()
     {
         return [
-            [['isrl_pagado', 'saldo_ph', 'importe_pagado_ejer_econo', 'importe_aplicado_ejer_econo', 'contratista_id', 'anho'], 'required'],
+            [['islr_pagado_id', 'saldo_ph', 'importe_pagado_ejer_econo', 'importe_aplicado_ejer_econo', 'contratista_id', 'anho'], 'required'],
+            [['islr_pagado_id', 'contratista_id', 'creado_por', 'actualizado_por'], 'integer'],
             [['nro_documento'], 'string'],
             [['saldo_ph', 'importe_pagado_ejer_econo', 'importe_aplicado_ejer_econo', 'saldo_cierre', 'monto'], 'number'],
-            [['contratista_id', 'creado_por', 'actualizado_por'], 'integer'],
             [['sys_status'], 'boolean'],
             [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
-            [['isrl_pagado'], 'string', 'max' => 255],
-            [['anho'], 'string', 'max' => 100]
+            [['anho'], 'string', 'max' => 100],
+            [['islr_pagado_id', 'contratista_id'], 'unique', 'targetAttribute' => ['islr_pagado_id', 'contratista_id'], 'message' => 'Ya se encuentra cargado un registro con este concepto.']
         ];
     }
 
@@ -63,7 +66,7 @@ class CuentasD1IslrPagadoAnticipo extends \common\components\BaseActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'isrl_pagado' => Yii::t('app', 'Isrl Pagado'),
+            'islr_pagado_id' => Yii::t('app', 'Islr Pagado ID'),
             'nro_documento' => Yii::t('app', 'Nro Documento'),
             'saldo_ph' => Yii::t('app', 'Saldo Ph'),
             'importe_pagado_ejer_econo' => Yii::t('app', 'Importe Pagado Ejer Econo'),
@@ -79,6 +82,13 @@ class CuentasD1IslrPagadoAnticipo extends \common\components\BaseActiveRecord
             'sys_actualizado_el' => Yii::t('app', 'Sys Actualizado El'),
             'sys_finalizado_el' => Yii::t('app', 'Sys Finalizado El'),
         ];
+    }
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getIslrPagado()
+    {
+        return $this->hasOne(CuentasConceptos::className(), ['id' => 'islr_pagado_id']);
     }
 
     /**
@@ -96,6 +106,11 @@ class CuentasD1IslrPagadoAnticipo extends \common\components\BaseActiveRecord
                 'type'=>Form::INPUT_HIDDEN,
                 'columnOptions'=>['hidden'=>true]
             ],
+
+            'islr_pagado_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(CuentasConceptos::concepto('d1'),'id','nombre'),
+                'options'=>['id'=>'islr-concepto','placeholder'=>'Seleccionar ', 'onchange'=>'js:'],'pluginOptions' => [
+                    'allowClear' => false,
+                ],]],
             'nro_documento'=>['type'=>Form::INPUT_TEXT,],
             'saldo_ph'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),],
             'importe_pagado_ejer_econo'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),],
