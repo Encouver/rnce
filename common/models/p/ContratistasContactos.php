@@ -1,7 +1,6 @@
 <?php
 
 namespace common\models\p;
-
 use Yii;
 
 /**
@@ -62,7 +61,7 @@ class ContratistasContactos extends \common\components\BaseActiveRecord
      */
     public function getContacto()
     {
-        return $this->hasOne(PersonasNaturales::className(), ['id' => 'contacto_id']);
+        return $this->hasOne(SysNaturalesJuridicas::className(), ['id' => 'contacto_id']);
     }
 
     /**

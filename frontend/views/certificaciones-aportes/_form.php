@@ -30,13 +30,11 @@ $url3 = \yii\helpers\Url::to(['personas-naturales/crearcomisario']);
 ]);?>
     <?php $form2 = ActiveForm::begin(['id'=>'modal_pnatural', 'type'=>ActiveForm::TYPE_VERTICAL]); ?>
     
-       <?= $form2->field($persona_natural, 'rif')->textInput(['maxlength' => 50]) ?>
-    
     <?php echo Form::widget([
     'model'=>$persona_natural,
     'form'=>$form2,
     'columns'=>2,
-    'attributes'=>$persona_natural->formAttribs
+    'attributes'=>$persona_natural->getformAttribs("basico")
       ]); ?>
 
     <div id="output15"></div>

@@ -15,26 +15,33 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <p>
-        <?= Html::a(Yii::t('app', 'Create Contratistas Contactos'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+   
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+        'summary'=>'',
+       // 'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'contacto_id',
-            'contratista_id',
-            'sys_status:boolean',
-            'sys_creado_el',
+            
+            [
+                'attribute'=>'contacto_id',
+                'label'=>'Nombre y Apellido',
+                'value'=>'contacto.denominacion'
+            ],
+            //'id',
+            //'contacto_id',
+            //'contratista_id',
+            //'sys_status:boolean',
+            //'sys_creado_el',
             // 'sys_actualizado_el',
             // 'sys_finalizado_el',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn','template'=>'{delete}'],
         ],
     ]); ?>
+     <p>
+        <?= Html::a(Yii::t('app', 'Agregar persona de contacto'), ['create'], ['class' => 'btn btn-success']) ?>
+    </p>
 
 </div>

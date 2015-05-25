@@ -150,7 +150,7 @@ class AccionistasOtrosController extends BaseController
         $out['results'] = array_values($data);
     }
     elseif ($id > 0) {
-        $out['results'] = ['id' => $id, 'text' => ActivosBienes::find($id)->detalle];
+        $out['results'] = ['id' => $id, 'text' => \common\models\p\SysNaturalesJuridicas::find($id)->denominacion];
     }
   
     return $out;

@@ -63,34 +63,25 @@ class ContratistasContactosController extends Controller
     public function actionCreate()
     {
         $model = new ContratistasContactos();
-        $model2  = new PersonasNaturales();
-        $model3  = new SysNaturalesJuridicas();
 
-        if ($model2->load(Yii::$app->request->post())) {
+        if ($model->load(Yii::$app->request->post()) ) {
+          
+            $contratista_contacto->contratista_id=  Yii::$app->user->identity->contratista_id;
+                   if ($contratista_contacto->save()) {
+                return $this->redirect(['index']);
+
+
+                   }else{
+                       Yii::$app->session->setFlash('error','Error en la carga');
+                       return $this->render('create', [
+                'model' => $model,
+            ]);
+                   }
             
-            $model3->rif= $model2->rif;
-            $model3->juridica= false;
-            $model3->denominacion=$model2->primer_nombre.' '.$model2->primer_apellido;
-            $model3->sys_status=true;
-            $model3->save();
-            
-            
-            $model2->sys_pais_id = 1;
-            $model2->nacionalidad = "NACIONAL";
-            $model2->creado_por = 1;
-            
-            
-            
-            $model2->save();
-            $model->contacto_id = $model2->id;
-            $model->contratista_id = 1;
-            $model->save();
-            
-            return $this->redirect(['view', 'id' => $model->id]);
+           
         } else {
             return $this->render('create', [
                 'model' => $model,
-                'model2' => $model2,
             ]);
         }
     }

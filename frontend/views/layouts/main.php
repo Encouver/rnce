@@ -85,16 +85,14 @@ AppAsset::register($this);
                          //['label' => 'Acordeon', 'url' => ['/contratistas/acordeon']],
                          ['label' => 'Datos basicos', 'url' => ['/contratistas/index']],
                          ['label' => 'Direccion Principal', 'url' => ['/domicilios/index']],
-                         ['label' => 'Informacion de contacto', 'url' => ['/contratistas-contactos/crearcontacto']],
+                        ['label' => 'Bancos', 'url' => ['/bancos-contratistas/index']],
                          ['label' => 'Sucursales', 'url' => ['/sucursales/index']],
-                         ['label' => 'Bancos', 'url' => ['/bancos-contratistas/index']],
-                        
+                        ['label' => 'Persona de contacto', 'url' => ['/contratistas-contactos/index']],
                          ['label' => 'Objeto empresa', 'url' => ['/objetos-empresas/index']],
                         
-                         ['label' => 'Comisarios', 'url' => ['/comisarios-auditores/crearcomisario']],
-                         ['label' => 'Responsable Contabilidad', 'url' => ['/comisarios-auditores/crearresponsable']],
+                       /*  ['label' => 'Responsable Contabilidad', 'url' => ['/comisarios-auditores/crearresponsable']],
                          ['label' => 'Contador Auditor', 'url' => ['/comisarios-auditores/crearcontador']],
-                         ['label' => 'Profesional Informe de conversion', 'url' => ['/comisarios-auditores/crearprofesional']],
+                         ['label' => 'Profesional Informe de conversion', 'url' => ['/comisarios-auditores/crearprofesional']],*/
                          ['label' => 'Relacion de Contratos', 'url' => ['/relaciones-contratos/crearrelacioncontrato']],
          
                         
