@@ -59,7 +59,7 @@ class ActivosInmuebles extends \common\components\BaseActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'bien_id' => Yii::t('app', 'Bien ID'),
+            'bien_id' => Yii::t('app', 'Bien'),
             'descripcion' => Yii::t('app', 'Descripcion'),
             'direccion_ubicacion' => Yii::t('app', 'Direccion Ubicacion'),
             'ficha_catastral' => Yii::t('app', 'Ficha Catastral'),

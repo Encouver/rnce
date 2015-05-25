@@ -1410,3 +1410,6 @@ ALTER TABLE cuentas.d1_d2_beneficiario DROP COLUMN tipo_beneficio;
 
 ALTER TABLE activos.bienes ADD COLUMN perdida_reverso boolean;
 COMMENT ON COLUMN activos.bienes.perdida_reverso IS 'Perdida o reverso.';
+
+
+INSERT INTO activos.facturas (id, num_factura, proveedor_id, fecha_emision, imprenta_id, fecha_emision_talonario, comprador_id, base_imponible_gravable, exento, iva, contratista_id, creado_por, actualizado_por, sys_status, sys_creado_el, sys_actualizado_el, sys_finalizado_el) VALUES (2, '1', 1, '2015-12-12', 2, '2015-12-12', 1, 65456.000000, 456.000000, 56.000000, 1, NULL, NULL, true, '2015-05-25 10:16:18.736-04:30', '2015-05-25 10:16:18.736-04:30', NULL);
