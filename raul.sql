@@ -124,3 +124,12 @@ ALTER TABLE sucursales
       REFERENCES sys_naturales_juridicas (id) MATCH SIMPLE
       ON UPDATE CASCADE ON DELETE NO ACTION;
 
+
+
+
+--25 mayo 01_07 am--
+
+ALTER TABLE comisarios_auditores ALTER COLUMN comisario SET DEFAULT false;
+ALTER TABLE comisarios_auditores ALTER COLUMN auditor SET DEFAULT false;
+ALTER TABLE comisarios_auditores ALTER COLUMN responsable_contabilidad SET DEFAULT false;
+ALTER TABLE comisarios_auditores ALTER COLUMN informe_conversion SET DEFAULT false;

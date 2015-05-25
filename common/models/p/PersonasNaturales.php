@@ -2,6 +2,8 @@
 
 namespace common\models\p;
 use kartik\builder\Form;
+use common\models\p\SysPaises;
+use yii\helpers\ArrayHelper;
 use Yii;
 
 /**
@@ -179,13 +181,18 @@ class PersonasNaturales extends \common\components\BaseActiveRecord
         'instagram'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Introduzca instagram']],
             ];
         }
-         if($id=="basico2"){
+         if($id=="posextranjero"){
+                $civil=[ 'SOLTERO (A)' => 'SOLTERO (A)', 'CASADO (A)' => 'CASADO (A)', 'CONCUBINO (A)' => 'CONCUBINO (A)', 'DIVORCIADO (A)' => 'DIVORCIADO (A)', 'VIUDO (A)' => 'VIUDO (A)', ];
+
             return [
-     
-        'primer_nombre'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Introduzca primer nombre']],
+         'sys_pais_id'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>ArrayHelper::map(SysPaises::find()->all(),'id','nombre'),'options'=>['prompt'=>'Seleccione Pais']],
+         'numero_identificacion'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Interprete']],
+         'primer_nombre'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Introduzca primer nombre']],
         'segundo_nombre'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Introduzca segundo nombre']],
         'primer_apellido'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Introduzca primer apellido']],
         'segundo_apellido'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Introduzca segundo apellido']],
+        'estado_civil'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>$civil,'options'=>['prompt'=>'Seleccione estado']],
+
             ];
         }
     

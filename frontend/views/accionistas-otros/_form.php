@@ -27,22 +27,14 @@ $persona_natural = new PersonasNaturales();
     
     
     <div id="output"></div>
-         <?= $form2->field($persona_natural, 'sys_pais_id')->dropDownList(
-                           ArrayHelper::map(SysPaises::find()->all(),'id','nombre'),
-                                  ['prompt' => 'Seleccione Pais'] 
-                               ) ?>
-                          
-    
-    <?= $form2->field($persona_natural, 'numero_identificacion')->textInput(['maxlength' => 50]) ?>
+        
     
     <?php echo Form::widget([
     'model'=>$persona_natural,
     'form'=>$form2,
     'columns'=>2,
-    'attributes'=>$persona_natural->getFormAttribs("basico2")
+    'attributes'=>$persona_natural->getFormAttribs("posextranjero")
       ]); ?>
-      <?= $form2->field($persona_natural, 'estado_civil')->dropDownList([ 'SOLTERO (A)' => 'SOLTERO (A)', 'CASADO (A)' => 'CASADO (A)', 'CONCUBINO (A)' => 'CONCUBINO (A)', 'DIVORCIADO (A)' => 'DIVORCIADO (A)', 'VIUDO (A)' => 'VIUDO (A)', ], ['prompt' => 'Seleccione estado civil']) ?>
-
     <div id="output15"></div>
     <div class="form-group">
          <?= Html::Button(Yii::t('app', 'Enviar'), ['class' => 'btn btn-success', 'id' => 'enviar15']) ?> 
@@ -64,7 +56,6 @@ $persona_natural = new PersonasNaturales();
     
     
     <div id="output"></div>
-        <?= $form3->field($persona_juridica, 'tipo_nacionalidad')->dropDownList([ 'NACIONAL' => 'NACIONAL', 'EXTRANJERA' => 'EXTRANJERA', ], ['prompt' => '']) ?>
 
     <?php echo Form::widget([
     'model'=>$persona_juridica,

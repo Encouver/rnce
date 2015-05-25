@@ -15,13 +15,12 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <p>
-        <?= Html::a(Yii::t('app', 'Create Comisarios Auditores'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+    
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+        //'filterModel' => $searchModel,
+        'summary'=>'',
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
@@ -43,8 +42,10 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'informe_conversion:boolean',
             // 'natural_juridica_id',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn','template'=>'{update}{delete}'],
         ],
     ]); ?>
-
+    <p>
+        <?= Html::a(Yii::t('app', 'Agregar Comisario'), ['create','id'=>'comisario'], ['class' => 'btn btn-success']) ?>
+    </p>
 </div>

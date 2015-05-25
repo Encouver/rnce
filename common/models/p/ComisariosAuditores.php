@@ -2,6 +2,8 @@
 
 namespace common\models\p;
 use kartik\builder\Form;
+use kartik\widgets\Select2;
+use yii\web\JsExpression;
 use Yii;
 
 /**
@@ -46,8 +48,15 @@ class ComisariosAuditores extends \common\components\BaseActiveRecord
             [['fecha_vencimiento','fecha_informe', 'fecha_carta', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['declaracion_jurada', 'comisario', 'sys_status', 'auditor', 'responsable_contabilidad', 'informe_conversion'], 'boolean'],
             [['tipo_profesion'], 'string'],
+            [['tipo_profesion','colegiatura','fecha_carta','fecha_vencimiento','declaracion_jurada'],'required','on'=>'comisario'],
             [['documento_registrado_id', 'contratista_id', 'natural_juridica_id'], 'integer'],
-            [['colegiatura'], 'string', 'max' => 255]
+            [['colegiatura'], 'string', 'max' => 255],
+            [['comisario', 'auditor', 'informe_conversion', 'responsable_contabilidad'],'default','value'=>false],
+             ['declaracion_jurada', 'compare', 'message' => 'Debe aceptar la declaracion jurada', 'operator'=> '==', 'compareValue'=>true, 'when' => function ($model) {
+                return $model->natural_juridica_id != '';
+            }, 'whenClient' => "function (attribute, value) {
+                return $('#comisariosauditores-natural_juridica_id').val() !='';
+            }"],
         ];
     }
 
@@ -79,11 +88,24 @@ class ComisariosAuditores extends \common\components\BaseActiveRecord
     }
     
     
-    public function getFormAttribs() {
+    public function getFormAttribs($id) {
         //$data=[ 'NACIONAL' => 'NACIONAL', 'EXTRANJERA' => 'EXTRANJERA', ];
-        
+        if($id=="comisario"){
         $profesiones =[ 'CONTADOR PUBLICO' => 'CONTADOR PUBLICO', 'ADMINISTRADOR' => 'ADMINISTRADOR', 'ECONOMISTA' => 'ECONOMISTA', ];
     return [
+        'natural_juridica_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>[
+                'options'=>[],'pluginOptions' => [
+                'allowClear' => true,
+                'minimumInputLength' => 3,
+                'ajax' => [
+                    'url' => \yii\helpers\Url::to(['sys-naturales-juridicas/naturales-juridicas-lista']),
+                    'dataType' => 'json',
+                    'data' => new JsExpression('function(params) { return {q:params.term,juridica:false}; }')
+                ],
+                'escapeMarkup' => new JsExpression('function (markup) { return markup; }'),
+                'templateResult' => new JsExpression('function(natural_juridica_id) { return natural_juridica_id.text; }'),
+                'templateSelection' => new JsExpression('function (natural_juridica_id) { return natural_juridica_id.text; }'),
+        ],]],
           'tipo_profesion'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>$profesiones , 'options'=>['prompt'=>'Seleccione profesion']],
          'colegiatura'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Numero de colegiatura']],
         'fecha_carta'=>[
@@ -105,13 +127,22 @@ class ComisariosAuditores extends \common\components\BaseActiveRecord
         'declaracion_jurada'=>['type'=>Form::INPUT_CHECKBOX],
       
     ];
-    
-    
-    }
-     public function getFormAttribscontador() {
-        //$data=[ 'NACIONAL' => 'NACIONAL', 'EXTRANJERA' => 'EXTRANJERA', ];
-        
-    return [
+        }
+        if($id=="auditor"){
+             return [
+                 'natural_juridica_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>[
+                'options'=>[],'pluginOptions' => [
+                'allowClear' => true,
+                'minimumInputLength' => 3,
+                'ajax' => [
+                    'url' => \yii\helpers\Url::to(['sys-naturales-juridicas/naturales-juridicas-lista']),
+                    'dataType' => 'json',
+                    'data' => new JsExpression('function(params) { return {q:params.term}; }')
+                ],
+                'escapeMarkup' => new JsExpression('function (markup) { return markup; }'),
+                'templateResult' => new JsExpression('function(natural_juridica_id) { return natural_juridica_id.text; }'),
+                'templateSelection' => new JsExpression('function (natural_juridica_id) { return natural_juridica_id.text; }'),
+        ],]],
          'colegiatura'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Numero de colegiatura']],
         'fecha_vencimiento'=>[
             'type'=>Form::INPUT_WIDGET, 
@@ -124,14 +155,24 @@ class ComisariosAuditores extends \common\components\BaseActiveRecord
       
       
     ];
-    
-    
-    }
-    public function getFormAttribsprofesional() {
-    
-        
+        }
+      if('profesional'){
+          
         $profesiones =[ 'CONTADOR PUBLICO' => 'CONTADOR PUBLICO', 'ADMINISTRADOR' => 'ADMINISTRADOR', 'ECONOMISTA' => 'ECONOMISTA', ];
     return [
+        'natural_juridica_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>[
+                'options'=>[],'pluginOptions' => [
+                'allowClear' => true,
+                'minimumInputLength' => 3,
+                'ajax' => [
+                    'url' => \yii\helpers\Url::to(['sys-naturales-juridicas/naturales-juridicas-lista']),
+                    'dataType' => 'json',
+                    'data' => new JsExpression('function(params) { return {q:params.term}; }')
+                ],
+                'escapeMarkup' => new JsExpression('function (markup) { return markup; }'),
+                'templateResult' => new JsExpression('function(natural_juridica_id) { return natural_juridica_id.text; }'),
+                'templateSelection' => new JsExpression('function (natural_juridica_id) { return natural_juridica_id.text; }'),
+        ],]],
           'tipo_profesion'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>$profesiones , 'options'=>['prompt'=>'Seleccione profesion']],
          'colegiatura'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Numero de colegiatura']],
        
@@ -144,9 +185,9 @@ class ComisariosAuditores extends \common\components\BaseActiveRecord
                 ]],
         ],
     ];
-    
+      }
     
     }
-    
+   
    
 }

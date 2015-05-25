@@ -3,6 +3,7 @@
 namespace frontend\controllers;
 
 use Yii;
+use common\models\a\ActivosDocumentosRegistrados;
 use common\models\p\ComisariosAuditores;
 use common\models\p\PersonasNaturales;
 use app\models\ComisariosAuditoresSearch;
@@ -34,6 +35,7 @@ class ComisariosAuditoresController extends BaseController
     public function actionIndex()
     {
         $searchModel = new ComisariosAuditoresSearch();
+        $searchModel->comisario=true;
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -59,12 +61,47 @@ class ComisariosAuditoresController extends BaseController
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($id=null)
     {
         $model = new ComisariosAuditores();
+        if (!is_null($id)){
+            switch ($id){
+            case "comisario":
+                $model->scenario=$id;
+                $model->comisario=true;
+                break;
+            case "auditor":
+                $model->scenario=$id;
+                $model->auditor=true;
+                break;
+            case "profesional":
+                $model->scenario=$id;
+                $model->informe_conversion=true;
+                break;
+            default :
+                break;
+            }  
+        }
+        if ( $model->load(Yii::$app->request->post())) {
+            if($model->comisario){
+            $registro = ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id, 'tipo_documento_id'=>1]);
+            $model->documento_registrado_id=$registro->id;
+            }
+            $model->contratista_id = Yii::$app->user->identity->contratista_id;
+               if ( $model->save()) {
+          
+                               return $this->redirect(['index']);
+                               
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+
+                   }else{
+                       Yii::$app->session->setFlash('error','error en la carga');
+                        return $this->render('create', [
+                        'model' => $model,
+                        ]);
+                   }
+             
+         
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -326,9 +363,12 @@ class ComisariosAuditoresController extends BaseController
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
+        if($model->comisario){
+               $model->scenario='comisario';
+           }
+        
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         } else {
             return $this->render('update', [
                 'model' => $model,
