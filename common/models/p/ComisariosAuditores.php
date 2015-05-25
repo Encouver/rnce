@@ -87,7 +87,13 @@ class ComisariosAuditores extends \common\components\BaseActiveRecord
         ];
     }
     
-    
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getNaturalJuridica()
+    {
+        return $this->hasOne(SysNaturalesJuridicas::className(), ['id' => 'natural_juridica_id']);
+    }
     public function getFormAttribs($id) {
         //$data=[ 'NACIONAL' => 'NACIONAL', 'EXTRANJERA' => 'EXTRANJERA', ];
         if($id=="comisario"){

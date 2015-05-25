@@ -86,6 +86,15 @@ class ComisariosAuditoresController extends BaseController
             if($model->comisario){
             $registro = ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id, 'tipo_documento_id'=>1]);
             $model->documento_registrado_id=$registro->id;
+            $comisario= ComisariosAuditores::findAll(['contratista_id'=>Yii::$app->user->identity->contratista_id,'comisario'=>true,'documento_registrado_id'=>$registro->id]);
+            
+            if(count($comisario)>=2){
+                
+                 Yii::$app->session->setFlash('error','Contratista ya ha alcanzado el maximo de comisarios');
+                        return $this->render('create', [
+                        'model' => $model,
+                        ]);
+            }
             }
             $model->contratista_id = Yii::$app->user->identity->contratista_id;
                if ( $model->save()) {
@@ -107,64 +116,6 @@ class ComisariosAuditoresController extends BaseController
                 'model' => $model,
             ]);
         }
-    }
-     public function actionCrearcomisario()
-    {
-        $comisario = new ComisariosAuditores();
-         $searchModel = new ComisariosAuditoresSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-       
-    
-        return $this->render('_comisarios', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-            'comisario' => $comisario,
-        ]);
-      
-        
-    }
-    
-    
-    public function actionComisario(){
-        
-        
-        
-         $comisario = new ComisariosAuditores();
-        $usuario= \common\models\p\User::findOne(Yii::$app->user->identity->id);
-        if ( $comisario->load(Yii::$app->request->post())) {
-            
-             $transaction = \Yii::$app->db->beginTransaction();
-           try {
-                
-            if($comisario->declaracion_jurada==false){
-               return "Para continuar debe aceptar la declaracion jurada";
-            }
-            
-            $comisario->contratista_id = $usuario->contratista_id;
-            $comisario->comisario=true;
-            $comisario->auditor=false;
-           $comisario->responsable_contabilidad=false;
-           $comisario->informe_conversion=false;
-          
-               if ( $comisario->save()) {
-           
-
-                               $transaction->commit();
-                               return "Datos guardados con exito";
-                               
-
-
-                   }else{
-                        $transaction->rollBack();
-                       return "Datos no guardados";
-                   }
-             
-             
-           } catch (Exception $e) {
-               $transaction->rollBack();
-           }
-        }
-        
     }
       public function actionCrearresponsable()
     {

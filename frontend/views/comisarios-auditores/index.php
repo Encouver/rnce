@@ -23,12 +23,16 @@ $this->params['breadcrumbs'][] = $this->title;
         'summary'=>'',
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'fecha_vencimiento',
-            'declaracion_jurada:boolean',
+            [
+                'attribute'=>'natural_juridica_id',
+                'label'=>'Nombre comisario',
+                'value'=>'naturalJuridica.denominacion'
+            ],
             'tipo_profesion',
             'fecha_carta',
+            'fecha_vencimiento',
+            //'id',
+            //'declaracion_jurada:boolean',
             // 'colegiatura',
             // 'documento_registrado_id',
             // 'contratista_id',
