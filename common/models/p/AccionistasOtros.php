@@ -65,6 +65,31 @@ class AccionistasOtros extends \common\components\BaseActiveRecord
             }, 'whenClient' => "function (attribute, value) {
                 return $('#accionistasotros-porcentaje_accionario').val() !='';
             }"],
+             ['junta_directiva', 'compare', 'message' => 'Junta directiva no puede estar vacio', 'operator'=> '==', 'compareValue'=>true, 'when' => function ($model) {
+                return $model->tipo_cargo != '';
+            }, 'whenClient' => "function (attribute, value) {
+                return $('#accionistasotros-tipo_cargo').val() !='';
+            }"],
+             ['rep_legal', 'compare', 'message' => 'Representante Legal no puede estar vacio', 'operator'=> '==', 'compareValue'=>true, 'when' => function ($model) {
+                return $model->repr_legal_vigencia != '';
+            }, 'whenClient' => "function (attribute, value) {
+                return $('#accionistasotros-repr_legal_vigencia').val() !='';
+            }"],
+             ['porcentaje_accionario', 'required', 'when' => function ($model) {
+                return $model->accionista == 'true';
+            }, 'whenClient' => "function (attribute, value) {
+                return $('#accionistasotros-accionista').is(':checked');
+            }"],
+              ['tipo_cargo', 'required', 'when' => function ($model) {
+                return $model->junta_directiva == 'true';
+            }, 'whenClient' => "function (attribute, value) {
+                return $('#accionistasotros-junta_directiva').is(':checked');
+            }"],
+           ['repr_legal_vigencia', 'required', 'when' => function ($model) {
+                return $model->rep_legal == 'true';
+            }, 'whenClient' => "function (attribute, value) {
+                return $('#accionistasotros-rep_legal').is(':checked');
+            }"],
            /* ['accionista', 'required', 'when' => function ($model) {
                return $model->porcentaje_accionario != "";
            }, 'whenClient' => "function (attribute, value) {
