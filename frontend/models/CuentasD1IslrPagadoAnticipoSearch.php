@@ -18,8 +18,8 @@ class CuentasD1IslrPagadoAnticipoSearch extends CuentasD1IslrPagadoAnticipo
     public function rules()
     {
         return [
-            [['id', 'contratista_id', 'creado_por', 'actualizado_por'], 'integer'],
-            [['isrl_pagado', 'nro_documento', 'anho', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
+            [['id', 'islr_pagado_id', 'contratista_id', 'creado_por', 'actualizado_por'], 'integer'],
+            [['nro_documento', 'anho', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['saldo_ph', 'importe_pagado_ejer_econo', 'importe_aplicado_ejer_econo', 'saldo_cierre', 'monto'], 'number'],
             [['sys_status'], 'boolean'],
         ];
@@ -59,6 +59,7 @@ class CuentasD1IslrPagadoAnticipoSearch extends CuentasD1IslrPagadoAnticipo
 
         $query->andFilterWhere([
             'id' => $this->id,
+            'islr_pagado_id' => $this->islr_pagado_id,
             'saldo_ph' => $this->saldo_ph,
             'importe_pagado_ejer_econo' => $this->importe_pagado_ejer_econo,
             'importe_aplicado_ejer_econo' => $this->importe_aplicado_ejer_econo,
@@ -73,8 +74,7 @@ class CuentasD1IslrPagadoAnticipoSearch extends CuentasD1IslrPagadoAnticipo
             'sys_finalizado_el' => $this->sys_finalizado_el,
         ]);
 
-        $query->andFilterWhere(['like', 'isrl_pagado', $this->isrl_pagado])
-            ->andFilterWhere(['like', 'nro_documento', $this->nro_documento])
+        $query->andFilterWhere(['like', 'nro_documento', $this->nro_documento])
             ->andFilterWhere(['like', 'anho', $this->anho]);
 
         return $dataProvider;

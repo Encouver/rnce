@@ -17,7 +17,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'id') ?>
 
-    <?= $form->field($model, 'isrl_pagado') ?>
+    <?= $form->field($model, 'islr_pagado_id') ?>
 
     <?= $form->field($model, 'nro_documento') ?>
 

@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'isrl_pagado',
+            'islr_pagado_id',
             'nro_documento',
             'saldo_ph',
             'importe_pagado_ejer_econo',
