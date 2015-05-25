@@ -131,6 +131,30 @@ class AccionistasOtrosController extends BaseController
             ]);
         }
     }
+    
+     public function actionAccionistasOtrosLista($q = null, $id = null) {
+    $buscar_accionista= "natural.denominacion ILIKE "."'%" . $q ."%' and accionista.accionista==true";   
+       
+    \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+     $out = ['results' => ['id' => '', 'text' => '']];
+    if (!is_null($q)) {
+        $query = new \yii\db\Query;
+        
+        $query->select("accionista.natural_juridica_id, natural.denominacion AS text")
+            ->from('accionistas_otros as accionista, sys_naturales_juridicas as natural')
+            ->where($buscar_accionista)
+            ->limit(20);
+        $command = $query->createCommand();
+        $data = $command->queryAll();
+        
+        $out['results'] = array_values($data);
+    }
+    elseif ($id > 0) {
+        $out['results'] = ['id' => $id, 'text' => ActivosBienes::find($id)->detalle];
+    }
+  
+    return $out;
+}
 
     /**
      * Deletes an existing AccionistasOtros model.

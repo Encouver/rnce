@@ -9,7 +9,7 @@ use yii\web\JsExpression;
 /* @var $this yii\web\View */
 /* @var $model common\models\p\Sucursales */
 /* @var $form yii\widgets\ActiveForm */
-$url = \yii\helpers\Url::to(['sys-naturales-juridicas/naturales-juridicas-lista']);
+$url = \yii\helpers\Url::to(['accionistas-otros/accionistas-otros-lista']);
 //$persona = empty($model->natural_juridica_id) ? '' : City::findOne($model->natural_juridica_id)->denominacion;
 
 
@@ -28,7 +28,7 @@ $url = \yii\helpers\Url::to(['sys-naturales-juridicas/naturales-juridicas-lista'
         'ajax' => [
             'url' => $url,
             'dataType' => 'json',
-            'data' => new JsExpression('function(params) { return {q:params.term,juridica:false}; }')
+            'data' => new JsExpression('function(params) { return {q:params.term}; }')
         ],
        'escapeMarkup' => new JsExpression('function (markup) { return markup; }'),
         'templateResult' => new JsExpression('function(natural_juridica_id) { return natural_juridica_id.text; }'),
