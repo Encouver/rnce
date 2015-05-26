@@ -91,7 +91,6 @@ $script = <<< JS
 		).done(function(result)
 		{
 			\$form.trigger("reset");
-			
 		}).fail(function()
 		{
 			console.log("error");

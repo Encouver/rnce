@@ -57,6 +57,11 @@ AppAsset::register($this);
                          ['label' => 'Otros tributos por pagar', 'url' => ['/cuentas-dd3-otros-tributos/index']],
                          ['label' => 'Gastos operacionales', 'url' => ['cuentas-ii1-gastos-operacionales/index']],
                          ['label' => 'Impuesto sobre la renta pagado por anticipado', 'url' => ['cuentas-d1-islr-pagado-anticipo/index']],
+                         ['label' => 'Otras cuentas por pagar', 'url' => ['#']],
+                         ['label' => 'Cuentas por pagar comerciales', 'url' => ['#']],
+                         ['label' => 'Otras cuentas por cobrar', 'url' => ['#']],
+                         ['label' => 'Cuentas por cobrar comerciales', 'url' => ['#']],
+
 
                     ],
                 ],
