@@ -39,7 +39,7 @@ return [
 	                \webvimark\modules\UserManagement\models\UserVisitLog::newVisitor($event->identity->id);
 	            }
 	    ],
-        'formatter' => [
+       'formatter' => [
             'class' => 'yii\i18n\formatter',
             'thousandSeparator' => '.',
             'decimalSeparator' => ',',

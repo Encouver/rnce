@@ -26,6 +26,7 @@ $urlDocumento = Url::to(['activos-documentos-registrados/create']);
 
 <?php  Modal::begin([
     'options'=>['id'=>'m1_factura'],
+    'size' => 'modal-lg',
     'header' => '<h4 style="margin:0; padding:0">Agregar Factura</h4>',
     'toggleButton' => ['label' => 'Agregar Factura', 'class'=>'btn btn-lg btn-primary','style'=>'margin-bottom:10px;'],
 ]);?>
@@ -39,7 +40,7 @@ $urlDocumento = Url::to(['activos-documentos-registrados/create']);
         'attributes'=>$modelFactura->formAttribs
     ]); ?>
 
-    <div class="form-group">
+    <div class="form-group" >
         <?= Html::Button(Yii::t('app', 'Enviar'), ['class' => 'btn btn-success', 'id' => 'enviar-factura']) ?>
     </div>
 <div id="output-factura">
