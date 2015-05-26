@@ -53,7 +53,7 @@ $this->params['breadcrumbs'][] = $this->title;
     $columns =
         [
             ['class'=>'kartik\grid\SerialColumn', 'order'=>DynaGrid::ORDER_FIX_LEFT],
-            'isrl_pagado',
+            'islr_pagado_id',
             'nro_documento',
             [
                 'attribute'=>'saldo_ph',
