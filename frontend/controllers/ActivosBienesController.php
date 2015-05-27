@@ -14,6 +14,7 @@ use common\models\a\ActivosFabricacionesMuebles;
 use common\models\a\ActivosFacturas;
 use common\models\a\ActivosInmuebles;
 use common\models\a\ActivosLicencias;
+use common\models\a\ActivosMejorasPropiedades;
 use common\models\a\ActivosMuebles;
 use common\models\a\ActivosVehiculos;
 use common\models\a\ConstruccionesInmuebles;
@@ -116,6 +117,8 @@ class ActivosBienesController extends BaseController
 
         $modelDepreciacion = new ActivosDepreciacionesAmortizaciones();
 
+        $modelMejoras = new ActivosMejorasPropiedades();
+
 
         if ($model->load(Yii::$app->request->post())) {
 
@@ -147,10 +150,6 @@ class ActivosBienesController extends BaseController
                 default:
                     break;
             }
-
-            $modelFactura = new ActivosFacturas();
-
-            $modelDocumento = new ActivosDocumentosRegistrados(['scenario'=>'bien-registro']);
 
             $modelDeterioro = new ActivosDeterioros();
 
@@ -191,21 +190,14 @@ class ActivosBienesController extends BaseController
                         }
                     }
 
-                    // Factura.
-                    if($model->factura && $modelFactura->load(Yii::$app->request->post()) && $modelFactura->validate()) {
+                    // En caso de Mejoras.
+                    if($model->mejora && $modelMejoras->load(Yii::$app->request->post()) && $modelMejoras->validate()) {
                         if($flag) {
-                            $modelFactura->bien_id = $model->id;
-                            $flag = $flag and $modelFactura->save();
+                            $modelMejoras->bien_id = $model->id;
+                            $flag = $flag and $modelMejoras->save();
                         }
                     }
 
-                    // Documento Registrado
-                    if($model->documento && $modelDocumento->load(Yii::$app->request->post()) && $modelDocumento->validate()) {
-                        if($flag) {
-                            $modelDocumento->bien_id = $model->id;
-                            $flag = $flag and $modelDocumento->save();
-                        }
-                    }
 
                     // En caso de Adquisición Datos de Importación.
                     if($model->origen_id ==2 && !$model->nacional && $modelDatosImportacion->load(Yii::$app->request->post()) && $modelDatosImportacion->validate()) {
@@ -239,7 +231,7 @@ class ActivosBienesController extends BaseController
 
             return $this->render('create', [
                 'model' => $model,'modelBienTipo'=> $modelBienTipo, 'modelDatosImportacion'=>$modelDatosImportacion, 'modelFactura'=>$modelFactura,'modelDocumento'=>$modelDocumento,
-                'modelDeterioro'=>$modelDeterioro, 'modelDepreciacion'=>$modelDepreciacion
+                'modelDeterioro'=>$modelDeterioro, 'modelDepreciacion'=>$modelDepreciacion, 'modelVehiculo'=>$modelVehiculo, 'modelLicencia'=>$modelLicencia, 'modelMejoras'=>$modelMejoras
             ]);
        // }
     }

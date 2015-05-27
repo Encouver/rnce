@@ -18,7 +18,7 @@ class CertificacionesAportesSearch extends CertificacionesAportes
     public function rules()
     {
         return [
-            [['id', 'persona_natural_id', 'creado_por', 'actualizado_por', 'documento_registrado_id', 'contratista_id'], 'integer'],
+            [['id', 'creado_por', 'actualizado_por', 'documento_registrado_id', 'contratista_id'], 'integer'],
             [['colegiatura', 'tipo_profesion', 'fecha_informe', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['sys_status'], 'boolean'],
         ];
@@ -58,7 +58,6 @@ class CertificacionesAportesSearch extends CertificacionesAportes
 
         $query->andFilterWhere([
             'id' => $this->id,
-            'persona_natural_id' => $this->persona_natural_id,
             'fecha_informe' => $this->fecha_informe,
             'creado_por' => $this->creado_por,
             'actualizado_por' => $this->actualizado_por,

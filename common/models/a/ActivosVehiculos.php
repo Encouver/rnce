@@ -2,6 +2,7 @@
 
 namespace common\models\a;
 
+use kartik\builder\Form;
 use Yii;
 
 /**
@@ -9,7 +10,7 @@ use Yii;
  *
  * @property integer $id
  * @property integer $mueble_id
- * @property integer $anho
+ * @property integer $anho_vehiculo
  * @property integer $uso
  * @property string $num_certificado
  * @property string $placa
@@ -38,8 +39,8 @@ class ActivosVehiculos extends \common\components\BaseActiveRecord
     public function rules()
     {
         return [
-            [['mueble_id', 'anho', 'uso', 'num_certificado', 'placa'], 'required'],
-            [['mueble_id', 'anho', 'uso', 'creado_por', 'actualizado_por'], 'integer'],
+            [['mueble_id', 'anho_vehiculo', 'uso', 'num_certificado', 'placa'], 'required'],
+            [['mueble_id', 'anho_vehiculo', 'uso', 'creado_por', 'actualizado_por'], 'integer'],
             [['sys_status'], 'boolean'],
             [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['num_certificado'], 'string', 'max' => 255],
@@ -55,7 +56,7 @@ class ActivosVehiculos extends \common\components\BaseActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'mueble_id' => Yii::t('app', 'Mueble ID'),
-            'anho' => Yii::t('app', 'Anho'),
+            'anho_vehiculo' => Yii::t('app', 'Año del vehiculo'),
             'uso' => Yii::t('app', 'Uso'),
             'num_certificado' => Yii::t('app', 'Num Certificado'),
             'placa' => Yii::t('app', 'Placa'),
@@ -66,6 +67,24 @@ class ActivosVehiculos extends \common\components\BaseActiveRecord
             'sys_actualizado_el' => Yii::t('app', 'Sys Actualizado El'),
             'sys_finalizado_el' => Yii::t('app', 'Sys Finalizado El'),
         ];
+    }
+
+    public function getFormAttribs() {
+        $attributes = [
+            // primary key column
+            'id'=>[ // primary key attribute
+                'type'=>Form::INPUT_HIDDEN,
+                'columnOptions'=>['hidden'=>true]
+            ],
+            'anho_vehiculo' => ['type'=>Form::INPUT_TEXT,],
+            'uso' => ['type'=>Form::INPUT_TEXT,],
+            'num_certificado' => ['type'=>Form::INPUT_TEXT,],
+            'placa' => ['type'=>Form::INPUT_TEXT,],
+
+        ];
+
+
+        return $attributes;
     }
 
     /**

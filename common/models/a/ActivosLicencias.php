@@ -2,7 +2,11 @@
 
 namespace common\models\a;
 
+use kartik\builder\Form;
+use kartik\widgets\DatePicker;
+use kartik\widgets\Select2;
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "activos.licencias".
@@ -50,13 +54,36 @@ class ActivosLicencias extends \common\components\BaseActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'activo_intangible_id' => Yii::t('app', 'Activo Intangible ID'),
-            'numero' => Yii::t('app', 'Numero'),
+            'numero' => Yii::t('app', 'Numero de Licencia'),
             'fecha_adquisicion' => Yii::t('app', 'Fecha Adquisicion'),
             'sys_status' => Yii::t('app', 'Sys Status'),
             'sys_creado_el' => Yii::t('app', 'Sys Creado El'),
             'sys_actualizado_el' => Yii::t('app', 'Sys Actualizado El'),
             'sys_finalizado_el' => Yii::t('app', 'Sys Finalizado El'),
         ];
+    }
+
+    public function getFormAttribs() {
+        $attributes = [
+            // primary key column
+            'id'=>[ // primary key attribute
+                'type'=>Form::INPUT_HIDDEN,
+                'columnOptions'=>['hidden'=>true]
+            ],
+            'numero' => ['type'=>Form::INPUT_TEXT,],
+            'fecha_adquisicion' => ['type'=>Form::INPUT_WIDGET,'widgetClass'=>DatePicker::className(),'options'=>['options' => ['placeholder' => 'Seleccione fecha ...'],
+                'convertFormat' => true,
+                'pluginOptions' => [
+                    'format' => 'd-M-yyyy ',
+                    //'startDate' => date('d-m-Y h:i A'),//'01-Mar-2014 12:00 AM',
+                    'todayHighlight' => true
+                ]],
+                'columnOptions'=>['hidden'=>true]
+            ],
+
+        ];
+
+        return $attributes;
     }
 
     /**

@@ -154,7 +154,7 @@ class ActivosFacturas extends \common\components\BaseActiveRecord
             ],
             'proveedor_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>[//'data'=>ArrayHelper::map(PersonasJuridicas::find()->all(),'id',function($model){return $model->etiqueta(); }),
                 'options'=>['id'=>'factura-proveedor'],'pluginOptions' => [
-                'allowClear' => true,
+                //'allowClear' => true,
                 'minimumInputLength' => 3,
                 'ajax' => [
                     'url' => \yii\helpers\Url::to(['personas-juridicas/juridicas-lista']),
@@ -167,7 +167,7 @@ class ActivosFacturas extends \common\components\BaseActiveRecord
             ],]],
             'imprenta_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>[//'data'=>ArrayHelper::map(PersonasJuridicas::find()->all(),'id',function($model){return $model->etiqueta(); }),
                 'options'=>['id'=>'factura-imprenta'],'pluginOptions' => [
-            'allowClear' => true,
+            //'allowClear' => true,
             'minimumInputLength' => 3,
             'ajax' => [
                 'url' => \yii\helpers\Url::to(['personas-juridicas/juridicas-lista']),
@@ -189,7 +189,7 @@ class ActivosFacturas extends \common\components\BaseActiveRecord
             ],
             'comprador_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>[//'data'=>ArrayHelper::map(SysNaturalesJuridicas::find()->all(),'id',function($model){return $model->etiqueta(); }),
                 'options'=>['id'=>'factura-comprador'],'pluginOptions' => [
-                    'allowClear' => true,
+                    //'allowClear' => true,
                     'minimumInputLength' => 3,
                     'ajax' => [
                         'url' => \yii\helpers\Url::to(['sys-naturales-juridicas/naturales-juridicas-lista']),

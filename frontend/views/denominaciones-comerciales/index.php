@@ -20,8 +20,9 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         //'filterModel' => $searchModel,
+        'summary'=>'',
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+           // ['class' => 'yii\grid\SerialColumn'],
 
             //'id',
             'tipo_denominacion',
@@ -46,6 +47,6 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]); ?>
        <p>
-        <?= Html::a(Yii::t('app', 'Crear Denominacion Comercial'), ['creardenominacion'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Crear Denominacion Comercial'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 </div>

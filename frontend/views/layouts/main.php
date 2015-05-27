@@ -57,6 +57,11 @@ AppAsset::register($this);
                          ['label' => 'Otros tributos por pagar', 'url' => ['/cuentas-dd3-otros-tributos/index']],
                          ['label' => 'Gastos operacionales', 'url' => ['cuentas-ii1-gastos-operacionales/index']],
                          ['label' => 'Impuesto sobre la renta pagado por anticipado', 'url' => ['cuentas-d1-islr-pagado-anticipo/index']],
+                         ['label' => 'Otras cuentas por pagar', 'url' => ['cuentas-bb2-otras-cuentas-por-pagar/index']],
+                         ['label' => 'Cuentas por pagar comerciales', 'url' => ['cuentas-bb1-cuentas-por-pagar-comerciales/index']],
+                         ['label' => 'Otras cuentas por cobrar', 'url' => ['cuentas-b2-otras-cuentas-por-cobrar/index']],
+                         ['label' => 'Cuentas por cobrar comerciales', 'url' => ['cuentas-b2-otras-cuentas-por-cobrar-e/index']],
+
 
                     ],
                 ],
@@ -105,7 +110,7 @@ AppAsset::register($this);
                 ],
                  ['label' => 'Acta Constitutiva',
                     'items' => [
-                         ['label' => 'Registro documento', 'url' => ['/activos-documentos-registrados/crearacta']],
+                         ['label' => 'Registro documento', 'url' => ['/activos-documentos-registrados/index']],
                          ['label' => 'Denominaciones Comerciales', 'url' => ['/denominaciones-comerciales/index']],
                         ['label' => 'Objeto Social', 'url' => ['/objetos-sociales/crearobjetoacta']],
                         ['label' => 'Cierre ejercicio', 'url' => ['/cierres-ejercicios/crearcierreacta']],

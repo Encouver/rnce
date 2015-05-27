@@ -6,6 +6,7 @@ use yii\bootstrap\Modal;
 use yii\helpers\Html;
 use kartik\widgets\ActiveForm;
 use yii\helpers\Url;
+use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\a\ActivosBienes */
@@ -16,61 +17,80 @@ use yii\helpers\Url;
 ?>
 
 <div class="activos-bienes-form">
+<?php
+$urlFactura = Url::to(['activos-facturas/create-ajax']);
+
+$urlDocumento = Url::to(['activos-documentos-registrados/create-general','id'=>2]);
+
+?>
+
 
 <?php  Modal::begin([
     'options'=>['id'=>'m1_factura'],
+    'size' => 'modal-lg',
     'header' => '<h4 style="margin:0; padding:0">Agregar Factura</h4>',
     'toggleButton' => ['label' => 'Agregar Factura', 'class'=>'btn btn-lg btn-primary','style'=>'margin-bottom:10px;'],
 ]);?>
+<?php Pjax::begin(['enablePushState' => false]);?>
+    <?php $form2 = ActiveForm::begin(['id'=>$modelFactura->formName(), 'type'=>ActiveForm::TYPE_VERTICAL,'action'=>$urlFactura, 'options' => ['data-pjax' => true]]); ?>
 
-<?php $form2 = ActiveForm::begin(['id'=>'modal_factura', 'type'=>ActiveForm::TYPE_VERTICAL]); ?>
+        <?php echo Form::widget([
+            'model'=>$modelFactura,
+            'form'=>$form2,
+            'columns'=>3,
+            'attributes'=>$modelFactura->formAttribs
+        ]); ?>
 
-    <?php echo Form::widget([
-        'model'=>$modelFactura,
-        'form'=>$form2,
-        'columns'=>3,
-        'attributes'=>$modelFactura->formAttribs
-    ]); ?>
-
-    <div class="form-group">
-        <?= Html::Button(Yii::t('app', 'Enviar'), ['class' => 'btn btn-success', 'id' => 'enviar-factura']) ?>
-    </div>
-<div id="output-factura">
-</div>
-<?php ActiveForm::end(); ?>
-
+<!--        <div class="form-group" >
+            <?/*= Html::Button(Yii::t('app', 'Guardar'), ['class' => 'btn btn-success', 'id' => 'enviar-factura']) */?>
+        </div>-->
+        <div class="form-group">
+            <?= Html::submitButton(Yii::t('app', 'Guardar') , ['class' =>'btn btn-success', 'id' => 'enviar-factura' ]) ?>
+        </div>
+       <!-- <div id="output-factura">
+        </div>-->
+    <?php ActiveForm::end(); ?>
+<?php Pjax::end();?>
 <?php Modal::end();?>
 
 
 
-<!--
-<?php /* Modal::begin([
+
+<?php  Modal::begin([
     'options'=>['id'=>'m1_documento'],
     'header' => '<h4 style="margin:0; padding:0">Agregar Documento Registrado</h4>',
     'toggleButton' => ['label' => 'Agregar Documento Registrado', 'class'=>'btn btn-lg btn-primary','style'=>'margin-bottom:10px;'],
-]);*/?>
+]);?>
+
+<div id="output-documento">
+    <?php Pjax::begin(['enablePushState' => false]);?>
+        <?php $form2 = ActiveForm::begin(['id'=>$modelDocumento->formName(), 'type'=>ActiveForm::TYPE_VERTICAL,'action'=>$urlDocumento, 'options' => ['data-pjax' => true]]); ?>
+            <?php  echo '<h1>Cargar Documentos Registrados</h1>'?>
+            <?php echo Form::widget([
+                'model'=>$modelDocumento,
+                'form'=>$form2,
+                'columns'=>3,
+                'attributes'=>$modelDocumento->formAttribs
+            ]); ?>
+
+        <!--    <div class="form-group">
+                <?/*= Html::Button(Yii::t('app', 'Enviar'), ['class' => 'btn btn-success', 'id' => 'enviar-documento']) */?>
+            </div>-->
+                <div class="form-group">
+                    <?= Html::submitButton(Yii::t('app', 'Guardar') , ['class' =>'btn btn-success', 'id' => 'enviar-documento' ]) ?>
+                </div>
+        <?php ActiveForm::end(); ?>
+    <?php Pjax::end();?>
+</div>
+
+
+<?php Modal::end();?>
+
+<!--
 <div id="output-documento">
     <?php /*$form2 = ActiveForm::begin(['id'=>'modal_documento', 'type'=>ActiveForm::TYPE_VERTICAL]); */?>
-
-    <?php /*echo Form::widget([
-        'model'=>$modelDocumento,
-        'form'=>$form2,
-        'columns'=>3,
-        'attributes'=>$modelDocumento->formAttribs
-    ]); */?>
-
-    <div class="form-group">
-        <?/*= Html::Button(Yii::t('app', 'Enviar'), ['class' => 'btn btn-success', 'id' => 'enviar-documento']) */?>
-    </div>
-</div>
-<?php /*ActiveForm::end(); */?>
-<?php /*Modal::end();*/?>
--->
-
-<div id="output-documento">
-    <?php $form2 = ActiveForm::begin(['id'=>'modal_documento', 'type'=>ActiveForm::TYPE_VERTICAL]); ?>
     <?php
-
+/*
     PopoverX::begin([
         'placement' => PopoverX::ALIGN_BOTTOM_LEFT,
         'size'=>'lg',
@@ -79,22 +99,24 @@ use yii\helpers\Url;
         'footer'=>Html::submitButton('Enviar', ['id'=>'enviar-documento', 'class'=>'btn btn-sm btn-primary']) .
             Html::resetButton('Resetear', ['class'=>'btn btn-sm btn-default'])
     ]);
-    ?>
-    <?php echo Form::widget([
+    */?>
+    <?php /*echo Form::widget([
         'model'=>$modelDocumento,
         'form'=>$form2,
         'columns'=>3,
         'attributes'=>$modelDocumento->formAttribs
-    ]); ?>
+    ]); */?>
     <?php
-    PopoverX::end();
+/*    PopoverX::end();
 
-    ?>
+    */?>
 
 </div>
-<?php ActiveForm::end(); ?>
+<?php /*ActiveForm::end(); */?>
 
-    <?php $form = ActiveForm::begin(/*[
+    -->
+
+        <?php $form = ActiveForm::begin(/*[
         'fieldConfig' => [
             'template' => "<div class=\"row\">
                                             <div class=\"col-xs-6\">{label}</div>\n<div class=\"col-xs-6 text-right\">{hint}</div>
@@ -139,7 +161,36 @@ use yii\helpers\Url;
                 'columnSize' => 'xs',
                 'attributes' => $modelBienTipo->getFormAttribs($model)
             ]);
+            if ($model->sys_tipo_bien_id == 3)
+                echo Form::widget([       // 3 column layout
+                    'model' => $modelVehiculo,
+                    'form' => $form,
+                    'columns' => 4,
+                    'columnSize' => 'xs',
+                    'attributes' => $modelVehiculo->getFormAttribs()
+                ]);
+            if ($model->sys_tipo_bien_id == 15)
+                echo Form::widget([       // 3 column layout
+                    'model' => $modelLicencia,
+                    'form' => $form,
+                    'columns' => 4,
+                    'columnSize' => 'xs',
+                    'attributes' => $modelLicencia->getFormAttribs()
+                 ]);
         }
+
+            //if($model->origen_id == 2 && !$model->nacional ) {
+            echo '<div id="mejora-container" style="display: none;">';
+            echo '<h2> Datos de Mejora: </h2>';
+            echo Form::widget([       // 3 column layout
+                    'model' => $modelMejoras,
+                    'form' => $form,
+                    'columns' => 4,
+                    'columnSize' => 'xs',
+                    'attributes' => $modelMejoras->getFormAttribs()
+                ]);
+                echo '</div>';
+                // }
 
         //if($model->factura) {
             echo '<div id="factura-container" style="display: none;">';
@@ -157,13 +208,13 @@ use yii\helpers\Url;
         //if($model->documento) {
             echo '<div id="documento-container" style="display: none;">';
             echo '<h2> Datos del Documento Registrado: </h2>';
-            echo Form::widget([       // 3 column layout
+ /*           echo Form::widget([       // 3 column layout
                 'model' => $modelDocumento,
                 'form' => $form,
                 'columns' => 4,
                 'columnSize' => 'xs',
                 'attributes' => $modelDocumento->getFormAttribs($model)
-            ]);
+            ]);*/
             echo '</div>';
         //}
         if($model->deterioro()) {
@@ -187,14 +238,106 @@ use yii\helpers\Url;
                 'attributes' => $modelDepreciacion->getFormAttribs()
             ]);
 
-    $urlFactura = Url::to(['activos-facturas/create-ajax']);
 
-    $urlDocumento = Url::to(['activos-documentos-registrados/createajax']);
 
     $script = <<< JS
 
 
-    $('#enviar-documento').click(function(e){
+    function datosImportados(){
+            if($('#activosbienes-nacional').is(':checked') ){
+               $('#datos-importacion-container').hide();
+            }//alert($('#activosbienes-nacional').val());
+            if(!$('#activosbienes-nacional').is(':checked')){
+                 $('#datos-importacion-container').show();
+        }
+    }
+     $('#activosbienes-nacional').change(function(e){
+
+               datosImportados();
+        });
+
+     $('#activosbienes-mejora').change(function(e){
+
+                if($('#activosbienes-mejora').is(':checked') ){
+                   $('#mejora-container').show();
+                }//alert($('#activosbienes-nacional').val());
+                if(!$('#activosbienes-mejora').is(':checked')){
+                    $('#mejora-container').hide();
+                }
+        });
+    $('#activosbienes-proc_productivo').change(function(e){
+
+                    if($('#activosbienes-proc_productivo').is(':checked')){
+                        $('.field-activosbienes-directo').parent().show();
+                        $('.field-activosbienes-proc_ventas').parent().hide();
+                    }
+                    if(!$('#activosbienes-proc_productivo').is(':checked')){
+                        $('.field-activosbienes-directo').parent().hide();
+                        $('.field-activosbienes-proc_ventas').parent().show();
+                    }
+            });
+        $('#origen').change(function(e){
+                if($('#origen').val()== 1 || $('#origen').val()==4){
+                    $('.field-activosbienes-fecha_origen').parent().show();
+                    $('.field-activosbienes-nacional').parent().hide();
+                    $('#datos-importacion-container').hide();
+
+                }else if ($('#origen').val()==2) {
+                    $('.field-activosbienes-fecha_origen').parent().hide();
+                    $('.field-activosbienes-nacional').parent().show();
+                    datosImportados();
+                }else
+                {
+                    $('.field-activosbienes-fecha_origen').parent().hide();
+                    $('.field-activosbienes-nacional').parent().hide();
+                }
+        });
+
+
+
+/*
+     $('#activosbienes-factura').change(function(e){
+
+                if($('#activosbienes-factura').is(':checked')){
+                    $('#factura-container').show();
+                }
+                if(!$('#activosbienes-factura').is(':checked')){
+                    $('#factura-container').hide();
+                }
+        });
+     $('#activosbienes-documento').change(function(e){
+
+                if($('#activosbienes-documento').is(':checked')){
+                    $('#documento-container').show();
+                }
+                if(!$('#activosbienes-documento').is(':checked')){
+                    $('#documento-container').hide();
+                }
+        });*/
+        /*
+    $('form#{$modelDocumento->formName()}').on('beforeSubmit', function(e){
+            var \$form = $(this);
+
+            $.post(
+                \$form.attr("action"), // serialize Yii2 form
+                \$form.serialize()
+            )
+            .done(function(result){
+                if(result == 1)
+                {
+                    $(\$form).trigger("reset");
+
+                }else{
+                alert('Error');
+
+                }
+                $("#message").html(result.message);
+            }).fail(function(){
+                console.log("server errror");
+            });
+        });*/
+
+  /*  $('#enviar-documento').click(function(e){
 
         if($('form#modal_documento').find('.has-error').length!=0){
 
@@ -202,8 +345,8 @@ use yii\helpers\Url;
         }else
         {
             //$('form#modal_pnatural').submit();
-            e.preventDefault();
-            e.stopImmediatePropagation();
+            //e.preventDefault();
+            //e.stopImmediatePropagation();
             $.ajax({
 
                     url: '$urlDocumento',
@@ -215,9 +358,9 @@ use yii\helpers\Url;
                 });
 
             }
-    });
+    });*/
 
-    $('form#{$modelFactura->formName()}').on('beforeSubmit', function(e){
+/*    $('form#{$modelFactura->formName()}').on('beforeSubmit', function(e){
         var \$form = $(this);
         $.post(
             \$form.attr("action"), // serialize Yii2 form
@@ -259,54 +402,7 @@ use yii\helpers\Url;
                 });
 
             }
-    });
-
-    function datosImportados(){
-            if($('#activosbienes-nacional').is(':checked') ){
-                $('#datos-importacion-container').show();
-            }//alert($('#activosbienes-nacional').val());
-            if(!$('#activosbienes-nacional').is(':checked')){
-                $('#datos-importacion-container').hide();
-        }
-    }
-     $('#activosbienes-nacional').change(function(e){
-
-               datosImportados();
-        });
-     $('#activosbienes-factura').change(function(e){
-
-                if($('#activosbienes-factura').is(':checked')){
-                    $('#factura-container').show();
-                }
-                if(!$('#activosbienes-factura').is(':checked')){
-                    $('#factura-container').hide();
-                }
-        });
-     $('#activosbienes-documento').change(function(e){
-
-                if($('#activosbienes-documento').is(':checked')){
-                    $('#documento-container').show();
-                }
-                if(!$('#activosbienes-documento').is(':checked')){
-                    $('#documento-container').hide();
-                }
-        });
-        $('#origen').change(function(e){
-                if($('#origen').val()== 1 || $('#origen').val()==4){
-                    $('.field-activosbienes-fecha_origen').parent().show();
-                    $('.field-activosbienes-nacional').parent().hide();
-                    $('#datos-importacion-container').hide();
-
-                }else if ($('#origen').val()==2) {
-                    $('.field-activosbienes-fecha_origen').parent().hide();
-                    $('.field-activosbienes-nacional').parent().show();
-                    datosImportados();
-                }else
-                {
-                    $('.field-activosbienes-fecha_origen').parent().hide();
-                    $('.field-activosbienes-nacional').parent().hide();
-                }
-        });
+    });*/
 JS;
     $this->registerJs($script);
 
