@@ -102,15 +102,27 @@ class ActivosFacturasController extends BaseController
 
         if ($model->load(Yii::$app->request->post())) {
             $model->contratista_id = Yii::$app->user->identity->contratista_id;
-            if($model->save())
-                echo 1;
-            else
-                echo 0;
+
+            if($model->save()) {
+
+                Yii::$app->getSession()->setFlash('success',Yii::t('app',Html::encode('Factura guardada.')) /*[
+                    'type' => 'success',
+                    'duration' => 5000,
+                    'icon' => 'fa fa-users',
+                    'message' => Yii::t('app',Html::encode('Documento registrado guaradado.')),
+                    'title' => Yii::t('app',Html::encode('Documento registrado')),
+                    'positonY' => 'top',
+                    'positonX' => 'center'
+                ]*/);
+                $model = new ActivosFacturas();
+                return $this->renderAjax('create', [
+                    'model' => $model,
+                ]);
+            }
         } else {
             return $this->renderAjax('create', [
                 'model' => $model,
             ]);
-            //return 'Debe llenar todos los campos requeridos';
         }
     }
 

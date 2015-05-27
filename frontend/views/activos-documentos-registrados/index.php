@@ -32,7 +32,11 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             //'id',
             //'contratista_id',
-            //'sys_tipo_registro_id',
+            [
+                'attribute'=>'sys_tipo_registro_id',
+                'label'=>'Tipo de Registro',
+                'value'=>'sysTipoRegistro.nombre'
+            ],
             'num_registro_notaria',
             'tomo',
             'folio',

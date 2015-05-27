@@ -4,12 +4,14 @@ namespace frontend\controllers;
 
 use Yii;
 use common\models\p\DenominacionesComerciales;
+use common\models\p\Contratistas;
+use common\models\p\SysNaturalesJuridicas;
 use common\models\p\User;
 use app\models\DenominacionesComercialesSearch;
 use common\components\BaseController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-
+use yii\helpers\Json;
 /**
  * DenominacionesComercialesController implements the CRUD actions for DenominacionesComerciales model.
  */
@@ -53,6 +55,92 @@ class DenominacionesComercialesController extends BaseController
             'model' => $this->findModel($id),
         ]);
     }
+    public function actionSubcat() {
+            $out = [];
+            if (isset($_POST['depdrop_parents'])) {
+                    
+                $parents = $_POST['depdrop_parents'];
+                if ($parents != null) {
+                    $categoria = $parents[0];
+                    switch ($categoria){
+                        case "COMANDITA":
+                            $out= [
+                                    ['id' => 'COMANDITA SIMPLE', 'name' => 'COMANDITA SIMPLE'],
+                                    ['id' => 'COMANDITA POR ACCIONES', 'name' => 'COMANDITA POR ACCIONES'],
+                                ];
+                            break;
+                        case "SOCIEDAD CIVIL":
+                            $out= [
+                                    ['id' => 'CON FINES DE LUCRO', 'name' => 'CON FINES DE LUCRO'],
+                                    ['id' => 'SIN FINES DE LUCRO', 'name' => 'SIN FINES DE LUCRO'],
+                                ];
+                            break;
+                        case "ASOCIACION CIVIL":
+                            $out= [
+                                    ['id' => 'CON FINES DE LUCRO', 'name' => 'CON FINES DE LUCRO'],
+                                    ['id' => 'SIN FINES DE LUCRO', 'name' => 'SIN FINES DE LUCRO'],
+                                ];
+                            break;
+                        case "ASOCIACION CIVIL":
+                            $out= [
+                                    ['id' => 'CON FINES DE LUCRO', 'name' => 'CON FINES DE LUCRO'],
+                                    ['id' => 'SIN FINES DE LUCRO', 'name' => 'SIN FINES DE LUCRO'],
+                                ];
+                            break;
+                        case "EMPRESA EXTRANJERA":
+                            $out=[
+                            ['id' => 'CON DOMICILIO EN VENEZUELA', 'name' => 'CON DOMICILIO EN VENEZUELA'],
+                            ['id' => 'SIN DOMICILIO EN VENEZUELA', 'name' => 'SIN DOMICILIO EN VENEZUELA']];
+                            break;
+                        case "FUNDACION":
+                            $out=[
+                                ['id' => 'FUNDACION DEL ESTADO (NACIONAL)', 'name' => 'FUNDACION DEL ESTADO (NACIONAL)'],
+                                ['id' => 'FUNDACION DEL ESTADO (ESTADAL)', 'name' => 'FUNDACION DEL ESTADO (ESTADAL)'],
+                                ['id' => 'FUNDACION DEL ESTADO (MUNICIPAL)', 'name' => 'FUNDACION DEL ESTADO (MUNICIPAL)']];
+
+                            break;
+                        case "ORGANIZACION SOCIOPRODUCTIVA":
+                            $out=[
+                                ['id' => 'FUNDACION DEL ESTADO (NACIONAL)', 'name' => 'FUNDACION DEL ESTADO (NACIONAL)'],
+                                ['id' => 'FUNDACION DEL ESTADO (ESTADAL)', 'name' => 'FUNDACION DEL ESTADO (ESTADAL)'],
+                                ['id' => 'FUNDACION DEL ESTADO (MUNICIPAL)', 'name' => 'FUNDACION DEL ESTADO (MUNICIPAL)']];
+
+                            break;
+                            case "ORGANIZACION SOCIOPRODUCTIVA":
+                            $out=[
+                                ['id' => 'FUNDACION DEL ESTADO (NACIONAL)', 'name' => 'FUNDACION DEL ESTADO (NACIONAL)'],
+                                ['id' => 'FUNDACION DEL ESTADO (ESTADAL)', 'name' => 'FUNDACION DEL ESTADO (ESTADAL)'],
+                                ['id' => 'FUNDACION DEL ESTADO (MUNICIPAL)', 'name' => 'FUNDACION DEL ESTADO (MUNICIPAL)']];
+
+                            break;
+                             case "SOCIEDAD ANONIMA":
+                            $out=[
+                                ['id' => 'FUNDACION DEL ESTADO (NACIONAL)', 'name' => 'FUNDACION DEL ESTADO (NACIONAL)'],
+                                ['id' => 'FUNDACION DEL ESTADO (ESTADAL)', 'name' => 'FUNDACION DEL ESTADO (ESTADAL)'],
+                                ['id' => 'FUNDACION DEL ESTADO (MUNICIPAL)', 'name' => 'FUNDACION DEL ESTADO (MUNICIPAL)'],];
+
+                            break;
+                        default:
+                        break;
+                      
+
+                    }
+                    
+                  
+
+            // the getSubCatList function will query the database based on the
+            // cat_id and return an array like below:
+            // [
+            // ['id'=>'<sub-cat-id-1>', 'name'=>'<sub-cat-name1>'],
+            // ['id'=>'<sub-cat_id_2>', 'name'=>'<sub-cat-name2>']
+            // ]
+
+                    return Json::encode(['output'=>$out, 'selected'=>'']);
+                   
+                }
+            }
+        return Json::encode(['output'=>'', 'selected'=>'']);
+    }
 
     /**
      * Creates a new DenominacionesComerciales model.
@@ -62,158 +150,59 @@ class DenominacionesComercialesController extends BaseController
     public function actionCreate()
     {
         $model = new DenominacionesComerciales();
+        $contratista= Contratistas::findOne( ['id' => Yii::$app->user->identity->contratista_id]);
+        $natural_juridica= SysNaturalesJuridicas::findOne(['id' => $contratista->natural_juridica_id]);
+        if($natural_juridica->juridica && $contratista->tipo_sector == "PRIVADO"){
+            $model->sector="PRIVADO";
+        }else{
+            if(!$natural_juridica->juridica){
+            $model->sector="NATURAL";
+              }
+        }
+        if($model->existeacta()){
+            Yii::$app->session->setFlash('error','usted posee una Denominacion Comercial asociada');
+            return $this->redirect(['index']);
+        }
+        if ($model->load(Yii::$app->request->post())) {
+            $model->documento_registrado_id=$model->registroacta()->id;
+            if($model->existe()){
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+                 Yii::$app->session->setFlash('error','Usuario posee Denominacion Comercial');
+                return $this->redirect(['index']);
+            }else{
+
+                if($model->tipo_subdenominacion==''){
+                    $model->tipo_subdenominacion=null;
+                    }
+                if($model->codigo_situr==''){
+                    $model->codigo_situr=null;
+                    }   
+                if($model->cooperativa_capital==''){
+                    $model->cooperativa_capital=null;
+                    }
+                if($model->cooperativa_distribuicion==''){
+                    $model->cooperativa_distribuicion=null;
+                }
+            
+
+                if($model->save()){
+                    Yii::$app->session->setFlash('success','Denominacion Comercial guardada con exito');
+                    return $this->redirect(['index']);
+                }else{
+                    Yii::$app->session->setFlash('error','Error en la carga');
+                    return $this->render('create', [
+                    'model' => $model,
+                ]);
+                }
+            }
+           
         } else {
             return $this->render('create', [
                 'model' => $model,
             ]);
         }
     }
-     public function actionCreardenominacion()
-    {
-        $denominacion_comercial = new DenominacionesComerciales();
-        
-        $usuario= User::findOne(Yii::$app->user->identity->id);
-        $id_contratista = $usuario->contratista_id;
-        return $this->render('_denominaciones_comerciales',['denominacion_comercial' => $denominacion_comercial,
-                                                                      'id_contratista'=>$id_contratista]);
-
-    }
     
-    
-     public function actionDenominacion()
-   {
-     $denominacion_comercial = new DenominacionesComerciales();
-      $usuario= \common\models\p\User::findOne(Yii::$app->user->identity->id);
-    if ($denominacion_comercial->load(Yii::$app->request->post())) {
-         $denominacion_comercial->contratista_id = $usuario->contratista_id;
-        if($denominacion_comercial->tipo_denominacion == "PERSONA NATURAL" || $denominacion_comercial->tipo_denominacion =="FIRMA PERSONAL" || $denominacion_comercial->tipo_denominacion == "SOCIEDAD DE RESPONSABILIDAD LIMITADA" || $denominacion_comercial->tipo_denominacion== "COMPAÑIA NOMBRE COLECTIVO" || $denominacion_comercial->tipo_denominacion == "COMPAÑIA ANONIMA"){
-              
-       $denominaciones= DenominacionesComerciales::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id]);
-
-            
-            if(isset($denominaciones)){
-                   
-                      return "Usario ya posee una denominacion comercial asociada";
-                                   
-                               
-                   }
-            if($denominacion_comercial->save()){
-                return $this->redirect(['index']);
-            }else{
-                return "Faltan datos por guardar";
-            }
-
-        }else{
-
-
-         switch ($denominacion_comercial->tipo_denominacion) {
-                case "SOCIEDAD ANONIMA":
-                    return $this->renderAjax('_sociedades_anonimas',
-                     array('d_comercial' => $denominacion_comercial,));
-                    break;
-                case "COMANDITA":
-                     return $this->renderAjax('_comanditas',
-                     array('d_comercial' => $denominacion_comercial,));
-                    break;
-                case "FUNDACION":
-                     return $this->renderAjax('_fundaciones',
-                     array('d_comercial' => $denominacion_comercial,));
-                    break;
-                case "ORGANIZACION SOCIOPRODUCTIVA":
-                     return $this->renderAjax('_org_socioproductivas',
-                     array('d_comercial' => $denominacion_comercial,));
-                    break;
-                case "COOPERATIVA":
-                     return $this->renderAjax('_cooperativas',
-                     array('d_comercial' => $denominacion_comercial,));
-                    break;
-                case "EMPRESA EXTRANJERA":
-                     return $this->renderAjax('_empresas_extranjeras',
-                     array('d_comercial' => $denominacion_comercial,));
-                    break;
-                 case "ASOCIACION CIVIL":
-                     return $this->renderAjax('_asociedades_civiles',
-                     array('d_comercial' => $denominacion_comercial,));
-                    break;
-                 case "SOCIEDAD CIVIL":
-                     return $this->renderAjax('_asociedades_civiles',
-                     array('d_comercial' => $denominacion_comercial,));
-                    break;
-                default:
-                            return "Debe elegir una opcion";
-                    }
-
-        }
-
-
-
-    }else{
-    return "Datos incompletos";
-    }
-
-
-
-
-
-   }
-
-    public function actionDenominacioncomercial()
-   {
-     $denominacion_comercial = new DenominacionesComerciales();
-
-     if ($denominacion_comercial->load(Yii::$app->request->post())) {
-
-         if($denominacion_comercial->tipo_subdenominacion!=null && $denominacion_comercial->tipo_denominacion!="COOPERATIVA" ){
-
-               if($denominacion_comercial->tipo_denominacion=="ORGANIZACION SOCIOPRODUCTIVA" && $denominacion_comercial->codigo_situr==null){
-              return "Faltan datos debe ingresar el codigo situr";
-            }else{
-                
-                 $denominaciones= DenominacionesComerciales::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id]);
-
-            
-            if(isset($denominaciones)){
-                   
-                      return "Usario ya posee una denominacion comercial asociada";
-                                   
-                               
-                   }
-                
-            if($denominacion_comercial->save()){
-                return $this->redirect(['index']);
-            }else{
-                return "Faltan datos por guardar";
-            }
-
-            }
-         }else{
-
-             if($denominacion_comercial->tipo_denominacion=="COOPERATIVA" ){
-
-                 if($denominacion_comercial->cooperativa_capital==null || $denominacion_comercial->cooperativa_distribuicion ==  null){
-                      return "Faltan datos debe competar los campos";
-                 }else{
-                     if($denominacion_comercial->save()){
-                             return $this->redirect(['index']);
-                        }else{
-                        return "Faltan datos por guardar";
-                        }
-                 }
-             }else{
-
-                 return "eror fuera de orbita";
-             }
-         }
-
-     }else{
-         return "Datos incorrectos";
-     }
-
-   }
-
 
     /**
      * Updates an existing DenominacionesComerciales model.
@@ -224,9 +213,42 @@ class DenominacionesComercialesController extends BaseController
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        if($model->tipo_denominacion=="FIRMA PERSONAL" || $model->tipo_denominacion=="PERSONA NATURAL"){
+            $model->sector="NATURAL";
+        }else{
+            if($model->tipo_denominacion=="FUNDACION"){
+            $model->sector="PRIVADO";
+               }
+        }
+        $model->tipo_denominacion='';
+        $model->tipo_subdenominacion='';
+        $model->codigo_situr='';
+        $model->cooperativa_distribuicion='';
+        $model->cooperativa_capital='';
+        if ($model->load(Yii::$app->request->post())) {
+            if($model->tipo_subdenominacion==''){
+                    $model->tipo_subdenominacion=null;
+                    }
+                if($model->codigo_situr==''){
+                    $model->codigo_situr=null;
+                    }   
+                if($model->cooperativa_capital==''){
+                    $model->cooperativa_capital=null;
+                    }
+                if($model->cooperativa_distribuicion==''){
+                    $model->cooperativa_distribuicion=null;
+                }
+            
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+                if($model->save()){
+                    Yii::$app->session->setFlash('success','Denominacion Comercial Actualizada con exito');
+                    return $this->redirect(['index']);
+                }else{
+                    Yii::$app->session->setFlash('error','Error en la carga');
+                    return $this->render('create', [
+                    'model' => $model,
+                ]);
+                }
         } else {
             return $this->render('update', [
                 'model' => $model,
