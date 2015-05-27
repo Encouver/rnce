@@ -12,10 +12,10 @@ use yii\helpers\Html;
 
 <div class="activos-facturas-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['id'=>$model->formName(), 'type'=>ActiveForm::TYPE_VERTICAL, 'options' => ['data-pjax' => Yii::$app->request->isPjax]]); ?>
 
     <?php
-        echo '<h2> Carga de Factura: </h2>';
+        //echo '<h2> Carga de Factura: </h2>';
         echo Form::widget([       // 3 column layout
             'model'=>$model,
             'form'=>$form,
