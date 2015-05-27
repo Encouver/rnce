@@ -22,8 +22,7 @@ $tip_sub_denominacion = [
 }
 </style>
 <div class="sociedades-drop" style="margin-bottom: 10px;">
-    
-    
+  
     
     <?php $form = ActiveForm::begin([
         'id' => "dc_asociedades",]); ?>

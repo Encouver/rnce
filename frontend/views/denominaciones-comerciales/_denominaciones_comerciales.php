@@ -60,8 +60,12 @@ if($natural_juridica->juridica && $contratista->tipo_sector != "PRIVADO"){
 }
 </style>
 <div class="contratista-drop col-sm-9" style="margin-bottom: 10px;">
-    
+      
+    <div id="w10-error-0" class="alert-danger alert fade in">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
     <div id="output9"></div>
+</div>
+    
     <?php $form = ActiveForm::begin([
         'id'=>'d_comercial',
   ]); ?>
