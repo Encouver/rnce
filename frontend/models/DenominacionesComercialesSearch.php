@@ -18,7 +18,7 @@ class DenominacionesComercialesSearch extends DenominacionesComerciales
     public function rules()
     {
         return [
-            [['id', 'contratista_id'], 'integer'],
+            [['id', 'contratista_id','documento_registrado_id'], 'integer'],
             [['codigo_situr', 'cooperativa_capital', 'cooperativa_distribuicion', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el', 'tipo_denominacion', 'tipo_subdenominacion'], 'safe'],
             [['sys_status'], 'boolean'],
         ];
@@ -63,6 +63,7 @@ class DenominacionesComercialesSearch extends DenominacionesComerciales
             'sys_creado_el' => $this->sys_creado_el,
             'sys_actualizado_el' => $this->sys_actualizado_el,
             'sys_finalizado_el' => $this->sys_finalizado_el,
+            'documento_registrado_id'=> $this->documento_registrado_id,
         ]);
 
         $query->andFilterWhere(['like', 'codigo_situr', $this->codigo_situr])
