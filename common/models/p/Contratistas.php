@@ -16,6 +16,7 @@ use Yii;
  * @property string $sys_actualizado_el
  * @property string $sys_finalizado_el
  * @property string $tipo_sector
+ * @property string $acta_constitutiva
  *
  * @property ActasConstitutivas[] $actasConstitutivas
  * @property Capitales[] $capitales
@@ -59,8 +60,8 @@ class Contratistas extends \common\components\BaseActiveRecord
         return [
             [['estatus_contratista_id'], 'required'],
             [['natural_juridica_id', 'estatus_contratista_id','creado_por','actualizado_por'], 'integer'],
-            [['sys_status'], 'boolean'],
-            [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
+            [['sys_status','acta_constitutiva'], 'boolean'],
+            [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el','acta_constitutiva'], 'safe'],
             [['tipo_sector'], 'string'],
             [['sigla'], 'string', 'max' => 50]
         ];
@@ -81,6 +82,7 @@ class Contratistas extends \common\components\BaseActiveRecord
             'sys_actualizado_el' => Yii::t('app', 'Sys Actualizado El'),
             'sys_finalizado_el' => Yii::t('app', 'Sys Finalizado El'),
             'tipo_sector' => Yii::t('app', 'Tipo Sector'),
+            'acta_constitutiva' => Yii::t('app', 'Acta Constitutiva'),
         ];
     }
 
