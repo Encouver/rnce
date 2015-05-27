@@ -110,7 +110,7 @@ AppAsset::register($this);
                 ],
                  ['label' => 'Acta Constitutiva',
                     'items' => [
-                         ['label' => 'Registro documento', 'url' => ['/activos-documentos-registrados/crearacta']],
+                         ['label' => 'Registro documento', 'url' => ['/activos-documentos-registrados/index']],
                          ['label' => 'Denominaciones Comerciales', 'url' => ['/denominaciones-comerciales/index']],
                         ['label' => 'Objeto Social', 'url' => ['/objetos-sociales/crearobjetoacta']],
                         ['label' => 'Cierre ejercicio', 'url' => ['/cierres-ejercicios/crearcierreacta']],

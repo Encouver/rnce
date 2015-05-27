@@ -52,10 +52,15 @@ class ActivosDocumentosRegistradosController extends BaseController
     {
         $searchModel = new ActivosDocumentosRegistradosSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $model= new ActivosDocumentosRegistrados();
+        $model->scenario='actas';
+        $model->sys_tipo_registro_id=1;
+        $model->tipo_documento_id=1;
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'model'=>$model
         ]);
     }
 
@@ -81,13 +86,30 @@ class ActivosDocumentosRegistradosController extends BaseController
         $model = new ActivosDocumentosRegistrados();
 
         if ($model->load(Yii::$app->request->post()) ) {
-            $model->sys_tipo_registro_id = 2;
+            //
+            if($model->tipo_documento_id==1){
+                 if($model->existe()){
+                    Yii::$app->session->setFlash('error','Ya existe documento registrado');
+                     return $this->redirect(['index']);
+
+                    
+                }
+            }else{
+                $model->sys_tipo_registro_id = 2;
+            }
             if($model->save()){
                 return 1;
             }
             else
             {
-                return 0;
+                 if($model->tipo_documento_id==1){
+                    if($model->existe()){
+                    Yii::$app->session->setFlash('error','Ya existe documento registrado');
+                     return $this->redirect(['index']);
+
+                    
+                            }
+                    }else return 0;
             }
             //return $this->redirect(['view', 'id' => $model->id]);
         } else {
@@ -96,62 +118,7 @@ class ActivosDocumentosRegistradosController extends BaseController
             ]);
         }
     }
-    public function actionCrearacta()
-    {
-        $registro_acta = new ActivosDocumentosRegistrados();
-            
-          
-            return $this->render('registros_actas', [
-                'registro_acta' => $registro_acta,
-            ]);
-        
-    }
-     public function actionRegistroacta(){
-        
-       $registro_acta = new ActivosDocumentosRegistrados();
-      
-        $usuario= \common\models\p\User::findOne(Yii::$app->user->identity->id);
-        if ( $registro_acta->load(Yii::$app->request->post())) {
-            
-             $transaction = \Yii::$app->db->beginTransaction();
-             
-           try {
-               
-            if($registro_acta->fecha_asamblea==null){
-                 $transaction->rollBack();
-                return "Debe ingresar fecha asamblea"; 
-            }
-           $registros = ActivosDocumentosRegistrados::findOne(['contratista_id'=>$usuario->contratista_id, 'tipo_documento_id'=>1]);
-           if(isset($registros)){
-               $transaction->rollBack();
-                return "Ya tiene un documento registrado"; 
-           }
-            $registro_acta->contratista_id = $usuario->contratista_id;
-            $registro_acta->sys_tipo_registro_id=1;
-            $registro_acta->tipo_documento_id=1;
-         
-               if ( $registro_acta->save()) {
-           
-
-                               $transaction->commit();
-                               return "Datos guardados con exito";
-                               
-
-
-                   }else{
-                        $transaction->rollBack();
-                       return "Datos no guardados";
-                   }
-             
-             
-           } catch (Exception $e) {
-               $transaction->rollBack();
-           }
-        }
-        
-        
-    }
-
+   
 
     /**
      * Updates an existing ActivosDocumentosRegistrados model.
@@ -162,9 +129,13 @@ class ActivosDocumentosRegistradosController extends BaseController
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        if($model->tipo_documento_id==1){
+            $model->scenario='actas';
+        }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+              Yii::$app->session->setFlash('success','Documento Actualizado con exito');
+                     return $this->redirect(['index']);
         } else {
             return $this->render('update', [
                 'model' => $model,

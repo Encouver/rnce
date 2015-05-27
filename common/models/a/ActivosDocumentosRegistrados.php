@@ -78,8 +78,10 @@ class ActivosDocumentosRegistrados extends \common\components\BaseActiveRecord
 
                      return false;
             }"*/],
+            [['fecha_asamblea'], 'required','on'=>'actas'],
             [['contratista_id', 'sys_tipo_registro_id', 'num_registro_notaria', 'tomo', 'folio', 'fecha_registro', 'sys_circunscripcion_id'], 'required', 'on'=>'bien-registro'],
             [['contratista_id', 'sys_tipo_registro_id', 'num_registro_notaria', 'tomo', 'folio', 'fecha_registro', 'sys_circunscripcion_id'], 'required', 'on'=>'bien-notaria'],
+            [['contratista_id', 'sys_tipo_registro_id', 'num_registro_notaria', 'tomo', 'folio', 'fecha_registro', 'sys_circunscripcion_id'], 'required', 'on'=>'acta_constitutiva'],
             [['contratista_id', 'sys_tipo_registro_id', 'sys_circunscripcion_id', 'tipo_documento_id', 'creado_por', 'actualizado_por'], 'integer'],
             [['fecha_registro', 'fecha_asamblea', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['valor_adquisicion'], 'number'],
@@ -315,9 +317,42 @@ class ActivosDocumentosRegistrados extends \common\components\BaseActiveRecord
         if($this->scenario == 'bien')
             return $attributes;
 
-       // if($this->scenario == 'actas')
+       if($this->scenario == 'actas'){
             //Actas
             return [
+
+                'sys_circunscripcion_id'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>ArrayHelper::map(SysCircunscripciones::find()->all(),'id','nombre') , 'options'=>['prompt'=>'Seleccione circunscripcion']],
+                'num_registro_notaria'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Numero de colegiatura']],
+                'tomo'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Numero de colegiatura']],
+                'folio'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Numero de colegiatura']],
+                'fecha_registro'=>[
+                    'type'=>Form::INPUT_WIDGET,
+                    'widgetClass'=>'\kartik\widgets\DatePicker',
+                    'options'=>['pluginOptions' => [
+                        'autoclose'=>true,
+                        'format' => 'yyyy-mm-dd'
+                    ]],
+                ],
+                'fecha_asamblea'=>[
+                    'type'=>Form::INPUT_WIDGET,
+                    'widgetClass'=>'\kartik\widgets\DatePicker',
+                    'options'=>['pluginOptions' => [
+                        'autoclose'=>true,
+                        'format' => 'yyyy-mm-dd'
+                    ]],
+                ],
+                 'sys_tipo_registro_id'=>[ // primary key attribute
+                'type'=>Form::INPUT_HIDDEN,
+                'columnOptions'=>['hidden'=>true]
+                ],
+                'tipo_documento_id'=>[ // primary key attribute
+                'type'=>Form::INPUT_HIDDEN,
+                'columnOptions'=>['hidden'=>true]
+                ],
+
+            ];
+            }
+             return [
                 'sys_circunscripcion_id'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>ArrayHelper::map(SysCircunscripciones::find()->all(),'id','nombre') , 'options'=>['prompt'=>'Seleccione circunscripcion']],
                 'num_registro_notaria'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Numero de colegiatura']],
                 'tomo'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Numero de colegiatura']],
@@ -340,11 +375,20 @@ class ActivosDocumentosRegistrados extends \common\components\BaseActiveRecord
                 ],
 
             ];
-
     }
 
     public function Etiqueta(){
         return $this->sysTipoRegistro->nombre.' - '.$this->num_registro_notaria;
     }
+    public function Existe(){
+        $documentos= ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'tipo_documento_id'=>$this->tipo_documento_id,'sys_tipo_registro_id'=>$this->sys_tipo_registro_id]);
+        
+        if(isset($documentos)){
+        return true;   
+        }else{
+            false;
+        }
+    }
+
 
 }
