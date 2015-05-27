@@ -18,31 +18,34 @@ use yii\widgets\ActiveForm;
         <td><?= $form->field($model, 'criterio')->textInput(['maxlength' => true]) ?></td>
         <td><?= $form->field($model, 'origen')->textInput(['maxlength' => true]) ?></td>
         <td><?= $form->field($model, 'fecha')->textInput() ?></td>
-        <td><?= $form->field($model, 'garantia')->textInput(['maxlength' => true]) ?></td>
     </tr>
     <tr>
+        <td><?= $form->field($model, 'garantia')->textInput(['maxlength' => true]) ?></td>
         <td><?= $form->field($model, 'corriente')->checkbox() ?></td>
         <td><?= $form->field($model, 'nocorriente')->checkbox() ?></td>
+    </tr>
+     <tr>
+        <td><?= $form->field($model, 'otro_nombre')->textInput(['maxlength' => true]) ?></td>
+    </tr>
+</table>
+
+<table>
+    <tr>
         <td><?= $form->field($model, 'plazo_contrato_c')->textInput() ?></td>
         <td><?= $form->field($model, 'saldo_c')->textInput() ?></td>
-    </tr>
-
-    <tr>
         <td><?= $form->field($model, 'deterioro_c')->checkbox() ?></td>
         <td><?= $form->field($model, 'valor_de_uso_c')->textInput() ?></td>
         <td><?= $form->field($model, 'saldo_neto_c')->textInput() ?></td>
-        <td><?= $form->field($model, 'plazo_contrato_nc')->textInput() ?></td>
     </tr>
+</table>
 
-    <tr>
+<table>
+     <tr>
+        <td><?= $form->field($model, 'plazo_contrato_nc')->textInput() ?></td>
         <td><?= $form->field($model, 'saldo_nc')->textInput() ?></td>
         <td><?= $form->field($model, 'deterioro_nc')->checkbox() ?></td>
         <td><?= $form->field($model, 'valor_de_uso_nc')->textInput() ?></td>
         <td><?= $form->field($model, 'saldo_neto_nc')->textInput() ?></td>
-    </tr>
-
-     <tr>
-        <td><?= $form->field($model, 'otro_nombre')->textInput(['maxlength' => true]) ?></td>
     </tr>
 </table>
 
