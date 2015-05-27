@@ -7,6 +7,7 @@ use common\models\a\ActivosDocumentosRegistrados;
 use app\models\ActivosDocumentosRegistrados as ActivosDocumentosRegistradosSearch;
 use common\components\BaseController;
 use yii\db\Query;
+use yii\helpers\Html;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -74,6 +75,44 @@ class ActivosDocumentosRegistradosController extends BaseController
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
+    }
+
+    /**
+     * Creates a new ActivosDocumentosRegistrados model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     * @return mixed
+     */
+    public function actionCreateGeneral($id=2)
+    {
+        $model = new ActivosDocumentosRegistrados();
+
+        if ($model->load(Yii::$app->request->post()) ) {
+            //
+                $model->sys_tipo_registro_id = $id;
+
+            if($model->save()) {
+
+
+                Yii::$app->getSession()->setFlash('success',Yii::t('app',Html::encode('Documento registrado guardado.')) /*[
+                    'type' => 'success',
+                    'duration' => 5000,
+                    'icon' => 'fa fa-users',
+                    'message' => Yii::t('app',Html::encode('Documento registrado guaradado.')),
+                    'title' => Yii::t('app',Html::encode('Documento registrado')),
+                    'positonY' => 'top',
+                    'positonX' => 'center'
+                ]*/);
+                $model = new ActivosDocumentosRegistrados();
+                return $this->renderAjax('create', [
+                    'model' => $model,
+                ]);
+            }
+            //return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            return $this->renderAjax('create', [
+                'model' => $model,
+            ]);
+        }
     }
 
     /**

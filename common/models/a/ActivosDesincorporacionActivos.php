@@ -3,6 +3,7 @@
 namespace common\models\a;
 
 use kartik\builder\Form;
+use kartik\money\MaskMoney;
 use kartik\widgets\DatePicker;
 use kartik\widgets\Select2;
 use Yii;
@@ -41,7 +42,7 @@ class ActivosDesincorporacionActivos extends \common\components\BaseActiveRecord
     public function rules()
     {
         return [
-            [['sys_motivo_id', 'fecha', 'valor_neto_libro'], 'required'],
+            [['sys_motivo_id', 'fecha', 'valor_neto_libro', 'precio_venta', 'valor_neto_libro'], 'required'],
             [['sys_motivo_id', 'creado_por', 'actualizado_por'], 'integer'],
             [['fecha', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['precio_venta', 'valor_neto_libro'], 'number'],

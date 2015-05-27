@@ -11,6 +11,26 @@ CONTROLADORES
 
 Base Controller Class: common\components\BaseController
 
+<?php Pjax::begin(['enablePushState' => false]);?>
+
+<?php ActiveForm::end(); ?>
+
+<?php
+
+
+
+// En el controlador
+Yii::$app->getSession()->setFlash('success',Yii::t('app',Html::encode('Documento registrado guardado.')));
+
+
+// En la vista
+foreach (Yii::$app->session->getAllFlashes() as $key => $message) {
+    echo '<div class="alert alert-' . $key . '">' . $message . '</div>';
+}
+?>
+
+
+
 <?php
 
 

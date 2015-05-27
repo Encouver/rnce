@@ -6,6 +6,7 @@ use yii\bootstrap\Modal;
 use yii\helpers\Html;
 use kartik\widgets\ActiveForm;
 use yii\helpers\Url;
+use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\a\ActivosBienes */
@@ -19,7 +20,7 @@ use yii\helpers\Url;
 <?php
 $urlFactura = Url::to(['activos-facturas/create-ajax']);
 
-$urlDocumento = Url::to(['activos-documentos-registrados/create']);
+$urlDocumento = Url::to(['activos-documentos-registrados/create-general','id'=>2]);
 
 ?>
 
@@ -30,23 +31,26 @@ $urlDocumento = Url::to(['activos-documentos-registrados/create']);
     'header' => '<h4 style="margin:0; padding:0">Agregar Factura</h4>',
     'toggleButton' => ['label' => 'Agregar Factura', 'class'=>'btn btn-lg btn-primary','style'=>'margin-bottom:10px;'],
 ]);?>
+<?php Pjax::begin(['enablePushState' => false]);?>
+    <?php $form2 = ActiveForm::begin(['id'=>$modelFactura->formName(), 'type'=>ActiveForm::TYPE_VERTICAL,'action'=>$urlFactura, 'options' => ['data-pjax' => true]]); ?>
 
-<?php $form2 = ActiveForm::begin(['id'=>$modelFactura->formName(), 'type'=>ActiveForm::TYPE_VERTICAL,'action'=>$urlFactura]); ?>
+        <?php echo Form::widget([
+            'model'=>$modelFactura,
+            'form'=>$form2,
+            'columns'=>3,
+            'attributes'=>$modelFactura->formAttribs
+        ]); ?>
 
-    <?php echo Form::widget([
-        'model'=>$modelFactura,
-        'form'=>$form2,
-        'columns'=>3,
-        'attributes'=>$modelFactura->formAttribs
-    ]); ?>
-
-    <div class="form-group" >
-        <?= Html::Button(Yii::t('app', 'Enviar'), ['class' => 'btn btn-success', 'id' => 'enviar-factura']) ?>
-    </div>
-<div id="output-factura">
-</div>
-<?php ActiveForm::end(); ?>
-
+<!--        <div class="form-group" >
+            <?/*= Html::Button(Yii::t('app', 'Guardar'), ['class' => 'btn btn-success', 'id' => 'enviar-factura']) */?>
+        </div>-->
+        <div class="form-group">
+            <?= Html::submitButton(Yii::t('app', 'Guardar') , ['class' =>'btn btn-success', 'id' => 'enviar-factura' ]) ?>
+        </div>
+       <!-- <div id="output-factura">
+        </div>-->
+    <?php ActiveForm::end(); ?>
+<?php Pjax::end();?>
 <?php Modal::end();?>
 
 
@@ -57,24 +61,29 @@ $urlDocumento = Url::to(['activos-documentos-registrados/create']);
     'header' => '<h4 style="margin:0; padding:0">Agregar Documento Registrado</h4>',
     'toggleButton' => ['label' => 'Agregar Documento Registrado', 'class'=>'btn btn-lg btn-primary','style'=>'margin-bottom:10px;'],
 ]);?>
+
 <div id="output-documento">
-    <?php $form2 = ActiveForm::begin(['id'=>$modelDocumento->formName(), 'type'=>ActiveForm::TYPE_VERTICAL,'action'=>$urlDocumento]); ?>
+    <?php Pjax::begin(['enablePushState' => false]);?>
+        <?php $form2 = ActiveForm::begin(['id'=>$modelDocumento->formName(), 'type'=>ActiveForm::TYPE_VERTICAL,'action'=>$urlDocumento, 'options' => ['data-pjax' => true]]); ?>
+            <?php  echo '<h1>Cargar Documentos Registrados</h1>'?>
+            <?php echo Form::widget([
+                'model'=>$modelDocumento,
+                'form'=>$form2,
+                'columns'=>3,
+                'attributes'=>$modelDocumento->formAttribs
+            ]); ?>
 
-    <?php echo Form::widget([
-        'model'=>$modelDocumento,
-        'form'=>$form2,
-        'columns'=>3,
-        'attributes'=>$modelDocumento->formAttribs
-    ]); ?>
-
-<!--    <div class="form-group">
-        <?/*= Html::Button(Yii::t('app', 'Enviar'), ['class' => 'btn btn-success', 'id' => 'enviar-documento']) */?>
-    </div>-->
-    <div class="form-group">
-        <?= Html::submitButton(Yii::t('app', 'Enviar') , ['class' =>'btn btn-success' ]) ?>
-    </div>
+        <!--    <div class="form-group">
+                <?/*= Html::Button(Yii::t('app', 'Enviar'), ['class' => 'btn btn-success', 'id' => 'enviar-documento']) */?>
+            </div>-->
+                <div class="form-group">
+                    <?= Html::submitButton(Yii::t('app', 'Guardar') , ['class' =>'btn btn-success', 'id' => 'enviar-documento' ]) ?>
+                </div>
+        <?php ActiveForm::end(); ?>
+    <?php Pjax::end();?>
 </div>
-<?php ActiveForm::end(); ?>
+
+
 <?php Modal::end();?>
 
 <!--
@@ -220,93 +229,6 @@ $urlDocumento = Url::to(['activos-documentos-registrados/create']);
 
     $script = <<< JS
 
-$('form#{$modelDocumento->formName()}').on('beforeSubmit', function(e){
-        var \$form = $(this);
-        $.post(
-            \$form.attr("action"), // serialize Yii2 form
-            \$form.serialize()
-        )
-        .done(function(result){
-            if(result == 1)
-            {
-                $(\$form).trigger("reset");
-
-            }else{
-            alert('Error');
-
-            }
-            $("#message").html(result.message);
-        }).fail(function(){
-            console.log("server errror");
-        });
-    });
-
-    $('#enviar-documento').click(function(e){
-
-        if($('form#modal_documento').find('.has-error').length!=0){
-
-            return false;
-        }else
-        {
-            //$('form#modal_pnatural').submit();
-            //e.preventDefault();
-            //e.stopImmediatePropagation();
-       /*     $.ajax({
-
-                    url: '$urlDocumento',
-                    type: 'post',
-                    data: $('form#modal_documento').serialize(),
-                    success: function(data) {
-                    $( "#output-documento" ).html( data );
-                }
-                });*/
-
-            }
-    });
-
-    $('form#{$modelFactura->formName()}').on('beforeSubmit', function(e){
-        var \$form = $(this);
-        $.post(
-            \$form.attr("action"), // serialize Yii2 form
-            \$form.serialize()
-        )
-        .done(function(result){
-            if(result == 1)
-            {
-                $(\$form).trigger("reset");
-
-            }else{
-            alert('Error');
-
-            }
-            $("#message").html(result.message);
-        }).fail(function(){
-            console.log("server errror");
-        });
-    });
-
-    $('#enviar-factura').click(function(e){
-
-        if($('form#modal_factura').find('.has-error').length!=0){
-            alert('Revise el formulario.');
-            return false;
-        }else
-        {
-            //$('form#modal_pnatural').submit();
-            e.preventDefault();
-            e.stopImmediatePropagation();
-            $.ajax({
-
-                    url: '$urlFactura',
-                    type: 'post',
-                    data: $('form#modal_factura').serialize(),
-                    success: function(data) {
-                    $( "#output-factura" ).html( data );
-                }
-                });
-
-            }
-    });
 
     function datosImportados(){
             if($('#activosbienes-nacional').is(':checked') ){
@@ -354,6 +276,100 @@ $('form#{$modelDocumento->formName()}').on('beforeSubmit', function(e){
                     $('.field-activosbienes-nacional').parent().hide();
                 }
         });
+
+
+
+
+
+        /*
+    $('form#{$modelDocumento->formName()}').on('beforeSubmit', function(e){
+            var \$form = $(this);
+
+            $.post(
+                \$form.attr("action"), // serialize Yii2 form
+                \$form.serialize()
+            )
+            .done(function(result){
+                if(result == 1)
+                {
+                    $(\$form).trigger("reset");
+
+                }else{
+                alert('Error');
+
+                }
+                $("#message").html(result.message);
+            }).fail(function(){
+                console.log("server errror");
+            });
+        });*/
+
+  /*  $('#enviar-documento').click(function(e){
+
+        if($('form#modal_documento').find('.has-error').length!=0){
+
+            return false;
+        }else
+        {
+            //$('form#modal_pnatural').submit();
+            //e.preventDefault();
+            //e.stopImmediatePropagation();
+            $.ajax({
+
+                    url: '$urlDocumento',
+                    type: 'post',
+                    data: $('form#modal_documento').serialize(),
+                    success: function(data) {
+                    $( "#output-documento" ).html( data );
+                }
+                });
+
+            }
+    });*/
+
+/*    $('form#{$modelFactura->formName()}').on('beforeSubmit', function(e){
+        var \$form = $(this);
+        $.post(
+            \$form.attr("action"), // serialize Yii2 form
+            \$form.serialize()
+        )
+        .done(function(result){
+            if(result == 1)
+            {
+                $(\$form).trigger("reset");
+
+            }else{
+            alert('Error');
+
+            }
+            $("#message").html(result.message);
+        }).fail(function(){
+            console.log("server errror");
+        });
+    });
+
+    $('#enviar-factura').click(function(e){
+
+        if($('form#modal_factura').find('.has-error').length!=0){
+            alert('Revise el formulario.');
+            return false;
+        }else
+        {
+            //$('form#modal_pnatural').submit();
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            $.ajax({
+
+                    url: '$urlFactura',
+                    type: 'post',
+                    data: $('form#modal_factura').serialize(),
+                    success: function(data) {
+                    $( "#output-factura" ).html( data );
+                }
+                });
+
+            }
+    });*/
 JS;
     $this->registerJs($script);
 
