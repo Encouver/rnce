@@ -394,7 +394,7 @@ class ActivosBienes extends \common\components\BaseActiveRecord
              // Si proc_productivo es true
              'directo'=>['type'=>Form::INPUT_CHECKBOX,'columnOptions'=>['hidden'=>true,]],
              // Si proceso productivo es false.
-             'proc_ventas'=>['type'=>Form::INPUT_CHECKBOX,'columnOptions'=>['hidden'=>false,]],
+             'proc_ventas'=>['type'=>Form::INPUT_WIDGET, 'widgetClass'=>CheckboxX::className()],
 
 
             //'principio_contable_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(ActivosSysFormasOrg::find()->asArray()->all(),'id','nombre')]],
