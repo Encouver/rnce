@@ -179,6 +179,19 @@ $urlDocumento = Url::to(['activos-documentos-registrados/create-general','id'=>2
                  ]);
         }
 
+            //if($model->origen_id == 2 && !$model->nacional ) {
+            echo '<div id="mejora-container" style="display: none;">';
+            echo '<h2> Datos de Mejora: </h2>';
+            echo Form::widget([       // 3 column layout
+                    'model' => $modelMejoras,
+                    'form' => $form,
+                    'columns' => 4,
+                    'columnSize' => 'xs',
+                    'attributes' => $modelMejoras->getFormAttribs()
+                ]);
+                echo '</div>';
+                // }
+
         //if($model->factura) {
             echo '<div id="factura-container" style="display: none;">';
             echo '<h2> Datos de la Factura: </h2>';
@@ -195,13 +208,13 @@ $urlDocumento = Url::to(['activos-documentos-registrados/create-general','id'=>2
         //if($model->documento) {
             echo '<div id="documento-container" style="display: none;">';
             echo '<h2> Datos del Documento Registrado: </h2>';
-            echo Form::widget([       // 3 column layout
+ /*           echo Form::widget([       // 3 column layout
                 'model' => $modelDocumento,
                 'form' => $form,
                 'columns' => 4,
                 'columnSize' => 'xs',
                 'attributes' => $modelDocumento->getFormAttribs($model)
-            ]);
+            ]);*/
             echo '</div>';
         //}
         if($model->deterioro()) {
@@ -242,24 +255,27 @@ $urlDocumento = Url::to(['activos-documentos-registrados/create-general','id'=>2
 
                datosImportados();
         });
-     $('#activosbienes-factura').change(function(e){
 
-                if($('#activosbienes-factura').is(':checked')){
-                    $('#factura-container').show();
-                }
-                if(!$('#activosbienes-factura').is(':checked')){
-                    $('#factura-container').hide();
+     $('#activosbienes-mejora').change(function(e){
+
+                if($('#activosbienes-mejora').is(':checked') ){
+                   $('#mejora-container').show();
+                }//alert($('#activosbienes-nacional').val());
+                if(!$('#activosbienes-mejora').is(':checked')){
+                    $('#mejora-container').hide();
                 }
         });
-     $('#activosbienes-documento').change(function(e){
+    $('#activosbienes-proc_productivo').change(function(e){
 
-                if($('#activosbienes-documento').is(':checked')){
-                    $('#documento-container').show();
-                }
-                if(!$('#activosbienes-documento').is(':checked')){
-                    $('#documento-container').hide();
-                }
-        });
+                    if($('#activosbienes-proc_productivo').is(':checked')){
+                        $('.field-activosbienes-directo').parent().show();
+                        $('.field-activosbienes-proc_ventas').parent().hide();
+                    }
+                    if(!$('#activosbienes-proc_productivo').is(':checked')){
+                        $('.field-activosbienes-directo').parent().hide();
+                        $('.field-activosbienes-proc_ventas').parent().show();
+                    }
+            });
         $('#origen').change(function(e){
                 if($('#origen').val()== 1 || $('#origen').val()==4){
                     $('.field-activosbienes-fecha_origen').parent().show();
@@ -279,8 +295,25 @@ $urlDocumento = Url::to(['activos-documentos-registrados/create-general','id'=>2
 
 
 
+/*
+     $('#activosbienes-factura').change(function(e){
 
+                if($('#activosbienes-factura').is(':checked')){
+                    $('#factura-container').show();
+                }
+                if(!$('#activosbienes-factura').is(':checked')){
+                    $('#factura-container').hide();
+                }
+        });
+     $('#activosbienes-documento').change(function(e){
 
+                if($('#activosbienes-documento').is(':checked')){
+                    $('#documento-container').show();
+                }
+                if(!$('#activosbienes-documento').is(':checked')){
+                    $('#documento-container').hide();
+                }
+        });*/
         /*
     $('form#{$modelDocumento->formName()}').on('beforeSubmit', function(e){
             var \$form = $(this);

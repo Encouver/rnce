@@ -2,7 +2,12 @@
 
 namespace common\models\a;
 
+use kartik\builder\Form;
+use kartik\money\MaskMoney;
+use kartik\widgets\DatePicker;
+use kartik\widgets\Select2;
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "activos.mejoras_propiedades".
@@ -40,7 +45,12 @@ class ActivosMejorasPropiedades extends \common\components\BaseActiveRecord
     public function rules()
     {
         return [
-            [['bien_id', 'monto', 'fecha'], 'required'],
+            [['bien_id', 'monto', 'fecha', 'mejora_bien_id', 'descripcion', 'capitalizable'], 'required',
+                'when' => function ($model) {
+                return !$model->bien->mejora;
+            }, 'whenClient' => "function (attribute, value) {
+                    return $('#activosbienes-mejora').is(':checked');
+                }"],
             [['bien_id', 'creado_por', 'actualizado_por', 'mejora_bien_id'], 'integer'],
             [['monto'], 'number'],
             [['fecha', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
@@ -56,7 +66,7 @@ class ActivosMejorasPropiedades extends \common\components\BaseActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'bien_id' => Yii::t('app', 'Bien ID'),
+            'bien_id' => Yii::t('app', 'Bien'),
             'monto' => Yii::t('app', 'Monto'),
             'fecha' => Yii::t('app', 'Fecha'),
             'capitalizable' => Yii::t('app', 'Capitalizable'),
@@ -66,8 +76,8 @@ class ActivosMejorasPropiedades extends \common\components\BaseActiveRecord
             'sys_creado_el' => Yii::t('app', 'Sys Creado El'),
             'sys_actualizado_el' => Yii::t('app', 'Sys Actualizado El'),
             'sys_finalizado_el' => Yii::t('app', 'Sys Finalizado El'),
-            'mejora_bien_id' => Yii::t('app', 'Mejora Bien ID'),
-            'descripcion' => Yii::t('app', 'Descripcion'),
+            'mejora_bien_id' => Yii::t('app', 'Mejora Bien'),
+            'descripcion' => Yii::t('app', 'Descripción'),
         ];
     }
 
@@ -86,4 +96,32 @@ class ActivosMejorasPropiedades extends \common\components\BaseActiveRecord
     {
         return $this->hasOne(ActivosBienes::className(), ['id' => 'mejora_bien_id']);
     }
+
+    public function getFormAttribs() {
+        return [
+            // primary key column
+            'id'=>[ // primary key attribute
+                'type'=>Form::INPUT_HIDDEN,
+                'columnOptions'=>['hidden'=>true]
+            ],
+            'mejora_bien_id' => ['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(ActivosBienes::find()->all(),'id',function($model){return  $model->etiqueta();}),
+                'options'=>['id'=>'mejora-bien-id','placeholder'=>'Seleccionar motivo', 'onchange'=>'js:'],'pluginOptions' => [
+                    'allowClear' => false,
+                ],]],
+            'monto' => ['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),],
+            'fecha' => ['type'=>Form::INPUT_WIDGET,'widgetClass'=>DatePicker::className(),'options'=>['options' => ['placeholder' => 'Seleccione fecha ...'],
+                'convertFormat' => true,
+                'pluginOptions' => [
+                    'format' => 'd-M-yyyy ',
+                    //'startDate' => date('d-m-Y h:i A'),//'01-Mar-2014 12:00 AM',
+                    'todayHighlight' => true
+                ]]],
+            'capitalizable' => ['type'=>Form::INPUT_CHECKBOX,'columnOptions'=>['hidden'=>false,],'options'=>['onchange'=>'']],
+
+            'descripcion' => ['type'=>Form::INPUT_TEXT,],
+
+
+        ];
+    }
+
 }
