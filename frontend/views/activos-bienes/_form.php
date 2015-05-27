@@ -310,10 +310,10 @@ $('form#{$modelDocumento->formName()}').on('beforeSubmit', function(e){
 
     function datosImportados(){
             if($('#activosbienes-nacional').is(':checked') ){
-                $('#datos-importacion-container').show();
+               $('#datos-importacion-container').hide();
             }//alert($('#activosbienes-nacional').val());
             if(!$('#activosbienes-nacional').is(':checked')){
-                $('#datos-importacion-container').hide();
+                 $('#datos-importacion-container').show();
         }
     }
      $('#activosbienes-nacional').change(function(e){
