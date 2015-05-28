@@ -87,7 +87,7 @@ class ActivosDesincorporacionActivos extends \common\components\BaseActiveRecord
             ],
 
             'sys_motivo_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(ActivosSysMotivos::find()->all(),'id','nombre'),
-                'options'=>['id'=>'','placeholder'=>'Seleccionar motivo', 'onchange'=>'js:'],'pluginOptions' => [
+                'options'=>['id'=>'motivo-desincorporacion','placeholder'=>'Seleccionar motivo', 'onchange'=>'js:'],'pluginOptions' => [
                     'allowClear' => false,
                 ],]],
 

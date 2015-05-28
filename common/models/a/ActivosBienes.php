@@ -67,8 +67,6 @@ use yii\web\JsExpression;
  */
 class ActivosBienes extends \common\components\BaseActiveRecord
 {
-    public $factura;
-    public $documento;
 
     /**
      * @inheritdoc
@@ -113,7 +111,7 @@ class ActivosBienes extends \common\components\BaseActiveRecord
                  return $('#activosbienes-factura_id').val() == 0;
             }"],
             [['fecha_origen', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
-            [['propio', 'nacional', 'carga_completa', 'sys_status','documento','factura', 'mejora', 'perdida_reverso', 'proc_productivo', 'directo', 'proc_ventas'], 'boolean'],
+            [['propio', 'nacional', 'carga_completa', 'sys_status', 'mejora', 'perdida_reverso', 'proc_productivo', 'directo', 'proc_ventas'], 'boolean'],
             [['detalle'], 'string', 'max' => 255],
             [['sys_tipo_bien_id', 'detalle', 'contratista_id'], 'unique', 'targetAttribute' => ['sys_tipo_bien_id', 'detalle', 'contratista_id'], 'message' => 'El nombre de detalle debe ser único para entre todos sus bienes.']
         ];

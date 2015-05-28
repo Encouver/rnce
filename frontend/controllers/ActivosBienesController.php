@@ -222,6 +222,7 @@ class ActivosBienesController extends BaseController
                     //return $this->redirect(['view', 'id' => $model->id]);
                     return $this->redirect(['index']);
                 }
+                $model->isNewRecord = true;
                 $transaction->rollBack();
             } catch (Exception $e) {
                 $transaction->rollBack();
