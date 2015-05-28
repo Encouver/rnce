@@ -23,7 +23,11 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'tiempo_prorroga') ?>
 
-    <?= $form->field($model, 'fecha_vencimiento') ?>
+    <?= $form->field($model, 'duracion_anos') ?>
+
+    <?php // echo $form->field($model, 'creado_por') ?>
+
+    <?php // echo $form->field($model, 'actualizado_por') ?>
 
     <?php // echo $form->field($model, 'sys_status')->checkbox() ?>
 
@@ -32,8 +36,6 @@ use yii\widgets\ActiveForm;
     <?php // echo $form->field($model, 'sys_actualizado_el') ?>
 
     <?php // echo $form->field($model, 'sys_finalizado_el') ?>
-
-    <?php // echo $form->field($model, 'duracion_años') ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>

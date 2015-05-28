@@ -23,3 +23,24 @@ ALTER TABLE principios_contables DROP COLUMN principio_contable;
 ALTER TABLE principios_contables ADD COLUMN principio_contable character varying(100);
 ALTER TABLE principios_contables ALTER COLUMN principio_contable SET NOT NULL;
 COMMENT ON COLUMN principios_contables.principio_contable IS 'Nombre del principio contable aplicable';
+
+
+-----28 mayo 12:51 am----
+ALTER TABLE denominaciones_comerciales
+  ADD CONSTRAINT denominaciones_comerciales_documento_registrado_id_fkey FOREIGN KEY (documento_registrado_id)
+      REFERENCES activos.documentos_registrados (id) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE NO ACTION;
+
+
+
+ALTER TABLE razones_sociales ADD COLUMN documento_registrado_id integer;
+ALTER TABLE razones_sociales ALTER COLUMN documento_registrado_id SET NOT NULL;
+COMMENT ON COLUMN razones_sociales.documento_registrado_id IS 'Clave foranea a la tabla documentos registrados del esquema activos';
+
+
+ALTER TABLE razones_sociales
+  ADD CONSTRAINT razones_sociales_documento_registrado_id_fkey FOREIGN KEY (documento_registrado_id)
+      REFERENCES activos.documentos_registrados (id) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE NO ACTION;
+
+ALTER TABLE duraciones_empresas DROP COLUMN fecha_vencimiento;

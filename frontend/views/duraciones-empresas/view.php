@@ -32,12 +32,13 @@ $this->params['breadcrumbs'][] = $this->title;
             'contratista_id',
             'documento_registrado_id',
             'tiempo_prorroga',
-            'fecha_vencimiento',
+            'duracion_anos',
+            'creado_por',
+            'actualizado_por',
             'sys_status:boolean',
             'sys_creado_el',
             'sys_actualizado_el',
             'sys_finalizado_el',
-            'duracion_años',
         ],
     ]) ?>
 

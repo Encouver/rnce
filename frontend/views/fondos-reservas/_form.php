@@ -11,22 +11,23 @@ use kartik\builder\Form;
 
 <div class="fondos-reservas-form">
 
-    <?php
-
-    //$model->scenario = 'extranjero';
-    $form = ActiveForm::begin([
-        'type'=>ActiveForm::TYPE_VERTICAL]);?>
+    <?php $form = ActiveForm::begin([
+        'type'=>ActiveForm::TYPE_VERTICAL
+  ]); ?>
     
-   <?php echo Form::widget([
-        'model'=>$fondo_reserva,
-        'form'=>$form,
-        'columns'=>2,
-        //'columns'=>11,
-        'attributes'=> $fondo_reserva->getFormAttribs()
-    ]);
-    echo Html::submitButton('Enviar', ['type'=>'button', 'class'=>'btn btn-primary']);
-    ActiveForm::end();
-    ?>
+
+     <?php echo Form::widget([
+    'model'=>$model,
+    'form'=>$form,
+    'columns'=>4,
+    'attributes'=>$model->formAttribs
+      ]); ?>
+    <?= $form->field($model, 'documento_registrado_id')->hiddenInput()->label(false) ?>
+    <div class="form-group">
+        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+    </div>
+
+    <?php ActiveForm::end(); ?>
 
 
 </div>

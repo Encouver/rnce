@@ -35,10 +35,11 @@ class ActividadesEconomicasController extends Controller
     {
         $searchModel = new ActividadesEconomicasSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+        $model = new ActividadesEconomicas();
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'model'=>$model
         ]);
     }
 
@@ -63,10 +64,13 @@ class ActividadesEconomicasController extends Controller
     {
         $model = new ActividadesEconomicas();
 
-        if ($model->load(Yii::$app->request->post())) {
-            $model->contratista_id=2;
-            $model->save();
-            return $this->redirect(['view', 'id' => $model->id]);
+         if($model->existeregistro()){
+            Yii::$app->session->setFlash('error','Usuario posee actividades economicas ó debe crear un documento registrado');
+            return $this->redirect(['index']);
+                }
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+               Yii::$app->session->setFlash('success','Actividad Economica guardada con exito');
+                    return $this->redirect(['index']);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -74,62 +78,6 @@ class ActividadesEconomicasController extends Controller
         }
     }
     
-     public function actionCrearactividadacta()
-    {
-        $actividad_economica = new ActividadesEconomicas();
-        return $this->render('_actividades_economicas',['actividad_economica' => $actividad_economica]);
-    }
-    
-     public function actionActividadacta()
-   {
-
-
-        $actividad_acta = new ActividadesEconomicas();
-
-            $usuario= \common\models\p\User::findOne(Yii::$app->user->identity->id);
-        if ( $actividad_acta->load(Yii::$app->request->post())) {
-            
-             $transaction = \Yii::$app->db->beginTransaction();
-             
-           try {
-                $registro = ActivosDocumentosRegistrados::findOne(['contratista_id'=>$usuario->contratista_id, 'tipo_documento_id'=>1]);
-                
-            if($actividad_acta->ppal_caev_id==null || $actividad_acta->comp1_caev_id==null || $actividad_acta->comp2_caev_id==null){
-                 $transaction->rollBack();
-                return "Debe ingresar actividad economica"; 
-            }
-             if($actividad_acta->ppal_experiencia==null || $actividad_acta->comp1_experiencia==null || $actividad_acta->comp1_experiencia==null){
-                 $transaction->rollBack();
-                return "Debe ingresar años de experiencia"; 
-            }
-           
-            $actividad_acta->contratista_id = $usuario->contratista_id;
-            $actividad_acta->documento_registrado_id= $registro->id;
-          
-               if ($actividad_acta->save()) {
-           
-
-                               $transaction->commit();
-                               return "Datos guardados con exito";
-                               
-
-
-                   }else{
-                       
-                        $transaction->rollBack();
-                        
-                      return "Datos no guardados";
-                   }
-             
-             
-           } catch (Exception $e) {
-               $transaction->rollBack();
-           }
-        }
-        
-
-
-   }
 
     /**
      * Updates an existing ActividadesEconomicas model.
@@ -142,7 +90,8 @@ class ActividadesEconomicasController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+             Yii::$app->session->setFlash('success','Actividad Economica actualizada con exito');
+                    return $this->redirect(['index']);
         } else {
             return $this->render('update', [
                 'model' => $model,

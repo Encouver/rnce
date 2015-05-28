@@ -15,28 +15,33 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <p>
-        <?= Html::a(Yii::t('app', 'Create Objetos Sociales'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+   
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+        'summary'=>'',
+        //'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+            //['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'contratista_id',
-            'documento_registrado_id',
-            'tipo_objeto',
+            //'id',
+            
+            //'contratista_id',
+            //'documento_registrado_id',
+            //'tipo_objeto',
             'descripcion:ntext',
             // 'sys_status:boolean',
             // 'sys_creado_el',
             // 'sys_actualizado_el',
             // 'sys_finalizado_el',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn', 'template'=>'{update}{delete}'],
         ],
     ]); ?>
-
+<?php 
+    if(!$model->existeregistro()){ ?>
+       <p>
+        <?= Html::a(Yii::t('app', 'Agregar Objeto Social'), ['create'], ['class' => 'btn btn-success']) ?>
+    </p>
+    <?php } ?>
 </div>

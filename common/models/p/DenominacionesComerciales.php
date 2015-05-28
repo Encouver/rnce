@@ -100,7 +100,13 @@ class DenominacionesComerciales extends \common\components\BaseActiveRecord
     {
         return $this->hasOne(Contratistas::className(), ['id' => 'contratista_id']);
     }
-
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDocumentoRegistrado()
+    {
+        return $this->hasOne(ActivosDocumentosRegistrados::className(), ['id' => 'documento_registrado_id']);
+    }
     /**
      * @return \yii\db\ActiveQuery
      */

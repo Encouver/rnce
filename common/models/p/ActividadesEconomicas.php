@@ -4,6 +4,7 @@ namespace common\models\p;
 use kartik\builder\Form;
 use yii\helpers\ArrayHelper;
 use common\models\p\SysCaev;
+use common\models\a\ActivosDocumentosRegistrados;
 use Yii;
 
 /**
@@ -67,9 +68,9 @@ class ActividadesEconomicas extends \common\components\BaseActiveRecord
             'sys_creado_el' => Yii::t('app', 'Sys Creado El'),
             'sys_actualizado_el' => Yii::t('app', 'Sys Actualizado El'),
             'sys_finalizado_el' => Yii::t('app', 'Sys Finalizado El'),
-            'ppal_experiencia' => Yii::t('app', 'Ppal Experiencia'),
-            'comp1_experiencia' => Yii::t('app', 'Comp1 Experiencia'),
-            'comp2_experiencia' => Yii::t('app', 'Comp2 Experiencia'),
+            'ppal_experiencia' => Yii::t('app', 'Experiencia principal'),
+            'comp1_experiencia' => Yii::t('app', 'Experiencia complementaria 1'),
+            'comp2_experiencia' => Yii::t('app', 'Experiencia complementaria 2'),
             'documento_registrado_id' => Yii::t('app', 'Documento Registrado ID'),
         ];
     }
@@ -130,6 +131,25 @@ class ActividadesEconomicas extends \common\components\BaseActiveRecord
     ];
     
     
+    }
+    public function Existeregistro(){
+       $registro = ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'tipo_documento_id'=>1,'proceso_finalizado'=>false]);       
+       $registromodificacion = ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'tipo_documento_id'=>2,'proceso_finalizado'=>false]);      
+       if(isset($registro) || isset($registromodificacion)){
+           if(isset($registromodificacion)){
+               $registro=$registromodificacion;
+           }
+          $actividad= ActividadesEconomicas::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'documento_registrado_id'=>$registro->id]);
+           if(isset($actividad)){
+               
+                return true;   
+            }else{
+                $this->documento_registrado_id=$registro->id;
+                return false;
+            }
+        }else{
+            return true;
+        }
     }
 	
 }

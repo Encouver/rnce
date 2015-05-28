@@ -5,12 +5,12 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\p\DuracionesEmpresas;
+use common\models\p\RazonesSociales;
 
 /**
- * DuracionesEmpresasSearch represents the model behind the search form about `common\models\p\DuracionesEmpresas`.
+ * RazonesSocialesSearch represents the model behind the search form about `common\models\p\RazonesSociales`.
  */
-class DuracionesEmpresasSearch extends DuracionesEmpresas
+class RazonesSocialesSearch extends RazonesSociales
 {
     /**
      * @inheritdoc
@@ -18,9 +18,9 @@ class DuracionesEmpresasSearch extends DuracionesEmpresas
     public function rules()
     {
         return [
-            [['id', 'contratista_id', 'documento_registrado_id', 'tiempo_prorroga', 'duracion_anos', 'creado_por', 'actualizado_por'], 'integer'],
+            [['id', 'contratista_id', 'creado_por', 'actualizado_por', 'documento_registrado_id'], 'integer'],
+            [['nombre', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['sys_status'], 'boolean'],
-            [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
         ];
     }
 
@@ -42,7 +42,7 @@ class DuracionesEmpresasSearch extends DuracionesEmpresas
      */
     public function search($params)
     {
-        $query = DuracionesEmpresas::find();
+        $query = RazonesSociales::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -59,16 +59,16 @@ class DuracionesEmpresasSearch extends DuracionesEmpresas
         $query->andFilterWhere([
             'id' => $this->id,
             'contratista_id' => $this->contratista_id,
-            'documento_registrado_id' => $this->documento_registrado_id,
-            'tiempo_prorroga' => $this->tiempo_prorroga,
-            'duracion_anos' => $this->duracion_anos,
             'creado_por' => $this->creado_por,
             'actualizado_por' => $this->actualizado_por,
             'sys_status' => $this->sys_status,
             'sys_creado_el' => $this->sys_creado_el,
             'sys_actualizado_el' => $this->sys_actualizado_el,
             'sys_finalizado_el' => $this->sys_finalizado_el,
+            'documento_registrado_id' => $this->documento_registrado_id,
         ]);
+
+        $query->andFilterWhere(['like', 'nombre', $this->nombre]);
 
         return $dataProvider;
     }

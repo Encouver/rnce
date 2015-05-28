@@ -2,6 +2,7 @@
 
 namespace common\models\p;
 use kartik\builder\Form;
+use common\models\a\ActivosDocumentosRegistrados;
 use Yii;
 
 /**
@@ -92,5 +93,20 @@ class FondosReservas extends \common\components\BaseActiveRecord
                 'porcentaje'=>['type'=>Form::INPUT_TEXT,'label'=>'Porcentaje'],
             ];
         
+    }
+     public function Existeregistro(){
+       $registro = ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'tipo_documento_id'=>1,'proceso_finalizado'=>false]);       
+       $registromodificacion = ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'tipo_documento_id'=>2,'proceso_finalizado'=>false]);      
+       if(isset($registro) || isset($registromodificacion)){
+           if(isset($registromodificacion)){
+               $registro=$registromodificacion;
+           }
+          
+                $this->documento_registrado_id=$registro->id;
+                return false;
+           
+        }else{
+            return true;
+        }
     }
 }

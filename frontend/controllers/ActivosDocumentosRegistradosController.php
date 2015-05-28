@@ -10,6 +10,7 @@ use yii\db\Query;
 use yii\helpers\Html;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use common\models\p\RazonesSociales;
 
 /**
  * ActivosDocumentosRegistradosController implements the CRUD actions for ActivosDocumentosRegistrados model.
@@ -131,6 +132,14 @@ class ActivosDocumentosRegistradosController extends BaseController
                 }
                     $model->proceso_finalizado=false;
                     if($model->save()){
+                        if($model->tipo_documento_id==1){
+                             $razon= new RazonesSociales();
+                            if(!$razon->Existeregistro()){
+                            $razon->nombre=$razon->asignarnombre();
+                            }
+                        }
+                       
+                        
                     Yii::$app->session->setFlash('success','Documento registrado con exito');
                      return $this->redirect(['index']);
                     }else{

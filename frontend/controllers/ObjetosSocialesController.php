@@ -35,10 +35,11 @@ class ObjetosSocialesController extends Controller
     {
         $searchModel = new ObjetosSocialesSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+        $model = new ObjetosSociales();
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'model'=> $model,
         ]);
     }
 
@@ -63,13 +64,13 @@ class ObjetosSocialesController extends Controller
     {
         $model = new ObjetosSociales();
 
-        if ($model->load(Yii::$app->request->post())) {
-            
-            $model->contratista_id= 2;
-            $model->documento_registrado_id=1;
-            $model->tipo_objeto= "PRINCIPAL";
-            $model->save();
-            return $this->redirect(['view', 'id' => $model->id]);
+        if($model->existeregistro()){
+            Yii::$app->session->setFlash('error','Usuario posee objeto social ó debe crear un documento registrado');
+            return $this->redirect(['index']);
+                }
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+               Yii::$app->session->setFlash('success','Objeto Social guardado con exito');
+                    return $this->redirect(['index']);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -142,7 +143,8 @@ class ObjetosSocialesController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+             Yii::$app->session->setFlash('success','Objeto Social actualizado con exito');
+                    return $this->redirect(['index']);
         } else {
             return $this->render('update', [
                 'model' => $model,

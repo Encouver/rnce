@@ -61,25 +61,18 @@ class FondosReservasController extends BaseController
      */
     public function actionCreate()
     {
-        $fondo_reserva = new FondosReservas();
+        $model = new FondosReservas();
 
-        if ($fondo_reserva->load(Yii::$app->request->post())) {
-            
-            $usuario= \common\models\p\User::findOne(Yii::$app->user->identity->id);
-                    $registro = ActivosDocumentosRegistrados::findOne(['contratista_id'=>$usuario->contratista_id, 'tipo_documento_id'=>1]);
-                    $fondo_reserva->contratista_id=$usuario->contratista_id;
-                    $fondo_reserva->documento_registrado_id=$registro->id;
-                    if($fondo_reserva->save()){
-                         return $this->redirect(['view', 'id' => $fondo_reserva->id]);
-                    }else{
-                       return $this->render('create', [
-                        'fondo_reserva' => $fondo_reserva,
-                        ]); 
-                    }
-           
+       if($model->existeregistro()){
+            Yii::$app->session->setFlash('error','Debe existir un acta constitutiva o una modificacion');
+            return $this->redirect(['index']);
+                }
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+               Yii::$app->session->setFlash('success','Fondo reserva guardado con exito');
+                    return $this->redirect(['index']);
         } else {
             return $this->render('create', [
-                'fondo_reserva' => $fondo_reserva,
+                'model' => $model,
             ]);
         }
     }
@@ -92,23 +85,14 @@ class FondosReservasController extends BaseController
      */
     public function actionUpdate($id)
     {
-        $fondo_reserva = $this->findModel($id);
+        $model = $this->findModel($id);
 
-        if ($fondo_reserva->load(Yii::$app->request->post()) && $fondo_reserva->save()) {
-            $usuario= \common\models\p\User::findOne(Yii::$app->user->identity->id);
-                    $registro = ActivosDocumentosRegistrados::findOne(['contratista_id'=>$usuario->contratista_id, 'tipo_documento_id'=>1]);
-                    $fondo_reserva->contratista_id=$usuario->contratista_id;
-                    $fondo_reserva->documento_registrado_id=$registro->id;
-                    if($fondo_reserva->save()){
-                         return $this->redirect(['view', 'id' => $fondo_reserva->id]);
-                    }else{
-                       return $this->render('update', [
-                'fondo_reserva' => $fondo_reserva,
-            ]);
-                    }
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+             Yii::$app->session->setFlash('success','Fondo reserva actualizado con exito');
+                    return $this->redirect(['index']);
         } else {
             return $this->render('update', [
-                'fondo_reserva' => $fondo_reserva,
+                'model' => $model,
             ]);
         }
     }

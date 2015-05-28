@@ -3,39 +3,38 @@
 namespace frontend\controllers;
 
 use Yii;
-use common\models\p\CierresEjercicios;
-use common\models\a\ActivosDocumentosRegistrados;
-use app\models\CierresEjerciciosSearch;
-use yii\web\Controller;
+use common\models\p\RazonesSociales;
+use app\models\RazonesSocialesSearch;
+use common\components\BaseController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * CierresEjerciciosController implements the CRUD actions for CierresEjercicios model.
+ * RazonesSocialesController implements the CRUD actions for RazonesSociales model.
  */
-class CierresEjerciciosController extends Controller
+class RazonesSocialesController extends BaseController
 {
     public function behaviors()
     {
-        return array_merge(parent::behaviors(),[
+        return [
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['post'],
                 ],
             ],
-        ]);
+        ];
     }
 
     /**
-     * Lists all CierresEjercicios models.
+     * Lists all RazonesSociales models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new CierresEjerciciosSearch();
+        $searchModel = new RazonesSocialesSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        $model= new CierresEjercicios();
+        $model = new RazonesSociales();
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -44,7 +43,7 @@ class CierresEjerciciosController extends Controller
     }
 
     /**
-     * Displays a single CierresEjercicios model.
+     * Displays a single RazonesSociales model.
      * @param integer $id
      * @return mixed
      */
@@ -56,20 +55,19 @@ class CierresEjerciciosController extends Controller
     }
 
     /**
-     * Creates a new CierresEjercicios model.
+     * Creates a new RazonesSociales model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new CierresEjercicios();
-
-         if($model->existeregistro()){
+        $model = new RazonesSociales();
+        if($model->existeregistro()){
             Yii::$app->session->setFlash('error','Usuario posee una razon social ó debe crear un documento registrado');
             return $this->redirect(['index']);
                 }
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-               Yii::$app->session->setFlash('success','Cierre Ejercicio guardado con exito');
+               Yii::$app->session->setFlash('success','Razon Social guardada con exito');
                     return $this->redirect(['index']);
         } else {
             return $this->render('create', [
@@ -77,8 +75,9 @@ class CierresEjerciciosController extends Controller
             ]);
         }
     }
+
     /**
-     * Updates an existing CierresEjercicios model.
+     * Updates an existing RazonesSociales model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -88,7 +87,7 @@ class CierresEjerciciosController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-           Yii::$app->session->setFlash('success','Cierre Ejercicio actualizado con exito');
+            Yii::$app->session->setFlash('success','Razon Social guardada con exito');
                     return $this->redirect(['index']);
         } else {
             return $this->render('update', [
@@ -98,7 +97,7 @@ class CierresEjerciciosController extends Controller
     }
 
     /**
-     * Deletes an existing CierresEjercicios model.
+     * Deletes an existing RazonesSociales model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -111,15 +110,15 @@ class CierresEjerciciosController extends Controller
     }
 
     /**
-     * Finds the CierresEjercicios model based on its primary key value.
+     * Finds the RazonesSociales model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return CierresEjercicios the loaded model
+     * @return RazonesSociales the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = CierresEjercicios::findOne($id)) !== null) {
+        if (($model = RazonesSociales::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

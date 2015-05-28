@@ -2,7 +2,6 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-
 /* @var $this yii\web\View */
 /* @var $model common\models\p\DuracionesEmpresas */
 /* @var $form yii\widgets\ActiveForm */
@@ -11,24 +10,8 @@ use yii\widgets\ActiveForm;
 <div class="duraciones-empresas-form">
 
     <?php $form = ActiveForm::begin(); ?>
-
-    <?= $form->field($model, 'contratista_id')->textInput() ?>
-
-    <?= $form->field($model, 'documento_registrado_id')->textInput() ?>
-
-    <?= $form->field($model, 'tiempo_prorroga')->textInput() ?>
-
-    <?= $form->field($model, 'fecha_vencimiento')->textInput() ?>
-
-    <?= $form->field($model, 'sys_status')->checkbox() ?>
-
-    <?= $form->field($model, 'sys_creado_el')->textInput() ?>
-
-    <?= $form->field($model, 'sys_actualizado_el')->textInput() ?>
-
-    <?= $form->field($model, 'sys_finalizado_el')->textInput() ?>
-
-    <?= $form->field($model, 'duracion_años')->textInput() ?>
+    <?= $form->field($model, 'duracion_anos')->textInput()?>
+    <?= $form->field($model, 'documento_registrado_id')->hiddenInput()->label(false) ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
