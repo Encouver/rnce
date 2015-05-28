@@ -15,31 +15,50 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <p>
-        <?= Html::a(Yii::t('app', 'Create Actividades Economicas'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+        'summary'=>'',
+        //'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+            //['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'ppal_caev_id',
-            'comp1_caev_id',
-            'comp2_caev_id',
-            'contratista_id',
+            //'id',
+            [
+                'attribute'=>'ppalcaev_id',
+                'label'=>'Actividad Principal',
+                'value'=>'ppalCaev.denominacion'
+            ],
+            
+            'ppal_experiencia',
+             [
+                'attribute'=>'comp1_caev_id',
+                'label'=>'Actividad Complementaria 1',
+                'value'=>'comp1Caev.denominacion'
+            ],
+            'comp1_experiencia',
+            [
+                'attribute'=>'comp2_caev_id',
+                'label'=>'Actividad Complementaria 2',
+                'value'=>'comp2Caev.denominacion'
+            ],
+            'comp2_experiencia',
+            //'contratista_id',
             // 'sys_status:boolean',
             // 'sys_creado_el',
             // 'sys_actualizado_el',
             // 'sys_finalizado_el',
-            // 'ppal_experiencia',
-            // 'comp1_experiencia',
-            // 'comp2_experiencia',
+            //
+            // 
+            // 
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn','template'=>'{update}{delete}'],
         ],
     ]); ?>
+     <?php 
+    if(!$model->existeregistro()){ ?>
+       <p>
+        <?= Html::a(Yii::t('app', 'Agregar Actividades Economicas'), ['create'], ['class' => 'btn btn-success']) ?>
+    </p>
+    <?php } ?>
 
 </div>

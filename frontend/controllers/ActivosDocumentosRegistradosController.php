@@ -10,6 +10,7 @@ use yii\db\Query;
 use yii\helpers\Html;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use common\models\p\RazonesSociales;
 
 /**
  * ActivosDocumentosRegistradosController implements the CRUD actions for ActivosDocumentosRegistrados model.
@@ -55,9 +56,6 @@ class ActivosDocumentosRegistradosController extends BaseController
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $model= new ActivosDocumentosRegistrados();
         $model->scenario='actas';
-        $model->sys_tipo_registro_id=1;
-        $model->tipo_documento_id=1;
-
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -123,41 +121,31 @@ class ActivosDocumentosRegistradosController extends BaseController
     public function actionCreate()
     {
         $model = new ActivosDocumentosRegistrados();
-
+         if($model->existeregistro()){
+            Yii::$app->session->setFlash('error','Usuario posee una documento registrado en proceso');
+            return $this->redirect(['index']);
+        }
         if ($model->load(Yii::$app->request->post()) ) {
-            //
-            if($model->tipo_documento_id==1){
-                 if($model->existe()){
-                    Yii::$app->session->setFlash('error','Ya existe documento registrado');
-                     return $this->redirect(['index']);
-
-                    
-                }else{
+                 if($model->existeregistro()){
+                    Yii::$app->session->setFlash('error','Usuario posee una documento registrado en proceso');
+                    return $this->redirect(['index']);
+                }
                     $model->proceso_finalizado=false;
                     if($model->save()){
+                        if($model->tipo_documento_id==1){
+                             $razon= new RazonesSociales();
+                            if(!$razon->Existeregistro()){
+                            $razon->nombre=$razon->asignarnombre();
+                            }
+                        }
+                       
+                        
                     Yii::$app->session->setFlash('success','Documento registrado con exito');
                      return $this->redirect(['index']);
-                    }
-                    
-                }
-            }else{
-                $model->sys_tipo_registro_id = 2;
-            }
-            if($model->save()){
-                return 1;
-            }
-            else
-            {
-                 if($model->tipo_documento_id==1){
-                    if($model->existe()){
-                    Yii::$app->session->setFlash('error','Ya existe documento registrado');
+                    }else{
+                    Yii::$app->session->setFlash('error','Error en la carga del documento');
                      return $this->redirect(['index']);
-
-                    
-                            }
-                    }else return 0;
-            }
-            //return $this->redirect(['view', 'id' => $model->id]);
+                        }
         } else {
             return $this->renderAjax('create', [
                 'model' => $model,
@@ -175,7 +163,7 @@ class ActivosDocumentosRegistradosController extends BaseController
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        if($model->tipo_documento_id==1){
+        if($model->tipo_documento_id==1 ||$model->tipo_documento_id==2){
             $model->scenario='actas';
         }
 

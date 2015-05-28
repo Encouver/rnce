@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use yii\jui\DatePicker;
+use kartik\date\DatePicker;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\p\CierresEjercicios */
@@ -13,11 +13,18 @@ use yii\jui\DatePicker;
 
     <?php $form = ActiveForm::begin(); ?>
 
-     <?= $form->field($model, 'fecha_cierre')->widget(\yii\jui\DatePicker::classname(), [
-    //'language' => 'ru',
-    'dateFormat' => 'yyyy-MM',
-    ])  ?>
-
+       <?= $form->field($model, 'fecha_cierre')->widget(
+                                DatePicker::className(), [
+                             // inline too, not bad
+                            //'inline' => false,
+                            // modify template for custom rendering
+                            //'template' => '<div class="well well-sm" style="background-color: #fff; width:250px">{input}</div>',
+                            'pluginOptions' => [
+                            'autoclose' => true,
+                            'format' => 'yyyy-mm'
+                                ]
+                                ]);?>
+    <?= $form->field($model, 'documento_registrado_id')->hiddenInput()->label(false) ?>
 
   
     <div class="form-group">

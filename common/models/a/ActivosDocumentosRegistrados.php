@@ -382,15 +382,23 @@ class ActivosDocumentosRegistrados extends \common\components\BaseActiveRecord
     public function Etiqueta(){
         return $this->sysTipoRegistro->nombre.' - '.$this->num_registro_notaria;
     }
-    public function Existe(){
-        $documentos= ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'tipo_documento_id'=>$this->tipo_documento_id,'sys_tipo_registro_id'=>$this->sys_tipo_registro_id]);
-        
-        if(isset($documentos)){
-        return true;   
+    public function Existeregistro(){
+       $registro = ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'tipo_documento_id'=>1,'proceso_finalizado'=>false]);       
+       $registromodificacion = ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'tipo_documento_id'=>2,'proceso_finalizado'=>false]);      
+       if(isset($registro) || isset($registromodificacion)){
+           return true;
         }else{
-            false;
+            $registro = ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'tipo_documento_id'=>1,'proceso_finalizado'=>true]); 
+            $this->sys_tipo_registro_id=1;
+            if(isset($registro)){
+                $this->tipo_documento_id=2;     
+           }else{
+               $this->tipo_documento_id=1;
+           }
+           return false;
         }
     }
+    
 
 
 }

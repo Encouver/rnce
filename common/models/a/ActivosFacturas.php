@@ -226,6 +226,6 @@ class ActivosFacturas extends \common\components\BaseActiveRecord
     }
 
     public function Etiqueta(){
-        return $this->num_factura;
+        return $this->proveedor->etiqueta().' - Num: '.$this->num_factura;
     }
 }

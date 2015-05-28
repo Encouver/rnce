@@ -1,7 +1,8 @@
 <?php
 
 namespace common\models\p;
-
+use kartik\builder\Form;
+use common\models\a\ActivosDocumentosRegistrados;
 use Yii;
 
 /**
@@ -35,11 +36,16 @@ class PrincipiosContables extends \common\components\BaseActiveRecord
     {
         return [
             [['principio_contable', 'contratista_id'], 'required'],
-            [['principio_contable'], 'string'],
+            [['principio_contable'], 'string', 'max' => 100],
             [['contratista_id'], 'integer'],
             [['sys_status'], 'boolean'],
             [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
-            [['codigo_sudeaseg'], 'string', 'max' => 255]
+            [['codigo_sudeaseg'], 'string', 'max' => 255],
+            [['codigo_sudeaseg'], 'required', 'when' => function ($model) {
+                return ($model->principio_contable == "EMPRESA DE SEGUROS");
+            }, 'whenClient' => "function (attribute, value) {
+                return $('#principioscontables-principio_contable').val() == 'EMPRESA DE SEGUROS';
+            }"],
         ];
     }
 
@@ -66,5 +72,26 @@ class PrincipiosContables extends \common\components\BaseActiveRecord
     public function getContratista()
     {
         return $this->hasOne(Contratistas::className(), ['id' => 'contratista_id']);
+    }
+    public function getFormAttribs() {
+
+
+        return [
+        'principio_contable'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>[ 'PYME' => 'PYME','GRAN ENTIDAD' => 'GRAN ENTIDAD', 'EMPRESA DE SEGUROS' => 'EMPRESA DE SEGUROS', ],'options'=>['prompt'=>'Seleccione principio contable']],
+        'codigo_sudeaseg'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'codigo sudeaseg']],
+         ];
+       
+    
+    
+
+    }
+    public function Existeregistro(){
+       $principio = PrincipiosContables::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id]);       
+       if(isset($principio)){
+           return true;
+        }else{
+           
+           return false;
+        }
     }
 }

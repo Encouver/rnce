@@ -130,7 +130,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'vAlign'=>'middle',
                     'value'=>function ($model, $key, $index, $widget) {
                         if(isset($model->factura))
-                        return Html::a($model->factura->num_factura, ['activos-facturas/view','id'=>$model->factura->id], [
+                        return Html::a($model->factura->etiqueta(), ['activos-facturas/view','id'=>$model->factura_id], [
                             'title'=>'Ver detalles de la factura',
                             //'onclick'=>'alert("This will open the author page.\n\nDisabled for this demo!")'
                         ]);
@@ -148,8 +148,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     //'header'=>'Banco',
                     'vAlign'=>'middle',
                     'value'=>function ($model, $key, $index, $widget) {
-                        if(isset($model->documentoRegistrado))
-                            return Html::a($model->documentoRegistrado->etiqueta(), ['activos-documentos-registrados/view','id'=>$model->documentoRegistrado->id], [
+                        if(isset($model->documento_registrado_id))
+                            return Html::a($model->documentoRegistrado->etiqueta(), ['activos-documentos-registrados/view','id'=>$model->documento_registrado_id], [
                                 'title'=>'Ver detalles del documento registrado',
                                 //'onclick'=>'alert("This will open the author page.\n\nDisabled for this demo!")'
                             ]);

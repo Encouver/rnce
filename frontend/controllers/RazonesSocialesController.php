@@ -3,38 +3,38 @@
 namespace frontend\controllers;
 
 use Yii;
-use common\models\p\PrincipiosContables;
-use app\models\PrincipiosContablesSearch;
-use yii\web\Controller;
+use common\models\p\RazonesSociales;
+use app\models\RazonesSocialesSearch;
+use common\components\BaseController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * PrincipiosContablesController implements the CRUD actions for PrincipiosContables model.
+ * RazonesSocialesController implements the CRUD actions for RazonesSociales model.
  */
-class PrincipiosContablesController extends Controller
+class RazonesSocialesController extends BaseController
 {
     public function behaviors()
     {
-        return array_merge(parent::behaviors(),[
+        return [
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['post'],
                 ],
             ],
-        ]);
+        ];
     }
 
     /**
-     * Lists all PrincipiosContables models.
+     * Lists all RazonesSociales models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new PrincipiosContablesSearch();
+        $searchModel = new RazonesSocialesSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        $model = new PrincipiosContables();
+        $model = new RazonesSociales();
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -43,7 +43,7 @@ class PrincipiosContablesController extends Controller
     }
 
     /**
-     * Displays a single PrincipiosContables model.
+     * Displays a single RazonesSociales model.
      * @param integer $id
      * @return mixed
      */
@@ -55,31 +55,20 @@ class PrincipiosContablesController extends Controller
     }
 
     /**
-     * Creates a new PrincipiosContables model.
+     * Creates a new RazonesSociales model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new PrincipiosContables();
+        $model = new RazonesSociales();
         if($model->existeregistro()){
-             Yii::$app->session->setFlash('error','Contratista posee un principio contable asociado');
-                 return $this->redirect(['index']);
-        }
-        if ($model->load(Yii::$app->request->post())) {
-            if($model->codigo_sudeaseg==''){
-                $model->codigo_sudeaseg=null;
-            }
-            if($model->save()){
-                Yii::$app->session->setFlash('success','Principio Contable agregado con exito');
-                 return $this->redirect(['index']);
-            }else{
-                Yii::$app->session->setFlash('error','Error en la carga');
-                return $this->render('create', [
-                'model' => $model,
-                ]);
-            }
-           
+            Yii::$app->session->setFlash('error','Usuario posee una razon social ó debe crear un documento registrado');
+            return $this->redirect(['index']);
+                }
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+               Yii::$app->session->setFlash('success','Razon Social guardada con exito');
+                    return $this->redirect(['index']);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -88,7 +77,7 @@ class PrincipiosContablesController extends Controller
     }
 
     /**
-     * Updates an existing PrincipiosContables model.
+     * Updates an existing RazonesSociales model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -97,19 +86,9 @@ class PrincipiosContablesController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post())) {
-            if($model->codigo_sudeaseg==''){
-                $model->codigo_sudeaseg=null;
-            }
-            if($model->save()){
-                Yii::$app->session->setFlash('success','Principio Contable actualizado con exito');
-                 return $this->redirect(['index']);
-            }else{
-                Yii::$app->session->setFlash('error','Error en la carga');
-                return $this->render('update', [
-                'model' => $model,
-                ]);
-            }
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->setFlash('success','Razon Social guardada con exito');
+                    return $this->redirect(['index']);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -118,7 +97,7 @@ class PrincipiosContablesController extends Controller
     }
 
     /**
-     * Deletes an existing PrincipiosContables model.
+     * Deletes an existing RazonesSociales model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -131,15 +110,15 @@ class PrincipiosContablesController extends Controller
     }
 
     /**
-     * Finds the PrincipiosContables model based on its primary key value.
+     * Finds the RazonesSociales model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return PrincipiosContables the loaded model
+     * @return RazonesSociales the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = PrincipiosContables::findOne($id)) !== null) {
+        if (($model = RazonesSociales::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

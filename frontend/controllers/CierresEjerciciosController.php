@@ -35,10 +35,11 @@ class CierresEjerciciosController extends Controller
     {
         $searchModel = new CierresEjerciciosSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+        $model= new CierresEjercicios();
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'model'=>$model
         ]);
     }
 
@@ -63,69 +64,18 @@ class CierresEjerciciosController extends Controller
     {
         $model = new CierresEjercicios();
 
-        if ($model->load(Yii::$app->request->post())) {
-            
-            $model->contratista_id=2;
-            $model->documento_registrado_id=1;
-            $model->save();
-            return $this->redirect(['view', 'id' => $model->id]);
+         if($model->existeregistro()){
+            Yii::$app->session->setFlash('error','Usuario posee una razon social ó debe crear un documento registrado');
+            return $this->redirect(['index']);
+                }
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+               Yii::$app->session->setFlash('success','Cierre Ejercicio guardado con exito');
+                    return $this->redirect(['index']);
         } else {
             return $this->render('create', [
                 'model' => $model,
             ]);
         }
-    }
-     public function actionCrearcierreacta()
-    {
-        $cierre_ejercicio = new CierresEjercicios();
-            
-          
-            return $this->render('cierres_actas', [
-                'cierre_ejercicio' => $cierre_ejercicio,
-            ]);
-        
-    }
-     public function actionCierreacta(){
-        
-        $cierre_acta = new CierresEjercicios();
-      
-        $usuario= \common\models\p\User::findOne(Yii::$app->user->identity->id);
-       
-        if ( $cierre_acta->load(Yii::$app->request->post())) {
-            
-             $transaction = \Yii::$app->db->beginTransaction();
-             
-           try {
-                $registro = ActivosDocumentosRegistrados::findOne(['contratista_id'=>$usuario->contratista_id, 'tipo_documento_id'=>1]);
-                
-            if($cierre_acta->fecha_cierre==null){
-                 $transaction->rollBack();
-                return "Debe ingresar fecha de cierre"; 
-            }
-           
-            $cierre_acta->contratista_id = $usuario->contratista_id;
-            $cierre_acta->documento_registrado_id= $registro->id;
-            
-               if ($cierre_acta->save()) {
-           
-
-                               $transaction->commit();
-                               return "Datos guardados con exito";
-                               
-
-
-                   }else{
-                        $transaction->rollBack();
-                       return "Datos no guardados";
-                   }
-             
-             
-           } catch (Exception $e) {
-               $transaction->rollBack();
-           }
-        }
-        
-        
     }
     /**
      * Updates an existing CierresEjercicios model.
@@ -138,7 +88,8 @@ class CierresEjerciciosController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+           Yii::$app->session->setFlash('success','Cierre Ejercicio actualizado con exito');
+                    return $this->redirect(['index']);
         } else {
             return $this->render('update', [
                 'model' => $model,

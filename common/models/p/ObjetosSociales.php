@@ -1,7 +1,7 @@
 <?php
 
 namespace common\models\p;
-
+use common\models\a\ActivosDocumentosRegistrados;
 use Yii;
 
 /**
@@ -85,5 +85,29 @@ class ObjetosSociales extends \common\components\BaseActiveRecord
     public function getDocumentoRegistrado()
     {
         return $this->hasOne(DocumentosRegistrados::className(), ['id' => 'documento_registrado_id']);
+    }
+    
+    public function Existeregistro(){
+       $registro = ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'tipo_documento_id'=>1,'proceso_finalizado'=>false]);       
+       $registromodificacion = ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'tipo_documento_id'=>2,'proceso_finalizado'=>false]);      
+       if(isset($registro) || isset($registromodificacion)){
+           if(isset($registromodificacion)){
+               $registro=$registromodificacion;
+             
+           }else{
+                 $this->tipo_objeto='PRINCIPAL';
+           }
+          $objeto= ObjetosSociales::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'documento_registrado_id'=>$registro->id]);
+           if(isset($objeto)){
+               
+                return true;   
+            }else{
+                
+                $this->documento_registrado_id=$registro->id;
+                return false;
+            }
+        }else{
+            return true;
+        }
     }
 }
