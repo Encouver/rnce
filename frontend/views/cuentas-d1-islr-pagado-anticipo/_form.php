@@ -32,7 +32,7 @@ use yii\helpers\Html;
 
 
     <div class="panel panel-default">
-        <div class="panel-heading"><h4><i class="glyphicon glyphicon-envelope"></i> Beneficiarios</h4></div>
+        <div class="panel-heading"><h4><i class="glyphicon "></i> Beneficiarios</h4></div>
         <div class="panel-body">
             <?php DynamicFormWidget::begin([
                 'widgetContainer' => 'dynamicform_wrapper', // required: only alphanumeric characters plus "_" [A-Za-z0-9_]
@@ -45,12 +45,11 @@ use yii\helpers\Html;
                 'model' => $modelBeneficiarios[0],
                 'formId' => 'dynamic-form',
                 'formFields' => [
-                    'full_name',
-                    'address_line1',
-                    'address_line2',
-                    'city',
-                    'state',
-                    'postal_code',
+                    //'id',
+                    'sys_naturales_juridicas_id',
+                    'nro_planilla',
+                    'periodo',
+                    'monto',
                 ],
             ]); ?>
 
@@ -125,7 +124,8 @@ use yii\helpers\Html;
 </div>
 
 <?php
-/*    $script = <<< JS
+
+ $script = <<< JS
 
             $(".dynamicform_wrapper").on("beforeInsert", function(e, item) {
                 console.log("beforeInsert");
@@ -150,6 +150,7 @@ use yii\helpers\Html;
                 alert("Limit reached");
             });
 
-        JS;
-        $this->registerJs($script);*/
+
+JS;
+$this->registerJs($script);
 ?>
