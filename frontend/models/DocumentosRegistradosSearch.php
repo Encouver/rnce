@@ -19,9 +19,9 @@ class DocumentosRegistradosSearch extends DocumentosRegistrados
     {
         return [
             [['id', 'contratista_id', 'sys_tipo_registro_id'], 'integer'],
-            [['circunscripcion', 'num_registro_notaria', 'tomo', 'folio', 'fecha_registro', 'fecha_asamblea', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
+            [['circunscripcion', 'num_registro_notaria', 'tomo', 'folio', 'fecha_registro', 'fecha_asamblea', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el','proceso_finalizado'], 'safe'],
             [['valor_adquisicion'], 'number'],
-            [['sys_status'], 'boolean'],
+            [['sys_status','proceso_finalizado'], 'boolean'],
         ];
     }
 
@@ -68,6 +68,7 @@ class DocumentosRegistradosSearch extends DocumentosRegistrados
             'sys_creado_el' => $this->sys_creado_el,
             'sys_actualizado_el' => $this->sys_actualizado_el,
             'sys_finalizado_el' => $this->sys_finalizado_el,
+            'proceso_finalizado' => $this->proceso_finalizado,
         ]);
 
         $query->andFilterWhere(['like', 'circunscripcion', $this->circunscripcion])

@@ -159,8 +159,8 @@ class DenominacionesComercialesController extends BaseController
             $model->sector="NATURAL";
               }
         }
-        if($model->existeacta()){
-            Yii::$app->session->setFlash('error','usted posee una Denominacion Comercial asociada');
+        if($model->existeregistro()){
+            Yii::$app->session->setFlash('error','No existe ningun proceso de acta constitutiva o modificacion activo');
             return $this->redirect(['index']);
         }
         if ($model->load(Yii::$app->request->post())) {
