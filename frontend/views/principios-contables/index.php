@@ -15,27 +15,30 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <p>
-        <?= Html::a(Yii::t('app', 'Create Principios Contables'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+        'summary'=>'',
+        //'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+            //['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+            //'id',
             'principio_contable',
             'codigo_sudeaseg',
-            'contratista_id',
-            'sys_status:boolean',
+            //'contratista_id',
+            //'sys_status:boolean',
             // 'sys_creado_el',
             // 'sys_actualizado_el',
             // 'sys_finalizado_el',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn','template'=>'{update}{delete}'],
         ],
     ]); ?>
+     <?php 
+    if(!$model->existeregistro()){ ?>
+       <p>
+        <?= Html::a(Yii::t('app', 'Agregar Principio Contable'), ['create'], ['class' => 'btn btn-success']) ?>
+    </p>
+    <?php } ?>
 
 </div>

@@ -34,10 +34,11 @@ class PrincipiosContablesController extends Controller
     {
         $searchModel = new PrincipiosContablesSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+        $model = new PrincipiosContables();
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'model'=>$model
         ]);
     }
 
@@ -61,12 +62,24 @@ class PrincipiosContablesController extends Controller
     public function actionCreate()
     {
         $model = new PrincipiosContables();
-
+        if($model->existeregistro()){
+             Yii::$app->session->setFlash('error','Contratista posee un principio contable asociado');
+                 return $this->redirect(['index']);
+        }
         if ($model->load(Yii::$app->request->post())) {
-            
-            $model->contratista_id=2;
-            $model->Save();
-            return $this->redirect(['view', 'id' => $model->id]);
+            if($model->codigo_sudeaseg==''){
+                $model->codigo_sudeaseg=null;
+            }
+            if($model->save()){
+                Yii::$app->session->setFlash('success','Principio Contable agregado con exito');
+                 return $this->redirect(['index']);
+            }else{
+                Yii::$app->session->setFlash('error','Error en la carga');
+                return $this->render('create', [
+                'model' => $model,
+                ]);
+            }
+           
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -84,8 +97,19 @@ class PrincipiosContablesController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            if($model->codigo_sudeaseg==''){
+                $model->codigo_sudeaseg=null;
+            }
+            if($model->save()){
+                Yii::$app->session->setFlash('success','Principio Contable actualizado con exito');
+                 return $this->redirect(['index']);
+            }else{
+                Yii::$app->session->setFlash('error','Error en la carga');
+                return $this->render('update', [
+                'model' => $model,
+                ]);
+            }
         } else {
             return $this->render('update', [
                 'model' => $model,

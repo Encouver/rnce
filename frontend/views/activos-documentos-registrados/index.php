@@ -60,7 +60,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]); ?>
 <?php 
-    if(!$model->existe()){ ?>
+    if(!$model->existeregistro()){ ?>
 
     <?php  Modal::begin([
     'options'=>['id'=>'m1_documento'],

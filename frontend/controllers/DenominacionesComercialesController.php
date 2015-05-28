@@ -4,9 +4,9 @@ namespace frontend\controllers;
 
 use Yii;
 use common\models\p\DenominacionesComerciales;
+use common\models\p\PrincipiosContables;
 use common\models\p\Contratistas;
 use common\models\p\SysNaturalesJuridicas;
-use common\models\p\User;
 use app\models\DenominacionesComercialesSearch;
 use common\components\BaseController;
 use yii\web\NotFoundHttpException;
@@ -37,10 +37,11 @@ class DenominacionesComercialesController extends BaseController
     {
         $searchModel = new DenominacionesComercialesSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+        $model= new DenominacionesComerciales();
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'model'=>$model,
         ]);
     }
 
@@ -159,17 +160,14 @@ class DenominacionesComercialesController extends BaseController
             $model->sector="NATURAL";
               }
         }
-        if($model->existeregistro()){
-            Yii::$app->session->setFlash('error','No existe ningun proceso de acta constitutiva o modificacion activo');
+            if($model->existeregistro()){
+            Yii::$app->session->setFlash('error','Usuario posee una denominacion comercial ó debe crear un documento registrado');
             return $this->redirect(['index']);
-        }
+                }
+        
         if ($model->load(Yii::$app->request->post())) {
-            $model->documento_registrado_id=$model->registroacta()->id;
-            if($model->existe()){
-
-                 Yii::$app->session->setFlash('error','Usuario posee Denominacion Comercial');
-                return $this->redirect(['index']);
-            }else{
+      
+           
 
                 if($model->tipo_subdenominacion==''){
                     $model->tipo_subdenominacion=null;
@@ -183,8 +181,8 @@ class DenominacionesComercialesController extends BaseController
                 if($model->cooperativa_distribuicion==''){
                     $model->cooperativa_distribuicion=null;
                 }
-            
-
+             
+                $model->asignarprincipio();
                 if($model->save()){
                     Yii::$app->session->setFlash('success','Denominacion Comercial guardada con exito');
                     return $this->redirect(['index']);
@@ -194,7 +192,7 @@ class DenominacionesComercialesController extends BaseController
                     'model' => $model,
                 ]);
                 }
-            }
+            
            
         } else {
             return $this->render('create', [
@@ -225,6 +223,7 @@ class DenominacionesComercialesController extends BaseController
         $model->codigo_situr='';
         $model->cooperativa_distribuicion='';
         $model->cooperativa_capital='';
+        
         if ($model->load(Yii::$app->request->post())) {
             if($model->tipo_subdenominacion==''){
                     $model->tipo_subdenominacion=null;
@@ -238,7 +237,7 @@ class DenominacionesComercialesController extends BaseController
                 if($model->cooperativa_distribuicion==''){
                     $model->cooperativa_distribuicion=null;
                 }
-            
+                 $model->asignarprincipio();
 
                 if($model->save()){
                     Yii::$app->session->setFlash('success','Denominacion Comercial Actualizada con exito');

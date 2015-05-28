@@ -13,3 +13,13 @@ ALTER TABLE activos.documentos_registrados ADD COLUMN proceso_finalizado boolean
 ALTER TABLE activos.documentos_registrados ALTER COLUMN proceso_finalizado SET NOT NULL;
 ALTER TABLE activos.documentos_registrados ALTER COLUMN proceso_finalizado SET DEFAULT true;
 COMMENT ON COLUMN activos.documentos_registrados.proceso_finalizado IS 'Junto a tipo_documento_id me indica si es un acta o una modificacion';
+
+
+
+----27 mayo 10:30 pm--
+
+ALTER TABLE principios_contables DROP COLUMN principio_contable;
+
+ALTER TABLE principios_contables ADD COLUMN principio_contable character varying(100);
+ALTER TABLE principios_contables ALTER COLUMN principio_contable SET NOT NULL;
+COMMENT ON COLUMN principios_contables.principio_contable IS 'Nombre del principio contable aplicable';

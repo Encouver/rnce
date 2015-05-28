@@ -99,7 +99,7 @@ AppAsset::register($this);
                          ['label' => 'Sucursales', 'url' => ['/sucursales/index']],
                         ['label' => 'Persona de contacto', 'url' => ['/contratistas-contactos/index']],
                          ['label' => 'Objeto empresa', 'url' => ['/objetos-empresas/index']],
-                        
+                        ['label' => 'Principio contable', 'url' => ['/principios-contables/index']],
                        /*  ['label' => 'Responsable Contabilidad', 'url' => ['/comisarios-auditores/crearresponsable']],
                          ['label' => 'Contador Auditor', 'url' => ['/comisarios-auditores/crearcontador']],
                          ['label' => 'Profesional Informe de conversion', 'url' => ['/comisarios-auditores/crearprofesional']],*/

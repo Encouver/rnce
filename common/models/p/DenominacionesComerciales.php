@@ -8,6 +8,7 @@ use kartik\widgets\Select2;
 use yii\web\JsExpression;
 use yii\helpers\Url;
 use common\models\a\ActivosDocumentosRegistrados;
+use common\models\p\PrincipiosContables;
 use Yii;
 
 /**
@@ -160,7 +161,7 @@ class DenominacionesComerciales extends \common\components\BaseActiveRecord
     }
      public function Existeregistro(){
        $registro = ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'tipo_documento_id'=>1,'proceso_finalizado'=>false]);       
-       $registromodificacion = ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'tipo_documento_id'=>12,'proceso_finalizado'=>false]);      
+       $registromodificacion = ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'tipo_documento_id'=>2,'proceso_finalizado'=>false]);      
        if(isset($registro) || isset($registromodificacion)){
            if(isset($registromodificacion)){
                $registro=$registromodificacion;
@@ -171,10 +172,48 @@ class DenominacionesComerciales extends \common\components\BaseActiveRecord
                 return true;   
             }else{
                 $this->documento_registrado_id=$registro->id;
-                false;
+                return false;
             }
         }else{
-            false;
+            return true;
         }
+    }
+    public function Asignarprincipio(){
+        $principio_contable= PrincipiosContables::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id]);
+         if(!isset($principio_contable)){
+             $principio_contable= new PrincipiosContables();
+         }     
+         
+           if($this->tipo_denominacion=='PERSONA NATURAL'){
+                    $principio_contable->principio_contable='PN';
+                     $principio_contable->codigo_sudeaseg=null;
+             }else{
+                  if($this->tipo_denominacion=='FIRMA PERSONAL'){
+                    $principio_contable->principio_contable='FP';
+                    $principio_contable->codigo_sudeaseg=null;
+                }else{
+                     if($this->tipo_denominacion=='COMANDITA' || $this->tipo_denominacion=='SOCIEDAD DE RESPONSABILIDAD LIMITADA' || $this->tipo_denominacion=='COMPAÑIA NOMBRE COLECTIVO' || $this->tipo_denominacion=='FUNDACION' || $this->tipo_denominacion=='ASOCIACION CIVIL' || $this->tipo_denominacion=='SOCIEDAD CIVIL'  || ($this->tipo_denominacion=='COOPERATIVA' && $this->cooperativa_distribuicion=="UTILIDADES")){
+                    $principio_contable->principio_contable='PYME';
+                    $principio_contable->codigo_sudeaseg=null;
+                    }else{
+                        if($this->tipo_denominacion=='ORGANIZACION SOCIOPRODUCTIVA'){
+                             $principio_contable->principio_contable='OSP';
+                             $principio_contable->codigo_sudeaseg=null;
+                        }else{
+                            if($this->tipo_denominacion=='COOPERATIVA' && $this->cooperativa_distribuicion=="EXCEDENTES"){
+                             $principio_contable->principio_contable='COOP';
+                             $principio_contable->codigo_sudeaseg=null;
+                                 }
+                        }
+                    }
+                }
+             }
+             if($principio_contable->save()){
+                 return true;
+             }else{
+                 return false;
+             }
+            
+       
     }
 }

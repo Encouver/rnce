@@ -46,7 +46,10 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\ActionColumn', 'template'=>'{update}{delete}'],
         ],
     ]); ?>
+    <?php 
+    if(!$model->existeregistro()){ ?>
        <p>
         <?= Html::a(Yii::t('app', 'Crear Denominacion Comercial'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
+    <?php } ?>
 </div>
