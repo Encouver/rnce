@@ -30,6 +30,7 @@ use yii\helpers\ArrayHelper;
  * @property string $sys_creado_el
  * @property string $sys_actualizado_el
  * @property string $sys_finalizado_el
+ * @property string $proceso_finalizado
  *
  * @property ActivosBienes[] $activosBienes
  * @property ActivosSysTiposDocumentos $tipoDocumento
@@ -83,9 +84,9 @@ class ActivosDocumentosRegistrados extends \common\components\BaseActiveRecord
             [['contratista_id', 'sys_tipo_registro_id', 'num_registro_notaria', 'tomo', 'folio', 'fecha_registro', 'sys_circunscripcion_id'], 'required', 'on'=>'bien-notaria'],
             [['contratista_id', 'sys_tipo_registro_id', 'num_registro_notaria', 'tomo', 'folio', 'fecha_registro', 'sys_circunscripcion_id'], 'required', 'on'=>'acta_constitutiva'],
             [['contratista_id', 'sys_tipo_registro_id', 'sys_circunscripcion_id', 'tipo_documento_id', 'creado_por', 'actualizado_por'], 'integer'],
-            [['fecha_registro', 'fecha_asamblea', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
+            [['fecha_registro', 'fecha_asamblea', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el','proceso_finalizado'], 'safe'],
             [['valor_adquisicion'], 'number'],
-            [['sys_status'], 'boolean'],
+            [['sys_status','proceso_finalizado'], 'boolean'],
             [['num_registro_notaria'], 'string', 'max' => 255],
             [['tomo', 'folio'], 'string', 'max' => 100]
         ];
@@ -114,6 +115,7 @@ class ActivosDocumentosRegistrados extends \common\components\BaseActiveRecord
             'sys_creado_el' => Yii::t('app', 'Sys Creado El'),
             'sys_actualizado_el' => Yii::t('app', 'Sys Actualizado El'),
             'sys_finalizado_el' => Yii::t('app', 'Sys Finalizado El'),
+            'proceso_finalizado' => Yii::t('app', 'Proceso Finalizado'),
         ];
     }
     public function scenarios()

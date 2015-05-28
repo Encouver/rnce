@@ -133,6 +133,7 @@ class ActivosDocumentosRegistradosController extends BaseController
 
                     
                 }else{
+                    $model->proceso_finalizado=false;
                     if($model->save()){
                     Yii::$app->session->setFlash('success','Documento registrado con exito');
                      return $this->redirect(['index']);

@@ -43,7 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'sys_finalizado_el',
             
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn', 'template'=>'{update}{delete}'],
         ],
     ]); ?>
        <p>

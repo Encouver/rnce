@@ -85,12 +85,32 @@ class ActivosBienes extends \common\components\BaseActiveRecord
     {
         return [
 
-            [['sys_tipo_bien_id', 'contratista_id', 'origen_id', 'detalle'], 'required'],
+            [['sys_tipo_bien_id', 'contratista_id', 'origen_id', 'detalle', 'metodo_medicion_id','propio' ], 'required'],
             [['sys_tipo_bien_id', 'contratista_id', 'origen_id', 'creado_por', 'actualizado_por', 'factura_id', 'documento_registrado_id', 'arrendamiento_id', 'desincorporacion_id', 'metodo_medicion_id'], 'integer'],
             [['arrendamiento_id'], 'required', 'when'=> function ($model) {
                 return !$model->propio;
                     }, 'whenClient' => "function (attribute, value) {
-                return !$('#propio').is(':checked');
+                return !$('#activosbienes-propio').is(':checked');
+            }"],
+            [['proc_ventas'], 'required', 'when'=> function ($model) {
+                return !$model->proc_productivo;
+            }, 'whenClient' => "function (attribute, value) {
+                return !$('#activosbienes-proc_productivo').is(':checked');
+            }"],
+            [['directo'], 'required', 'when'=> function ($model) {
+                return $model->proc_productivo;
+            }, 'whenClient' => "function (attribute, value) {
+                return $('#activosbienes-proc_productivo').is(':checked');
+            }"],
+            [['factura_id'], 'required', 'message'=>'Al menos la factura es requerida si no introduce documento.', 'when'=> function ($model) {
+                return $model->documento_registrado_id == null or $model->documento_registrado_id == 0;
+            }, 'whenClient' => "function (attribute, value) {
+                return $('#activosbienes-documento_registrado_id').val() == 0;
+            }"],
+            [['documento_registrado_id'],  'required', 'message'=>'Al menos el documento registrado es requerido si no introduce factura.','when'=> function ($model) {
+                return $model->factura_id == null or $model->factura_id == 0;
+            }, 'whenClient' => "function (attribute, value) {
+                 return $('#activosbienes-factura_id').val() == 0;
             }"],
             [['fecha_origen', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['propio', 'nacional', 'carga_completa', 'sys_status','documento','factura', 'mejora', 'perdida_reverso', 'proc_productivo', 'directo', 'proc_ventas'], 'boolean'],
@@ -352,10 +372,10 @@ class ActivosBienes extends \common\components\BaseActiveRecord
             //'depreciable'=>['type'=>Form::INPUT_CHECKBOX,],
             //'deterioro'=>['type'=>Form::INPUT_CHECKBOX,],
             'detalle'=>['type'=>Form::INPUT_TEXT,],
-            'origen_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(ActivosSysOrigenesBienes::find()->asArray()->all(),'id','nombre'),'options'=>['id'=>'origen','onchange'=>'js:']]],
+            'origen_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(ActivosSysOrigenesBienes::find()->asArray()->all(),'id','nombre'),'options'=>['id'=>'origen','onchange'=>'']]],
 
              'factura_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>[//'data'=>ArrayHelper::map(PersonasJuridicas::find()->all(),'id',function($model){return $model->etiqueta(); }),
-                 'options'=>['id'=>'factura','placeholder'=>'Seleccionar factura', 'onchange'=>'js:'],'pluginOptions' => [
+                 'options'=>['id'=>'factura','placeholder'=>'Seleccionar factura', 'onchange'=>''],'pluginOptions' => [
                      'allowClear' => true,
                      'minimumInputLength' => 1,
                      'ajax' => [
@@ -369,7 +389,7 @@ class ActivosBienes extends \common\components\BaseActiveRecord
                  ],]],
 
              'documento_registrado_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>[//'data'=>ArrayHelper::map(PersonasJuridicas::find()->all(),'id',function($model){return $model->etiqueta(); }),
-                 'options'=>['id'=>'documento-registrado','placeholder'=>'Seleccionar documento registrado', 'onchange'=>'js:'],'pluginOptions' => [
+                 'options'=>['id'=>'documento-registrado','placeholder'=>'Seleccionar documento registrado', 'onchange'=>''],'pluginOptions' => [
                      'allowClear' => true,
                      'minimumInputLength' => 1,
                      'ajax' => [
@@ -385,16 +405,16 @@ class ActivosBienes extends \common\components\BaseActiveRecord
             //'factura'=>['type'=>Form::INPUT_WIDGET, 'widgetClass'=>CheckboxX::className()],
              //'documento'=>['type'=>Form::INPUT_WIDGET, 'widgetClass'=>CheckboxX::className()],
 
-             'metodo_medicion_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(ActivosSysMetodosMedicion::find()->all(),'id','nombre',function($model){ return $model->modelo->nombre;}), 'pluginOptions'=>['allowClear' => true],'options'=>['id'=>'metodo-medicion','placeholder'=>'Seleccionar método de medición', 'onchange'=>'js:']]],
+             'metodo_medicion_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(ActivosSysMetodosMedicion::find()->all(),'id','nombre',function($model){ return $model->modelo->nombre;}), 'pluginOptions'=>['allowClear' => true],'options'=>['id'=>'metodo-medicion','placeholder'=>'Seleccionar método de medición', 'onchange'=>'']]],
              // Mejora
-             'mejora'=>['type'=>Form::INPUT_WIDGET, 'widgetClass'=>CheckboxX::className()],
+             'mejora'=>['type'=>Form::INPUT_CHECKBOX,'columnOptions'=>['hidden'=>false,],'options'=>['onchange'=>'']],//['type'=>Form::INPUT_WIDGET, 'widgetClass'=>CheckboxX::className()],
              'perdida_reverso'=>['type'=>Form::INPUT_WIDGET, 'widgetClass'=>CheckboxX::className()],
 
-             'proc_productivo'=>['type'=>Form::INPUT_WIDGET, 'widgetClass'=>CheckboxX::className()],
+             'proc_productivo'=>['type'=>Form::INPUT_CHECKBOX,'columnOptions'=>['hidden'=>false,]], //['type'=>Form::INPUT_WIDGET, 'widgetClass'=>CheckboxX::className()],
              // Si proc_productivo es true
              'directo'=>['type'=>Form::INPUT_CHECKBOX,'columnOptions'=>['hidden'=>true,]],
              // Si proceso productivo es false.
-             'proc_ventas'=>['type'=>Form::INPUT_WIDGET, 'widgetClass'=>CheckboxX::className()],
+             'proc_ventas'=>['type'=>Form::INPUT_CHECKBOX,'columnOptions'=>['hidden'=>false,]], //['type'=>Form::INPUT_WIDGET, 'widgetClass'=>CheckboxX::className()],
 
 
             //'principio_contable_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(ActivosSysFormasOrg::find()->asArray()->all(),'id','nombre')]],

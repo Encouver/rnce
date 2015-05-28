@@ -148,29 +148,31 @@ class DenominacionesComerciales extends \common\components\BaseActiveRecord
            
          'cooperativa_capital'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>[ 'SUPLEMENTARIO' => 'SUPLEMENTARIO', 'LIMITADO' => 'LIMITADO', ],'options'=>['prompt'=>'Seleccione denominacion']],
          'cooperativa_distribuicion'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>[ 'UTILIDADES' => 'UTILIDADES', 'EXCEDENTES' => 'EXCEDENTES', ],'options'=>['prompt'=>'Seleccione denominacion']],     
-         
+         'documento_registrado_id'=>[ // primary key attribute
+                'type'=>Form::INPUT_HIDDEN,
+                'columnOptions'=>['hidden'=>true]
+                ],
          ];
        
     
     
 
     }
-    public function Existeacta(){
-        $actaconstitutiva= ActasConstitutivas::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id]);       
-        if(isset($actaconstitutiva)){
-        return true;   
-        }else{
-            false;
-        }
-    }
-    public function Registroacta(){
-         $registro = ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'tipo_documento_id'=>1]);
-        return $registro;   
-    }
-    public function Existe(){
-        $denominacion= DenominacionesComerciales::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'documento_registrado_id'=>$this->documento_registrado_id]);
-        if(isset($denominacion)){
-        return true;   
+     public function Existeregistro(){
+       $registro = ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'tipo_documento_id'=>1,'proceso_finalizado'=>false]);       
+       $registromodificacion = ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'tipo_documento_id'=>12,'proceso_finalizado'=>false]);      
+       if(isset($registro) || isset($registromodificacion)){
+           if(isset($registromodificacion)){
+               $registro=$registromodificacion;
+           }
+          $denominacion= DenominacionesComerciales::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'documento_registrado_id'=>$registro->id]);
+           if(isset($denominacion)){
+               
+                return true;   
+            }else{
+                $this->documento_registrado_id=$registro->id;
+                false;
+            }
         }else{
             false;
         }
