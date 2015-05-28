@@ -86,10 +86,10 @@ $persona = empty($model->natural_juridica_id) ? '' : \common\models\p\SysNatural
     ],
 ]);?>
      <?php echo Form::widget([
-    'model'=>$relacion_contrato,
-    'form'=>$form,
-    'columns'=>2,
-    'attributes'=>$relacion_contrato->formAttribs
+        'model'=>$relacion_contrato,
+        'form'=>$form,
+        'columns'=>2,
+        'attributes'=>$relacion_contrato->formAttribs
       ]); ?>
     
   

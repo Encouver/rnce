@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use yii\jui\DatePicker
+use yii\jui\DatePicker;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\p\RelacionesContratos */

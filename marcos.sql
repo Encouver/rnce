@@ -33,3 +33,21 @@ ALTER TABLE activos.vehiculos RENAME anho  TO anho_vehiculo;
 COMMENT ON COLUMN activos.vehiculos.anho_vehiculo
 IS 'Año del vehiculo.';
 COMMENT ON COLUMN activos.vehiculos.anho_vehiculo IS 'Año del vehiculo.';
+
+
+/**************     28/05/2015 *************/
+
+COMMENT ON COLUMN activos.desincorporacion_activos.sys_motivo_id
+IS 'Clave foranea a la tabla sys_motivos.';
+COMMENT ON COLUMN activos.desincorporacion_activos.fecha
+IS 'Fecha de la desincorporación.';
+COMMENT ON COLUMN activos.desincorporacion_activos.precio_venta
+IS 'Precio de venta.';
+ALTER TABLE activos.desincorporacion_activos
+ALTER COLUMN valor_neto_libro TYPE numeric(38,6);
+COMMENT ON COLUMN activos.desincorporacion_activos.valor_neto_libro
+IS 'Valor neto según libro.';
+COMMENT ON COLUMN activos.desincorporacion_activos.sys_motivo_id IS 'Clave foranea a la tabla sys_motivos.';
+COMMENT ON COLUMN activos.desincorporacion_activos.fecha IS 'Fecha de la desincorporación.';
+COMMENT ON COLUMN activos.desincorporacion_activos.precio_venta IS 'Precio de venta.';
+COMMENT ON COLUMN activos.desincorporacion_activos.valor_neto_libro IS 'Valor neto según libro.';

@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use common\models\c\CuentasD1D2Beneficiario;
 use Yii;
 use common\models\c\CuentasD1IslrPagadoAnticipo;
 use app\models\CuentasD1IslrPagadoAnticipoSearch;
@@ -61,12 +62,13 @@ class CuentasD1IslrPagadoAnticipoController extends BaseController
     public function actionCreate()
     {
         $model = new CuentasD1IslrPagadoAnticipo();
+        $modelBeneficiarios = [new CuentasD1D2Beneficiario()];
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
-                'model' => $model,
+                'model' => $model, 'modelBeneficiarios'=>$modelBeneficiarios
             ]);
         }
     }

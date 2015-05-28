@@ -7,6 +7,7 @@ use kartik\money\MaskMoney;
 use kartik\widgets\Select2;
 use Yii;
 use yii\helpers\ArrayHelper;
+use yii\web\JsExpression;
 
 /**
  * This is the model class for table "cuentas.d1_d2_beneficiario".
