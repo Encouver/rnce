@@ -84,7 +84,7 @@ class ActivosBienes extends \common\components\BaseActiveRecord
         return [
 
             [['sys_tipo_bien_id', 'contratista_id', 'origen_id', 'detalle', 'metodo_medicion_id','propio' ], 'required'],
-            [['sys_tipo_bien_id', 'contratista_id', 'origen_id', 'creado_por', 'actualizado_por', 'factura_id', 'documento_registrado_id', 'arrendamiento_id', 'desincorporacion_id', 'metodo_medicion_id'], 'integer'],
+            [['id','sys_tipo_bien_id', 'contratista_id', 'origen_id', 'creado_por', 'actualizado_por', 'factura_id', 'documento_registrado_id', 'arrendamiento_id', 'desincorporacion_id', 'metodo_medicion_id'], 'integer'],
             [['arrendamiento_id'], 'required', 'when'=> function ($model) {
                 return !$model->propio;
                     }, 'whenClient' => "function (attribute, value) {
@@ -445,6 +445,26 @@ class ActivosBienes extends \common\components\BaseActiveRecord
             $attributes['nacional'] = ['type'=>Form::INPUT_CHECKBOX,'columnOptions'=>['hidden'=>true,],'options'=>['onchange'=>'']];
 
         return $attributes;
+    }
+
+    public function getBienesContratista(){
+        // returns all inactive customers
+     /*   $sql = 'SELECT * FROM activos.bienes WHERE desincoporacion_id=null';
+        //$customers = Customer::findBySql($sql, [':status' => Customer::STATUS_INACTIVE])->all();
+         $this->findBySql($sql)->all(); //findAll(['contratista_id'=>Yii::$app->user->identity->contratista_id,'desincoporacion_id'=>null]);*/
+
+        return $this->find()->where(['and',['contratista_id'=>Yii::$app->user->identity->contratista_id],['is','desincorporacion_id',null]])->all();
+    }
+
+    public function getBienesContratistaDesincorporados(){
+        //return $this->findAll(['contratista_id'=>Yii::$app->user->identity->contratista_id,'desincoporacion_id'=>null]);
+
+        /*$sql = 'SELECT * FROM activos.bienes WHERE desincoporacion_id>0';
+        //$customers = Customer::findBySql($sql, [':status' => Customer::STATUS_INACTIVE])->all();
+        return $this->findBySql($sql)->all(); //findAll(['contratista_id'=>Yii::$app->user->identity->contratista_id,'desincoporacion_id'=>null]);
+        */
+
+        return $this->find()->where(['and',['contratista_id'=>Yii::$app->user->identity->contratista_id],['is not','desincorporacion_id',null]])->all();
     }
 
     public function getBienTipo()

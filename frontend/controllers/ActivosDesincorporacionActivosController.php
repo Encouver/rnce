@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use common\models\a\ActivosBienes;
 use Yii;
 use common\models\a\ActivosDesincorporacionActivos;
 use app\models\ActivosDesincorporacionActivosSearch;
@@ -61,12 +62,31 @@ class ActivosDesincorporacionActivosController extends BaseController
     public function actionCreate()
     {
         $model = new ActivosDesincorporacionActivos();
+        $modelBien = new ActivosBienes();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && $modelBien->load(Yii::$app->request->post())) {
+            $transaction = \Yii::$app->db->beginTransaction();
+            try {
+                if (($modelBien = ActivosBienes::findOne($modelBien->id)) !== null) {
+                    if ($model->save()) {
+                        $modelBien->desincorporacion_id = $model->id;
+                        if($modelBien->save())
+                        {
+                            $transaction->commit();
+                        }
+                    }
+                } else {
+                    throw new NotFoundHttpException('The requested page does not exist.');
+                }
+
+                $transaction->rollBack();
+            }catch (Exception $e) {
+                $transaction->rollBack();
+            }
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
-                'model' => $model,
+                'model' => $model, 'modelBien'=>$modelBien
             ]);
         }
     }
