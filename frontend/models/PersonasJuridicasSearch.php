@@ -18,8 +18,8 @@ class PersonasJuridicasSearch extends PersonasJuridicas
     public function rules()
     {
         return [
-            [['id', 'creado_por'], 'integer'],
-            [['rif', 'razon_social', 'numero_identificacion', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el', 'tipo_nacionalidad'], 'safe'],
+            [['id', 'creado_por','sys_pais_id'], 'integer'],
+            [['rif', 'razon_social', 'numero_identificacion', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el', 'tipo_nacionalidad','sys_pais_id'], 'safe'],
             [['sys_status'], 'boolean'],
         ];
     }
@@ -63,6 +63,7 @@ class PersonasJuridicasSearch extends PersonasJuridicas
             'sys_creado_el' => $this->sys_creado_el,
             'sys_actualizado_el' => $this->sys_actualizado_el,
             'sys_finalizado_el' => $this->sys_finalizado_el,
+            'sys_pais_id' => $this->sys_pais_id,
         ]);
 
         $query->andFilterWhere(['like', 'rif', $this->rif])

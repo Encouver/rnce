@@ -21,7 +21,7 @@ use kartik\builder\Form;
     'model'=>$persona_juridica,
     'form'=>$form,
     'columns'=>2,
-    'attributes'=>$persona_juridica->getFormAttribs("conbasico")
+    'attributes'=>$persona_juridica->getFormAttribs()
       ]); 
     
    echo Html::submitButton('Enviar', ['type'=>'button', 'class'=>'btn btn-primary']);

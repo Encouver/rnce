@@ -6,6 +6,8 @@ use Yii;
 use common\models\p\AccionistasOtros;
 use app\models\AccionistasOtrosSearch;
 use common\models\a\ActivosDocumentosRegistrados;
+use common\models\p\PersonasNaturales;
+use common\models\p\PersonasJuridicas;
 use common\components\BaseController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -62,11 +64,14 @@ class AccionistasOtrosController extends BaseController
     public function actionCreate()
     {
         $model = new AccionistasOtros();
-
+        $modelPersona= new PersonasNaturales(['scenario'=>'basico']);
+        $modelJuridica= new PersonasJuridicas();
+        
+       if($model->existeregistro()){
+            Yii::$app->session->setFlash('error','Debe existir un acta constitutiva o una modificacion');
+            return $this->redirect(['index']);
+                }
         if ($model->load(Yii::$app->request->post())) {
-            $registro = ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id, 'tipo_documento_id'=>1]);
-            $model->documento_registrado_id=$registro->id;
-            $model->contratista_id = Yii::$app->user->identity->contratista_id;
             if($model->tipo_cargo==""){
                 $model->tipo_cargo=null;
             }
@@ -74,6 +79,8 @@ class AccionistasOtrosController extends BaseController
                   Yii::$app->session->setFlash('error','Debe ingresar si es contratista, representante legal o junta directiva');
                  return $this->render('create', [
                 'model' => $model,
+                'modelPersona'=>$modelPersona,
+                'modelJuridica'=>$modelJuridica,
             ]);
             }
             if($model->save()){
@@ -83,12 +90,16 @@ class AccionistasOtrosController extends BaseController
                 Yii::$app->session->setFlash('error','Error en la carga');
                  return $this->render('create', [
                 'model' => $model,
+                'modelPersona'=>$modelPersona,
+                'modelJuridica'=>$modelJuridica,
             ]);
             }
           
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'modelPersona'=>$modelPersona,
+                'modelJuridica'=>$modelJuridica,
             ]);
         }
     }
@@ -105,15 +116,18 @@ class AccionistasOtrosController extends BaseController
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
+        $modelPersona= new PersonasNaturales(['scenario'=>'basico']);
+        $modelJuridica= new PersonasJuridicas();
         if ($model->load(Yii::$app->request->post())) {
              if($model->tipo_cargo==""){
                 $model->tipo_cargo=null;
             }
             if($model->accionista==0 && $model->junta_directiva==0 && $model->rep_legal==0){
                   Yii::$app->session->setFlash('error','Debe ingresar si es contratista, representante legal o junta directiva');
-                 return $this->render('create', [
+                 return $this->render('update', [
                 'model' => $model,
+                'modelPersona'=>$modelPersona,
+                'modelJuridica'=>$modelJuridica,
             ]);
             }
             if($model->save()){
@@ -122,12 +136,16 @@ class AccionistasOtrosController extends BaseController
                 Yii::$app->session->setFlash('error','Error en la carga');
                  return $this->render('update', [
                 'model' => $model,
+                'modelPersona'=>$modelPersona,
+                'modelJuridica'=>$modelJuridica,
             ]);
             }
            
         } else {
             return $this->render('update', [
                 'model' => $model,
+                'modelPersona'=>$modelPersona,
+                'modelJuridica'=>$modelJuridica,
             ]);
         }
     }

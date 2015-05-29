@@ -5,12 +5,12 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\p\SysNaturalesJuridicas;
+use common\models\p\ContratosFacturas;
 
 /**
- * SysNaturalesJuridicasSearch represents the model behind the search form about `common\models\p\SysNaturalesJuridicas`.
+ * ContratosFacturasSearch represents the model behind the search form about `common\models\p\ContratosFacturas`.
  */
-class SysNaturalesJuridicasSearch extends SysNaturalesJuridicas
+class ContratosFacturasSearch extends ContratosFacturas
 {
     /**
      * @inheritdoc
@@ -18,9 +18,10 @@ class SysNaturalesJuridicasSearch extends SysNaturalesJuridicas
     public function rules()
     {
         return [
-            [['id', 'creado_por', 'actualizado_por'], 'integer'],
-            [['rif', 'denominacion', 'anho', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el','nacional'], 'safe'],
-            [['juridica', 'sys_status','nacional'], 'boolean'],
+            [['id', 'relacion_contrato_id', 'orden_factura', 'creado_por', 'actualizado_por'], 'integer'],
+            [['monto'], 'number'],
+            [['sys_status'], 'boolean'],
+            [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
         ];
     }
 
@@ -42,7 +43,7 @@ class SysNaturalesJuridicasSearch extends SysNaturalesJuridicas
      */
     public function search($params)
     {
-        $query = SysNaturalesJuridicas::find();
+        $query = ContratosFacturas::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -58,19 +59,16 @@ class SysNaturalesJuridicasSearch extends SysNaturalesJuridicas
 
         $query->andFilterWhere([
             'id' => $this->id,
-            'juridica' => $this->juridica,
+            'relacion_contrato_id' => $this->relacion_contrato_id,
+            'orden_factura' => $this->orden_factura,
+            'monto' => $this->monto,
             'creado_por' => $this->creado_por,
             'actualizado_por' => $this->actualizado_por,
             'sys_status' => $this->sys_status,
             'sys_creado_el' => $this->sys_creado_el,
             'sys_actualizado_el' => $this->sys_actualizado_el,
             'sys_finalizado_el' => $this->sys_finalizado_el,
-            'nacional'=>$this->nacional,
         ]);
-
-        $query->andFilterWhere(['like', 'rif', $this->rif])
-            ->andFilterWhere(['like', 'denominacion', $this->denominacion])
-            ->andFilterWhere(['like', 'anho', $this->anho]);
 
         return $dataProvider;
     }

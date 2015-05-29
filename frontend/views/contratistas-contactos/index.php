@@ -22,12 +22,17 @@ $this->params['breadcrumbs'][] = $this->title;
         'summary'=>'',
        // 'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+           // ['class' => 'yii\grid\SerialColumn'],
             
             [
                 'attribute'=>'contacto_id',
                 'label'=>'Nombre y Apellido',
                 'value'=>'contacto.denominacion'
+            ],
+            [
+                'attribute'=>'contacto_id',
+                'label'=>'Numero identificacion',
+                'value'=>'contacto.rif'
             ],
             //'id',
             //'contacto_id',
@@ -40,8 +45,11 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\ActionColumn','template'=>'{delete}'],
         ],
     ]); ?>
-     <p>
-        <?= Html::a(Yii::t('app', 'Agregar persona de contacto'), ['create'], ['class' => 'btn btn-success']) ?>
+    <?php 
+    if(!$searchModel->existeregistro()){ ?>
+       <p>
+        <?= Html::a(Yii::t('app', 'Agregar Persona de contacto'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
+    <?php } ?>
 
 </div>

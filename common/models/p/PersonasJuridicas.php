@@ -2,6 +2,8 @@
 
 namespace common\models\p;
 use kartik\builder\Form;
+use common\models\p\SysPaises;
+use yii\helpers\ArrayHelper;
 use Yii;
 
 /**
@@ -17,6 +19,7 @@ use Yii;
  * @property string $sys_actualizado_el
  * @property string $sys_finalizado_el
  * @property string $tipo_nacionalidad
+* @property string $sys_pais_id
  *
  * @property ObjetosAutorizaciones[] $objetosAutorizaciones
  * @property EmpresasRelacionadas[] $empresasRelacionadas
@@ -41,7 +44,7 @@ class PersonasJuridicas extends \common\components\BaseActiveRecord
     public function rules()
     {
         return [
-            [['creado_por','razon_social'], 'required'],
+            [['razon_social','tipo_nacionalidad'], 'required'],
             [['creado_por'], 'integer'],
             [['sys_status'], 'boolean'],
             [['anho','sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
@@ -51,7 +54,17 @@ class PersonasJuridicas extends \common\components\BaseActiveRecord
             [['sigla'], 'string', 'max' => 50],
             [['tipo_sector','sigla','rif'],'required','on'=>'conbasico'],
             [['razon_social', 'numero_identificacion'], 'string', 'max' => 255],
-            [['rif'], 'unique']
+            [['rif'], 'unique'],
+            [['rif'], 'required', 'when' => function ($model) {
+                return $model->tipo_nacionalidad == "NACIONAL";
+            }, 'whenClient' => "function (attribute, value) {
+                return $('#personasjuridicas-tipo_nacionalidad').val() == 'NACIONAL';
+            }"],
+            [['sys_pais_id','numero_identificacion'], 'required', 'when' => function ($model) {
+                return $model->tipo_nacionalidad == "EXTRANJERA";
+            }, 'whenClient' => "function (attribute, value) {
+                return $('#personasjuridicas-tipo_nacionalidad').val() == 'EXTRANJERA';
+            }"],
         ];
     }
 
@@ -73,6 +86,7 @@ class PersonasJuridicas extends \common\components\BaseActiveRecord
             'tipo_nacionalidad' => Yii::t('app', 'Tipo Nacionalidad'),
             'sigla' => Yii::t('app', 'Sigla'),
             'tipo_sector' => Yii::t('app', 'Tipo sector'),
+            'sys_pais_id'=>Yii::t('app', 'Pais'),
         ];
     }
 
@@ -107,10 +121,17 @@ class PersonasJuridicas extends \common\components\BaseActiveRecord
     {
         return $this->hasMany(PolizasContratadas::className(), ['aseguradora_id' => 'id']);
     }
+     /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getSysPais()
+    {
+        return $this->hasOne(SysPaises::className(), ['id' => 'sys_pais_id']);
+    }
     
-    public function getFormAttribs($id) {
+    public function getFormAttribs() {
         //$data=[ 'NACIONAL' => 'NACIONAL', 'EXTRANJERA' => 'EXTRANJERA', ];
-    if($id=="conbasico"){
+    if($this->scenario=="conbasico"){
          return [
         //'tipo_nacionalidad'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>$data , 'options'=>['placeholder'=>'Enter username...']],
         
@@ -119,24 +140,18 @@ class PersonasJuridicas extends \common\components\BaseActiveRecord
         'tipo_sector'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>[ 'PUBLICO' => 'PUBLICO', 'PRIVADO' => 'PRIVADO', 'MIXTO' => 'MIXTO' ],'options'=>['prompt'=>'Seleccione tipo']],
         'sigla'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Introduzca sigla']],
     ];
-    }
-    if($id=="posextranjero"){
-        $data=[ 'NACIONAL' => 'NACIONAL', 'EXTRANJERA' => 'EXTRANJERA', ];
+    }else{
+    
+        $nacionalidad=[ 'NACIONAL' => 'NACIONAL', 'EXTRANJERA' => 'EXTRANJERA', ];
          return [             
-        'tipo_nacionalidad'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>$data , 'options'=>['placeholder'=>'Enter username...']],
-        'numero_identificacion'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Introduzca rif']],
+        'tipo_nacionalidad'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>$nacionalidad,'options'=>['prompt'=>'Seleccione Pais']],
+        'sys_pais_id'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>ArrayHelper::map(SysPaises::find()->all(),'id','nombre'),'options'=>['prompt'=>'Seleccione Pais']],
+         'numero_identificacion'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Introduzca numero identificacion']],
         'razon_social'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Introduzca razon social']],
+        'rif'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Introduzca rif'],'hint'=>'Formato V123456789'],
     ];
     }
        
-    }
-    public function getFormAttribsnacional() {
-      
-    return [
-        'rif'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'introduza su rif']],
-        'razon_social'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Enter username...']],
-       
-    ];
     }
     public function Etiqueta(){
         return $this->rif." - ".$this->razon_social;

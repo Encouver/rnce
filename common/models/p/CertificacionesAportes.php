@@ -2,6 +2,10 @@
 
 namespace common\models\p;
 use kartik\builder\Form;
+use kartik\widgets\Select2;
+use yii\web\JsExpression;
+use common\models\a\ActivosDocumentosRegistrados;
+use common\models\p\SysNaturalesJuridicas;
 use Yii;
 
 /**
@@ -48,7 +52,12 @@ class CertificacionesAportes extends \common\components\BaseActiveRecord
             [['tipo_profesion'], 'string'],
             [['fecha_informe', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['sys_status'], 'boolean'],
-            [['colegiatura'], 'string', 'max' => 255]
+            [['colegiatura'], 'string', 'max' => 255],
+            [['colegiatura'], 'required', 'when' => function ($model) {
+                return $model->tipo_profesion == "CONTADOR PUBLICO";
+            }, 'whenClient' => "function (attribute, value) {
+                return $('#certificacionesaportes-tipo_profesion').val() == 'CONTADOR PUBLICO';
+            }"],
         ];
     }
 
@@ -97,7 +106,13 @@ class CertificacionesAportes extends \common\components\BaseActiveRecord
     {
         return $this->hasOne(Contratistas::className(), ['id' => 'contratista_id']);
     }
-
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getNaturalJuridica()
+    {
+        return $this->hasOne(SysNaturalesJuridicas::className(), ['id' => 'natural_juridica_id']);
+    }
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -116,12 +131,26 @@ class CertificacionesAportes extends \common\components\BaseActiveRecord
     
      public function getFormAttribs() {
       
-        
-       
+    
+    $persona = empty($this->natural_juridica_id) ? '' : SysNaturalesJuridicas::findOne($this->natural_juridica_id)->denominacion;
     $profesiones =[ 'CONTADOR PUBLICO' => 'CONTADOR PUBLICO', 'ADMINISTRADOR' => 'ADMINISTRADOR', 'ECONOMISTA' => 'ECONOMISTA', ];
     return [
-          'tipo_profesion'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>$profesiones , 'options'=>['prompt'=>'Seleccione profesion']],
-         'colegiatura'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Numero de colegiatura']],
+        'natural_juridica_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>[
+                'initValueText' => $persona,
+                'options'=>['placeholder' => 'Buscar persona ...'],'pluginOptions' => [
+                'allowClear' => true,
+                'minimumInputLength' => 3,
+                'ajax' => [
+                    'url' => \yii\helpers\Url::to(['sys-naturales-juridicas/naturales-juridicas-lista']),
+                    'dataType' => 'json',
+                    'data' => new JsExpression('function(params) { return {q:params.term,juridica:false}; }')
+                ],
+                'escapeMarkup' => new JsExpression('function (markup) { return markup; }'),
+                'templateResult' => new JsExpression('function(natural_juridica_id) { return natural_juridica_id.text; }'),
+                'templateSelection' => new JsExpression('function (natural_juridica_id) { return natural_juridica_id.text; }'),
+            ],]],
+         'tipo_profesion'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>$profesiones , 'options'=>['prompt'=>'Seleccione profesion']],
+         'colegiatura'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Numero de colegiatura'],'hint'=>'Solo contador publico'],
        
         'fecha_informe'=>[
             'type'=>Form::INPUT_WIDGET, 
@@ -130,10 +159,32 @@ class CertificacionesAportes extends \common\components\BaseActiveRecord
                     'autoclose'=>true,
                     'format' => 'yyyy-mm-dd'
                 ]],
-        ],
+            ],
+        'documento_registrado_id'=>['type'=>Form::INPUT_HIDDEN],
+
     ];
     
     
     
+    }
+    
+     public function Existeregistro(){
+       $registro = ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'tipo_documento_id'=>1,'proceso_finalizado'=>false]);       
+       $registromodificacion = ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'tipo_documento_id'=>2,'proceso_finalizado'=>false]);      
+       if(isset($registro) || isset($registromodificacion)){
+           if(isset($registromodificacion)){
+               $registro=$registromodificacion;
+           }
+          $certificacion= CertificacionesAportes::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'documento_registrado_id'=>$registro->id]);
+           if(isset($certificacion)){
+               
+                return true;   
+            }else{
+                $this->documento_registrado_id=$registro->id;
+                return false;
+            }
+        }else{
+            return true;
+        }
     }
 }

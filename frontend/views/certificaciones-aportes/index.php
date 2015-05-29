@@ -15,20 +15,21 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <p>
-        <?= Html::a(Yii::t('app', 'Create Certificaciones Aportes'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+        'summary'=>'',
+        //'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+            //['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-    
-            'colegiatura',
+            //'id',
+            [
+                'attribute'=>'natural_juridica_id',
+                'label'=>'Nombre',
+                'value'=>'naturalJuridica.denominacion'
+            ],
             'tipo_profesion',
+            'colegiatura',
             'fecha_informe',
             // 'creado_por',
             // 'actualizado_por',
@@ -39,8 +40,14 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'documento_registrado_id',
             // 'contratista_id',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn','template'=>'{update}{delete}'],
         ],
     ]); ?>
+    <?php 
+    if(!$model->existeregistro()){ ?>
+       <p>
+        <?= Html::a(Yii::t('app', 'Agregar Certificacion de aportes'), ['create'], ['class' => 'btn btn-success']) ?>
+    </p>
+    <?php } ?>
 
 </div>

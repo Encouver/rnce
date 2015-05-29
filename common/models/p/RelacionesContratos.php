@@ -3,6 +3,9 @@
 namespace common\models\p;
 use kartik\builder\Form;
 use yii\helpers\Url;
+use common\models\p\SysNaturalesJuridicas;
+use kartik\widgets\Select2;
+use yii\web\JsExpression;
 use Yii;
 
 /**
@@ -118,9 +121,25 @@ class RelacionesContratos extends \common\components\BaseActiveRecord
         
       $sector= [ 'PUBLICO' => 'PUBLICO', 'PRIVADO' => 'PRIVADO', ];
      $contrato= [ 'OBRAS' => 'OBRAS', 'SERVICIOS' => 'SERVICIOS', 'BIENES' => 'BIENES', ];
+     $persona = empty($this->natural_juridica_id) ? '' : SysNaturalesJuridicas::findOne($this->natural_juridica_id)->denominacion;
     return [
+           'natural_juridica_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>[
+                'initValueText' => $persona,
+                'options'=>['placeholder' => 'Buscar persona ...'],'pluginOptions' => [
+                'allowClear' => true,
+                'minimumInputLength' => 3,
+                'ajax' => [
+                    'url' => \yii\helpers\Url::to(['sys-naturales-juridicas/naturales-juridicas-lista']),
+                    'dataType' => 'json',
+                    'data' => new JsExpression('function(params) { return {q:params.term,juridica:true}; }')
+                ],
+                'escapeMarkup' => new JsExpression('function (markup) { return markup; }'),
+                'templateResult' => new JsExpression('function(natural_juridica_id) { return natural_juridica_id.text; }'),
+                'templateSelection' => new JsExpression('function (natural_juridica_id) { return natural_juridica_id.text; }'),
+            ],]],
           'tipo_sector'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>$sector , 'options'=>['prompt'=>'Seleccione el sector']],
-          'tipo_contrato'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>$contrato , 'options'=>['prompt'=>'Seleccione el tipo de contrato', 'onchange'=>'
+          'tipo_contrato'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>$contrato , 'options'=>['prompt'=>'Seleccione el tipo de contrato']],
+          /*'tipo_contrato'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>$contrato , 'options'=>['prompt'=>'Seleccione el tipo de contrato', 'onchange'=>'
                        
             if($(this).val()!=""){
              $.get( "'.Url::toRoute('/relaciones-contratos/tiposector').'", { id: $(this).val() } )
@@ -128,7 +147,7 @@ class RelacionesContratos extends \common\components\BaseActiveRecord
                                 $( "#output" ).html( data );
                             }
                         );
-            }']],
+            }']],*/
 
         'nombre_proyecto'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Nombre del proyecto']],
         'monto_contrato'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Monto contrato']],

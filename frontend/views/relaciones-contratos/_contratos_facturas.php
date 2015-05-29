@@ -8,14 +8,10 @@ use wbraganca\dynamicform\DynamicFormWidget;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="contratos-facturas-form">
 
-    <?php $form = ActiveForm::begin([
-        'id' => "c_facturas",
-  
 
-]); ?>
-    <div id="output6"></div>
+
+    
     
    
              <?php DynamicFormWidget::begin([
@@ -65,8 +61,6 @@ use wbraganca\dynamicform\DynamicFormWidget;
             <?php DynamicFormWidget::end(); ?>
       
    
-    <?php ActiveForm::end(); ?>
 
-</div>
 
 
