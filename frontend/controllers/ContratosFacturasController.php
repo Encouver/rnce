@@ -3,38 +3,36 @@
 namespace frontend\controllers;
 
 use Yii;
-use common\models\p\ContratistasContactos;
-use common\models\p\PersonasNaturales;
-use common\models\p\SysNaturalesJuridicas;
-use app\models\ContratistasContactosSearch;
-use yii\web\Controller;
+use common\models\p\ContratosFacturas;
+use app\models\ContratosFacturasSearch;
+use common\components\BaseController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * ContratistasContactosController implements the CRUD actions for ContratistasContactos model.
+ * ContratosFacturasController implements the CRUD actions for ContratosFacturas model.
  */
-class ContratistasContactosController extends Controller
+class ContratosFacturasController extends BaseController
 {
     public function behaviors()
     {
-        return array_merge(parent::behaviors(),[
+        return [
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['post'],
                 ],
             ],
-        ]);
+        ];
     }
 
     /**
-     * Lists all ContratistasContactos models.
+     * Lists all ContratosFacturas models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new ContratistasContactosSearch();
+        $searchModel = new ContratosFacturasSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -44,7 +42,7 @@ class ContratistasContactosController extends Controller
     }
 
     /**
-     * Displays a single ContratistasContactos model.
+     * Displays a single ContratosFacturas model.
      * @param integer $id
      * @return mixed
      */
@@ -56,29 +54,25 @@ class ContratistasContactosController extends Controller
     }
 
     /**
-     * Creates a new ContratistasContactos model.
+     * Creates a new ContratosFacturas model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new ContratistasContactos();
-         if($model->existeregistro()){
-            Yii::$app->session->setFlash('error','Contratista ya posee una persona de contacto');
-            return $this->redirect(['index']);
-                }
+        $model = new ContratosFacturas();
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-         
-                return $this->redirect(['index']);
-           
+            return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
             ]);
         }
     }
+
     /**
-     * Updates an existing ContratistasContactos model.
+     * Updates an existing ContratosFacturas model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -97,7 +91,7 @@ class ContratistasContactosController extends Controller
     }
 
     /**
-     * Deletes an existing ContratistasContactos model.
+     * Deletes an existing ContratosFacturas model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -110,15 +104,15 @@ class ContratistasContactosController extends Controller
     }
 
     /**
-     * Finds the ContratistasContactos model based on its primary key value.
+     * Finds the ContratosFacturas model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return ContratistasContactos the loaded model
+     * @return ContratosFacturas the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = ContratistasContactos::findOne($id)) !== null) {
+        if (($model = ContratosFacturas::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

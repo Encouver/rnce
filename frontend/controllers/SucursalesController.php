@@ -64,13 +64,15 @@ class SucursalesController extends BaseController
     {
         $model = new Sucursales();
         $direccion = new Direcciones();
-
+        if($model->existeregistro()){
+            Yii::$app->session->setFlash('error','Debe existir un acta constitutiva o una modificacion');
+            return $this->redirect(['index']);
+                }
         if ($model->load(Yii::$app->request->post()) && $direccion->load(Yii::$app->request->post())) {
             $transaction = \Yii::$app->db->beginTransaction();
            try {
                 $flag =false;
            if ($direccion->save()) {
-               $model->contratista_id=Yii::$app->user->identity->contratista_id;
                $model->direccion_id=$direccion->id;
                if($model->save()){
                     $transaction->commit();
@@ -116,6 +118,7 @@ class SucursalesController extends BaseController
     {
         $model = $this->findModel($id);
         $direccion = Direcciones::findOne($model->direccion_id);
+         
         if ($model->load(Yii::$app->request->post()) && $direccion->load(Yii::$app->request->post())) {
             $transaction = \Yii::$app->db->beginTransaction();
            try {

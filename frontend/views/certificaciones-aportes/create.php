@@ -12,10 +12,11 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="certificaciones-aportes-create">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+   
 
     <?= $this->render('_form', [
-        'certificacion_aporte' => $certificacion_aporte,
+        'model' => $model,
+        'modelPersona'=>$modelPersona
     ]) ?>
 
 </div>

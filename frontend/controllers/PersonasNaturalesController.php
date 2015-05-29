@@ -5,7 +5,9 @@ namespace frontend\controllers;
 use Yii;
 use common\models\p\PersonasNaturales;
 use app\models\PersonasNaturalesSearch;
+use common\models\p\SysNaturalesJuridicas;
 use yii\db\Query;
+use yii\helpers\Html;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -82,123 +84,49 @@ class PersonasNaturalesController extends Controller
     {
         $model = new PersonasNaturales();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+             $transaction = \Yii::$app->db->beginTransaction();
+           try {
+                $natural_juridica= new SysNaturalesJuridicas();
+               if($model->nacionalidad=='NACIONAL'){
+                $model->sys_pais_id=1;
+                $model->numero_identificacion=null;
+               
+                $natural_juridica->rif= $model->rif;
+                }else{
+                $natural_juridica->rif= $model->numero_identificacion;
+                $natural_juridica->nacional=false;
+                $model->rif=$model->numero_identificacion;
+                }
+                if($model->estado_civil==''){
+                    $model->estado_civil=null;
+                }
+                $natural_juridica->juridica= false;
+                $natural_juridica->denominacion=$model->primer_nombre.' '.$model->primer_apellido;
+                if (!$natural_juridica->save()) {
+                    $transaction->rollBack();
+                    return $this->renderAjax('create', [
+                    'model' => $model,]);
+                    }
+                if($model->save()){
+                    $transaction->commit();
+                    Yii::$app->getSession()->setFlash('success',Yii::t('app',Html::encode('Documento registrado guardado.')));
+                    $model = new PersonasNaturales(['scenario'=>'basico']);
+                    return $this->renderAjax('create', [
+                        'model' => $model,
+                    ]);
+                }
+                
+           }catch (Exception $e) {
+               $transaction->rollBack();
+           }
         } else {
-            return $this->render('create', [
+             return $this->renderAjax('create', [
                 'model' => $model,
             ]);
         }
     }
-    
-     public function actionCrearpersonanatural()
-    {
-        $persona_natural = new PersonasNaturales();
-        $natural_juridica= new \common\models\p\SysNaturalesJuridicas();
-        
 
-        if ($persona_natural->load(Yii::$app->request->post())) {
-           $transaction = \Yii::$app->db->beginTransaction();
-           try {
-                $flag =false;
-                $natural_juridica->rif= $persona_natural->numero_identificacion;
-            $natural_juridica->juridica= false;
-            $natural_juridica->denominacion=$persona_natural->primer_nombre.' '.$persona_natural->primer_apellido;
-            $natural_juridica->sys_status=true;
-            if (! ($flag = $natural_juridica->save())) {
-
-                                        $transaction->rollBack();
-                                    return "faltan datos de natural juridica";
-                                            
-                                    }
-                                     
-                                     
-            if($persona_natural->sys_pais_id==1){
-                $persona_natural->rif=$persona_natural->numero_identificacion;
-                $persona_natural->numero_identificacion=null;
-                $persona_natural->nacionalidad = "NACIONAL";
-            }else{
-                 $persona_natural->nacionalidad = "EXTRANJERA";
-            }
-
-           
-           
-            $persona_natural->creado_por = 1;
-               if ($persona_natural->save()) {
-           
-
-                               $transaction->commit();
-                               return "Datos guardados con exito";
-                               
-
-
-                   }else{
-                        $transaction->rollBack();
-                       return "Datos no guardados";
-                   }
-             
-             
-           } catch (Exception $e) {
-               $transaction->rollBack();
-           }
-       }else{
-           return "Datos incompletos";
-       }
-
-
-    }
-       public function actionCrearcomisario()
-    {
-        $persona_natural = new PersonasNaturales();
-        $natural_juridica= new \common\models\p\SysNaturalesJuridicas();
-        
-
-        if ($persona_natural->load(Yii::$app->request->post())) {
-           $transaction = \Yii::$app->db->beginTransaction();
-           try {
-                $flag =false;
-                $natural_juridica->rif= $persona_natural->rif;
-            $natural_juridica->juridica= false;
-            $natural_juridica->denominacion=$persona_natural->primer_nombre.' '.$persona_natural->primer_apellido;
-            $natural_juridica->sys_status=true;
-            if (! ($flag = $natural_juridica->save())) {
-
-                                        $transaction->rollBack();
-                                    return "faltan datos de natural juridica";
-                                            
-                                    }
-              $persona_natural->sys_pais_id=1;                       
-              $persona_natural->nacionalidad = "NACIONAL";
-                 
-
-           
-           
-            $persona_natural->creado_por = 1;
-            $persona_natural->save();
-           
-               if ($persona_natural->save()) {
-           
-
-                               $transaction->commit();
-                               return "Datos guardados con exito";
-                               
-
-
-                   }else{
-                        $transaction->rollBack();
-                       return "Datos no guardados";
-                   }
-             
-             
-           } catch (Exception $e) {
-               $transaction->rollBack();
-           }
-       }else{
-           return "Datos incompletos";
-       }
-
-
-    }
     /**
      * Updates an existing PersonasNaturales model.
      * If update is successful, the browser will be redirected to the 'view' page.

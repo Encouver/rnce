@@ -44,3 +44,32 @@ ALTER TABLE razones_sociales
       ON UPDATE CASCADE ON DELETE NO ACTION;
 
 ALTER TABLE duraciones_empresas DROP COLUMN fecha_vencimiento;
+
+
+------28 mayo 2015 4:00 pm---
+
+ALTER TABLE sys_naturales_juridicas ADD COLUMN nacional boolean;
+ALTER TABLE sys_naturales_juridicas ALTER COLUMN nacional SET NOT NULL;
+ALTER TABLE sys_naturales_juridicas ALTER COLUMN nacional SET DEFAULT true;
+COMMENT ON COLUMN sys_naturales_juridicas.nacional IS 'true nacionalidad es venezolano, false extranjero';
+
+ALTER TABLE personas_juridicas ALTER COLUMN rif SET NOT NULL;
+ALTER TABLE personas_naturales ALTER COLUMN rif SET NOT NULL;
+
+ALTER TABLE personas_juridicas ALTER COLUMN tipo_nacionalidad SET NOT NULL;
+ALTER TABLE personas_juridicas ALTER COLUMN tipo_nacionalidad SET DEFAULT 'NACIONAL'::tipo_nacionalidad;
+ALTER TABLE personas_juridicas ALTER COLUMN tipo_nacionalidad DROP DEFAULT;
+
+ALTER TABLE personas_juridicas ALTER COLUMN sys_pais_id SET NOT NULL;
+
+
+---29 mayo 2015 09:00 am---
+
+ALTER TABLE sucursales ADD COLUMN documento_registrado_id integer;
+ALTER TABLE sucursales ALTER COLUMN documento_registrado_id SET NOT NULL;
+COMMENT ON COLUMN sucursales.documento_registrado_id IS 'Clave a la tabla documentos_registrados';
+
+ALTER TABLE sucursales
+  ADD CONSTRAINT sucursales_documento_registrado_id_fkey FOREIGN KEY (documento_registrado_id)
+      REFERENCES activos.documentos_registrados (id) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE NO ACTION;

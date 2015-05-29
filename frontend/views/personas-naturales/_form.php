@@ -1,7 +1,8 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use kartik\widgets\ActiveForm;
+use kartik\builder\Form;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\p\PersonasNaturales */
@@ -10,58 +11,58 @@ use yii\widgets\ActiveForm;
 
 <div class="personas-naturales-form">
 
-    <?php $form = ActiveForm::begin(); ?>
-
-    <?= $form->field($model, 'primer_nombre')->textInput(['maxlength' => 255]) ?>
-
-    <?= $form->field($model, 'segundo_nombre')->textInput(['maxlength' => 255]) ?>
-
-    <?= $form->field($model, 'rif')->textInput(['maxlength' => 20]) ?>
-
-    <?= $form->field($model, 'ci')->textInput() ?>
-
-    <?= $form->field($model, 'creado_por')->textInput() ?>
-
-    <?= $form->field($model, 'primer_apellido')->textInput(['maxlength' => 255]) ?>
-
-    <?= $form->field($model, 'segundo_apellido')->textInput(['maxlength' => 255]) ?>
-
-    <?= $form->field($model, 'telefono_local')->textInput(['maxlength' => 50]) ?>
-
-    <?= $form->field($model, 'telefono_celular')->textInput(['maxlength' => 50]) ?>
-
-    <?= $form->field($model, 'fax')->textInput(['maxlength' => 50]) ?>
-
-    <?= $form->field($model, 'correo')->textInput(['maxlength' => 150]) ?>
-
-    <?= $form->field($model, 'pagina_web')->textInput(['maxlength' => 255]) ?>
-
-    <?= $form->field($model, 'facebook')->textInput(['maxlength' => 255]) ?>
-
-    <?= $form->field($model, 'twitter')->textInput(['maxlength' => 255]) ?>
-
-    <?= $form->field($model, 'instagram')->textInput(['maxlength' => 255]) ?>
-
-    <?= $form->field($model, 'sys_pais_id')->textInput() ?>
-
-    <?= $form->field($model, 'sys_status')->checkbox() ?>
-
-    <?= $form->field($model, 'sys_creado_el')->textInput() ?>
-
-    <?= $form->field($model, 'sys_actualizado_el')->textInput() ?>
-
-    <?= $form->field($model, 'sys_finalizado_el')->textInput() ?>
-
-    <?= $form->field($model, 'numero_identificacion')->textInput(['maxlength' => 255]) ?>
-
-    <?= $form->field($model, 'nacionalidad')->dropDownList([ 'NACIONAL' => 'NACIONAL', 'EXTRANJERA' => 'EXTRANJERA', ], ['prompt' => '']) ?>
-
-    <?= $form->field($model, 'estado_civil')->dropDownList([ 'SOLTERO (A)' => 'SOLTERO (A)', 'CASADO (A)' => 'CASADO (A)', 'CONCUBINO (A)' => 'CONCUBINO (A)', 'DIVORCIADO (A)' => 'DIVORCIADO (A)', 'VIUDO (A)' => 'VIUDO (A)', ], ['prompt' => '']) ?>
-
+    <?php $form = ActiveForm::begin(['id'=>$model->formName(), 'type'=>ActiveForm::TYPE_VERTICAL, 'options' => ['data-pjax' => Yii::$app->request->isPjax]]);  ?>
+     <?php
+        foreach (Yii::$app->session->getAllFlashes() as $key => $message) {
+            echo '<div class="alert alert-' . $key . '">' . $message . '</div>';
+        }
+    ?>
+    <?php echo Form::widget([
+                'model'=>$model,
+                'form'=>$form,
+                'columns'=>3,
+                'attributes'=>$model->getformAttribs()
+            ]); ?>
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
+     <?php
+
+$script = <<< JS
+$( document ).ready(function() {
+  
+    
+    $('.field-personasnaturales-sys_pais_id').css('display','none');
+    $('.field-personasnaturales-rif').css('display','none');
+    $('.field-personasnaturales-numero_identificacion').css('display','none');
+        
+    $('#personasnaturales-nacionalidad').click(function(e){
+                if($('#personasnaturales-nacionalidad').val()=='NACIONAL') {
+                     $('.field-personasnaturales-rif').css('display','inherit');
+                     $('.field-personasnaturales-sys_pais_id').css('display','none');
+                     $('.field-personasnaturales-numero_identificacion').css('display','none');
+                     $('#personasnaturales-sys_pais_id').val('');
+                     $('#personasnaturales-numero_identificacion').val('');
+                  
+                }else{
+                        if($('#personasnaturales-nacionalidad').val()=='EXTRANJERA'){
+                        $('.field-personasnaturales-rif').css('display','none');
+                        $('.field-personasnaturales-sys_pais_id').css('display','inherit');
+                        $('.field-personasnaturales-numero_identificacion').css('display','inherit');
+                        $('#personasnaturales-rif').val('');
+            
+                        }
+                     
+                       }
+                
+       
+        });
+      
+});
+JS;
+$this->registerJs($script);
+?>
 
 </div>

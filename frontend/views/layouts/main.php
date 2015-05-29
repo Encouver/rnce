@@ -96,14 +96,13 @@ AppAsset::register($this);
                          ['label' => 'Datos basicos', 'url' => ['/contratistas/index']],
                          ['label' => 'Direccion Principal', 'url' => ['/domicilios/index']],
                         ['label' => 'Bancos', 'url' => ['/bancos-contratistas/index']],
-                         ['label' => 'Sucursales', 'url' => ['/sucursales/index']],
                         ['label' => 'Persona de contacto', 'url' => ['/contratistas-contactos/index']],
                          ['label' => 'Objeto empresa', 'url' => ['/objetos-empresas/index']],
                         ['label' => 'Principio contable', 'url' => ['/principios-contables/index']],
                        /*  ['label' => 'Responsable Contabilidad', 'url' => ['/comisarios-auditores/crearresponsable']],
                          ['label' => 'Contador Auditor', 'url' => ['/comisarios-auditores/crearcontador']],
                          ['label' => 'Profesional Informe de conversion', 'url' => ['/comisarios-auditores/crearprofesional']],*/
-                         ['label' => 'Relacion de Contratos', 'url' => ['/relaciones-contratos/crearrelacioncontrato']],
+                         ['label' => 'Relacion de Contratos', 'url' => ['/relaciones-contratos/index']],
          
                         
                     ],
@@ -119,10 +118,11 @@ AppAsset::register($this);
                         ['label' => 'Actividades Economicas', 'url' => ['/actividades-economicas/index']],
                         ['label' => 'Capital', 'url' => ['/actas-constitutivas/crearcapitalsuscrito']],
                         ['label' => 'Origen Capital', 'url' => ['/origenes-capitales/index']],
-                        ['label' => 'Certificacion Aportes', 'url' => ['/certificaciones-aportes/create']],
+                        ['label' => 'Certificacion Aportes', 'url' => ['/certificaciones-aportes/index']],
                         ['label' => 'Accionistas Representante Legal o Junta Directiva', 'url' => ['/accionistas-otros/index']],
                         ['label' => 'Comisarios', 'url' => ['/comisarios-auditores/index']],
                         ['label' => 'Fondos Reservas', 'url' => ['/fondos-reservas/index']],
+                        ['label' => 'Sucursales', 'url' => ['/sucursales/index']],
                         ['label' => 'Resumen', 'url' => ['/actas-constitutivas/resumenacta']],
                     ],
                 ],

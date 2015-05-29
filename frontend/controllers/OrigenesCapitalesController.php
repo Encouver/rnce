@@ -113,27 +113,15 @@ class OrigenesCapitalesController extends BaseController
                 break;
             }  
         }
-
-        if ($model->load(Yii::$app->request->post())) {
+        if($model->existeregistro()){
+            Yii::$app->session->setFlash('error','Debe crear un documento registrado');
+            return $this->redirect(['index']);
+          }
+        if ($model->load(Yii::$app->request->post())&& $model->save()) {
            
               
-                     
-              
-                    $usuario= \common\models\p\User::findOne(Yii::$app->user->identity->id);
-                    $registro = ActivosDocumentosRegistrados::findOne(['contratista_id'=>$usuario->contratista_id, 'tipo_documento_id'=>1]);
-                    $model->contratista_id=$usuario->contratista_id;
-                    
-                    $model->documento_registrado_id=$registro->id;
-                    
-                    if($model->save()){
                         return $this->redirect(['index']);
-                    }else{
-                       
-             
-                        return $this->render('create', [
-                            'model' => $model,
-                            ]);
-                    }
+                  
                     
                      
             }else{
