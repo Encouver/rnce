@@ -15,7 +15,7 @@ use yii\helpers\Html;
 
 <div class="cuentas-d1-islr-pagado-anticipo-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['id'=>'dynamic-form']); ?>
 
     <?php
 
