@@ -1,13 +1,17 @@
 <?php
 
+use common\models\a\ActivosBienes;
 use kartik\builder\Form;
 use kartik\widgets\ActiveForm;
+use kartik\widgets\Select2;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 
 
 
 /* @var $this yii\web\View */
 /* @var $model common\models\a\ActivosDesincorporacionActivos */
+/* @var $modelBien common\models\a\ActivosBienes */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
@@ -17,6 +21,16 @@ use yii\helpers\Html;
 
     <?php
         echo '<h2> Desincorporación de Bienes: </h2>';
+
+        echo $form->field($modelBien, 'id')->widget(Select2::classname(), [
+            'language' => 'es',
+            'data' =>  ArrayHelper::map($modelBien->getBienesContratista(),'id','detalle',function($model){ return $model->sysTipoBien->nombre;}),
+            'options' => ['placeholder' => 'Selecciona el bien ...'],
+            'pluginOptions' => [
+                'allowClear' => false,
+            ],
+        ])->label('Bien');
+
         echo Form::widget([       // 3 column layout
             'model'=>$model,
             'form'=>$form,
