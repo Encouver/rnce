@@ -2,8 +2,6 @@
 
 use yii\helpers\Html;
 use kartik\widgets\ActiveForm;
-use common\models\p\PersonasNaturales;
-use common\models\p\PersonasJuridicas;
 use yii\bootstrap\Modal;
 use kartik\builder\Form;
 use yii\helpers\Url;

@@ -160,7 +160,7 @@ class CertificacionesAportes extends \common\components\BaseActiveRecord
                     'format' => 'yyyy-mm-dd'
                 ]],
             ],
-        'documento_registrado_id'=>['type'=>Form::INPUT_HIDDEN],
+        
 
     ];
     

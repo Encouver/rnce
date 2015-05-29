@@ -86,7 +86,7 @@ class ContratosFacturas extends \common\components\BaseActiveRecord
                 'ajax' => [
                     'url' => \yii\helpers\Url::to(['relaciones-contratos/relaciones-contratos-lista']),
                     'dataType' => 'json',
-                    'data' => new JsExpression('function(params) { return {q:params.term,tipo:false}; }')
+                    'data' => new JsExpression('function(params) { return {q:params.term}; }')
                 ],
                 'escapeMarkup' => new JsExpression('function (markup) { return markup; }'),
                 'templateResult' => new JsExpression('function(relacion_contrato_id) { return relacion_contrato_id.text; }'),

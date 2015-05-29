@@ -44,17 +44,9 @@ class RelacionesContratosController extends Controller
             'dataProvider' => $dataProvider,
         ]);
     }
-    public function actionRelacionesContratosLista($q = null, $id = null,$tipo=null) {
-         $buscar='';
-        if(!$tipo){
-             $buscar='nombre_proyecto LIKE \'%' . $q .'%\' and contratista_id='.Yii::$app->user->identity->contratista_id.' and tipo_contrato=OBRAS';
-        }else{
-            $buscar='nombre_proyecto LIKE \'%' . $q .'%\' and contratista_id='.Yii::$app->user->identity->contratista_id.' and tipo_contrato=SERVICIOS';
-        }
-  
-       /* if($tipo=="SERVICOS"){
-            $buscar= "nombre_proyectof ILIKE "."'%" . $q ."%' and contratista_id=".Yii::$app->user->identity->contratista_id." and (tipo_contrato='SERVICOS' or tipo_contrato='BIENES')"; 
-        }*/
+    public function actionRelacionesContratosLista($q = null,$id = null) {
+         $buscar='nombre_proyecto ILIKE \'%' . $q .'%\' and contratista_id='.Yii::$app->user->identity->contratista_id.' and tipo_contrato="OBRAS"';
+       
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         $out = ['results' => ['id' => '', 'text' => '']];
         if (!is_null($q)) {
