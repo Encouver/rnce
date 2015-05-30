@@ -400,7 +400,7 @@ class ActivosBienes extends \common\components\BaseActiveRecord
                      'templateSelection' => new JsExpression('function (city) { return city.text; }'),
                  ],]],
             'propio'=>['type'=>Form::INPUT_WIDGET, 'widgetClass'=>CheckboxX::className(),'options'=>[
-                'pluginOptions'=>['threeState'=>true,
+                'pluginOptions'=>['threeState'=>false,
                     //'iconChecked'=>'<i class="glyphicon glyphicon-plus"></i>',
                     'iconUnchecked'=>'<i class="glyphicon glyphicon-remove"></i>',
                     'iconNull'=>'<i class="glyphicon"></i>']]],
@@ -410,26 +410,26 @@ class ActivosBienes extends \common\components\BaseActiveRecord
              'metodo_medicion_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(ActivosSysMetodosMedicion::find()->all(),'id','nombre',function($model){ return $model->modelo->nombre;}), 'pluginOptions'=>['allowClear' => true],'options'=>['id'=>'metodo-medicion','placeholder'=>'Seleccionar método de medición', 'onchange'=>'']]],
              // Mejora
              'mejora'=>['type'=>Form::INPUT_WIDGET, 'widgetClass'=>CheckboxX::className(),'options'=>[
-                 'pluginOptions'=>['threeState'=>true,
+                 'pluginOptions'=>['threeState'=>false,
                  //'iconChecked'=>'<i class="glyphicon glyphicon-plus"></i>',
                  'iconUnchecked'=>'<i class="glyphicon glyphicon-remove"></i>',
                  'iconNull'=>'<i class="glyphicon"></i>']]
              ], //['type'=>Form::INPUT_CHECKBOX,'columnOptions'=>['hidden'=>false,],'options'=>['onchange'=>'']],
              'perdida_reverso'=>['type'=>Form::INPUT_WIDGET, 'widgetClass'=>CheckboxX::className(),'options'=>[
-                 'pluginOptions'=>['threeState'=>true,
+                 'pluginOptions'=>['threeState'=>false,
                      //'iconChecked'=>'<i class="glyphicon glyphicon-plus"></i>',
                      'iconUnchecked'=>'<i class="glyphicon glyphicon-remove"></i>',
                      'iconNull'=>'<i class="glyphicon"></i>']]],
 
              'proc_productivo'=>['type'=>Form::INPUT_WIDGET, 'widgetClass'=>CheckboxX::className(),'options'=>[
-                 'pluginOptions'=>['threeState'=>true,
+                 'pluginOptions'=>['threeState'=>false,
                      //'iconChecked'=>'<i class="glyphicon glyphicon-plus"></i>',
                      'iconUnchecked'=>'<i class="glyphicon glyphicon-remove"></i>',
                      'iconNull'=>'<i class="glyphicon"></i>']]
                  ],//['type'=>Form::INPUT_CHECKBOX,'columnOptions'=>['hidden'=>false,]],
              // Si proc_productivo es true
              'directo'=>['type'=>Form::INPUT_WIDGET, 'widgetClass'=>CheckboxX::className(),'options'=>[
-                 'pluginOptions'=>['threeState'=>true,
+                 'pluginOptions'=>['threeState'=>false,
                      //'iconChecked'=>'<i class="glyphicon glyphicon-plus"></i>',
                      'iconUnchecked'=>'<i class="glyphicon glyphicon-remove"></i>',
                      'iconNull'=>'<i class="glyphicon"></i>']],
@@ -437,7 +437,7 @@ class ActivosBienes extends \common\components\BaseActiveRecord
                  ],//['type'=>Form::INPUT_CHECKBOX,'columnOptions'=>['hidden'=>true,]],
              // Si proceso productivo es false.
              'proc_ventas'=> ['type'=>Form::INPUT_WIDGET, 'widgetClass'=>CheckboxX::className(),'options'=>[
-                 'pluginOptions'=>['threeState'=>true,
+                 'pluginOptions'=>['threeState'=>false,
                      //'iconChecked'=>'<i class="glyphicon glyphicon-plus"></i>',
                      'iconUnchecked'=>'<i class="glyphicon glyphicon-remove"></i>',
                      'iconNull'=>'<i class="glyphicon"></i>']],
@@ -460,7 +460,7 @@ class ActivosBienes extends \common\components\BaseActiveRecord
         ];
         //if($this->origen_id==2)
             $attributes['nacional'] = ['type'=>Form::INPUT_WIDGET, 'widgetClass'=>CheckboxX::className(),'options'=>[
-                'pluginOptions'=>['threeState'=>true,
+                'pluginOptions'=>['threeState'=>false,
                     //'iconChecked'=>'<i class="glyphicon glyphicon-plus"></i>',
                     'iconUnchecked'=>'<i class="glyphicon glyphicon-remove"></i>',
                     'iconNull'=>'<i class="glyphicon"></i>'],

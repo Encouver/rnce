@@ -50,9 +50,10 @@ class ActivosDatosImportaciones extends \common\components\BaseActiveRecord
         return [
             [['bien_id', 'num_guia_nac', 'costo_adquisicion', 'gastos_mon_extranjera', 'sys_divisa_id', 'tasa_cambio', 'gastos_imp_nacional', 'otros_costros_imp_instalacion', 'total_costo_adquisicion', 'pais_origen_id'], 'required',
                 'when' => function ($model) {
-                return !$model->bien->nacional;
+                return !$model->bien->nacional && $model->bien->origen_id==2;
             }, 'whenClient' => "function (attribute, value) {
-                    return !$('#activosbienes-nacional').is(':checked');
+                    //return !$('#activosbienes-nacional').is(':checked');
+                    return $('#activosbienes-nacional').val() == 0 && $('#activosbienes-origen').val() == 2;
                 }"],
             [['bien_id', 'sys_divisa_id', 'pais_origen_id'], 'integer'],
             [['costo_adquisicion', 'gastos_mon_extranjera', 'tasa_cambio', 'gastos_imp_nacional', 'otros_costros_imp_instalacion', 'total_costo_adquisicion'], 'number'],

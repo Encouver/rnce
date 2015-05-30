@@ -198,6 +198,17 @@ $urlDocumento = Url::to(['activos-documentos-registrados/create-general','id'=>2
                 echo '</div>';
                 // }
 
+            echo '<div id="arrendamiento-container" style="display: block;">';
+            echo '<h2> Datos de Arrendamiento: </h2>';
+            echo Form::widget([       // 3 column layout
+                'model' => $modelArrendamiento,
+                'form' => $form,
+                'columns' => 4,
+                'columnSize' => 'xs',
+                'attributes' => $modelArrendamiento->getFormAttribs()
+            ]);
+            echo '</div>';
+
         //if($model->factura) {
             echo '<div id="factura-container" style="display: none;">';
             echo '<h2> Datos de la Factura: </h2>';
@@ -275,6 +286,19 @@ $urlDocumento = Url::to(['activos-documentos-registrados/create-general','id'=>2
                     $('#mejora-container').hide();
                 }
         });
+
+        $('#activosbienes-propio').change(function(e){
+
+                //if($('#activosbienes-mejora').is(':checked') ){
+                if($('#activosbienes-propio').val()==1){
+                   $('#arrendamiento-container').hide();
+                }//alert($('#activosbienes-nacional').val());
+                //if(!$('#activosbienes-mejora').is(':checked')){
+                if($('#activosbienes-propio').val()==0){
+                   $('#arrendamiento-container').show();
+                }
+        });
+
     $('#activosbienes-proc_productivo').change(function(e){
 
                     //if($('#activosbienes-proc_productivo').is(':checked')){
