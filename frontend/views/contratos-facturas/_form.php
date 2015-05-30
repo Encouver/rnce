@@ -10,7 +10,12 @@ use kartik\builder\Form;
 
 <div class="contratos-facturas-form">
 
-   <?php $form = ActiveForm::begin(['type'=>ActiveForm::TYPE_VERTICAL]); ?>
+   <?php $form = ActiveForm::begin(['id'=>$model->formName(), 'type'=>ActiveForm::TYPE_VERTICAL, 'options' => ['data-pjax' => Yii::$app->request->isPjax]]);  ?>
+     <?php
+        foreach (Yii::$app->session->getAllFlashes() as $key => $message) {
+            echo '<div class="alert alert-' . $key . '">' . $message . '</div>';
+        }
+    ?>
     
  <?php echo Form::widget([
     'model'=>$model,

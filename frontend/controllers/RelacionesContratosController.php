@@ -5,6 +5,8 @@ namespace frontend\controllers;
 use Yii;
 use common\models\p\RelacionesContratos;
 use common\models\p\ContratosFacturas;
+use app\models\ContratosFacturasSearch;
+use app\models\ContratosValuacionesSearch;
 use common\models\p\ContratosValuaciones;
 use app\models\RelacionesContratosSearch;
 use yii\web\Controller;
@@ -38,14 +40,29 @@ class RelacionesContratosController extends Controller
     {
         $searchModel = new RelacionesContratosSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+        $searchModelFactura = new ContratosFacturasSearch();
+        $dataProviderFactura = $searchModelFactura->search(Yii::$app->request->queryParams);
+        $modelcFactura= new ContratosFacturas();
+        $searchModelValuacion = new ContratosValuacionesSearch();
+        $dataProviderValuacion = $searchModelValuacion->search(Yii::$app->request->queryParams);
+        $modelcValuacion= new ContratosValuaciones();
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'searchModelFactura' => $searchModelFactura,
+            'dataProviderFactura' => $dataProviderFactura,
+            'modelcFactura'=>$modelcFactura,
+            'searchModelValuacion' => $searchModelValuacion,
+            'dataProviderValuacion' => $dataProviderValuacion,
+            'modelcValuacion'=>$modelcValuacion,
         ]);
     }
-    public function actionRelacionesContratosLista($q = null,$id = null) {
-         $buscar='nombre_proyecto ILIKE \'%' . $q .'%\' and contratista_id='.Yii::$app->user->identity->contratista_id.' and tipo_contrato="OBRAS"';
+    public function actionRelacionesContratosLista($q = null,$id = null,$ver) {
+       
+         $buscar="nombre_proyecto ILIKE "."'%" . $q ."%' and contratista_id=".Yii::$app->user->identity->contratista_id." and tipo_contrato='OBRAS'";
+         if($ver=="factura"){
+             $buscar="nombre_proyecto ILIKE "."'%" . $q ."%' and contratista_id=".Yii::$app->user->identity->contratista_id." and (tipo_contrato='BIENES' or tipo_contrato='SERVICIOS')";
+         }
        
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         $out = ['results' => ['id' => '', 'text' => '']];

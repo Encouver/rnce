@@ -73,3 +73,13 @@ ALTER TABLE sucursales
   ADD CONSTRAINT sucursales_documento_registrado_id_fkey FOREIGN KEY (documento_registrado_id)
       REFERENCES activos.documentos_registrados (id) MATCH SIMPLE
       ON UPDATE CASCADE ON DELETE NO ACTION;
+
+
+--29 mayo 2:00 pm--
+
+ALTER TABLE contratos_facturas
+  ADD CONSTRAINT factura_contrato_orden UNIQUE(relacion_contrato_id, orden_factura);
+
+ALTER TABLE contratos_valuaciones
+  ADD CONSTRAINT valuacion_contrato_orden UNIQUE(relacion_contrato_id, orden_valuacion);
+
