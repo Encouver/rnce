@@ -85,7 +85,7 @@ class CuentasD1D2Beneficiario extends \common\components\BaseActiveRecord
                 'columnOptions'=>['hidden'=>true]
             ],
             'sys_naturales_juridicas_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>[//'data'=>ArrayHelper::map(SysNaturalesJuridicas::find()->all(),'id',function($model){return $model->etiqueta(); }),
-                'options'=>[],'pluginOptions' => [
+                'options'=>['id'=>'beneficiario-'.uniqid()],'pluginOptions' => [
                     'allowClear' => true,
                     'minimumInputLength' => 3,
                     'ajax' => [

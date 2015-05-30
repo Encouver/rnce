@@ -26,7 +26,10 @@ $urlDocumento = Url::to(['activos-documentos-registrados/create-general','id'=>2
 
 
 <?php  Modal::begin([
-    'options'=>['id'=>'m1_factura'],
+    'options'=>[
+        'id'=>'m1_factura',
+        'tabindex' => false // important for Select2 to work properly
+    ],
     'size' => 'modal-lg',
     'header' => '<h4 style="margin:0; padding:0">Agregar Factura</h4>',
     'toggleButton' => ['label' => 'Agregar Factura', 'class'=>'btn btn-lg btn-primary','style'=>'margin-bottom:10px;'],
@@ -57,7 +60,10 @@ $urlDocumento = Url::to(['activos-documentos-registrados/create-general','id'=>2
 
 
 <?php  Modal::begin([
-    'options'=>['id'=>'m1_documento'],
+    'options'=>[
+        'id'=>'m1_documento',
+        'tabindex' => false // important for Select2 to work properly
+    ],
     'header' => '<h4 style="margin:0; padding:0">Agregar Documento Registrado</h4>',
     'toggleButton' => ['label' => 'Agregar Documento Registrado', 'class'=>'btn btn-lg btn-primary','style'=>'margin-bottom:10px;'],
 ]);?>
@@ -192,6 +198,17 @@ $urlDocumento = Url::to(['activos-documentos-registrados/create-general','id'=>2
                 echo '</div>';
                 // }
 
+            echo '<div id="arrendamiento-container" style="display: block;">';
+            echo '<h2> Datos de Arrendamiento: </h2>';
+            echo Form::widget([       // 3 column layout
+                'model' => $modelArrendamiento,
+                'form' => $form,
+                'columns' => 4,
+                'columnSize' => 'xs',
+                'attributes' => $modelArrendamiento->getFormAttribs()
+            ]);
+            echo '</div>';
+
         //if($model->factura) {
             echo '<div id="factura-container" style="display: none;">';
             echo '<h2> Datos de la Factura: </h2>';
@@ -244,12 +261,14 @@ $urlDocumento = Url::to(['activos-documentos-registrados/create-general','id'=>2
 
 
     function datosImportados(){
-            if($('#activosbienes-nacional').is(':checked') ){
+            //if($('#activosbienes-nacional').is(':checked') ){
+            if($('#activosbienes-nacional').val()==1){
                $('#datos-importacion-container').hide();
             }//alert($('#activosbienes-nacional').val());
-            if(!$('#activosbienes-nacional').is(':checked')){
+            //if(!$('#activosbienes-nacional').is(':checked')){
+             if($('#activosbienes-nacional').val()==0){
                  $('#datos-importacion-container').show();
-        }
+             }
     }
      $('#activosbienes-nacional').change(function(e){
 
@@ -258,20 +277,37 @@ $urlDocumento = Url::to(['activos-documentos-registrados/create-general','id'=>2
 
      $('#activosbienes-mejora').change(function(e){
 
-                if($('#activosbienes-mejora').is(':checked') ){
+                //if($('#activosbienes-mejora').is(':checked') ){
+                if($('#activosbienes-mejora').val()==1){
                    $('#mejora-container').show();
                 }//alert($('#activosbienes-nacional').val());
-                if(!$('#activosbienes-mejora').is(':checked')){
+                //if(!$('#activosbienes-mejora').is(':checked')){
+                if($('#activosbienes-mejora').val()==0){
                     $('#mejora-container').hide();
                 }
         });
+
+        $('#activosbienes-propio').change(function(e){
+
+                //if($('#activosbienes-mejora').is(':checked') ){
+                if($('#activosbienes-propio').val()==1){
+                   $('#arrendamiento-container').hide();
+                }//alert($('#activosbienes-nacional').val());
+                //if(!$('#activosbienes-mejora').is(':checked')){
+                if($('#activosbienes-propio').val()==0){
+                   $('#arrendamiento-container').show();
+                }
+        });
+
     $('#activosbienes-proc_productivo').change(function(e){
 
-                    if($('#activosbienes-proc_productivo').is(':checked')){
+                    //if($('#activosbienes-proc_productivo').is(':checked')){
+                    if($('#activosbienes-proc_productivo').val()==1){
                         $('.field-activosbienes-directo').parent().show();
                         $('.field-activosbienes-proc_ventas').parent().hide();
                     }
-                    if(!$('#activosbienes-proc_productivo').is(':checked')){
+                    //if(!$('#activosbienes-proc_productivo').is(':checked')){
+                    if($('#activosbienes-proc_productivo').val()==0/*is(':checked')*/){
                         $('.field-activosbienes-directo').parent().hide();
                         $('.field-activosbienes-proc_ventas').parent().show();
                     }

@@ -8,6 +8,7 @@ use app\models\ContratosFacturasSearch;
 use common\components\BaseController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\Html;
 
 /**
  * ContratosFacturasController implements the CRUD actions for ContratosFacturas model.
@@ -62,10 +63,22 @@ class ContratosFacturasController extends BaseController
     {
         $model = new ContratosFacturas();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            if($model->save()){
+                   
+                    Yii::$app->getSession()->setFlash('success',Yii::t('app',Html::encode('Factura guarda con exito')));
+                    $model = new ContratosFacturas();
+                    return $this->renderAjax('create', [
+                        'model' => $model,
+                    ]);
+                }else{
+                    return $this->renderAjax('create', [
+                        'model' => $model,
+                         ]);
+                }
+            
         } else {
-            return $this->render('create', [
+            return $this->renderAjax('create', [
                 'model' => $model,
             ]);
         }
@@ -82,7 +95,7 @@ class ContratosFacturasController extends BaseController
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['relaciones-contratos/index']);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -100,7 +113,7 @@ class ContratosFacturasController extends BaseController
     {
         $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+         return $this->redirect(['relaciones-contratos/index']);
     }
 
     /**
