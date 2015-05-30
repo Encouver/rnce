@@ -3,6 +3,12 @@
 namespace common\models\c;
 
 use Yii;
+use kartik\builder\TabularForm;
+use kartik\grid\GridView;
+use yii\helpers\ArrayHelper;
+use kartik\builder\Form;
+use kartik\builder\ActiveFormEvent;
+use yii\helpers\Html;
 
 /**
  * This is the model class for table "cuentas.b2_otras_cuentas_por_cobrar_e".
@@ -33,8 +39,10 @@ use Yii;
  * @property string $sys_creado_el
  * @property string $sys_actualizado_el
  * @property string $sys_finalizado_el
+ * @property integer $empresa
  *
  * @property Contratistas $contratista
+ * @property EmpresasRelacionadas $empresa0
  */
 class CuentasB2OtrasCuentasPorCobrarE extends \common\components\BaseActiveRecord
 {
@@ -55,10 +63,25 @@ class CuentasB2OtrasCuentasPorCobrarE extends \common\components\BaseActiveRecor
             [['criterio', 'origen', 'fecha', 'contratista_id', 'anho'], 'required'],
             [['fecha', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['corriente', 'nocorriente', 'deterioro_c', 'deterioro_nc', 'sys_status'], 'boolean'],
-            [['plazo_contrato_c', 'plazo_contrato_nc', 'contratista_id', 'creado_por', 'actualizado_por'], 'integer'],
+            [['plazo_contrato_c', 'plazo_contrato_nc', 'contratista_id', 'creado_por', 'actualizado_por', 'empresa'], 'integer'],
             [['saldo_c', 'valor_de_uso_c', 'saldo_neto_c', 'saldo_nc', 'valor_de_uso_nc', 'saldo_neto_nc'], 'number'],
             [['criterio', 'origen', 'garantia', 'otro_nombre'], 'string', 'max' => 255],
-            [['anho'], 'string', 'max' => 100]
+            [['anho'], 'string', 'max' => 100],
+            ['corriente', 'required', 'when' => function ($model) {
+                return $model->corriente == 1 and $model->nocorriente == 1;
+              }, 'whenClient' => "function (attribute, value) {
+                return true;
+            }"],
+            [['plazo_contrato_c', 'saldo_c', 'deterioro_c', 'valor_de_uso_c'], 'required', 'when' => function ($model) {
+                return $model->corriente == 1;
+            }, 'whenClient' => "function (attribute, value) {
+                return $('#cuentasb2otrascuentasporcobrare-corriente').attr('checked');
+            }"],
+            [['plazo_contrato_nc', 'saldo_nc', 'deterioro_nc', 'valor_de_uso_nc'], 'required', 'when' => function ($model) {
+                return $model->nocorriente == 1;
+            }, 'whenClient' => "function (attribute, value) {
+                return $('#cuentasb2otrascuentasporcobrare-nocorriente').attr('checked');
+            }"],
         ];
     }
 
@@ -94,6 +117,7 @@ class CuentasB2OtrasCuentasPorCobrarE extends \common\components\BaseActiveRecor
             'sys_creado_el' => Yii::t('app', 'Sys Creado El'),
             'sys_actualizado_el' => Yii::t('app', 'Sys Actualizado El'),
             'sys_finalizado_el' => Yii::t('app', 'Sys Finalizado El'),
+            'empresa' => Yii::t('app', 'Empresa'),
         ];
     }
 
@@ -103,5 +127,59 @@ class CuentasB2OtrasCuentasPorCobrarE extends \common\components\BaseActiveRecor
     public function getContratista()
     {
         return $this->hasOne(Contratistas::className(), ['id' => 'contratista_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getEmpresa0()
+    {
+        return $this->hasOne(EmpresasRelacionadas::className(), ['id' => 'empresa']);
+    }
+
+    public function getFormAttribs(){
+        return [
+                // primary key column
+                'id'=>[ // primary key attribute
+                    'type'=>TabularForm::INPUT_HIDDEN,
+                    'columnOptions'=>['hidden'=>true]
+                ],
+                
+                'criterio'=>['type'=>Form::INPUT_TEXT,'label'=>'Criterio'],
+
+                'origen'=>['type'=>Form::INPUT_TEXT,'label'=>'Origen'],
+                'fecha'=>[
+                    'type'=>Form::INPUT_WIDGET, 
+                    'widgetClass'=>'\kartik\widgets\DatePicker', 
+                    'options'=>['pluginOptions' => [
+                        'autoclose'=>true,
+                        'format' => 'yyyy-mm-dd'
+                    ]],
+                 ],
+                'garantia'=>['type'=>Form::INPUT_TEXT,'label'=>'Garantia'],
+                'corriente'=>['type'=>Form::INPUT_CHECKBOX,'label'=>'Corriente'],
+                'nocorriente'=>['type'=>Form::INPUT_CHECKBOX,'label'=>'No corriente'],
+                //'hh_concepto_id'=>['type'=>Form::INPUT_DROPDOWN_LIST, 'items'=>ArrayHelper::map(CuentasConceptos::find()->where(['cuenta' => 'hh'])->orderBy('id')->asArray()->all(), 'id', 'nombre'), 'label'=>'Concepto'],                
+            ];
+    }
+
+    public function getFormA(){
+        return [
+                'plazo_contrato_c'=>['type'=>Form::INPUT_TEXT,'label'=>'Plazo del contrato'],
+                'saldo_c'=>['type'=>Form::INPUT_TEXT,'label'=>'Saldo'],
+                'deterioro_c'=>['type'=>Form::INPUT_TEXT,'label'=>'Deterioro'],
+                'valor_de_uso_c'=>['type'=>Form::INPUT_TEXT,'label'=>'Valor de uso'],
+                //'hh_concepto_id'=>['type'=>Form::INPUT_DROPDOWN_LIST, 'items'=>ArrayHelper::map(CuentasConceptos::find()->where(['cuenta' => 'hh'])->orderBy('id')->asArray()->all(), 'id', 'nombre'), 'label'=>'Concepto'],                
+            ];
+    }
+
+    public function getFormB(){
+        return [
+                'plazo_contrato_nc'=>['type'=>Form::INPUT_TEXT,'label'=>'Plazo del contrato'],
+                'saldo_nc'=>['type'=>Form::INPUT_TEXT,'label'=>'Saldo'],
+                'deterioro_nc'=>['type'=>Form::INPUT_TEXT,'label'=>'Deterioro'],
+                'valor_de_uso_nc'=>['type'=>Form::INPUT_TEXT,'label'=>'Valor de uso'],
+                //'hh_concepto_id'=>['type'=>Form::INPUT_DROPDOWN_LIST, 'items'=>ArrayHelper::map(CuentasConceptos::find()->where(['cuenta' => 'hh'])->orderBy('id')->asArray()->all(), 'id', 'nombre'), 'label'=>'Concepto'],                
+            ];
     }
 }

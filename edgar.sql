@@ -374,6 +374,14 @@ COMMENT ON COLUMN cuentas.bb2_garantias.sys_actualizado_el IS 'Fecha de última 
 COMMENT ON COLUMN cuentas.bb2_garantias.sys_finalizado_el IS 'Fecha de "eliminado" el registro.';
 
 
+--------29/05/2015--------------
 
+ALTER TABLE cuentas.b2_otras_cuentas_por_cobrar_e ADD COLUMN empresa integer;
+COMMENT ON COLUMN cuentas.b2_otras_cuentas_por_cobrar_e.empresa IS 'Clave foranea a la tabla empresas relacionadas';
+
+ALTER TABLE cuentas.b2_otras_cuentas_por_cobrar_e
+  ADD CONSTRAINT fk_empresa_b2_cuentas_e FOREIGN KEY (empresa)
+      REFERENCES empresas_relacionadas (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION;
 
 
