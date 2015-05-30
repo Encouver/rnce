@@ -2,7 +2,6 @@
 
 namespace common\models\p;
 use kartik\builder\Form;
-use yii\helpers\Url;
 use common\models\p\RelacionesContratos;
 use kartik\widgets\Select2;
 use yii\web\JsExpression;
@@ -44,7 +43,8 @@ class ContratosFacturas extends \common\components\BaseActiveRecord
             [['relacion_contrato_id', 'orden_factura', 'creado_por', 'actualizado_por'], 'integer'],
             [['monto'], 'number'],
             [['sys_status'], 'boolean'],
-            [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe']
+            [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
+            [['orden_factura'], 'unique', 'targetAttribute' => ['relacion_contrato_id', 'orden_factura'], 'message' => 'Ya se encuentra cargado un registro con este orden de factura.']
         ];
     }
 
@@ -78,6 +78,7 @@ class ContratosFacturas extends \common\components\BaseActiveRecord
     
      $contrato = empty($this->relacion_contrato_id) ? '' : RelacionesContratos::findOne($this->relacion_contrato_id)->nombre_proyecto;
     return [
+        
            'relacion_contrato_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>[
                 'initValueText' => $contrato,
                 'options'=>['placeholder' => 'Buscar proyecto'],'pluginOptions' => [
@@ -86,7 +87,7 @@ class ContratosFacturas extends \common\components\BaseActiveRecord
                 'ajax' => [
                     'url' => \yii\helpers\Url::to(['relaciones-contratos/relaciones-contratos-lista']),
                     'dataType' => 'json',
-                    'data' => new JsExpression('function(params) { return {q:params.term}; }')
+                    'data' => new JsExpression('function(params) { return {q:params.term,ver:"factura"}; }')
                 ],
                 'escapeMarkup' => new JsExpression('function (markup) { return markup; }'),
                 'templateResult' => new JsExpression('function(relacion_contrato_id) { return relacion_contrato_id.text; }'),

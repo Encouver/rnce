@@ -8,7 +8,7 @@ use app\models\ContratosValuacionesSearch;
 use common\components\BaseController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-
+use yii\helpers\Html;
 /**
  * ContratosValuacionesController implements the CRUD actions for ContratosValuaciones model.
  */
@@ -62,10 +62,22 @@ class ContratosValuacionesController extends BaseController
     {
         $model = new ContratosValuaciones();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+         if ($model->load(Yii::$app->request->post())) {
+            if($model->save()){
+                   
+                    Yii::$app->getSession()->setFlash('success',Yii::t('app',Html::encode('Factura guarda con exito')));
+                    $model = new ContratosFacturas();
+                    return $this->renderAjax('create', [
+                        'model' => $model,
+                    ]);
+                }else{
+                    return $this->renderAjax('create', [
+                        'model' => $model,
+                         ]);
+                }
+            
         } else {
-            return $this->render('create', [
+            return $this->renderAjax('create', [
                 'model' => $model,
             ]);
         }
@@ -81,8 +93,8 @@ class ContratosValuacionesController extends BaseController
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['relaciones-contratos/index']);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -100,7 +112,7 @@ class ContratosValuacionesController extends BaseController
     {
         $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect(['relaciones-contratos/index']);
     }
 
     /**

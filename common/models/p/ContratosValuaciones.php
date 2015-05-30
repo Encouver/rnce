@@ -1,7 +1,10 @@
 <?php
 
 namespace common\models\p;
-
+use kartik\builder\Form;
+use common\models\p\RelacionesContratos;
+use kartik\widgets\Select2;
+use yii\web\JsExpression;
 use Yii;
 
 /**
@@ -40,7 +43,8 @@ class ContratosValuaciones extends \common\components\BaseActiveRecord
             [['relacion_contrato_id', 'orden_valuacion', 'creado_por', 'actualizado_por'], 'integer'],
             [['monto'], 'number'],
             [['sys_status'], 'boolean'],
-            [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe']
+            [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
+            [['orden_valuacion'], 'unique', 'targetAttribute' => ['relacion_contrato_id', 'orden_valuacion'], 'message' => 'Ya se encuentra cargado un registro con este orden de valuacion.']
         ];
     }
 
@@ -69,5 +73,32 @@ class ContratosValuaciones extends \common\components\BaseActiveRecord
     public function getRelacionContrato()
     {
         return $this->hasOne(RelacionesContratos::className(), ['id' => 'relacion_contrato_id']);
+    }
+    public function getFormAttribs() {
+    
+     $contrato = empty($this->relacion_contrato_id) ? '' : RelacionesContratos::findOne($this->relacion_contrato_id)->nombre_proyecto;
+    return [
+        
+           'relacion_contrato_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>[
+                'initValueText' => $contrato,
+                'options'=>['placeholder' => 'Buscar proyecto'],'pluginOptions' => [
+                'allowClear' => true,
+                'minimumInputLength' => 3,
+                'ajax' => [
+                    'url' => \yii\helpers\Url::to(['relaciones-contratos/relaciones-contratos-lista']),
+                    'dataType' => 'json',
+                    'data' => new JsExpression('function(params) { return {q:params.term,ver:"valuacion"}; }')
+                ],
+                'escapeMarkup' => new JsExpression('function (markup) { return markup; }'),
+                'templateResult' => new JsExpression('function(relacion_contrato_id) { return relacion_contrato_id.text; }'),
+                'templateSelection' => new JsExpression('function (relacion_contrato_id) { return relacion_contrato_id.text; }'),
+            ],]],
+          
+        'orden_valuacion'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Orden factura']],
+        'monto'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Monto']],
+      
+    ];
+    
+    
     }
 }
