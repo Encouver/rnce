@@ -1,9 +1,10 @@
 <?php
-use kartik\popover\PopoverX;
+
 use yii\helpers\Html;
 use kartik\widgets\ActiveForm;
 use common\models\c\ActivosSysMetodosMedicion;
 use kartik\widgets\DatePicker;
+use kartik\popover\PopoverX;
 
 $url = \yii\helpers\Url::to(['site/probando']);
 $model = new ActivosSysMetodosMedicion();
@@ -14,7 +15,17 @@ $form = ActiveForm::begin(['fieldConfig'=>['showLabels'=>false], 'id' => $model-
 PopoverX::begin([
     //'placement' => PopoverX::ALIGN_RIGHT_BOTTOM,
     'size' => PopoverX::SIZE_LARGE,
-    'toggleButton' => ['label'=>'Login', 'class'=>'btn btn-default'],
+    //'toggleButton' => ['label'=>'Login', 'class'=>'btn btn-default'],
+    'toggleButton' => [
+        'label' => 'Logout' . Html::tag('span', '', ['class' => 'glyphicon glyphicon-lock', 'style' => 'padding-left: 10px']),
+    	'tag' =>'input', 
+    	'type'=>'checkbox',
+    	'value' => 1,
+    	'name' => 'popo',
+    	'id' => 'propo'
+
+        //'class'=>'btn btn-default'
+    ],
     'header' => 'Metodo -- ',
     'footer'=>Html::submitButton('Submit', ['class'=>'btn btn-sm btn-primary']) .
              Html::resetButton('Reset', ['class'=>'btn btn-sm btn-default'])
@@ -89,8 +100,8 @@ $script = <<< JS
 		$.post(
 			\$form.attr("action"), \$form.serialize()
 		).done(function(result)
-		{
-			\$form.trigger("reset");
+		{	
+			$('#propo').attr('checked', 'checked');
 		}).fail(function()
 		{
 			console.log("error");

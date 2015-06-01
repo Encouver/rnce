@@ -3,6 +3,12 @@
 namespace common\models\c;
 
 use Yii;
+use kartik\builder\TabularForm;
+use kartik\grid\GridView;
+use yii\helpers\ArrayHelper;
+use kartik\builder\Form;
+use kartik\builder\ActiveFormEvent;
+use yii\helpers\Html;
 
 /**
  * This is the model class for table "cuentas.bb2_otras_cuentas_por_pagar".
@@ -99,5 +105,32 @@ class CuentasBb2OtrasCuentasPorPagar extends \common\components\BaseActiveRecord
     public function getContratista()
     {
         return $this->hasOne(Contratistas::className(), ['id' => 'contratista_id']);
+    }
+
+    public function getFormAttribs()
+    {
+        $arreglo= [];
+        return [
+                // primary key column
+                'id'=>[ // primary key attribute
+                    'type'=>TabularForm::INPUT_HIDDEN,
+                    'columnOptions'=>['hidden'=>true]
+                ],
+                'criterio'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>ArrayHelper::map($arreglo, 'id', 'nombre'), 'label'=>'Criterio'],
+                'fecha'=>[
+                    'type'=>Form::INPUT_WIDGET, 
+                    'widgetClass'=>'\kartik\widgets\DatePicker', 
+                    'options'=>['pluginOptions' => [
+                        'autoclose'=>true,
+                        'format' => 'yyyy-mm-dd'
+                    ]],
+                 ],
+                'garantia'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>ArrayHelper::map($arreglo, 'id', 'nombre'), 'label'=>'Criterio'],
+                'criterio_id'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>ArrayHelper::map($arreglo, 'id', 'nombre'), 'label'=>'Proveedor'],
+                'plazo'=>['type'=>Form::INPUT_TEXT, 'label'=>'Plazo'],
+                'saldo_conta_nc'=>['type'=>Form::INPUT_TEXT, 'label'=>'Saldo segun contabilidad no corriente'],
+                'saldo_conta_co'=>['type'=>Form::INPUT_TEXT,'label'=>'Saldo segun contabilidad corriente'],
+                'intereses'=>['type'=>Form::INPUT_TEXT,'label'=>'Intereses pagados durante la actividad económica'],
+            ];
     }
 }

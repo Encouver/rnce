@@ -3,6 +3,13 @@
 namespace common\models\c;
 
 use Yii;
+use kartik\builder\TabularForm;
+use kartik\grid\GridView;
+use yii\helpers\ArrayHelper;
+use kartik\builder\Form;
+use kartik\builder\ActiveFormEvent;
+use yii\helpers\Html;
+use common\models\p\EmpresasRelacionadas;
 
 /**
  * This is the model class for table "cuentas.bb1_cuentas_por_pagar_comerciales".
@@ -87,5 +94,23 @@ class CuentasBb1CuentasPorPagarComerciales extends \common\components\BaseActive
     public function getProveedor()
     {
         return $this->hasOne(EmpresasRelacionadas::className(), ['id' => 'proveedor_id']);
+    }
+
+    public function getFormAttribs()
+    {
+        $arreglo= [];
+        return [
+                // primary key column
+                'id'=>[ // primary key attribute
+                    'type'=>TabularForm::INPUT_HIDDEN,
+                    'columnOptions'=>['hidden'=>true]
+                ],
+                'corriente'=>['type'=>Form::INPUT_CHECKBOX,'label'=>'Corriente'],
+
+                'proveedor_id'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>ArrayHelper::map($arreglo, 'id', 'nombre'), 'label'=>'Proveedor'],
+                'cantidad_factura'=>['type'=>Form::INPUT_TEXT, 'label'=>'Cantidad de factura o documentos por pagar'],
+                'saldo_al_cierre'=>['type'=>Form::INPUT_TEXT, 'label'=>'Saldo al cierre ejercicio económico'],
+                'intereses_actividad_e'=>['type'=>Form::INPUT_TEXT,'label'=>'Intereses pagados durante la actividad económica'],
+            ];
     }
 }

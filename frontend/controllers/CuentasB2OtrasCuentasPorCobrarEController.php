@@ -62,9 +62,21 @@ class CuentasB2OtrasCuentasPorCobrarEController extends BaseController
     {
         $model = new CuentasB2OtrasCuentasPorCobrarE();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            
+            if(!$model->corriente and !$model->nocorriente)
+            {
+                Yii::$app->getSession()->setFlash('error', 'Debe seleccionar si es corriente, no corriente, o ambas');
+                //Yii::$app->getSession()->setFlash('success', 'probando');
+                 return $this->render('create', [
+                    'model' => $model,
+                ]);
+            }
+           return $this->redirect(['view', 'id' => $model->id]);
         } else {
+            //echo "Hola";
+            //print_r($model->getErrors());
             return $this->render('create', [
                 'model' => $model,
             ]);
