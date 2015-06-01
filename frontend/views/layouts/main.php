@@ -94,7 +94,7 @@ AppAsset::register($this);
                     'items' => [
                          //['label' => 'Acordeon', 'url' => ['/contratistas/acordeon']],
                          ['label' => 'Datos basicos', 'url' => ['/contratistas/index']],
-                         ['label' => 'Direccion Principal', 'url' => ['/domicilios/index']],
+                         
                         ['label' => 'Bancos', 'url' => ['/bancos-contratistas/index']],
                         ['label' => 'Persona de contacto', 'url' => ['/contratistas-contactos/index']],
                          ['label' => 'Objeto empresa', 'url' => ['/objetos-empresas/index']],
@@ -111,6 +111,7 @@ AppAsset::register($this);
                     'items' => [
                          ['label' => 'Registro documento', 'url' => ['/activos-documentos-registrados/index']],
                         ['label' => 'Razon Social', 'url' => ['/razones-sociales/index']],
+                        ['label' => 'Direcciones', 'url' => ['/domicilios/index']],
                          ['label' => 'Denominaciones Comerciales', 'url' => ['/denominaciones-comerciales/index']],
                         ['label' => 'Objeto Social', 'url' => ['/objetos-sociales/index']],
                         ['label' => 'Cierre ejercicio', 'url' => ['/cierres-ejercicios/index']],

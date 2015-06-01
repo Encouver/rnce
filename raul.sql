@@ -83,3 +83,5 @@ ALTER TABLE contratos_facturas
 ALTER TABLE contratos_valuaciones
   ADD CONSTRAINT valuacion_contrato_orden UNIQUE(relacion_contrato_id, orden_valuacion);
 
+--30 mayo 11:00am---
+ALTER TABLE domicilios ALTER COLUMN documento_registrado_id SET NOT NULL;

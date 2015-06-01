@@ -20,6 +20,8 @@ use kartik\builder\Form;
     'columns'=>3,
     'attributes'=>($model->fiscal) ? $direccion->getFormAttribs('fiscal') : $direccion->getFormAttribs('principal')
       ]); ?>
+     <?= print_r($direccion);?>
+    <?= print_r($model);?>
      <div class="form-group">
          <?= Html::submitButton(Yii::t('app', 'Enviar'), ['class' => 'btn btn-success']) ?> 
     </div>
