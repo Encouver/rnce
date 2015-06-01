@@ -1,7 +1,7 @@
 <?php
 
 namespace common\models\p;
-
+use common\models\a\ActivosDocumentosRegistrados;
 use Yii;
 
 /**
@@ -37,7 +37,7 @@ class Domicilios extends \common\components\BaseActiveRecord
     public function rules()
     {
         return [
-            [['contratista_id', 'direccion_id'], 'required'],
+            [['contratista_id', 'direccion_id','documento_registrado_id'], 'required'],
             [['contratista_id', 'documento_registrado_id', 'direccion_id'], 'integer'],
             [['sys_status', 'fiscal'], 'boolean'],
             [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
@@ -92,6 +92,27 @@ class Domicilios extends \common\components\BaseActiveRecord
     public function getDireccion()
     {
         return $this->hasOne(Direcciones::className(), ['id' => 'direccion_id']);
+    }
+    public function Existeregistro(){
+       $registro = ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'tipo_documento_id'=>1,'proceso_finalizado'=>false]);       
+       $registromodificacion = ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'tipo_documento_id'=>2,'proceso_finalizado'=>false]);      
+       if(isset($registro) || isset($registromodificacion)){
+           if(isset($registromodificacion)){
+               $registro=$registromodificacion;
+             
+           }
+          $domicilio= Domicilios::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'documento_registrado_id'=>$registro->id,'fiscal'=>$this->fiscal]);
+           if(isset($domicilio)){
+               
+                return true;   
+            }else{
+                
+                $this->documento_registrado_id=$registro->id;
+                return false;
+            }
+        }else{
+            return true;
+        }
     }
 
 }
