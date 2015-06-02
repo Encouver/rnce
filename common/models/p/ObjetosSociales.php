@@ -88,7 +88,7 @@ class ObjetosSociales extends \common\components\BaseActiveRecord
      */
     public function getDocumentoRegistrado()
     {
-        return $this->hasOne(DocumentosRegistrados::className(), ['id' => 'documento_registrado_id']);
+        return $this->hasOne(ActivosDocumentosRegistrados::className(), ['id' => 'documento_registrado_id']);
     }
       public function getFormAttribs() {
         
