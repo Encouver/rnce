@@ -127,6 +127,11 @@ AppAsset::register($this);
                         ['label' => 'Resumen', 'url' => ['/actas-constitutivas/resumenacta']],
                     ],
                 ],
+                ['label' => 'Modificacion acta',
+                    'items' => [
+                         ['label' => 'Registro documento', 'url' => ['/activos-documentos-registrados/index']],
+                    ],
+                ],
                 
             ];
 

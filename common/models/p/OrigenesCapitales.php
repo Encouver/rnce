@@ -153,9 +153,12 @@ class OrigenesCapitales extends \common\components\BaseActiveRecord
        // $registro = ActivosDocumentosRegistrados::findOne(['contratista_id'=>$usuario->contratista_id, 'tipo_documento_id'=>1]);
                    
         $capitales= OrigenesCapitales::findAll(['contratista_id'=>Yii::$app->user->identity->id, 'documento_registrado_id'=>$this->documento_registrado_id]);
-         foreach ($capitales as $capital) {
+        if(isset($capitales)){
+             foreach ($capitales as $capital) {
                 $suma=$suma+$capital->monto;
             }
+        } 
+       
         
         return $suma;
     }
