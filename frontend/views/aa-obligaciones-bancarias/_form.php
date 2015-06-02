@@ -12,6 +12,7 @@ use \yii\helpers\ArrayHelper;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
+
 <div class="aa-obligaciones-bancarias-form">
 
     <?php $form = ActiveForm::begin(); ?>

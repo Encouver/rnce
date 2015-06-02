@@ -254,3 +254,8 @@ COMMENT ON COLUMN modificaciones_actas.sys_finalizado_el IS 'Fecha de "eliminado
 
 
 
+---02 junio 2015 5:00 pm--
+ALTER TABLE duraciones_empresas DROP COLUMN tiempo_prorroga;
+
+
+

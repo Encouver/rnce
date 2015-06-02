@@ -18,7 +18,7 @@ class DuracionesEmpresasSearch extends DuracionesEmpresas
     public function rules()
     {
         return [
-            [['id', 'contratista_id', 'documento_registrado_id', 'tiempo_prorroga', 'duracion_anos', 'creado_por', 'actualizado_por'], 'integer'],
+            [['id', 'contratista_id', 'documento_registrado_id','duracion_anos', 'creado_por', 'actualizado_por'], 'integer'],
             [['sys_status'], 'boolean'],
             [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
         ];
@@ -60,7 +60,6 @@ class DuracionesEmpresasSearch extends DuracionesEmpresas
             'id' => $this->id,
             'contratista_id' => $this->contratista_id,
             'documento_registrado_id' => $this->documento_registrado_id,
-            'tiempo_prorroga' => $this->tiempo_prorroga,
             'duracion_anos' => $this->duracion_anos,
             'creado_por' => $this->creado_por,
             'actualizado_por' => $this->actualizado_por,

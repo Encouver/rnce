@@ -134,6 +134,7 @@ AppAsset::register($this);
                          ['label' => 'Cambio Objeto Social', 'url' => ['objetos-sociales/index']],
                         ['label' => 'Cambio Domicilio', 'url' => ['domicilios/index']],
                          ['label' => 'Cambio Cierre Ejercicio Econonomico', 'url' => ['/cierres-ejercicios/index']],
+                        ['label' => 'Duracion empresa', 'url' => ['/duraciones-empresas/index']],
                     ],
                 ],
                 

@@ -2,6 +2,7 @@
 
 namespace common\models\p;
 use common\models\a\ActivosDocumentosRegistrados;
+use common\models\p\ModificacionesActas;
 use Yii;
 
 /**
@@ -10,7 +11,6 @@ use Yii;
  * @property integer $id
  * @property integer $contratista_id
  * @property integer $documento_registrado_id
- * @property integer $tiempo_prorroga
  * @property integer $duracion_anos
  * @property integer $creado_por
  * @property integer $actualizado_por
@@ -40,7 +40,7 @@ class DuracionesEmpresas extends \common\components\BaseActiveRecord
     {
         return [
             [['contratista_id', 'documento_registrado_id', 'duracion_anos'], 'required'],
-            [['contratista_id', 'documento_registrado_id', 'tiempo_prorroga', 'duracion_anos', 'creado_por', 'actualizado_por'], 'integer'],
+            [['contratista_id', 'documento_registrado_id', 'duracion_anos', 'creado_por', 'actualizado_por'], 'integer'],
             [['sys_status'], 'boolean'],
             [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe']
         ];
@@ -55,8 +55,7 @@ class DuracionesEmpresas extends \common\components\BaseActiveRecord
             'id' => Yii::t('app', 'ID'),
             'contratista_id' => Yii::t('app', 'Contratista ID'),
             'documento_registrado_id' => Yii::t('app', 'Documento Registrado ID'),
-            'tiempo_prorroga' => Yii::t('app', 'Tiempo Prorroga'),
-            'duracion_anos' => Yii::t('app', 'Duracion Anos'),
+            'duracion_anos' => Yii::t('app', 'Duracion'),
             'creado_por' => Yii::t('app', 'Creado Por'),
             'actualizado_por' => Yii::t('app', 'Actualizado Por'),
             'sys_status' => Yii::t('app', 'Sys Status'),
@@ -89,12 +88,21 @@ class DuracionesEmpresas extends \common\components\BaseActiveRecord
     {
         return $this->hasOne(Contratistas::className(), ['id' => 'contratista_id']);
     }
+     
      public function Existeregistro(){
        $registro = ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'tipo_documento_id'=>1,'proceso_finalizado'=>false]);       
        $registromodificacion = ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'tipo_documento_id'=>2,'proceso_finalizado'=>false]);      
        if(isset($registro) || isset($registromodificacion)){
            if(isset($registromodificacion)){
                $registro=$registromodificacion;
+                $modificacion= ModificacionesActas::findOne(['documento_registrado_id'=>$registro->id]);
+               if(isset($modificacion)){
+                   if(!$modificacion->duracion_empresa){
+                       return true;
+                   }
+               }else{
+                   return true;
+               }
            }
           $duracion= DuracionesEmpresas::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'documento_registrado_id'=>$registro->id]);
            if(isset($duracion)){
