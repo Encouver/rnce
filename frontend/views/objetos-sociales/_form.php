@@ -1,7 +1,8 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use kartik\widgets\ActiveForm;
+use kartik\builder\Form;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\p\ObjetosSociales */
@@ -10,14 +11,13 @@ use yii\widgets\ActiveForm;
 
 <div class="objetos-sociales-form">
 
-    <?php $form = ActiveForm::begin(); ?>
-    
-
-
-    <?php /*$form->field($model, 'tipo_objeto')->dropDownList([ 'PRINCIPAL' => 'PRINCIPAL', 'AMPLIACION' => 'AMPLIACION', 'MODIFICACION PARCIAL' => 'MODIFICACION PARCIAL', 'MODIFICACION TOTAL' => 'MODIFICACION TOTAL', ], ['prompt' => '']) */ ?>
-
-    <?= $form->field($model, 'descripcion')->textarea(['rows' => 6]) ?>
-    <?= $form->field($model, 'documento_registrado_id')->hiddenInput()->label(false) ?>
+    <?php $form = ActiveForm::begin(['type'=>ActiveForm::TYPE_VERTICAL]);  ?>
+      <?php echo Form::widget([
+                'model'=>$model,
+                'form'=>$form,
+                'columns'=>2,
+                'attributes'=>$model->getformAttribs()
+            ]); ?>
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
