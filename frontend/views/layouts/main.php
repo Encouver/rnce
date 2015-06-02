@@ -114,7 +114,7 @@ AppAsset::register($this);
                         ['label' => 'Direcciones', 'url' => ['/domicilios/index']],
                          ['label' => 'Denominaciones Comerciales', 'url' => ['/denominaciones-comerciales/index']],
                         ['label' => 'Objeto Social', 'url' => ['/objetos-sociales/index']],
-                        ['label' => 'Cierre ejercicio', 'url' => ['/cierres-ejercicios/index']],
+                        ['label' => 'Cierre ejercicio Econonomico', 'url' => ['/cierres-ejercicios/index']],
                         ['label' => 'Duracion empresa', 'url' => ['/duraciones-empresas/index']],
                         ['label' => 'Actividades Economicas', 'url' => ['/actividades-economicas/index']],
                         ['label' => 'Capital', 'url' => ['/actas-constitutivas/crearcapitalsuscrito']],
@@ -133,6 +133,7 @@ AppAsset::register($this);
                         ['label' => 'Modificaciones', 'url' => ['/modificaciones-actas/index']],
                          ['label' => 'Cambio Objeto Social', 'url' => ['objetos-sociales/index']],
                         ['label' => 'Cambio Domicilio', 'url' => ['domicilios/index']],
+                         ['label' => 'Cambio Cierre Ejercicio Econonomico', 'url' => ['/cierres-ejercicios/index']],
                     ],
                 ],
                 

@@ -2,6 +2,7 @@
 
 namespace common\models\p;
 use common\models\a\ActivosDocumentosRegistrados;
+use common\models\p\ModificacionesActas;
 use Yii;
 
 /**
@@ -81,7 +82,7 @@ class CierresEjercicios extends \common\components\BaseActiveRecord
      */
     public function getDocumentoRegistrado()
     {
-        return $this->hasOne(DocumentosRegistrados::className(), ['id' => 'documento_registrado_id']);
+        return $this->hasOne(ActivosDocumentosRegistrados::className(), ['id' => 'documento_registrado_id']);
     }
      public function Existeregistro(){
        $registro = ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'tipo_documento_id'=>1,'proceso_finalizado'=>false]);       
@@ -89,6 +90,14 @@ class CierresEjercicios extends \common\components\BaseActiveRecord
        if(isset($registro) || isset($registromodificacion)){
            if(isset($registromodificacion)){
                $registro=$registromodificacion;
+                $modificacion= ModificacionesActas::findOne(['documento_registrado_id'=>$registro->id]);
+               if(isset($modificacion)){
+                   if(!$modificacion->cierre_ejercicio){
+                       return true;
+                   }
+               }else{
+                   return true;
+               }
            }
           $cierre= CierresEjercicios::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'documento_registrado_id'=>$registro->id]);
            if(isset($cierre)){
