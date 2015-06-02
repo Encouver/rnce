@@ -132,6 +132,7 @@ AppAsset::register($this);
                          ['label' => 'Registro documento', 'url' => ['/activos-documentos-registrados/index']],
                         ['label' => 'Modificaciones', 'url' => ['/modificaciones-actas/index']],
                          ['label' => 'Cambio Objeto Social', 'url' => ['objetos-sociales/index']],
+                        ['label' => 'Cambio Domicilio', 'url' => ['objetos-sociales/index']],
                     ],
                 ],
                 

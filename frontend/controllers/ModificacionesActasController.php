@@ -136,6 +136,7 @@ class ModificacionesActasController extends BaseController
                     break;
                 case "domicilio_fiscal":
                     $model->domicilio_fiscal=true;
+                    $model->domicilio_principal=true;
                     break;
                 case "denominacion_comercial":
                      $model->denominacion_comercial=true;

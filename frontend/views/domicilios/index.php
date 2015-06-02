@@ -21,6 +21,11 @@ $this->params['breadcrumbs'][] = $this->title;
         //'filterModel' => $searchModel,
         'columns' => [
             //['class' => 'yii\grid\SerialColumn'],
+              [
+               'attribute'=>'documento_registrado_id',
+               'label'=>'Tipo documento',
+               'value'=>'documentoRegistrado.tipoDocumento.nombre',
+               ],
             [
                 'attribute'=>'direccion_id',
                 'label'=>'Estado',
@@ -90,6 +95,11 @@ $this->params['breadcrumbs'][] = $this->title;
         //'filterModel' => $searchModel,
         'columns' => [
             //['class' => 'yii\grid\SerialColumn'],
+              [
+               'attribute'=>'documento_registrado_id',
+               'label'=>'Tipo documento',
+               'value'=>'documentoRegistrado.tipoDocumento.nombre',
+               ],
             [
                 'attribute'=>'direccion_id',
                 'label'=>'Estado',
