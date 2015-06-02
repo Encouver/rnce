@@ -21,7 +21,7 @@ use kartik\builder\Form;
     'model'=>$persona_natural,
     'form'=>$form,
     'columns'=>3,
-    'attributes'=>$persona_natural->getFormAttribs("basico")
+    'attributes'=>$persona_natural->getFormAttribs()
       ]); 
     
    echo Html::submitButton('Enviar', ['type'=>'button', 'class'=>'btn btn-primary']);

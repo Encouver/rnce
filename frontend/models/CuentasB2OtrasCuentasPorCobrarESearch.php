@@ -18,7 +18,7 @@ class CuentasB2OtrasCuentasPorCobrarESearch extends CuentasB2OtrasCuentasPorCobr
     public function rules()
     {
         return [
-            [['id', 'plazo_contrato_c', 'plazo_contrato_nc', 'contratista_id', 'creado_por', 'actualizado_por'], 'integer'],
+            [['id', 'plazo_contrato_c', 'plazo_contrato_nc', 'contratista_id', 'creado_por', 'actualizado_por', 'empresa'], 'integer'],
             [['criterio', 'origen', 'fecha', 'garantia', 'otro_nombre', 'anho', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['corriente', 'nocorriente', 'deterioro_c', 'deterioro_nc', 'sys_status'], 'boolean'],
             [['saldo_c', 'valor_de_uso_c', 'saldo_neto_c', 'saldo_nc', 'valor_de_uso_nc', 'saldo_neto_nc'], 'number'],
@@ -79,6 +79,7 @@ class CuentasB2OtrasCuentasPorCobrarESearch extends CuentasB2OtrasCuentasPorCobr
             'sys_creado_el' => $this->sys_creado_el,
             'sys_actualizado_el' => $this->sys_actualizado_el,
             'sys_finalizado_el' => $this->sys_finalizado_el,
+            'empresa' => $this->empresa,
         ]);
 
         $query->andFilterWhere(['like', 'criterio', $this->criterio])

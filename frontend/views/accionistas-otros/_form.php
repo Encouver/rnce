@@ -2,81 +2,79 @@
 
 use yii\helpers\Html;
 use kartik\widgets\ActiveForm;
-use common\models\p\PersonasNaturales;
-use common\models\p\PersonasJuridicas;
 use yii\bootstrap\Modal;
 use kartik\builder\Form;
-use common\models\p\SysPaises;
-use yii\helpers\ArrayHelper;
+use yii\helpers\Url;
+use yii\widgets\Pjax;
+$urlPersona = Url::to(['personas-naturales/create']);
+$urlJuridica = Url::to(['personas-juridicas/create']);
 
 /* @var $this yii\web\View */
 /* @var $model common\models\p\AccionistasOtros */
 /* @var $form yii\widgets\ActiveForm */
 
 $persona_juridica = new PersonasJuridicas();
-$persona_natural = new PersonasNaturales();   
 ?>
-<div class="container">
-    
-    <?php  Modal::begin([
-    'options'=>['id'=>'m1_natural'],
-    'header' => '<h4 style="margin:0; padding:0">Agregar Persona Natural</h4>',
-    'toggleButton' => ['label' => 'Agregar persona natural', 'class'=>'btn btn-primary','style'=>'margin-bottom:10px;'],
-]);?>
-    <?php $form2 = ActiveForm::begin(['id'=>'modal_pnatural', 'type'=>ActiveForm::TYPE_VERTICAL]); ?>
-    
-    
-    <div id="output"></div>
-        
-    
-    <?php echo Form::widget([
-    'model'=>$persona_natural,
-    'form'=>$form2,
-    'columns'=>2,
-    'attributes'=>$persona_natural->getFormAttribs("posextranjero")
-      ]); ?>
-    <div id="output15"></div>
-    <div class="form-group">
-         <?= Html::Button(Yii::t('app', 'Enviar'), ['class' => 'btn btn-success', 'id' => 'enviar15']) ?> 
-    </div>
-   
-   
-    <?php ActiveForm::end(); ?>
-   <?php Modal::end();?>
-    
-    
-        
-     
-     <?php  Modal::begin([
-    'options'=>['id'=>'m2_juridica'],
-    'header' => '<h4 style="margin:0; padding:0">Agregar Persona Juridica</h4>',
-    'toggleButton' => ['label' => 'Agregar persona juridica', 'class'=>'btn btn-primary','style'=>'margin-bottom:10px;'],
-        ]);?>
-    <?php $form3 = ActiveForm::begin(['id'=>'modal_pjuridica', 'type'=>ActiveForm::TYPE_VERTICAL]); ?>
-    
-    
-    <div id="output"></div>
-
-    <?php echo Form::widget([
-    'model'=>$persona_juridica,
-    'form'=>$form3,
-    'columns'=>2,
-    'attributes'=>$persona_juridica->getFormAttribs("posextranjero")
-      ]); ?>
-    
-    <div id="output16"></div>
-    <div class="form-group">
-         <?= Html::Button(Yii::t('app', 'Enviar'), ['class' => 'btn btn-success', 'id' => 'enviar16']) ?> 
-    </div>
-   
-   
-    <?php ActiveForm::end(); ?>
-   <?php Modal::end();?>
-</div>
 
 
 
 <div class="accionistas-otros-form">
+    <?php  Modal::begin([
+    'options'=>['id'=>'persona_natural'],
+    'header' => '<h4 style="margin:0; padding:0">Agregar Persona Natural</h4>',
+    'toggleButton' => ['label' => 'Agregar Persona Natural', 'class'=>'btn btn-primary','style'=>'margin-bottom:10px;'],
+]);?>
+
+<div id="output-documento">
+    <?php Pjax::begin(['enablePushState' => false]);?>
+        <?php $form2 = ActiveForm::begin(['id'=>$modelPersona->formName(), 'type'=>ActiveForm::TYPE_VERTICAL,'action'=>$urlPersona, 'options' => ['data-pjax' => true]]); ?>
+  
+            <?php echo Form::widget([
+                'model'=>$modelPersona,
+                'form'=>$form2,
+                'columns'=>3,
+                'attributes'=>$modelPersona->getformAttribs("basico")
+            ]); ?>
+
+        <!--    <div class="form-group">
+                <?/*= Html::Button(Yii::t('app', 'Enviar'), ['class' => 'btn btn-success', 'id' => 'enviar-documento']) */?>
+            </div>-->
+                <div class="form-group">
+                    <?= Html::submitButton(Yii::t('app', 'Guardar') , ['class' =>'btn btn-success', 'id' => 'enviar-documento' ]) ?>
+                </div>
+        <?php ActiveForm::end(); ?>
+    <?php Pjax::end();?>
+</div>
+
+<?php Modal::end();?>    
+ <?php  Modal::begin([
+    'options'=>['id'=>'persona_juridica'],
+    'header' => '<h4 style="margin:0; padding:0">Agregar Persona Juridica</h4>',
+    'toggleButton' => ['label' => 'Agregar Persona Juridica', 'class'=>'btn btn-primary','style'=>'margin-bottom:10px;'],
+]);?>
+
+<div id="output-documento2">
+    <?php Pjax::begin(['enablePushState' => false]);?>
+        <?php $form3 = ActiveForm::begin(['id'=>$modelJuridica->formName(), 'type'=>ActiveForm::TYPE_VERTICAL,'action'=>$urlJuridica, 'options' => ['data-pjax' => true]]); ?>
+  
+            <?php echo Form::widget([
+                'model'=>$modelJuridica,
+                'form'=>$form3,
+                'columns'=>3,
+                'attributes'=>$modelJuridica->getformAttribs()
+            ]); ?>
+
+        <!--    <div class="form-group">
+                <?/*= Html::Button(Yii::t('app', 'Enviar'), ['class' => 'btn btn-success', 'id' => 'enviar-documento']) */?>
+            </div>-->
+                <div class="form-group">
+                    <?= Html::submitButton(Yii::t('app', 'Guardar') , ['class' =>'btn btn-success', 'id' => 'enviar-documento' ]) ?>
+                </div>
+        <?php ActiveForm::end(); ?>
+    <?php Pjax::end();?>
+</div>
+
+<?php Modal::end();?>  
  <?php $form = ActiveForm::begin(['type'=>ActiveForm::TYPE_VERTICAL]); ?>
     
  <?php echo Form::widget([
@@ -92,52 +90,64 @@ $persona_natural = new PersonasNaturales();
     <?php ActiveForm::end(); ?>
  <?php
 $script = <<< JS
-    $('#enviar15').click(function(e){
-          
-            if($('form#modal_pnatural').find('.has-error').length!=0){
-              
-                return false;
-            }else
-            {
-                //$('form#modal_pnatural').submit();
-                e.preventDefault();
-                e.stopImmediatePropagation();
-               $.ajax({
-                   
-                    url: 'http://localhost/rnce/frontend/web/index.php?r=personas-naturales/crearpersonanatural',
-                    type: 'post',
-                    data: $('form#modal_pnatural').serialize(),
-                    success: function(data) {
-                             $( "#output15" ).html( data ); 
-                    }
-                });
+        $( document ).ready(function() {
+  
+    
+    $('.field-personasnaturales-sys_pais_id').css('display','none');
+    $('.field-personasnaturales-rif').css('display','none');
+    $('.field-personasnaturales-numero_identificacion').css('display','none');
+        
+    $('#personasnaturales-nacionalidad').click(function(e){
+                if($('#personasnaturales-nacionalidad').val()=='NACIONAL') {
+                     $('.field-personasnaturales-rif').css('display','inherit');
+                     $('.field-personasnaturales-sys_pais_id').css('display','none');
+                     $('.field-personasnaturales-numero_identificacion').css('display','none');
+                     $('#personasnaturales-sys_pais_id').val('');
+                     $('#personasnaturales-numero_identificacion').val('');
+                  
+                }else{
+                        if($('#personasnaturales-nacionalidad').val()=='EXTRANJERA'){
+                        $('.field-personasnaturales-rif').css('display','none');
+                        $('.field-personasnaturales-sys_pais_id').css('display','inherit');
+                        $('.field-personasnaturales-numero_identificacion').css('display','inherit');
+                        $('#personasnaturales-rif').val('');
+            
+                        }
+                     
+                       }
                 
-            }
-    });
-     $('#enviar16').click(function(e){
-          
-            if($('form#modal_pjuridica').find('.has-error').length!=0){
-              
-                return false;
-            }else
-            {
-                //$('form#modal_pjuridica').submit();
-                e.preventDefault();
-                e.stopImmediatePropagation();
-               $.ajax({
-                   
-                    url: 'http://localhost/rnce/frontend/web/index.php?r=personas-juridicas/crearpersonajuridica',
-                    type: 'post',
-                    data: $('form#modal_pjuridica').serialize(),
-                    success: function(data) {
-                             $( "#output16" ).html( data ); 
-                    }
-                });
+       
+        });
+        
+        $('.field-personasjuridicas-sys_pais_id').css('display','none');
+    $('.field-personasjuridicas-rif').css('display','none');
+    $('.field-personasjuridicas-numero_identificacion').css('display','none');
+        
+    $('#personasjuridicas-tipo_nacionalidad').click(function(e){
+                if($('#personasjuridicas-tipo_nacionalidad').val()=='NACIONAL') {
+                     $('.field-personasjuridicas-rif').css('display','inherit');
+                     $('.field-personasjuridicas-sys_pais_id').css('display','none');
+                     $('.field-personasjuridicas-numero_identificacion').css('display','none');
+                     $('#personasjuridicas-sys_pais_id').val('');
+                     $('#personasjuridicas-numero_identificacion').val('');
+                  
+                }else{
+                        if($('#personasjuridicas-tipo_nacionalidad').val()=='EXTRANJERA'){
+                        $('.field-personasjuridicas-rif').css('display','none');
+                        $('.field-personasjuridicas-sys_pais_id').css('display','inherit');
+                        $('.field-personasjuridicas-numero_identificacion').css('display','inherit');
+                        $('#personasjuridicas-rif').val('');
+            
+                        }
+                     
+                       }
                 
-            }
-    });
+       
+        });
+      
+});
 JS;
 $this->registerJs($script);
-
 ?>
+
 </div>

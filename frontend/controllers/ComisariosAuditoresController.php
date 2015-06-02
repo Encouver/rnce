@@ -64,6 +64,8 @@ class ComisariosAuditoresController extends BaseController
     public function actionCreate($id=null)
     {
         $model = new ComisariosAuditores();
+        $modelPersona= new PersonasNaturales(['scenario'=>'basico']);
+       
         if (!is_null($id)){
             switch ($id){
             case "comisario":
@@ -82,38 +84,22 @@ class ComisariosAuditoresController extends BaseController
                 break;
             }  
         }
-        if ( $model->load(Yii::$app->request->post())) {
-            if($model->comisario){
-            $registro = ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id, 'tipo_documento_id'=>1]);
-            $model->documento_registrado_id=$registro->id;
-            $comisario= ComisariosAuditores::findAll(['contratista_id'=>Yii::$app->user->identity->contratista_id,'comisario'=>true,'documento_registrado_id'=>$registro->id]);
-            
-            if(count($comisario)>=2){
-                
-                 Yii::$app->session->setFlash('error','Contratista ya ha alcanzado el maximo de comisarios');
-                        return $this->render('create', [
-                        'model' => $model,
-                        ]);
-            }
-            }
-            $model->contratista_id = Yii::$app->user->identity->contratista_id;
-               if ( $model->save()) {
-          
-                               return $this->redirect(['index']);
+          if($model->existeregistro()){
+            Yii::$app->session->setFlash('error','Usuario posee el limte de comisarios ó debe crear un documento registrado');
+            return $this->redirect(['index']);
+          }
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+          return $this->redirect(['index']);
                                
 
 
-                   }else{
-                       Yii::$app->session->setFlash('error','error en la carga');
-                        return $this->render('create', [
-                        'model' => $model,
-                        ]);
-                   }
+                 
              
          
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'modelPersona'=>$modelPersona,
             ]);
         }
     }
@@ -314,6 +300,7 @@ class ComisariosAuditoresController extends BaseController
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $modelPersona= new PersonasNaturales();
         if($model->comisario){
                $model->scenario='comisario';
            }
@@ -323,6 +310,7 @@ class ComisariosAuditoresController extends BaseController
         } else {
             return $this->render('update', [
                 'model' => $model,
+                 'modelPersona'=>$modelPersona,
             ]);
         }
     }

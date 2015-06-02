@@ -67,6 +67,8 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'sys_finalizado_el') ?>
 
+    <?php // echo $form->field($model, 'empresa') ?>
+
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>
         <?= Html::resetButton(Yii::t('app', 'Reset'), ['class' => 'btn btn-default']) ?>

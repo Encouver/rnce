@@ -24,15 +24,11 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'razon_social_id')->textInput() ?>
 
-    <?= $form->field($model, 'domicilio_id')->textInput() ?>
-
-    <?= $form->field($model, 'accionista_otro')->textInput() ?>
-
-    <?= $form->field($model, 'comisario_auditor_id')->textInput() ?>
-
     <?= $form->field($model, 'cierre_ejercicio_id')->textInput() ?>
 
-    <?= $form->field($model, 'fecha_modificacion')->textInput() ?>
+    <?= $form->field($model, 'creado_por')->textInput() ?>
+
+    <?= $form->field($model, 'actualizado_por')->textInput() ?>
 
     <?= $form->field($model, 'sys_status')->checkbox() ?>
 
@@ -42,33 +38,23 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'sys_finalizado_el')->textInput() ?>
 
-    <?= $form->field($model, 'capital_principal')->checkbox() ?>
+    <?= $form->field($model, 'domicilio_fiscal_id')->textInput() ?>
 
-    <?= $form->field($model, 'pago_capital')->checkbox() ?>
+    <?= $form->field($model, 'domicilio_principal_id')->textInput() ?>
 
-    <?= $form->field($model, 'aporte_capitalizar')->checkbox() ?>
+    <?= $form->field($model, 'acciones')->checkbox() ?>
 
-    <?= $form->field($model, 'aumento_capital')->checkbox() ?>
+    <?= $form->field($model, 'certificados')->checkbox() ?>
 
-    <?= $form->field($model, 'coreccion_monetaria')->checkbox() ?>
+    <?= $form->field($model, 'suplementarios')->checkbox() ?>
 
-    <?= $form->field($model, 'disminucion_capital')->checkbox() ?>
+    <?= $form->field($model, 'capital_suscrito')->textInput() ?>
 
-    <?= $form->field($model, 'limitacion_capital')->checkbox() ?>
+    <?= $form->field($model, 'capital_pagado')->textInput() ?>
 
-    <?= $form->field($model, 'limitacion_capital_afectado')->checkbox() ?>
+    <?= $form->field($model, 'actual')->checkbox() ?>
 
-    <?= $form->field($model, 'fondo_emergencia')->checkbox() ?>
-
-    <?= $form->field($model, 'reintegro_perdida')->checkbox() ?>
-
-    <?= $form->field($model, 'venta_accion')->checkbox() ?>
-
-    <?= $form->field($model, 'fusion_empresarial')->checkbox() ?>
-
-    <?= $form->field($model, 'decreto_div_excedente')->checkbox() ?>
-
-    <?= $form->field($model, 'modificacion_balance')->checkbox() ?>
+    <?= $form->field($model, 'modificacion_acta_id')->textInput() ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

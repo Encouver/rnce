@@ -63,29 +63,13 @@ class ContratistasContactosController extends Controller
     public function actionCreate()
     {
         $model = new ContratistasContactos();
-
-        if ($model->load(Yii::$app->request->post()) ) {
+         if($model->existeregistro()){
+            Yii::$app->session->setFlash('error','Contratista ya posee una persona de contacto');
+            return $this->redirect(['index']);
+                }
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
          
-            $model->contratista_id=  Yii::$app->user->identity->contratista_id;
-            $contacto= ContratistasContactos::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id]);
-            if(isset($contacto)){
-                 Yii::$app->session->setFlash('error','Usuario ya posse una persona de contacto asociada');
-                       return $this->render('create', [
-                'model' => $model,
-            ]);
-            }
-            if('')
-                   if ($model->save()) {
                 return $this->redirect(['index']);
-
-
-                   }else{
-                       Yii::$app->session->setFlash('error','Error en la carga');
-                       return $this->render('create', [
-                'model' => $model,
-            ]);
-                   }
-            
            
         } else {
             return $this->render('create', [

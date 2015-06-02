@@ -18,7 +18,7 @@ class SucursalesSearch extends Sucursales
     public function rules()
     {
         return [
-            [['direccion_id', 'contratista_id', 'id', 'creado_por', 'actualizado_por', 'natural_juridica_id'], 'integer'],
+            [['direccion_id', 'contratista_id', 'id', 'creado_por', 'actualizado_por', 'natural_juridica_id','documento_registrado_id'], 'integer'],
             [['sys_status'], 'boolean'],
             [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
         ];
@@ -67,6 +67,7 @@ class SucursalesSearch extends Sucursales
             'sys_actualizado_el' => $this->sys_actualizado_el,
             'sys_finalizado_el' => $this->sys_finalizado_el,
             'natural_juridica_id' => $this->natural_juridica_id,
+            'documento_registrado_id' => $this->documento_registrado_id,
         ]);
 
         return $dataProvider;

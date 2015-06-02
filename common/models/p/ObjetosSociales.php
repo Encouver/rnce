@@ -2,6 +2,8 @@
 
 namespace common\models\p;
 use common\models\a\ActivosDocumentosRegistrados;
+use kartik\builder\Form;
+use common\models\p\ModificacionesActas;
 use Yii;
 
 /**
@@ -37,11 +39,13 @@ class ObjetosSociales extends \common\components\BaseActiveRecord
     public function rules()
     {
         return [
-            [['contratista_id', 'documento_registrado_id', 'tipo_objeto', 'descripcion'], 'required'],
+            [['contratista_id', 'documento_registrado_id', 'descripcion'], 'required'],
             [['contratista_id', 'documento_registrado_id'], 'integer'],
             [['tipo_objeto', 'descripcion'], 'string'],
             [['sys_status'], 'boolean'],
-            [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe']
+            [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
+            [['tipo_objeto'], 'required','on'=>'modificacion'],
+
         ];
     }
 
@@ -84,7 +88,26 @@ class ObjetosSociales extends \common\components\BaseActiveRecord
      */
     public function getDocumentoRegistrado()
     {
-        return $this->hasOne(DocumentosRegistrados::className(), ['id' => 'documento_registrado_id']);
+        return $this->hasOne(ActivosDocumentosRegistrados::className(), ['id' => 'documento_registrado_id']);
+    }
+      public function getFormAttribs() {
+        
+    if($this->scenario=="modificacion"){
+        $data=['AMPLIACION' => 'AMPLIACION', 'MODIFICACION PARCIAL' => 'MODIFICACION PARCIAL', 'MODIFICACION TOTAL' => 'MODIFICACION TOTAL', ];
+         return [
+        
+        'tipo_objeto'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>$data,'options'=>['prompt'=>'Seleccione tipo']],
+        'descripcion'=>['type'=>Form::INPUT_TEXTAREA,'options'=>['placeholder'=>'Introduzca descripcion']],
+             ];
+    }else{
+    
+         return [             
+      
+        'descripcion'=>['type'=>Form::INPUT_TEXTAREA,'options'=>['placeholder'=>'Introduzca descripcion']],
+      
+    ];
+    }
+       
     }
     
     public function Existeregistro(){
@@ -93,7 +116,15 @@ class ObjetosSociales extends \common\components\BaseActiveRecord
        if(isset($registro) || isset($registromodificacion)){
            if(isset($registromodificacion)){
                $registro=$registromodificacion;
-             
+               $modificacion= ModificacionesActas::findOne(['documento_registrado_id'=>$registro->id]);
+               if(isset($modificacion)){
+                   if(!$modificacion->objeto_social){
+                       return true;
+                   }
+               }else{
+                   return true;
+               }
+               $this->scenario="modificacion";
            }else{
                  $this->tipo_objeto='PRINCIPAL';
            }

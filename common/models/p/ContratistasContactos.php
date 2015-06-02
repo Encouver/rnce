@@ -71,4 +71,16 @@ class ContratistasContactos extends \common\components\BaseActiveRecord
     {
         return $this->hasOne(Contratistas::className(), ['id' => 'contratista_id']);
     }
+    public function Existeregistro(){
+  
+          $contacto= ContratistasContactos::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id]);
+           if(isset($contacto)){
+               
+                return true;   
+            }else{
+                return false;
+            }
+        
+        
+    }
 }

@@ -27,6 +27,11 @@ $this->params['breadcrumbs'][] = $this->title;
             //'id',
             //'contratista_id',
             //'documento_registrado_id',
+              [
+               'attribute'=>'documento_registrado_id',
+               'label'=>'Tipo documento',
+               'value'=>'documentoRegistrado.tipoDocumento.nombre',
+               ],
             'fecha_cierre',
             //'sys_status:boolean',
             // 'sys_creado_el',

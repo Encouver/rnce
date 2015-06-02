@@ -18,6 +18,7 @@ use Yii;
  * @property string $sys_creado_el
  * @property string $sys_actualizado_el
  * @property string $sys_finalizado_el
+ * @property string $natural
  */
 class SysNaturalesJuridicas extends \common\components\BaseActiveRecord
 {
@@ -36,9 +37,9 @@ class SysNaturalesJuridicas extends \common\components\BaseActiveRecord
     {
         return [
             [['rif', 'juridica', 'denominacion', 'anho'], 'required'],
-            [['juridica', 'sys_status'], 'boolean'],
+            [['juridica', 'sys_status','nacional'], 'boolean'],
             [['creado_por', 'actualizado_por'], 'integer'],
-            [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
+            [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el','nacional'], 'safe'],
             [['rif'], 'string', 'max' => 20],
             [['denominacion'], 'string', 'max' => 255],
             [['anho'], 'string', 'max' => 100],
@@ -63,6 +64,7 @@ class SysNaturalesJuridicas extends \common\components\BaseActiveRecord
             'sys_creado_el' => Yii::t('app', 'Sys Creado El'),
             'sys_actualizado_el' => Yii::t('app', 'Sys Actualizado El'),
             'sys_finalizado_el' => Yii::t('app', 'Sys Finalizado El'),
+            'nacional' => Yii::t('app', 'Tipo nacionalidad'),
         ];
     }
 

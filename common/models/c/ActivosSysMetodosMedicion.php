@@ -50,7 +50,7 @@ class ActivosSysMetodosMedicion extends \common\components\BaseActiveRecord
     public $desde;
     public $hasta;
 
-
+    
     /**
      * @inheritdoc
      */

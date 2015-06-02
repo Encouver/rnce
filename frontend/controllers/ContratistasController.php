@@ -86,8 +86,7 @@ class ContratistasController extends BaseController
    {
 
      
-        $persona_natural = new PersonasNaturales();
-        $persona_natural->scenario='basico';
+        $persona_natural = new PersonasNaturales(['scenario'=>'acta']);
      
        if ($persona_natural->load(Yii::$app->request->post())) {
 
@@ -103,10 +102,8 @@ class ContratistasController extends BaseController
 
                    $persona_natural->sys_pais_id = 1;
                    $persona_natural->nacionalidad = "NACIONAL";
-                   $persona_natural->creado_por = 1;
                    if ($persona_natural->save()) {
 
-                       $contratista->estatus_contratista_id = 1;
                        $contratista ->natural_juridica_id = $natural_juridica->id;
 
                        if($contratista->save()){
@@ -191,7 +188,7 @@ class ContratistasController extends BaseController
 
                 if ($natural_juridica->save()) {
 
-
+                $persona_juridica->sys_pais_id=1;
                 $persona_juridica->tipo_nacionalidad = "NACIONAL";
                 $persona_juridica->creado_por = Yii::$app->user->identity->id;
                    if ($persona_juridica->save()) {

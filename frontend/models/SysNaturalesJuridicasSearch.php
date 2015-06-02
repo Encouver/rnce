@@ -19,8 +19,8 @@ class SysNaturalesJuridicasSearch extends SysNaturalesJuridicas
     {
         return [
             [['id', 'creado_por', 'actualizado_por'], 'integer'],
-            [['rif', 'denominacion', 'anho', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
-            [['juridica', 'sys_status'], 'boolean'],
+            [['rif', 'denominacion', 'anho', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el','nacional'], 'safe'],
+            [['juridica', 'sys_status','nacional'], 'boolean'],
         ];
     }
 
@@ -65,6 +65,7 @@ class SysNaturalesJuridicasSearch extends SysNaturalesJuridicas
             'sys_creado_el' => $this->sys_creado_el,
             'sys_actualizado_el' => $this->sys_actualizado_el,
             'sys_finalizado_el' => $this->sys_finalizado_el,
+            'nacional'=>$this->nacional,
         ]);
 
         $query->andFilterWhere(['like', 'rif', $this->rif])

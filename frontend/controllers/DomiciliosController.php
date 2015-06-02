@@ -33,13 +33,18 @@ class DomiciliosController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new DomiciliosSearch();
-        $searchModel->fiscal = false;
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $searchModelFiscal = new DomiciliosSearch();
+        $searchModelFiscal->fiscal = true;
+        $dataProviderFiscal = $searchModelFiscal->search(Yii::$app->request->queryParams);
+        $searchModelPrincipal = new DomiciliosSearch();
+        $searchModelPrincipal->fiscal = false;
+        $dataProviderPrincipal = $searchModelPrincipal->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'searchModelFiscal' => $searchModelFiscal,
+            'dataProviderFiscal' => $dataProviderFiscal,
+            'searchModelPrincipal' => $searchModelPrincipal,
+            'dataProviderPrincipal' => $dataProviderPrincipal,
         ]);
     }
 
@@ -78,32 +83,17 @@ class DomiciliosController extends Controller
                 break;
             }  
         }
+         if($model->existeregistro()){
+            Yii::$app->session->setFlash('error','Usuario ya posse una direccion asociada ó debe crear un documento registrado');
+            return $this->redirect(['index']);
+                }
         if ($model->load(Yii::$app->request->post()) && $direccion->load(Yii::$app->request->post())) {
               $transaction = \Yii::$app->db->beginTransaction();
            try {
-                $flag =false;
+              
                if ($direccion->save()) {
            $model->direccion_id=$direccion->id;
-           $usuario= \common\models\p\User::findOne(Yii::$app->user->identity->id);
-            $model->contratista_id=  $usuario->contratista_id;
-             $domicilio= Domicilios::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'fiscal'=>false]);
-            if($model->fiscal){
-                 $domicilio= Domicilios::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'fiscal'=>true]);
-            }
-            
-
-            
-            if(isset($domicilio)){
-                   $opcion="Principal";
-                   if($domicilio->fiscal){
-                       $opcion="Fiscal";
-                   }
-                      Yii::$app->session->setFlash('error','Usuario ya posee una direccion '.$opcion.' asociada');
-                   return $this->render('create', [
-                        'model'=>$model,
-                        'direccion' => $direccion,
-                        ]);
-                   }
+           
                    if ($model->save()) {
 
 
@@ -114,6 +104,7 @@ class DomiciliosController extends Controller
 
 
                    }else{
+                        $transaction->rollBack();
                        Yii::$app->session->setFlash('error','Direccion Principal no guardada');
                    return $this->render('create', [
                         'model'=>$model,
@@ -121,6 +112,7 @@ class DomiciliosController extends Controller
                         ]);
                    }
                }else{
+                   $transaction->rollBack();
                    Yii::$app->session->setFlash('error','Error en la carga de la direccion');
                    return $this->render('create', [
                         'model'=>$model,
@@ -128,10 +120,6 @@ class DomiciliosController extends Controller
                         ]);
                }
 
-               if(!$flag)
-               {
-                   $transaction->rollBack();
-               }
            } catch (Exception $e) {
                $transaction->rollBack();
            }

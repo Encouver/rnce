@@ -94,16 +94,15 @@ AppAsset::register($this);
                     'items' => [
                          //['label' => 'Acordeon', 'url' => ['/contratistas/acordeon']],
                          ['label' => 'Datos basicos', 'url' => ['/contratistas/index']],
-                         ['label' => 'Direccion Principal', 'url' => ['/domicilios/index']],
+                         
                         ['label' => 'Bancos', 'url' => ['/bancos-contratistas/index']],
-                         ['label' => 'Sucursales', 'url' => ['/sucursales/index']],
                         ['label' => 'Persona de contacto', 'url' => ['/contratistas-contactos/index']],
                          ['label' => 'Objeto empresa', 'url' => ['/objetos-empresas/index']],
                         ['label' => 'Principio contable', 'url' => ['/principios-contables/index']],
                        /*  ['label' => 'Responsable Contabilidad', 'url' => ['/comisarios-auditores/crearresponsable']],
                          ['label' => 'Contador Auditor', 'url' => ['/comisarios-auditores/crearcontador']],
                          ['label' => 'Profesional Informe de conversion', 'url' => ['/comisarios-auditores/crearprofesional']],*/
-                         ['label' => 'Relacion de Contratos', 'url' => ['/relaciones-contratos/crearrelacioncontrato']],
+                         ['label' => 'Relacion de Contratos', 'url' => ['/relaciones-contratos/index']],
          
                         
                     ],
@@ -112,18 +111,30 @@ AppAsset::register($this);
                     'items' => [
                          ['label' => 'Registro documento', 'url' => ['/activos-documentos-registrados/index']],
                         ['label' => 'Razon Social', 'url' => ['/razones-sociales/index']],
+                        ['label' => 'Direcciones', 'url' => ['/domicilios/index']],
                          ['label' => 'Denominaciones Comerciales', 'url' => ['/denominaciones-comerciales/index']],
                         ['label' => 'Objeto Social', 'url' => ['/objetos-sociales/index']],
-                        ['label' => 'Cierre ejercicio', 'url' => ['/cierres-ejercicios/index']],
+                        ['label' => 'Cierre ejercicio Econonomico', 'url' => ['/cierres-ejercicios/index']],
                         ['label' => 'Duracion empresa', 'url' => ['/duraciones-empresas/index']],
                         ['label' => 'Actividades Economicas', 'url' => ['/actividades-economicas/index']],
                         ['label' => 'Capital', 'url' => ['/actas-constitutivas/crearcapitalsuscrito']],
                         ['label' => 'Origen Capital', 'url' => ['/origenes-capitales/index']],
-                        ['label' => 'Certificacion Aportes', 'url' => ['/certificaciones-aportes/create']],
+                        ['label' => 'Certificacion Aportes', 'url' => ['/certificaciones-aportes/index']],
                         ['label' => 'Accionistas Representante Legal o Junta Directiva', 'url' => ['/accionistas-otros/index']],
                         ['label' => 'Comisarios', 'url' => ['/comisarios-auditores/index']],
                         ['label' => 'Fondos Reservas', 'url' => ['/fondos-reservas/index']],
+                        ['label' => 'Sucursales', 'url' => ['/sucursales/index']],
                         ['label' => 'Resumen', 'url' => ['/actas-constitutivas/resumenacta']],
+                    ],
+                ],
+                ['label' => 'Modificacion acta',
+                    'items' => [
+                         ['label' => 'Registro documento', 'url' => ['/activos-documentos-registrados/index']],
+                        ['label' => 'Modificaciones', 'url' => ['/modificaciones-actas/index']],
+                         ['label' => 'Cambio Objeto Social', 'url' => ['objetos-sociales/index']],
+                        ['label' => 'Cambio Domicilio', 'url' => ['domicilios/index']],
+                         ['label' => 'Cambio Cierre Ejercicio Econonomico', 'url' => ['/cierres-ejercicios/index']],
+                        ['label' => 'Duracion empresa', 'url' => ['/duraciones-empresas/index']],
                     ],
                 ],
                 

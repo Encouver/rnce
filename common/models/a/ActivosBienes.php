@@ -83,7 +83,7 @@ class ActivosBienes extends \common\components\BaseActiveRecord
     {
         return [
 
-            [['sys_tipo_bien_id', 'contratista_id', 'origen_id', 'detalle', 'metodo_medicion_id','propio' ], 'required'],
+            [['sys_tipo_bien_id', 'contratista_id', 'origen_id', 'detalle', 'metodo_medicion_id','propio','mejora', 'perdida_reverso', 'proc_productivo' ], 'required'],
             [['id','sys_tipo_bien_id', 'contratista_id', 'origen_id', 'creado_por', 'actualizado_por', 'factura_id', 'documento_registrado_id', 'arrendamiento_id', 'desincorporacion_id', 'metodo_medicion_id'], 'integer'],
             [['arrendamiento_id'], 'required', 'when'=> function ($model) {
                 return !$model->propio;
@@ -103,12 +103,12 @@ class ActivosBienes extends \common\components\BaseActiveRecord
             [['factura_id'], 'required', 'message'=>'Al menos la factura es requerida si no introduce documento.', 'when'=> function ($model) {
                 return $model->documento_registrado_id == null or $model->documento_registrado_id == 0;
             }, 'whenClient' => "function (attribute, value) {
-                return $('#activosbienes-documento_registrado_id').val() == 0;
+                return $('#activosbienes-documento_registrado_id').val() == '';
             }"],
             [['documento_registrado_id'],  'required', 'message'=>'Al menos el documento registrado es requerido si no introduce factura.','when'=> function ($model) {
                 return $model->factura_id == null or $model->factura_id == 0;
             }, 'whenClient' => "function (attribute, value) {
-                 return $('#activosbienes-factura_id').val() == 0;
+                 return $('#activosbienes-factura_id').val() == '';
             }"],
             [['fecha_origen', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['propio', 'nacional', 'carga_completa', 'sys_status', 'mejora', 'perdida_reverso', 'proc_productivo', 'directo', 'proc_ventas'], 'boolean'],
@@ -399,34 +399,51 @@ class ActivosBienes extends \common\components\BaseActiveRecord
                      'templateResult' => new JsExpression('function(city) { return city.text; }'),
                      'templateSelection' => new JsExpression('function (city) { return city.text; }'),
                  ],]],
-            'propio'=>['type'=>Form::INPUT_WIDGET, 'widgetClass'=>CheckboxX::className()],
+            'propio'=>['type'=>Form::INPUT_WIDGET, 'widgetClass'=>CheckboxX::className(),'options'=>[
+                'pluginOptions'=>['threeState'=>false,
+                    //'iconChecked'=>'<i class="glyphicon glyphicon-plus"></i>',
+                    'iconUnchecked'=>'<i class="glyphicon glyphicon-remove"></i>',
+                    'iconNull'=>'<i class="glyphicon"></i>']]],
             //'factura'=>['type'=>Form::INPUT_WIDGET, 'widgetClass'=>CheckboxX::className()],
              //'documento'=>['type'=>Form::INPUT_WIDGET, 'widgetClass'=>CheckboxX::className()],
 
              'metodo_medicion_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(ActivosSysMetodosMedicion::find()->all(),'id','nombre',function($model){ return $model->modelo->nombre;}), 'pluginOptions'=>['allowClear' => true],'options'=>['id'=>'metodo-medicion','placeholder'=>'Seleccionar método de medición', 'onchange'=>'']]],
              // Mejora
-             'mejora'=>['type'=>Form::INPUT_CHECKBOX,'columnOptions'=>['hidden'=>false,],'options'=>['onchange'=>'']],//['type'=>Form::INPUT_WIDGET, 'widgetClass'=>CheckboxX::className()],
-             'perdida_reverso'=>['type'=>Form::INPUT_WIDGET, 'widgetClass'=>CheckboxX::className()],
+             'mejora'=>['type'=>Form::INPUT_WIDGET, 'widgetClass'=>CheckboxX::className(),'options'=>[
+                 'pluginOptions'=>['threeState'=>false,
+                 //'iconChecked'=>'<i class="glyphicon glyphicon-plus"></i>',
+                 'iconUnchecked'=>'<i class="glyphicon glyphicon-remove"></i>',
+                 'iconNull'=>'<i class="glyphicon"></i>']]
+             ], //['type'=>Form::INPUT_CHECKBOX,'columnOptions'=>['hidden'=>false,],'options'=>['onchange'=>'']],
+             'perdida_reverso'=>['type'=>Form::INPUT_WIDGET, 'widgetClass'=>CheckboxX::className(),'options'=>[
+                 'pluginOptions'=>['threeState'=>false,
+                     //'iconChecked'=>'<i class="glyphicon glyphicon-plus"></i>',
+                     'iconUnchecked'=>'<i class="glyphicon glyphicon-remove"></i>',
+                     'iconNull'=>'<i class="glyphicon"></i>']]],
 
-             'proc_productivo'=>['type'=>Form::INPUT_CHECKBOX,'columnOptions'=>['hidden'=>false,]], //['type'=>Form::INPUT_WIDGET, 'widgetClass'=>CheckboxX::className()],
+             'proc_productivo'=>['type'=>Form::INPUT_WIDGET, 'widgetClass'=>CheckboxX::className(),'options'=>[
+                 'pluginOptions'=>['threeState'=>false,
+                     //'iconChecked'=>'<i class="glyphicon glyphicon-plus"></i>',
+                     'iconUnchecked'=>'<i class="glyphicon glyphicon-remove"></i>',
+                     'iconNull'=>'<i class="glyphicon"></i>']]
+                 ],//['type'=>Form::INPUT_CHECKBOX,'columnOptions'=>['hidden'=>false,]],
              // Si proc_productivo es true
-             'directo'=>['type'=>Form::INPUT_CHECKBOX,'columnOptions'=>['hidden'=>true,]],
+             'directo'=>['type'=>Form::INPUT_WIDGET, 'widgetClass'=>CheckboxX::className(),'options'=>[
+                 'pluginOptions'=>['threeState'=>false,
+                     //'iconChecked'=>'<i class="glyphicon glyphicon-plus"></i>',
+                     'iconUnchecked'=>'<i class="glyphicon glyphicon-remove"></i>',
+                     'iconNull'=>'<i class="glyphicon"></i>']],
+                 'columnOptions'=>['hidden'=>true,]
+                 ],//['type'=>Form::INPUT_CHECKBOX,'columnOptions'=>['hidden'=>true,]],
              // Si proceso productivo es false.
-             'proc_ventas'=>['type'=>Form::INPUT_CHECKBOX,'columnOptions'=>['hidden'=>false,]], //['type'=>Form::INPUT_WIDGET, 'widgetClass'=>CheckboxX::className()],
+             'proc_ventas'=> ['type'=>Form::INPUT_WIDGET, 'widgetClass'=>CheckboxX::className(),'options'=>[
+                 'pluginOptions'=>['threeState'=>false,
+                     //'iconChecked'=>'<i class="glyphicon glyphicon-plus"></i>',
+                     'iconUnchecked'=>'<i class="glyphicon glyphicon-remove"></i>',
+                     'iconNull'=>'<i class="glyphicon"></i>']],
+                 'columnOptions'=>['hidden'=>true,]
 
-
-            //'principio_contable_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(ActivosSysFormasOrg::find()->asArray()->all(),'id','nombre')]],
-            /*'fecha_origen'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>DatePicker::className(),'options'=>['options' => ['placeholder' => 'Seleccione fecha ...'],
-                'convertFormat' => true,
-                'pluginOptions' => [
-                    'format' => 'd-M-yyyy ',
-                    //'startDate' => date('d-m-Y h:i A'),//'01-Mar-2014 12:00 AM',
-                    'todayHighlight' => true
-                ]],
-                'columnOptions'=>['hidden'=>true]
-            ],*/
-            //'nacional'=>['type'=>Form::INPUT_CHECKBOX,'columnOptions'=>['hidden'=>true]],
-            //'contratista_id'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>ArrayHelper::map(Contratistas::find()->asArray()->all(),'id','nombre'),],
+             ]//['type'=>Form::INPUT_CHECKBOX,'columnOptions'=>['hidden'=>false,]],
 
         ];
 
@@ -442,7 +459,13 @@ class ActivosBienes extends \common\components\BaseActiveRecord
             'columnOptions'=>[ 'hidden'=>false,]
         ];
         //if($this->origen_id==2)
-            $attributes['nacional'] = ['type'=>Form::INPUT_CHECKBOX,'columnOptions'=>['hidden'=>true,],'options'=>['onchange'=>'']];
+            $attributes['nacional'] = ['type'=>Form::INPUT_WIDGET, 'widgetClass'=>CheckboxX::className(),'options'=>[
+                'pluginOptions'=>['threeState'=>false,
+                    //'iconChecked'=>'<i class="glyphicon glyphicon-plus"></i>',
+                    'iconUnchecked'=>'<i class="glyphicon glyphicon-remove"></i>',
+                    'iconNull'=>'<i class="glyphicon"></i>'],
+                ],'columnOptions'=>['hidden'=>true,]
+            ];//['type'=>Form::INPUT_CHECKBOX,'columnOptions'=>['hidden'=>true,],'options'=>['onchange'=>'']];
 
         return $attributes;
     }

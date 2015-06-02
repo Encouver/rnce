@@ -2,15 +2,20 @@
 
 namespace common\models\p;
 use kartik\builder\Form;
+use common\models\p\RelacionesContratos;
+use kartik\widgets\Select2;
+use yii\web\JsExpression;
 use Yii;
 
 /**
- * This is the model class for table "public.contratos_facturas".
+ * This is the model class for table "contratos_facturas".
  *
  * @property integer $id
  * @property integer $relacion_contrato_id
  * @property integer $orden_factura
  * @property string $monto
+ * @property integer $creado_por
+ * @property integer $actualizado_por
  * @property boolean $sys_status
  * @property string $sys_creado_el
  * @property string $sys_actualizado_el
@@ -25,7 +30,7 @@ class ContratosFacturas extends \common\components\BaseActiveRecord
      */
     public static function tableName()
     {
-        return 'public.contratos_facturas';
+        return 'contratos_facturas';
     }
 
     /**
@@ -35,10 +40,11 @@ class ContratosFacturas extends \common\components\BaseActiveRecord
     {
         return [
             [['relacion_contrato_id', 'orden_factura', 'monto'], 'required'],
-            [['relacion_contrato_id', 'orden_factura'], 'integer'],
+            [['relacion_contrato_id', 'orden_factura', 'creado_por', 'actualizado_por'], 'integer'],
             [['monto'], 'number'],
             [['sys_status'], 'boolean'],
-            [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe']
+            [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
+            [['orden_factura'], 'unique', 'targetAttribute' => ['relacion_contrato_id', 'orden_factura'], 'message' => 'Ya se encuentra cargado un registro con este orden de factura.']
         ];
     }
 
@@ -52,6 +58,8 @@ class ContratosFacturas extends \common\components\BaseActiveRecord
             'relacion_contrato_id' => Yii::t('app', 'Relacion Contrato ID'),
             'orden_factura' => Yii::t('app', 'Orden Factura'),
             'monto' => Yii::t('app', 'Monto'),
+            'creado_por' => Yii::t('app', 'Creado Por'),
+            'actualizado_por' => Yii::t('app', 'Actualizado Por'),
             'sys_status' => Yii::t('app', 'Sys Status'),
             'sys_creado_el' => Yii::t('app', 'Sys Creado El'),
             'sys_actualizado_el' => Yii::t('app', 'Sys Actualizado El'),
@@ -66,14 +74,28 @@ class ContratosFacturas extends \common\components\BaseActiveRecord
     {
         return $this->hasOne(RelacionesContratos::className(), ['id' => 'relacion_contrato_id']);
     }
-      public function getFormAttribs() {
+    public function getFormAttribs() {
     
-      
+     $contrato = empty($this->relacion_contrato_id) ? '' : RelacionesContratos::findOne($this->relacion_contrato_id)->nombre_proyecto;
     return [
+        
+           'relacion_contrato_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>[
+                'initValueText' => $contrato,
+                'options'=>['placeholder' => 'Buscar proyecto'],'pluginOptions' => [
+                'allowClear' => true,
+                'minimumInputLength' => 3,
+                'ajax' => [
+                    'url' => \yii\helpers\Url::to(['relaciones-contratos/relaciones-contratos-lista']),
+                    'dataType' => 'json',
+                    'data' => new JsExpression('function(params) { return {q:params.term,ver:"factura"}; }')
+                ],
+                'escapeMarkup' => new JsExpression('function (markup) { return markup; }'),
+                'templateResult' => new JsExpression('function(relacion_contrato_id) { return relacion_contrato_id.text; }'),
+                'templateSelection' => new JsExpression('function (relacion_contrato_id) { return relacion_contrato_id.text; }'),
+            ],]],
           
-        'orden_factura'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Orden de la factura']],
-        'monto'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Monto de la factura']],
-       
+        'orden_factura'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Orden factura']],
+        'monto'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Monto']],
       
     ];
     

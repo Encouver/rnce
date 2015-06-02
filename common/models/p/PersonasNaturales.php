@@ -61,20 +61,36 @@ class PersonasNaturales extends \common\components\BaseActiveRecord
     public function rules()
     {
         return [
-            [['primer_nombre', 'primer_apellido','sys_pais_id', 'nacionalidad', 'anho'], 'required'],
+            [['primer_nombre', 'primer_apellido', 'nacionalidad', 'anho'], 'required'],
             [['ci', 'sys_pais_id', 'creado_por', 'actualizado_por'], 'integer'],
             [['nacionalidad', 'estado_civil'], 'string'],
             [['sys_status'], 'boolean'],
             [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['primer_nombre', 'segundo_nombre', 'primer_apellido', 'segundo_apellido', 'pagina_web', 'facebook', 'twitter', 'instagram', 'numero_identificacion'], 'string', 'max' => 255],
-            [['rif'], 'required', 'on' => 'basico'],
+            [['rif'], 'required', 'on' => 'acta'],
+            [['nacionalidad'], 'required', 'on' => 'basico'],
             [['rif','telefono_local','telefono_celular','correo'], 'required', 'on' => 'contacto'],
             [['rif'], 'string', 'max' => 20],
             [['telefono_local', 'telefono_celular', 'fax'], 'string', 'max' => 50],
             [['correo'], 'string', 'max' => 150],
             [['anho'], 'string', 'max' => 100],
             [['rif'], 'unique'],
-            [['ci'], 'unique']
+            [['ci'], 'unique'],
+            [['rif'], 'required', 'when' => function ($model) {
+                return $model->nacionalidad == "NACIONAL";
+            }, 'whenClient' => "function (attribute, value) {
+                return $('#personasnaturales-nacionalidad').val() == 'NACIONAL';
+            }"],
+            [['sys_pais_id','numero_identificacion'], 'required', 'when' => function ($model) {
+                return $model->nacionalidad == "EXTRANJERA";
+            }, 'whenClient' => "function (attribute, value) {
+                return $('#personasnaturales-nacionalidad').val() == 'EXTRANJERA';
+            }"],
+           /* ['sys_pais_id', 'compare', 'message' => 'Debe seleccionar otro pais', 'operator'=> '==', 'compareValue'=>true, 'when' => function ($model) {
+                return $model->sys_pais_id==1;
+            }, 'whenClient' => "function (attribute, value) {
+                return $('#personasnaturales-sys_pais_id').val()=='1';
+            }"],*/
         ];
     }
 
@@ -153,9 +169,9 @@ class PersonasNaturales extends \common\components\BaseActiveRecord
         return $this->hasMany(ContratistasContactos::className(), ['contacto_id' => 'id']);
     }
     
-    public function getFormAttribs($id) {
+    public function getFormAttribs() {
         
-        if($id=="basico"){
+        if($this->scenario=="acta"){
             return [
         'rif'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Introduzca rif']],
         'primer_nombre'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Introduzca primer nombre']],
@@ -164,7 +180,24 @@ class PersonasNaturales extends \common\components\BaseActiveRecord
         'segundo_apellido'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Introduzca segundo apellido']],
             ];
         }
-        if($id=="contacto"){
+        if($this->scenario=="basico"){
+              $civil=[ 'SOLTERO (A)' => 'SOLTERO (A)', 'CASADO (A)' => 'CASADO (A)', 'CONCUBINO (A)' => 'CONCUBINO (A)', 'DIVORCIADO (A)' => 'DIVORCIADO (A)', 'VIUDO (A)' => 'VIUDO (A)', ];
+              $nacionalidad=[ 'NACIONAL' => 'NACIONAL', 'EXTRANJERA' => 'EXTRANJERA',];
+            return [
+         'nacionalidad'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>$nacionalidad,'options'=>['prompt'=>'Seleccione Pais']],
+         'sys_pais_id'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>ArrayHelper::map(SysPaises::find()->all(),'id','nombre'),'options'=>['prompt'=>'Seleccione Pais']],
+         'rif'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Introduzca rif'],'hint'=>'Formato V123456789'],
+        'numero_identificacion'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Introduz numero identificacion']],
+         'primer_nombre'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Introduzca primer nombre']],
+        'segundo_nombre'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Introduzca segundo nombre']],
+        'primer_apellido'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Introduzca primer apellido']],
+        'segundo_apellido'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Introduzca segundo apellido']],
+        'estado_civil'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>$civil,'options'=>['prompt'=>'Seleccione estado']],
+        'telefono_local'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Introduzca telefono local']],
+        'telefono_celular'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Introduzca telefono celular']],
+            ];
+        }
+        if($this->scenario=="contacto"){
             return [
         'rif'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Enter rif']],
         'primer_nombre'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Introduzca primer nombre']],
@@ -181,7 +214,7 @@ class PersonasNaturales extends \common\components\BaseActiveRecord
         'instagram'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Introduzca instagram']],
             ];
         }
-         if($id=="posextranjero"){
+        /* if($id=="posextranjero"){
                 $civil=[ 'SOLTERO (A)' => 'SOLTERO (A)', 'CASADO (A)' => 'CASADO (A)', 'CONCUBINO (A)' => 'CONCUBINO (A)', 'DIVORCIADO (A)' => 'DIVORCIADO (A)', 'VIUDO (A)' => 'VIUDO (A)', ];
 
             return [
@@ -194,7 +227,7 @@ class PersonasNaturales extends \common\components\BaseActiveRecord
         'estado_civil'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>$civil,'options'=>['prompt'=>'Seleccione estado']],
 
             ];
-        }
+        }*/
     
     }
     public function Etiqueta(){

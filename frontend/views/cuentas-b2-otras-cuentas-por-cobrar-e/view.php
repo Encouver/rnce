@@ -54,6 +54,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'sys_creado_el',
             'sys_actualizado_el',
             'sys_finalizado_el',
+            'empresa',
         ],
     ]) ?>
 

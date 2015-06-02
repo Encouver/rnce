@@ -5,6 +5,7 @@ namespace frontend\controllers;
 use app\models\ActivosMueblesSearch;
 use common\models\a\ActivosActivosBiologicos;
 use common\models\a\ActivosActivosIntangibles;
+use common\models\a\ActivosArrendamientos;
 use common\models\a\ActivosConstruccionesInmuebles;
 use common\models\a\ActivosDatosImportaciones;
 use common\models\a\ActivosDepreciacionesAmortizaciones;
@@ -119,6 +120,8 @@ class ActivosBienesController extends BaseController
 
         $modelMejoras = new ActivosMejorasPropiedades();
 
+        $modelArrendamiento = new ActivosArrendamientos();
+
 
         if ($model->load(Yii::$app->request->post())) {
 
@@ -198,6 +201,14 @@ class ActivosBienesController extends BaseController
                         }
                     }
 
+                    // En caso de Arrendamiento.
+                    if($model->propio && $modelArrendamiento->load(Yii::$app->request->post()) && $modelMejoras->validate()) {
+                        if($flag) {
+                            $flag = $flag and $modelArrendamiento->save();
+                            if($flag)
+                                $model->arrendamiento_id = $modelArrendamiento->id;
+                        }
+                    }
 
                     // En caso de Adquisición Datos de Importación.
                     if($model->origen_id ==2 && !$model->nacional && $modelDatosImportacion->load(Yii::$app->request->post()) && $modelDatosImportacion->validate()) {
@@ -232,7 +243,8 @@ class ActivosBienesController extends BaseController
 
             return $this->render('create', [
                 'model' => $model,'modelBienTipo'=> $modelBienTipo, 'modelDatosImportacion'=>$modelDatosImportacion, 'modelFactura'=>$modelFactura,'modelDocumento'=>$modelDocumento,
-                'modelDeterioro'=>$modelDeterioro, 'modelDepreciacion'=>$modelDepreciacion, 'modelVehiculo'=>$modelVehiculo, 'modelLicencia'=>$modelLicencia, 'modelMejoras'=>$modelMejoras
+                'modelDeterioro'=>$modelDeterioro, 'modelDepreciacion'=>$modelDepreciacion, 'modelVehiculo'=>$modelVehiculo, 'modelLicencia'=>$modelLicencia, 'modelMejoras'=>$modelMejoras,
+                'modelArrendamiento'=>$modelArrendamiento
             ]);
        // }
     }

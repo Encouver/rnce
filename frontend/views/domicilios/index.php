@@ -12,17 +12,94 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="domicilios-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h2>Direccion Fiscal</h2>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-   
-
     <?= GridView::widget([
-        'dataProvider' => $dataProvider,
+        'dataProvider' => $dataProviderFiscal,
         'summary'=>'',
         //'filterModel' => $searchModel,
         'columns' => [
             //['class' => 'yii\grid\SerialColumn'],
+              [
+               'attribute'=>'documento_registrado_id',
+               'label'=>'Tipo documento',
+               'value'=>'documentoRegistrado.tipoDocumento.nombre',
+               ],
+            [
+                'attribute'=>'direccion_id',
+                'label'=>'Estado',
+                'value'=>'direccion.sysEstado.nombre'
+            ],
+            [
+                'attribute'=>'direccion_id',
+                'label'=>'Municipio',
+                'value'=>'direccion.sysMunicipio.nombre'
+            ],
+             [
+                'attribute'=>'direccion_id',
+                'label'=>'Parroquia',
+                'value'=>'direccion.sysParroquia.nombre'
+            ],
+             [
+                'attribute'=>'direccion_id',
+                'label'=>'Sector / Zona / Urbanizacion',
+                'value'=>'direccion.zona'
+            ],
+             [
+                'attribute'=>'direccion_id',
+                'label'=>'Avenida / Calle / Esquina',
+                'value'=>'direccion.calle'
+            ],
+            [
+                'attribute'=>'direccion_id',
+                'label'=>'Edif. / Casa / C.C',
+                'value'=>'direccion.casa'
+            ],
+             [
+                'attribute'=>'direccion_id',
+                'label'=>'Piso / Nivel',
+                'value'=>'direccion.nivel'
+            ],
+             [
+                'attribute'=>'direccion_id',
+                'label'=>'Numero',
+                'value'=>'direccion.numero'
+            ],
+            
+            //'id',
+            //'contratista_id',
+            //'documento_registrado_id',
+            //'sys_status:boolean',
+            //'sys_creado_el',
+            // 'sys_actualizado_el',
+            // 'sys_finalizado_el',
+            // 'fiscal:boolean',
+            // 'direccion_id',
+
+            ['class' => 'yii\grid\ActionColumn', 'template'=>'{update}{delete}'],
+        ],
+    ]); ?>
+    <?php 
+    if(!$searchModelFiscal->existeregistro()){ ?>
+       <p>
+        <?= Html::a(Yii::t('app', 'Agreagar Direccion Fiscal'), ['create','id'=>'fiscal'], ['class' => 'btn btn-success']) ?>
+    </p>
+    <?php } ?>
+    <br />
+    <h2>Direccion Principal</h2>
+
+    <?= GridView::widget([
+        'dataProvider' => $dataProviderPrincipal,
+        'summary'=>'',
+        //'filterModel' => $searchModel,
+        'columns' => [
+            //['class' => 'yii\grid\SerialColumn'],
+              [
+               'attribute'=>'documento_registrado_id',
+               'label'=>'Tipo documento',
+               'value'=>'documentoRegistrado.tipoDocumento.nombre',
+               ],
             [
                 'attribute'=>'direccion_id',
                 'label'=>'Estado',
@@ -82,8 +159,12 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\ActionColumn', 'template'=>'{update}{delete}'],
         ],
     ]); ?>
-     <p>
+     <?php 
+    if(!$searchModelPrincipal->existeregistro()){ ?>
+        <p>
         <?= Html::a(Yii::t('app', 'Agreagar Direccion Principal'), ['create','id'=>'principal'], ['class' => 'btn btn-success']) ?>
     </p>
+    <?php } ?>
+   
 
 </div>

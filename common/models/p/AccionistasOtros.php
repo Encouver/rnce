@@ -4,6 +4,8 @@ namespace common\models\p;
 use kartik\builder\Form;
 use kartik\widgets\Select2;
 use yii\web\JsExpression;
+use common\models\p\SysNaturalesJuridicas;
+use common\models\a\ActivosDocumentosRegistrados;
 use Yii;
 /**
  * This is the model class for table "accionistas_otros".
@@ -176,12 +178,13 @@ class AccionistasOtros extends \common\components\BaseActiveRecord
         return $this->hasMany(PagosAccionistasDecretos::className(), ['accionista_id' => 'id']);
     }
      public function getFormAttribs() {
-         
+         $persona = empty($this->natural_juridica_id) ? '' : SysNaturalesJuridicas::findOne($this->natural_juridica_id)->denominacion;
         $cargos=[ 'PRESIDENTE' => 'PRESIDENTE', 'DIRECTOR' => 'DIRECTOR', 'VOCERO DE LA UNIDAD DE ADMINISTRACION' => 'VOCERO DE LA UNIDAD DE ADMINISTRACION', 'VOCERO DE LA UNIDAD DE GESTION PRODUCTIVA' => 'VOCERO DE LA UNIDAD DE GESTION PRODUCTIVA', 'VOCERO DE LA UNIDAD DE FORMACION' => 'VOCERO DE LA UNIDAD DE FORMACION', 'VOCERO DE LA UNIDAD DE CONTRALORIA SOCIAL' => 'VOCERO DE LA UNIDAD DE CONTRALORIA SOCIAL', 'INSTANCIA DE ADMINISTRACION' => 'INSTANCIA DE ADMINISTRACION', 'INSTANCIA DE CONTROL Y EVALUACION' => 'INSTANCIA DE CONTROL Y EVALUACION', 'INSTANCIA DE EDUCACION' => 'INSTANCIA DE EDUCACION', ];
        $obligacion=[ 'FIRMA CONJUNTA' => 'FIRMA CONJUNTA', 'FIRMA SEPARADA' => 'FIRMA SEPARADA', ];
         return [
         'natural_juridica_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>[
-                'options'=>[],'pluginOptions' => [
+                'initValueText' => $persona,
+                'options'=>['placeholder' => 'Buscar persona ...'],'pluginOptions' => [
                 'allowClear' => true,
                 'minimumInputLength' => 3,
                 'ajax' => [
@@ -212,5 +215,20 @@ class AccionistasOtros extends \common\components\BaseActiveRecord
     ];
 
        
+    }
+     public function Existeregistro(){
+       $registro = ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'tipo_documento_id'=>1,'proceso_finalizado'=>false]);       
+       $registromodificacion = ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'tipo_documento_id'=>2,'proceso_finalizado'=>false]);      
+       if(isset($registro) || isset($registromodificacion)){
+           if(isset($registromodificacion)){
+               $registro=$registromodificacion;
+           }
+          
+                $this->documento_registrado_id=$registro->id;
+                return false;
+           
+        }else{
+            return true;
+        }
     }
 }

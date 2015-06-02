@@ -6,6 +6,7 @@ use Yii;
 use common\models\p\CertificacionesAportes;
 use common\models\a\ActivosDocumentosRegistrados;
 use app\models\CertificacionesAportesSearch;
+use common\models\p\PersonasNaturales;
 use common\components\BaseController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -35,10 +36,11 @@ class CertificacionesAportesController extends BaseController
     {
         $searchModel = new CertificacionesAportesSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+        $model= new CertificacionesAportes();
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'model'=>$model,
         ]);
     }
 
@@ -61,25 +63,23 @@ class CertificacionesAportesController extends BaseController
      */
     public function actionCreate()
     {
-        $certificacion_aporte = new CertificacionesAportes();
-
-        if ($certificacion_aporte->load(Yii::$app->request->post())) {
-            $usuario= \common\models\p\User::findOne(Yii::$app->user->identity->id);
-                    $registro = ActivosDocumentosRegistrados::findOne(['contratista_id'=>$usuario->contratista_id, 'tipo_documento_id'=>1]);
-                    $certificacion_aporte->contratista_id=$usuario->contratista_id;
-                    $certificacion_aporte->documento_registrado_id=$registro->id;
-                    if($certificacion_aporte->save()){
-                        return $this->redirect(['view', 'id' => $certificacion_aporte->id]);
-                    }else{
-                       
-             
-                        return $this->render('create', [
-                            'certificacion_aporte' => $certificacion_aporte,
-                            ]);
-                    }
+        $model = new CertificacionesAportes();
+        $modelPersona = new PersonasNaturales(['scenario'=>'basico']);
+         if($model->existeregistro()){
+            Yii::$app->session->setFlash('error','Usuario posee certificacion de aportes ó debe crear un documento registrado');
+            return $this->redirect(['index']);
+                }
+        if ($model->load(Yii::$app->request->post())) {
+            if($model->tipo_profesion!='CONTADOR PUBLICO'){
+                $model->colegiatura=null;
+            }
+             $model->save();   
+              Yii::$app->session->setFlash('success','Certificacion de aportes guardado con exito');
+              return $this->redirect(['index']);
         } else {
             return $this->render('create', [
-                'certificacion_aporte' => $certificacion_aporte,
+                'model' => $model,
+                'modelPersona'=>$modelPersona
             ]);
         }
     }
@@ -93,14 +93,18 @@ class CertificacionesAportesController extends BaseController
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            
-            
-            return $this->redirect(['view', 'id' => $model->id]);
+        $modelPersona = new PersonasNaturales(['scenario'=>'basico']);
+        if ($model->load(Yii::$app->request->post())) {
+             if($model->tipo_profesion!='CONTADOR PUBLICO'){
+                $model->colegiatura=null;
+            }
+            $model->save();
+             Yii::$app->session->setFlash('success','Certificacion de aportes guardado con exito');
+                    return $this->redirect(['index']);
         } else {
             return $this->render('update', [
                 'model' => $model,
+                'modelPersona'=>$modelPersona,
             ]);
         }
     }

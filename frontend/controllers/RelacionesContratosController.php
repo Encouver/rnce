@@ -5,13 +5,15 @@ namespace frontend\controllers;
 use Yii;
 use common\models\p\RelacionesContratos;
 use common\models\p\ContratosFacturas;
+use app\models\ContratosFacturasSearch;
+use app\models\ContratosValuacionesSearch;
 use common\models\p\ContratosValuaciones;
 use app\models\RelacionesContratosSearch;
-use common\models\p\SysNaturalesJuridicas;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use common\models\p\Model;
+use yii\db\Query;
+use common\models\p\PersonasJuridicas;
 
 /**
  * RelacionesContratosController implements the CRUD actions for RelacionesContratos model.
@@ -38,13 +40,47 @@ class RelacionesContratosController extends Controller
     {
         $searchModel = new RelacionesContratosSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+        $searchModelFactura = new ContratosFacturasSearch();
+        $dataProviderFactura = $searchModelFactura->search(Yii::$app->request->queryParams);
+        $modelcFactura= new ContratosFacturas();
+        $searchModelValuacion = new ContratosValuacionesSearch();
+        $dataProviderValuacion = $searchModelValuacion->search(Yii::$app->request->queryParams);
+        $modelcValuacion= new ContratosValuaciones();
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'searchModelFactura' => $searchModelFactura,
+            'dataProviderFactura' => $dataProviderFactura,
+            'modelcFactura'=>$modelcFactura,
+            'searchModelValuacion' => $searchModelValuacion,
+            'dataProviderValuacion' => $dataProviderValuacion,
+            'modelcValuacion'=>$modelcValuacion,
         ]);
     }
-
+    public function actionRelacionesContratosLista($q = null,$id = null,$ver) {
+       
+         $buscar="nombre_proyecto ILIKE "."'%" . $q ."%' and contratista_id=".Yii::$app->user->identity->contratista_id." and tipo_contrato='OBRAS'";
+         if($ver=="factura"){
+             $buscar="nombre_proyecto ILIKE "."'%" . $q ."%' and contratista_id=".Yii::$app->user->identity->contratista_id." and (tipo_contrato='BIENES' or tipo_contrato='SERVICIOS')";
+         }
+       
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $out = ['results' => ['id' => '', 'text' => '']];
+        if (!is_null($q)) {
+            $query = new Query;
+            $query->select('id, nombre_proyecto AS text')
+                ->from('relaciones_contratos')
+                ->where($buscar)
+                ->limit(20);
+            $command = $query->createCommand();
+            $data = $command->queryAll();
+            $out['results'] = array_values($data);
+        }
+        elseif ($id > 0) {
+            $out['results'] = ['id' => $id, 'text' => RelacionesContratos::find($id)->nombre_proyecto];
+        }
+        return $out;
+    }
     /**
      * Displays a single RelacionesContratos model.
      * @param integer $id
@@ -65,24 +101,15 @@ class RelacionesContratosController extends Controller
     public function actionCreate()
     {
         $model = new RelacionesContratos();
-        $model2  = new SysNaturalesJuridicas();
+        $modelJuridica= new PersonasJuridicas();
 
-        if ($model->load(Yii::$app->request->post()) && $model2->load(Yii::$app->request->post())) {
-            
-             $model2->juridica=true;
-            $model2->sys_status=true;
-            
-            $model2->save();
-            
-            
-            $model->contratista_id = 2;
-            $model->natural_juridica_id = $model2->id;
-            $model->save();
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+             
+            return $this->redirect(['index']);
         } else {
             return $this->render('create', [
                 'model' => $model,
-                'model2'=>$model2,
+                'modelJuridica'=>$modelJuridica,
             ]);
         }
     }
@@ -90,9 +117,11 @@ class RelacionesContratosController extends Controller
       public function actionCrearrelacioncontrato()
     {
         $relacion_contrato = new RelacionesContratos();
-       
+       $modelJuridica= new PersonasJuridicas();
             return $this->render('_relaciones_contratos', [
-                'relacion_contrato' => $relacion_contrato]);
+                'relacion_contrato' => $relacion_contrato,
+                'modelJuridica'=>$modelJuridica,
+                    ]);
         
     }
       public function actionTiposector($id)

@@ -69,11 +69,11 @@ class CuentasB2OtrasCuentasPorCobrar extends \common\components\BaseActiveRecord
             'fecha' => Yii::t('app', 'Fecha'),
             'garantia' => Yii::t('app', 'Garantia'),
             'corriente' => Yii::t('app', 'Corriente'),
-            'nocorriente' => Yii::t('app', 'Nocorriente'),
-            'plazo_contrato_c' => Yii::t('app', 'Plazo Contrato C'),
-            'saldo_neto_c' => Yii::t('app', 'Saldo Neto C'),
-            'plazo_contrato_nc' => Yii::t('app', 'Plazo Contrato Nc'),
-            'saldo_neto_nc' => Yii::t('app', 'Saldo Neto Nc'),
+            'nocorriente' => Yii::t('app', 'No corriente'),
+            'plazo_contrato_c' => Yii::t('app', 'Plazo del contrato'),
+            'saldo_neto_c' => Yii::t('app', 'Saldo neto segun contabilidad'),
+            'plazo_contrato_nc' => Yii::t('app', 'Plazo del contrato'),
+            'saldo_neto_nc' => Yii::t('app', 'Saldo neto segun contabilidad'),
             'criterio_id' => Yii::t('app', 'Criterio ID'),
             'otro_nombre' => Yii::t('app', 'Otro Nombre'),
             'contratista_id' => Yii::t('app', 'Contratista ID'),
@@ -94,4 +94,22 @@ class CuentasB2OtrasCuentasPorCobrar extends \common\components\BaseActiveRecord
     {
         return $this->hasOne(Contratistas::className(), ['id' => 'contratista_id']);
     }
+
+    public function getFormAttribs(){
+        return [
+                // primary key column
+                'id'=>[ // primary key attribute
+                    'type'=>TabularForm::INPUT_HIDDEN,
+                    'columnOptions'=>['hidden'=>true]
+                ],
+                
+                'corriente'=>['type'=>Form::INPUT_CHECKBOX,'label'=>'Corriente'],
+                'nocorriente'=>['type'=>Form::INPUT_CHECKBOX,'label'=>'Corriente'],
+                'hh_concepto_id'=>['type'=>Form::INPUT_DROPDOWN_LIST, 'items'=>ArrayHelper::map(CuentasConceptos::find()->where(['cuenta' => 'hh'])->orderBy('id')->asArray()->all(), 'id', 'nombre'), 'label'=>'Concepto'],                
+                'otro_nombre'=>['type'=>Form::INPUT_TEXT,'label'=>'Especifique'],
+                'saldo_p_anterior'=>['type'=>Form::INPUT_TEXT, 'label'=>'Saldo del período anterior'],
+                'importe_gasto_ejer_eco'=>['type'=>Form::INPUT_TEXT,'label'=>'Importe gasto'],
+                'importe_pago_ejer_eco'=>['type'=>Form::INPUT_TEXT,'label'=>'Importe pago'],
+            ];
+    } 
 }

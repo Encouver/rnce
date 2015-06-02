@@ -34,6 +34,7 @@ use kartik\builder\Form;
         //'columns'=>11,
         'attributes'=> $model->getFormAttribs($model->getScenario())
     ]);
+   
     echo Html::submitButton('Enviar', ['type'=>'button', 'class'=>'btn btn-primary']);
     ActiveForm::end();
     ?>
