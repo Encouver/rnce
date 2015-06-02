@@ -130,6 +130,7 @@ AppAsset::register($this);
                 ['label' => 'Modificacion acta',
                     'items' => [
                          ['label' => 'Registro documento', 'url' => ['/activos-documentos-registrados/index']],
+                        ['label' => 'Modificaciones', 'url' => ['/modificaciones-actas/index']],
                     ],
                 ],
                 
