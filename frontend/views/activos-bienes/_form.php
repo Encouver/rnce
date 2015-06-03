@@ -197,7 +197,7 @@ $urlDocumento = Url::to(['activos-documentos-registrados/create-general','id'=>2
                 ]);
                 echo '</div>';
                 // }
-
+        if(!$model->propio && ($model->sysTipoBien->sysClasificacionBien->id == 1 || $model->sysTipoBien->sysClasificacionBien->id == 2) ) {
             echo '<div id="arrendamiento-container" style="display: block;">';
             echo '<h2> Datos de Arrendamiento: </h2>';
             echo Form::widget([       // 3 column layout
@@ -208,6 +208,7 @@ $urlDocumento = Url::to(['activos-documentos-registrados/create-general','id'=>2
                 'attributes' => $modelArrendamiento->getFormAttribs()
             ]);
             echo '</div>';
+        }
 
         //if($model->factura) {
             echo '<div id="factura-container" style="display: none;">';
@@ -326,6 +327,15 @@ $urlDocumento = Url::to(['activos-documentos-registrados/create-general','id'=>2
                 {
                     $('.field-activosbienes-fecha_origen').parent().hide();
                     $('.field-activosbienes-nacional').parent().hide();
+                }
+        });
+
+        $('#activosarrendamientos-tipo_arrendamiento_id').change(function(e){
+                if($('#activosarrendamientos-tipo_arrendamiento_id').val()== 2){
+                    $('.field-activosarrendamientos-valor_bien_arrendado').parent().show();
+                }else
+                {
+                    $('.field-activosarrendamientos-valor_bien_arrendado').parent().hide();
                 }
         });
 

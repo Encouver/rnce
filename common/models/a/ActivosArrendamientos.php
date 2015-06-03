@@ -33,6 +33,7 @@ use yii\web\JsExpression;
  * @property ActivosSysTiposArrendamientos $tipoArrendamiento
  * @property ActivosSysUnidades $unidadDuracion
  * @property ActivosBienes[] $activosBienes
+ * @property ActivosBienes $bienes
  */
 class ActivosArrendamientos extends \common\components\BaseActiveRecord
 {
@@ -51,12 +52,16 @@ class ActivosArrendamientos extends \common\components\BaseActiveRecord
     {
         return [
             [['tipo_arrendamiento_id', 'propietario_id', 'unidad_duracion_id', 'numero_duracion', 'creado_por', 'actualizado_por'], 'integer'],
-
             [['valor_bien_arrendado'], 'number'],
-            [['propietario_id', 'num_doc_notariado', 'fecha_registro', 'fecha_inicio', 'fecha_finalizacion', 'unidad_duracion_id', 'numero_duracion'], 'required','when'=> function ($model) {
-                return !$model->activosBienes->propio;
+            [['valor_bien_arrendado'], 'required','when'=> function ($model) {
+                return !$model->bien->propio && ($model->sysTipoBien->sysClasificacionBien->id == 1 || $model->sysTipoBien->sysClasificacionBien->id == 2) && !$model->tipo_arrendamiento_id == 2;
             }, 'whenClient' => "function (attribute, value) {
-                    return $('#activosbienes-propio').val() == 0;
+                    return $('#activosbienes-propio').val() == 0 && ($('#activosbienes-sys_tipo_bien_id').val() >= 1 && $('#activosbienes-sys_tipo_bien_id').val() <= 7) && $('#activosarrendamientos-tipo_arrendamiento_id').val() == 2;
+                }" ],
+            [['propietario_id', 'num_doc_notariado', 'fecha_registro', 'fecha_inicio', 'fecha_finalizacion', 'unidad_duracion_id', 'numero_duracion'], 'required','when'=> function ($model) {
+                return !$model->bien->propio && ($model->sysTipoBien->sysClasificacionBien->id == 1 || $model->sysTipoBien->sysClasificacionBien->id == 2);
+            }, 'whenClient' => "function (attribute, value) {
+                    return $('#activosbienes-propio').val() == 0 && ($('#activosbienes-sys_tipo_bien_id').val() >= 1 && $('#activosbienes-sys_tipo_bien_id').val() <= 7);
                 }"],
             [['fecha_registro', 'fecha_inicio', 'fecha_finalizacion', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['sys_status'], 'boolean'],
@@ -71,14 +76,14 @@ class ActivosArrendamientos extends \common\components\BaseActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'tipo_arrendamiento_id' => Yii::t('app', 'Tipo Arrendamiento ID'),
+            'tipo_arrendamiento_id' => Yii::t('app', 'Tipo Arrendamiento'),
             'valor_bien_arrendado' => Yii::t('app', 'Valor Bien Arrendado'),
-            'propietario_id' => Yii::t('app', 'Propietario ID'),
+            'propietario_id' => Yii::t('app', 'Propietario'),
             'num_doc_notariado' => Yii::t('app', 'Num Doc Notariado'),
             'fecha_registro' => Yii::t('app', 'Fecha Registro'),
             'fecha_inicio' => Yii::t('app', 'Fecha Inicio'),
             'fecha_finalizacion' => Yii::t('app', 'Fecha Finalizacion'),
-            'unidad_duracion_id' => Yii::t('app', 'Unidad Duracion ID'),
+            'unidad_duracion_id' => Yii::t('app', 'Unidad Duracion'),
             'numero_duracion' => Yii::t('app', 'Numero Duracion'),
             'creado_por' => Yii::t('app', 'Creado Por'),
             'actualizado_por' => Yii::t('app', 'Actualizado Por'),
@@ -113,6 +118,14 @@ class ActivosArrendamientos extends \common\components\BaseActiveRecord
         return $this->hasMany(ActivosBienes::className(), ['arrendamiento_id' => 'id']);
     }
 
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getBien()
+    {
+        return $this->hasOne(ActivosBienes::className(), ['arrendamiento_id' => 'id']);
+    }
+
 
     public function getFormAttribs() {
         $attributes = [
@@ -123,7 +136,7 @@ class ActivosArrendamientos extends \common\components\BaseActiveRecord
             ],
 
             'tipo_arrendamiento_id' => ['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(ActivosSysTiposArrendamientos::find()->all(),'id','nombre'),'options'=>['onchange'=>'']]],
-            'valor_bien_arrendado' => ['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),],
+            'valor_bien_arrendado' => ['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),'columnOptions'=>['hidden'=>true]],
             'propietario_id' => ['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>[//'data'=>ArrayHelper::map(SysNaturalesJuridicas::find()->all(),'id',function($model){return $model->etiqueta(); }),
                 'options'=>['id'=>'arrendamiento-proveedor'],'pluginOptions' => [
                     //'allowClear' => true,
