@@ -236,7 +236,7 @@ class ActasConstitutivasController extends BaseController
                 'accionista_otro'=>$accionista_otro,
                 'comisario'=>$comisario,
                 'fondo_reserva'=>$fondo_reserva,
-                'sucursal'=>$fondo_reserva,
+                'sucursal'=>$sucursal,
             ]);
          }else{
               return $this->render('resumenacta', [

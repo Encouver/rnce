@@ -13,7 +13,6 @@ $urlJuridica = Url::to(['personas-juridicas/create']);
 /* @var $model common\models\p\AccionistasOtros */
 /* @var $form yii\widgets\ActiveForm */
 
-$persona_juridica = new PersonasJuridicas();
 ?>
 
 
