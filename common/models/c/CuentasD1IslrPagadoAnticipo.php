@@ -8,6 +8,7 @@ use kartik\money\MaskMoney;
 use kartik\widgets\Select2;
 use Yii;
 use yii\helpers\ArrayHelper;
+use yii\widgets\MaskedInput;
 
 /**
  * This is the model class for table "cuentas.d1_islr_pagado_anticipo".
@@ -113,7 +114,18 @@ class CuentasD1IslrPagadoAnticipo extends \common\components\BaseActiveRecord
                 ],]],
             'nro_documento'=>['type'=>Form::INPUT_TEXT,],
             'saldo_ph'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),],
-            'importe_pagado_ejer_econo'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),],
+            'importe_pagado_ejer_econo'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),],/*['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskedInput::className(),'options'=>[
+                'clientOptions' => [
+                    'autoUnmask'=> true,
+                    'removeMaskOnSubmit'=>true,
+                    //'definitions'=>['maskSymbol'=>'Bs. '],
+                    'alias' =>  'decimal',
+                    'groupSeparator' => '.',
+                    'radixPoint' => ',',
+                    //'mask'=>'9{1,38}',
+                    'autoGroup' => true
+                ],]
+            ],//*/
             'importe_aplicado_ejer_econo'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),],
             //'saldo_cierre'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),],
 

@@ -75,6 +75,7 @@ ALTER TABLE sucursales
       ON UPDATE CASCADE ON DELETE NO ACTION;
 
 
+
 --29 mayo 2:00 pm--
 
 ALTER TABLE contratos_facturas
@@ -161,10 +162,7 @@ ALTER TABLE actas_constitutivas ADD COLUMN modificacion_acta_id integer;
 ALTER TABLE actas_constitutivas ALTER COLUMN modificacion_acta_id SET NOT NULL;
 COMMENT ON COLUMN actas_constitutivas.modificacion_acta_id IS 'Clave foranea a la tabla modificaciones_actas';
 
-ALTER TABLE actas_constitutivas
-  ADD CONSTRAINT actas_constitutivas_modificacion_acta_id_fkey FOREIGN KEY (modificacion_acta_id)
-      REFERENCES modificaciones_actas (id) MATCH SIMPLE
-      ON UPDATE CASCADE ON DELETE NO ACTION;
+
 
 
 
@@ -252,7 +250,10 @@ COMMENT ON COLUMN modificaciones_actas.sys_creado_el IS 'Fecha de creación del 
 COMMENT ON COLUMN modificaciones_actas.sys_actualizado_el IS 'Fecha de última actualización del registro.';
 COMMENT ON COLUMN modificaciones_actas.sys_finalizado_el IS 'Fecha de "eliminado" el registro.';
 
-
+ALTER TABLE actas_constitutivas
+  ADD CONSTRAINT actas_constitutivas_modificacion_acta_id_fkey FOREIGN KEY (modificacion_acta_id)
+      REFERENCES modificaciones_actas (id) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE NO ACTION;
 
 ---02 junio 2015 5:00 pm--
 ALTER TABLE duraciones_empresas DROP COLUMN tiempo_prorroga;
