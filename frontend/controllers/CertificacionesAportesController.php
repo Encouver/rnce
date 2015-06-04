@@ -69,7 +69,11 @@ class CertificacionesAportesController extends BaseController
             Yii::$app->session->setFlash('error','Usuario posee certificacion de aportes ó debe crear un documento registrado');
             return $this->redirect(['index']);
                 }
-        if ($model->load(Yii::$app->request->post())) {
+                 if(!$model->validarorigen()){
+            Yii::$app->session->setFlash('error','No existe capital suscrito');
+            return $this->redirect(['index']);
+                }
+        if ($model->load(Yii::$app->request->post()) && !$model->accionista()) {
             if($model->tipo_profesion!='CONTADOR PUBLICO'){
                 $model->colegiatura=null;
             }
@@ -77,6 +81,10 @@ class CertificacionesAportesController extends BaseController
               Yii::$app->session->setFlash('success','Certificacion de aportes guardado con exito');
               return $this->redirect(['index']);
         } else {
+             if($model->accionista()){
+                Yii::$app->session->setFlash('error','El certificador de aportes no puede formar parte de los accionista o junta directiva');
+           
+            }
             return $this->render('create', [
                 'model' => $model,
                 'modelPersona'=>$modelPersona
@@ -94,7 +102,7 @@ class CertificacionesAportesController extends BaseController
     {
         $model = $this->findModel($id);
         $modelPersona = new PersonasNaturales(['scenario'=>'basico']);
-        if ($model->load(Yii::$app->request->post())) {
+        if ($model->load(Yii::$app->request->post()) && !$model->accionista()) {
              if($model->tipo_profesion!='CONTADOR PUBLICO'){
                 $model->colegiatura=null;
             }
@@ -102,6 +110,10 @@ class CertificacionesAportesController extends BaseController
              Yii::$app->session->setFlash('success','Certificacion de aportes guardado con exito');
                     return $this->redirect(['index']);
         } else {
+              if($model->accionista()){
+                Yii::$app->session->setFlash('error','El certificador de aportes no puede formar parte de los accionista o junta directiva');
+           
+            }
             return $this->render('update', [
                 'model' => $model,
                 'modelPersona'=>$modelPersona,

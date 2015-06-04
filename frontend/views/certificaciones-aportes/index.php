@@ -44,7 +44,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]); ?>
     <?php 
-    if(!$model->existeregistro()){ ?>
+    if(!$model->existeregistro() && $model->validarorigen()){ ?>
        <p>
         <?= Html::a(Yii::t('app', 'Agregar Certificacion de aportes'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
