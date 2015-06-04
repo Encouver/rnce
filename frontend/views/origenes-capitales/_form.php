@@ -35,7 +35,7 @@ use kartik\builder\Form;
         'attributes'=> $model->getFormAttribs($model->getScenario())
     ]);
    
-    echo Html::submitButton('Enviar', ['type'=>'button', 'class'=>'btn btn-primary']);
+    echo Html::submitButton($model->isNewRecord ? Yii::t('app', 'Agregar') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']);
     ActiveForm::end();
     ?>
 

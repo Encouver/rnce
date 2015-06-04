@@ -6,6 +6,8 @@ use kartik\widgets\Select2;
 use yii\web\JsExpression;
 use common\models\a\ActivosDocumentosRegistrados;
 use common\models\p\SysNaturalesJuridicas;
+use common\models\p\OrigenesCapitales;
+use common\models\p\AccionistasOtros;
 use Yii;
 
 /**
@@ -186,5 +188,28 @@ class CertificacionesAportes extends \common\components\BaseActiveRecord
         }else{
             return true;
         }
+    }
+    public function Validarorigen()
+    {
+       $registro = ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'tipo_documento_id'=>1,'proceso_finalizado'=>false]);       
+       $registromodificacion = ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'tipo_documento_id'=>2,'proceso_finalizado'=>false]);      
+       if(isset($registro) || isset($registromodificacion)){
+           if(isset($registromodificacion)){
+           $registro=$registromodificacion;
+           
+           }
+           $origen=  OrigenesCapitales::findOne(['documento_registrado_id'=>$registro->id]);
+           if(isset($origen)){
+               return true;
+           }
+       }
+       return false;
+    }
+    public function accionista(){
+        $accionista= AccionistasOtros::findOne(['natural_juridica_id'=>$this->natural_juridica_id]);
+        if(isset($accionista)){
+            return true;
+        }
+        return false;
     }
 }

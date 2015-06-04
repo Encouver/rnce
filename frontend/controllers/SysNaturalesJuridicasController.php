@@ -80,7 +80,8 @@ class SysNaturalesJuridicasController extends BaseController
     if (!is_null($q)) {
         $query = new \yii\db\Query;
         if(!is_null($juridica)){
-             $buscar_juridica= "rif ILIKE "."'%" . $q ."%' and juridica=".$juridica;
+             //$buscar_juridica= "rif ILIKE "."'%" . $q ."%' and juridica=".$juridica;
+             $buscar_juridica= "rif ILIKE "."'%" . $q ."%' or denominacion ILIKE "."'%" . $q ."%' and juridica=".$juridica; 
         }
         $query->select("id, (rif || ' - ' || denominacion)  AS text")
             ->from('sys_naturales_juridicas')

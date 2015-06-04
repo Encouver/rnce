@@ -5,6 +5,7 @@ use kartik\builder\Form;
 use kartik\widgets\Select2;
 use yii\web\JsExpression;
 use common\models\a\ActivosDocumentosRegistrados;
+use common\models\p\AccionistasOtros;
 use common\models\p\SysNaturalesJuridicas;
 use Yii;
 
@@ -226,6 +227,13 @@ class ComisariosAuditores extends \common\components\BaseActiveRecord
         }else{
             return true;
         }
+    }
+    public function accionista(){
+        $accionista= AccionistasOtros::findOne(['natural_juridica_id'=>$this->natural_juridica_id]);
+        if(isset($accionista)){
+            return true;
+        }
+        return false;
     }
    
    

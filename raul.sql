@@ -258,5 +258,8 @@ ALTER TABLE actas_constitutivas
 ---02 junio 2015 5:00 pm--
 ALTER TABLE duraciones_empresas DROP COLUMN tiempo_prorroga;
 
+---03 junio 2015 08:30---
+ALTER TABLE actas_constitutivas DROP COLUMN comisario_auditor_id;
+
 
 

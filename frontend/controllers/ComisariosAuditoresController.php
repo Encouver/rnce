@@ -88,15 +88,16 @@ class ComisariosAuditoresController extends BaseController
             Yii::$app->session->setFlash('error','Usuario posee el limte de comisarios ó debe crear un documento registrado');
             return $this->redirect(['index']);
           }
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && !$model->accionista() && $model->save()) {
+    
+                
           return $this->redirect(['index']);
-                               
 
-
-                 
-             
-         
         } else {
+            if($model->accionista()){
+                Yii::$app->session->setFlash('error','El comisario no puede formar parte de los accionista o junta directiva');
+           
+            }
             return $this->render('create', [
                 'model' => $model,
                 'modelPersona'=>$modelPersona,
@@ -305,9 +306,13 @@ class ComisariosAuditoresController extends BaseController
                $model->scenario='comisario';
            }
         
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && !$model->accionista() && $model->save()) {
             return $this->redirect(['index']);
         } else {
+            if($model->accionista()){
+                Yii::$app->session->setFlash('error','El comisario no puede formar parte de los accionista o junta directiva');
+           
+            }
             return $this->render('update', [
                 'model' => $model,
                  'modelPersona'=>$modelPersona,
