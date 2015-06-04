@@ -127,7 +127,6 @@ class EmpresasRelacionadas extends \common\components\BaseActiveRecord
     {
         return $this->hasOne(Contratistas::className(), ['id' => 'contratista_id']);
     }
-
     /**
      * @return \yii\db\ActiveQuery
      */

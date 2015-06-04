@@ -24,6 +24,9 @@ $this->params['breadcrumbs'][] = $this->title;
            // ['class' => 'yii\grid\SerialColumn'],
 
             //'id',
+           
+           'personaJuridica.nacional:boolean',
+         
             'tipo_relacion',
             
             [

@@ -66,7 +66,7 @@ class SysNaturalesJuridicas extends \common\components\BaseActiveRecord
             'sys_creado_el' => Yii::t('app', 'Sys Creado El'),
             'sys_actualizado_el' => Yii::t('app', 'Sys Actualizado El'),
             'sys_finalizado_el' => Yii::t('app', 'Sys Finalizado El'),
-            'nacional' => Yii::t('app', 'Tipo nacionalidad'),
+            'nacional' => Yii::t('app', 'Nacional'),
         ];
     }
 
