@@ -5,6 +5,7 @@ use kartik\builder\Form;
 use kartik\widgets\Select2;
 use yii\web\JsExpression;
 use common\models\a\ActivosDocumentosRegistrados;
+use common\models\p\SysNaturalesJuridicas;
 use Yii;
 
 /**
@@ -102,10 +103,12 @@ class ComisariosAuditores extends \common\components\BaseActiveRecord
     }
     public function getFormAttribs($id) {
         //$data=[ 'NACIONAL' => 'NACIONAL', 'EXTRANJERA' => 'EXTRANJERA', ];
+         $persona = empty($this->natural_juridica_id) ? '' : SysNaturalesJuridicas::findOne($this->natural_juridica_id)->denominacion;
         if($id=="comisario"){
         $profesiones =[ 'CONTADOR PUBLICO' => 'CONTADOR PUBLICO', 'ADMINISTRADOR' => 'ADMINISTRADOR', 'ECONOMISTA' => 'ECONOMISTA', ];
     return [
         'natural_juridica_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>[
+                'initValueText' => $persona,
                 'options'=>[],'pluginOptions' => [
                 'allowClear' => true,
                 'minimumInputLength' => 3,
@@ -143,7 +146,8 @@ class ComisariosAuditores extends \common\components\BaseActiveRecord
         if($id=="auditor"){
              return [
                  'natural_juridica_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>[
-                'options'=>[],'pluginOptions' => [
+                 'initValueText' => $persona,
+                 'options'=>[],'pluginOptions' => [
                 'allowClear' => true,
                 'minimumInputLength' => 3,
                 'ajax' => [
@@ -173,6 +177,7 @@ class ComisariosAuditores extends \common\components\BaseActiveRecord
         $profesiones =[ 'CONTADOR PUBLICO' => 'CONTADOR PUBLICO', 'ADMINISTRADOR' => 'ADMINISTRADOR', 'ECONOMISTA' => 'ECONOMISTA', ];
     return [
         'natural_juridica_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>[
+                'initValueText' => $persona,
                 'options'=>[],'pluginOptions' => [
                 'allowClear' => true,
                 'minimumInputLength' => 3,

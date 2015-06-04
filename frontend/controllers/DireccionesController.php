@@ -4,10 +4,14 @@ namespace frontend\controllers;
 
 use Yii;
 use common\models\p\Direcciones;
+use common\models\p\SysMunicipios;
+use common\models\p\SysParroquias;
+use yii\helpers\ArrayHelper;
 use app\modelsDireccionesSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\Json;
 
 /**
  * DireccionesController implements the CRUD actions for Direcciones model.
@@ -118,4 +122,59 @@ class DireccionesController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+     public function actionMunicipioslista() {
+           $out = [];
+    if (isset($_POST['depdrop_parents'])) {
+        $parents = $_POST['depdrop_parents'];
+        if ($parents != null) {
+            $estado = $parents[0];
+           $out = SysMunicipios::find()->where(['sys_estado_id'=>$estado])->all();
+           $resultado=[];
+          if(isset($out)){
+              foreach ($out as $municipio) {
+                   $resultado = array_merge ( $resultado ,[['id' =>$municipio->id , 'name' =>$municipio->nombre]]);
+              }
+          }else{
+              return Json::encode(['output'=>'', 'selected'=>'']);
+          }
+            // the getSubCatList function will query the database based on the
+            // cat_id and return an array like below:
+            // [
+            //    ['id'=>'<sub-cat-id-1>', 'name'=>'<sub-cat-name1>'],
+            //    ['id'=>'<sub-cat_id_2>', 'name'=>'<sub-cat-name2>']
+            // ]
+           
+             return Json::encode(['output'=>$resultado, 'selected'=>'']);
+        }
+    }
+    return Json::encode(['output'=>'', 'selected'=>'']);
+    }
+    public function actionParroquiaslista() {
+           $out = [];
+    if (isset($_POST['depdrop_parents'])) {
+        $parents = $_POST['depdrop_parents'];
+        if ($parents != null) {
+            $municipio = $parents[0];
+           $out = SysParroquias::find()->where(['sys_municipio_id'=>$municipio])->all();
+           $resultado=[];
+          if(isset($out)){
+              foreach ($out as $parroquia) {
+                   $resultado = array_merge ( $resultado ,[['id' =>$parroquia->id , 'name' =>$parroquia->nombre]]);
+              }
+          }else{
+              return Json::encode(['output'=>'', 'selected'=>'']);
+          }
+            // the getSubCatList function will query the database based on the
+            // cat_id and return an array like below:
+            // [
+            //    ['id'=>'<sub-cat-id-1>', 'name'=>'<sub-cat-name1>'],
+            //    ['id'=>'<sub-cat_id_2>', 'name'=>'<sub-cat-name2>']
+            // ]
+           
+             return Json::encode(['output'=>$resultado, 'selected'=>'']);
+        }
+    }
+    return Json::encode(['output'=>'', 'selected'=>'']);
+    }
+
 }

@@ -300,7 +300,7 @@ class ComisariosAuditoresController extends BaseController
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $modelPersona= new PersonasNaturales();
+        $modelPersona= new PersonasNaturales(['scenario'=>'basico']);
         if($model->comisario){
                $model->scenario='comisario';
            }

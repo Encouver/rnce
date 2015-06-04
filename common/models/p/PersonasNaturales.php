@@ -70,7 +70,10 @@ class PersonasNaturales extends \common\components\BaseActiveRecord
             [['rif'], 'required', 'on' => 'acta'],
             [['nacionalidad'], 'required', 'on' => 'basico'],
             [['rif','telefono_local','telefono_celular','correo'], 'required', 'on' => 'contacto'],
-            [['rif'], 'string', 'max' => 20],
+            [['rif'],'filter','filter'=>'trim'],
+            [['rif'],'filter','filter'=>'strtoupper'],
+            [['rif'],'string','min'=>10,'max'=>10],
+            ['rif', 'match', 'pattern' => '/^[[VE][0-9]{8}[0-9]$/i','message'=>'Rif no concuerda con el formato'],
             [['telefono_local', 'telefono_celular', 'fax'], 'string', 'max' => 50],
             [['correo'], 'string', 'max' => 150],
             [['anho'], 'string', 'max' => 100],
@@ -214,20 +217,8 @@ class PersonasNaturales extends \common\components\BaseActiveRecord
         'instagram'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Introduzca instagram']],
             ];
         }
-        /* if($id=="posextranjero"){
-                $civil=[ 'SOLTERO (A)' => 'SOLTERO (A)', 'CASADO (A)' => 'CASADO (A)', 'CONCUBINO (A)' => 'CONCUBINO (A)', 'DIVORCIADO (A)' => 'DIVORCIADO (A)', 'VIUDO (A)' => 'VIUDO (A)', ];
-
-            return [
-         'sys_pais_id'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>ArrayHelper::map(SysPaises::find()->all(),'id','nombre'),'options'=>['prompt'=>'Seleccione Pais']],
-         'numero_identificacion'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Interprete']],
-         'primer_nombre'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Introduzca primer nombre']],
-        'segundo_nombre'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Introduzca segundo nombre']],
-        'primer_apellido'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Introduzca primer apellido']],
-        'segundo_apellido'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Introduzca segundo apellido']],
-        'estado_civil'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>$civil,'options'=>['prompt'=>'Seleccione estado']],
-
-            ];
-        }*/
+      
+        
     
     }
     public function Etiqueta(){

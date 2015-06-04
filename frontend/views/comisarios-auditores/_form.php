@@ -27,7 +27,7 @@ $urlPersona = Url::to(['personas-naturales/create']);
                 'model'=>$modelPersona,
                 'form'=>$form2,
                 'columns'=>3,
-                'attributes'=>$modelPersona->getformAttribs("basico")
+                'attributes'=>$modelPersona->getFormAttribs()
             ]); ?>
 
         <!--    <div class="form-group">

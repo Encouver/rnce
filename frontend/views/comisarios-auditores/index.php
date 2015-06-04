@@ -49,7 +49,11 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\ActionColumn','template'=>'{update}{delete}'],
         ],
     ]); ?>
-    <p>
+       <?php 
+    if(!$searchModel->existeregistro()){ ?>
+       <p>
         <?= Html::a(Yii::t('app', 'Agregar Comisario'), ['create','id'=>'comisario'], ['class' => 'btn btn-success']) ?>
     </p>
+    <?php } ?>
+
 </div>

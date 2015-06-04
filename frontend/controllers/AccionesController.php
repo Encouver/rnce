@@ -5,6 +5,8 @@ namespace frontend\controllers;
 use Yii;
 use common\models\p\Acciones;
 use common\models\a\ActivosDocumentosRegistrados;
+use common\models\p\Certificados;
+use common\models\p\Suplementarios;
 use app\models\AccionesSearch;
 use common\components\BaseController;
 use yii\web\NotFoundHttpException;
@@ -35,11 +37,13 @@ class AccionesController extends BaseController
     public function actionIndex()
     {
         $searchModel = new AccionesSearch();
+       // $searchModel->suscrito=true;
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+         $model= new Acciones();
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'model'=>$model,
         ]);
     }
 
@@ -63,81 +67,69 @@ class AccionesController extends BaseController
     public function actionCreate()
     {
         $model = new Acciones();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
-        }
-    }
-    public function actionAccionsuscritaacta()
-    {
-        $suscrita_acta = new Acciones();
-         $suscrita_acta->scenario='principal';
+         $model->scenario='principal';
+        if(!$model->validardenominacion()){
+            Yii::$app->session->setFlash('error','Su denominacion comercial no le permite crear acciones');
+            return $this->redirect(['index']);
+         }
+          if($model->existeregistro()){
+            Yii::$app->session->setFlash('error','Usuario posee acciones cargadas o no ha creado un documento registrado');
+            return $this->redirect(['index']);
+                }
         
-        if ( $suscrita_acta->load(Yii::$app->request->post())) {
+        if ( $model->load(Yii::$app->request->post())) {
             
             
-          
-              $usuario= \common\models\p\User::findOne(Yii::$app->user->identity->id);
-              $registro = ActivosDocumentosRegistrados::findOne(['contratista_id'=>$usuario->contratista_id, 'tipo_documento_id'=>1]);
    
-              $suscrita_acta->suscrito=true;
-              $suscrita_acta->tipo_accion="PRINCIPAL";
-              $suscrita_acta->contratista_id = $usuario->contratista_id;
-              $suscrita_acta->documento_registrado_id = $registro->id;
-     
-            if($suscrita_acta->validate()){
-                
-                $acciones= Acciones::findOne(['contratista_id'=>$suscrita_acta->contratista_id ,'documento_registrado_id'=>$suscrita_acta->documento_registrado_id]);
-          
-                if(isset($acciones)){
-                   
-                     $msg = "Usuario ya posee accones suscritas y pagadas asociadas";
-                                   
-                               
-                   }else{
-                 
+              $model->suscrito=true;
+              $model->tipo_accion="PRINCIPAL";
+                $model->contratista_id = Yii::$app->user->identity->contratista_id;
                         $paga_acta = new Acciones();
-                        $paga_acta->numero_comun= $suscrita_acta->numero_comun_pagada;
-                        $paga_acta->capital=$suscrita_acta->capital_pagado;
-             
-                        $paga_acta->contratista_id = $suscrita_acta->contratista_id;
-                        $paga_acta->documento_registrado_id= $suscrita_acta->documento_registrado_id;
+                        $paga_acta->numero_comun= $model->numero_comun_pagada;
+                        //$paga_acta->valor_comun= $model->valor_comun;
+                        $paga_acta->capital=$model->capital_pagado;
+                       $paga_acta->contratista_id=$model->contratista_id;
+                        $paga_acta->documento_registrado_id= $model->documento_registrado_id;
                         $paga_acta->suscrito=false;
-                        $paga_acta->tipo_accion=$suscrita_acta->tipo_accion;
+                        $paga_acta->tipo_accion=$model->tipo_accion;
                 
                         $transaction = \Yii::$app->db->beginTransaction();
              
                         try {
-                            if (! ($flag =  $paga_acta->save(false))) {
-           
-                            $transaction->rollBack();
-                            $msg= "Error en la carga de las acciones suscritas";
-                               
-                        }
-                        if ($suscrita_acta->save()) {
+                            if ($paga_acta->save(false)) {
+                                if ($model->save()) {
                                
                                 $transaction->commit();
                                  return $this->redirect(['index']);
 
+                          
+                          
+                               
+                            }else{
+                                $transaction->rollBack();
+                                Yii::$app->session->setFlash('error','Erroren la carga del capital sucrito');
+                             return $this->render('create',['model'=>$model]);
+                                            }
+                            
                         }else{
+                            
                             $transaction->rollBack();
-                        
-                        $msg= "Acciones suscritas no guardas con exito";
+            
+                            Yii::$app->session->setFlash('error','Erroren la carga del capital pagado');
+                             return $this->render('create',['model'=>$model]);
                         }
+                      
                     
                     } catch (Exception $e) {
                          $transaction->rollBack();
                     }
                 
-                }
-            }
+                
+            
         }
-        return $this->render("acciones_actas",['accion_acta'=>$suscrita_acta]);
+        return $this->render('create',['model'=>$model]);
     }
+   
 
     /**
      * Updates an existing Acciones model.
@@ -148,13 +140,54 @@ class AccionesController extends BaseController
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        if(!$model->suscrito){
+        $model = Acciones::findOne(['documento_registrado_id'=>$model->documento_registrado_id,'suscrito'=>true]);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        }
+         $model->scenario='principal';
+         $pagada_acta = Acciones::findOne(['documento_registrado_id'=>$model->documento_registrado_id,'suscrito'=>false]);
+
+        if ($model->load(Yii::$app->request->post())) {
+                     $pagada_acta = Acciones::findOne(['documento_registrado_id'=>$model->documento_registrado_id,'suscrito'=>false]);
+            $pagada_acta->capital=$model->capital_pagado;
+            $pagada_acta->numero_comun=$model->numero_comun_pagada;
+           $transaction = \Yii::$app->db->beginTransaction();
+             
+                        try {
+                            if ($pagada_acta->save(false)) {
+                                if ($model->save()) {
+                               
+                                $transaction->commit();
+                                 return $this->redirect(['index']);
+
+                          
+                          
+                               
+                            }else{
+                                $transaction->rollBack();
+                                Yii::$app->session->setFlash('error','Erroren la carga del capital sucrito');
+                             return $this->render('create',['model'=>$model]);
+                                            }
+                            
+                        }else{
+                            
+                            $transaction->rollBack();
+                            Yii::$app->session->setFlash('error','Erroren la carga del capital pagado');
+                             return $this->render('create',['model'=>$model]);
+                        }
+                      
+                    
+                    } catch (Exception $e) {
+                         $transaction->rollBack();
+                    }
+            
+            
         } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
+              
+                $model->capital_pagado=$pagada_acta->capital;
+                $model->numero_comun_pagada=$pagada_acta->numero_comun;
+                
+           return $this->render('update',['model'=>$model]);
         }
     }
 
@@ -165,8 +198,14 @@ class AccionesController extends BaseController
      * @return mixed
      */
     public function actionDelete($id)
+            
     {
-        $this->findModel($id)->delete();
+         $model = $this->findModel($id);
+        $model2 = Acciones::findOne(['documento_registrado_id'=>$model->documento_registrado_id,'suscrito'=>!$model->suscrito]);
+
+        $model->delete();
+       $model2 ->delete();
+        
 
         return $this->redirect(['index']);
     }

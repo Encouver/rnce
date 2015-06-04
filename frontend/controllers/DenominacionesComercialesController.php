@@ -4,7 +4,6 @@ namespace frontend\controllers;
 
 use Yii;
 use common\models\p\DenominacionesComerciales;
-use common\models\p\PrincipiosContables;
 use common\models\p\Contratistas;
 use common\models\p\SysNaturalesJuridicas;
 use app\models\DenominacionesComercialesSearch;
@@ -183,7 +182,9 @@ class DenominacionesComercialesController extends BaseController
                 }
              
                 $model->asignarprincipio();
+                $model->tieneotrosdatos();
                 if($model->save()){
+                    
                     Yii::$app->session->setFlash('success','Denominacion Comercial guardada con exito');
                     return $this->redirect(['index']);
                 }else{
@@ -238,6 +239,7 @@ class DenominacionesComercialesController extends BaseController
                     $model->cooperativa_distribuicion=null;
                 }
                  $model->asignarprincipio();
+                 $model->tieneotrosdatos();
 
                 if($model->save()){
                     Yii::$app->session->setFlash('success','Denominacion Comercial Actualizada con exito');
