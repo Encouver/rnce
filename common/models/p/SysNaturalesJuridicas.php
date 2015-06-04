@@ -43,7 +43,9 @@ class SysNaturalesJuridicas extends \common\components\BaseActiveRecord
             [['rif'], 'string', 'max' => 20],
             [['denominacion'], 'string', 'max' => 255],
             [['anho'], 'string', 'max' => 100],
-            [['rif'], 'unique']
+            [['rif'], 'unique'],
+            [['rif'],'filter','filter'=>'trim'],
+            [['rif'],'filter','filter'=>'strtoupper'],
         ];
     }
 

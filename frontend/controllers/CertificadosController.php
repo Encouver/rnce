@@ -35,10 +35,11 @@ class CertificadosController extends BaseController
     {
         $searchModel = new CertificadosSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+        $model= new Certificados();
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'model'=>$model,
         ]);
     }
 
@@ -59,18 +60,78 @@ class CertificadosController extends BaseController
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+     public function actionCreate()
     {
         $model = new Certificados();
+         $model->scenario='principal';
+        if(!$model->validardenominacion()){
+            Yii::$app->session->setFlash('error','Su denominacion comercial no le permite crear acciones');
+            return $this->redirect(['index']);
+         }
+          if($model->existeregistro()){
+            Yii::$app->session->setFlash('error','Usuario posee acciones cargadas o no ha creado un documento registrado');
+            return $this->redirect(['index']);
+                }
+        
+        if ( $model->load(Yii::$app->request->post())) {
+            
+            
+   
+              $model->suscrito=true;
+              $model->tipo_certificado="PRINCIPAL";
+                $model->contratista_id = Yii::$app->user->identity->contratista_id;
+                        $paga_acta = new Certificados();
+                        $paga_acta->numero_asociacion= $model->numero_asociacion_pagada;
+       
+                        $paga_acta->numero_aportacion= $model->numero_aportacion_pagada;
+                    
+                        $paga_acta->numero_rotativo= $model->numero_rotativo_pagada;
+                  
+                        $paga_acta->numero_inversion= $model->numero_inversion_pagada;
+                        $paga_acta->capital=$model->capital_pagado;
+             
+                        $paga_acta->contratista_id = $model->contratista_id;
+                        $paga_acta->documento_registrado_id= $model->documento_registrado_id;
+                        $paga_acta->suscrito=false;
+                        $paga_acta->tipo_certificado=$model->tipo_certificado;
+                                
+                        $transaction = \Yii::$app->db->beginTransaction();
+             
+                        try {
+                            if ($paga_acta->save(false)) {
+                                if ($model->save()) {
+                               
+                                $transaction->commit();
+                                 return $this->redirect(['index']);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
+                          
+                          
+                               
+                            }else{
+                                $transaction->rollBack();
+                                Yii::$app->session->setFlash('error','Erroren la carga del capital sucrito');
+                             return $this->render('create',['model'=>$model]);
+                                            }
+                            
+                        }else{
+                            
+                            $transaction->rollBack();
+                          
+                            Yii::$app->session->setFlash('error','Erroren la carga del capital pagado');
+                             return $this->render('create',['model'=>$model]);
+                        }
+                      
+                    
+                    } catch (Exception $e) {
+                         $transaction->rollBack();
+                    }
+                
+                
+            
         }
+        return $this->render('create',['model'=>$model]);
     }
+   
      public function actionCertificadosuscritaacta()
     {
         $suscrita_acta = new Certificados();
@@ -150,16 +211,70 @@ class CertificadosController extends BaseController
      * @param integer $id
      * @return mixed
      */
-    public function actionUpdate($id)
+   public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        if(!$model->suscrito){
+        $model = Certificados::findOne(['documento_registrado_id'=>$model->documento_registrado_id,'suscrito'=>true]);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        }
+         $model->scenario='principal';
+         $paga_acta = Certificados::findOne(['documento_registrado_id'=>$model->documento_registrado_id,'suscrito'=>false]);
+
+        if ($model->load(Yii::$app->request->post())) {
+                     $paga_acta = Certificados::findOne(['documento_registrado_id'=>$model->documento_registrado_id,'suscrito'=>false]);
+                    $paga_acta->numero_asociacion= $model->numero_asociacion_pagada;
+       
+                        $paga_acta->numero_aportacion= $model->numero_aportacion_pagada;
+                    
+                        $paga_acta->numero_rotativo= $model->numero_rotativo_pagada;
+                  
+                        $paga_acta->numero_inversion= $model->numero_inversion_pagada;
+                        $paga_acta->capital=$model->capital_pagado;
+             
+           $transaction = \Yii::$app->db->beginTransaction();
+             
+                        try {
+                            if ($paga_acta->save(false)) {
+                                if ($model->save()) {
+                               
+                                $transaction->commit();
+                                 return $this->redirect(['index']);
+
+                          
+                          
+                               
+                            }else{
+                                $transaction->rollBack();
+                                Yii::$app->session->setFlash('error','Erroren la carga del capital sucrito');
+                             return $this->render('create',['model'=>$model]);
+                                            }
+                            
+                        }else{
+                            
+                            $transaction->rollBack();
+                            Yii::$app->session->setFlash('error','Erroren la carga del capital pagado');
+                             return $this->render('create',['model'=>$model]);
+                        }
+                      
+                    
+                    } catch (Exception $e) {
+                         $transaction->rollBack();
+                    }
+            
+            
         } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
+              $model->numero_asociacion_pagada=$paga_acta->numero_asociacion;
+       
+               $model->numero_aportacion_pagada=$paga_acta->numero_aportacion;
+                    
+             $model->numero_rotativo_pagada=$paga_acta->numero_rotativo;
+                  
+               $model->numero_inversion_pagada=$paga_acta->numero_inversion;
+               $model->capital_pagado=$paga_acta->capital;
+               
+                
+           return $this->render('update',['model'=>$model]);
         }
     }
 
@@ -171,7 +286,11 @@ class CertificadosController extends BaseController
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+            $model = $this->findModel($id);
+        $model2 = Certificados::findOne(['documento_registrado_id'=>$model->documento_registrado_id,'suscrito'=>!$model->suscrito]);
+
+        $model->delete();
+       $model2 ->delete();
 
         return $this->redirect(['index']);
     }

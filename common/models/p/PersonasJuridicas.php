@@ -49,12 +49,18 @@ class PersonasJuridicas extends \common\components\BaseActiveRecord
             [['sys_status'], 'boolean'],
             [['anho','sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['tipo_nacionalidad'], 'string'],
-            [['rif'], 'string', 'max' => 20],
+            [['rif'],'filter','filter'=>'trim'],
+            [['rif'],'filter','filter'=>'strtoupper'],
+            [['rif'],'string','min'=>10,'max'=>10],
+            ['rif', 'match', 'pattern' => '/^[[JGP][0-9]{8}[0-9]$/i','message'=>'Rif no concuerda con el formato'],
+            
+
             [['tipo_sector'], 'string'],
             [['sigla'], 'string', 'max' => 50],
             [['tipo_sector','sigla','rif'],'required','on'=>'conbasico'],
             [['razon_social', 'numero_identificacion'], 'string', 'max' => 255],
             [['rif'], 'unique'],
+
             [['rif'], 'required', 'when' => function ($model) {
                 return $model->tipo_nacionalidad == "NACIONAL";
             }, 'whenClient' => "function (attribute, value) {
@@ -135,7 +141,7 @@ class PersonasJuridicas extends \common\components\BaseActiveRecord
          return [
         //'tipo_nacionalidad'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>$data , 'options'=>['placeholder'=>'Enter username...']],
         
-        'rif'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Introduzca rif']],
+        'rif'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Introduzca rif'],'hint'=>'Formato J123456789'],
         'razon_social'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Introduzca razon social']],
         'tipo_sector'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>[ 'PUBLICO' => 'PUBLICO', 'PRIVADO' => 'PRIVADO', 'MIXTO' => 'MIXTO' ],'options'=>['prompt'=>'Seleccione tipo']],
         'sigla'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Introduzca sigla']],
@@ -148,7 +154,7 @@ class PersonasJuridicas extends \common\components\BaseActiveRecord
         'sys_pais_id'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>ArrayHelper::map(SysPaises::find()->all(),'id','nombre'),'options'=>['prompt'=>'Seleccione Pais']],
          'numero_identificacion'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Introduzca numero identificacion']],
         'razon_social'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Introduzca razon social']],
-        'rif'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Introduzca rif'],'hint'=>'Formato V123456789'],
+        'rif'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Introduzca rif'],'hint'=>'Formato J123456789'],
     ];
     }
        

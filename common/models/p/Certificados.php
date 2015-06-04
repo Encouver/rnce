@@ -2,6 +2,9 @@
 
 namespace common\models\p;
 use kartik\builder\Form;
+use common\models\a\ActivosDocumentosRegistrados;
+use common\models\p\ModificacionesActas;
+use common\models\p\DenominacionesComerciales;
 use Yii;
 
 /**
@@ -233,5 +236,45 @@ class Certificados extends \common\components\BaseActiveRecord
         
         }
         return false;
+    }
+    public function Existeregistro(){
+       $registro = ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'tipo_documento_id'=>1,'proceso_finalizado'=>false]);       
+       $registromodificacion = ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'tipo_documento_id'=>2,'proceso_finalizado'=>false]);      
+       if(isset($registro) || isset($registromodificacion)){
+           if(isset($registromodificacion)){
+               $registro=$registromodificacion;
+               }
+          $certificado= Certificados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'documento_registrado_id'=>$registro->id]);
+           if(isset($certificado)){
+               
+                return true;   
+            }else{
+                $this->documento_registrado_id=$registro->id;
+                return false;
+            }
+        }else{
+            return true;
+        }
+    }
+     public function Validardenominacion()
+    {
+       $registro = ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'tipo_documento_id'=>1,'proceso_finalizado'=>false]);       
+       $registromodificacion = ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'tipo_documento_id'=>2,'proceso_finalizado'=>false]);      
+       if(isset($registro) || isset($registromodificacion)){
+           if(isset($registromodificacion)){
+           $registro=$registromodificacion;
+           
+           }
+           $denominacion=  DenominacionesComerciales::findOne(['documento_registrado_id'=>$registro->id]);
+           if(isset($denominacion)){
+               if($denominacion->tipo_denominacion!="COOPERATIVA" || $denominacion->cooperativa_capital=="SUPLEMENTARIO"){
+                   return false;
+                   
+               }else{
+                   return true;
+               }
+           }
+       }
+       return false;
     }
 }

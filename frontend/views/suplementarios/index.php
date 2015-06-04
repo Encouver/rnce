@@ -39,11 +39,15 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'documento_registrado_id',
             // 'contratista_id',
 
-            ['class' => 'yii\grid\ActionColumn'],
+             ['class' => 'yii\grid\ActionColumn','template'=>'{update}{delete}'],
         ],
     ]); ?>
-    <p>
-        <?= Html::a(Yii::t('app', 'Crear Certificado Supelementario'), ['suplementariosuscritaacta'], ['class' => 'btn btn-success']) ?>
+     <?php 
+    if(!$model->existeregistro() && $model->validardenominacion()){ ?>
+        <p>
+        <?= Html::a(Yii::t('app', 'Crear Certificado Suplementario'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
+    <?php } ?>
+   
 
 </div>

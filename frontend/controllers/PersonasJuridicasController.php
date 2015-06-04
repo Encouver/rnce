@@ -91,29 +91,28 @@ class PersonasJuridicasController extends BaseController
                if($model->tipo_nacionalidad=='NACIONAL'){
                 $model->sys_pais_id=1;
                 $model->numero_identificacion=null;
-               
-                $natural_juridica->rif= $model->rif;
                 }else{
-                $natural_juridica->rif= $model->numero_identificacion;
                 $natural_juridica->nacional=false;
                 $model->rif=$model->numero_identificacion;
                 }
-                
+                 $natural_juridica->rif= $model->rif;
                 $natural_juridica->juridica= true;
                 $natural_juridica->denominacion=$model->razon_social;
-                if (!$natural_juridica->save()) {
-                    $transaction->rollBack();
+                if ($natural_juridica->save()) {
+                            if($model->save()){
+                            $transaction->commit();
+                             Yii::$app->getSession()->setFlash('success',Yii::t('app',Html::encode('Documento registrado guardado.')));
+                            $model = new PersonasJuridicas();
+                            return $this->renderAjax('create', [
+                                'model' => $model,
+                            ]);
+                            }
+                    }else{
+                          $transaction->rollBack();
                     return $this->renderAjax('create', [
                     'model' => $model,]);
                     }
-                if($model->save()){
-                    $transaction->commit();
-                    Yii::$app->getSession()->setFlash('success',Yii::t('app',Html::encode('Documento registrado guardado.')));
-                    $model = new PersonasJuridicas();
-                    return $this->renderAjax('create', [
-                        'model' => $model,
-                    ]);
-                }
+                
                 
            }catch (Exception $e) {
                $transaction->rollBack();

@@ -25,8 +25,8 @@ use kartik\builder\Form;
     'attributes'=>$accion_acta->formAttribsactas
       ]); ?>
     <div id="output17"></div>
-     <div class="form-group">
-         <?= Html::submitButton(Yii::t('app', 'Enviar'), ['class' => 'btn btn-success', 'id' => 'enviar']) ?> 
+       <div class="form-group">
+        <?= Html::submitButton($accion_acta->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $accion_acta->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

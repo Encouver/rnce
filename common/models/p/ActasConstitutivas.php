@@ -375,23 +375,25 @@ class ActasConstitutivas extends \common\components\BaseActiveRecord
          $fondo_reserva= FondosReservas::findAll(['documento_registrado_id'=>$this->documento_registrado_id]);
          $sucursal= Sucursales::findAll(['documento_registrado_id'=>$this->documento_registrado_id]);
          if(isset($denominacion_comercial)){
+             if($denominacion_comercial->tipo_denominacion!="COOPERATIVA"){
              $capital_suscrito=Acciones::findOne(['documento_registrado_id'=>$this->documento_registrado_id, 'tipo_accion'=>'PRINCIPAL', 'suscrito'=>true]);
              $capital_pagado= Acciones::findOne(['documento_registrado_id'=>$this->documento_registrado_id, 'tipo_accion'=>'PRINCIPAL', 'suscrito'=>false]);
              $this->acciones=true;
-                 if($denominacion_comercial->tipo_denominacion=="COOPERATIVA" && $denominacion_comercial->cooperativa_capital!="SUPLEMENTARIO"){
+              }else{   if($denominacion_comercial->tipo_denominacion=="COOPERATIVA" && $denominacion_comercial->cooperativa_capital!="SUPLEMENTARIO"){
                        $capital_suscrito= Certificados::findOne(['documento_registrado_id'=>$this->documento_registrado_id, 'tipo_certificado'=>'PRINCIPAL', 'suscrito'=>true]);
                         $capital_pagado= Certificados::findOne(['documento_registrado_id'=>$this->documento_registrado_id, 'tipo_certificado'=>'PRINCIPAL', 'suscrito'=>false]);
-                        $this->acciones=false;
+                       
                         $this->certificados=true;
                         
                  }else{
                      $capital_suscrito= Suplementarios::findOne(['documento_registrado_id'=>$this->documento_registrado_id, 'tipo_suplementario'=>'PRINCIPAL', 'suscrito'=>true]);
                     $capital_pagado= Suplementarios::findOne(['documento_registrado_id'=>$this->documento_registrado_id, 'tipo_suplementario'=>'PRINCIPAL', 'suscrito'=>false]);
-                     $this->acciones=false;
+            
                      $this->suplementarios=true;
                  }
+              }
                  if(!isset($capital_suscrito)){
-                     $resultado="Capital suscrito incompleto";
+                     $resultado="Debe agregar el capital";
                     return $resultado;
                     
                  }

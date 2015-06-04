@@ -38,11 +38,13 @@ $this->params['breadcrumbs'][] = $this->title;
             
             // 'acta_constitutiva_id',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn','template'=>'{update}{delete}'],
         ],
     ]); ?>
-     <p>
-        <?= Html::a(Yii::t('app', 'Create Acciones'), ['accionsuscritaacta'], ['class' => 'btn btn-success']) ?>
+     <?php 
+    if(!$model->existeregistro() && $model->validardenominacion()){ ?>
+       <p>
+        <?= Html::a(Yii::t('app', 'Create Acciones'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-
+    <?php } ?>
 </div>

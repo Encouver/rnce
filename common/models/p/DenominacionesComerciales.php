@@ -7,6 +7,9 @@ use common\models\p\SysPaises;
 use kartik\widgets\Select2;
 use yii\web\JsExpression;
 use yii\helpers\Url;
+use common\models\p\Acciones;
+use common\models\p\Certificados;
+use common\models\p\Suplementarios;
 use common\models\a\ActivosDocumentosRegistrados;
 use common\models\p\PrincipiosContables;
 use Yii;
@@ -220,6 +223,61 @@ class DenominacionesComerciales extends \common\components\BaseActiveRecord
                  return false;
              }
             
+       
+    }
+     public function Tieneotrosdatos()
+    {
+         if($this->tipo_denominacion=="COOPERATIVA" && $this->cooperativa_capital!="SUPLEMENTARIO"){
+             $accion= Acciones::findAll(['documento_registrado_id'=>$this->documento_registrado_id]);
+             $suplementario= Suplementarios::findAll(['documento_registrado_id'=>$this->documento_registrado_id]);
+             if(isset($accion)){
+                 foreach ($accion as $acciones) {
+                     $acciones->delete();
+                     
+                 }
+             }
+             if(isset($suplementario)){
+                 foreach ($suplementario as $suplementarios) {
+                     $suplementarios->delete();
+                     
+                 }
+             }
+         }else{
+             if($this->tipo_denominacion=="COOPERATIVA" && $this->cooperativa_capital=="SUPLEMENTARIO"){
+             $accion= Acciones::findAll(['documento_registrado_id'=>$this->documento_registrado_id]);
+             $certificado= Certificados::findAll(['documento_registrado_id'=>$this->documento_registrado_id]);
+             if(isset($accion)){
+                 foreach ($accion as $acciones) {
+                     $acciones->delete();
+                     
+                 }
+             }
+             if(isset($certificado)){
+                 foreach ($certificado as $certificados) {
+                     $certificados->delete();
+                     
+                 }
+             }
+            }else{
+                 $suplementario= Suplementarios::findAll(['documento_registrado_id'=>$this->documento_registrado_id]);
+                 $certificado= Certificados::findAll(['documento_registrado_id'=>$this->documento_registrado_id]);
+                   if(isset($suplementario)){
+                        foreach ($suplementario as $suplementarios) {
+                            $suplementarios->delete();
+                     
+                            }
+                            }
+                 if(isset($certificado)){
+                        foreach ($certificado as $certificados) {
+                            $certificados->delete();
+                     
+                        }
+                    }
+                 
+            }
+         }
+         return true;
+        
        
     }
 }

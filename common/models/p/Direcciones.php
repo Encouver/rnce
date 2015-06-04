@@ -3,6 +3,7 @@
 namespace common\models\p;
 use kartik\builder\Form;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Url;
 use common\models\p\SysEstados;
 use common\models\p\SysMunicipios;
 use common\models\p\SysParroquias;
@@ -130,8 +131,24 @@ class Direcciones extends \common\components\BaseActiveRecord
         //'tipo_nacionalidad'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>$data , 'options'=>['placeholder'=>'Enter username...']],
         
         'sys_estado_id'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>ArrayHelper::map(SysEstados::find()->all(),'id','nombre'),'options'=>['prompt'=>'Seleccione estado']],
-        'sys_municipio_id'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>ArrayHelper::map(SysMunicipios::find()->all(),'id','nombre'),'options'=>['prompt'=>'Seleccione municipio']],
-        'sys_parroquia_id'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>ArrayHelper::map(SysParroquias::find()->all(),'id','nombre'),'options'=>['prompt'=>'Seleccione parroquia']],
+         'sys_municipio_id'=>[
+                'type'=>Form::INPUT_WIDGET, 
+                'widgetClass'=>'\kartik\widgets\DepDrop', 
+                'options'=>['pluginOptions'=>[
+                'depends'=>['direcciones-sys_estado_id'],
+            'placeholder'=>'Select...',
+            'url'=>Url::to(['direcciones/municipioslista'])
+                ]],
+            ],
+         'sys_parroquia_id'=>[
+                'type'=>Form::INPUT_WIDGET, 
+                'widgetClass'=>'\kartik\widgets\DepDrop', 
+                'options'=>['pluginOptions'=>[
+                'depends'=>['direcciones-sys_municipio_id'],
+            'placeholder'=>'Select...',
+            'url'=>Url::to(['direcciones/parroquiaslista'])
+                ]],
+            ],
         'zona'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Introduzca zona']],
         'calle'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Introduzca direccion']],
         'casa'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Introduzca tipo']],
@@ -145,8 +162,25 @@ class Direcciones extends \common\components\BaseActiveRecord
         //'tipo_nacionalidad'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>$data , 'options'=>['placeholder'=>'Enter username...']],
         
         'sys_estado_id'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>ArrayHelper::map(SysEstados::find()->all(),'id','nombre'),'options'=>['prompt'=>'Seleccione estado']],
-        'sys_municipio_id'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>ArrayHelper::map(SysMunicipios::find()->all(),'id','nombre'),'options'=>['prompt'=>'Seleccione municipio']],
-        'sys_parroquia_id'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>ArrayHelper::map(SysParroquias::find()->all(),'id','nombre'),'options'=>['prompt'=>'Seleccione parroquia']],
+        'sys_municipio_id'=>[
+                'type'=>Form::INPUT_WIDGET, 
+                'widgetClass'=>'\kartik\widgets\DepDrop', 
+                'options'=>['pluginOptions'=>[
+                'depends'=>['direcciones-sys_estado_id'],
+            'placeholder'=>'Select...',
+            'url'=>Url::to(['direcciones/municipioslista'])
+                ]],
+            ],
+             'sys_parroquia_id'=>[
+                'type'=>Form::INPUT_WIDGET, 
+                'widgetClass'=>'\kartik\widgets\DepDrop', 
+                'options'=>['pluginOptions'=>[
+                'depends'=>['direcciones-sys_municipio_id'],
+            'placeholder'=>'Select...',
+            'url'=>Url::to(['direcciones/parroquiaslista'])
+                ]],
+            ],
+     
         'zona'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Introduzca zona']],
         'calle'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Introduzca direccion']],
         'casa'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Introduzca tipo']],
