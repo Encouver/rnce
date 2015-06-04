@@ -4,6 +4,7 @@ namespace frontend\controllers;
 
 use Yii;
 use common\models\p\ObjetosAutorizaciones;
+use common\models\p\PersonasJuridicas;
 use app\models\ObjetosAutorizacionesSearch;
 use common\components\BaseController;
 use yii\web\NotFoundHttpException;
@@ -61,21 +62,26 @@ class ObjetosAutorizacionesController extends BaseController
     public function actionCreate()
     {
         $model = new ObjetosAutorizaciones();
+        $modelJuridica = new PersonasJuridicas();
 
         if ($model->load(Yii::$app->request->post())) {
             $model->contratista_id= Yii::$app->user->identity->contratista_id;
             if($model->save()){
                 return $this->redirect(['objetos-empresas/index']);
             }else{
+                $modelJuridica = new PersonasJuridicas();
+
                 Yii::$app->session->setFlash('error','error en la carga del objeto autorizado');
                  return $this->render('create', [
                 'model' => $model,
+                'modelJuridica'=>$modelJuridica,
             ]);
             }
             
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'modelJuridica'=>$modelJuridica,
             ]);
         }
     }
@@ -89,12 +95,13 @@ class ObjetosAutorizacionesController extends BaseController
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
+        $modelJuridica = new PersonasJuridicas();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['objetos-empresas/index']);
         } else {
             return $this->render('update', [
                 'model' => $model,
+                'modelJuridica'=>$modelJuridica,
             ]);
         }
     }

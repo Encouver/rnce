@@ -9,7 +9,6 @@ use Yii;
  *
  * @property integer $id
  * @property boolean $contratista
- * @property integer $empresa_relacionada_id
  * @property integer $contratista_id
  * @property integer $creado_por
  * @property integer $actualizado_por
@@ -40,7 +39,7 @@ class ObjetosEmpresas extends \common\components\BaseActiveRecord
         return [
             [['contratista', 'contratista_id', 'objeto_empresa'], 'required'],
             [['contratista',  'sys_status'], 'boolean'],
-            [['empresa_relacionada_id', 'contratista_id', 'creado_por', 'actualizado_por'], 'integer'],
+            [['contratista_id', 'creado_por', 'actualizado_por'], 'integer'],
             [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['objeto_empresa'], 'string']
         ];
@@ -54,7 +53,6 @@ class ObjetosEmpresas extends \common\components\BaseActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'contratista' => Yii::t('app', 'Contratista'),
-            'empresa_relacionada_id' => Yii::t('app', 'Empresa Relacionada ID'),
             'contratista_id' => Yii::t('app', 'Contratista ID'),
             'creado_por' => Yii::t('app', 'Creado Por'),
             'actualizado_por' => Yii::t('app', 'Actualizado Por'),

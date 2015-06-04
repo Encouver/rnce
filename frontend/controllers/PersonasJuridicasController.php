@@ -98,22 +98,40 @@ class PersonasJuridicasController extends BaseController
                  $natural_juridica->rif= $model->rif;
                 $natural_juridica->juridica= true;
                 $natural_juridica->denominacion=$model->razon_social;
+                  if($model->tipo_nacionalidad=='EXTRANJERA'){
+                       $natural_juridica->anho = date('m-Y');
+                      $natural_juridica->contratista_id=Yii::$app->user->identity->contratista_id;
+                      $natural_juridica->save(false);
+                      $model->anho = date('m-Y');
+                      $model->contratista_id=Yii::$app->user->identity->contratista_id;
+                      $model->save(false);
+                      $transaction->commit();
+                             Yii::$app->getSession()->setFlash('success',Yii::t('app',Html::encode('Persona juridica guarda con exito.')));
+                            $model = new PersonasJuridicas();
+                            return $this->renderAjax('create', [
+                                'model' => $model,
+                            ]);
+                  }else {
+
                 if ($natural_juridica->save()) {
-                            if($model->save()){
+               
+                          if($model->save()){
                             $transaction->commit();
-                             Yii::$app->getSession()->setFlash('success',Yii::t('app',Html::encode('Documento registrado guardado.')));
+                             Yii::$app->getSession()->setFlash('success',Yii::t('app',Html::encode('Persona juridica guarda con exito.')));
                             $model = new PersonasJuridicas();
                             return $this->renderAjax('create', [
                                 'model' => $model,
                             ]);
                             }
+                    
+                           
                     }else{
                           $transaction->rollBack();
                     return $this->renderAjax('create', [
                     'model' => $model,]);
                     }
                 
-                
+           }
            }catch (Exception $e) {
                $transaction->rollBack();
            }

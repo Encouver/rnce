@@ -44,7 +44,7 @@ class PersonasJuridicas extends \common\components\BaseActiveRecord
     public function rules()
     {
         return [
-            [['razon_social','tipo_nacionalidad'], 'required'],
+            [['razon_social','tipo_nacionalidad','tipo_sector'], 'required'],
             [['creado_por'], 'integer'],
             [['sys_status'], 'boolean'],
             [['anho','sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
@@ -57,7 +57,7 @@ class PersonasJuridicas extends \common\components\BaseActiveRecord
 
             [['tipo_sector'], 'string'],
             [['sigla'], 'string', 'max' => 50],
-            [['tipo_sector','sigla','rif'],'required','on'=>'conbasico'],
+            [['sigla','rif'],'required','on'=>'conbasico'],
             [['razon_social', 'numero_identificacion'], 'string', 'max' => 255],
             [['rif'], 'unique'],
 
@@ -152,9 +152,11 @@ class PersonasJuridicas extends \common\components\BaseActiveRecord
          return [             
         'tipo_nacionalidad'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>$nacionalidad,'options'=>['prompt'=>'Seleccione Pais']],
         'sys_pais_id'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>ArrayHelper::map(SysPaises::find()->all(),'id','nombre'),'options'=>['prompt'=>'Seleccione Pais']],
-         'numero_identificacion'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Introduzca numero identificacion']],
+        'numero_identificacion'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Introduzca numero identificacion']],
+        'tipo_sector'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>[ 'PUBLICO' => 'PUBLICO', 'PRIVADO' => 'PRIVADO', 'MIXTO' => 'MIXTO' ],'options'=>['prompt'=>'Seleccione sector']],
         'razon_social'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Introduzca razon social']],
         'rif'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Introduzca rif'],'hint'=>'Formato J123456789'],
+        
     ];
     }
        

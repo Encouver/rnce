@@ -83,7 +83,7 @@ class ActivosDocumentosRegistrados extends \common\components\BaseActiveRecord
             [['contratista_id', 'sys_tipo_registro_id', 'num_registro_notaria', 'tomo', 'folio', 'fecha_registro', 'sys_circunscripcion_id'], 'required', 'on'=>'bien-registro'],
             [['contratista_id', 'sys_tipo_registro_id', 'num_registro_notaria', 'tomo', 'folio', 'fecha_registro', 'sys_circunscripcion_id'], 'required', 'on'=>'bien-notaria'],
             [['contratista_id', 'sys_tipo_registro_id', 'num_registro_notaria', 'tomo', 'folio', 'fecha_registro', 'sys_circunscripcion_id'], 'required', 'on'=>'acta_constitutiva'],
-            [['contratista_id', 'sys_tipo_registro_id', 'sys_circunscripcion_id', 'tipo_documento_id', 'creado_por', 'actualizado_por'], 'integer'],
+            //[['contratista_id', 'sys_tipo_registro_id', 'sys_circunscripcion_id', 'tipo_documento_id', 'creado_por', 'actualizado_por'], 'integer'],
             [['fecha_registro', 'fecha_asamblea', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el','proceso_finalizado'], 'safe'],
             [['valor_adquisicion'], 'number'],
             [['sys_status','proceso_finalizado'], 'boolean'],
@@ -360,14 +360,6 @@ class ActivosDocumentosRegistrados extends \common\components\BaseActiveRecord
                 'tomo'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Numero de colegiatura']],
                 'folio'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Numero de colegiatura']],
                 'fecha_registro'=>[
-                    'type'=>Form::INPUT_WIDGET,
-                    'widgetClass'=>'\kartik\widgets\DatePicker',
-                    'options'=>['pluginOptions' => [
-                        'autoclose'=>true,
-                        'format' => 'yyyy-mm-dd'
-                    ]],
-                ],
-                'fecha_asamblea'=>[
                     'type'=>Form::INPUT_WIDGET,
                     'widgetClass'=>'\kartik\widgets\DatePicker',
                     'options'=>['pluginOptions' => [

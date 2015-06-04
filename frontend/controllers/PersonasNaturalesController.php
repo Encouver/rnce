@@ -103,20 +103,35 @@ class PersonasNaturalesController extends Controller
                 }
                 $natural_juridica->juridica= false;
                 $natural_juridica->denominacion=$model->primer_nombre.' '.$model->primer_apellido;
-                if (!$natural_juridica->save()) {
+                if($model->nacionalidad=='EXTRANJERA'){
+                       $natural_juridica->anho = date('m-Y');
+                      $natural_juridica->contratista_id=Yii::$app->user->identity->contratista_id;
+                      $natural_juridica->save(false);
+                      $model->anho = date('m-Y');
+                      $model->contratista_id=Yii::$app->user->identity->contratista_id;
+                      $model->save(false);
+                      $transaction->commit();
+                             Yii::$app->getSession()->setFlash('success',Yii::t('app',Html::encode('Persona juridica guarda con exito.')));
+                            $model = new PersonasNaturales(['scenario'=>'basico']);
+                            return $this->renderAjax('create', [
+                                'model' => $model,
+                            ]);
+                  }else {
+                        if (!$natural_juridica->save()) {
                     $transaction->rollBack();
                     return $this->renderAjax('create', [
                     'model' => $model,]);
-                    }
-                if($model->save()){
-                    $transaction->commit();
-                    Yii::$app->getSession()->setFlash('success',Yii::t('app',Html::encode('Documento registrado guardado.')));
-                    $model = new PersonasNaturales(['scenario'=>'basico']);
-                    return $this->renderAjax('create', [
-                        'model' => $model,
-                    ]);
-                }
+                        }
                 
+                        if($model->save()){
+                            $transaction->commit();
+                            Yii::$app->getSession()->setFlash('success',Yii::t('app',Html::encode('Persona natural guarda con exito.')));
+                            $model = new PersonasNaturales(['scenario'=>'basico']);
+                            return $this->renderAjax('create', [
+                        'model' => $model,
+                         ]);
+                }
+                  }
            }catch (Exception $e) {
                $transaction->rollBack();
            }
