@@ -151,13 +151,17 @@ class OrigenesCapitales extends \common\components\BaseActiveRecord
         
         
        // $registro = ActivosDocumentosRegistrados::findOne(['contratista_id'=>$usuario->contratista_id, 'tipo_documento_id'=>1]);
-                   
-        $capitales= OrigenesCapitales::findAll(['contratista_id'=>Yii::$app->user->identity->id, 'documento_registrado_id'=>$this->documento_registrado_id]);
+       $capitales= OrigenesCapitales::findAll(['contratista_id'=>Yii::$app->user->identity->id, 'documento_registrado_id'=>$this->documento_registrado_id]);  
+      
         if(isset($capitales)){
              foreach ($capitales as $capital) {
                 $suma=$suma+$capital->monto;
             }
-        } 
+           if(!$this->isNewRecord){
+              $capital= OrigenesCapitales::findOne($this->id);
+              $suma= $suma-$capital->monto;
+           }
+        }
        
         
         return $suma;
@@ -300,5 +304,40 @@ class OrigenesCapitales extends \common\components\BaseActiveRecord
          return false;
         
        
+    }
+    public function aceptarmonto(){
+        
+        $monto_pagado=0;
+         $registro = ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'tipo_documento_id'=>1,'proceso_finalizado'=>false]);       
+        $registromodificacion = ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'tipo_documento_id'=>2,'proceso_finalizado'=>false]);      
+        if(isset($registro) || isset($registromodificacion)){
+           if(isset($registromodificacion)){
+               $registro=$registromodificacion;
+          }
+         $denominacion_comercial= DenominacionesComerciales::findOne(['documento_registrado_id'=>$registro->id]);
+            if(isset($denominacion_comercial)){
+                if($denominacion_comercial->tipo_denominacion!="COOPERATIVA"){
+                    $accion= Acciones::findOne(['contratista_id'=>Yii::$app->user->identity->id ,'documento_registrado_id'=>$this->documento_registrado_id,'suscrito'=>false]);
+                    $monto_pagado = $accion->capital;
+                }else{
+                    if($denominacion_comercial->tipo_denominacion=="COOPERATIVA" && $denominacion_comercial->cooperativa_capital=='LIMITADO'){
+           
+                         $certificado= Certificados::findOne(['contratista_id'=>Yii::$app->user->identity->id ,'documento_registrado_id'=>$this->documento_registrado_id,'suscrito'=>false]);
+                            $monto_pagado = $certificado->capital;
+                    }else{
+                        $suplementario= Suplementarios::findOne(['contratista_id'=>$usuario->contratista_id ,'documento_registrado_id'=>$this->documento_registrado_id,'suscrito'=>false]);
+                        $monto_pagado = $suplementario->capital;
+                 
+                    }
+                }
+            }
+         
+          $monto_actual= $this->sumarmonto();
+          
+          if($monto_actual<$monto_pagado){
+              return true;
+          }
+        }
+        return false;
     }
 }

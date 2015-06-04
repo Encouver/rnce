@@ -47,7 +47,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]); ?>
        <?php 
-    if(!$searchModel->existeregistro() && $searchModel->validarcapital()){ ?>
+    if(!$searchModel->existeregistro() && $searchModel->validarcapital() && $searchModel->aceptarmonto()){ ?>
        <p>
         <?= Html::a(Yii::t('app', 'Agregar Efectivo'), ['create', 'identificador' => 'efectivo'], ['class' => 'btn btn-success']) ?>
        </p>
@@ -99,7 +99,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]); ?>
      <?php 
-    if(!$searchModel->existeregistro() && $searchModel->validarcapital()){ ?>
+    if(!$searchModel->existeregistro() && $searchModel->validarcapital() && $searchModel->aceptarmonto()){ ?>
         <p>
         <?= Html::a(Yii::t('app', 'Agregar Efectivo Banco'),['create', 'identificador' => 'banco'], ['class' => 'btn btn-success']) ?>
     </p>
@@ -156,7 +156,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]); ?>
      <?php 
-    if(!$searchModel->existeregistro() && $searchModel->validarcapital()){ ?>
+    if(!$searchModel->existeregistro() && $searchModel->validarcapital() && $searchModel->aceptarmonto()){ ?>
      <p>
         <?= Html::a(Yii::t('app', 'Agregar Bien'), ['create', 'identificador' => 'bien'], ['class' => 'btn btn-success']) ?>
     </p>
