@@ -242,7 +242,15 @@ class DenominacionesComerciales extends \common\components\BaseActiveRecord
                      
                  }
              }
-         }else{
+             $origen_capital= OrigenesCapitales::findAll(['documento_registrado_id'=>$this->documento_registrado_id]);
+             if(isset($origen_capital)){
+                 foreach ($origen_capital as $capital) {
+                     $capital->delete();
+                     
+                 }
+             }
+             
+                 }else{
              if($this->tipo_denominacion=="COOPERATIVA" && $this->cooperativa_capital=="SUPLEMENTARIO"){
              $accion= Acciones::findAll(['documento_registrado_id'=>$this->documento_registrado_id]);
              $certificado= Certificados::findAll(['documento_registrado_id'=>$this->documento_registrado_id]);
@@ -258,7 +266,15 @@ class DenominacionesComerciales extends \common\components\BaseActiveRecord
                      
                  }
              }
+             $origen_capital= OrigenesCapitales::findAll(['documento_registrado_id'=>$this->documento_registrado_id]);
+             if(isset($origen_capital)){
+                 foreach ($origen_capital as $capital) {
+                     $capital->delete();
+                     
+                 }
+             }
             }else{
+                if($this->tipo_denominacion!="COOPERATIVA"){
                  $suplementario= Suplementarios::findAll(['documento_registrado_id'=>$this->documento_registrado_id]);
                  $certificado= Certificados::findAll(['documento_registrado_id'=>$this->documento_registrado_id]);
                    if(isset($suplementario)){
@@ -266,14 +282,22 @@ class DenominacionesComerciales extends \common\components\BaseActiveRecord
                             $suplementarios->delete();
                      
                             }
-                            }
+                         }
                  if(isset($certificado)){
                         foreach ($certificado as $certificados) {
                             $certificados->delete();
                      
                         }
                     }
-                 
+                    $origen_capital= OrigenesCapitales::findAll(['documento_registrado_id'=>$this->documento_registrado_id]);
+                    if(isset($origen_capital)){
+                    foreach ($origen_capital as $capital) {
+                     $capital->delete();
+                     
+                    }
+             }
+                  
+                }
             }
          }
          return true;

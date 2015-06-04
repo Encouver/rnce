@@ -50,6 +50,7 @@ class OrigenesCapitalesController extends BaseController
             'dataProvider_efectivo' => $dataProvider_efectivo,
             'dataProvider_banco' => $dataProvider_banco,
             'dataProvider_bien' => $dataProvider_bien,
+            'searchModel'=>$searchModel,
         ]);
     }
     public function actionOrigen()
@@ -113,6 +114,10 @@ class OrigenesCapitalesController extends BaseController
                 break;
             }  
         }
+         if(!$model->validarcapital()){
+            Yii::$app->session->setFlash('error','No existe capital suscrito');
+            return $this->redirect(['index']);
+         }
         if($model->existeregistro()){
             Yii::$app->session->setFlash('error','Debe crear un documento registrado');
             return $this->redirect(['index']);

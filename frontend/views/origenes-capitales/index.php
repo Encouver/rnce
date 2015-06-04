@@ -46,9 +46,13 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
-     <p>
+       <?php 
+    if(!$searchModel->existeregistro() && $searchModel->validarcapital()){ ?>
+       <p>
         <?= Html::a(Yii::t('app', 'Agregar Efectivo'), ['create', 'identificador' => 'efectivo'], ['class' => 'btn btn-success']) ?>
-    </p>
+       </p>
+    <?php } ?>
+     
     <hr />
     <h3>Efectivo en banco</h3>
     <?= GridView::widget([
@@ -94,9 +98,13 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
-    <p>
+     <?php 
+    if(!$searchModel->existeregistro() && $searchModel->validarcapital()){ ?>
+        <p>
         <?= Html::a(Yii::t('app', 'Agregar Efectivo Banco'),['create', 'identificador' => 'banco'], ['class' => 'btn btn-success']) ?>
     </p>
+    <?php } ?>
+   
     <hr />
     <h3>Bienes</h3>
     <?= GridView::widget([
@@ -147,7 +155,11 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
-    <p>
+     <?php 
+    if(!$searchModel->existeregistro() && $searchModel->validarcapital()){ ?>
+     <p>
         <?= Html::a(Yii::t('app', 'Agregar Bien'), ['create', 'identificador' => 'bien'], ['class' => 'btn btn-success']) ?>
     </p>
+    <?php } ?>
+    
 </div>

@@ -272,4 +272,33 @@ class OrigenesCapitales extends \common\components\BaseActiveRecord
             return true;
         }
     }
+     public function Validarcapital()
+    {
+          $registro = ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'tipo_documento_id'=>1,'proceso_finalizado'=>false]);       
+       $registromodificacion = ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'tipo_documento_id'=>2,'proceso_finalizado'=>false]);      
+       if(isset($registro) || isset($registromodificacion)){
+           if(isset($registromodificacion)){
+               $registro=$registromodificacion;
+           }
+           $denominacion = DenominacionesComerciales::findOne(['documento_registrado_id'=>$registro->id]);
+           if(isset($denominacion)){
+              $accion= Acciones::findAll(['documento_registrado_id'=>$denominacion->documento_registrado_id]);
+              $suplementario= Suplementarios::findAll(['documento_registrado_id'=>$denominacion->documento_registrado_id]);
+              $certificado= Certificados::findAll(['documento_registrado_id'=>$denominacion->documento_registrado_id]);
+              if(isset($accion) || isset($suplementario) || isset($certificado)){
+                  return true;
+                  
+              }else{
+                  
+                  return false;
+              }
+               
+               
+           }
+         
+       }
+         return false;
+        
+       
+    }
 }
