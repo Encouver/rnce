@@ -12,7 +12,7 @@ use yii\helpers\Html;
 
 <div class="activos-documentos-registrados-form">
 
-    <?php $form = ActiveForm::begin(['id'=>$model->formName(), 'type'=>ActiveForm::TYPE_VERTICAL, 'options' => ['data-pjax' => Yii::$app->request->isPjax]]);  ?>
+    <?php $form = ActiveForm::begin(['id'=>$model->formName(),'action'=>$url, 'type'=>ActiveForm::TYPE_VERTICAL, 'options' => ['data-pjax' => Yii::$app->request->isPjax]]);  ?>
 
 <!--
     <?php /*//Get all flash messages and loop through them
@@ -46,7 +46,7 @@ use yii\helpers\Html;
     echo Form::widget([       // 3 column layout
         'model'=>$model,
         'form'=>$form,
-        'columns'=>4,
+        'columns'=>3,
         'columnSize'=>'xs',
         'attributes'=>$model->getFormAttribs()
     ]);

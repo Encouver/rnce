@@ -262,4 +262,40 @@ ALTER TABLE duraciones_empresas DROP COLUMN tiempo_prorroga;
 ALTER TABLE actas_constitutivas DROP COLUMN comisario_auditor_id;
 
 
+--04 JUNIO 2015 12:00M--
 
+ALTER TABLE empresas_relacionadas ADD COLUMN documento_registrado_id integer;
+COMMENT ON COLUMN empresas_relacionadas.documento_registrado_id IS 'Clave foranea a la tabla documentos registrados';
+
+
+ALTER TABLE empresas_relacionadas
+  ADD CONSTRAINT empresas_relacionadas_documento_registrado_id_fkey FOREIGN KEY (documento_registrado_id)
+      REFERENCES activos.documentos_registrados (id) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE NO ACTION;
+
+ALTER TABLE empresas_relacionadas DROP COLUMN tipo_sector;
+ALTER TABLE empresas_relacionadas DROP COLUMN persona_juridica_id;
+ALTER TABLE empresas_relacionadas DROP COLUMN persona_contacto_id;
+
+ALTER TABLE empresas_relacionadas ADD COLUMN persona_juridica_id integer;
+ALTER TABLE empresas_relacionadas ALTER COLUMN persona_juridica_id SET NOT NULL;
+COMMENT ON COLUMN empresas_relacionadas.persona_juridica_id IS 'Clave foranea a la tabla sys_naturales_juridicas';
+
+ALTER TABLE empresas_relacionadas ADD COLUMN persona_contacto_id integer;
+ALTER TABLE empresas_relacionadas ALTER COLUMN persona_contacto_id SET NOT NULL;
+COMMENT ON COLUMN empresas_relacionadas.persona_contacto_id IS 'Clave foranea a la tabla sys_naturales_juridicas';
+
+ALTER TABLE empresas_relacionadas
+  ADD CONSTRAINT empresas_relacionada_spersona_juridica_id_fkey FOREIGN KEY (persona_juridica_id)
+      REFERENCES sys_naturales_juridicas (id) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE NO ACTION;
+
+ALTER TABLE empresas_relacionadas
+  ADD CONSTRAINT empresas_relacionadas_persona_contacto_id_fkey FOREIGN KEY (persona_contacto_id)
+      REFERENCES sys_naturales_juridicas (id) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE NO ACTION;
+
+
+
+ALTER TABLE objetos_empresas DROP COLUMN empresa_relacionada_id;
+LTER TABLE empresas_relacionadas DROP COLUMN sys_pais_id;

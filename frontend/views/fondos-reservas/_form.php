@@ -22,7 +22,7 @@ use kartik\builder\Form;
     'columns'=>4,
     'attributes'=>$model->formAttribs
       ]); ?>
-    <?= $form->field($model, 'documento_registrado_id')->hiddenInput()->label(false) ?>
+    <?php //$form->field($model, 'documento_registrado_id')->hiddenInput()->label(false) ?>
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>

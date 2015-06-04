@@ -101,7 +101,7 @@ class PersonasJuridicasController extends BaseController
                 if ($natural_juridica->save()) {
                             if($model->save()){
                             $transaction->commit();
-                             Yii::$app->getSession()->setFlash('success',Yii::t('app',Html::encode('Documento registrado guardado.')));
+                             Yii::$app->getSession()->setFlash('success',Yii::t('app',Html::encode('Persona juridica guarda con exito.')));
                             $model = new PersonasJuridicas();
                             return $this->renderAjax('create', [
                                 'model' => $model,

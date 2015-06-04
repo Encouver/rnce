@@ -103,6 +103,7 @@ AppAsset::register($this);
                          ['label' => 'Contador Auditor', 'url' => ['/comisarios-auditores/crearcontador']],
                          ['label' => 'Profesional Informe de conversion', 'url' => ['/comisarios-auditores/crearprofesional']],*/
                          ['label' => 'Relacion de Contratos', 'url' => ['/relaciones-contratos/index']],
+                         ['label' => 'Empresas Relacionadas', 'url' => ['/empresas-relacionadas/index']],
          
                         
                     ],

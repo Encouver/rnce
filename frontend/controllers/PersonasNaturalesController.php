@@ -110,7 +110,7 @@ class PersonasNaturalesController extends Controller
                     }
                 if($model->save()){
                     $transaction->commit();
-                    Yii::$app->getSession()->setFlash('success',Yii::t('app',Html::encode('Documento registrado guardado.')));
+                    Yii::$app->getSession()->setFlash('success',Yii::t('app',Html::encode('Persona natural guarda con exito.')));
                     $model = new PersonasNaturales(['scenario'=>'basico']);
                     return $this->renderAjax('create', [
                         'model' => $model,

@@ -11,6 +11,7 @@ use yii\helpers\Html;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use common\models\p\RazonesSociales;
+use yii\helpers\Url;
 
 /**
  * ActivosDocumentosRegistradosController implements the CRUD actions for ActivosDocumentosRegistrados model.
@@ -101,14 +102,18 @@ class ActivosDocumentosRegistradosController extends BaseController
                     'positonX' => 'center'
                 ]*/);
                 $model = new ActivosDocumentosRegistrados();
+                $url= Url::to(['create-general']);
                 return $this->renderAjax('create', [
                     'model' => $model,
+                    'url'=>$url
                 ]);
             }
             //return $this->redirect(['view', 'id' => $model->id]);
         } else {
+            $url= Url::to(['create-general']);
             return $this->renderAjax('create', [
                 'model' => $model,
+                'url'=>$url,
             ]);
         }
     }
@@ -121,6 +126,7 @@ class ActivosDocumentosRegistradosController extends BaseController
     public function actionCreate()
     {
         $model = new ActivosDocumentosRegistrados();
+        $model = new ActivosDocumentosRegistrados(['scenario'=>'actas']);
          if($model->existeregistro()){
             Yii::$app->session->setFlash('error','Usuario posee una documento registrado en proceso');
             return $this->redirect(['index']);
@@ -147,11 +153,51 @@ class ActivosDocumentosRegistradosController extends BaseController
                      return $this->redirect(['index']);
                         }
         } else {
+             $url= Url::to(['create']);
             return $this->renderAjax('create', [
                 'model' => $model,
+                'url'=>$url,
             ]);
         }
     }
+    public function actionCreateempresarelacionada()
+    {
+        $model = new ActivosDocumentosRegistrados();
+
+        if ($model->load(Yii::$app->request->post()) ) {
+            //
+                $model->sys_tipo_registro_id = 3;
+                $model->tipo_documento_id = 3;
+
+            if($model->save()) {
+
+
+                Yii::$app->getSession()->setFlash('success',Yii::t('app',Html::encode('Documento registrado guardado.')) /*[
+                    'type' => 'success',
+                    'duration' => 5000,
+                    'icon' => 'fa fa-users',
+                    'message' => Yii::t('app',Html::encode('Documento registrado guaradado.')),
+                    'title' => Yii::t('app',Html::encode('Documento registrado')),
+                    'positonY' => 'top',
+                    'positonX' => 'center'
+                ]*/);
+                $model = new ActivosDocumentosRegistrados();
+                $url= Url::to(['createempresarelacionada']);
+                return $this->renderAjax('create', [
+                    'model' => $model,
+                    'url'=>$url
+                ]);
+            }
+            //return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            $url= Url::to(['createempresarelacionada']);
+                return $this->renderAjax('create', [
+                    'model' => $model,
+                    'url'=>$url
+                ]);
+        }
+    }
+
    
 
     /**
@@ -171,8 +217,10 @@ class ActivosDocumentosRegistradosController extends BaseController
               Yii::$app->session->setFlash('success','Documento Actualizado con exito');
                      return $this->redirect(['index']);
         } else {
+            $url= Url::to(['update']);
             return $this->render('update', [
                 'model' => $model,
+                 'url'=>$url
             ]);
         }
     }
