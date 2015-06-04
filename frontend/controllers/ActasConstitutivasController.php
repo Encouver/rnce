@@ -132,7 +132,7 @@ class ActasConstitutivasController extends BaseController
     {
        $usuario= \common\models\p\User::findOne(Yii::$app->user->identity->id);
          $denominacion_comercial= DenominacionesComerciales::findOne(['contratista_id'=>$usuario->contratista_id]);
-      
+      if(isset($denominacion_comercial)){
          if($denominacion_comercial->tipo_denominacion!="COOPERATIVA"){
              $accion_acta = new Acciones();
            
@@ -149,7 +149,12 @@ class ActasConstitutivasController extends BaseController
              $suplementario_acta = new Suplementarios();
              $msg=null;
              $suplementario_acta->scenario = 'principal';
-              return $this->redirect(['suplementarios/index']);;
+              return $this->redirect(['suplementarios/index']);
+         }
+         
+      }else{
+            Yii::$app->session->setFlash('error','Debe agregar una denominacion comercial');
+             return $this->redirect(['denominaciones-comerciales/index']);
          }
 
     }
