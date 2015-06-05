@@ -232,6 +232,7 @@ class BaseActiveRecord extends ActiveRecord
     {
         $model    = new $modelClass;
         $formName = $model->formName();
+
         $post     = Yii::$app->request->post($formName);
         $models   = [];
 
@@ -253,6 +254,13 @@ class BaseActiveRecord extends ActiveRecord
         unset($model, $formName, $post);
 
         return $models;
+    }
+
+    public function Calculo(){
+
+
+
+        return true;
     }
 /*+++++++++++++++++++++++++++++++METODOS DISPONIBLES PARA HACER LOS CALCULOS EN EL SISTEMA++++++++++++++++++++++++++++*/
 

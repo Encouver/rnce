@@ -28,22 +28,22 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
-            'islr_pagado_id',
+            //'id',
+            'islrPagado.nombre',
             'nro_documento',
             'saldo_ph',
             'importe_pagado_ejer_econo',
             'importe_aplicado_ejer_econo',
             'saldo_cierre',
             'monto',
-            'contratista_id',
+            /*'contratista_id',
             'anho',
             'creado_por',
             'actualizado_por',
             'sys_status:boolean',
             'sys_creado_el',
             'sys_actualizado_el',
-            'sys_finalizado_el',
+            'sys_finalizado_el',*/
         ],
     ]) ?>
 

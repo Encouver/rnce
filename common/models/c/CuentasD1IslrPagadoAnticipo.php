@@ -31,6 +31,7 @@ use yii\widgets\MaskedInput;
  * @property string $sys_finalizado_el
  *
  * @property CuentasConceptos $islrPagado
+ * * @property CuentasConceptos $islrBeneficiarios
  * @property Contratistas $contratista
  */
 class CuentasD1IslrPagadoAnticipo extends \common\components\BaseActiveRecord
@@ -100,6 +101,14 @@ class CuentasD1IslrPagadoAnticipo extends \common\components\BaseActiveRecord
         return $this->hasOne(Contratistas::className(), ['id' => 'contratista_id']);
     }
 
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getIslrBeneficiarios()
+    {
+        return $this->hasMany(CuentasD1D2Beneficiario::className(), ['cuenta_id' => 'id']);
+    }
+
     public function getFormAttribs() {
         return [
             // primary key column
@@ -126,10 +135,18 @@ class CuentasD1IslrPagadoAnticipo extends \common\components\BaseActiveRecord
                     'autoGroup' => true
                 ],]
             ],//*/
+            'monto'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),],
             'importe_aplicado_ejer_econo'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),],
             //'saldo_cierre'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),],
 
 
         ];
+    }
+
+    public function Calculo(){
+
+        $this->saldo_cierre = $this->saldo_ph + $this->importe_pagado_ejer_econo + $this->monto + $this->importe_aplicado_ejer_econo;
+
+        return true;
     }
 }

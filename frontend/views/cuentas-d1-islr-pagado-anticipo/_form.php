@@ -71,7 +71,7 @@ use yii\helpers\Html;
                                     'form'=>$form,
                                     'columns'=>4,
                                     'columnSize'=>'xs',
-                                    'attributes'=>$modelBeneficiario->formAttribs
+                                    'attributes'=>$modelBeneficiario->getFormAttribs($i)
                                 ]);
                             ?>
 
