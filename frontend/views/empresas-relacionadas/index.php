@@ -43,7 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
              [
                 'attribute'=>'documento_registrado_id',
                 'label'=>'Numero documento',
-                'value'=>'documentoRegistrado.numero_registro'
+                'value'=>'documentoRegistrado.num_registro_notaria'
             ],
             'fecha_inicio',
             'fecha_fin',
