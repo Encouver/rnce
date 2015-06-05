@@ -4,6 +4,7 @@ namespace frontend\controllers;
 
 use Yii;
 use common\models\p\OrigenesCapitales;
+use common\models\p\CertificacionesAportes;
 use common\models\a\ActivosDocumentosRegistrados;
 use app\models\OrigenesCapitalesSearch;
 use common\components\BaseController;
@@ -186,7 +187,15 @@ class OrigenesCapitalesController extends BaseController
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+        $todos = OrigenesCapitales::findAll(['documento_registrado_id'=>$model->documento_registrado_id]);
+        if(count($todos)==1){
+            $certificacion= CertificacionesAportes::findOne(['documento_registrado_id'=>$model->documento_registrado_id]);
+        
+            $certificacion->delete();
+        }
+        $model->delete();
+       // $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
     }
