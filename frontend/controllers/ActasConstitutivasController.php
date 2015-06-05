@@ -163,27 +163,100 @@ class ActasConstitutivasController extends BaseController
          $registro = ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'tipo_documento_id'=>1]);
          $contratista = Contratistas::findOne(['id'=>Yii::$app->user->identity->contratista_id]);
          $natural_juridica = SysNaturalesJuridicas::findOne(['id'=>$contratista->natural_juridica_id]);
+         $msgDocumentoRegistrado= "Debe Crear un Documento Registrado";
+         $msgDenominacionComercial= "Debe crear una Denominacion Comercial";
+         $msgNaturalJuridica= "Debe crear datos del contratista";
+         $msgDuracionEmpresa= "Debe agregar la duracion de la empresa";
+         $msgCierreEjercicio= "Debe agregar cierre ejercicio economico";
+         $msgObjetoSocial= "Debe agregar objeto social";
+         $msgActividadEconomica= "Debe agregar actividades economicas";
+         $msgDomicilioFiscal= "Debe agregar domicilio fiscal";
+         $msgDomicilioPrincipal= "Debe agregar domicilio principal";
+         $msgRazonSocial= "Debe agregar razon social";
+         $msgOrigenCapital= "Debe agregar el origen del capital";
+         $msgAccionistaOtro= "Debe agregar accionistas";
+         $msgComisario="Debe agregar comisarios";
+         $msgSucursal= "Si posee sucursales puede agregarlas";
+         $msgFondoReserva="Debe agregar fondo reserva";
+         $msgCertificacionAporte= "Debe agregar certificacion de aportes";
+         $msgCapital= "Debe agregar el capital";
+         $boton= false;
+         if(isset($natural_juridica)){
+             $msgNaturalJuridica= null;
+         }
          if(isset($registro)){
+             $msgDocumentoRegistrado= null;
          $denominacion_comercial = DenominacionesComerciales::findOne(['documento_registrado_id'=>$registro->id]);
          $duracion_empresa = DuracionesEmpresas::findOne(['documento_registrado_id'=>$registro->id]);
+          if(isset($duracion_empresa)){
+             $msgDuracionEmpresa= null;
+         }
          $cierre_ejercicio= CierresEjercicios::findOne(['documento_registrado_id'=>$registro->id]);
+          if(isset($cierre_ejercicio)){
+             $msgCierreEjercicio= null;
+         }
          $objeto_social= ObjetosSociales::findOne(['documento_registrado_id'=>$registro->id]);
+          if(isset($objeto_social)){
+            $msgObjetoSocial= null;
+         }
          $actividad_economica= ActividadesEconomicas::findOne(['documento_registrado_id'=>$registro->id]);
-         
+          if(isset($actividad_economica)){
+            $msgActividadEconomica= null;
+         }
          $domicilio_fiscal= Domicilios::findOne(['documento_registrado_id'=>$registro->id, 'fiscal'=>true]);
-          
+           if(isset( $domicilio_fiscal)){
+            $msgDomicilioFiscal= null;
+         }
          $domicilio_principal= Domicilios::findOne(['documento_registrado_id'=>$registro->id, 'fiscal'=>false]);
+          if(isset($domicilio_principal)){
+            $msgDomicilioPrincipal= null;
+         }
          $razon_social= RazonesSociales::findOne(['documento_registrado_id'=>$registro->id]);
-         $origen_capital_efectivo= OrigenesCapitales::findAll(['documento_registrado_id'=>$registro->id,'efectivo'=>true]);
-         $origen_capital_banco= OrigenesCapitales::findAll(['documento_registrado_id'=>$registro->id,'banco'=>true]);
-         $origen_capital_bien= OrigenesCapitales::findAll(['documento_registrado_id'=>$registro->id,'bien'=>true]);
+         if(isset($razon_social)){
+            $msgRazonSocial= null;
+         }
+         $origen_capital_efectivo= OrigenesCapitales::findOne(['documento_registrado_id'=>$registro->id,'efectivo'=>true]);
+         if(isset($origen_capital_efectivo)){
+            $origen_capital_efectivo= OrigenesCapitales::findAll(['documento_registrado_id'=>$registro->id,'efectivo'=>true]);
+         }
+         $origen_capital_banco= OrigenesCapitales::findOne(['documento_registrado_id'=>$registro->id,'banco'=>true]);
+          if(isset($origen_capital_banco)){
+            $origen_capital_banco= OrigenesCapitales::findAll(['documento_registrado_id'=>$registro->id,'banco'=>true]);
+         }
+         $origen_capital_bien= OrigenesCapitales::findOne(['documento_registrado_id'=>$registro->id,'bien'=>true]);
+          if(isset($origen_capital_bien)){
+            $origen_capital_bien= OrigenesCapitales::findAll(['documento_registrado_id'=>$registro->id,'bien'=>true]);
+         }
+          if(isset($origen_capital_bien) || isset($origen_capital_banco) || isset($origen_capital_efectivo)){
+           $msgOrigenCapital=null;
+         }
          $certificacion_aporte= CertificacionesAportes::findOne(['documento_registrado_id'=>$registro->id]);
-         $accionista_otro= AccionistasOtros::findAll(['documento_registrado_id'=>$registro->id]);
-         $comisario= ComisariosAuditores::findAll(['documento_registrado_id'=>$registro->id]);
-         $fondo_reserva= FondosReservas::findAll(['documento_registrado_id'=>$registro->id]);
-         $sucursal= Sucursales::findAll(['documento_registrado_id'=>$registro->id]);
+          if(isset($certificacion_aporte)){
+           $msgCertificacionAporte=null;
+         }
+         $accionista_otro= AccionistasOtros::findOne(['documento_registrado_id'=>$registro->id]);
+         if(isset($accionista_otro)){
+           $msgAccionistaOtro=null;
+           $accionista_otro= AccionistasOtros::findAll(['documento_registrado_id'=>$registro->id]);
+         }
+         $comisario= ComisariosAuditores::findOne(['documento_registrado_id'=>$registro->id]);
+         if(isset($comisario)){
+             $msgComisario=null;
+             $comisario= ComisariosAuditores::findAll(['documento_registrado_id'=>$registro->id]);
+         }
+         $fondo_reserva= FondosReservas::findOne(['documento_registrado_id'=>$registro->id]);
+         if(isset($fondo_reserva)){
+             $msgFondoReserva=null;
+              $fondo_reserva= FondosReservas::findAll(['documento_registrado_id'=>$registro->id]);
+         }
+         $sucursal= Sucursales::findOne(['documento_registrado_id'=>$registro->id]);
+          if(isset($sucursal)){
+              $msgSucursal=null;
+              $sucursal= Sucursales::findAll(['documento_registrado_id'=>$registro->id]);
+         }
        
          if(isset($denominacion_comercial)){
+             $msgDenominacionComercial= null;
              if($denominacion_comercial->tipo_denominacion!="COOPERATIVA"){
                  $capital_suscrito=Acciones::findOne(['documento_registrado_id'=>$registro->id, 'tipo_accion'=>'PRINCIPAL', 'suscrito'=>true]);
                  $capital_pagado= Acciones::findOne(['documento_registrado_id'=>$registro->id, 'tipo_accion'=>'PRINCIPAL', 'suscrito'=>false]);
@@ -198,6 +271,13 @@ class ActasConstitutivasController extends BaseController
          
                  }
              }
+             if(isset($capital_suscrito)){
+              $msgCapital=null;
+            }
+            if(isset($fondo_reserva) && isset($comisario) && isset($accionista_otro) && isset($certificacion_aporte) && is_null($msgCapital) && isset($domicilio_principal) && isset($domicilio_fiscal) && isset($capital_suscrito) && isset($actividad_economica) && isset($razon_social) && isset($natural_juridica) && isset($registro) && isset($denominacion_comercial) && isset($duracion_empresa) && isset($cierre_ejercicio) && isset($objeto_social)){
+                $boton=true;
+            }
+             
              return $this->render('resumenacta', [
                 'contratista'=>$contratista,
                'natural_juridica'=>$natural_juridica,
@@ -220,6 +300,24 @@ class ActasConstitutivasController extends BaseController
                 'comisario'=>$comisario,
                 'fondo_reserva'=>$fondo_reserva,
                 'sucursal'=>$sucursal,
+                'msgDenominacionComercial'=>$msgDenominacionComercial,
+                'msgDocumentoRegistrado'=>$msgDocumentoRegistrado,
+                'msgNaturalJuridica'=>$msgNaturalJuridica,
+                'msgDuracionEmpresa'=>$msgDuracionEmpresa,
+                'msgCierreEjercicio'=>$msgCierreEjercicio,
+                'msgObjetoSocial'=>$msgObjetoSocial,
+                'msgActividadEconomica'=>$msgActividadEconomica,
+                'msgDomicilioFiscal'=>$msgDomicilioFiscal,
+                'msgDomicilioPrincipal'=>$msgDomicilioPrincipal,
+                'msgRazonSocial'=>$msgRazonSocial,
+                'msgOrigenCapital'=>$msgOrigenCapital,
+                'msgAccionistaOtro'=>$msgAccionistaOtro,
+                'msgComisario'=>$msgComisario,
+                'msgSucursal'=>$msgSucursal,
+                'msgCertificacionAporte'=>$msgCertificacionAporte,
+                'msgFondoReserva'=>$msgFondoReserva,
+                'msgCapital'=>$msgCapital,
+                'boton'=>$boton,
             ]);
          }     
           return $this->render('resumenacta', [
@@ -242,12 +340,48 @@ class ActasConstitutivasController extends BaseController
                 'comisario'=>$comisario,
                 'fondo_reserva'=>$fondo_reserva,
                 'sucursal'=>$sucursal,
+                'msgDenominacionComercial'=>$msgDenominacionComercial,
+                'msgDocumentoRegistrado'=>$msgDocumentoRegistrado,
+                'msgNaturalJuridica'=>$msgNaturalJuridica,
+                'msgDuracionEmpresa'=>$msgDuracionEmpresa,
+                'msgCierreEjercicio'=>$msgCierreEjercicio,
+                'msgObjetoSocial'=>$msgObjetoSocial,
+                'msgActividadEconomica'=>$msgActividadEconomica,
+                'msgDomicilioFiscal'=>$msgDomicilioFiscal,
+                'msgDomicilioPrincipal'=>$msgDomicilioPrincipal,
+                'msgRazonSocial'=>$msgRazonSocial,
+                'msgOrigenCapital'=>$msgOrigenCapital,
+                'msgAccionistaOtro'=>$msgAccionistaOtro,
+                'msgComisario'=>$msgComisario,
+                'msgSucursal'=>$msgSucursal,
+                'msgCertificacionAporte'=>$msgCertificacionAporte,
+                'msgFondoReserva'=>$msgFondoReserva,
+                'msgCapital'=>$msgCapital,
+                'boton'=>$boton,
             ]);
          }else{
               return $this->render('resumenacta', [
                 'contratista'=>$contratista,
                'natural_juridica'=>$natural_juridica,
                 'registro'=>$registro,
+                'msgDenominacionComercial'=>$msgDenominacionComercial,
+                'msgDocumentoRegistrado'=>$msgDocumentoRegistrado,
+                'msgNaturalJuridica'=>$msgNaturalJuridica,
+                'msgDuracionEmpresa'=>$msgDuracionEmpresa,
+                'msgCierreEjercicio'=>$msgCierreEjercicio,
+                'msgObjetoSocial'=>$msgObjetoSocial,
+                'msgActividadEconomica'=>$msgActividadEconomica,
+                'msgDomicilioFiscal'=>$msgDomicilioFiscal,
+                'msgDomicilioPrincipal'=>$msgDomicilioPrincipal,
+                'msgRazonSocial'=>$msgRazonSocial,
+                'msgOrigenCapital'=>$msgOrigenCapital,
+                'msgAccionistaOtro'=>$msgAccionistaOtro,
+                'msgComisario'=>$msgComisario,
+                'msgSucursal'=>$msgSucursal,
+                'msgCertificacionAporte'=>$msgCertificacionAporte,
+                'msgFondoReserva'=>$msgFondoReserva,
+                'msgCapital'=>$msgCapital,
+                'boton'=>$boton,
             ]);
          }
         

@@ -405,7 +405,7 @@ class ActasConstitutivas extends \common\components\BaseActiveRecord
              }
       
         if(!isset($natural_juridica)){
-             $resultado="Debe crear datos natural juridica";
+             $resultado="Debe crear datos del contratista";
                     return $resultado;
         }
          if(!isset($origen_capital)){
@@ -441,11 +441,15 @@ class ActasConstitutivas extends \common\components\BaseActiveRecord
                     return $resultado;
         }
          if(!isset($accionista_otro)){
-             $resultado="Debe agregar accionista otro";
+             $resultado="Debe agregar accionistas";
                     return $resultado;
         }
          if(!isset($fondo_reserva)){
              $resultado="Debe agregar fondo_reserva";
+                    return $resultado;
+        }
+         if(!isset($certificacion_aporte)){
+             $resultado="Debe agregar certificacion de aportes";
                     return $resultado;
         }
          if(!isset($comisario)){
