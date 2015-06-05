@@ -299,3 +299,11 @@ ALTER TABLE empresas_relacionadas
 
 ALTER TABLE objetos_empresas DROP COLUMN empresa_relacionada_id;
 LTER TABLE empresas_relacionadas DROP COLUMN sys_pais_id;
+
+
+---04 junio 7:35 pm---
+
+
+ALTER TABLE objetos_empresas ADD COLUMN objeto_empresa tipo_objeto_empresa;
+ALTER TABLE objetos_empresas ALTER COLUMN objeto_empresa SET NOT NULL;
+COMMENT ON COLUMN objetos_empresas.objeto_empresa IS 'Tipo objeto empresa puede ser PRODUCTOR, FABRICANTE, FABRICANTE IMPORTADOR, DISTRIBUIDOR, DISTRIBUIDOR IMPORTADOR, SERVICIOS BASICOS, SERVICIOS PROFESIONALES, SERVICIOS COMERCIALES , OBRAS';
