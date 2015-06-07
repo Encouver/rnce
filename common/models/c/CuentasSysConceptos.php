@@ -17,12 +17,16 @@ use Yii;
  * @property string $sys_actualizado_el
  * @property string $sys_finalizado_el
  * @property string $cuenta
+ * @property integer $sys_clasificacion_id
+ * @property boolean $carga_sistema
  *
  * @property CuentasD1IslrPagadoAnticipo[] $cuentasD1IslrPagadoAnticipos
  * @property CuentasD2OtrosTributosPag[] $cuentasD2OtrosTributosPags
  * @property CuentasDd3OtrosTributos[] $cuentasDd3OtrosTributos
  * @property CuentasHhPasivoLaboral[] $cuentasHhPasivoLaborals
+ * @property CuentasI2DeclaracionIslr[] $cuentasI2DeclaracionIslrs
  * @property CuentasJjProviciones[] $cuentasJjProviciones
+ * @property CuentasSysClasificacionesConceptos $sysClasificacion
  */
 class CuentasSysConceptos extends \common\components\BaseActiveRecord
 {
@@ -39,6 +43,7 @@ class CuentasSysConceptos extends \common\components\BaseActiveRecord
         return CuentasSysConceptos::find()->where(['cuenta'=>$cuenta])->orderBy('id')->all();
     }
 
+
     /**
      * @inheritdoc
      */
@@ -46,8 +51,8 @@ class CuentasSysConceptos extends \common\components\BaseActiveRecord
     {
         return [
             [['nombre'], 'required'],
-            [['creado_por', 'actualizado_por'], 'integer'],
-            [['sys_status'], 'boolean'],
+            [['creado_por', 'actualizado_por', 'sys_clasificacion_id'], 'integer'],
+            [['sys_status', 'carga_sistema'], 'boolean'],
             [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['nombre', 'descripcion', 'cuenta'], 'string', 'max' => 255],
             [['nombre', 'cuenta'], 'unique', 'targetAttribute' => ['nombre', 'cuenta'], 'message' => 'The combination of Nombre and Cuenta has already been taken.']
@@ -70,6 +75,8 @@ class CuentasSysConceptos extends \common\components\BaseActiveRecord
             'sys_actualizado_el' => Yii::t('app', 'Sys Actualizado El'),
             'sys_finalizado_el' => Yii::t('app', 'Sys Finalizado El'),
             'cuenta' => Yii::t('app', 'Cuenta'),
+            'sys_clasificacion_id' => Yii::t('app', 'Sys Clasificacion ID'),
+            'carga_sistema' => Yii::t('app', 'Carga Sistema'),
         ];
     }
 
@@ -108,8 +115,24 @@ class CuentasSysConceptos extends \common\components\BaseActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
+    public function getCuentasI2DeclaracionIslrs()
+    {
+        return $this->hasMany(CuentasI2DeclaracionIslr::className(), ['tipo_declaracion_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getCuentasJjProviciones()
     {
         return $this->hasMany(CuentasJjProviciones::className(), ['concepto_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getSysClasificacion()
+    {
+        return $this->hasOne(CuentasSysClasificacionesConceptos::className(), ['id' => 'sys_clasificacion_id']);
     }
 }

@@ -274,3 +274,54 @@ ALTER TABLE cuentas.i2_declaracion_islr
 DROP CONSTRAINT i2_declaracion_islr_tipo_declaracion_id_fkey;
 ALTER TABLE cuentas.i2_declaracion_islr
 ADD FOREIGN KEY (tipo_declaracion_id) REFERENCES cuentas.sys_conceptos (id) ON UPDATE NO ACTION ON DELETE NO ACTION;
+
+
+
+/**************     07/06/2015 *************/
+
+-- Table: cuentas.sys_clasificaciones_conceptos
+
+-- DROP TABLE cuentas.sys_clasificaciones_conceptos;
+
+CREATE TABLE cuentas.sys_clasificaciones_conceptos
+(
+  id serial NOT NULL, -- Clave primaria.
+  nombre character varying(255) NOT NULL, -- Nombre de la clasificación.
+  descripcion character varying(255), -- Descripción de la clasificación.
+  creado_por integer, -- Clave foranea al usuario
+  actualizado_por integer, -- Clave foranea al usuario
+  sys_status boolean NOT NULL DEFAULT true, -- Estatus interno del sistema
+  sys_creado_el timestamp with time zone DEFAULT now(), -- Fecha de creación del registro.
+  sys_actualizado_el timestamp with time zone DEFAULT now(), -- Fecha de última actualización del registro.
+  sys_finalizado_el timestamp with time zone, -- Fecha de "eliminado" el registro.
+  CONSTRAINT sys_clasificaciones_conceptos_pkey PRIMARY KEY (id),
+  CONSTRAINT sys_clasificaciones_conceptos_nombre_descripcion_key UNIQUE (nombre, descripcion)
+)
+WITH (
+OIDS=FALSE
+);
+ALTER TABLE cuentas.sys_clasificaciones_conceptos
+OWNER TO eureka;
+COMMENT ON TABLE cuentas.sys_clasificaciones_conceptos
+IS 'Clasificaciones de los conceptos.';
+COMMENT ON COLUMN cuentas.sys_clasificaciones_conceptos.id IS 'Clave primaria.';
+COMMENT ON COLUMN cuentas.sys_clasificaciones_conceptos.nombre IS 'Nombre de la clasificación.';
+COMMENT ON COLUMN cuentas.sys_clasificaciones_conceptos.descripcion IS 'Descripción de la clasificación.';
+COMMENT ON COLUMN cuentas.sys_clasificaciones_conceptos.creado_por IS 'Clave foranea al usuario';
+COMMENT ON COLUMN cuentas.sys_clasificaciones_conceptos.actualizado_por IS 'Clave foranea al usuario';
+COMMENT ON COLUMN cuentas.sys_clasificaciones_conceptos.sys_status IS 'Estatus interno del sistema';
+COMMENT ON COLUMN cuentas.sys_clasificaciones_conceptos.sys_creado_el IS 'Fecha de creación del registro.';
+COMMENT ON COLUMN cuentas.sys_clasificaciones_conceptos.sys_actualizado_el IS 'Fecha de última actualización del registro.';
+COMMENT ON COLUMN cuentas.sys_clasificaciones_conceptos.sys_finalizado_el IS 'Fecha de "eliminado" el registro.';
+
+
+
+
+ALTER TABLE cuentas.sys_conceptos
+ADD COLUMN sys_clasificacion_id integer;
+ALTER TABLE cuentas.sys_conceptos
+ADD COLUMN carga_sistema boolean DEFAULT false;
+ALTER TABLE cuentas.sys_conceptos
+ADD FOREIGN KEY (sys_clasificacion_id) REFERENCES cuentas.sys_clasificaciones_conceptos (id) ON UPDATE NO ACTION ON DELETE NO ACTION;
+COMMENT ON COLUMN cuentas.sys_conceptos.sys_clasificacion_id IS 'Clave foránea a la tabla sys_clasificaciones_conceptos.';
+COMMENT ON COLUMN cuentas.sys_conceptos.carga_sistema IS 'Indica si este tipo de concepto se cargara por el sistema.';
