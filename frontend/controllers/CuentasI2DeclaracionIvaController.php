@@ -86,16 +86,18 @@ class CuentasI2DeclaracionIvaController extends BaseController
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $models = $dataProvider->getModels();
 
+        //print_r($models[0]->load(Yii::$app->request->post())?'cargado':'no cargado');
+        //die;
 
-        if (CuentasI2DeclaracionIva::loadMultiple($models, Yii::$app->request->post()) && CuentasI2DeclaracionIva::validateMultiple($models)) {
-            $count = 0;
-            foreach ($models as $index => $model) {
-                // populate and save records for each model
-                if ($model->save()) {
-                    $count++;
+            if (CuentasI2DeclaracionIva::loadMultiple($models, Yii::$app->request->post()) && CuentasI2DeclaracionIva::validateMultiple($models)) {
+                $count = 0;
+                foreach ($models as $index => $model) {
+                    // populate and save records for each model
+                    if ($model->save()) {
+                        $count++;
                 }
             }
-            Yii::$app->session->setFlash('success', "Processed {$count} records successfully.");
+                Yii::$app->session->setFlash('success', "Declaración de IVA actualizada.");
             return $this->redirect(['index']); // redirect to your next desired page
         } else {
             return $this->render('update', [

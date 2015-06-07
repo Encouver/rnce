@@ -43,7 +43,7 @@ class CuentasI2DeclaracionIvaSearch extends CuentasI2DeclaracionIva
      */
     public function search($params)
     {
-        $query = CuentasI2DeclaracionIva::find();
+        $query = CuentasI2DeclaracionIva::find()->indexBy('id');
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,

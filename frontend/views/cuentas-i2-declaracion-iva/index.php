@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a(Yii::t('app', 'Create Cuentas I2 Declaracion Iva'), ['batch-update'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Actualizar declaración de IVA'), ['batch-update'], ['class' => 'btn btn-primary']) ?>
     </p>
 <!--
     <?/*= GridView::widget([
@@ -55,16 +55,17 @@ $this->params['breadcrumbs'][] = $this->title;
    -->
 
     <?php
-    // En la vista
+/*    // En la vista
     foreach (Yii::$app->session->getAllFlashes() as $key => $message) {
         echo '<div class="alert alert-' . $key . '">' . $message . '</div>';
-    }
+    }*/
 
         $form = ActiveForm::begin();
             echo TabularForm::widget([
                 // set entire form to static only (read only)
                 //'staticOnly'=>true,
                 'actionColumn'=>false,
+
 
                 'dataProvider'=>$dataProvider,
                 'form'=>$form,
