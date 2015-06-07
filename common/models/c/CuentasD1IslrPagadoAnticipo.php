@@ -31,7 +31,7 @@ use yii\widgets\MaskedInput;
  * @property string $sys_finalizado_el
  *
  * @property CuentasConceptos $islrPagado
- * * @property CuentasConceptos $islrBeneficiarios
+ * @property CuentasD1D2Beneficiario $islrBeneficiarios
  * @property Contratistas $contratista
  */
 class CuentasD1IslrPagadoAnticipo extends \common\components\BaseActiveRecord
@@ -50,14 +50,15 @@ class CuentasD1IslrPagadoAnticipo extends \common\components\BaseActiveRecord
     public function rules()
     {
         return [
-            [['islr_pagado_id', 'saldo_ph', 'importe_pagado_ejer_econo', 'importe_aplicado_ejer_econo', 'contratista_id', 'anho'], 'required'],
+            [['islr_pagado_id', 'saldo_ph', 'importe_pagado_ejer_econo', 'importe_aplicado_ejer_econo', 'contratista_id', 'monto', 'anho'], 'required'],
             [['islr_pagado_id', 'contratista_id', 'creado_por', 'actualizado_por'], 'integer'],
             [['nro_documento'], 'string'],
             [['saldo_ph', 'importe_pagado_ejer_econo', 'importe_aplicado_ejer_econo', 'saldo_cierre', 'monto'], 'number'],
+            ['monto', 'default', 'value'=>0],
             [['sys_status'], 'boolean'],
             [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['anho'], 'string', 'max' => 100],
-            [['islr_pagado_id', 'contratista_id'], 'unique', 'targetAttribute' => ['islr_pagado_id', 'contratista_id'], 'message' => 'Ya se encuentra cargado un registro con este concepto.']
+            [['islr_pagado_id', 'contratista_id', 'anho'], 'unique', 'targetAttribute' => ['islr_pagado_id', 'contratista_id', 'anho'], 'message' => 'Ya se encuentra cargado un registro con este concepto.']
         ];
     }
 
@@ -68,12 +69,12 @@ class CuentasD1IslrPagadoAnticipo extends \common\components\BaseActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'islr_pagado_id' => Yii::t('app', 'Islr Pagado ID'),
+            'islr_pagado_id' => Yii::t('app', 'Islr Pagado'),
             'nro_documento' => Yii::t('app', 'Nro Documento'),
             'saldo_ph' => Yii::t('app', 'Saldo Ph'),
-            'importe_pagado_ejer_econo' => Yii::t('app', 'Importe Pagado Ejer Econo'),
-            'importe_aplicado_ejer_econo' => Yii::t('app', 'Importe Aplicado Ejer Econo'),
-            'saldo_cierre' => Yii::t('app', 'Saldo Cierre'),
+            'importe_pagado_ejer_econo' => Yii::t('app', 'Importe Pagado Ejercicio Económico'),
+            'importe_aplicado_ejer_econo' => Yii::t('app', 'Importe Aplicado Ejercicio Económico'),
+            'saldo_cierre' => Yii::t('app', 'Saldo al Cierre'),
             'monto' => Yii::t('app', 'Monto'),
             'contratista_id' => Yii::t('app', 'Contratista ID'),
             'anho' => Yii::t('app', 'Anho'),
@@ -90,7 +91,7 @@ class CuentasD1IslrPagadoAnticipo extends \common\components\BaseActiveRecord
      */
     public function getIslrPagado()
     {
-        return $this->hasOne(CuentasConceptos::className(), ['id' => 'islr_pagado_id']);
+        return $this->hasOne(CuentasSysConceptos::className(), ['id' => 'islr_pagado_id']);
     }
 
     /**
@@ -110,20 +111,20 @@ class CuentasD1IslrPagadoAnticipo extends \common\components\BaseActiveRecord
     }
 
     public function getFormAttribs() {
-        return [
-            // primary key column
-            'id'=>[ // primary key attribute
-                'type'=>Form::INPUT_HIDDEN,
-                'columnOptions'=>['hidden'=>true]
-            ],
+            return [
+                // primary key column
+                'id'=>[ // primary key attribute
+                    'type'=>Form::INPUT_HIDDEN,
+                    'columnOptions'=>['hidden'=>true]
+                ],
 
-            'islr_pagado_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(CuentasConceptos::concepto('d1'),'id','nombre'),
-                'options'=>['id'=>'islr-concepto','placeholder'=>'Seleccionar ', 'onchange'=>'js:'],'pluginOptions' => [
-                    'allowClear' => false,
-                ],]],
-            'nro_documento'=>['type'=>Form::INPUT_TEXT,],
-            'saldo_ph'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),],
-            'importe_pagado_ejer_econo'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),],/*['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskedInput::className(),'options'=>[
+                'islr_pagado_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(CuentasSysConceptos::concepto('d1'),'id','nombre'),
+                    'options'=>['id'=>'islr-concepto','placeholder'=>'Seleccionar ', 'onchange'=>''],'pluginOptions' => [
+                        'allowClear' => false,
+                    ],]],
+                'nro_documento'=>['type'=>Form::INPUT_TEXT,],
+                'saldo_ph'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),],
+                'importe_pagado_ejer_econo'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),],/*['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskedInput::className(),'options'=>[
                 'clientOptions' => [
                     'autoUnmask'=> true,
                     'removeMaskOnSubmit'=>true,
@@ -135,12 +136,12 @@ class CuentasD1IslrPagadoAnticipo extends \common\components\BaseActiveRecord
                     'autoGroup' => true
                 ],]
             ],//*/
-            'monto'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),],
-            'importe_aplicado_ejer_econo'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),],
-            //'saldo_cierre'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),],
+                'monto'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),],
+                'importe_aplicado_ejer_econo'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),],
+                //'saldo_cierre'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),],
 
 
-        ];
+            ];
     }
 
     public function Calculo(){

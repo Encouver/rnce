@@ -5,7 +5,7 @@ namespace common\models\c;
 use Yii;
 
 /**
- * This is the model class for table "cuentas.conceptos".
+ * This is the model class for table "cuentas.sys_periodos".
  *
  * @property integer $id
  * @property string $nombre
@@ -16,25 +16,22 @@ use Yii;
  * @property string $sys_creado_el
  * @property string $sys_actualizado_el
  * @property string $sys_finalizado_el
- * @property string $cuenta
  *
- * @property CuentasD1IslrPagadoAnticipo[] $cuentasD1IslrPagadoAnticipos
- * @property CuentasHhPasivoLaboral[] $cuentasHhPasivoLaborals
- * @property CuentasJjProviciones[] $cuentasJjProviciones
+ * @property CuentasI2DeclaracionIva[] $cuentasI2DeclaracionIvas
  */
-class CuentasConceptos extends \common\components\BaseActiveRecord
+class CuentasSysPeriodos extends \common\components\BaseActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'cuentas.conceptos';
+        return 'cuentas.sys_periodos';
     }
 
-    public static function Concepto($cuenta = '')
+    public static function porDescripcion($descripcion)
     {
-        return CuentasConceptos::find()->where(['cuenta'=>$cuenta])->all();
+        return CuentasSysPeriodos::find()->where(['descripcion'=>$descripcion])->orderBy('id')->all();
     }
 
     /**
@@ -47,8 +44,8 @@ class CuentasConceptos extends \common\components\BaseActiveRecord
             [['creado_por', 'actualizado_por'], 'integer'],
             [['sys_status'], 'boolean'],
             [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
-            [['nombre', 'descripcion', 'cuenta'], 'string', 'max' => 255],
-            [['nombre', 'cuenta'], 'unique', 'targetAttribute' => ['nombre', 'cuenta'], 'message' => 'The combination of Nombre and Cuenta has already been taken.']
+            [['nombre', 'descripcion'], 'string', 'max' => 255],
+            [['nombre', 'descripcion'], 'unique', 'targetAttribute' => ['nombre', 'descripcion'], 'message' => 'The combination of Nombre and Descripcion has already been taken.']
         ];
     }
 
@@ -67,31 +64,14 @@ class CuentasConceptos extends \common\components\BaseActiveRecord
             'sys_creado_el' => Yii::t('app', 'Sys Creado El'),
             'sys_actualizado_el' => Yii::t('app', 'Sys Actualizado El'),
             'sys_finalizado_el' => Yii::t('app', 'Sys Finalizado El'),
-            'cuenta' => Yii::t('app', 'Cuenta'),
         ];
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getCuentasD1IslrPagadoAnticipos()
+    public function getCuentasI2DeclaracionIvas()
     {
-        return $this->hasMany(CuentasD1IslrPagadoAnticipo::className(), ['islr_pagado_id' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getCuentasHhPasivoLaborals()
-    {
-        return $this->hasMany(CuentasHhPasivoLaboral::className(), ['hh_concepto_id' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getCuentasJjProviciones()
-    {
-        return $this->hasMany(CuentasJjProviciones::className(), ['concepto_id' => 'id']);
+        return $this->hasMany(CuentasI2DeclaracionIva::className(), ['periodo_id' => 'id']);
     }
 }

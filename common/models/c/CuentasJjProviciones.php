@@ -97,7 +97,7 @@ class CuentasJjProviciones extends \common\components\BaseActiveRecord
      */
     public function getConcepto()
     {
-        return $this->hasOne(CuentasConceptos::className(), ['id' => 'concepto_id']);
+        return $this->hasOne(CuentasSysConceptos::className(), ['id' => 'concepto_id']);
     }
 
     public function getFormAttribs(){
@@ -109,7 +109,7 @@ class CuentasJjProviciones extends \common\components\BaseActiveRecord
                 ],
                 
                 'corriente'=>['type'=>Form::INPUT_CHECKBOX,'label'=>'Corriente'],
-                'concepto_id'=>['type'=>Form::INPUT_DROPDOWN_LIST, 'items'=>ArrayHelper::map(CuentasConceptos::find()->where(['cuenta' => 'jj'])->orderBy('id')->asArray()->all(), 'id', 'nombre'), 'label'=>'Concepto'],                
+                'concepto_id'=>['type'=>Form::INPUT_DROPDOWN_LIST, 'items'=>ArrayHelper::map(CuentasSysConceptos::find()->where(['cuenta' => 'jj'])->orderBy('id')->asArray()->all(), 'id', 'nombre'), 'label'=>'Concepto'],
                 'otro_nombre'=>['type'=>Form::INPUT_TEXT,'label'=>'Otro nombre'],
                 'importe_provisionado_periodo'=>['type'=>Form::INPUT_TEXT,'label'=>'Importe provisionado del periodo'],
                 'saldo_p_anterior'=>['type'=>Form::INPUT_TEXT, 'label'=>'Saldo del período anterior'],

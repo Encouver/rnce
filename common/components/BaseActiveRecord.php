@@ -12,6 +12,12 @@ use yii\db\Expression;
 use common\models\p\SysInpc;
 use yii\helpers\ArrayHelper;
 
+/**
+ * Esto es el módelo base para todos los modelos en el sistema.
+ *
+ *
+ * @property string $anhoContable
+ */
 class BaseActiveRecord extends ActiveRecord
 {
     public function init() {
@@ -26,6 +32,10 @@ class BaseActiveRecord extends ActiveRecord
         return $scenarios;
 
     }*/
+
+    public function getAnhoContable(){
+        return date('m-Y');
+    }
 
 	public function behaviors()
     {
@@ -160,6 +170,7 @@ class BaseActiveRecord extends ActiveRecord
             $this->anho = date('m-Y');
         return parent::beforeValidate();
     }
+
 	public function beforeSave($insert){
 
 		if (parent::beforeSave($insert)) {
@@ -257,8 +268,6 @@ class BaseActiveRecord extends ActiveRecord
     }
 
     public function Calculo(){
-
-
 
         return true;
     }

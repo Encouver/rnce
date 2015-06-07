@@ -5,20 +5,18 @@ namespace frontend\controllers;
 use common\models\c\CuentasD1D2Beneficiario;
 use kartik\widgets\ActiveForm;
 use Yii;
-use common\models\c\CuentasD1IslrPagadoAnticipo;
-use app\models\CuentasD1IslrPagadoAnticipoSearch;
+use common\models\c\CuentasD2OtrosTributosPag;
+use app\models\CuentasD2OtrosTributosPagSearch;
 use common\components\BaseController;
 use yii\db\Exception;
-use yii\filters\auth\HttpBasicAuth;
 use yii\helpers\ArrayHelper;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\web\Response;
 
 /**
- * CuentasD1IslrPagadoAnticipoController implements the CRUD actions for CuentasD1IslrPagadoAnticipo model.
+ * CuentasD2OtrosTributosPagController implements the CRUD actions for CuentasD2OtrosTributosPag model.
  */
-class CuentasD1IslrPagadoAnticipoController extends BaseController
+class CuentasD2OtrosTributosPagController extends BaseController
 {
     public function behaviors()
     {
@@ -33,12 +31,12 @@ class CuentasD1IslrPagadoAnticipoController extends BaseController
     }
 
     /**
-     * Lists all CuentasD1IslrPagadoAnticipo models.
+     * Lists all CuentasD2OtrosTributosPag models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new CuentasD1IslrPagadoAnticipoSearch();
+        $searchModel = new CuentasD2OtrosTributosPagSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -48,7 +46,7 @@ class CuentasD1IslrPagadoAnticipoController extends BaseController
     }
 
     /**
-     * Displays a single CuentasD1IslrPagadoAnticipo model.
+     * Displays a single CuentasD2OtrosTributosPag model.
      * @param integer $id
      * @return mixed
      */
@@ -60,13 +58,13 @@ class CuentasD1IslrPagadoAnticipoController extends BaseController
     }
 
     /**
-     * Creates a new CuentasD1IslrPagadoAnticipo model.
+     * Creates a new CuentasD2OtrosTributosPag model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new CuentasD1IslrPagadoAnticipo();
+        $model = new CuentasD2OtrosTributosPag();
         $modelBeneficiarios = [new CuentasD1D2Beneficiario()];
 
         if ($model->load(Yii::$app->request->post())) {
@@ -84,15 +82,13 @@ class CuentasD1IslrPagadoAnticipoController extends BaseController
 
             // validate all models
             $valid = $model->validate();
-            if($model->monto > 0)
-                $valid = CuentasD1D2Beneficiario::validateMultiple($modelBeneficiarios) && $valid;
+            $valid = CuentasD1D2Beneficiario::validateMultiple($modelBeneficiarios) && $valid;
 
 
             if ($valid) {
                 $transaction = \Yii::$app->db->beginTransaction();
                 try {
                     if ($flag = $model->save(false)) {
-                        if($model->monto > 0)
                         foreach ($modelBeneficiarios as $modelBeneficiario) {
                             $modelBeneficiario->cuenta_id = $model->id;
                             if (! ($flag = $modelBeneficiario->save(false))) {
@@ -112,14 +108,13 @@ class CuentasD1IslrPagadoAnticipoController extends BaseController
 
             //return $this->redirect(['view', 'id' => $model->id]);
         }
-            return $this->render('create', [
-                'model' => $model, 'modelBeneficiarios'=>$modelBeneficiarios
-            ]);
-
+        return $this->render('create', [
+            'model' => $model, 'modelBeneficiarios'=>$modelBeneficiarios
+        ]);
     }
 
     /**
-     * Updates an existing CuentasD1IslrPagadoAnticipo model.
+     * Updates an existing CuentasD2OtrosTributosPag model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -127,7 +122,7 @@ class CuentasD1IslrPagadoAnticipoController extends BaseController
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $modelBeneficiarios = $model->islrBeneficiarios;
+        $modelBeneficiarios = $model->otrosTributosBeneficiarios;
 
         if ($model->load(Yii::$app->request->post())) {
 
@@ -187,17 +182,16 @@ class CuentasD1IslrPagadoAnticipoController extends BaseController
     }
 
     /**
-     * Deletes an existing CuentasD1IslrPagadoAnticipo model.
+     * Deletes an existing CuentasD2OtrosTributosPag model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
      */
     public function actionDelete($id)
     {
-
         $model = $this->findModel($id);
         if($model){
-            $modelBeneficiarios = $model->islrBeneficiarios;
+            $modelBeneficiarios = $model->otrosTributos;
 
 
             $flag = true;
@@ -222,15 +216,15 @@ class CuentasD1IslrPagadoAnticipoController extends BaseController
     }
 
     /**
-     * Finds the CuentasD1IslrPagadoAnticipo model based on its primary key value.
+     * Finds the CuentasD2OtrosTributosPag model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return CuentasD1IslrPagadoAnticipo the loaded model
+     * @return CuentasD2OtrosTributosPag the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = CuentasD1IslrPagadoAnticipo::findOne($id)) !== null) {
+        if (($model = CuentasD2OtrosTributosPag::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
