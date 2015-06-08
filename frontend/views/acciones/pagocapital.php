@@ -10,14 +10,16 @@ use yii\grid\GridView;
 $this->title = Yii::t('app', 'Acciones');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="acciones-index">
+<div class="acciones-pagocapital">
 
-    <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
    
 
-    <?= GridView::widget([
+    <?php
+    if(isset($documento)){
+    echo Html::tag('h1','Pago de Capital');
+       echo GridView::widget([
         'dataProvider' => $dataProvider,
         //'filterModel' => $searchModel,
         'summary'=>'',
@@ -25,12 +27,19 @@ $this->params['breadcrumbs'][] = $this->title;
            // ['class' => 'yii\grid\SerialColumn'],
 
             //'id',
-            'suscrito:boolean',
-            'capital',
-            'numero_comun',
-            'valor_comun',
-            'numero_preferencial',
-            'valor_preferencial',
+            //'suscrito:boolean',
+            [
+                'attribute'=>'capital',
+                'label'=>'Capital Pagado'
+            ],
+            [
+                'attribute'=>'numero_comun',
+                'label'=>'Numero acciones pagadas'
+            ],
+            
+           // 'valor_comun',
+            //'numero_preferencial',
+            //'valor_preferencial',
             [
                 'attribute'=>'certificacion_aporte_id',
                 'label'=>'Certificador Aporte',
@@ -46,11 +55,23 @@ $this->params['breadcrumbs'][] = $this->title;
 
             ['class' => 'yii\grid\ActionColumn','template'=>'{update}{delete}'],
         ],
-    ]); ?>
-     <?php 
-    if(!$model->existeregistro() && $model->validardenominacion()){ ?>
-       <p>
-        <?= Html::a(Yii::t('app', 'Agregar Acciones'), ['create','id'=>'principal'], ['class' => 'btn btn-success']) ?>
-    </p>
-    <?php } ?>
+    ]); 
+       
+         if(!$searchModel->existeregistro()){ ?>
+                <p>
+                     <?=Html::a(Yii::t('app', 'Agregar Pago de Capital'), ['create','id'=>'pago'], ['class' => 'btn btn-success']) ?>
+
+             </p>
+      
+         <?php }  }else{?>
+        
+            <div class="alert-warning alert fade in">
+               
+
+                <h4>No existe ningun procedimiento referente al pago de capital activo</h4>
+
+            </div>
+        <?php } ?>
+    
+
 </div>

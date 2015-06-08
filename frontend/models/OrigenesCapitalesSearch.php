@@ -21,7 +21,8 @@ class OrigenesCapitalesSearch extends OrigenesCapitales
             [['id', 'bien_id', 'banco_contratista_id', 'numero_accion', 'contratista_id', 'documento_registrado_id', 'creado_por', 'actualizado_por', 'numero_transaccion'], 'integer'],
             [['monto', 'saldo_cierre_anterior', 'saldo_corte', 'monto_aumento', 'saldo_aumento', 'valor_acciones', 'saldo_cierre_ajustado'], 'number'],
             [['fecha', 'fecha_corte', 'fecha_aumento', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
-            [['sys_status', 'efectivo', 'banco', 'bien', 'cuenta_pagar', 'decreto'], 'boolean'],
+            [['sys_status', 'efectivo', 'banco', 'bien', 'cuenta_pagar', 'decreto','principal'], 'boolean'],
+            [['tipo_origen'], 'string'],
         ];
     }
 
@@ -86,6 +87,8 @@ class OrigenesCapitalesSearch extends OrigenesCapitales
             'bien' => $this->bien,
             'cuenta_pagar' => $this->cuenta_pagar,
             'decreto' => $this->decreto,
+            'tipo_origen' => $this->tipo_origen,
+            'principal' => $this->principal,
         ]);
 
         return $dataProvider;

@@ -197,7 +197,7 @@ class AccionistasOtros extends \common\components\BaseActiveRecord
                 'templateSelection' => new JsExpression('function (natural_juridica_id) { return natural_juridica_id.text; }'),
         ],]],
         'accionista'=>['type'=>Form::INPUT_CHECKBOX,'hint'=>'Solo si es accionista'],
-        'junta_directiva'=>['type'=>Form::INPUT_CHECKBOX,'hint'=>'Solo si parte de la junta directiva'],
+        'junta_directiva'=>['type'=>Form::INPUT_CHECKBOX,'hint'=>'Solo si es parte de la junta directiva'],
         'rep_legal'=>['type'=>Form::INPUT_CHECKBOX,'hint'=>'Solo si es representante legal'],
         'porcentaje_accionario'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Nombre y Apellido']],
         'junta_directiva'=>['type'=>Form::INPUT_CHECKBOX,'hint'=>'Solo si parte de la junta directiva'],

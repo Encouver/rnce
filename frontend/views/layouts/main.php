@@ -104,6 +104,7 @@ AppAsset::register($this);
                          ['label' => 'Profesional Informe de conversion', 'url' => ['/comisarios-auditores/crearprofesional']],*/
                          ['label' => 'Relacion de Contratos', 'url' => ['/relaciones-contratos/index']],
                          ['label' => 'Empresas Relacionadas', 'url' => ['/empresas-relacionadas/index']],
+                         ['label' => 'Certificacion Aportes', 'url' => ['/certificaciones-aportes/index']],
          
                         
                     ],
@@ -120,7 +121,7 @@ AppAsset::register($this);
                         ['label' => 'Actividades Economicas', 'url' => ['/actividades-economicas/index']],
                         ['label' => 'Capital', 'url' => ['/actas-constitutivas/crearcapitalsuscrito']],
                         ['label' => 'Origen Capital', 'url' => ['/origenes-capitales/index']],
-                        ['label' => 'Certificacion Aportes', 'url' => ['/certificaciones-aportes/index']],
+                       
                         ['label' => 'Accionistas Representante Legal o Junta Directiva', 'url' => ['/accionistas-otros/index']],
                         ['label' => 'Comisarios', 'url' => ['/comisarios-auditores/index']],
                         ['label' => 'Fondos Reservas', 'url' => ['/fondos-reservas/index']],
@@ -136,6 +137,8 @@ AppAsset::register($this);
                         ['label' => 'Cambio Domicilio', 'url' => ['domicilios/index']],
                          ['label' => 'Cambio Cierre Ejercicio Econonomico', 'url' => ['/cierres-ejercicios/index']],
                         ['label' => 'Duracion empresa', 'url' => ['/duraciones-empresas/index']],
+                        ['label' => 'Pago Capital', 'url' => ['/actas-constitutivas/crearpagocapital']],
+                         ['label' => 'Origen Capital', 'url' => ['/origenes-capitales/origen']],
                     ],
                 ],
                 

@@ -18,9 +18,9 @@ class AccionesSearch extends Acciones
     public function rules()
     {
         return [
-            [['id', 'numero_comun', 'numero_preferencial', 'documento_registrado_id', 'contratista_id', 'creado_por', 'actualizado_por'], 'integer'],
+            [['id', 'numero_comun', 'numero_preferencial', 'documento_registrado_id', 'contratista_id', 'creado_por', 'actualizado_por','certificacion_aporte_id'], 'integer'],
             [['valor_comun', 'valor_preferencial', 'capital'], 'number'],
-            [['tipo_accion', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
+            [['tipo_accion', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el','actual'], 'safe'],
             [['suscrito', 'sys_status'], 'boolean'],
         ];
     }
@@ -73,9 +73,12 @@ class AccionesSearch extends Acciones
             'sys_actualizado_el' => $this->sys_actualizado_el,
             'sys_finalizado_el' => $this->sys_finalizado_el,
             'capital' => $this->capital,
+            'actual' => $this->actual,
+            'certificacion_aporte_id'=> $this->certificacion_aporte_id,
+            'tipo_accion'=> $this->tipo_accion,
         ]);
 
-        $query->andFilterWhere(['like', 'tipo_accion', $this->tipo_accion]);
+       // $query->andFilterWhere(['like', 'tipo_accion', $this->tipo_accion]);
 
         return $dataProvider;
     }

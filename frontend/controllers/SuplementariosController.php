@@ -88,6 +88,7 @@ class SuplementariosController extends BaseController
                         $paga_acta->documento_registrado_id= $model->documento_registrado_id;
                         $paga_acta->suscrito=false;
                         $paga_acta->tipo_suplementario=$model->tipo_suplementario;
+                         $paga_acta->certificacion_aporte_id=$model->certificacion_aporte_id;
                 
                         $transaction = \Yii::$app->db->beginTransaction();
              
@@ -127,71 +128,6 @@ class SuplementariosController extends BaseController
     }
    
     
-    public function actionSuplementariosuscritaacta()
-    {
-        $suscrita_acta = new Suplementarios();
-         $suscrita_acta->scenario='principal';
-        
-
-        if ( $suscrita_acta->load(Yii::$app->request->post())) {
-            
-            
-          
-              $usuario= \common\models\p\User::findOne(Yii::$app->user->identity->id);
-              $registro = ActivosDocumentosRegistrados::findOne(['contratista_id'=>$usuario->contratista_id, 'tipo_documento_id'=>1]);
-   
-              $suscrita_acta->suscrito=true;
-              $suscrita_acta->tipo_suplementario="PRINCIPAL";
-              $suscrita_acta->contratista_id = $usuario->contratista_id;
-              $suscrita_acta->documento_registrado_id = $registro->id;
-     
-            if($suscrita_acta->validate()){
-                
-                $suplementarios= Suplementarios::findOne(['contratista_id'=>$suscrita_acta->contratista_id ,'documento_registrado_id'=>$suscrita_acta->documento_registrado_id]);
-          
-                if(isset($suplementarios)){
-                   
-                     $msg = "Usuario ya posee certificados suplementarios suscritas y pagadas asociadas";
-                                   
-                              
-                   }else{
-                 
-                        $paga_acta = new Suplementarios();
-                        $paga_acta->numero= $suscrita_acta->numero_pagada;
-                        $paga_acta->capital=$suscrita_acta->capital_pagado;
-                        $paga_acta->contratista_id = $suscrita_acta->contratista_id;
-                        $paga_acta->documento_registrado_id= $suscrita_acta->documento_registrado_id;
-                        $paga_acta->suscrito=false;
-                        $paga_acta->tipo_suplementario=$suscrita_acta->tipo_suplementario;
-                        $transaction = \Yii::$app->db->beginTransaction();
-                        try {
-                            if (! ($flag =  $paga_acta->save(false))) {
-           
-                            $transaction->rollBack();
-                           
-                               
-                        }
-                        if ($suscrita_acta->save()) {
-           
-                              
-                                $transaction->commit();
-                                return $this->redirect(['index']);
-                        }else{
-                            $transaction->rollBack();
-     
-                        }
-                    
-                    } catch (Exception $e) {
-                         $transaction->rollBack();
-                    }
-                
-                }
-            }
-        }
-        return $this->render("suplementarios_actas",['suplementario_acta'=>$suscrita_acta]);
-    }
-    
-    
 
     /**
      * Updates an existing Suplementarios model.
@@ -213,6 +149,7 @@ class SuplementariosController extends BaseController
                      $pagada_acta = Suplementarios::findOne(['documento_registrado_id'=>$model->documento_registrado_id,'suscrito'=>false]);
             $pagada_acta->numero= $model->numero_pagada;
                         $pagada_acta->capital=$model->capital_pagado;
+                         $pagada_acta->certificacion_aporte_id=$model->certificacion_aporte_id;
            $transaction = \Yii::$app->db->beginTransaction();
              
                         try {
