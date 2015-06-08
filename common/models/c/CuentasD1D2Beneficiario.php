@@ -76,15 +76,30 @@ class CuentasD1D2Beneficiario extends \common\components\BaseActiveRecord
         ];
     }
 
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCuentaD1Islr()
+    {
+        return $this->hasOne(CuentasD1IslrPagadoAnticipo::className(), ['id' => 'cuenta_id']);
+    }
 
-    public function getFormAttribs() {
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCuentaD2OtrosTributosPagados()
+    {
+        return $this->hasOne(CuentasD2OtrosTributosPag::className(), ['id' => 'cuenta_id']);
+    }
+
+    public function getFormAttribs($i = 0) {
         return [
             // primary key column
-            'id'=>[ // primary key attribute
+            '['.$i.']id'=>[ // primary key attribute
                 'type'=>Form::INPUT_HIDDEN,
                 'columnOptions'=>['hidden'=>true]
             ],
-            'sys_naturales_juridicas_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>[//'data'=>ArrayHelper::map(SysNaturalesJuridicas::find()->all(),'id',function($model){return $model->etiqueta(); }),
+            '['.$i.']sys_naturales_juridicas_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>[//'data'=>ArrayHelper::map(SysNaturalesJuridicas::find()->all(),'id',function($model){return $model->etiqueta(); }),
                 'options'=>['id'=>'beneficiario-'.uniqid()],'pluginOptions' => [
                     'allowClear' => true,
                     'minimumInputLength' => 3,
@@ -98,9 +113,9 @@ class CuentasD1D2Beneficiario extends \common\components\BaseActiveRecord
                     'templateSelection' => new JsExpression('function (city) { return city.text; }'),
                 ],]],
 
-            'nro_planilla'=>['type'=>Form::INPUT_TEXT,],
-            'periodo'=>['type'=>Form::INPUT_TEXT,],
-            'monto'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),],
+            '['.$i.']nro_planilla'=>['type'=>Form::INPUT_TEXT,],
+            '['.$i.']periodo'=>['type'=>Form::INPUT_TEXT,],
+            '['.$i.']monto'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),],
 
 
         ];

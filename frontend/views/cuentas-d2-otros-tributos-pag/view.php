@@ -4,13 +4,13 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\c\CuentasD1IslrPagadoAnticipo */
+/* @var $model common\models\c\CuentasD2OtrosTributosPag */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Cuentas D1 Islr Pagado Anticipos'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Cuentas D2 Otros Tributos Pags'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="cuentas-d1-islr-pagado-anticipo-view">
+<div class="cuentas-d2-otros-tributos-pag-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -29,14 +29,15 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             //'id',
-            'islrPagado.nombre',
-            'nro_documento',
-            'saldo_ph',
-            'importe_pagado_ejer_econo',
-            'importe_aplicado_ejer_econo',
-            'saldo_cierre',
-            'monto',
-            /*'contratista_id',
+            'otrosTributos.nombre',
+            'saldo_pah:currency',
+            'credito_fiscal:currency',
+            'monto:currency',
+            'debito_fiscal:currency',
+            'debito_fiscal_no',
+            'importe_pagado:currency',
+            'saldo_cierre:currency',
+           /* 'contratista_id',
             'anho',
             'creado_por',
             'actualizado_por',

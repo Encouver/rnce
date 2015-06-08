@@ -4,13 +4,13 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\c\CuentasD1IslrPagadoAnticipo */
+/* @var $model common\models\c\CuentasI2DeclaracionIva */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Cuentas D1 Islr Pagado Anticipos'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Cuentas I2 Declaracion Ivas'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="cuentas-d1-islr-pagado-anticipo-view">
+<div class="cuentas-i2-declaracion-iva-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -29,21 +29,25 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             //'id',
-            'islrPagado.nombre',
-            'nro_documento',
-            'saldo_ph',
-            'importe_pagado_ejer_econo',
-            'importe_aplicado_ejer_econo',
-            'saldo_cierre',
-            'monto',
-            /*'contratista_id',
-            'anho',
-            'creado_por',
+            'periodo.nombre',
+            'certificado_electronico',
+            'ventas_grabadas:currency',
+            'ventas_no_grabadas:currency',
+            'ingresos_totales:currency',
+            'debito_fiscal:currency',
+            'compras_gravadas:currency',
+            'compras_no_gravadas:currency',
+            'egresos_totales_compra:currency',
+            'credito_fiscal:currency',
+            'imp_pagar_compensar:currency',
+/*            'creado_por',
             'actualizado_por',
             'sys_status:boolean',
             'sys_creado_el',
             'sys_actualizado_el',
-            'sys_finalizado_el',*/
+            'sys_finalizado_el',
+            'contratista_id',
+            'anho',*/
         ],
     ]) ?>
 
