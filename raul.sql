@@ -351,3 +351,10 @@ COMMENT ON COLUMN origenes_capitales.tipo_origen IS 'Tipo origen puede ser PRINC
 ALTER TABLE origenes_capitales ADD COLUMN principal boolean;
 ALTER TABLE origenes_capitales ALTER COLUMN principal SET NOT NULL;
 COMMENT ON COLUMN origenes_capitales.principal IS 'true si es parte del acta, false si es parte de una modificacion';
+
+
+---08 junio 10:05 am--
+ALTER TABLE acciones ADD COLUMN actual boolean;
+ALTER TABLE acciones ALTER COLUMN actual SET NOT NULL;
+ALTER TABLE acciones ALTER COLUMN actual SET DEFAULT false;
+COMMENT ON COLUMN acciones.actual IS 'true significa que el valor de las acciones es el actual';

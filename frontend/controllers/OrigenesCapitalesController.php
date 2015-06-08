@@ -135,10 +135,12 @@ class OrigenesCapitalesController extends BaseController
          }
         if ($model->load(Yii::$app->request->post())&& $model->save()) {
            
-              
+                        if($model->principal){
                         return $this->redirect(['index']);
                   
-                    
+                        }else{
+                            return $this->redirect(['origen']);
+                        }
                      
             }else{
                 
@@ -197,17 +199,9 @@ class OrigenesCapitalesController extends BaseController
      */
     public function actionDelete($id)
     {
-        $model = $this->findModel($id);
-       $todos = OrigenesCapitales::findAll(['documento_registrado_id'=>$model->documento_registrado_id]);
-        if(count($todos)==1){
-            $certificacion= CertificacionesAportes::findOne(['documento_registrado_id'=>$model->documento_registrado_id]);
-            if(isset($certificacion)){
-                 $certificacion->delete();
-            }
-           
-        }
-        $model->delete();
-       // $this->findModel($id)->delete();
+       /* $model = $this->findModel($id);
+        $model->delete();*/
+       $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
     }

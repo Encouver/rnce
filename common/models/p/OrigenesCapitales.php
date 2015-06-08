@@ -3,6 +3,7 @@
 namespace common\models\p;
 use common\models\a\ActivosDocumentosRegistrados;
 use common\models\p\DenominacionesComerciales;
+use common\models\p\ActasConstitutivas;
 use common\models\a\ActivosBienes;
 use common\models\p\Certificados;
 use common\models\p\Suplementarios;
@@ -148,11 +149,31 @@ class OrigenesCapitales extends \common\components\BaseActiveRecord
          
           
         }else{
-    
+            $acta= ActasConstitutivas::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'actual'=>true]);
+            $denominacion_comercial= DenominacionesComerciales::findOne($acta->denominacion_comercial_id);
+            if($denominacion_comercial->tipo_denominacion!="COOPERATIVA"){
+            
              $accion= Acciones::findOne(['contratista_id'=>Yii::$app->user->identity->id ,'documento_registrado_id'=>$this->documento_registrado_id,'tipo_accion'=>$this->tipo_origen]);
-             if(isset($accion)){
+             if(isset( $accion)){
                   $monto_pagado = $accion->capital;
-             }  
+             }
+            
+         }
+         if($denominacion_comercial->tipo_denominacion=="COOPERATIVA" && $denominacion_comercial->cooperativa_capital=='LIMITADO'){
+           
+             $certificado= Certificados::findOne(['contratista_id'=>Yii::$app->user->identity->id ,'documento_registrado_id'=>$this->documento_registrado_id,'tipo_certificado'=>$this->tipo_origen]);
+             if(isset($certificado)){
+                  $monto_pagado = $certificado->capital;
+             }
+            
+         }
+         if($denominacion_comercial->tipo_denominacion=="COOPERATIVA" && $denominacion_comercial->cooperativa_capital=='SUPLEMENTARIO'){
+             $suplementario= Suplementarios::findOne(['contratista_id'=>$usuario->contratista_id ,'documento_registrado_id'=>$this->documento_registrado_id,'tipo_suplementario'=>$this->tipo_origen]);
+              if(isset($suplementario)){
+                   $monto_pagado = $suplementario->capital;
+             }
+            
+         }
                   
             
         }
