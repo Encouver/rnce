@@ -21,7 +21,7 @@ class CertificadosSearch extends Certificados
             [['id', 'numero_asociacion', 'numero_aportacion', 'numero_rotativo', 'numero_inversion', 'documento_registrado_id', 'contratista_id', 'creado_por', 'actualizado_por','certificacion_aporte_id'], 'integer'],
             [['valor_asociacion', 'valor_aportacion', 'valor_rotativo', 'valor_inversion', 'capital'], 'number'],
             [['tipo_certificado', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
-            [['suscrito', 'sys_status'], 'boolean'],
+            [['suscrito', 'sys_status','actual'], 'boolean'],
         ];
     }
 
@@ -78,9 +78,11 @@ class CertificadosSearch extends Certificados
             'sys_finalizado_el' => $this->sys_finalizado_el,
             'capital' => $this->capital,
             'certificacion_aporte_id'=> $this->certificacion_aporte_id,
+            'actual'=> $this->actual,
+            'tipo_certificado'=>$this->tipo_certificado,
         ]);
 
-        $query->andFilterWhere(['like', 'tipo_certificado', $this->tipo_certificado]);
+        //$query->andFilterWhere(['like', 'tipo_certificado', $this->tipo_certificado]);
 
         return $dataProvider;
     }

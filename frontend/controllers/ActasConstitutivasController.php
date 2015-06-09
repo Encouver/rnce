@@ -167,10 +167,10 @@ class ActasConstitutivasController extends BaseController
               return $this->redirect(['acciones/pagocapital']);
          }
          if($denominacion_comercial->tipo_denominacion=="COOPERATIVA" && $denominacion_comercial->cooperativa_capital=='LIMITADO'){
-              return $this->redirect(['certificados/index']);
+              return $this->redirect(['certificados/pagocapital']);
          }
          if($denominacion_comercial->tipo_denominacion=="COOPERATIVA" && $denominacion_comercial->cooperativa_capital=='SUPLEMENTARIO'){
-              return $this->redirect(['suplementarios/index']);
+              return $this->redirect(['suplementarios/pagocapital']);
          }
          
       }else{

@@ -72,6 +72,11 @@ class OrigenesCapitalesController extends BaseController
         $searchModel->banco = false;
         $searchModel->bien = true;
         $dataProvider_bien = $searchModel->search(Yii::$app->request->queryParams);
+        $searchModel->efectivo = false;
+        $searchModel->banco = false;
+        $searchModel->bien = false;
+         $searchModel->cuenta_pagar = true;
+          $dataProvider_cuentapagar = $searchModel->search(Yii::$app->request->queryParams);
 
 
 
@@ -79,6 +84,7 @@ class OrigenesCapitalesController extends BaseController
             'dataProvider_efectivo' => $dataProvider_efectivo,
             'dataProvider_banco' => $dataProvider_banco,
             'dataProvider_bien' => $dataProvider_bien,
+            'dataProvider_cuentapagar'=> $dataProvider_cuentapagar,
             'searchModel'=>$searchModel,
         ]);
     }
@@ -119,6 +125,10 @@ class OrigenesCapitalesController extends BaseController
                 $model->scenario=$identificador;
                 $model->bien=true;
                 break;
+            case "cuentapagar":
+                $model->scenario=$identificador;
+                $model->cuenta_pagar=true;
+                break;
             default :
                 break;
             }  
@@ -143,7 +153,7 @@ class OrigenesCapitalesController extends BaseController
                         }
                      
             }else{
-                
+                    //return print_r($model);
                         return $this->render('create', [
                             'model' => $model,
                             ]);

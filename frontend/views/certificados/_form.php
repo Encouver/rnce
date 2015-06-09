@@ -10,11 +10,12 @@ use kartik\builder\Form;
 
 <div class="certificados-form">
 
-       <?php $form = ActiveForm::begin(); ?>
-    
-<h3>Certificados Suscritas y Pagadas</h3>
-<hr />
- <?php echo Form::widget([
+<?php $form = ActiveForm::begin(); ?>
+    <?php if($model->scenario=='PRINCIPAL'){
+        echo Html::tag('h3','Certificados Suscritas y Pagadas');
+    } ?>
+    <hr />
+    <?php echo Form::widget([
     'model'=>$model,
     'form'=>$form,
     'columns'=>3,

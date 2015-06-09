@@ -4,6 +4,7 @@ namespace common\models\p;
 use kartik\builder\Form;
 use common\models\a\ActivosDocumentosRegistrados;
 use common\models\p\ModificacionesActas;
+use common\models\p\ActasConstitutivas;
 use common\models\p\CertificacionesAportes;
 use kartik\widgets\Select2;
 use yii\web\JsExpression;
@@ -25,6 +26,8 @@ use Yii;
  * @property string $sys_finalizado_el
  * @property integer $documento_registrado_id
  * @property integer $contratista_id
+ * @property integer $certificacion_aporte_id
+ * @property boolean $actual
  *
  * @property ActivosDocumentosRegistrados $documentoRegistrado
  * @property Contratistas $contratista
@@ -52,21 +55,56 @@ class Suplementarios extends \common\components\BaseActiveRecord
             [['valor','capital','capital_pagado'], 'number'],
             [['tipo_suplementario'], 'string'],
             ['numero_pagada', 'validarnumeropagada'],
+            ['numero', 'validarnumero'],
             ['capital', 'validarcapital'],
             ['capital_pagado', 'validarcapitalpagado'],
             ['valor', 'validarvalor'],
+            [['capital','numero'], 'required', 'on' => 'pago'],
             [['capital','capital_pagado','numero', 'valor','numero_pagada'], 'required', 'on' => 'principal'],
             [['suscrito', 'documento_registrado_id', 'contratista_id'], 'required'],
-            [['suscrito', 'sys_status'], 'boolean'],
-            [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe']
+            [['suscrito', 'sys_status','actual'], 'boolean'],
+            [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el','actual'], 'safe']
         ];
     }
     public function validarcapital($attribute){
          
-              if($this->numero*$this->valor< $this->capital){
+        if($this->scenario=='principal'){
+               if($this->numero*$this->valor< $this->capital){
                   $this->addError($attribute,'Faltan capital por fraccionar');
               }
+       }else{
+              if($this->scenario=='pago'){
+                  $acta= ActasConstitutivas::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'actual'=>true]);
+                  if(isset($acta)){
+                      //$accion= Acciones::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'actual'=>true]);
+                      $monto=$acta->capital_suscrito-$acta->capital_pagado;
+                      if($this->capital>$monto){
+                        $this->addError($attribute,'Monto sobre pasa el capital deudor actual:'.$monto);
+                        }else{
+                                $suplementario= Suplementarios::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'actual'=>true,'suscrito'=>true]);
+                                if($this->numero*$suplementario->valor<$this->capital){
+                                    $this->addError($attribute,'Falta capital por fraccionar el valor actual del certificado suplementario es: '.$suplementario->valor);
+                                }
+                        }
+                      
+                  }
+              }
+          }
           
+    }
+     public function validarnumero($attribute){
+           if($this->scenario=='pago'){
+               $suplementario_suscrito= Suplementarios::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'actual'=>true,'suscrito'=>true]);
+               $suplementario_pagado= Suplementarios::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'actual'=>true,'suscrito'=>false]);
+          if(($this->numero+ $suplementario_pagado->numero)>$suplementario_suscrito->numero){
+               $this->addError($attribute,'El numero de certificados suplementarios sobrepasa las certificados suplementarios suscritos:'.$suplementario_suscrito->numero);
+          }else{
+             if(($this->numero*$suplementario_suscrito->valor) >$this->capital){
+                  $this->addError($attribute,'Numero de certificados suplementarios pagados sobrepasa el valor valido');
+             }
+          }
+        }
+
     }
    
       public function validarnumeropagada($attribute){
@@ -116,7 +154,8 @@ class Suplementarios extends \common\components\BaseActiveRecord
             'numero_pagada' => Yii::t('app', 'Numero Pagada'),
             'capital' => Yii::t('app', 'Capital Suscrito'),
             'capital_pagado' => Yii::t('app', 'Capital Pagado'),
-             'certificacion_aporte_id'  => Yii::t('app', 'Certificador de aportes'),
+            'certificacion_aporte_id'  => Yii::t('app', 'Certificador de aportes'),
+            'actual'  => Yii::t('app', 'Actual'),
         ];
     }
 
@@ -177,7 +216,43 @@ class Suplementarios extends \common\components\BaseActiveRecord
             ];
         
         }
-        return false;
+        if($this->scenario=='pago')
+        {
+            
+
+            return [
+            'capital'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Capital Suscrito'],'label'=>'Capital pagado'],
+            'numero'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Numero de Certificados Suplementarios'],'label'=>'Numero certificados suplementarios pagados'],
+              
+            'certificacion_aporte_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>[
+               'initValueText' => $persona,
+                'options'=>['placeholder' => 'Buscar persona ...'],'pluginOptions' => [
+                'allowClear' => true,
+                'minimumInputLength' => 3,
+                'ajax' => [
+                    'url' => \yii\helpers\Url::to(['certificaciones-aportes/certificaciones-aportes-lista']),
+                    'dataType' => 'json',
+                    'data' => new JsExpression('function(params) { return {q:params.term}; }')
+                ],
+                'escapeMarkup' => new JsExpression('function (markup) { return markup; }'),
+                'templateResult' => new JsExpression('function(certificacion_aporte_id) { return certificacion_aporte_id.text; }'),
+                'templateSelection' => new JsExpression('function (certificacion_aporte_id) { return certificacion_aporte_id.text; }'),
+                 ],]],
+              
+            ];
+        
+        }
+    }
+    public function Modificacionactual(){
+       
+       $registro = ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'tipo_documento_id'=>2,'proceso_finalizado'=>false]);      
+       
+       if(isset($registro)){
+         $modificacion= ModificacionesActas::findOne(['documento_registrado_id'=>$registro->id]);  
+       }else{
+           $modificacion= ModificacionesActas::findOne(['documento_registrado_id'=>-100]); 
+       }
+       return $modificacion;
     }
      public function Existeregistro(){
        $registro = ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'tipo_documento_id'=>1,'proceso_finalizado'=>false]);       
@@ -185,6 +260,14 @@ class Suplementarios extends \common\components\BaseActiveRecord
        if(isset($registro) || isset($registromodificacion)){
            if(isset($registromodificacion)){
                $registro=$registromodificacion;
+               $modificacion= ModificacionesActas::findOne(['documento_registrado_id'=>$registro->id]);
+               if(isset($modificacion)){
+                   if($this->scenario=='pago' && !$modificacion->pago_capital){
+                       return true;
+                   }
+              }else{
+                   return true;
+               }
                }
           $suplementario= Suplementarios::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'documento_registrado_id'=>$registro->id]);
            if(isset($suplementario)){

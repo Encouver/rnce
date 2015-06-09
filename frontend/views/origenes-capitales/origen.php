@@ -99,7 +99,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]); ?>
      <?php 
-    if(!$searchModel->existeregistro() && $searchModel->validarcapital() && $searchModel->aceptarmonto()){ ?>
+    if(!$searchModel->existeregistro()){ ?>
         <p>
         <?= Html::a(Yii::t('app', 'Agregar Efectivo Banco'),['create', 'identificador' => 'banco'], ['class' => 'btn btn-success']) ?>
     </p>
@@ -156,9 +156,51 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]); ?>
      <?php 
-    if(!$searchModel->existeregistro() && $searchModel->validarcapital() && $searchModel->aceptarmonto()){ ?>
+    if(!$searchModel->existeregistro()){ ?>
      <p>
         <?= Html::a(Yii::t('app', 'Agregar Bien'), ['create', 'identificador' => 'bien'], ['class' => 'btn btn-success']) ?>
+    </p>
+    <?php } ?>
+    <hr />
+    <h3>Cuenta por pagar</h3>
+    <?= GridView::widget([
+        'dataProvider' => $dataProvider_cuentapagar,
+        //'filterModel' => $searchModel,
+        'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
+            
+            //'id',
+            'tipo_origen',
+            //'bien_id',
+            //'numero_transaccion',
+            //'banco_contratista_id',
+            //'monto',
+            //'fecha',
+            'saldo_cierre_anterior',
+            'saldo_corte',
+            'fecha_corte',
+            'monto_aumento',
+            'saldo_aumento',
+            // 'numero_accion',
+            // 'valor_acciones',
+            // 'saldo_cierre_ajustado',
+            // 'fecha_aumento',
+            // 'contratista_id',
+            // 'documento_registrado_id',
+            // 'creado_por',
+            // 'actualizado_por',
+            // 'sys_status:boolean',
+            // 'sys_creado_el',
+            // 'sys_actualizado_el',
+            // 'sys_finalizado_el',
+
+            ['class' => 'yii\grid\ActionColumn', 'template'=>'{update}{delete}'],
+        ],
+    ]); ?>
+     <?php 
+    if(!$searchModel->existeregistro()){ ?>
+     <p>
+        <?= Html::a(Yii::t('app', 'Agregar Pago accionista'), ['create', 'identificador' => 'cuentapagar'], ['class' => 'btn btn-success']) ?>
     </p>
     <?php } ?>
     

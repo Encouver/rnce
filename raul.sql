@@ -358,3 +358,19 @@ ALTER TABLE acciones ADD COLUMN actual boolean;
 ALTER TABLE acciones ALTER COLUMN actual SET NOT NULL;
 ALTER TABLE acciones ALTER COLUMN actual SET DEFAULT false;
 COMMENT ON COLUMN acciones.actual IS 'true significa que el valor de las acciones es el actual';
+
+--08 junio 2:00 pm--
+ALTER TABLE origenes_capitales ALTER COLUMN monto DROP NOT NULL;
+
+ALTER TABLE certificados ADD COLUMN actual boolean;
+ALTER TABLE certificados ALTER COLUMN actual SET NOT NULL;
+ALTER TABLE certificados ALTER COLUMN actual SET DEFAULT false;
+COMMENT ON COLUMN certificados.actual IS 'true significa que el valor de los certificados es el actual';
+
+
+ALTER TABLE suplementarios ADD COLUMN actual boolean;
+ALTER TABLE suplementarios ALTER COLUMN actual SET NOT NULL;
+ALTER TABLE suplementarios ALTER COLUMN actual SET DEFAULT false;
+COMMENT ON COLUMN suplementarios.actual IS 'true significa que el valor de los suplementarios es el actual';
+
+

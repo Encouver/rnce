@@ -7,6 +7,7 @@ use common\models\p\Acciones;
 use common\models\a\ActivosDocumentosRegistrados;
 use common\models\p\ActasConstitutivas;
 use common\models\p\Certificados;
+use common\models\p\OrigenesCapitales;
 use common\models\p\Suplementarios;
 use app\models\AccionesSearch;
 use common\components\BaseController;
@@ -153,7 +154,7 @@ class AccionesController extends BaseController
                             }
                         }else{
                             $transaction->rollBack();
-                            Yii::$app->session->setFlash('error','Erroren la carga del capital pagado');
+                            //Yii::$app->session->setFlash('error','Erroren la carga del capital pagado');
                             return $this->render('create',['model'=>$model]);
                         }
                         
@@ -270,24 +271,64 @@ class AccionesController extends BaseController
     {
         $model = $this->findModel($id);
         $opcion=$model->tipo_accion;
-        if($opcion=="PRINCIPAL"){
-            $model2 = Acciones::findOne(['documento_registrado_id'=>$model->documento_registrado_id,'suscrito'=>!$model->suscrito]);
-            $model2 ->delete();
-        }
-        $model->delete();
-        switch ($opcion){
-            case 'PRINCIPAL':
-                return $this->redirect(['index']);
-                break;
-            case 'PAGO_CAPITAL':
-                return $this->redirect(['pagocapital']);
-                break;
-            default :
-                break;
+        $transaction = \Yii::$app->db->beginTransaction();
+        try {
+            if($opcion=="PRINCIPAL"){
+                $model2 = Acciones::findOne(['documento_registrado_id'=>$model->documento_registrado_id,'suscrito'=>!$model->suscrito]);
+                if(!$model2 ->delete()){
+                    $transaction->rollBack();
+                    Yii::$app->session->setFlash('error','Error al eliminar el capital');
+                    return $this->redirect(['index']);
+                }
+            }
+             $origen_capital= OrigenesCapitales::findAll(['documento_registrado_id'=>$model->documento_registrado_id,'tipo_origen'=>$model->tipo_accion]);
+            if(isset($origen_capital)){
+                foreach ($origen_capital as $origen) {
+                    if(!$origen->delete()){
+                        $transaction->rollBack();
+                        Yii::$app->session->setFlash('error','Error al eliminar el origen de capital asociado');
+                        
+                        switch ($opcion){
+                            case 'PRINCIPAL':
+                   
+                                return $this->redirect(['index']);
+                            break;
+                            case 'PAGO_CAPITAL':
+                                $model->delete();
+                                return $this->redirect(['pagocapital']);
+                            break;
+                            default :
+                            break;
+                        }
+                    }
+                    
+                }
+            }
+            if(!$model->delete()){
+                $transaction->rollBack();
+                Yii::$app->session->setFlash('error','Error al eliminar el capital');
+                
+            }else{
+                $transaction->commit();
+            }
+            switch ($opcion){
+                case 'PRINCIPAL':
+                   
+                    return $this->redirect(['index']);
+                    break;
+                case 'PAGO_CAPITAL':
+                    $model->delete();
+                    return $this->redirect(['pagocapital']);
+                    break;
+                default :
+                    break;
+                }
+            
+        } catch (Exception $e) {
+            $transaction->rollBack();
         }
   
     }
-
     /**
      * Finds the Acciones model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.

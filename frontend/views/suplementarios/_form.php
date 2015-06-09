@@ -12,8 +12,9 @@ use kartik\builder\Form;
 <div class="suplementarios-form">
 
      <?php $form = ActiveForm::begin(); ?>
-    
-<h3>Certificados Suplementarios Suscritas y Pagadas</h3>
+     <?php if($model->scenario=='PRINCIPAL'){
+    echo Html::tag('h3','Certificados Suplementarios Suscritas y Pagadas');
+  } ?>
 <hr />
  <?php echo Form::widget([
     'model'=>$model,

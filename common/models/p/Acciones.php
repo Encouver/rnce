@@ -53,7 +53,7 @@ class Acciones extends \common\components\BaseActiveRecord
             [['suscrito', 'documento_registrado_id','contratista_id','tipo_accion','certificacion_aporte_id'], 'required'],
             [['numero_comun', 'numero_comun_pagada','numero_preferencial', 'documento_registrado_id','contratista_id','certificacion_aporte_id'], 'integer'],
             ['numero_comun_pagada', 'validarnumeropagada'],
-             ['numero_comun', 'validarnumerocomun'],
+            ['numero_comun', 'validarnumerocomun'],
             ['capital', 'validarcapital'],
             ['capital_pagado', 'validarcapitalpagado'],
             ['valor_comun', 'validarvalor'],

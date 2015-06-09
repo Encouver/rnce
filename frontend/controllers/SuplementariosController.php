@@ -5,6 +5,10 @@ namespace frontend\controllers;
 use Yii;
 use common\models\p\Suplementarios;
 use common\models\a\ActivosDocumentosRegistrados;
+use common\models\p\ActasConstitutivas;
+use common\models\p\Acciones;
+use common\models\p\Certificados;
+use common\models\p\OrigenesCapitales;
 use app\models\SuplementariosSearch;
 use common\components\BaseController;
 use yii\web\NotFoundHttpException;
@@ -42,6 +46,23 @@ class SuplementariosController extends BaseController
             'model'=>$model,
         ]);
     }
+     public function actionPagocapital()
+    {
+        $searchModel = new SuplementariosSearch();
+        $searchModel->tipo_suplementario="PAGO_CAPITAL";
+        $documento=$searchModel->Modificacionactual();
+        if(isset($documento)){
+            $searchModel->documento_registrado_id= $documento->documento_registrado_id;
+          
+        }
+      
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        return $this->render('pagocapital', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'documento'=>$documento,
+        ]);
+    }
 
     /**
      * Displays a single Suplementarios model.
@@ -60,75 +81,111 @@ class SuplementariosController extends BaseController
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-     public function actionCreate()
+    public function actionCreate($id='principal')
     {
         $model = new Suplementarios();
-         $model->scenario='principal';
-        if(!$model->validardenominacion()){
-            Yii::$app->session->setFlash('error','Su denominacion comercial no le permite crear acciones');
-            return $this->redirect(['index']);
-         }
-          if($model->existeregistro()){
-            Yii::$app->session->setFlash('error','Usuario posee acciones cargadas o no ha creado un documento registrado');
-            return $this->redirect(['index']);
-                }
+        switch ($id){
+            case 'principal':
+                $model->scenario='principal';
+                $model->tipo_suplementario='PRINCIPAL';
+                break;
+            case 'pago':
+                $model->scenario='pago';
+                $model->tipo_suplementario='PAGO_CAPITAL';
+                
+                break;
+            default :
+                break;
+        }
+        
+        if($model->scenario=='principal'){
+            if(!$model->validardenominacion()){
+                Yii::$app->session->setFlash('error','Su denominacion comercial no le permite crear certificados suplementarios');
+                return $this->redirect(['index']);
+            }
+        }
+      
+        if($model->existeregistro()){
+            
+            Yii::$app->session->setFlash('error','Usuario posee certificados suplementarios cargados o no ha creado un documento registrado');
+            switch ($model->tipo_suplementario){
+                case 'PRINCIPAL':
+                    return $this->redirect(['index']);
+                    break;
+                case 'PAGO_CAPITAL':
+                    return $this->redirect(['pagocapital']);
+                    break;
+                default :
+                    break;
+            }
+        }
         
         if ( $model->load(Yii::$app->request->post())) {
             
-            
-   
-              $model->suscrito=true;
-              $model->tipo_suplementario="PRINCIPAL";
-                $model->contratista_id = Yii::$app->user->identity->contratista_id;
-                       $paga_acta = new Suplementarios();
-                        $paga_acta->numero= $model->numero_pagada;
-                        $paga_acta->capital=$model->capital_pagado;
+            switch ($model->tipo_suplementario){
+                case 'PRINCIPAL':
+                    $model->suscrito=true;
+                    $model->actual=true;
+                    $model->contratista_id = Yii::$app->user->identity->contratista_id;
+                    $paga_acta = new Suplementarios();
+                    $paga_acta->numero= $model->numero_pagada;
+                    $paga_acta->capital=$model->capital_pagado;
              
-                        $paga_acta->contratista_id = $model->contratista_id;
-                        $paga_acta->documento_registrado_id= $model->documento_registrado_id;
-                        $paga_acta->suscrito=false;
-                        $paga_acta->tipo_suplementario=$model->tipo_suplementario;
-                         $paga_acta->certificacion_aporte_id=$model->certificacion_aporte_id;
+                    $paga_acta->contratista_id = $model->contratista_id;
+                    $paga_acta->documento_registrado_id= $model->documento_registrado_id;
+                    $paga_acta->suscrito=false;
+                    $paga_acta->actual=true;
+                    $paga_acta->tipo_suplementario=$model->tipo_suplementario;
+                    $paga_acta->certificacion_aporte_id=$model->certificacion_aporte_id;
                 
-                        $transaction = \Yii::$app->db->beginTransaction();
+                    $transaction = \Yii::$app->db->beginTransaction();
              
-                        try {
-                            if ($paga_acta->save(false)) {
-                                if ($model->save()) {
-                               
+                    try {
+                        if ($paga_acta->save(false)) {
+                            if ($model->save()) {
                                 $transaction->commit();
-                                 return $this->redirect(['index']);
-
-                          
-                          
-                               
+                                return $this->redirect(['index']);
                             }else{
                                 $transaction->rollBack();
-                                Yii::$app->session->setFlash('error','Erroren la carga del capital sucrito');
-                             return $this->render('create',['model'=>$model]);
-                                            }
+                                //Yii::$app->session->setFlash('error','Erroren la carga del capital sucrito');
+                                return $this->render('create',['model'=>$model]);
+                            }
                             
                         }else{
                             
                             $transaction->rollBack();
-            
-                            Yii::$app->session->setFlash('error','Erroren la carga del capital pagado');
-                             return $this->render('create',['model'=>$model]);
+                            //Yii::$app->session->setFlash('error','Erroren la carga del capital pagado');
+                            return $this->render('create',['model'=>$model]);
                         }
                       
                     
                     } catch (Exception $e) {
                          $transaction->rollBack();
                     }
+                break;
+                
+                case 'PAGO_CAPITAL':
+                
+                    $model->suscrito=false;
+                    $model->actual=false;
+                    if($model->save()){
+                        Yii::$app->session->setFlash('success','Registro creado con exito');
+                        return $this->redirect(['pagocapital']);
+                    }else{
+                        Yii::$app->session->setFlash('error','Error en la actualizacion del capital');
+                        
+                        return $this->render('create',['model'=>$model]);
+                    }
                 
                 
+                break;
+            default :
+                break;
+            }
             
         }
         return $this->render('create',['model'=>$model]);
     }
-   
-    
-
     /**
      * Updates an existing Suplementarios model.
      * If update is successful, the browser will be redirected to the 'view' page.
@@ -138,57 +195,73 @@ class SuplementariosController extends BaseController
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        if(!$model->suscrito){
-        $model = Suplementarios::findOne(['documento_registrado_id'=>$model->documento_registrado_id,'suscrito'=>true]);
+        switch ($model->tipo_suplementario){
+            case 'PRINCIPAL':
+                if(!$model->suscrito){
+                    $model = Suplementarios::findOne(['documento_registrado_id'=>$model->documento_registrado_id,'suscrito'=>true]);
 
-        }
-         $model->scenario='principal';
-         $pagada_acta = Suplementarios::findOne(['documento_registrado_id'=>$model->documento_registrado_id,'suscrito'=>false]);
+                }
+                $model->scenario='principal';
+            break;
+            
+            case 'PAGO_CAPITAL':
+                $model->scenario='pago';
+                break;
+            default :
+                break;
+         }
 
         if ($model->load(Yii::$app->request->post())) {
-                     $pagada_acta = Suplementarios::findOne(['documento_registrado_id'=>$model->documento_registrado_id,'suscrito'=>false]);
-            $pagada_acta->numero= $model->numero_pagada;
-                        $pagada_acta->capital=$model->capital_pagado;
-                         $pagada_acta->certificacion_aporte_id=$model->certificacion_aporte_id;
-           $transaction = \Yii::$app->db->beginTransaction();
-             
-                        try {
-                            if ($pagada_acta->save(false)) {
-                                if ($model->save()) {
-                               
+            switch ($model->tipo_suplementario){
+                case 'PRINCIPAL':
+                    $pagada_acta = Suplementarios::findOne(['documento_registrado_id'=>$model->documento_registrado_id,'suscrito'=>false]);
+                    $pagada_acta->numero= $model->numero_pagada;
+                    $pagada_acta->capital=$model->capital_pagado;
+                    $pagada_acta->certificacion_aporte_id=$model->certificacion_aporte_id;
+                    $transaction = \Yii::$app->db->beginTransaction();
+                    
+                    try {
+                        if ($pagada_acta->save(false)) {
+                            if ($model->save()) {
                                 $transaction->commit();
-                                 return $this->redirect(['index']);
-
-                          
-                          
-                               
+                                return $this->redirect(['index']);
                             }else{
                                 $transaction->rollBack();
-                                Yii::$app->session->setFlash('error','Erroren la carga del capital sucrito');
-                             return $this->render('create',['model'=>$model]);
-                                            }
+                                //Yii::$app->session->setFlash('error','Erroren la carga del capital sucrito');
+                                return $this->render('create',['model'=>$model]);
+                            }
                             
                         }else{
-                            
                             $transaction->rollBack();
-                            Yii::$app->session->setFlash('error','Erroren la carga del capital pagado');
-                             return $this->render('create',['model'=>$model]);
+                            //Yii::$app->session->setFlash('error','Erroren la carga del capital pagado');
+                            return $this->render('create',['model'=>$model]);
                         }
-                      
-                    
                     } catch (Exception $e) {
                          $transaction->rollBack();
                     }
             
-            
-        } else {
-              
+                break;
+                case 'PAGO_CAPITAL':
+                    if($model->save()){
+                        return $this->redirect(['pagocapital']);
+                    }else{
+                        return $this->render('update',['model'=>$model]);
+                    }
+                
+                break;
+                default :
+                    break;
+            }
+        }else{
+            if($model->tipo_suplementario=="PRINCIPAL"){
+                $pagada_acta = Suplementarios::findOne(['documento_registrado_id'=>$model->documento_registrado_id,'suscrito'=>false]);
                 $model->capital_pagado=$pagada_acta->capital;
                 $model->numero_pagada=$pagada_acta->numero;
-                
-           return $this->render('update',['model'=>$model]);
+            }
+            return $this->render('update',['model'=>$model]);
         }
     }
+    
 
     /**
      * Deletes an existing Suplementarios model.
@@ -197,14 +270,67 @@ class SuplementariosController extends BaseController
      * @return mixed
      */
     public function actionDelete($id)
+            
     {
-       $model = $this->findModel($id);
-        $model2 = Suplementarios::findOne(['documento_registrado_id'=>$model->documento_registrado_id,'suscrito'=>!$model->suscrito]);
-
-        $model->delete();
-       $model2 ->delete();
-
-        return $this->redirect(['index']);
+        $model = $this->findModel($id);
+        $opcion=$model->tipo_suplementario;
+        $transaction = \Yii::$app->db->beginTransaction();
+        try {
+            if($opcion=="PRINCIPAL"){
+                $model2 = Suplementarios::findOne(['documento_registrado_id'=>$model->documento_registrado_id,'suscrito'=>!$model->suscrito]);
+                if(!$model2 ->delete()){
+                    $transaction->rollBack();
+                    Yii::$app->session->setFlash('error','Error al eliminar el capital');
+                    return $this->redirect(['index']);
+                }
+            }
+             $origen_capital= OrigenesCapitales::findAll(['documento_registrado_id'=>$model->documento_registrado_id,'tipo_origen'=>$model->tipo_suplementario]);
+            if(isset($origen_capital)){
+                foreach ($origen_capital as $origen) {
+                    if(!$origen->delete()){
+                        $transaction->rollBack();
+                        Yii::$app->session->setFlash('error','Error al eliminar el origen de capital asociado');
+                        
+                        switch ($opcion){
+                            case 'PRINCIPAL':
+                   
+                                return $this->redirect(['index']);
+                            break;
+                            case 'PAGO_CAPITAL':
+                                $model->delete();
+                                return $this->redirect(['pagocapital']);
+                            break;
+                            default :
+                            break;
+                        }
+                    }
+                    
+                }
+            }
+            if(!$model->delete()){
+                $transaction->rollBack();
+                Yii::$app->session->setFlash('error','Error al eliminar el capital');
+                
+            }else{
+                $transaction->commit();
+            }
+            switch ($opcion){
+                case 'PRINCIPAL':
+                   
+                    return $this->redirect(['index']);
+                    break;
+                case 'PAGO_CAPITAL':
+                    $model->delete();
+                    return $this->redirect(['pagocapital']);
+                    break;
+                default :
+                    break;
+                }
+            
+        } catch (Exception $e) {
+            $transaction->rollBack();
+        }
+  
     }
 
     /**

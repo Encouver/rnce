@@ -30,7 +30,7 @@ use kartik\builder\Form;
    <?php echo Form::widget([
         'model'=>$model,
         'form'=>$form,
-        'columns'=>2,
+        'columns'=>3,
         //'columns'=>11,
         'attributes'=> $model->getFormAttribs($model->getScenario())
     ]);

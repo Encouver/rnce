@@ -15,20 +15,21 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    
-
-    <?= GridView::widget([
+   <?php
+    if(isset($documento)){
+    echo Html::tag('h1','Pago de Capital');
+    echo GridView::widget([
         'dataProvider' => $dataProvider,
-        //'filterModel' => $searchModel,
         'summary'=>'',
+        //'filterModel' => $searchModel,
         'columns' => [
-            //['class' => 'yii\grid\SerialColumn'],
+           // ['class' => 'yii\grid\SerialColumn'],
 
             //'id',
-            'suscrito:boolean',
+            //'suscrito:boolean',
             'capital',
             'numero',
-            'valor',
+            //'valor',
             //'tipo_suplementario',
             
             // 'creado_por',
@@ -42,13 +43,24 @@ $this->params['breadcrumbs'][] = $this->title;
 
              ['class' => 'yii\grid\ActionColumn','template'=>'{update}{delete}'],
         ],
-    ]); ?>
-     <?php 
-    if(!$model->existeregistro() && $model->validardenominacion()){ ?>
-        <p>
-        <?= Html::a(Yii::t('app', 'Crear Certificado Suplementario'), ['create','id'=>'principal'], ['class' => 'btn btn-success']) ?>
+    ]); 
+    if(!$searchModel->existeregistro()){ ?>
+    <p>
+        <?= Html::a(Yii::t('app', 'Agregar Pago de Capital'), ['create','id'=>'pago'], ['class' => 'btn btn-success']) ?>
     </p>
-    <?php } ?>
+      
+         <?php }  }else{?>
+        
+            <div class="alert-warning alert fade in">
+               
+
+                <h4>No existe ningun procedimiento referente al pago de capital activo</h4>
+
+            </div>
+        <?php } ?>
+
+       
+  
    
 
 </div>
