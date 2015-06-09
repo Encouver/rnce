@@ -35,6 +35,7 @@ use Yii;
 class Acciones extends \common\components\BaseActiveRecord
 {
     public $numero_comun_pagada;
+    public $numero_preferencial_pagada;
     public $capital_pagado;
     /**
      * @inheritdoc
@@ -51,7 +52,7 @@ class Acciones extends \common\components\BaseActiveRecord
     {
         return [
             [['suscrito', 'documento_registrado_id','contratista_id','tipo_accion','certificacion_aporte_id'], 'required'],
-            [['numero_comun', 'numero_comun_pagada','numero_preferencial', 'documento_registrado_id','contratista_id','certificacion_aporte_id'], 'integer'],
+            [['numero_comun', 'numero_comun_pagada','numero_preferencial','numero_preferencial_pagada', 'documento_registrado_id','contratista_id','certificacion_aporte_id'], 'integer'],
             ['numero_comun_pagada', 'validarnumeropagada'],
             ['numero_comun', 'validarnumerocomun'],
             ['capital', 'validarcapital'],
@@ -62,6 +63,7 @@ class Acciones extends \common\components\BaseActiveRecord
             [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el','actual'], 'safe'],
             [['tipo_accion'], 'string'],
             [['capital','numero_comun'], 'required', 'on' => 'pago'],
+            [['capital','numero_comun','numero_comun_pagada','numero_preferencial','numero_preferencial_pagada','valor_comun','valor_preferencial'], 'required', 'on' => 'aumento'],
             [['numero_comun', 'valor_comun','numero_comun_pagada','capital','capital_pagado'], 'required', 'on' => 'principal']
             
         ];
@@ -161,6 +163,7 @@ class Acciones extends \common\components\BaseActiveRecord
             'capital' => Yii::t('app', 'Capital'),
             'capital_pagado' => Yii::t('app', 'Capital Pagado'),
             'actual'  => Yii::t('app', 'Actual'),
+            'numero_preferencial_pagada' => Yii::t('app', 'Numero Accion o Participacion Pagada'),
         ];
     }
 

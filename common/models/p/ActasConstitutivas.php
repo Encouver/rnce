@@ -460,7 +460,7 @@ class ActasConstitutivas extends \common\components\BaseActiveRecord
                      $this->capital_suscrito=$capital_suscrito->capital;
                      $this->capital_pagado=$capital_pagado->capital;
                      if($origen_capital->sumarmonto(false) < $this->capital_pagado){
-                         $resultado="Debe agregar mas origen capital:".$origen_capital->sumarmonto().' '.$this->capital_pagado;
+                         $resultado="Debe agregar mas origen capital:".$origen_capital->sumarmonto(false).' de '.$this->capital_pagado;
                     return $resultado;
                      }
                      $this->denominacion_comercial_id= $denominacion_comercial->id;
