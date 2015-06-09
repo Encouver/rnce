@@ -397,3 +397,12 @@ ALTER TABLE empresas_relacionadas
    ON UPDATE NO ACTION ON DELETE NO ACTION;
 CREATE INDEX fki_contratista_empresar_relaci
   ON empresas_relacionadas(contratista_id);
+  
+----------------07/06/2015--------CAMBIOS LUEGO DE MONTAR LA BD DE MARCOS DE FECHA 05/06-------
+
+ALTER TABLE cuentas.jj_proviciones
+   ADD COLUMN otro_nombre character varying(255);
+COMMENT ON COLUMN cuentas.jj_proviciones.otro_nombre
+  IS 'Campo que complementa la informacion seleccionada en conceptos por Otros.';
+  
+  

@@ -11,9 +11,8 @@ use kartik\builder\Form;
 
 <div class="acciones-form">
 
-   
-    <?php $form = ActiveForm::begin(); ?>
-    
+<?php $form = ActiveForm::begin(); ?>
+
 <h3>Acciones o Participaciones Suscritas y Pagadas</h3>
 <hr />
  <?php echo Form::widget([

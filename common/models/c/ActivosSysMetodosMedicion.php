@@ -34,6 +34,7 @@ class ActivosSysMetodosMedicion extends \common\components\BaseActiveRecord
         return 'activos.sys_metodos_medicion';
     }
 
+    //por capas
     public $enero;
     public $febrero;
     public $marzo;
@@ -47,10 +48,21 @@ class ActivosSysMetodosMedicion extends \common\components\BaseActiveRecord
     public $noviembre;
     public $diciembre;
 
+    //promedio
     public $desde;
     public $hasta;
 
-    
+    //deterioro
+    public $valor_neto;
+    public $valor_razo;
+    public $costo_dis;
+    public $valor_uso;
+    public $importe_recu;
+    public $diferencia;
+    public $deterioro_acu;
+    public $perdida;
+    public $reverso;
+
     /**
      * @inheritdoc
      */
