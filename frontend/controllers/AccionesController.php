@@ -5,6 +5,7 @@ namespace frontend\controllers;
 use Yii;
 use common\models\p\Acciones;
 use common\models\a\ActivosDocumentosRegistrados;
+use common\models\p\ActasConstitutivas;
 use common\models\p\Certificados;
 use common\models\p\Suplementarios;
 use app\models\AccionesSearch;
@@ -37,13 +38,30 @@ class AccionesController extends BaseController
     public function actionIndex()
     {
         $searchModel = new AccionesSearch();
-       // $searchModel->suscrito=true;
+        $searchModel->tipo_accion="PRINCIPAL";
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-         $model= new Acciones();
+        $model= new Acciones();
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
             'model'=>$model,
+        ]);
+    }
+    public function actionPagocapital()
+    {
+        $searchModel = new AccionesSearch();
+        $searchModel->tipo_accion="PAGO_CAPITAL";
+        $documento=$searchModel->Modificacionactual();
+        if(isset($documento)){
+            $searchModel->documento_registrado_id= $documento->documento_registrado_id;
+          
+        }
+      
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        return $this->render('pagocapital', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'documento'=>$documento,
         ]);
     }
 
@@ -64,67 +82,102 @@ class AccionesController extends BaseController
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($id='principal')
     {
         $model = new Acciones();
-         $model->scenario='principal';
-        if(!$model->validardenominacion()){
-            Yii::$app->session->setFlash('error','Su denominacion comercial no le permite crear acciones');
-            return $this->redirect(['index']);
-         }
-          if($model->existeregistro()){
+        switch ($id){
+            case 'principal':
+                $model->scenario='principal';
+                $model->tipo_accion='PRINCIPAL';
+                break;
+            case 'pago':
+                $model->scenario='pago';
+                $model->tipo_accion='PAGO_CAPITAL';
+                
+                break;
+            default :
+                break;
+        }
+        
+        if($model->scenario=='principal'){
+            if(!$model->validardenominacion()){
+                Yii::$app->session->setFlash('error','Su denominacion comercial no le permite crear acciones');
+                return $this->redirect(['index']);
+            }
+        }
+      
+        if($model->existeregistro()){
+            
             Yii::$app->session->setFlash('error','Usuario posee acciones cargadas o no ha creado un documento registrado');
-            return $this->redirect(['index']);
-                }
+            switch ($model->tipo_accion){
+                case 'PRINCIPAL':
+                    return $this->redirect(['index']);
+                    break;
+                case 'PAGO_CAPITAL':
+                    return $this->redirect(['pagocapital']);
+                    break;
+                default :
+                    break;
+            }
+        }
         
         if ( $model->load(Yii::$app->request->post())) {
             
-            
-   
-              $model->suscrito=true;
-              $model->tipo_accion="PRINCIPAL";
-                $model->contratista_id = Yii::$app->user->identity->contratista_id;
-                        $paga_acta = new Acciones();
-                        $paga_acta->numero_comun= $model->numero_comun_pagada;
-                        //$paga_acta->valor_comun= $model->valor_comun;
-                        $paga_acta->capital=$model->capital_pagado;
-                       $paga_acta->contratista_id=$model->contratista_id;
-                        $paga_acta->documento_registrado_id= $model->documento_registrado_id;
-                        $paga_acta->suscrito=false;
-                        $paga_acta->tipo_accion=$model->tipo_accion;
+            switch ($model->tipo_accion){
+                case 'PRINCIPAL':
+                    $model->suscrito=true;
+                    //$model->tipo_accion="PRINCIPAL";
+                    $model->actual=true;
+                    $model->contratista_id = Yii::$app->user->identity->contratista_id;
+                    $paga_acta = new Acciones();
+                    $paga_acta->numero_comun= $model->numero_comun_pagada;
+                    //$paga_acta->valor_comun= $model->valor_comun;
+                    $paga_acta->capital=$model->capital_pagado;
+                    $paga_acta->contratista_id=$model->contratista_id;
+                    $paga_acta->documento_registrado_id= $model->documento_registrado_id;
+                    $paga_acta->suscrito=false;
+                    $paga_acta->actual=true;
+                    $paga_acta->tipo_accion=$model->tipo_accion;
+                    $paga_acta->certificacion_aporte_id=$model->certificacion_aporte_id;
                 
-                        $transaction = \Yii::$app->db->beginTransaction();
-             
-                        try {
-                            if ($paga_acta->save(false)) {
-                                if ($model->save()) {
-                               
+                    $transaction = \Yii::$app->db->beginTransaction();
+                    try {
+                        if ($paga_acta->save(false)) {
+                            if ($model->save()) {
                                 $transaction->commit();
-                                 return $this->redirect(['index']);
-
-                          
-                          
-                               
+                                return $this->redirect(['index']);
                             }else{
                                 $transaction->rollBack();
-                                Yii::$app->session->setFlash('error','Erroren la carga del capital sucrito');
-                             return $this->render('create',['model'=>$model]);
-                                            }
-                            
+                                // Yii::$app->session->setFlash('error','Erroren la carga del capital sucrito');
+                                return $this->render('create',['model'=>$model]);
+                            }
                         }else{
-                            
                             $transaction->rollBack();
-            
                             Yii::$app->session->setFlash('error','Erroren la carga del capital pagado');
-                             return $this->render('create',['model'=>$model]);
+                            return $this->render('create',['model'=>$model]);
                         }
-                      
-                    
+                        
                     } catch (Exception $e) {
                          $transaction->rollBack();
                     }
+                break;
+                
+                case 'PAGO_CAPITAL':
+                
+                    $model->suscrito=false;
+                    if($model->save()){
+                        Yii::$app->session->setFlash('success','Registro creado con exito');
+                        return $this->redirect(['pagocapital']);
+                    }else{
+                        Yii::$app->session->setFlash('error','Error en la actualizacion del capital');
+                        return $this->render('create',['model'=>$model]);
+                    }
                 
                 
+                break;
+            default :
+                break;
+            }
             
         }
         return $this->render('create',['model'=>$model]);
@@ -140,54 +193,69 @@ class AccionesController extends BaseController
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        if(!$model->suscrito){
-        $model = Acciones::findOne(['documento_registrado_id'=>$model->documento_registrado_id,'suscrito'=>true]);
+        switch ($model->tipo_accion){
+            case 'PRINCIPAL':
+                if(!$model->suscrito){
+                    $model = Acciones::findOne(['documento_registrado_id'=>$model->documento_registrado_id,'suscrito'=>true]);
 
-        }
-         $model->scenario='principal';
-         $pagada_acta = Acciones::findOne(['documento_registrado_id'=>$model->documento_registrado_id,'suscrito'=>false]);
+                }
+                $model->scenario='principal';
+            break;
+            
+            case 'PAGO_CAPITAL':
+                $model->scenario='pago';
+                break;
+            default :
+                break;
+         }
 
         if ($model->load(Yii::$app->request->post())) {
-                     $pagada_acta = Acciones::findOne(['documento_registrado_id'=>$model->documento_registrado_id,'suscrito'=>false]);
-            $pagada_acta->capital=$model->capital_pagado;
-            $pagada_acta->numero_comun=$model->numero_comun_pagada;
-           $transaction = \Yii::$app->db->beginTransaction();
-             
-                        try {
-                            if ($pagada_acta->save(false)) {
-                                if ($model->save()) {
-                               
+            switch ($model->tipo_accion){
+                case 'PRINCIPAL':
+                    $pagada_acta = Acciones::findOne(['documento_registrado_id'=>$model->documento_registrado_id,'suscrito'=>false]);
+                    $pagada_acta->capital=$model->capital_pagado;
+                    $pagada_acta->numero_comun=$model->numero_comun_pagada;
+                    $pagada_acta->certificacion_aporte_id=$model->certificacion_aporte_id;
+                    $transaction = \Yii::$app->db->beginTransaction();
+                    try {
+                        if ($pagada_acta->save(false)) {
+                            if ($model->save()) {
                                 $transaction->commit();
-                                 return $this->redirect(['index']);
-
-                          
-                          
-                               
+                                return $this->redirect(['index']);
                             }else{
                                 $transaction->rollBack();
-                                Yii::$app->session->setFlash('error','Erroren la carga del capital sucrito');
-                             return $this->render('create',['model'=>$model]);
-                                            }
+                                Yii::$app->session->setFlash('error','Error en la carga del capital sucrito');
+                                return $this->render('update',['model'=>$model]);
+                            }
                             
                         }else{
-                            
                             $transaction->rollBack();
-                            Yii::$app->session->setFlash('error','Erroren la carga del capital pagado');
-                             return $this->render('create',['model'=>$model]);
+                            Yii::$app->session->setFlash('error','Error en la carga del capital pagado');
+                             return $this->render('update',['model'=>$model]);
                         }
-                      
-                    
                     } catch (Exception $e) {
                          $transaction->rollBack();
                     }
             
-            
-        } else {
-              
+                break;
+                case 'PAGO_CAPITAL':
+                    if($model->save()){
+                        return $this->redirect(['pagocapital']);
+                    }else{
+                        return $this->render('update',['model'=>$model]);
+                    }
+                
+                break;
+                default :
+                    break;
+            }
+        }else{
+            if($model->tipo_accion=="PRINCIPAL"){
+                $pagada_acta = Acciones::findOne(['documento_registrado_id'=>$model->documento_registrado_id,'suscrito'=>false]);
                 $model->capital_pagado=$pagada_acta->capital;
                 $model->numero_comun_pagada=$pagada_acta->numero_comun;
-                
-           return $this->render('update',['model'=>$model]);
+            }
+            return $this->render('update',['model'=>$model]);
         }
     }
 
@@ -200,14 +268,24 @@ class AccionesController extends BaseController
     public function actionDelete($id)
             
     {
-         $model = $this->findModel($id);
-        $model2 = Acciones::findOne(['documento_registrado_id'=>$model->documento_registrado_id,'suscrito'=>!$model->suscrito]);
-
+        $model = $this->findModel($id);
+        $opcion=$model->tipo_accion;
+        if($opcion=="PRINCIPAL"){
+            $model2 = Acciones::findOne(['documento_registrado_id'=>$model->documento_registrado_id,'suscrito'=>!$model->suscrito]);
+            $model2 ->delete();
+        }
         $model->delete();
-       $model2 ->delete();
-        
-
-        return $this->redirect(['index']);
+        switch ($opcion){
+            case 'PRINCIPAL':
+                return $this->redirect(['index']);
+                break;
+            case 'PAGO_CAPITAL':
+                return $this->redirect(['pagocapital']);
+                break;
+            default :
+                break;
+        }
+  
     }
 
     /**

@@ -4,9 +4,11 @@ namespace common\models\p;
 use kartik\builder\Form;
 use common\models\a\ActivosDocumentosRegistrados;
 use common\models\p\ModificacionesActas;
+use common\models\p\CertificacionesAportes;
+use kartik\widgets\Select2;
+use yii\web\JsExpression;
 use common\models\p\DenominacionesComerciales;
 use Yii;
-
 /**
  * This is the model class for table "suplementarios".
  *
@@ -45,7 +47,8 @@ class Suplementarios extends \common\components\BaseActiveRecord
     public function rules()
     {
         return [
-            [['numero','numero_pagada', 'creado_por', 'actualizado_por', 'documento_registrado_id', 'contratista_id'], 'integer'],
+            [['suscrito', 'documento_registrado_id','contratista_id','tipo_suplementario','certificacion_aporte_id'], 'required'],
+            [['numero','numero_pagada', 'creado_por', 'actualizado_por', 'documento_registrado_id', 'contratista_id','certificacion_aporte_id'], 'integer'],
             [['valor','capital','capital_pagado'], 'number'],
             [['tipo_suplementario'], 'string'],
             ['numero_pagada', 'validarnumeropagada'],
@@ -113,10 +116,11 @@ class Suplementarios extends \common\components\BaseActiveRecord
             'numero_pagada' => Yii::t('app', 'Numero Pagada'),
             'capital' => Yii::t('app', 'Capital Suscrito'),
             'capital_pagado' => Yii::t('app', 'Capital Pagado'),
+             'certificacion_aporte_id'  => Yii::t('app', 'Certificador de aportes'),
         ];
     }
 
-    /**
+     /**
      * @return \yii\db\ActiveQuery
      */
     public function getDocumentoRegistrado()
@@ -127,14 +131,24 @@ class Suplementarios extends \common\components\BaseActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
+    public function getCertificacionAporte()
+    {
+        return $this->hasOne(CertificacionesAportes::className(), ['id' => 'certificacion_aporte_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getContratista()
     {
         return $this->hasOne(Contratistas::className(), ['id' => 'contratista_id']);
     }
     
-     public function getFormAttribs($id) {
-        
-        if($id=='principal')
+    
+     public function getFormAttribs() {
+         
+        $persona = empty($this->certificacion_aporte_id) ? '' : CertificacionesAportes::findOne($this->certificacion_aporte_id)->getNombreJuridica();
+        if($this->scenario=='principal')
         {
             
 
@@ -145,7 +159,20 @@ class Suplementarios extends \common\components\BaseActiveRecord
             'capital_pagado'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Capital Pagado']],
                
              'numero_pagada'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Numero de Certificados Suplementarios']],
-          
+            'certificacion_aporte_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>[
+               'initValueText' => $persona,
+                'options'=>['placeholder' => 'Buscar persona ...'],'pluginOptions' => [
+                'allowClear' => true,
+                'minimumInputLength' => 3,
+                'ajax' => [
+                    'url' => \yii\helpers\Url::to(['certificaciones-aportes/certificaciones-aportes-lista']),
+                    'dataType' => 'json',
+                    'data' => new JsExpression('function(params) { return {q:params.term}; }')
+                ],
+                'escapeMarkup' => new JsExpression('function (markup) { return markup; }'),
+                'templateResult' => new JsExpression('function(certificacion_aporte_id) { return certificacion_aporte_id.text; }'),
+                'templateSelection' => new JsExpression('function (certificacion_aporte_id) { return certificacion_aporte_id.text; }'),
+                 ],]],
               
             ];
         

@@ -3,11 +3,11 @@
 namespace common\models\p;
 use common\models\a\ActivosDocumentosRegistrados;
 use common\models\p\DenominacionesComerciales;
+use common\models\p\ActasConstitutivas;
 use common\models\a\ActivosBienes;
 use common\models\p\Certificados;
 use common\models\p\Suplementarios;
 use common\models\p\Acciones;
-use kartik\money\MaskMoney;
 use kartik\widgets\Select2;
 use kartik\builder\Form;
 use yii\helpers\ArrayHelper;
@@ -39,12 +39,14 @@ use Yii;
  * @property string $sys_creado_el
  * @property string $sys_actualizado_el
  * @property string $sys_finalizado_el
+ * @property string $tipo_origen
  * @property integer $numero_transaccion
  * @property boolean $efectivo
  * @property boolean $banco
  * @property boolean $bien
  * @property boolean $cuenta_pagar
  * @property boolean $decreto
+ * @property boolean $principal
  *
  * @property ActivosBienes $bien0
  * @property ActivosDocumentosRegistrados $documentoRegistrado
@@ -68,14 +70,15 @@ class OrigenesCapitales extends \common\components\BaseActiveRecord
     {
         return [
             [['bien_id', 'banco_contratista_id', 'numero_accion', 'contratista_id', 'documento_registrado_id', 'creado_por', 'actualizado_por', 'numero_transaccion'], 'integer'],
-            [['monto', 'contratista_id', 'documento_registrado_id'], 'required'],
+            [['monto', 'contratista_id', 'documento_registrado_id','tipo_origen','principal'], 'required'],
+            [['tipo_origen'], 'string'],
             ['monto', 'validarmonto'],
             [['monto','fecha'], 'required', 'on' => 'efectivo'],
             [['monto','banco_contratista_id','numero_transaccion'], 'required', 'on' => 'banco'],
             [['monto','bien_id'], 'required', 'on' => 'bien'],
             [['monto', 'saldo_cierre_anterior', 'saldo_corte', 'monto_aumento', 'saldo_aumento', 'valor_acciones', 'saldo_cierre_ajustado'], 'number'],
             [['fecha', 'fecha_corte', 'fecha_aumento', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
-            [['sys_status', 'efectivo', 'banco', 'bien', 'cuenta_pagar', 'decreto'], 'boolean'],
+            [['sys_status', 'efectivo', 'banco', 'bien', 'cuenta_pagar', 'decreto','principal'], 'boolean'],
             [['efectivo', 'banco', 'bien', 'cuenta_pagar', 'decreto'],'default','value'=>false],
 
         ];
@@ -115,14 +118,17 @@ class OrigenesCapitales extends \common\components\BaseActiveRecord
             'bien' => Yii::t('app', 'Bien'),
             'cuenta_pagar' => Yii::t('app', 'Cuenta Pagar'),
             'decreto' => Yii::t('app', 'Decreto'),
+            'tipo_origen' => Yii::t('app', 'Tipo Origen'),
+            'principal' => Yii::t('app', 'Principal'),
         ];
     }
     public function validarmonto($attribute){
         
         $monto_pagado=0;
-        $registro = ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->id, 'tipo_documento_id'=>1]);
+        if($this->principal){
+       // $registro = ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->id, 'tipo_documento_id'=>1]);
 
-         $denominacion_comercial= DenominacionesComerciales::findOne(['contratista_id'=>Yii::$app->user->identity->id]);
+         $denominacion_comercial= DenominacionesComerciales::findOne(['contratista_id'=>Yii::$app->user->identity->id,'documento_registrado_id'=>$this->documento_registrado_id]);
             if($denominacion_comercial->tipo_denominacion!="COOPERATIVA"){
             
              $accion= Acciones::findOne(['contratista_id'=>Yii::$app->user->identity->id ,'documento_registrado_id'=>$this->documento_registrado_id,'suscrito'=>false]);
@@ -138,26 +144,63 @@ class OrigenesCapitales extends \common\components\BaseActiveRecord
              $suplementario= Suplementarios::findOne(['contratista_id'=>$usuario->contratista_id ,'documento_registrado_id'=>$this->documento_registrado_id,'suscrito'=>false]);
              $monto_pagado = $suplementario->capital;
          }
-          $monto_actual= $this->sumarmonto()+$this->monto;
+          //$monto_actual= $this->sumarmonto()+$this->monto;
           
-          if($monto_actual>$monto_pagado){
+         
+          
+        }else{
+            $acta= ActasConstitutivas::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'actual'=>true]);
+            $denominacion_comercial= DenominacionesComerciales::findOne($acta->denominacion_comercial_id);
+            if($denominacion_comercial->tipo_denominacion!="COOPERATIVA"){
+            
+             $accion= Acciones::findOne(['contratista_id'=>Yii::$app->user->identity->id ,'documento_registrado_id'=>$this->documento_registrado_id,'tipo_accion'=>$this->tipo_origen]);
+             if(isset( $accion)){
+                  $monto_pagado = $accion->capital;
+             }
+            
+         }
+         if($denominacion_comercial->tipo_denominacion=="COOPERATIVA" && $denominacion_comercial->cooperativa_capital=='LIMITADO'){
+           
+             $certificado= Certificados::findOne(['contratista_id'=>Yii::$app->user->identity->id ,'documento_registrado_id'=>$this->documento_registrado_id,'tipo_certificado'=>$this->tipo_origen]);
+             if(isset($certificado)){
+                  $monto_pagado = $certificado->capital;
+             }
+            
+         }
+         if($denominacion_comercial->tipo_denominacion=="COOPERATIVA" && $denominacion_comercial->cooperativa_capital=='SUPLEMENTARIO'){
+             $suplementario= Suplementarios::findOne(['contratista_id'=>$usuario->contratista_id ,'documento_registrado_id'=>$this->documento_registrado_id,'tipo_suplementario'=>$this->tipo_origen]);
+              if(isset($suplementario)){
+                   $monto_pagado = $suplementario->capital;
+             }
+            
+         }
+                  
+            
+        }
+        $monto_actual= $this->sumarmonto()+$this->monto;
+         if($monto_actual>$monto_pagado){
                $this->addError($attribute,'Monto excedente');
           }
     }
     
-    public function sumarmonto()
+    public function sumarmonto($sum=true)
     {
         $suma=0;
         
         
        // $registro = ActivosDocumentosRegistrados::findOne(['contratista_id'=>$usuario->contratista_id, 'tipo_documento_id'=>1]);
-       $capitales= OrigenesCapitales::findAll(['contratista_id'=>Yii::$app->user->identity->id, 'documento_registrado_id'=>$this->documento_registrado_id]);  
+        if($this->principal){
+             $capitales= OrigenesCapitales::findAll(['contratista_id'=>Yii::$app->user->identity->id, 'documento_registrado_id'=>$this->documento_registrado_id]);  
+        }else{
+            $capitales= OrigenesCapitales::findAll(['contratista_id'=>Yii::$app->user->identity->id, 'documento_registrado_id'=>$this->documento_registrado_id,'tipo_origen'=>$this->tipo_origen]);
+        }
+      
       
         if(isset($capitales)){
              foreach ($capitales as $capital) {
                 $suma=$suma+$capital->monto;
             }
-           if(!$this->isNewRecord){
+           if(!$this->isNewRecord && $sum){
               $capital= OrigenesCapitales::findOne($this->id);
               $suma= $suma-$capital->monto;
            }
@@ -199,8 +242,17 @@ class OrigenesCapitales extends \common\components\BaseActiveRecord
         return $this->hasOne(Contratistas::className(), ['id' => 'contratista_id']);
     }
     public function getFormAttribs($id){
-        
-        if($id=='efectivo')
+         $modificacion = [];
+          $modificaciones= ModificacionesActas::findOne(['documento_registrado_id'=>$this->documento_registrado_id]);
+          if(isset($modificaciones)){
+                if($modificaciones->pago_capital){
+                  $modificacion = array_merge ( $modificacion,[['id' => 'PAGO_CAPITAL', 'name' => 'PAGO DE CAPITAL']] );
+                   }
+                if($modificaciones->aporte_capitalizar){
+                  $modificacion = array_merge ( $modificacion,[['id' => 'APORTE_CAPITALIZAR', 'name' => 'APORTE POR CAPITALIZAR']] );
+                   }
+          }
+        if($id=='efectivo' && $this->principal)
         {
            
             return [
@@ -218,7 +270,8 @@ class OrigenesCapitales extends \common\components\BaseActiveRecord
             ];
 
         }
-        if($id=='banco'){
+         
+        if($id=='banco' && $this->principal){
             $ban = BancosContratistas::find()->all();
             $array = array();
               foreach ($ban as $banco) {
@@ -242,7 +295,7 @@ class OrigenesCapitales extends \common\components\BaseActiveRecord
             ];
         }
   
-        if($id=='bien'){
+        if($id=='bien' && $this->principal){
            return [
                 'bien_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>[//'data'=>ArrayHelper::map(PersonasJuridicas::find()->all(),'id',function($model){return $model->etiqueta(); }),
                 'options'=>[],'pluginOptions' => [
@@ -261,6 +314,25 @@ class OrigenesCapitales extends \common\components\BaseActiveRecord
                'monto'=>['type'=>Form::INPUT_TEXT,'label'=>'Monto bien'],
             ];
         }
+        if($id=='efectivo')
+            
+        {
+           
+            return [
+                'tipo_origen'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>ArrayHelper::map($modificacion, 'id', 'name'),'options'=>['prompt'=>'Seleccione tipo origen']],
+                'monto'=>['type'=>Form::INPUT_TEXT,'label'=>'Monto Efectivo'],
+                'fecha'=>[
+                'type'=>Form::INPUT_WIDGET, 
+                'widgetClass'=>'\kartik\widgets\DatePicker', 
+                'options'=>['pluginOptions' => [
+                    'autoclose'=>true,
+                    'format' => 'yyyy-mm-dd'
+                ]],
+                ],
+                
+            ];
+
+        }
     }
      public function Existeregistro(){
        $registro = ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'tipo_documento_id'=>1,'proceso_finalizado'=>false]);       
@@ -268,6 +340,10 @@ class OrigenesCapitales extends \common\components\BaseActiveRecord
        if(isset($registro) || isset($registromodificacion)){
            if(isset($registromodificacion)){
                $registro=$registromodificacion;
+               $this->principal=false;
+           }else{
+               $this->tipo_origen="PRINCIPAL";
+               $this->principal=true;
            }
            $this->documento_registrado_id=$registro->id;
            return false;
@@ -283,6 +359,7 @@ class OrigenesCapitales extends \common\components\BaseActiveRecord
        if(isset($registro) || isset($registromodificacion)){
            if(isset($registromodificacion)){
                $registro=$registromodificacion;
+               
            }
            $denominacion = DenominacionesComerciales::findOne(['documento_registrado_id'=>$registro->id]);
            if(isset($denominacion)){
@@ -318,15 +395,30 @@ class OrigenesCapitales extends \common\components\BaseActiveRecord
             if(isset($denominacion_comercial)){
                 if($denominacion_comercial->tipo_denominacion!="COOPERATIVA"){
                     $accion= Acciones::findOne(['contratista_id'=>Yii::$app->user->identity->id ,'documento_registrado_id'=>$this->documento_registrado_id,'suscrito'=>false]);
-                    $monto_pagado = $accion->capital;
+                    if(isset($accion)){
+                        $monto_pagado = $accion->capital;
+                    }else{
+                        return false;
+                    }
+                    
                 }else{
                     if($denominacion_comercial->tipo_denominacion=="COOPERATIVA" && $denominacion_comercial->cooperativa_capital=='LIMITADO'){
            
                          $certificado= Certificados::findOne(['contratista_id'=>Yii::$app->user->identity->id ,'documento_registrado_id'=>$this->documento_registrado_id,'suscrito'=>false]);
-                            $monto_pagado = $certificado->capital;
+                          if(isset($certificado)){
+                       $monto_pagado = $certificado->capital;
+                         }else{
+                        return false;
+                                }
+                         
                     }else{
                         $suplementario= Suplementarios::findOne(['contratista_id'=>$usuario->contratista_id ,'documento_registrado_id'=>$this->documento_registrado_id,'suscrito'=>false]);
-                        $monto_pagado = $suplementario->capital;
+                       
+                         if(isset($suplementario)){
+                      $monto_pagado = $suplementario->capital;
+                         }else{
+                        return false;
+                                }
                  
                     }
                 }
@@ -339,5 +431,16 @@ class OrigenesCapitales extends \common\components\BaseActiveRecord
           }
         }
         return false;
+    }
+     public function Modificacionactual(){
+       
+       $registro = ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'tipo_documento_id'=>2,'proceso_finalizado'=>false]);      
+       
+       if(isset($registro)){
+         $modificacion= ModificacionesActas::findOne(['documento_registrado_id'=>$registro->id]);  
+       }else{
+           $modificacion= ModificacionesActas::findOne(['documento_registrado_id'=>-100]); 
+       }
+       return $modificacion;
     }
 }

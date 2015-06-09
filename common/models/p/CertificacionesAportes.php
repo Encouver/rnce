@@ -24,7 +24,6 @@ use Yii;
  * @property string $sys_creado_el
  * @property string $sys_actualizado_el
  * @property string $sys_finalizado_el
- * @property integer $documento_registrado_id
  * @property integer $contratista_id
  *
  * @property Capitales[] $capitales
@@ -49,8 +48,8 @@ class CertificacionesAportes extends \common\components\BaseActiveRecord
     public function rules()
     {
         return [
-            [['natural_juridica_id', 'creado_por', 'actualizado_por', 'documento_registrado_id', 'contratista_id'], 'integer'],
-            [['tipo_profesion', 'fecha_informe', 'documento_registrado_id', 'contratista_id','natural_juridica_id'], 'required'],
+            [['natural_juridica_id', 'creado_por', 'actualizado_por',  'contratista_id'], 'integer'],
+            [['tipo_profesion', 'fecha_informe', 'contratista_id','natural_juridica_id'], 'required'],
             [['tipo_profesion'], 'string'],
             [['fecha_informe', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['sys_status'], 'boolean'],
@@ -80,7 +79,6 @@ class CertificacionesAportes extends \common\components\BaseActiveRecord
             'sys_creado_el' => Yii::t('app', 'Sys Creado El'),
             'sys_actualizado_el' => Yii::t('app', 'Sys Actualizado El'),
             'sys_finalizado_el' => Yii::t('app', 'Sys Finalizado El'),
-            'documento_registrado_id' => Yii::t('app', 'Documento Registrado ID'),
             'contratista_id' => Yii::t('app', 'Contratista ID'),
         ];
     }
@@ -93,13 +91,7 @@ class CertificacionesAportes extends \common\components\BaseActiveRecord
         return $this->hasMany(Capitales::className(), ['certificacion_aporte_id' => 'id']);
     }
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getDocumentoRegistrado()
-    {
-        return $this->hasOne(ActivosDocumentosRegistrados::className(), ['id' => 'documento_registrado_id']);
-    }
+    
 
     /**
      * @return \yii\db\ActiveQuery
@@ -114,6 +106,13 @@ class CertificacionesAportes extends \common\components\BaseActiveRecord
     public function getNaturalJuridica()
     {
         return $this->hasOne(SysNaturalesJuridicas::className(), ['id' => 'natural_juridica_id']);
+    }
+
+    public function getNombreJuridica()
+          
+    {
+          $juridica = SysNaturalesJuridicas::findOne(['id' => $this->natural_juridica_id]);
+        return $juridica->denominacion;
     }
     /**
      * @return \yii\db\ActiveQuery
@@ -170,7 +169,7 @@ class CertificacionesAportes extends \common\components\BaseActiveRecord
     
     }
     
-     public function Existeregistro(){
+     /*public function Existeregistro(){
        $registro = ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'tipo_documento_id'=>1,'proceso_finalizado'=>false]);       
        $registromodificacion = ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'tipo_documento_id'=>2,'proceso_finalizado'=>false]);      
        if(isset($registro) || isset($registromodificacion)){
@@ -204,7 +203,7 @@ class CertificacionesAportes extends \common\components\BaseActiveRecord
            }
        }
        return false;
-    }
+    }*/
     public function accionista(){
         $accionista= AccionistasOtros::findOne(['natural_juridica_id'=>$this->natural_juridica_id]);
         if(isset($accionista)){

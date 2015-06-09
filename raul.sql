@@ -307,3 +307,54 @@ LTER TABLE empresas_relacionadas DROP COLUMN sys_pais_id;
 ALTER TABLE empresas_relacionadas ADD COLUMN objeto_empresa text;
 ALTER TABLE empresas_relacionadas ALTER COLUMN objeto_empresa SET NOT NULL;
 COMMENT ON COLUMN empresas_relacionadas.objeto_empresa IS 'Objeto de la empresa';
+
+
+---05 junio 8:30 pm--
+
+
+ALTER TABLE certificaciones_aportes DROP COLUMN documento_registrado_id;
+
+ALTER TABLE acciones ADD COLUMN certificacion_aporte_id integer;
+COMMENT ON COLUMN acciones.certificacion_aporte_id IS 'Clave foranea a la tabla certificaciones_aportes';
+
+
+ALTER TABLE acciones
+  ADD CONSTRAINT acciones_certificacion_aporte_id_fkey FOREIGN KEY (certificacion_aporte_id)
+      REFERENCES certificaciones_aportes (id) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE NO ACTION;
+
+ALTER TABLE certificados ADD COLUMN certificacion_aporte_id integer;
+COMMENT ON COLUMN certificados.certificacion_aporte_id IS 'Clave foranea a la tabla certificaciones_aportes';
+
+
+ALTER TABLE certificados
+  ADD CONSTRAINT certificados_certificacion_aporte_id_fkey FOREIGN KEY (certificacion_aporte_id)
+      REFERENCES certificaciones_aportes (id) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE NO ACTION;
+
+ALTER TABLE suplementarios ADD COLUMN certificacion_aporte_id integer;
+COMMENT ON COLUMN suplementarios.certificacion_aporte_id IS 'Clave foranea a la tabla certificaciones_aportes';
+
+
+ALTER TABLE suplementarios
+  ADD CONSTRAINT suplementarios_certificacion_aporte_id_fkey FOREIGN KEY (certificacion_aporte_id)
+      REFERENCES certificaciones_aportes (id) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE NO ACTION;
+
+
+CREATE TYPE tipo_origen_capital as enum ('PRINCIPAL','PAGO_CAPITAL','APORTE_CAPITALIZAR','AUMENTO_CAPITAL','DISMINUCION_CAPITAL','FONDO_EMERGENCIA','REINTEGRO_PERDIDA','FUSION_EMPRESARIAL');
+
+ALTER TABLE origenes_capitales ADD COLUMN tipo_origen tipo_origen_capital;
+ALTER TABLE origenes_capitales ALTER COLUMN tipo_origen SET NOT NULL;
+COMMENT ON COLUMN origenes_capitales.tipo_origen IS 'Tipo origen puede ser PRINCIPAL,PAGO_CAPITAL, APORTE_CAPITALIZAR, AUMENTO_CAPITAL, DISMINUCION_CAPITAL, FONDO_EMERGENCIA, REINTEGRO_PERDIDA, FUSION_EMPRESARIAL';
+
+ALTER TABLE origenes_capitales ADD COLUMN principal boolean;
+ALTER TABLE origenes_capitales ALTER COLUMN principal SET NOT NULL;
+COMMENT ON COLUMN origenes_capitales.principal IS 'true si es parte del acta, false si es parte de una modificacion';
+
+
+---08 junio 10:05 am--
+ALTER TABLE acciones ADD COLUMN actual boolean;
+ALTER TABLE acciones ALTER COLUMN actual SET NOT NULL;
+ALTER TABLE acciones ALTER COLUMN actual SET DEFAULT false;
+COMMENT ON COLUMN acciones.actual IS 'true significa que el valor de las acciones es el actual';

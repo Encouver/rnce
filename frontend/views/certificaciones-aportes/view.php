@@ -39,7 +39,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'sys_creado_el',
             'sys_actualizado_el',
             'sys_finalizado_el',
-            'documento_registrado_id',
             'contratista_id',
         ],
     ]) ?>

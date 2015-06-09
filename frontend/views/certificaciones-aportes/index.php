@@ -37,17 +37,13 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'sys_creado_el',
             // 'sys_actualizado_el',
             // 'sys_finalizado_el',
-            // 'documento_registrado_id',
             // 'contratista_id',
 
             ['class' => 'yii\grid\ActionColumn','template'=>'{update}{delete}'],
         ],
     ]); ?>
-    <?php 
-    if(!$model->existeregistro() && $model->validarorigen()){ ?>
        <p>
-        <?= Html::a(Yii::t('app', 'Agregar Certificacion de aportes'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Agregar Certificador de aportes'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-    <?php } ?>
 
 </div>

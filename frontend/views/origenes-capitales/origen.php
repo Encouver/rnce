@@ -10,12 +10,9 @@ use yii\grid\GridView;
 $this->title = Yii::t('app', 'Origenes Capitales');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="origenes-capitales-origen-capital">
+<div class="origenes-capitales-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <h3>Efectivo</h3>
+      <h3>Efectivo</h3>
     <?= GridView::widget([
         'dataProvider' => $dataProvider_efectivo,
         //'filterModel' => $searchModel,
@@ -46,12 +43,16 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'sys_actualizado_el',
             // 'sys_finalizado_el',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn', 'template'=>'{update}{delete}'],
         ],
     ]); ?>
-     <p>
+       <?php 
+    if(!$searchModel->existeregistro()){ ?>
+       <p>
         <?= Html::a(Yii::t('app', 'Agregar Efectivo'), ['create', 'identificador' => 'efectivo'], ['class' => 'btn btn-success']) ?>
-    </p>
+       </p>
+    <?php } ?>
+     
     <hr />
     <h3>Efectivo en banco</h3>
     <?= GridView::widget([
@@ -94,12 +95,16 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'sys_actualizado_el',
             // 'sys_finalizado_el',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn', 'template'=>'{update}{delete}'],
         ],
     ]); ?>
-    <p>
+     <?php 
+    if(!$searchModel->existeregistro() && $searchModel->validarcapital() && $searchModel->aceptarmonto()){ ?>
+        <p>
         <?= Html::a(Yii::t('app', 'Agregar Efectivo Banco'),['create', 'identificador' => 'banco'], ['class' => 'btn btn-success']) ?>
     </p>
+    <?php } ?>
+   
     <hr />
     <h3>Bienes</h3>
     <?= GridView::widget([
@@ -147,10 +152,14 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'sys_actualizado_el',
             // 'sys_finalizado_el',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn', 'template'=>'{update}{delete}'],
         ],
     ]); ?>
-    <p>
+     <?php 
+    if(!$searchModel->existeregistro() && $searchModel->validarcapital() && $searchModel->aceptarmonto()){ ?>
+     <p>
         <?= Html::a(Yii::t('app', 'Agregar Bien'), ['create', 'identificador' => 'bien'], ['class' => 'btn btn-success']) ?>
     </p>
+    <?php } ?>
+    
 </div>

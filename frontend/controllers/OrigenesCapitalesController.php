@@ -57,7 +57,13 @@ class OrigenesCapitalesController extends BaseController
     public function actionOrigen()
     {
        $searchModel = new OrigenesCapitalesSearch();
-         $searchModel->efectivo = true;
+       $documento=$searchModel->Modificacionactual();
+       if(isset($documento)){
+            $searchModel->documento_registrado_id= $documento->documento_registrado_id;
+          
+        }
+        
+        $searchModel->efectivo = true;
         $dataProvider_efectivo = $searchModel->search(Yii::$app->request->queryParams);
         $searchModel->efectivo = false;
         $searchModel->banco = true;
@@ -69,12 +75,14 @@ class OrigenesCapitalesController extends BaseController
 
 
 
-        return $this->render('origen_capital', [
+        return $this->render('origen', [
             'dataProvider_efectivo' => $dataProvider_efectivo,
             'dataProvider_banco' => $dataProvider_banco,
             'dataProvider_bien' => $dataProvider_bien,
+            'searchModel'=>$searchModel,
         ]);
     }
+
 
     /**
      * Displays a single OrigenesCapitales model.
@@ -115,20 +123,24 @@ class OrigenesCapitalesController extends BaseController
                 break;
             }  
         }
-         if(!$model->validarcapital()){
-            Yii::$app->session->setFlash('error','No existe capital suscrito');
-            return $this->redirect(['index']);
-         }
+        
         if($model->existeregistro()){
             Yii::$app->session->setFlash('error','Debe crear un documento registrado');
             return $this->redirect(['index']);
           }
+          
+           if($model->principal && !$model->validarcapital()){
+            Yii::$app->session->setFlash('error','No existe capital suscrito');
+            return $this->redirect(['index']);
+         }
         if ($model->load(Yii::$app->request->post())&& $model->save()) {
            
-              
+                        if($model->principal){
                         return $this->redirect(['index']);
                   
-                    
+                        }else{
+                            return $this->redirect(['origen']);
+                        }
                      
             }else{
                 
@@ -187,15 +199,9 @@ class OrigenesCapitalesController extends BaseController
      */
     public function actionDelete($id)
     {
-        $model = $this->findModel($id);
-        $todos = OrigenesCapitales::findAll(['documento_registrado_id'=>$model->documento_registrado_id]);
-        if(count($todos)==1){
-            $certificacion= CertificacionesAportes::findOne(['documento_registrado_id'=>$model->documento_registrado_id]);
-        
-            $certificacion->delete();
-        }
-        $model->delete();
-       // $this->findModel($id)->delete();
+       /* $model = $this->findModel($id);
+        $model->delete();*/
+       $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
     }

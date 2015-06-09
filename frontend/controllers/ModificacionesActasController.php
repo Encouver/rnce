@@ -79,7 +79,7 @@ class ModificacionesActasController extends BaseController
                      $model->aporte_capitalizar=true;
                     break;
                 case "pago_capital":
-                    $model->pago_capitaL=true;
+                    $model->pago_capital=true;
                     break;
         
                 case "junta_directiva":

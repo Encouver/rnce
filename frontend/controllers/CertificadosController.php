@@ -94,6 +94,7 @@ class CertificadosController extends BaseController
                         $paga_acta->documento_registrado_id= $model->documento_registrado_id;
                         $paga_acta->suscrito=false;
                         $paga_acta->tipo_certificado=$model->tipo_certificado;
+                        $paga_acta->certificacion_aporte_id=$model->certificacion_aporte_id;
                                 
                         $transaction = \Yii::$app->db->beginTransaction();
              
@@ -231,6 +232,7 @@ class CertificadosController extends BaseController
                   
                         $paga_acta->numero_inversion= $model->numero_inversion_pagada;
                         $paga_acta->capital=$model->capital_pagado;
+                        $paga_acta->certificacion_aporte_id=$model->certificacion_aporte_id;
              
            $transaction = \Yii::$app->db->beginTransaction();
              

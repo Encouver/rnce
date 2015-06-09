@@ -4,9 +4,11 @@ namespace common\models\p;
 use kartik\builder\Form;
 use common\models\a\ActivosDocumentosRegistrados;
 use common\models\p\ModificacionesActas;
+use common\models\p\CertificacionesAportes;
+use kartik\widgets\Select2;
+use yii\web\JsExpression;
 use common\models\p\DenominacionesComerciales;
 use Yii;
-
 /**
  * This is the model class for table "certificados".
  *
@@ -55,7 +57,8 @@ class Certificados extends \common\components\BaseActiveRecord
     public function rules()
     {
         return [
-            [['numero_asociacion', 'numero_aportacion', 'numero_rotativo', 'numero_inversion','numero_asociacion_pagada', 'numero_aportacion_pagada', 'numero_rotativo_pagada', 'numero_inversion_pagada', 'creado_por', 'actualizado_por', 'documento_registrado_id', 'contratista_id'], 'integer'],
+            [['documento_registrado_id', 'contratista_id','certificacion_aporte_id'], 'required'],
+            [['numero_asociacion', 'numero_aportacion', 'numero_rotativo', 'numero_inversion','numero_asociacion_pagada', 'numero_aportacion_pagada', 'numero_rotativo_pagada', 'numero_inversion_pagada', 'creado_por', 'actualizado_por', 'documento_registrado_id', 'contratista_id','certificacion_aporte_id'], 'integer'],
             [['valor_asociacion', 'valor_aportacion', 'valor_rotativo', 'valor_inversion','capital','capital_pagado'], 'number'],
             [['tipo_certificado'], 'string'],
             ['capital', 'validarcapital'],
@@ -72,7 +75,8 @@ class Certificados extends \common\components\BaseActiveRecord
             [['capital','numero_asociacion', 'numero_aportacion', 'numero_rotativo', 'numero_inversion', 'valor_asociacion', 'valor_aportacion', 'valor_rotativo','valor_inversion','numero_asociacion_pagada', 'numero_aportacion_pagada', 'numero_rotativo_pagada', 'numero_inversion_pagada', 'capital_pagado'], 'required','on'=>'principal'],
             [['suscrito', 'documento_registrado_id', 'contratista_id'], 'required'],
             [['suscrito', 'sys_status'], 'boolean'],
-            [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe']
+            [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
+           
         ];
     }
     public function validarcapital($attribute){
@@ -190,6 +194,7 @@ class Certificados extends \common\components\BaseActiveRecord
             'numero_inversion_pagada' => Yii::t('app', 'Numero Inversion Pagada'),
             'capital' => Yii::t('app', 'Capital Suscrito'),
             'capital_pagado' => Yii::t('app', 'Capital pagado'),
+            'certificacion_aporte_id'  => Yii::t('app', 'Certificador de aportes'),
             
         ];
     }
@@ -205,14 +210,23 @@ class Certificados extends \common\components\BaseActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
+    public function getCertificacionAporte()
+    {
+        return $this->hasOne(CertificacionesAportes::className(), ['id' => 'certificacion_aporte_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getContratista()
     {
         return $this->hasOne(Contratistas::className(), ['id' => 'contratista_id']);
     }
     
-     public function getFormAttribs($id) {
-        
-        if($id=='principal')
+    
+     public function getFormAttribs() {
+         $persona = empty($this->certificacion_aporte_id) ? '' : CertificacionesAportes::findOne($this->certificacion_aporte_id)->getNombreJuridica();
+        if($this->scenario=='principal')
         {
             
 
@@ -231,7 +245,20 @@ class Certificados extends \common\components\BaseActiveRecord
                'numero_aportacion_pagada'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Numero de Certificados ']],
                'numero_rotativo_pagada'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Numero de Certificados ']],
                'numero_inversion_pagada'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Numero de Certificados ']],
-              
+                'certificacion_aporte_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>[
+               'initValueText' => $persona,
+                'options'=>['placeholder' => 'Buscar persona ...'],'pluginOptions' => [
+                'allowClear' => true,
+                'minimumInputLength' => 3,
+                'ajax' => [
+                    'url' => \yii\helpers\Url::to(['certificaciones-aportes/certificaciones-aportes-lista']),
+                    'dataType' => 'json',
+                    'data' => new JsExpression('function(params) { return {q:params.term}; }')
+                ],
+                'escapeMarkup' => new JsExpression('function (markup) { return markup; }'),
+                'templateResult' => new JsExpression('function(certificacion_aporte_id) { return certificacion_aporte_id.text; }'),
+                'templateSelection' => new JsExpression('function (certificacion_aporte_id) { return certificacion_aporte_id.text; }'),
+                ],]],
             ];
         
         }

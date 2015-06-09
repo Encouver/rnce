@@ -170,15 +170,6 @@ use yii\helpers\Html;
                 <?php } }?>
             </table>
         <?php }?>
-        <?php if(isset($certificacion_aporte)){?>
-                <h4><?= Html::a('Certificacion de Aporte', ['certificaciones-aportes/index'], ['class' => 'profile-link']) ?></h4>
-                <table class="table table-bordered">
-                    <tr class="success">
-                        <td><b>Nombre: </b><?=$certificacion_aporte->naturalJuridica->denominacion;?></td> 
-                        <td><b>Tipo Profesion: </b><?=$certificacion_aporte->tipo_profesion;?></td> 
-                    </tr>
-                </table>
-        <?php }?>
         <?php if (isset($accionista_otro)){?>
                 <h4><?= Html::a('Accionistas, Representante Legal y Junta Directiva', ['accionistas-otros/index'], ['class' => 'profile-link']) ?></h4>
                 <table class="table table-bordered">
@@ -334,14 +325,6 @@ use yii\helpers\Html;
 
             </div>
         <?php } ?>
-         <?php if (!is_null($msgCertificacionAporte)){?>
-            <div class="alert-danger alert fade in">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-
-                 <?= Html::a($msgCertificacionAporte, ['certificaciones-aportes/index'], ['class' => 'profile-link']) ?></h4>
-
-            </div>
-        <?php } ?>
         <?php if (!is_null($msgAccionistaOtro)){?>
             <div class="alert-danger alert fade in">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
@@ -362,7 +345,7 @@ use yii\helpers\Html;
             <div class="alert-danger alert fade in">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
 
-                 <?= Html::a($msgFondoReserva, ['fondos-reservas/index'], ['class' => 'profile-link']) ?></h4>
+                 <?= Html::a($msgFondoReserva, ['fondos-reservas/index'], ['class' => 'profile-link']) ?>
 
             </div>
         <?php } ?>
@@ -370,7 +353,7 @@ use yii\helpers\Html;
             <div class="alert-warning alert fade in">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
 
-                 <?= Html::a($msgSucursal, ['sucursales/index'], ['class' => 'profile-link']) ?></h4>
+                 <?= Html::a($msgSucursal, ['sucursales/index'], ['class' => 'profile-link']) ?>
 
             </div>
         <?php } ?>

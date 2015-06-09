@@ -18,7 +18,7 @@ class CertificacionesAportesSearch extends CertificacionesAportes
     public function rules()
     {
         return [
-            [['id', 'creado_por', 'actualizado_por', 'documento_registrado_id', 'contratista_id'], 'integer'],
+            [['id', 'creado_por', 'actualizado_por','contratista_id'], 'integer'],
             [['colegiatura', 'tipo_profesion', 'fecha_informe', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['sys_status'], 'boolean'],
         ];
@@ -65,7 +65,6 @@ class CertificacionesAportesSearch extends CertificacionesAportes
             'sys_creado_el' => $this->sys_creado_el,
             'sys_actualizado_el' => $this->sys_actualizado_el,
             'sys_finalizado_el' => $this->sys_finalizado_el,
-            'documento_registrado_id' => $this->documento_registrado_id,
             'contratista_id' => $this->contratista_id,
         ]);
 

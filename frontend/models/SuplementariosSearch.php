@@ -18,7 +18,7 @@ class SuplementariosSearch extends Suplementarios
     public function rules()
     {
         return [
-            [['id', 'numero', 'documento_registrado_id', 'contratista_id', 'creado_por', 'actualizado_por'], 'integer'],
+            [['id', 'numero', 'documento_registrado_id', 'contratista_id', 'creado_por', 'actualizado_por','certificacion_aporte_id'], 'integer'],
             [['valor', 'capital'], 'number'],
             [['tipo_suplementario', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['suscrito', 'sys_status'], 'boolean'],
@@ -71,6 +71,7 @@ class SuplementariosSearch extends Suplementarios
             'sys_actualizado_el' => $this->sys_actualizado_el,
             'sys_finalizado_el' => $this->sys_finalizado_el,
             'capital' => $this->capital,
+            'certificacion_aporte_id'=> $this->certificacion_aporte_id,
         ]);
 
         $query->andFilterWhere(['like', 'tipo_suplementario', $this->tipo_suplementario]);

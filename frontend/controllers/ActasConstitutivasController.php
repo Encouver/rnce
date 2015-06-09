@@ -158,6 +158,27 @@ class ActasConstitutivasController extends BaseController
          }
 
     }
+    public function actionCrearpagocapital()
+    {
+       $acta= ActasConstitutivas::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'actual'=>true]);
+      if(isset($acta)){
+          $denominacion_comercial= DenominacionesComerciales::findOne($acta->denominacion_comercial_id);
+         if($denominacion_comercial->tipo_denominacion!="COOPERATIVA"){
+              return $this->redirect(['acciones/pagocapital']);
+         }
+         if($denominacion_comercial->tipo_denominacion=="COOPERATIVA" && $denominacion_comercial->cooperativa_capital=='LIMITADO'){
+              return $this->redirect(['certificados/index']);
+         }
+         if($denominacion_comercial->tipo_denominacion=="COOPERATIVA" && $denominacion_comercial->cooperativa_capital=='SUPLEMENTARIO'){
+              return $this->redirect(['suplementarios/index']);
+         }
+         
+      }else{
+            Yii::$app->session->setFlash('error','Acta constitutiva no creada');
+             return $this->redirect(['resumenacta']);
+         }
+
+    }
      public function actionResumenacta()
     {
          $registro = ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'tipo_documento_id'=>1]);
@@ -178,7 +199,7 @@ class ActasConstitutivasController extends BaseController
          $msgComisario="Debe agregar comisarios";
          $msgSucursal= "Si posee sucursales puede agregarlas";
          $msgFondoReserva="Debe agregar fondo reserva";
-         $msgCertificacionAporte= "Debe agregar certificacion de aportes";
+        // $msgCertificacionAporte= "Debe agregar certificacion de aportes";
          $msgCapital= "Debe agregar el capital";
          $boton= false;
          if(isset($natural_juridica)){
@@ -230,10 +251,10 @@ class ActasConstitutivasController extends BaseController
           if(isset($origen_capital_bien) || isset($origen_capital_banco) || isset($origen_capital_efectivo)){
            $msgOrigenCapital=null;
          }
-         $certificacion_aporte= CertificacionesAportes::findOne(['documento_registrado_id'=>$registro->id]);
+         /*$certificacion_aporte= CertificacionesAportes::findOne(['documento_registrado_id'=>$registro->id]);
           if(isset($certificacion_aporte)){
            $msgCertificacionAporte=null;
-         }
+         }*/
          $accionista_otro= AccionistasOtros::findOne(['documento_registrado_id'=>$registro->id]);
          if(isset($accionista_otro)){
            $msgAccionistaOtro=null;
@@ -274,7 +295,7 @@ class ActasConstitutivasController extends BaseController
              if(isset($capital_suscrito)){
               $msgCapital=null;
             }
-            if(isset($fondo_reserva) && isset($comisario) && isset($accionista_otro) && isset($certificacion_aporte) && is_null($msgCapital) && isset($domicilio_principal) && isset($domicilio_fiscal) && isset($capital_suscrito) && isset($actividad_economica) && isset($razon_social) && isset($natural_juridica) && isset($registro) && isset($denominacion_comercial) && isset($duracion_empresa) && isset($cierre_ejercicio) && isset($objeto_social)){
+            if(isset($fondo_reserva) && isset($comisario) && isset($accionista_otro) && is_null($msgCapital) && isset($domicilio_principal) && isset($domicilio_fiscal) && isset($capital_suscrito) && isset($actividad_economica) && isset($razon_social) && isset($natural_juridica) && isset($registro) && isset($denominacion_comercial) && isset($duracion_empresa) && isset($cierre_ejercicio) && isset($objeto_social)){
                 $boton=true;
             }
              
@@ -295,7 +316,7 @@ class ActasConstitutivasController extends BaseController
                 'origen_capital_efectivo'=>$origen_capital_efectivo,
                 'origen_capital_banco'=>$origen_capital_banco,
                 'origen_capital_bien'=>$origen_capital_bien,
-                'certificacion_aporte'=>$certificacion_aporte,
+                //'certificacion_aporte'=>$certificacion_aporte,
                 'accionista_otro'=>$accionista_otro,
                 'comisario'=>$comisario,
                 'fondo_reserva'=>$fondo_reserva,
@@ -314,7 +335,7 @@ class ActasConstitutivasController extends BaseController
                 'msgAccionistaOtro'=>$msgAccionistaOtro,
                 'msgComisario'=>$msgComisario,
                 'msgSucursal'=>$msgSucursal,
-                'msgCertificacionAporte'=>$msgCertificacionAporte,
+                //'msgCertificacionAporte'=>$msgCertificacionAporte,
                 'msgFondoReserva'=>$msgFondoReserva,
                 'msgCapital'=>$msgCapital,
                 'boton'=>$boton,
@@ -335,7 +356,7 @@ class ActasConstitutivasController extends BaseController
                 'origen_capital_efectivo'=>$origen_capital_efectivo,
                 'origen_capital_banco'=>$origen_capital_banco,
                 'origen_capital_bien'=>$origen_capital_bien,
-                'certificacion_aporte'=>$certificacion_aporte,
+                //'certificacion_aporte'=>$certificacion_aporte,
                 'accionista_otro'=>$accionista_otro,
                 'comisario'=>$comisario,
                 'fondo_reserva'=>$fondo_reserva,
@@ -354,7 +375,7 @@ class ActasConstitutivasController extends BaseController
                 'msgAccionistaOtro'=>$msgAccionistaOtro,
                 'msgComisario'=>$msgComisario,
                 'msgSucursal'=>$msgSucursal,
-                'msgCertificacionAporte'=>$msgCertificacionAporte,
+               // 'msgCertificacionAporte'=>$msgCertificacionAporte,
                 'msgFondoReserva'=>$msgFondoReserva,
                 'msgCapital'=>$msgCapital,
                 'boton'=>$boton,
@@ -378,7 +399,7 @@ class ActasConstitutivasController extends BaseController
                 'msgAccionistaOtro'=>$msgAccionistaOtro,
                 'msgComisario'=>$msgComisario,
                 'msgSucursal'=>$msgSucursal,
-                'msgCertificacionAporte'=>$msgCertificacionAporte,
+                //'msgCertificacionAporte'=>$msgCertificacionAporte,
                 'msgFondoReserva'=>$msgFondoReserva,
                 'msgCapital'=>$msgCapital,
                 'boton'=>$boton,

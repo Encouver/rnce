@@ -369,7 +369,7 @@ class ActasConstitutivas extends \common\components\BaseActiveRecord
          $domicilio_principal= Domicilios::findOne(['documento_registrado_id'=>$this->documento_registrado_id, 'fiscal'=>false]);
          $razon_social= RazonesSociales::findOne(['documento_registrado_id'=>$this->documento_registrado_id]);
          $origen_capital= OrigenesCapitales::findOne(['documento_registrado_id'=>$this->documento_registrado_id]);
-         $certificacion_aporte= CertificacionesAportes::findOne(['documento_registrado_id'=>$this->documento_registrado_id]);
+        // $certificacion_aporte= CertificacionesAportes::findOne(['documento_registrado_id'=>$this->documento_registrado_id]);
          $accionista_otro= AccionistasOtros::findAll(['documento_registrado_id'=>$this->documento_registrado_id]);
          $comisario= ComisariosAuditores::findAll(['documento_registrado_id'=>$this->documento_registrado_id]);
          $fondo_reserva= FondosReservas::findAll(['documento_registrado_id'=>$this->documento_registrado_id]);
@@ -448,10 +448,10 @@ class ActasConstitutivas extends \common\components\BaseActiveRecord
              $resultado="Debe agregar fondo_reserva";
                     return $resultado;
         }
-         if(!isset($certificacion_aporte)){
+       /*  if(!isset($certificacion_aporte)){
              $resultado="Debe agregar certificacion de aportes";
                     return $resultado;
-        }
+        }*/
          if(!isset($comisario)){
              $resultado="Debe agregar comisarios";
                     return $resultado;
@@ -459,8 +459,8 @@ class ActasConstitutivas extends \common\components\BaseActiveRecord
  
                      $this->capital_suscrito=$capital_suscrito->capital;
                      $this->capital_pagado=$capital_pagado->capital;
-                     if($origen_capital->sumarmonto() < $this->capital_pagado){
-                         $resultado="Debe agregar mas origen capital";
+                     if($origen_capital->sumarmonto(false) < $this->capital_pagado){
+                         $resultado="Debe agregar mas origen capital:".$origen_capital->sumarmonto().' '.$this->capital_pagado;
                     return $resultado;
                      }
                      $this->denominacion_comercial_id= $denominacion_comercial->id;
