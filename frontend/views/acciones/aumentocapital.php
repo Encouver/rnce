@@ -10,15 +10,15 @@ use yii\grid\GridView;
 $this->title = Yii::t('app', 'Acciones');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="acciones-pagocapital">
+<div class="acciones-aumentocapital">
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
    
 
     <?php
-    if(isset($documento) && $documento->pago_capital){
-    echo Html::tag('h1','Pago de Capital');
+    if(isset($documento)){
+    echo Html::tag('h1','Aumento de Capital');
        echo GridView::widget([
         'dataProvider' => $dataProvider,
         //'filterModel' => $searchModel,
@@ -27,19 +27,13 @@ $this->params['breadcrumbs'][] = $this->title;
            // ['class' => 'yii\grid\SerialColumn'],
 
             //'id',
-            //'suscrito:boolean',
-            [
-                'attribute'=>'capital',
-                'label'=>'Capital Pagado'
-            ],
-            [
-                'attribute'=>'numero_comun',
-                'label'=>'Numero acciones pagadas'
-            ],
+            'suscrito:boolean',
+            'capital',
+            'numero_comun',
             
-           // 'valor_comun',
-            //'numero_preferencial',
-            //'valor_preferencial',
+           'valor_comun',
+            'numero_preferencial',
+            'valor_preferencial',
             [
                 'attribute'=>'certificacion_aporte_id',
                 'label'=>'Certificador Aporte',
@@ -57,9 +51,9 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]); 
        
-         if(!$searchModel->existeregistro()&& $documento->pago_capital){ ?>
+         if(!$searchModel->existeregistro() && $searchModel->Pagocompleto()){ ?>
                 <p>
-                     <?=Html::a(Yii::t('app', 'Agregar Pago de Capital'), ['create','id'=>'pago'], ['class' => 'btn btn-success']) ?>
+                     <?=Html::a(Yii::t('app', 'Agregar Aumento de Capital'), ['create','id'=>'aumento'], ['class' => 'btn btn-success']) ?>
 
              </p>
       
@@ -68,7 +62,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="alert-warning alert fade in">
                
 
-                <h4>No existe ningun procedimiento referente al pago de capital activo</h4>
+                <h4>No existe ningun procedimiento referente al aumento de capital activo</h4>
 
             </div>
         <?php } ?>

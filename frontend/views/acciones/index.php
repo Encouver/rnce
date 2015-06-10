@@ -27,10 +27,10 @@ $this->params['breadcrumbs'][] = $this->title;
             //'id',
             'suscrito:boolean',
             'capital',
-            'numero_comun',
-            'valor_comun',
             'numero_preferencial',
             'valor_preferencial',
+            'numero_comun',
+            'valor_comun',
             [
                 'attribute'=>'certificacion_aporte_id',
                 'label'=>'Certificador Aporte',

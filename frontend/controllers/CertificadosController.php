@@ -220,6 +220,21 @@ class CertificadosController extends BaseController
             switch ($model->tipo_certificado){
                 case 'PRINCIPAL':
                     $paga_acta = Certificados::findOne(['documento_registrado_id'=>$model->documento_registrado_id,'suscrito'=>false]);
+                    if($paga_acta->capital>$model->capital_pagado){
+                       // $origen_capital= OrigenesCapitales::findAll(['documento_registrado_id'=>$model->documento_registrado_id,'tipo_origen'=>$model->tipo_accion]);
+                        $origen_capital= OrigenesCapitales::find()->where(['documento_registrado_id'=>$model->documento_registrado_id,'tipo_origen'=>$model->tipo_certificado])->orderBy('monto')->all();
+                        if(isset($origen_capital)){
+                            foreach ($origen_capital as $origen) {
+                                if($origen->sumarmonto(false)>$model->capital_pagado){
+                                    if(!$origen->delete()){
+                                        $transaction->rollBack();
+                                        Yii::$app->session->setFlash('error','Error al eliminar el origen de capital');
+                                        return $this->redirect(['index']);
+                                    }   
+                                }
+                            }
+                        }
+                    }
                     $paga_acta->numero_asociacion= $model->numero_asociacion_pagada;
        
                     $paga_acta->numero_aportacion= $model->numero_aportacion_pagada;
@@ -255,10 +270,35 @@ class CertificadosController extends BaseController
                     }
                 break;
                 case 'PAGO_CAPITAL':
-                    if($model->save()){
-                        return $this->redirect(['pagocapital']);
-                    }else{
+                    $transaction = \Yii::$app->db->beginTransaction();
+                    try {
+                        $modelaux= $this->findModel($model->id);
+                        if($modelaux->capital>$model->capital){
+                            $origen_capital= OrigenesCapitales::find()->where(['documento_registrado_id'=>$model->documento_registrado_id,'tipo_origen'=>$model->tipo_certificado])->orderBy('monto')->all();
+                                if(isset($origen_capital)){
+                                    foreach ($origen_capital as $origen) {
+                                        if($origen->sumarmonto(false)>$model->capital){
+                                            if(!$origen->delete()){
+                                                $transaction->rollBack();
+                                                Yii::$app->session->setFlash('error','Error al eliminar el origen de capital');
+                                                return $this->redirect(['pagocapital']);
+                                            }   
+                                        }
+                                    }
+                                }
+                        
+                        }
+                        if($model->save()){
+                             $transaction->commit();
+                             Yii::$app->session->setFlash('success','Actualizacion realizada con exito');
+                            return $this->redirect(['pagocapital']);
+                        }else{
+                            $transaction->rollBack();
                         return $this->render('update',['model'=>$model]);
+                        }
+                        
+                    } catch (Exception $e) {
+                         $transaction->rollBack();
                     }
                 
                 break;
