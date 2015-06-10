@@ -75,16 +75,21 @@ class OrigenesCapitalesController extends BaseController
         $searchModel->efectivo = false;
         $searchModel->banco = false;
         $searchModel->bien = false;
-         $searchModel->cuenta_pagar = true;
-          $dataProvider_cuentapagar = $searchModel->search(Yii::$app->request->queryParams);
-
-
+        $searchModel->cuenta_pagar = true;
+       $dataProvider_cuentapagar = $searchModel->search(Yii::$app->request->queryParams);
+       $searchModel->efectivo = false;
+        $searchModel->banco = false;
+        $searchModel->bien = false;
+        $searchModel->cuenta_pagar = false;
+        $searchModel->decreto = true;
+        $dataProvider_decreto = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('origen', [
             'dataProvider_efectivo' => $dataProvider_efectivo,
             'dataProvider_banco' => $dataProvider_banco,
             'dataProvider_bien' => $dataProvider_bien,
             'dataProvider_cuentapagar'=> $dataProvider_cuentapagar,
+            'dataProvider_decreto'=> $dataProvider_decreto,
             'searchModel'=>$searchModel,
         ]);
     }
@@ -128,6 +133,10 @@ class OrigenesCapitalesController extends BaseController
             case "cuentapagar":
                 $model->scenario=$identificador;
                 $model->cuenta_pagar=true;
+                break;
+            case "decreto":
+                $model->scenario=$identificador;
+                $model->decreto=true;
                 break;
             default :
                 break;

@@ -77,6 +77,7 @@ class OrigenesCapitales extends \common\components\BaseActiveRecord
             ['monto_aumento', 'validarmontoaumento'],
             [['monto','fecha'], 'required', 'on' => 'efectivo'],
             [['monto','banco_contratista_id','numero_transaccion'], 'required', 'on' => 'banco'],
+            [['numero_accion','valor_acciones','saldo_cierre_ajustado','fecha_aumento','monto_aumento'], 'required', 'on' => 'decreto'],
             [['saldo_cierre_anterior','saldo_corte','fecha_corte','monto_aumento', 'saldo_aumento'], 'required', 'on' => 'cuentapagar'],
             [['monto','bien_id'], 'required', 'on' => 'bien'],
             [['monto', 'saldo_cierre_anterior', 'saldo_corte', 'monto_aumento', 'saldo_aumento', 'valor_acciones', 'saldo_cierre_ajustado'], 'number'],
@@ -227,10 +228,12 @@ class OrigenesCapitales extends \common\components\BaseActiveRecord
             
          }
          }else{
-                $aporte= AportesCapitalizar::findOne(['contratista_id'=>Yii::$app->user->identity->id ,'documento_registrado_id'=>$this->documento_registrado_id]);
-                    if(isset($aporte)){
-                        $monto_pagado = $aporte->monto_aporte;
-                    }
+          
+                    $aporte= AportesCapitalizar::findOne(['contratista_id'=>Yii::$app->user->identity->id ,'documento_registrado_id'=>$this->documento_registrado_id]);
+                        if(isset($aporte)){
+                            $monto_pagado = $aporte->monto_aporte;
+                        }
+                
             }
                   
             
@@ -315,13 +318,13 @@ class OrigenesCapitales extends \common\components\BaseActiveRecord
          $modificacion = [];
           $modificaciones= ModificacionesActas::findOne(['documento_registrado_id'=>$this->documento_registrado_id]);
           if(isset($modificaciones)){
-                if($modificaciones->pago_capital){
+                if($modificaciones->pago_capital && $id!='decreto' && $id!='cuentapagar'){
                   $modificacion = array_merge ( $modificacion,[['id' => 'PAGO_CAPITAL', 'name' => 'PAGO DE CAPITAL']] );
                    }
-                if($modificaciones->aporte_capitalizar && $id!='cuentapagar'){
+                if($modificaciones->aporte_capitalizar && $id!='decreto'){
                   $modificacion = array_merge ( $modificacion,[['id' => 'APORTE_CAPITALIZAR', 'name' => 'APORTE POR CAPITALIZAR']] );
                    }
-                if($modificaciones->aumento_capital){
+                if($modificaciones->aumento_capital && $id!='cuentapagar'){
                   $modificacion = array_merge ( $modificacion,[['id' => 'AUMENTO_CAPITAL', 'name' => 'AUMENTO DE CAPITAL']] );
                    }
           }
@@ -468,6 +471,28 @@ class OrigenesCapitales extends \common\components\BaseActiveRecord
                 ],
                 'monto_aumento'=>['type'=>Form::INPUT_TEXT,'label'=>'Monto del aumento'],
                 'saldo_aumento'=>['type'=>Form::INPUT_TEXT,'label'=>'Saldo despues del aumento'],
+                
+            ];
+
+        }
+        if($id=='decreto')
+            
+        {
+           
+            return [
+                'tipo_origen'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>ArrayHelper::map($modificacion, 'id', 'name'),'options'=>['prompt'=>'Seleccione tipo origen']],
+                'numero_accion'=>['type'=>Form::INPUT_TEXT,'label'=>'Saldo al cierre del ejericio anterior'],
+                'valor_acciones'=>['type'=>Form::INPUT_TEXT,'label'=>'Saldo al corte'],
+                'saldo_cierre_ajustado'=>['type'=>Form::INPUT_TEXT,'label'=>'Saldo cierre ajustado'],
+                'fecha_aumento'=>[
+                'type'=>Form::INPUT_WIDGET, 
+                'widgetClass'=>'\kartik\widgets\DatePicker', 
+                'options'=>['pluginOptions' => [
+                    'autoclose'=>true,
+                    'format' => 'yyyy-mm-dd'
+                ]],
+                ],
+                'monto_aumento'=>['type'=>Form::INPUT_TEXT,'label'=>'Monto del aumento'],
                 
             ];
 

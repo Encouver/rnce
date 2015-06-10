@@ -204,4 +204,40 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
     <?php } ?>
     
+    <hr />
+    <h3>Decreto de diviendo en acciones</h3>
+    <?= GridView::widget([
+        'dataProvider' => $dataProvider_decreto,
+        //'filterModel' => $searchModel,
+        'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
+            
+            //'id',
+            'tipo_origen',
+       
+          
+            'numero_accion',
+            'valor_acciones',
+            'saldo_cierre_ajustado',
+            'fecha_aumento',
+             'monto_aumento',
+            // 'contratista_id',
+            // 'documento_registrado_id',
+            // 'creado_por',
+            // 'actualizado_por',
+            // 'sys_status:boolean',
+            // 'sys_creado_el',
+            // 'sys_actualizado_el',
+            // 'sys_finalizado_el',
+
+            ['class' => 'yii\grid\ActionColumn', 'template'=>'{update}{delete}'],
+        ],
+    ]); ?>
+     <?php 
+    if(!$searchModel->existeregistro()){ ?>
+     <p>
+        <?= Html::a(Yii::t('app', 'Agregar Decreto dividiendo en acciones'), ['create', 'identificador' => 'decreto'], ['class' => 'btn btn-success']) ?>
+    </p>
+    <?php } ?>
+    
 </div>
