@@ -179,6 +179,27 @@ class ActasConstitutivasController extends BaseController
          }
 
     }
+    public function actionCrearaumentocapital()
+    {
+       $acta= ActasConstitutivas::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'actual'=>true]);
+      if(isset($acta)){
+          $denominacion_comercial= DenominacionesComerciales::findOne($acta->denominacion_comercial_id);
+         if($denominacion_comercial->tipo_denominacion!="COOPERATIVA"){
+              return $this->redirect(['acciones/aumentocapital']);
+         }
+         if($denominacion_comercial->tipo_denominacion=="COOPERATIVA" && $denominacion_comercial->cooperativa_capital=='LIMITADO'){
+              return $this->redirect(['certificados/aumentocapital']);
+         }
+         if($denominacion_comercial->tipo_denominacion=="COOPERATIVA" && $denominacion_comercial->cooperativa_capital=='SUPLEMENTARIO'){
+              return $this->redirect(['suplementarios/aumentocapital']);
+         }
+         
+      }else{
+            Yii::$app->session->setFlash('error','Acta constitutiva no creada');
+             return $this->redirect(['resumenacta']);
+         }
+
+    }
      public function actionResumenacta()
     {
          $registro = ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'tipo_documento_id'=>1]);

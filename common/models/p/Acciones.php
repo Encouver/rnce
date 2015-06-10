@@ -53,24 +53,26 @@ class Acciones extends \common\components\BaseActiveRecord
         return [
             [['suscrito', 'documento_registrado_id','contratista_id','tipo_accion','certificacion_aporte_id'], 'required'],
             [['numero_comun', 'numero_comun_pagada','numero_preferencial','numero_preferencial_pagada', 'documento_registrado_id','contratista_id','certificacion_aporte_id'], 'integer'],
-            ['numero_comun_pagada', 'validarnumeropagada'],
-            ['numero_comun', 'validarnumerocomun'],
+            ['numero_comun_pagada', 'validarnumerocomunpagada'],
+            ['numero_preferencial_pagada', 'validarnumeropreferencialpagada'],
+            ['numero_preferencial', 'validarnumeropreferencial'],
             ['capital', 'validarcapital'],
             ['capital_pagado', 'validarcapitalpagado'],
-            ['valor_comun', 'validarvalor'],
+            ['valor_comun', 'validarmaximocomun'],
+            ['valor_preferencial', 'validarmaximopreferencial'],
             [['valor_comun', 'valor_preferencial','capital'], 'number'],
             [['sys_status', 'suscrito'], 'boolean'],
             [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el','actual'], 'safe'],
             [['tipo_accion'], 'string'],
-            [['capital','numero_comun'], 'required', 'on' => 'pago'],
+            [['capital','numero_preferencial'], 'required', 'on' => 'pago'],
             [['capital','numero_comun','numero_comun_pagada','numero_preferencial','numero_preferencial_pagada','valor_comun','valor_preferencial'], 'required', 'on' => 'aumento'],
-            [['numero_comun', 'valor_comun','numero_comun_pagada','capital','capital_pagado'], 'required', 'on' => 'principal']
+            [['numero_preferencial', 'valor_preferencial','numero_preferencial_pagada','capital','capital_pagado'], 'required', 'on' => 'principal']
             
         ];
     }
      public function validarcapital($attribute){
          if($this->scenario=='principal'){
-              if($this->numero_comun*$this->valor_comun< $this->capital){
+              if($this->numero_preferencial*$this->valor_preferencial< $this->capital){
                   $this->addError($attribute,'Faltan capital por fraccionar');
               }
           }else{
@@ -83,8 +85,8 @@ class Acciones extends \common\components\BaseActiveRecord
                         $this->addError($attribute,'Monto sobre pasa el capital deudor actual:'.$monto);
                         }else{
                                 $accion= Acciones::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'actual'=>true,'suscrito'=>true]);
-                                if($this->numero_comun*$accion->valor_comun<$this->capital){
-                                    $this->addError($attribute,'Falta capital por fraccionar el valor actual de la accion es: '.$accion->valor_comun);
+                                if($this->numero_preferencial*$accion->valor_preferencial<$this->capital){
+                                    $this->addError($attribute,'Falta capital por fraccionar el valor actual de la accion es: '.$accion->valor_preferencial);
                                 }
                         }
                       
@@ -93,49 +95,74 @@ class Acciones extends \common\components\BaseActiveRecord
           }
           
     }
-    public function validarnumerocomun($attribute){
+    public function validarnumeropreferencial($attribute){
            if($this->scenario=='pago'){
                $accion_suscrita= Acciones::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'actual'=>true,'suscrito'=>true]);
                 $accion_pagada= Acciones::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'actual'=>true,'suscrito'=>false]);
-          if(($this->numero_comun+$accion_pagada->numero_comun)>$accion_suscrita->numero_comun){
+          if(($this->numero_preferencial+$accion_pagada->numero_preferencial)>$accion_suscrita->numero_preferencial){
                $this->addError($attribute,'El numero de acciones sobrepasa las acciones o participaciones suscritas:'.$accion_suscrita->numero_comun);
           }else{
-             if(($this->numero_comun*$accion_suscrita->valor_comun) >$this->capital){
+             if(($this->numero_preferencial*$accion_suscrita->valor_preferencial) >$this->capital){
                   $this->addError($attribute,'Numero de acciones pagada sobrepasa el valor valido');
              }
           }
         }
 
     }
-      public function validarnumeropagada($attribute){
-           if($this->scenario=='principal'){
-          if($this->numero_comun_pagada>$this->numero_comun){
+    public function validarnumeropreferencialpagada($attribute){
+        
+        if($this->scenario=='principal' || $this->scenario=='aumento'){
+            if($this->numero_preferencial_pagada>$this->numero_preferencial){
                $this->addError($attribute,'Numero Accion pagada invalido');
-          }else{
-             if($this->numero_comun_pagada * $this->valor_comun >$this->capital_pagado){
-                  $this->addError($attribute,'Numero Accion pagada sobrepasa el valor valido');
-             }
-          }
+            }else{
+                if(($this->capital_pagado<$this->capital) && ($this->numero_preferencial_pagada * $this->valor_preferencial >$this->capital_pagado)){
+                    $this->addError($attribute,'Numero Accion pagada sobrepasa el valor valido');
+                }
+            }
         }
-
+    }
+    public function validarnumerocomunpagada($attribute){
+        if($this->scenario=='aumento'){
+           if($this->numero_preferencial_pagada>$this->numero_preferencial){
+               $this->addError($attribute,'Numero Preferencial pagada invalido');
+          }else{
+               if(($this->capital_pagado<$this->capital) && (($this->numero_comun_pagada*$this->valor_comun)+($this->numero_preferencial_pagada*$this->valor_preferencial) > $this->capital_pagado)){
+               $this->addError($attribute,'Numero Comun pagada sobrepasa valor valido');
+                } 
+          } 
+        }
+          
     }
     public function validarcapitalpagado($attribute){
-        if($this->scenario=='principal'){
+        if($this->scenario=='principal' || $this->scenario=='aumento'){
           if($this->capital_pagado>$this->capital){
                $this->addError($attribute,'Valor Capital pagada invalido');
           }else{
-              if($this->numero_comun_pagada*$this->valor_comun < $this->capital_pagado){
+              if($this->scenario=='principal' && $this->numero_preferencial_pagada*$this->valor_preferencial < $this->capital_pagado){
+                  $this->addError($attribute,'Faltan capital pagado por fraccionar');
+              }  else {
+                  if($this->scenario=='aumento' && (($this->numero_comun_pagada*$this->valor_comun + $this->numero_preferencial_pagada*$this->valor_preferencial) < $this->capital_pagado)){
                   $this->addError($attribute,'Faltan capital pagado por fraccionar');
               }
+              }
+              
           }
           }
     }
-    public function validarvalor($attribute){
-        if($this->scenario=='principal'){
-          if($this->valor_comun*$this->numero_comun > $this->capital){
+    public function validarmaximopreferencial($attribute){
+        if($this->scenario=='principal' || $this->scenario=='aumento'){
+          if($this->valor_preferencial*$this->numero_preferencial > $this->capital){
                $this->addError($attribute,'Valor accion suscrita invalida');
           }
         }
+    }
+    public function validarmaximocomun($attribute){
+        if($this->scenario=='aumento'){
+             if(($this->valor_comun*$this->numero_comun)+($this->valor_preferencial*$this->numero_preferencial)> $this->capital){
+               $this->addError($attribute,'Valor Comun pasa el maximo valido');
+          } 
+        }
+         
     }
     
 
@@ -198,10 +225,10 @@ class Acciones extends \common\components\BaseActiveRecord
     if($this->scenario=='principal'){
         return [
             'capital'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Capital Suscrito']],
-            'numero_comun'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Numero de acciones o participaciones']],
-            'valor_comun'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Valor']],
+            'numero_preferencial'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Numero de acciones o participaciones']],
+            'valor_preferencial'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Valor']],
             'capital_pagado'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Capital Pagado']],
-            'numero_comun_pagada'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Numero de acciones o participaciones']],
+            'numero_preferencial_pagada'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Numero de acciones o participaciones']],
             'certificacion_aporte_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>[
                'initValueText' => $persona,
                 'options'=>['placeholder' => 'Buscar persona ...'],'pluginOptions' => [
@@ -222,7 +249,7 @@ class Acciones extends \common\components\BaseActiveRecord
     if($this->scenario=='pago'){
         return [
             'capital'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Capital'],'label'=>'Capital a pagar'],
-            'numero_comun'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Numero de acciones o participaciones'],'label'=>'Numero de acciones o participaciones a pagar'],
+            'numero_preferencial'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Numero de acciones o participaciones'],'label'=>'Numero de acciones o participaciones a pagar'],
             'certificacion_aporte_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>[
                'initValueText' => $persona,
                 'options'=>['placeholder' => 'Buscar persona ...'],'pluginOptions' => [
@@ -240,7 +267,60 @@ class Acciones extends \common\components\BaseActiveRecord
       
     ];
         }
+         if($this->scenario=='aumento'){
+        return [
+            'capital'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Capital Suscrito']],
+            'numero_preferencial'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Numero de acciones o participaciones'],'label'=>'Numero acciones/participaciones preferenciales'],
+            'valor_preferencial'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Valor'],'label'=>'Valor acciones/participaciones Preferenciales'],
+            'numero_comun'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Numero de acciones o participaciones'],'label'=>'Numero acciones/participaciones comunes'],
+            'valor_comun'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Valor'],'label'=>'Valor acciones/participaciones comunes'],
+            'capital_pagado'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Capital Pagado']],
+            'numero_preferencial_pagada'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Numero de acciones o participaciones'],'label'=>'Numero acciones/participaciones preferenciales pagadas'],
+            'numero_comun_pagada'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Numero de acciones o participaciones'],'label'=>'Numero acciones/participaciones comunes pagadas'],
+            'certificacion_aporte_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>[
+               'initValueText' => $persona,
+                'options'=>['placeholder' => 'Buscar persona ...'],'pluginOptions' => [
+                'allowClear' => true,
+                'minimumInputLength' => 3,
+                'ajax' => [
+                    'url' => \yii\helpers\Url::to(['certificaciones-aportes/certificaciones-aportes-lista']),
+                    'dataType' => 'json',
+                    'data' => new JsExpression('function(params) { return {q:params.term}; }')
+                ],
+                'escapeMarkup' => new JsExpression('function (markup) { return markup; }'),
+                'templateResult' => new JsExpression('function(certificacion_aporte_id) { return certificacion_aporte_id.text; }'),
+                'templateSelection' => new JsExpression('function (certificacion_aporte_id) { return certificacion_aporte_id.text; }'),
+        ],]],
+      
+            ];
+        }
     
+    }
+    public function Pagocompleto(){
+       $acta= ActasConstitutivas::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'actual'=>true]);
+        if(isset($acta)){
+                 if($acta->capital_suscrito==$acta->capital_pagado){
+                     return true;
+                     
+                 }else{
+                     $modificacion=$this->Modificacionactual();
+                     if(isset($modificacion)){
+                        if($modificacion->pago_capital){
+                            $accion= Acciones::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'documento_registrado_id'=>$modificacion->documento_registrado_id,'tipo_accion'=>'PAGO_CAPITAL']);
+                            if(isset($accion)){
+                                if(($accion->capital + $acta->capital_pagado)==$acta->capital_suscrito){
+                                    return true;
+                                }
+                                
+                            }
+                        }
+                         
+                     }
+                 }   
+                      
+        }
+        return false;       
+       
     }
     public function Modificacionactual(){
        
@@ -262,6 +342,9 @@ class Acciones extends \common\components\BaseActiveRecord
                $modificacion= ModificacionesActas::findOne(['documento_registrado_id'=>$registro->id]);
                if(isset($modificacion)){
                    if($this->scenario=='pago' && !$modificacion->pago_capital){
+                       return true;
+                   }
+                   if($this->scenario=='aumento' && !$modificacion->aumento_capital){
                        return true;
                    }
               }else{

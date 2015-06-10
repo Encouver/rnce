@@ -116,7 +116,7 @@ AppAsset::register($this);
                 ],
                  ['label' => 'Acta Constitutiva',
                     'items' => [
-                         ['label' => 'Registro documento', 'url' => ['/activos-documentos-registrados/index']],
+                         ['label' => 'Registro documento acta', 'url' => ['/activos-documentos-registrados/index']],
                         ['label' => 'Razon Social', 'url' => ['/razones-sociales/index']],
                         ['label' => 'Direcciones', 'url' => ['/domicilios/index']],
                          ['label' => 'Denominaciones Comerciales', 'url' => ['/denominaciones-comerciales/index']],
@@ -136,14 +136,15 @@ AppAsset::register($this);
                 ],
                 ['label' => 'Modificacion acta',
                     'items' => [
-                         ['label' => 'Registro documento', 'url' => ['/activos-documentos-registrados/index']],
+                        ['label' => 'Registro documento modificado', 'url' => ['/activos-documentos-registrados/index']],
                         ['label' => 'Modificaciones', 'url' => ['/modificaciones-actas/index']],
-                         ['label' => 'Cambio Objeto Social', 'url' => ['objetos-sociales/index']],
+                        ['label' => 'Cambio Objeto Social', 'url' => ['objetos-sociales/index']],
                         ['label' => 'Cambio Domicilio', 'url' => ['domicilios/index']],
-                         ['label' => 'Cambio Cierre Ejercicio Econonomico', 'url' => ['/cierres-ejercicios/index']],
+                        ['label' => 'Cambio Cierre Ejercicio Econonomico', 'url' => ['/cierres-ejercicios/index']],
                         ['label' => 'Duracion empresa', 'url' => ['/duraciones-empresas/index']],
                         ['label' => 'Pago Capital', 'url' => ['/actas-constitutivas/crearpagocapital']],
-                         ['label' => 'Origen Capital', 'url' => ['/origenes-capitales/origen']],
+                        ['label' => 'Aumento Capital', 'url' => ['/actas-constitutivas/crearaumentocapital']],
+                        ['label' => 'Origen Capital', 'url' => ['/origenes-capitales/origen']],
                     ],
                 ],
                 

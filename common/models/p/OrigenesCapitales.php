@@ -307,6 +307,9 @@ class OrigenesCapitales extends \common\components\BaseActiveRecord
                 if($modificaciones->aporte_capitalizar && $id!='cuentapagar'){
                   $modificacion = array_merge ( $modificacion,[['id' => 'APORTE_CAPITALIZAR', 'name' => 'APORTE POR CAPITALIZAR']] );
                    }
+                if($modificaciones->aumento_capital){
+                  $modificacion = array_merge ( $modificacion,[['id' => 'AUMENTO_CAPITAL', 'name' => 'AUMENTO DE CAPITAL']] );
+                   }
           }
         if($id=='efectivo' && $this->principal)
         {
