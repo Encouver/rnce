@@ -60,6 +60,7 @@ class Suplementarios extends \common\components\BaseActiveRecord
             ['capital_pagado', 'validarcapitalpagado'],
             ['valor', 'validarvalor'],
             [['capital','numero'], 'required', 'on' => 'pago'],
+            [['capital','capital_pagado','numero', 'valor','numero_pagada'], 'required', 'on' => 'aumento'],
             [['capital','capital_pagado','numero', 'valor','numero_pagada'], 'required', 'on' => 'principal'],
             [['suscrito', 'documento_registrado_id', 'contratista_id'], 'required'],
             [['suscrito', 'sys_status','actual'], 'boolean'],
@@ -68,7 +69,7 @@ class Suplementarios extends \common\components\BaseActiveRecord
     }
     public function validarcapital($attribute){
          
-        if($this->scenario=='principal'){
+        if($this->scenario=='principal' || $this->scenario=='aumento'){
                if($this->numero*$this->valor< $this->capital){
                   $this->addError($attribute,'Faltan capital por fraccionar');
               }
@@ -187,7 +188,7 @@ class Suplementarios extends \common\components\BaseActiveRecord
      public function getFormAttribs() {
          
         $persona = empty($this->certificacion_aporte_id) ? '' : CertificacionesAportes::findOne($this->certificacion_aporte_id)->getNombreJuridica();
-        if($this->scenario=='principal')
+        if($this->scenario=='principal' || $this->scenario=='aumento')
         {
             
 
@@ -243,6 +244,32 @@ class Suplementarios extends \common\components\BaseActiveRecord
         
         }
     }
+    public function Pagocompleto(){
+       $acta= ActasConstitutivas::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'actual'=>true]);
+        if(isset($acta)){
+                 if($acta->capital_suscrito==$acta->capital_pagado){
+                     return true;
+                     
+                 }else{
+                     $modificacion=$this->Modificacionactual();
+                     if(isset($modificacion)){
+                        if($modificacion->pago_capital){
+                            $suplementario= Suplementarios::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'documento_registrado_id'=>$modificacion->documento_registrado_id,'tipo_suplementario'=>'PAGO_CAPITAL']);
+                            if(isset($suplementario)){
+                                if(($suplementario->capital + $acta->capital_pagado)==$acta->capital_suscrito){
+                                    return true;
+                                }
+                                
+                            }
+                        }
+                         
+                     }
+                 }   
+                      
+        }
+        return false;       
+       
+    }
     public function Modificacionactual(){
        
        $registro = ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'tipo_documento_id'=>2,'proceso_finalizado'=>false]);      
@@ -265,11 +292,14 @@ class Suplementarios extends \common\components\BaseActiveRecord
                    if($this->scenario=='pago' && !$modificacion->pago_capital){
                        return true;
                    }
+                   if($this->scenario=='aumento' && !$modificacion->aumento_capital){
+                       return true;
+                   }
               }else{
                    return true;
                }
                }
-          $suplementario= Suplementarios::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'documento_registrado_id'=>$registro->id]);
+          $suplementario= Suplementarios::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'documento_registrado_id'=>$registro->id,'tipo_suplementario'=>$this->tipo_suplementario]);
            if(isset($suplementario)){
                
                 return true;   

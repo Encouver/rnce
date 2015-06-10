@@ -4,40 +4,39 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\CertificadosSearch */
+/* @var $searchModel app\models\SuplementariosSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Certificados');
+$this->title = Yii::t('app', 'Suplementarios');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="certificados-pagocapital">
+<div class="suplementarios-index">
 
+    <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-
-    <?php
-      if(isset($documento)){
-      echo Html::tag('h1','Pago de Capital');
-    
+   <?php
+    if(isset($documento)){
+    echo Html::tag('h1','Aumento de Capital');
     echo GridView::widget([
         'dataProvider' => $dataProvider,
-        //'filterModel' => $searchModel,
         'summary'=>'',
+        //'filterModel' => $searchModel,
         'columns' => [
            // ['class' => 'yii\grid\SerialColumn'],
 
+            //'id',
+            //'suscrito:boolean',
             'capital',
-            'numero_asociacion',
-            'numero_aportacion',
-            'numero_inversion',
-            'numero_rotativo',
-            [
+            'numero',
+             [
                 'attribute'=>'certificacion_aporte_id',
                 'label'=>'Certificador Aporte',
                 'value'=>'certificacionAporte.naturalJuridica.denominacion'
             ],
-            // 'tipo_certificado',
-            // 'suscrito:boolean',
+            //'valor',
+            //'tipo_suplementario',
+            
             // 'creado_por',
             // 'actualizado_por',
             // 'sys_status:boolean',
@@ -47,25 +46,26 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'documento_registrado_id',
             // 'contratista_id',
 
-            ['class' => 'yii\grid\ActionColumn','template'=>'{update}{delete}'],
+             ['class' => 'yii\grid\ActionColumn','template'=>'{update}{delete}'],
         ],
-    ]);
-    if(!$searchModel->existeregistro()){ ?>
-        <p>
-            <?= Html::a(Yii::t('app', 'Agregar Pago Capital'), ['create','id'=>'pago'], ['class' => 'btn btn-success']) ?>
-        </p>
+    ]); 
+    if(!$searchModel->existeregistro() && $searchModel->Pagocompleto()){ ?>
+    <p>
+        <?= Html::a(Yii::t('app', 'Agregar Aumento de Capital'), ['create','id'=>'aumento'], ['class' => 'btn btn-success']) ?>
+    </p>
       
          <?php }  }else{?>
         
             <div class="alert-warning alert fade in">
                
 
-                <h4>No existe ningun procedimiento referente al pago de capital activo</h4>
+                <h4>No existe ningun procedimiento referente al aumento de capital activo</h4>
 
             </div>
         <?php } ?>
-     
 
-
+       
+  
    
+
 </div>

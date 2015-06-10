@@ -77,6 +77,7 @@ class Certificados extends \common\components\BaseActiveRecord
             ['numero_aportacion', 'validarnumeroaportacion'],
             ['numero_rotativo', 'validarnumerorotativo'],
             ['numero_inversion', 'validarnumeroinversion'],
+            [['capital','numero_asociacion', 'numero_aportacion', 'numero_rotativo', 'numero_inversion', 'valor_asociacion', 'valor_aportacion', 'valor_rotativo','valor_inversion','numero_asociacion_pagada', 'numero_aportacion_pagada', 'numero_rotativo_pagada', 'numero_inversion_pagada', 'capital_pagado'], 'required','on'=>'aumento'],
             [['capital','numero_asociacion', 'numero_aportacion', 'numero_rotativo', 'numero_inversion', 'valor_asociacion', 'valor_aportacion', 'valor_rotativo','valor_inversion','numero_asociacion_pagada', 'numero_aportacion_pagada', 'numero_rotativo_pagada', 'numero_inversion_pagada', 'capital_pagado'], 'required','on'=>'principal'],
             [['capital','numero_asociacion', 'numero_aportacion', 'numero_rotativo', 'numero_inversion'], 'required','on'=>'pago'],
             [['suscrito', 'documento_registrado_id', 'contratista_id'], 'required'],
@@ -89,7 +90,7 @@ class Certificados extends \common\components\BaseActiveRecord
          
              
               
-       if($this->scenario=='principal'){
+       if($this->scenario=='principal' || $this->scenario=='aumento'){
                if(($this->numero_asociacion*$this->valor_asociacion)+($this->numero_aportacion*$this->valor_aportacion)+($this->numero_rotativo*$this->valor_rotativo)+($this->numero_inversion*$this->valor_inversion) < $this->capital){
                   $this->addError($attribute,'Faltan capital por fraccionar');
               }
@@ -170,7 +171,7 @@ class Certificados extends \common\components\BaseActiveRecord
 
     }
       public function validarcapitalpagado($attribute){
-          if($this->scenario=='principal'){
+          if($this->scenario=='principal' || $this->scenario=='aumento'){
                if($this->capital_pagado>$this->capital){
                $this->addError($attribute,'Valor Capital pagada invalido');
             }else{
@@ -182,7 +183,7 @@ class Certificados extends \common\components\BaseActiveRecord
          
     }
     public function validarmaximoasociacion($attribute){
-        if($this->scenario=='principal'){
+        if($this->scenario=='principal' || $this->scenario=='aumento'){
              if($this->valor_asociacion*$this->numero_asociacion > $this->capital){
                $this->addError($attribute,'Valor Asociacion pasa el maximo valido');
           } 
@@ -191,7 +192,7 @@ class Certificados extends \common\components\BaseActiveRecord
          
     }
     public function validarmaximoaportacion($attribute){
-        if($this->scenario=='principal'){
+        if($this->scenario=='principal' || $this->scenario=='aumento'){
              if(($this->valor_asociacion*$this->numero_asociacion)+($this->valor_aportacion*$this->numero_aportacion)> $this->capital){
                $this->addError($attribute,'Valor Inversion pasa el maximo valido');
           } 
@@ -199,7 +200,7 @@ class Certificados extends \common\components\BaseActiveRecord
          
     }
     public function validarmaximoinversion($attribute){
-        if($this->scenario=='principal'){
+        if($this->scenario=='principal' || $this->scenario=='aumento'){
             if(($this->valor_asociacion*$this->numero_asociacion)+($this->valor_aportacion*$this->numero_aportacion) +($this->valor_inversion*$this->numero_inversion) > $this->capital){
                $this->addError($attribute,'Valor Aportacion pasa el maximo valido');
           } 
@@ -207,7 +208,7 @@ class Certificados extends \common\components\BaseActiveRecord
           
     }
      public function validarmaximorotativo($attribute){
-        if($this->scenario=='principal'){
+        if($this->scenario=='principal' || $this->scenario=='aumento'){
             if(($this->valor_asociacion*$this->numero_asociacion)+($this->valor_aportacion*$this->numero_aportacion) +($this->valor_inversion*$this->numero_inversion) +($this->valor_rotativo*$this->numero_rotativo)> $this->capital){
                $this->addError($attribute,'Valor Rotativo pasa el maximo valido');
           } 
@@ -215,7 +216,7 @@ class Certificados extends \common\components\BaseActiveRecord
           
     }
      public function validarnumeroasociacionpagada($attribute){
-         if($this->scenario=='principal'){
+         if($this->scenario=='principal' || $this->scenario=='aumento'){
              if($this->numero_asociacion_pagada>$this->numero_asociacion){
                $this->addError($attribute,'Numero Asociacion pagada invalido');
           }else{
@@ -229,7 +230,7 @@ class Certificados extends \common\components\BaseActiveRecord
     
     
     public function validarnumeroaportacionpagada($attribute){
-        if($this->scenario=='principal'){
+        if($this->scenario=='principal' || $this->scenario=='aumento'){
            if($this->numero_aportacion_pagada>$this->numero_aportacion){
                $this->addError($attribute,'Numero Aportacion pagada invalido');
           }else{
@@ -244,7 +245,7 @@ class Certificados extends \common\components\BaseActiveRecord
   
    
     public function validarnumerorotativopagada($attribute){
-        if($this->scenario=='principal'){
+        if($this->scenario=='principal' || $this->scenario=='aumento'){
             if($this->numero_rotativo_pagada>$this->numero_rotativo){
                $this->addError($attribute,'Numero Rotativo pagada invalido');
           }else{
@@ -258,7 +259,7 @@ class Certificados extends \common\components\BaseActiveRecord
    
             
      public function validarnumeroinversionpagada($attribute){
-         if($this->scenario=='principal'){
+         if($this->scenario=='principal' || $this->scenario=='aumento'){
             if($this->numero_inversion_pagada>$this->numero_inversion){
                $this->addError($attribute,'Numero Inversion pagada invalido');
           }else{
@@ -334,7 +335,7 @@ class Certificados extends \common\components\BaseActiveRecord
     
      public function getFormAttribs() {
          $persona = empty($this->certificacion_aporte_id) ? '' : CertificacionesAportes::findOne($this->certificacion_aporte_id)->getNombreJuridica();
-        if($this->scenario=='principal')
+        if($this->scenario=='principal' || $this->scenario=='aumento')
         {
             
 
@@ -344,11 +345,12 @@ class Certificados extends \common\components\BaseActiveRecord
                'valor_asociacion'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Valor']],
                'numero_aportacion'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Numero de Certificados ']],
                'valor_aportacion'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Valor']],
-               'numero_rotativo'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Numero de Certificados ']],
-               'valor_rotativo'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Valor']],
+              
                'numero_inversion'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Numero de Certificados ']],
                'valor_inversion'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Valor']],
-               'capital_pagado'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Capital Pagado']],
+                'numero_rotativo'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Numero de Certificados ']],
+               'valor_rotativo'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Valor']],
+                'capital_pagado'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Capital Pagado']],
                'numero_asociacion_pagada'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Numero de Certificados ']],
                'numero_aportacion_pagada'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Numero de Certificados ']],
                'numero_rotativo_pagada'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Numero de Certificados ']],
@@ -378,8 +380,8 @@ class Certificados extends \common\components\BaseActiveRecord
                'capital'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Capital Suscrito'],'label'=>'Capital pagado'],
                'numero_asociacion'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Numero de Certificados '],'label'=>'Numero Asociacion pagada'],
                'numero_aportacion'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Numero de Certificados '],'label'=>'Numero Aportacion pagada'],
-               'numero_rotativo'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Numero de Certificados '],'label'=>'Numero Rotativo pagado'],
                'numero_inversion'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Numero de Certificados '],'label'=>'Numero Inversion pagado'],
+               'numero_rotativo'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Numero de Certificados '],'label'=>'Numero Rotativo pagado'],
                'certificacion_aporte_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>[
                'initValueText' => $persona,
                 'options'=>['placeholder' => 'Buscar persona ...'],'pluginOptions' => [
@@ -397,6 +399,32 @@ class Certificados extends \common\components\BaseActiveRecord
             ];
         
         }
+    }
+    public function Pagocompleto(){
+       $acta= ActasConstitutivas::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'actual'=>true]);
+        if(isset($acta)){
+                 if($acta->capital_suscrito==$acta->capital_pagado){
+                     return true;
+                     
+                 }else{
+                     $modificacion=$this->Modificacionactual();
+                     if(isset($modificacion)){
+                        if($modificacion->pago_capital){
+                            $certificado= Certificados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'documento_registrado_id'=>$modificacion->documento_registrado_id,'tipo_certificado'=>'PAGO_CAPITAL']);
+                            if(isset($certificado)){
+                                if(($certificado->capital + $acta->capital_pagado)==$acta->capital_suscrito){
+                                    return true;
+                                }
+                                
+                            }
+                        }
+                         
+                     }
+                 }   
+                      
+        }
+        return false;       
+       
     }
      public function Modificacionactual(){
        
@@ -420,11 +448,14 @@ class Certificados extends \common\components\BaseActiveRecord
                    if($this->scenario=='pago' && !$modificacion->pago_capital){
                        return true;
                    }
+                    if($this->scenario=='aumento' && !$modificacion->aumento_capital){
+                       return true;
+                   }
               }else{
                    return true;
                }
                }
-          $certificado= Certificados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'documento_registrado_id'=>$registro->id]);
+          $certificado= Certificados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'documento_registrado_id'=>$registro->id,'tipo_certificado'=>$this->tipo_certificado]);
            if(isset($certificado)){
                
                 return true;   

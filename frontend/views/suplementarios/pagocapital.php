@@ -29,6 +29,11 @@ $this->params['breadcrumbs'][] = $this->title;
             //'suscrito:boolean',
             'capital',
             'numero',
+             [
+                'attribute'=>'certificacion_aporte_id',
+                'label'=>'Certificador Aporte',
+                'value'=>'certificacionAporte.naturalJuridica.denominacion'
+            ],
             //'valor',
             //'tipo_suplementario',
             
