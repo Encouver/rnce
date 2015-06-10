@@ -27,6 +27,7 @@ use Yii;
  * @property boolean $suscrito
  * @property integer $documento_registrado_id
  * @property integer $contratista_id
+ * @property string $fecha_informe
  * @property integer $certificacion_aporte_id
  * @property boolean $actual
  *
@@ -51,7 +52,7 @@ class Acciones extends \common\components\BaseActiveRecord
     public function rules()
     {
         return [
-            [['suscrito', 'documento_registrado_id','contratista_id','tipo_accion','certificacion_aporte_id'], 'required'],
+            [['suscrito', 'documento_registrado_id','contratista_id','tipo_accion','certificacion_aporte_id','fecha_informe'], 'required'],
             [['numero_comun', 'numero_comun_pagada','numero_preferencial','numero_preferencial_pagada', 'documento_registrado_id','contratista_id','certificacion_aporte_id'], 'integer'],
             ['numero_comun_pagada', 'validarnumerocomunpagada'],
             ['numero_preferencial_pagada', 'validarnumeropreferencialpagada'],
@@ -62,7 +63,7 @@ class Acciones extends \common\components\BaseActiveRecord
             ['valor_preferencial', 'validarmaximopreferencial'],
             [['valor_comun', 'valor_preferencial','capital'], 'number'],
             [['sys_status', 'suscrito'], 'boolean'],
-            [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el','actual'], 'safe'],
+            [['fecha_informe','sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el','actual'], 'safe'],
             [['tipo_accion'], 'string'],
             [['capital','numero_preferencial'], 'required', 'on' => 'pago'],
             [['capital','numero_comun','numero_comun_pagada','numero_preferencial','numero_preferencial_pagada','valor_comun','valor_preferencial'], 'required', 'on' => 'aumento'],
@@ -195,6 +196,7 @@ class Acciones extends \common\components\BaseActiveRecord
             'capital_pagado' => Yii::t('app', 'Capital Pagado'),
             'actual'  => Yii::t('app', 'Actual'),
             'numero_preferencial_pagada' => Yii::t('app', 'Numero Accion o Participacion Pagada'),
+            'fecha_informe' => Yii::t('app', 'Fecha Informe'),
         ];
     }
 
@@ -247,6 +249,14 @@ class Acciones extends \common\components\BaseActiveRecord
                 'templateResult' => new JsExpression('function(certificacion_aporte_id) { return certificacion_aporte_id.text; }'),
                 'templateSelection' => new JsExpression('function (certificacion_aporte_id) { return certificacion_aporte_id.text; }'),
         ],]],
+            'fecha_informe'=>[
+            'type'=>Form::INPUT_WIDGET, 
+            'widgetClass'=>'\kartik\widgets\DatePicker', 
+            'options'=>['pluginOptions' => [
+                    'autoclose'=>true,
+                    'format' => 'yyyy-mm-dd'
+                ]],
+            ],
       
     ];
         }
@@ -268,6 +278,14 @@ class Acciones extends \common\components\BaseActiveRecord
                 'templateResult' => new JsExpression('function(certificacion_aporte_id) { return certificacion_aporte_id.text; }'),
                 'templateSelection' => new JsExpression('function (certificacion_aporte_id) { return certificacion_aporte_id.text; }'),
         ],]],
+            'fecha_informe'=>[
+            'type'=>Form::INPUT_WIDGET, 
+            'widgetClass'=>'\kartik\widgets\DatePicker', 
+            'options'=>['pluginOptions' => [
+                    'autoclose'=>true,
+                    'format' => 'yyyy-mm-dd'
+                ]],
+            ],
       
     ];
         }
@@ -295,6 +313,14 @@ class Acciones extends \common\components\BaseActiveRecord
                 'templateResult' => new JsExpression('function(certificacion_aporte_id) { return certificacion_aporte_id.text; }'),
                 'templateSelection' => new JsExpression('function (certificacion_aporte_id) { return certificacion_aporte_id.text; }'),
         ],]],
+            'fecha_informe'=>[
+            'type'=>Form::INPUT_WIDGET, 
+            'widgetClass'=>'\kartik\widgets\DatePicker', 
+            'options'=>['pluginOptions' => [
+                    'autoclose'=>true,
+                    'format' => 'yyyy-mm-dd'
+                ]],
+            ],
       
             ];
         }

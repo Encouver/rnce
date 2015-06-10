@@ -36,6 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label'=>'Certificador Aporte',
                 'value'=>'certificacionAporte.naturalJuridica.denominacion'
             ],
+            'fecha_informe',
             // 'tipo_certificado',
             // 'suscrito:boolean',
             // 'creado_por',

@@ -23,6 +23,7 @@ use Yii;
  * @property boolean $sys_status
  * @property string $sys_creado_el
  * @property string $sys_actualizado_el
+ * @property string $fecha_informe
  * @property string $sys_finalizado_el
  * @property integer $documento_registrado_id
  * @property integer $contratista_id
@@ -50,7 +51,7 @@ class Suplementarios extends \common\components\BaseActiveRecord
     public function rules()
     {
         return [
-            [['suscrito', 'documento_registrado_id','contratista_id','tipo_suplementario','certificacion_aporte_id'], 'required'],
+            [['suscrito', 'documento_registrado_id','contratista_id','tipo_suplementario','certificacion_aporte_id','fecha_informe'], 'required'],
             [['numero','numero_pagada', 'creado_por', 'actualizado_por', 'documento_registrado_id', 'contratista_id','certificacion_aporte_id'], 'integer'],
             [['valor','capital','capital_pagado'], 'number'],
             [['tipo_suplementario'], 'string'],
@@ -64,7 +65,7 @@ class Suplementarios extends \common\components\BaseActiveRecord
             [['capital','capital_pagado','numero', 'valor','numero_pagada'], 'required', 'on' => 'principal'],
             [['suscrito', 'documento_registrado_id', 'contratista_id'], 'required'],
             [['suscrito', 'sys_status','actual'], 'boolean'],
-            [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el','actual'], 'safe']
+            [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el','actual','fecha_informe'], 'safe']
         ];
     }
     public function validarcapital($attribute){
@@ -157,6 +158,7 @@ class Suplementarios extends \common\components\BaseActiveRecord
             'capital_pagado' => Yii::t('app', 'Capital Pagado'),
             'certificacion_aporte_id'  => Yii::t('app', 'Certificador de aportes'),
             'actual'  => Yii::t('app', 'Actual'),
+            'fecha_informe' => Yii::t('app', 'Fecha Informe'),
         ];
     }
 
@@ -213,6 +215,14 @@ class Suplementarios extends \common\components\BaseActiveRecord
                 'templateResult' => new JsExpression('function(certificacion_aporte_id) { return certificacion_aporte_id.text; }'),
                 'templateSelection' => new JsExpression('function (certificacion_aporte_id) { return certificacion_aporte_id.text; }'),
                  ],]],
+                'fecha_informe'=>[
+                    'type'=>Form::INPUT_WIDGET, 
+                    'widgetClass'=>'\kartik\widgets\DatePicker', 
+                    'options'=>['pluginOptions' => [
+                    'autoclose'=>true,
+                    'format' => 'yyyy-mm-dd'
+                    ]],
+                ],
               
             ];
         
@@ -239,6 +249,14 @@ class Suplementarios extends \common\components\BaseActiveRecord
                 'templateResult' => new JsExpression('function(certificacion_aporte_id) { return certificacion_aporte_id.text; }'),
                 'templateSelection' => new JsExpression('function (certificacion_aporte_id) { return certificacion_aporte_id.text; }'),
                  ],]],
+                'fecha_informe'=>[
+                    'type'=>Form::INPUT_WIDGET, 
+                    'widgetClass'=>'\kartik\widgets\DatePicker', 
+                    'options'=>['pluginOptions' => [
+                    'autoclose'=>true,
+                    'format' => 'yyyy-mm-dd'
+                    ]],
+                ],
               
             ];
         

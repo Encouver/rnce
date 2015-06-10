@@ -30,7 +30,6 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             'tipo_profesion',
             'colegiatura',
-            'fecha_informe',
             // 'creado_por',
             // 'actualizado_por',
             // 'sys_status:boolean',

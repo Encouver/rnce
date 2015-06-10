@@ -155,6 +155,7 @@ class CertificadosController extends BaseController
                     $paga_acta->documento_registrado_id= $model->documento_registrado_id;
                     $paga_acta->suscrito=false;
                     $paga_acta->actual=true;
+                    $paga_acta->fecha_informe=$model->fecha_informe;
                     $paga_acta->tipo_certificado=$model->tipo_certificado;
                     $paga_acta->certificacion_aporte_id=$model->certificacion_aporte_id;
                                 
@@ -221,6 +222,7 @@ class CertificadosController extends BaseController
                     $paga_acta->documento_registrado_id= $model->documento_registrado_id;
                     $paga_acta->suscrito=false;
                     $paga_acta->actual=false;
+                    $paga_acta->fecha_informe=$model->fecha_informe;
                     $paga_acta->tipo_certificado=$model->tipo_certificado;
                     $paga_acta->certificacion_aporte_id=$model->certificacion_aporte_id;
                                 
@@ -329,7 +331,7 @@ class CertificadosController extends BaseController
                     $paga_acta->numero_asociacion= $model->numero_asociacion_pagada;
        
                     $paga_acta->numero_aportacion= $model->numero_aportacion_pagada;
-                    
+                    $paga_acta->fecha_informe=$model->fecha_informe;
                     $paga_acta->numero_rotativo= $model->numero_rotativo_pagada;
                   
                     $paga_acta->numero_inversion= $model->numero_inversion_pagada;
@@ -413,7 +415,7 @@ class CertificadosController extends BaseController
                     $paga_acta->numero_asociacion= $model->numero_asociacion_pagada;
        
                     $paga_acta->numero_aportacion= $model->numero_aportacion_pagada;
-                    
+                    $paga_acta->fecha_informe=$model->fecha_informe;
                     $paga_acta->numero_rotativo= $model->numero_rotativo_pagada;
                   
                     $paga_acta->numero_inversion= $model->numero_inversion_pagada;

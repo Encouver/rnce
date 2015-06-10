@@ -374,3 +374,51 @@ ALTER TABLE suplementarios ALTER COLUMN actual SET DEFAULT false;
 COMMENT ON COLUMN suplementarios.actual IS 'true significa que el valor de los suplementarios es el actual';
 
 
+--10 junio 12:45--
+ALTER TABLE aportes_capitalizar DROP COLUMN acta_constitutiva_id;
+ALTER TABLE certificaciones_aportes DROP COLUMN fecha_informe;
+
+ALTER TABLE acciones ADD COLUMN fecha_informe date;
+ALTER TABLE acciones ALTER COLUMN fecha_informe SET NOT NULL;
+COMMENT ON COLUMN acciones.fecha_informe IS 'Fecha informe de la certificacion_aporte';
+
+ALTER TABLE certificados ADD COLUMN fecha_informe date;
+ALTER TABLE certificados ALTER COLUMN fecha_informe SET NOT NULL;
+COMMENT ON COLUMN certificados.fecha_informe IS 'Fecha informe de la certificacion_aporte';
+
+ALTER TABLE suplementarios ADD COLUMN fecha_informe date;
+ALTER TABLE suplementarios ALTER COLUMN fecha_informe SET NOT NULL;
+COMMENT ON COLUMN suplementarios.fecha_informe IS 'Fecha informe de la certificacion_aporte';
+
+ALTER TABLE aportes_capitalizar ADD COLUMN contratista_id integer;
+ALTER TABLE aportes_capitalizar ALTER COLUMN contratista_id SET NOT NULL;
+COMMENT ON COLUMN aportes_capitalizar.contratista_id IS 'Clave foranea a la tabla contratistas';
+
+ALTER TABLE aportes_capitalizar ADD COLUMN documento_registrado_id integer;
+ALTER TABLE aportes_capitalizar ALTER COLUMN documento_registrado_id SET NOT NULL;
+COMMENT ON COLUMN aportes_capitalizar.documento_registrado_id IS 'Clave foranea a la tabal documentos registrados';
+
+ALTER TABLE aportes_capitalizar ADD COLUMN certificacion_aporte_id integer;
+ALTER TABLE aportes_capitalizar ALTER COLUMN certificacion_aporte_id SET NOT NULL;
+COMMENT ON COLUMN aportes_capitalizar.certificacion_aporte_id IS 'Clave foranea a la tabla certificaciones_aportes';
+
+ALTER TABLE aportes_capitalizar ADD COLUMN fecha_informe date;
+ALTER TABLE aportes_capitalizar ALTER COLUMN fecha_informe SET NOT NULL;
+COMMENT ON COLUMN aportes_capitalizar.fecha_informe IS 'Fehca informe de la certificacion del aporte';
+
+ALTER TABLE aportes_capitalizar
+  ADD CONSTRAINT aportes_capitalizar_certificacion_aporte_id_fkey FOREIGN KEY (certificacion_aporte_id)
+      REFERENCES certificaciones_aportes (id) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE NO ACTION;
+
+ALTER TABLE aportes_capitalizar
+  ADD CONSTRAINT aportes_capitalizar_contratista_id_fkey FOREIGN KEY (contratista_id)
+      REFERENCES contratistas (id) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE NO ACTION;
+
+ALTER TABLE aportes_capitalizar
+  ADD CONSTRAINT aportes_capitalizar_documento_registrado_id_fkey FOREIGN KEY (documento_registrado_id)
+      REFERENCES activos.documentos_registrados (id) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE NO ACTION;
+
+

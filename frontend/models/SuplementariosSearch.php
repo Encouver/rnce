@@ -20,7 +20,7 @@ class SuplementariosSearch extends Suplementarios
         return [
             [['id', 'numero', 'documento_registrado_id', 'contratista_id', 'creado_por', 'actualizado_por','certificacion_aporte_id'], 'integer'],
             [['valor', 'capital'], 'number'],
-            [['tipo_suplementario', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
+            [['tipo_suplementario', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el','fecha_informe'], 'safe'],
             [['suscrito', 'sys_status','actual'], 'boolean'],
         ];
     }
@@ -74,6 +74,7 @@ class SuplementariosSearch extends Suplementarios
             'certificacion_aporte_id'=> $this->certificacion_aporte_id,
             'tipo_suplementario'=>$this->tipo_suplementario,
             'actual'=>$this->actual,
+            'fecha_informe'=> $this->fecha_informe,
         ]);
 
        // $query->andFilterWhere(['like', 'tipo_suplementario', $this->tipo_suplementario]);

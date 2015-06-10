@@ -17,7 +17,6 @@ use Yii;
  * @property integer $natural_juridica_id
  * @property string $colegiatura
  * @property string $tipo_profesion
- * @property string $fecha_informe
  * @property integer $creado_por
  * @property integer $actualizado_por
  * @property boolean $sys_status
@@ -49,9 +48,9 @@ class CertificacionesAportes extends \common\components\BaseActiveRecord
     {
         return [
             [['natural_juridica_id', 'creado_por', 'actualizado_por',  'contratista_id'], 'integer'],
-            [['tipo_profesion', 'fecha_informe', 'contratista_id','natural_juridica_id'], 'required'],
+            [['tipo_profesion','contratista_id','natural_juridica_id'], 'required'],
             [['tipo_profesion'], 'string'],
-            [['fecha_informe', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
+            [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['sys_status'], 'boolean'],
             [['colegiatura'], 'string', 'max' => 255],
             [['colegiatura'], 'required', 'when' => function ($model) {
@@ -72,7 +71,6 @@ class CertificacionesAportes extends \common\components\BaseActiveRecord
             'natural_juridica_id' => Yii::t('app', 'Natural Juridica'),
             'colegiatura' => Yii::t('app', 'Colegiatura'),
             'tipo_profesion' => Yii::t('app', 'Tipo Profesion'),
-            'fecha_informe' => Yii::t('app', 'Fecha Informe'),
             'creado_por' => Yii::t('app', 'Creado Por'),
             'actualizado_por' => Yii::t('app', 'Actualizado Por'),
             'sys_status' => Yii::t('app', 'Sys Status'),
@@ -153,14 +151,6 @@ class CertificacionesAportes extends \common\components\BaseActiveRecord
          'tipo_profesion'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>$profesiones , 'options'=>['prompt'=>'Seleccione profesion']],
          'colegiatura'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Numero de colegiatura'],'hint'=>'Solo contador publico'],
        
-        'fecha_informe'=>[
-            'type'=>Form::INPUT_WIDGET, 
-            'widgetClass'=>'\kartik\widgets\DatePicker', 
-            'options'=>['pluginOptions' => [
-                    'autoclose'=>true,
-                    'format' => 'yyyy-mm-dd'
-                ]],
-            ],
         
 
     ];

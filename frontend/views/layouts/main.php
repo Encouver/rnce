@@ -145,6 +145,7 @@ AppAsset::register($this);
                         ['label' => 'Duracion empresa', 'url' => ['/duraciones-empresas/index']],
                         ['label' => 'Pago Capital', 'url' => ['/actas-constitutivas/crearpagocapital']],
                         ['label' => 'Aumento Capital', 'url' => ['/actas-constitutivas/crearaumentocapital']],
+                         ['label' => 'Aporte por Capitalizar', 'url' => ['/aportes-capitalizar/index']],
                         ['label' => 'Origen Capital', 'url' => ['/origenes-capitales/origen']],
                     ],
                 ],

@@ -20,7 +20,7 @@ class AccionesSearch extends Acciones
         return [
             [['id', 'numero_comun', 'numero_preferencial', 'documento_registrado_id', 'contratista_id', 'creado_por', 'actualizado_por','certificacion_aporte_id'], 'integer'],
             [['valor_comun', 'valor_preferencial', 'capital'], 'number'],
-            [['tipo_accion', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el','actual'], 'safe'],
+            [['tipo_accion', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el','actual','fecha_informe'], 'safe'],
             [['suscrito', 'sys_status'], 'boolean'],
         ];
     }
@@ -76,6 +76,7 @@ class AccionesSearch extends Acciones
             'actual' => $this->actual,
             'certificacion_aporte_id'=> $this->certificacion_aporte_id,
             'tipo_accion'=> $this->tipo_accion,
+            'fecha_informe'=> $this->fecha_informe,
         ]);
 
        // $query->andFilterWhere(['like', 'tipo_accion', $this->tipo_accion]);

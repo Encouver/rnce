@@ -34,6 +34,12 @@ $this->params['breadcrumbs'][] = $this->title;
             'valor_inversion',
             'numero_rotativo',
             'valor_rotativo',
+            [
+                'attribute'=>'certificacion_aporte_id',
+                'label'=>'Certificador Aporte',
+                'value'=>'certificacionAporte.naturalJuridica.denominacion'
+            ],
+            'fecha_informe',
             // 'tipo_certificado',
             // 'suscrito:boolean',
             // 'creado_por',

@@ -6,6 +6,7 @@ use common\models\p\DenominacionesComerciales;
 use common\models\p\ActasConstitutivas;
 use common\models\a\ActivosBienes;
 use common\models\p\Certificados;
+use common\models\p\AportesCapitalizar;
 use common\models\p\Suplementarios;
 use common\models\p\Acciones;
 use kartik\widgets\Select2;
@@ -152,30 +153,37 @@ class OrigenesCapitales extends \common\components\BaseActiveRecord
           
         }else{
             $acta= ActasConstitutivas::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'actual'=>true]);
-            $denominacion_comercial= DenominacionesComerciales::findOne($acta->denominacion_comercial_id);
-            if($denominacion_comercial->tipo_denominacion!="COOPERATIVA"){
+            if($this->tipo_origen!='APORTE_CAPITALIZAR'){
+                $denominacion_comercial= DenominacionesComerciales::findOne($acta->denominacion_comercial_id);
+                if($denominacion_comercial->tipo_denominacion!="COOPERATIVA"){
             
-             $accion= Acciones::findOne(['contratista_id'=>Yii::$app->user->identity->id ,'documento_registrado_id'=>$this->documento_registrado_id,'tipo_accion'=>$this->tipo_origen]);
-             if(isset( $accion)){
-                  $monto_pagado = $accion->capital;
-             }
+                    $accion= Acciones::findOne(['contratista_id'=>Yii::$app->user->identity->id ,'documento_registrado_id'=>$this->documento_registrado_id,'tipo_accion'=>$this->tipo_origen]);
+                    if(isset( $accion)){
+                        $monto_pagado = $accion->capital;
+                    }
             
-         }
-         if($denominacion_comercial->tipo_denominacion=="COOPERATIVA" && $denominacion_comercial->cooperativa_capital=='LIMITADO'){
+                }
+                if($denominacion_comercial->tipo_denominacion=="COOPERATIVA" && $denominacion_comercial->cooperativa_capital=='LIMITADO'){
            
-             $certificado= Certificados::findOne(['contratista_id'=>Yii::$app->user->identity->id ,'documento_registrado_id'=>$this->documento_registrado_id,'tipo_certificado'=>$this->tipo_origen]);
-             if(isset($certificado)){
-                  $monto_pagado = $certificado->capital;
-             }
+                    $certificado= Certificados::findOne(['contratista_id'=>Yii::$app->user->identity->id ,'documento_registrado_id'=>$this->documento_registrado_id,'tipo_certificado'=>$this->tipo_origen]);
+                    if(isset($certificado)){
+                         $monto_pagado = $certificado->capital;
+                    }
             
-         }
-         if($denominacion_comercial->tipo_denominacion=="COOPERATIVA" && $denominacion_comercial->cooperativa_capital=='SUPLEMENTARIO'){
-             $suplementario= Suplementarios::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id ,'documento_registrado_id'=>$this->documento_registrado_id,'tipo_suplementario'=>$this->tipo_origen]);
-              if(isset($suplementario)){
-                   $monto_pagado = $suplementario->capital;
-             }
+                }
+                if($denominacion_comercial->tipo_denominacion=="COOPERATIVA" && $denominacion_comercial->cooperativa_capital=='SUPLEMENTARIO'){
+                    $suplementario= Suplementarios::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id ,'documento_registrado_id'=>$this->documento_registrado_id,'tipo_suplementario'=>$this->tipo_origen]);
+                    if(isset($suplementario)){
+                        $monto_pagado = $suplementario->capital;
+                    }
             
-         }
+                }
+            }else{
+                $aporte= AportesCapitalizar::findOne(['contratista_id'=>Yii::$app->user->identity->id ,'documento_registrado_id'=>$this->documento_registrado_id]);
+                    if(isset($aporte)){
+                        $monto_pagado = $aporte->monto_aporte;
+                    }
+            }
                   
             
         }
@@ -192,7 +200,7 @@ class OrigenesCapitales extends \common\components\BaseActiveRecord
     public function validarmontoaumento($attribute){
         
         $monto_pagado=0;
-        
+         if($this->tipo_origen!='APORTE_CAPITALIZAR'){
             $acta= ActasConstitutivas::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'actual'=>true]);
             $denominacion_comercial= DenominacionesComerciales::findOne($acta->denominacion_comercial_id);
             if($denominacion_comercial->tipo_denominacion!="COOPERATIVA"){
@@ -218,6 +226,12 @@ class OrigenesCapitales extends \common\components\BaseActiveRecord
              }
             
          }
+         }else{
+                $aporte= AportesCapitalizar::findOne(['contratista_id'=>Yii::$app->user->identity->id ,'documento_registrado_id'=>$this->documento_registrado_id]);
+                    if(isset($aporte)){
+                        $monto_pagado = $aporte->monto_aporte;
+                    }
+            }
                   
             
         

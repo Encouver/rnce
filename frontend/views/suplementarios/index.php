@@ -29,11 +29,12 @@ $this->params['breadcrumbs'][] = $this->title;
             'capital',
             'numero',
             'valor',
-             [
+            [
                 'attribute'=>'certificacion_aporte_id',
                 'label'=>'Certificador Aporte',
                 'value'=>'certificacionAporte.naturalJuridica.denominacion'
             ],
+            'fecha_informe',
             //'tipo_suplementario',
             
             // 'creado_por',

@@ -165,6 +165,7 @@ class SuplementariosController extends BaseController
                     $paga_acta->contratista_id = $model->contratista_id;
                     $paga_acta->documento_registrado_id= $model->documento_registrado_id;
                     $paga_acta->suscrito=false;
+                    $paga_acta->fecha_informe=$model->fecha_informe;
                     $paga_acta->actual=true;
                     $paga_acta->tipo_suplementario=$model->tipo_suplementario;
                     $paga_acta->certificacion_aporte_id=$model->certificacion_aporte_id;
@@ -222,6 +223,7 @@ class SuplementariosController extends BaseController
                     $paga_acta->documento_registrado_id= $model->documento_registrado_id;
                     $paga_acta->suscrito=false;
                     $paga_acta->actual=false;
+                    $paga_acta->fecha_informe=$model->fecha_informe;
                     $paga_acta->tipo_suplementario=$model->tipo_suplementario;
                     $paga_acta->certificacion_aporte_id=$model->certificacion_aporte_id;
                 
@@ -310,6 +312,7 @@ class SuplementariosController extends BaseController
                         }
                     }
                     $pagada_acta->numero= $model->numero_pagada;
+                    $paga_acta->fecha_informe=$model->fecha_informe;
                     $pagada_acta->capital=$model->capital_pagado;
                     $pagada_acta->certificacion_aporte_id=$model->certificacion_aporte_id;
                     $transaction = \Yii::$app->db->beginTransaction();
@@ -386,6 +389,7 @@ class SuplementariosController extends BaseController
                         }
                     }
                     $pagada_acta->numero= $model->numero_pagada;
+                    $paga_acta->fecha_informe=$model->fecha_informe;
                     $pagada_acta->capital=$model->capital_pagado;
                     $pagada_acta->certificacion_aporte_id=$model->certificacion_aporte_id;
                     $transaction = \Yii::$app->db->beginTransaction();

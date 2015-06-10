@@ -169,6 +169,7 @@ class AccionesController extends BaseController
                     $paga_acta->documento_registrado_id= $model->documento_registrado_id;
                     $paga_acta->suscrito=false;
                     $paga_acta->actual=true;
+                    $paga_acta->fecha_informe=$model->fecha_informe;
                     $paga_acta->tipo_accion=$model->tipo_accion;
                     $paga_acta->certificacion_aporte_id=$model->certificacion_aporte_id;
                 
@@ -220,6 +221,7 @@ class AccionesController extends BaseController
                     $paga_acta->contratista_id=$model->contratista_id;
                     $paga_acta->documento_registrado_id= $model->documento_registrado_id;
                     $paga_acta->suscrito=false;
+                    $paga_acta->fecha_informe=$model->fecha_informe;
                     $paga_acta->actual=false;
                     $paga_acta->tipo_accion=$model->tipo_accion;
                     $paga_acta->certificacion_aporte_id=$model->certificacion_aporte_id;
@@ -310,6 +312,7 @@ class AccionesController extends BaseController
                     $pagada_acta->capital=$model->capital_pagado;
                     $pagada_acta->numero_comun=$model->numero_comun_pagada;
                     $pagada_acta->certificacion_aporte_id=$model->certificacion_aporte_id;
+                    $pagada_acta->fecha_informe=$model->fecha_informe;
                     $transaction = \Yii::$app->db->beginTransaction();
                     try {
                         if ($pagada_acta->save(false)) {
@@ -387,6 +390,7 @@ class AccionesController extends BaseController
                     $pagada_acta->numero_comun=$model->numero_comun_pagada;
                     $pagada_acta->numero_preferencial=$model->numero_preferencial_pagada;
                     $pagada_acta->certificacion_aporte_id=$model->certificacion_aporte_id;
+                    $pagada_acta->fecha_informe=$model->fecha_informe;
                     $transaction = \Yii::$app->db->beginTransaction();
                     try {
                         if ($pagada_acta->save(false)) {

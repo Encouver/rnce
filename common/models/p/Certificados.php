@@ -21,6 +21,7 @@ use Yii;
  * @property string $valor_aportacion
  * @property string $valor_rotativo
  * @property string $valor_inversion
+ * @property string $fecha_informe
  * @property string $tipo_certificado
  * @property boolean $suscrito
  * @property integer $creado_por
@@ -59,7 +60,7 @@ class Certificados extends \common\components\BaseActiveRecord
     public function rules()
     {
         return [
-            [['documento_registrado_id', 'contratista_id','certificacion_aporte_id'], 'required'],
+            [['documento_registrado_id', 'contratista_id','certificacion_aporte_id','fecha_informe'], 'required'],
             [['numero_asociacion', 'numero_aportacion', 'numero_rotativo', 'numero_inversion','numero_asociacion_pagada', 'numero_aportacion_pagada', 'numero_rotativo_pagada', 'numero_inversion_pagada', 'creado_por', 'actualizado_por', 'documento_registrado_id', 'contratista_id','certificacion_aporte_id'], 'integer'],
             [['valor_asociacion', 'valor_aportacion', 'valor_rotativo', 'valor_inversion','capital','capital_pagado'], 'number'],
             [['tipo_certificado'], 'string'],
@@ -82,7 +83,7 @@ class Certificados extends \common\components\BaseActiveRecord
             [['capital','numero_asociacion', 'numero_aportacion', 'numero_rotativo', 'numero_inversion'], 'required','on'=>'pago'],
             [['suscrito', 'documento_registrado_id', 'contratista_id'], 'required'],
             [['suscrito', 'sys_status','actual'], 'boolean'],
-            [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
+            [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el','fecha_informe'], 'safe'],
            
         ];
     }
@@ -304,7 +305,7 @@ class Certificados extends \common\components\BaseActiveRecord
             'capital_pagado' => Yii::t('app', 'Capital pagado'),
             'certificacion_aporte_id'  => Yii::t('app', 'Certificador de aportes'),
             'actual'  => Yii::t('app', 'Actual'),
-            
+            'fecha_informe' => Yii::t('app', 'Fecha Informe'),
         ];
     }
 
@@ -369,6 +370,14 @@ class Certificados extends \common\components\BaseActiveRecord
                 'templateResult' => new JsExpression('function(certificacion_aporte_id) { return certificacion_aporte_id.text; }'),
                 'templateSelection' => new JsExpression('function (certificacion_aporte_id) { return certificacion_aporte_id.text; }'),
                 ],]],
+                'fecha_informe'=>[
+                    'type'=>Form::INPUT_WIDGET, 
+                    'widgetClass'=>'\kartik\widgets\DatePicker', 
+                    'options'=>['pluginOptions' => [
+                    'autoclose'=>true,
+                    'format' => 'yyyy-mm-dd'
+                    ]],
+                ],
             ];
         
         }
@@ -396,6 +405,14 @@ class Certificados extends \common\components\BaseActiveRecord
                 'templateResult' => new JsExpression('function(certificacion_aporte_id) { return certificacion_aporte_id.text; }'),
                 'templateSelection' => new JsExpression('function (certificacion_aporte_id) { return certificacion_aporte_id.text; }'),
                 ],]],
+                'fecha_informe'=>[
+                    'type'=>Form::INPUT_WIDGET, 
+                    'widgetClass'=>'\kartik\widgets\DatePicker', 
+                    'options'=>['pluginOptions' => [
+                    'autoclose'=>true,
+                    'format' => 'yyyy-mm-dd'
+                    ]],
+                ],
             ];
         
         }
