@@ -61,11 +61,14 @@ AppAsset::register($this);
                         ['label' => 'D-1 - Impuesto sobre la renta pagado por anticipado', 'url' => ['cuentas-d1-islr-pagado-anticipo/index']],
                         ['label' => 'D-2 - Otros tributos pagados', 'url' => ['cuentas-d2-otros-tributos-pag/index']],
                         ['label' => 'BB-3 - Otras cuentas por pagar', 'url' => ['cuentas-bb2-otras-cuentas-por-pagar/index']],
-                        ['label' => 'BB-1 Cuentas por pagar comerciales', 'url' => ['cuentas-bb1-cuentas-por-pagar-comerciales/index']],
+                        ['label' => 'BB-1 Cuentas por pagar comerciales', 'url' => ['cuenatas-bb1-cuentas-por-pagar-comerciales/index']],
                         ['label' => 'B-1 - Cuentas por cobrar comerciales', 'url' => ['cuentas-b1-cuentas-por-cobrar-comerciales/index']],
                         ['label' => 'B-2.1 - Otras cuentas por cobrar', 'url' => ['cuentas-b2-otras-cuentas-por-cobrar/index']],
                         ['label' => 'B-2.2 - Cuentas por cobrar comerciales', 'url' => ['cuentas-b2-otras-cuentas-por-cobrar-e/index']],
                         ['label' => 'I-4 - Costos personal', 'url' => ['cuentas-i4-costos-personal/index']],
+                        ['label' => 'II-2 - Gastos personal', 'url' => ['cuentas-ii2-gastos-personal/index']],
+                        ['label' => 'II-3 - Gastos funcionamiento', 'url' => ['cuentas-ii3-gastos-funcionamiento/index']],
+                        ['label' => 'II-5 - Tributos', 'url' => ['cuentas-ii5-tributos/index']],
 
 
 

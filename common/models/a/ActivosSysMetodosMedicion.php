@@ -33,7 +33,39 @@ class ActivosSysMetodosMedicion extends \common\components\BaseActiveRecord
     {
         return 'activos.sys_metodos_medicion';
     }
+    public static function Metodos($modelo_id = 1){
+        return ActivosSysMetodosMedicion::find()->where(['modelo_id'=>$modelo_id])->all();
+    }
 
+
+    //por capas
+    public $enero;
+    public $febrero;
+    public $marzo;
+    public $abril;
+    public $mayo;
+    public $junio;
+    public $julio;
+    public $agosto;
+    public $septiembre;
+    public $octubre;
+    public $noviembre;
+    public $diciembre;
+
+    //promedio
+    public $desde;
+    public $hasta;
+
+    //deterioro
+    public $valor_neto;
+    public $valor_razo;
+    public $costo_dis;
+    public $valor_uso;
+    public $importe_recu;
+    public $diferencia;
+    public $deterioro_acu;
+    public $perdida;
+    public $reverso;
     /**
      * @inheritdoc
      */
@@ -100,6 +132,7 @@ class ActivosSysMetodosMedicion extends \common\components\BaseActiveRecord
     {
         return $this->hasMany(CuentasSysFormulasTecnicas::className(), ['tecnica_medicion_id' => 'id']);
     }
+
     public function Etiqueta(){
         return $this->modelo->nombre.' - '.$this->nombre;
     }

@@ -678,3 +678,14 @@ COMMENT ON COLUMN cuentas.ii2_gastos_personal.sys_finalizado_el IS 'Fecha de "el
 
 
 
+
+
+ALTER TABLE cuentas.ii5_tributos
+ADD FOREIGN KEY (admin_metodo_id) REFERENCES activos.sys_metodos_medicion (id) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE cuentas.ii5_tributos
+ADD FOREIGN KEY (ventas_metodo_id) REFERENCES activos.sys_metodos_medicion (id) ON UPDATE NO ACTION ON DELETE NO ACTION;
+
+
+ALTER TABLE cuentas.ii2_gastos_personal
+ADD UNIQUE (concepto_id, contratista_id, anho);
+
