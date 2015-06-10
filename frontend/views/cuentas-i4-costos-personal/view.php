@@ -4,13 +4,13 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\c\CuentasEInversiones */
+/* @var $model common\models\c\CuentasI4CostosPersonal */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Cuentas Einversiones'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Cuentas I4 Costos Personals'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="cuentas-einversiones-view">
+<div class="cuentas-i4-costos-personal-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -28,14 +28,20 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            //'id',
-            'empresa_relacionada_id',
-            'corriente:boolean',
-            'disponibilidad_id',
-            'tipo_instrumento_id',
-            'nombre_instrumento',
-            'numero_acc_bon',
-            'e_inversion_info_adicional_id',
+            'id',
+            'monto_mano_directa',
+            'metodo_inflacion_directa',
+            'desde_directa',
+            'hasta_directa',
+            'mdo_ajustado_directa',
+            'monto_mano_indirecta',
+            'metodo_inflacion_indirecta',
+            'desde_indirecta',
+            'hasta_indirecta',
+            'mdo_ajustado_indirecta',
+            'concepto_id',
+            'cp_objeto_id',
+            'especifique',
             'contratista_id',
             'anho',
             'creado_por',

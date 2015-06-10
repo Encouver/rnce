@@ -359,7 +359,7 @@ ALTER TABLE acciones ALTER COLUMN actual SET NOT NULL;
 ALTER TABLE acciones ALTER COLUMN actual SET DEFAULT false;
 COMMENT ON COLUMN acciones.actual IS 'true significa que el valor de las acciones es el actual';
 
---08 junio 2:00 pm--
+--08 j-unio 2:00 pm-
 ALTER TABLE origenes_capitales ALTER COLUMN monto DROP NOT NULL;
 
 ALTER TABLE certificados ADD COLUMN actual boolean;

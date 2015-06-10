@@ -16,10 +16,9 @@ use yii\helpers\ArrayHelper;
  * @property integer $id
  * @property integer $empresa_relacionada_id
  * @property boolean $corriente
- * @property string $disponibilidad
- * @property string $tipo_instrumento
+ * @property integer $disponibilidad_id
+ * @property integer $tipo_instrumento_id
  * @property string $nombre_instrumento
- * @property string $motivo_retiro
  * @property integer $numero_acc_bon
  * @property integer $e_inversion_info_adicional_id
  * @property integer $contratista_id
@@ -30,9 +29,6 @@ use yii\helpers\ArrayHelper;
  * @property string $sys_creado_el
  * @property string $sys_actualizado_el
  * @property string $sys_finalizado_el
- * @property string $fecha_motivo
- * @property string $monto_nominal_motivo
- * @property string $monto_nominal_motivo_ajus
  *
  * @property CuentasEInversionesInfoAdicional $eInversionInfoAdicional
  * @property Contratistas $contratista
@@ -55,12 +51,10 @@ class CuentasEInversiones extends \common\components\BaseActiveRecord
     public function rules()
     {
         return [
-            [['empresa_relacionada_id', 'corriente', 'disponibilidad', 'tipo_instrumento', 'nombre_instrumento', 'numero_acc_bon', 'e_inversion_info_adicional_id', 'contratista_id', 'anho', 'fecha_motivo', 'monto_nominal_motivo', 'monto_nominal_motivo_ajus'], 'required'],
-            [['empresa_relacionada_id', 'numero_acc_bon', 'e_inversion_info_adicional_id', 'contratista_id', 'creado_por', 'actualizado_por'], 'integer'],
+            [['empresa_relacionada_id', 'corriente', 'disponibilidad_id', 'tipo_instrumento_id', 'nombre_instrumento', 'numero_acc_bon', 'e_inversion_info_adicional_id', 'contratista_id', 'anho'], 'required'],
+            [['empresa_relacionada_id', 'disponibilidad_id', 'tipo_instrumento_id', 'numero_acc_bon', 'e_inversion_info_adicional_id', 'contratista_id', 'creado_por', 'actualizado_por'], 'integer'],
             [['corriente', 'sys_status'], 'boolean'],
-            [['disponibilidad', 'tipo_instrumento', 'motivo_retiro'], 'string'],
-            [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el', 'fecha_motivo'], 'safe'],
-            [['monto_nominal_motivo', 'monto_nominal_motivo_ajus'], 'number'],
+            [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['nombre_instrumento'], 'string', 'max' => 255],
             [['anho'], 'string', 'max' => 100]
         ];
@@ -73,12 +67,11 @@ class CuentasEInversiones extends \common\components\BaseActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'empresa_relacionada_id' => Yii::t('app', 'Empresa Relacionada ID'),
+            'empresa_relacionada_id' => Yii::t('app', 'Empresa Relacionada'),
             'corriente' => Yii::t('app', 'Corriente'),
-            'disponibilidad' => Yii::t('app', 'Disponibilidad'),
-            'tipo_instrumento' => Yii::t('app', 'Tipo Instrumento'),
+            'disponibilidad_id' => Yii::t('app', 'Disponibilidad'),
+            'tipo_instrumento_id' => Yii::t('app', 'Tipo Instrumento'),
             'nombre_instrumento' => Yii::t('app', 'Nombre Instrumento'),
-            'motivo_retiro' => Yii::t('app', 'Motivo Retiro'),
             'numero_acc_bon' => Yii::t('app', 'Numero Acciones / Bonos'),
             'e_inversion_info_adicional_id' => Yii::t('app', 'E Inversion Información Adicional'),
             'contratista_id' => Yii::t('app', 'Contratista ID'),
@@ -89,9 +82,6 @@ class CuentasEInversiones extends \common\components\BaseActiveRecord
             'sys_creado_el' => Yii::t('app', 'Sys Creado El'),
             'sys_actualizado_el' => Yii::t('app', 'Sys Actualizado El'),
             'sys_finalizado_el' => Yii::t('app', 'Sys Finalizado El'),
-            'fecha_motivo' => Yii::t('app', 'Fecha Motivo'),
-            'monto_nominal_motivo' => Yii::t('app', 'Monto Nominal Motivo'),
-            'monto_nominal_motivo_ajus' => Yii::t('app', 'Monto Nominal Motivo Ajustado'),
         ];
     }
 
@@ -136,9 +126,17 @@ class CuentasEInversiones extends \common\components\BaseActiveRecord
             ],
             'empresa_relacionada_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(PersonasJuridicas::find()->all(),'rif',function($model){ return $model->etiqueta();}),'options'=>['onchange'=>'']]],
             'corriente'=>['type'=>Form::INPUT_CHECKBOX,],
-            'disponibilidad'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>['DISPONIBLES PARA LA VENTA'=>'DISPONIBLES PARA LA VENTA','NO DISPONIBLES PARA LA VENTA'=>'NO DISPONIBLES PARA LA VENTA', 'SUBSIDIARIAS, NEGOCIOS CONJUNTOS Y ASOCIADAS'=>'SUBSIDIARIAS, NEGOCIOS CONJUNTOS Y ASOCIADAS',],'options'=>['onchange'=>'']]],
-            'tipo_instrumento'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>['BONOS'=>'BONOS','ACCIONES'=>'ACCIONES',],'options'=>['onchange'=>'']]],
+            'disponibilidad_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(CuentasSysConceptos::concepto('e.1'),'id','nombre'),
+                'options'=>['id'=>'declaración-islr-concepto','placeholder'=>'Seleccionar ', 'onchange'=>''],'pluginOptions' => [
+                    'allowClear' => false,
+                ],]],
+            'tipo_instrumento_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(CuentasSysConceptos::concepto('e.2'),'id','nombre'),
+                'options'=>['id'=>'declaración-islr-concepto','placeholder'=>'Seleccionar ', 'onchange'=>''],'pluginOptions' => [
+                    'allowClear' => false,
+                ],]],
             'nombre_instrumento'=>['type'=>Form::INPUT_TEXT,],
+            'numero_acc_bon'=>['type'=>Form::INPUT_TEXT],//['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),'options'=>['pluginOptions'=>['prefix'=>'','precision'=>'0'],]],
+            /*
             'motivo_retiro'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>['VENTA'=>'VENTA','CESION'=>'CESION','DETERIORO'=>'DETERIORO'],'options'=>['multiple'=>false,'onchange'=>'']]],
             'fecha_motivo'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>DatePicker::className(), 'options'=>['options' => ['placeholder' => 'Seleccione fecha ...'],
                 'convertFormat' => true,
@@ -147,9 +145,9 @@ class CuentasEInversiones extends \common\components\BaseActiveRecord
                     //'startDate' => date('d-m-Y h:i A'),//'01-Mar-2014 12:00 AM',
                     'todayHighlight' => true
                 ]]],
-            'numero_acc_bon'=>['type'=>Form::INPUT_TEXT],//['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),'options'=>['pluginOptions'=>['prefix'=>'','precision'=>'0'],]],
+
             'monto_nominal_motivo'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),],
-            'monto_nominal_motivo_ajus'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),],
+            'monto_nominal_motivo_ajus'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),],*/
 
 
         ];

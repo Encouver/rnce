@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\CuentasEInversionesSearch */
+/* @var $model app\models\CuentasIi2GastosPersonalSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="cuentas-einversiones-search">
+<div class="cuentas-ii2-gastos-personal-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
@@ -17,19 +17,19 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'id') ?>
 
-    <?= $form->field($model, 'empresa_relacionada_id') ?>
+    <?= $form->field($model, 'concepto_id') ?>
 
-    <?= $form->field($model, 'corriente')->checkbox() ?>
+    <?= $form->field($model, 'administracion') ?>
 
-    <?= $form->field($model, 'disponibilidad_id') ?>
+    <?= $form->field($model, 'admin_metodo_id') ?>
 
-    <?= $form->field($model, 'tipo_instrumento_id') ?>
+    <?= $form->field($model, 'administracion_ajustadas') ?>
 
-    <?php // echo $form->field($model, 'nombre_instrumento') ?>
+    <?php // echo $form->field($model, 'ventas') ?>
 
-    <?php // echo $form->field($model, 'numero_acc_bon') ?>
+    <?php // echo $form->field($model, 'ventas_metodo_id') ?>
 
-    <?php // echo $form->field($model, 'e_inversion_info_adicional_id') ?>
+    <?php // echo $form->field($model, 'ventas_ajustadas') ?>
 
     <?php // echo $form->field($model, 'contratista_id') ?>
 

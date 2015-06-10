@@ -4,13 +4,13 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\c\CuentasEInversiones */
+/* @var $model common\models\c\CuentasIi2GastosPersonal */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Cuentas Einversiones'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Cuentas Ii2 Gastos Personals'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="cuentas-einversiones-view">
+<div class="cuentas-ii2-gastos-personal-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -28,14 +28,14 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            //'id',
-            'empresa_relacionada_id',
-            'corriente:boolean',
-            'disponibilidad_id',
-            'tipo_instrumento_id',
-            'nombre_instrumento',
-            'numero_acc_bon',
-            'e_inversion_info_adicional_id',
+            'id',
+            'concepto_id',
+            'administracion',
+            'admin_metodo_id',
+            'administracion_ajustadas',
+            'ventas',
+            'ventas_metodo_id',
+            'ventas_ajustadas',
             'contratista_id',
             'anho',
             'creado_por',

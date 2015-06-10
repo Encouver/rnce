@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\CuentasEInversionesSearch */
+/* @var $model app\models\CuentasI4CostosPersonalSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="cuentas-einversiones-search">
+<div class="cuentas-i4-costos-personal-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
@@ -17,19 +17,31 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'id') ?>
 
-    <?= $form->field($model, 'empresa_relacionada_id') ?>
+    <?= $form->field($model, 'monto_mano_directa') ?>
 
-    <?= $form->field($model, 'corriente')->checkbox() ?>
+    <?= $form->field($model, 'metodo_inflacion_directa') ?>
 
-    <?= $form->field($model, 'disponibilidad_id') ?>
+    <?= $form->field($model, 'desde_directa') ?>
 
-    <?= $form->field($model, 'tipo_instrumento_id') ?>
+    <?= $form->field($model, 'hasta_directa') ?>
 
-    <?php // echo $form->field($model, 'nombre_instrumento') ?>
+    <?php // echo $form->field($model, 'mdo_ajustado_directa') ?>
 
-    <?php // echo $form->field($model, 'numero_acc_bon') ?>
+    <?php // echo $form->field($model, 'monto_mano_indirecta') ?>
 
-    <?php // echo $form->field($model, 'e_inversion_info_adicional_id') ?>
+    <?php // echo $form->field($model, 'metodo_inflacion_indirecta') ?>
+
+    <?php // echo $form->field($model, 'desde_indirecta') ?>
+
+    <?php // echo $form->field($model, 'hasta_indirecta') ?>
+
+    <?php // echo $form->field($model, 'mdo_ajustado_indirecta') ?>
+
+    <?php // echo $form->field($model, 'concepto_id') ?>
+
+    <?php // echo $form->field($model, 'cp_objeto_id') ?>
+
+    <?php // echo $form->field($model, 'especifique') ?>
 
     <?php // echo $form->field($model, 'contratista_id') ?>
 
