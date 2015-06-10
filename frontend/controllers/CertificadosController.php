@@ -63,6 +63,23 @@ class CertificadosController extends BaseController
             'documento'=>$documento,
         ]);
     }
+    public function actionAumentocapital()
+    {
+        $searchModel = new CertificadosSearch();
+        $searchModel->tipo_certificado="AUMENTO_CAPITAL";
+        $documento=$searchModel->Modificacionactual();
+        if(isset($documento)){
+            $searchModel->documento_registrado_id= $documento->documento_registrado_id;
+          
+        }
+      
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        return $this->render('aumentocapital', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'documento'=>$documento,
+        ]);
+    }
     public function actionCreate($id='principal')
     {
         $model = new Certificados();
@@ -74,6 +91,12 @@ class CertificadosController extends BaseController
             case 'pago':
                 $model->scenario='pago';
                 $model->tipo_certificado='PAGO_CAPITAL';
+                break;
+            case 'aumento':
+                $model->scenario='aumento';
+                $model->tipo_certificado='AUMENTO_CAPITAL';
+                
+                break;
                 
                 break;
             default :
@@ -90,15 +113,24 @@ class CertificadosController extends BaseController
         if($model->existeregistro()){
             
             Yii::$app->session->setFlash('error','Usuario posee certificados cargados o no ha creado un documento registrado');
-            switch ($model->tipo_accion){
+            switch ($model->tipo_certificado){
                 case 'PRINCIPAL':
                     return $this->redirect(['index']);
                     break;
                 case 'PAGO_CAPITAL':
                     return $this->redirect(['pagocapital']);
                     break;
+                case 'AUMENTO_CAPITAL':
+                    return $this->redirect(['aumentocapital']);
+                    break;
                 default :
                     break;
+            }
+        }
+        if($model->scenario=='aumento'){
+            if(!$model->Pagocompleto()){
+                Yii::$app->session->setFlash('error','No existe un aumento de capital valido, realice el pago de capital');
+                return $this->redirect(['aumentocapital']);
             }
         }
         
@@ -171,6 +203,58 @@ class CertificadosController extends BaseController
                 
                 
                 break;
+                case 'AUMENTO_CAPITAL':
+                    $model->suscrito=true;
+                    $model->actual=false;
+                    $model->contratista_id = Yii::$app->user->identity->contratista_id;
+                    $paga_acta = new Certificados();
+                    $paga_acta->numero_asociacion= $model->numero_asociacion_pagada;
+       
+                    $paga_acta->numero_aportacion= $model->numero_aportacion_pagada;
+                    
+                    $paga_acta->numero_rotativo= $model->numero_rotativo_pagada;
+                  
+                    $paga_acta->numero_inversion= $model->numero_inversion_pagada;
+                    $paga_acta->capital=$model->capital_pagado;
+             
+                    $paga_acta->contratista_id = $model->contratista_id;
+                    $paga_acta->documento_registrado_id= $model->documento_registrado_id;
+                    $paga_acta->suscrito=false;
+                    $paga_acta->actual=false;
+                    $paga_acta->tipo_certificado=$model->tipo_certificado;
+                    $paga_acta->certificacion_aporte_id=$model->certificacion_aporte_id;
+                                
+                        $transaction = \Yii::$app->db->beginTransaction();
+             
+                        try {
+                            if ($paga_acta->save(false)) {
+                                if ($model->save()) {
+                               
+                                $transaction->commit();
+                                 return $this->redirect(['aumentocapital']);
+
+                          
+                          
+                               
+                            }else{
+                                $transaction->rollBack();
+                               // Yii::$app->session->setFlash('error','Erroren la carga del capital sucrito');
+                             return $this->render('create',['model'=>$model]);
+                                            }
+                            
+                        }else{
+                            
+                            $transaction->rollBack();
+                          
+                           // Yii::$app->session->setFlash('error','Erroren la carga del capital pagado');
+                             return $this->render('create',['model'=>$model]);
+                        }
+                      
+                    
+                    } catch (Exception $e) {
+                         $transaction->rollBack();
+                    }
+                break;
             default :
                 break;
             }
@@ -203,7 +287,7 @@ class CertificadosController extends BaseController
         switch ($model->tipo_certificado){
             case 'PRINCIPAL':
                 if(!$model->suscrito){
-                    $model = Certificados::findOne(['documento_registrado_id'=>$model->documento_registrado_id,'suscrito'=>true]);
+                    $model = Certificados::findOne(['documento_registrado_id'=>$model->documento_registrado_id,'suscrito'=>true,'tipo_certificado'=>$model->tipo_certificado]);
 
                 }
                 $model->scenario='principal';
@@ -212,6 +296,13 @@ class CertificadosController extends BaseController
             case 'PAGO_CAPITAL':
                 $model->scenario='pago';
                 break;
+            case 'AUMENTO_CAPITAL':
+                if(!$model->suscrito){
+                    $model = Certificados::findOne(['documento_registrado_id'=>$model->documento_registrado_id,'suscrito'=>true,'tipo_certificado'=>$model->tipo_certificado]);
+
+                }
+                $model->scenario='aumento';
+            break;
             default :
                 break;
          }
@@ -219,7 +310,7 @@ class CertificadosController extends BaseController
         if ($model->load(Yii::$app->request->post())) {
             switch ($model->tipo_certificado){
                 case 'PRINCIPAL':
-                    $paga_acta = Certificados::findOne(['documento_registrado_id'=>$model->documento_registrado_id,'suscrito'=>false]);
+                    $paga_acta = Certificados::findOne(['documento_registrado_id'=>$model->documento_registrado_id,'suscrito'=>false,'tipo_certificado'=>$model->tipo_certificado]);
                     if($paga_acta->capital>$model->capital_pagado){
                        // $origen_capital= OrigenesCapitales::findAll(['documento_registrado_id'=>$model->documento_registrado_id,'tipo_origen'=>$model->tipo_accion]);
                         $origen_capital= OrigenesCapitales::find()->where(['documento_registrado_id'=>$model->documento_registrado_id,'tipo_origen'=>$model->tipo_certificado])->orderBy('monto')->all();
@@ -255,13 +346,13 @@ class CertificadosController extends BaseController
                             }else{
                                 $transaction->rollBack();
                                 //Yii::$app->session->setFlash('error','Erroren la carga del capital sucrito');
-                                return $this->render('create',['model'=>$model]);
+                                return $this->render('update',['model'=>$model]);
                             }
                             
                         }else{
                             $transaction->rollBack();
                             //Yii::$app->session->setFlash('error','Erroren la carga del capital pagado');
-                            return $this->render('create',['model'=>$model]);
+                            return $this->render('update',['model'=>$model]);
                         }
                       
                     
@@ -302,12 +393,63 @@ class CertificadosController extends BaseController
                     }
                 
                 break;
+                case 'AUMENTO_CAPITAL':
+                    $paga_acta = Certificados::findOne(['documento_registrado_id'=>$model->documento_registrado_id,'suscrito'=>false,'tipo_certificado'=>$model->tipo_certificado]);
+                    if($paga_acta->capital>$model->capital_pagado){
+                       // $origen_capital= OrigenesCapitales::findAll(['documento_registrado_id'=>$model->documento_registrado_id,'tipo_origen'=>$model->tipo_accion]);
+                        $origen_capital= OrigenesCapitales::find()->where(['documento_registrado_id'=>$model->documento_registrado_id,'tipo_origen'=>$model->tipo_certificado])->orderBy('monto')->all();
+                        if(isset($origen_capital)){
+                            foreach ($origen_capital as $origen) {
+                                if($origen->sumarmonto(false)>$model->capital_pagado){
+                                    if(!$origen->delete()){
+                                        $transaction->rollBack();
+                                        Yii::$app->session->setFlash('error','Error al eliminar el origen de capital');
+                                        return $this->redirect(['index']);
+                                    }   
+                                }
+                            }
+                        }
+                    }
+                    $paga_acta->numero_asociacion= $model->numero_asociacion_pagada;
+       
+                    $paga_acta->numero_aportacion= $model->numero_aportacion_pagada;
+                    
+                    $paga_acta->numero_rotativo= $model->numero_rotativo_pagada;
+                  
+                    $paga_acta->numero_inversion= $model->numero_inversion_pagada;
+                    $paga_acta->capital=$model->capital_pagado;
+                    $paga_acta->certificacion_aporte_id=$model->certificacion_aporte_id;
+             
+                    $transaction = \Yii::$app->db->beginTransaction();
+             
+                    try {
+                        if ($paga_acta->save(false)) {
+                            if ($model->save()) {
+                                $transaction->commit();
+                                return $this->redirect(['aumentocapital']);
+                            }else{
+                                $transaction->rollBack();
+                                //Yii::$app->session->setFlash('error','Erroren la carga del capital sucrito');
+                                return $this->render('update',['model'=>$model]);
+                            }
+                            
+                        }else{
+                            $transaction->rollBack();
+                            //Yii::$app->session->setFlash('error','Erroren la carga del capital pagado');
+                            return $this->render('update',['model'=>$model]);
+                        }
+                      
+                    
+                    } catch (Exception $e) {
+                         $transaction->rollBack();
+                    }
+                break;
                 default :
                     break;
             }
         }else{
-            if($model->tipo_certificado=="PRINCIPAL"){
-                $paga_acta = Certificados::findOne(['documento_registrado_id'=>$model->documento_registrado_id,'suscrito'=>false]);
+            if($model->tipo_certificado=="PRINCIPAL" || $model->tipo_certificado=="AUMENTO_CAPITAL"){
+                $paga_acta = Certificados::findOne(['documento_registrado_id'=>$model->documento_registrado_id,'suscrito'=>false,'tipo_certificado'=>$model->tipo_certificado]);
                 $model->numero_asociacion_pagada=$paga_acta->numero_asociacion;
                 $model->numero_aportacion_pagada=$paga_acta->numero_aportacion;
                 $model->numero_rotativo_pagada=$paga_acta->numero_rotativo;
@@ -331,12 +473,16 @@ class CertificadosController extends BaseController
         $opcion=$model->tipo_certificado;
         $transaction = \Yii::$app->db->beginTransaction();
         try {
-            if($opcion=="PRINCIPAL"){
-                $model2 = Certificados::findOne(['documento_registrado_id'=>$model->documento_registrado_id,'suscrito'=>!$model->suscrito]);
+            if($opcion=="PRINCIPAL" || $opcion=="AUMENTO_CAPITAL"){
+                $model2 = Certificados::findOne(['documento_registrado_id'=>$model->documento_registrado_id,'suscrito'=>!$model->suscrito,'tipo_certificado'=>$model->tipo_certificado]);
                 if(!$model2 ->delete()){
                     $transaction->rollBack();
                     Yii::$app->session->setFlash('error','Error al eliminar el capital');
+                    if($opcion=="PRINCIPAL"){
                     return $this->redirect(['index']);
+                    }else{
+                         return $this->redirect(['aumentocapital']);
+                    }
                 }
             }
              $origen_capital= OrigenesCapitales::findAll(['documento_registrado_id'=>$model->documento_registrado_id,'tipo_origen'=>$model->tipo_certificado]);
@@ -354,6 +500,10 @@ class CertificadosController extends BaseController
                             case 'PAGO_CAPITAL':
                                 $model->delete();
                                 return $this->redirect(['pagocapital']);
+                            break;
+                            case 'AUMENTO_CAPITAL':
+                                $model->delete();
+                                return $this->redirect(['aumentocapital']);
                             break;
                             default :
                             break;
@@ -377,6 +527,10 @@ class CertificadosController extends BaseController
                 case 'PAGO_CAPITAL':
                     $model->delete();
                     return $this->redirect(['pagocapital']);
+                    break;
+                case 'AUMENTO_CAPITAL':
+                    $model->delete();
+                    return $this->redirect(['aumentocapital']);
                     break;
                 default :
                     break;

@@ -71,9 +71,13 @@ class Acciones extends \common\components\BaseActiveRecord
         ];
     }
      public function validarcapital($attribute){
-         if($this->scenario=='principal'){
-              if($this->numero_preferencial*$this->valor_preferencial< $this->capital){
+         if($this->scenario=='principal' || $this->scenario=='aumento'){
+              if($this->scenario=='principal' && ($this->numero_preferencial*$this->valor_preferencial< $this->capital)){
                   $this->addError($attribute,'Faltan capital por fraccionar');
+              }else{
+                  if(($this->numero_preferencial*$this->valor_preferencial + $this->numero_comun*$this->valor_comun)< $this->capital){
+                  $this->addError($attribute,'Faltan capital por fraccionar');
+                    }
               }
           }else{
               if($this->scenario=='pago'){

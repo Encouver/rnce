@@ -10,32 +10,38 @@ use yii\grid\GridView;
 $this->title = Yii::t('app', 'Certificados');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="certificados-index">
+<div class="certificados-aumentocapital">
 
-    <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
 
-    <?= GridView::widget([
+    <?php
+      if(isset($documento)){
+      echo Html::tag('h1','Aumento de Capital');
+    
+    echo GridView::widget([
         'dataProvider' => $dataProvider,
         //'filterModel' => $searchModel,
         'summary'=>'',
         'columns' => [
            // ['class' => 'yii\grid\SerialColumn'],
-
-            //'id',
             'suscrito:boolean',
             'capital',
             'numero_asociacion',
-            'valor_asociacion',
             'numero_aportacion',
-            'valor_aportacion',
             'numero_inversion',
-            'valor_inversion',
             'numero_rotativo',
+            'valor_asociacion',
+            'valor_aportacion',
+            'valor_inversion',
             'valor_rotativo',
+            [
+                'attribute'=>'certificacion_aporte_id',
+                'label'=>'Certificador Aporte',
+                'value'=>'certificacionAporte.naturalJuridica.denominacion'
+            ],
             // 'tipo_certificado',
-            // 'suscrito:boolean',
+            // 
             // 'creado_por',
             // 'actualizado_por',
             // 'sys_status:boolean',
@@ -47,13 +53,23 @@ $this->params['breadcrumbs'][] = $this->title;
 
             ['class' => 'yii\grid\ActionColumn','template'=>'{update}{delete}'],
         ],
-    ]); ?>
-    <?php 
-    if(!$model->existeregistro() && $model->validardenominacion()){ ?>
-      <p>
-        <?= Html::a(Yii::t('app', 'Crear Certificado'), ['create','id'=>'principal'], ['class' => 'btn btn-success']) ?>
-    </p>
+    ]);
+    if(!$searchModel->existeregistro() && $searchModel->Pagocompleto()){ ?>
+        <p>
+            <?= Html::a(Yii::t('app', 'Agregar Aumento de Capital'), ['create','id'=>'aumento'], ['class' => 'btn btn-success']) ?>
+        </p>
+      
+         <?php }  }else{?>
+        
+            <div class="alert-warning alert fade in">
+               
 
-    <?php } ?>
+                <h4>No existe ningun procedimiento referente al aumento de capital activo</h4>
+
+            </div>
+        <?php } ?>
+     
+
+
    
 </div>
