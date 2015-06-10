@@ -406,3 +406,14 @@ COMMENT ON COLUMN cuentas.jj_proviciones.otro_nombre
   IS 'Campo que complementa la informacion seleccionada en conceptos por Otros.';
   
   
+------------------09/06/2015------------
+-- Column: tipo
+
+-- ALTER TABLE cuentas.sys_conceptos DROP COLUMN tipo;
+
+ALTER TABLE cuentas.sys_conceptos ADD COLUMN tipo character varying(255);
+COMMENT ON COLUMN cuentas.sys_conceptos.tipo IS 'Clasificacion de mayor nivel a los items de las cuentas.';
+
+
+
+
