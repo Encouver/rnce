@@ -65,6 +65,7 @@ AppAsset::register($this);
                         ['label' => 'B-1 - Cuentas por cobrar comerciales', 'url' => ['cuentas-b1-cuentas-por-cobrar-comerciales/index']],
                         ['label' => 'B-2.1 - Otras cuentas por cobrar', 'url' => ['cuentas-b2-otras-cuentas-por-cobrar/index']],
                         ['label' => 'B-2.2 - Cuentas por cobrar comerciales', 'url' => ['cuentas-b2-otras-cuentas-por-cobrar-e/index']],
+                        ['label' => 'I-4 - Costos personal', 'url' => ['cuentas-i4-costos-personal/index']],
 
 
 

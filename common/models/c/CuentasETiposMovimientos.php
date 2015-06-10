@@ -10,6 +10,7 @@ use Yii;
  * @property integer $id
  * @property integer $e_inversion_id
  * @property integer $movimiento_id
+ * @property integer $motivo_retiro_id
  * @property string $fecha
  * @property string $monto_nominal
  * @property string $monto_nominal_ajustado
@@ -21,7 +22,7 @@ use Yii;
  * @property string $sys_finalizado_el
  *
  * @property CuentasEInversiones $eInversion
- * @property CuentasEMovimientos $movimiento
+ * @property CuentasSysConceptos $movimiento
  */
 class CuentasETiposMovimientos extends \common\components\BaseActiveRecord
 {
@@ -40,10 +41,11 @@ class CuentasETiposMovimientos extends \common\components\BaseActiveRecord
     {
         return [
             [['e_inversion_id', 'movimiento_id', 'fecha', 'monto_nominal', 'monto_nominal_ajustado'], 'required'],
-            [['e_inversion_id', 'movimiento_id', 'creado_por', 'actualizado_por'], 'integer'],
+            [['e_inversion_id', 'movimiento_id', 'motivo_retiro_id', 'creado_por', 'actualizado_por'], 'integer'],
             [['fecha', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['monto_nominal', 'monto_nominal_ajustado'], 'number'],
-            [['sys_status'], 'boolean']
+            [['sys_status'], 'boolean'],
+            [['e_inversion_id', 'movimiento_id'], 'unique', 'targetAttribute' => ['e_inversion_id', 'movimiento_id'], 'message' => 'The combination of E Inversion ID and Movimiento ID has already been taken.']
         ];
     }
 
@@ -56,6 +58,7 @@ class CuentasETiposMovimientos extends \common\components\BaseActiveRecord
             'id' => Yii::t('app', 'ID'),
             'e_inversion_id' => Yii::t('app', 'E Inversion ID'),
             'movimiento_id' => Yii::t('app', 'Movimiento ID'),
+            'motivo_retiro_id' => Yii::t('app', 'Motivo Retiro ID'),
             'fecha' => Yii::t('app', 'Fecha'),
             'monto_nominal' => Yii::t('app', 'Monto Nominal'),
             'monto_nominal_ajustado' => Yii::t('app', 'Monto Nominal Ajustado'),
@@ -81,6 +84,6 @@ class CuentasETiposMovimientos extends \common\components\BaseActiveRecord
      */
     public function getMovimiento()
     {
-        return $this->hasOne(CuentasEMovimientos::className(), ['id' => 'movimiento_id']);
+        return $this->hasOne(CuentasSysConceptos::className(), ['id' => 'movimiento_id']);
     }
 }

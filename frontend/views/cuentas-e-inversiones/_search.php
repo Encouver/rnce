@@ -21,13 +21,11 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'corriente')->checkbox() ?>
 
-    <?= $form->field($model, 'disponibilidad') ?>
+    <?= $form->field($model, 'disponibilidad_id') ?>
 
-    <?= $form->field($model, 'tipo_instrumento') ?>
+    <?= $form->field($model, 'tipo_instrumento_id') ?>
 
     <?php // echo $form->field($model, 'nombre_instrumento') ?>
-
-    <?php // echo $form->field($model, 'motivo_retiro') ?>
 
     <?php // echo $form->field($model, 'numero_acc_bon') ?>
 
@@ -48,8 +46,6 @@ use yii\widgets\ActiveForm;
     <?php // echo $form->field($model, 'sys_actualizado_el') ?>
 
     <?php // echo $form->field($model, 'sys_finalizado_el') ?>
-
-    <?php // echo $form->field($model, 'fecha_motivo') ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>

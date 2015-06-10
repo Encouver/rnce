@@ -28,13 +28,12 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
+            //'id',
             'empresa_relacionada_id',
             'corriente:boolean',
-            'disponibilidad',
-            'tipo_instrumento',
+            'disponibilidad_id',
+            'tipo_instrumento_id',
             'nombre_instrumento',
-            'motivo_retiro',
             'numero_acc_bon',
             'e_inversion_info_adicional_id',
             'contratista_id',
@@ -45,7 +44,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'sys_creado_el',
             'sys_actualizado_el',
             'sys_finalizado_el',
-            'fecha_motivo',
         ],
     ]) ?>
 

@@ -18,9 +18,9 @@ class CuentasEInversionesSearch extends CuentasEInversiones
     public function rules()
     {
         return [
-            [['id', 'empresa_relacionada_id', 'numero_acc_bon', 'e_inversion_info_adicional_id', 'contratista_id', 'creado_por', 'actualizado_por'], 'integer'],
+            [['id', 'empresa_relacionada_id', 'disponibilidad_id', 'tipo_instrumento_id', 'numero_acc_bon', 'e_inversion_info_adicional_id', 'contratista_id', 'creado_por', 'actualizado_por'], 'integer'],
             [['corriente', 'sys_status'], 'boolean'],
-            [['disponibilidad', 'tipo_instrumento', 'nombre_instrumento', 'motivo_retiro', 'anho', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el', 'fecha_motivo'], 'safe'],
+            [['nombre_instrumento', 'anho', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
         ];
     }
 
@@ -60,6 +60,8 @@ class CuentasEInversionesSearch extends CuentasEInversiones
             'id' => $this->id,
             'empresa_relacionada_id' => $this->empresa_relacionada_id,
             'corriente' => $this->corriente,
+            'disponibilidad_id' => $this->disponibilidad_id,
+            'tipo_instrumento_id' => $this->tipo_instrumento_id,
             'numero_acc_bon' => $this->numero_acc_bon,
             'e_inversion_info_adicional_id' => $this->e_inversion_info_adicional_id,
             'contratista_id' => $this->contratista_id,
@@ -69,13 +71,9 @@ class CuentasEInversionesSearch extends CuentasEInversiones
             'sys_creado_el' => $this->sys_creado_el,
             'sys_actualizado_el' => $this->sys_actualizado_el,
             'sys_finalizado_el' => $this->sys_finalizado_el,
-            'fecha_motivo' => $this->fecha_motivo,
         ]);
 
-        $query->andFilterWhere(['like', 'disponibilidad', $this->disponibilidad])
-            ->andFilterWhere(['like', 'tipo_instrumento', $this->tipo_instrumento])
-            ->andFilterWhere(['like', 'nombre_instrumento', $this->nombre_instrumento])
-            ->andFilterWhere(['like', 'motivo_retiro', $this->motivo_retiro])
+        $query->andFilterWhere(['like', 'nombre_instrumento', $this->nombre_instrumento])
             ->andFilterWhere(['like', 'anho', $this->anho]);
 
         return $dataProvider;

@@ -107,7 +107,7 @@ class CuentasDd3OtrosTributos extends \common\components\BaseActiveRecord
                 ],
                 
                 //'corriente'=>['type'=>Form::INPUT_CHECKBOX,'label'=>'Corriente'],
-                'concepto_id'=>['type'=>Form::INPUT_DROPDOWN_LIST, 'items'=>ArrayHelper::map(CuentasConceptos::find()->where(['cuenta' => 'dd3'])->orderBy('id')->asArray()->all(), 'id', 'nombre'), 'label'=>'Concepto'],                
+                'concepto_id'=>['type'=>Form::INPUT_DROPDOWN_LIST, 'items'=>ArrayHelper::map(CuentasSysConceptos::find()->where(['cuenta' => 'dd3'])->orderBy('id')->asArray()->all(), 'id', 'nombre'), 'label'=>'Concepto'],
                 'otro_nombre'=>['type'=>Form::INPUT_TEXT,'label'=>'Especifique'],
                 'saldo_p_anterior'=>['type'=>Form::INPUT_TEXT, 'label'=>'Saldo del período anterior'],              
                 'importe_gasto_ejer_eco'=>['type'=>Form::INPUT_TEXT,'label'=>'Importe gasto'],
