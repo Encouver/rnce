@@ -152,7 +152,11 @@ class LimitacionesCapitales extends \common\components\BaseActiveRecord
         return $this->hasMany(LimitacionesCapitalesAfectados::className(), ['limitacion_capital_id' => 'id']);
     }
     public function getFormAttribs() {
-      
+      if($this->afecta){
+         $comun=  $this->Existecomun();
+         
+            
+        }
 
     $persona = empty($this->certificacion_aporte_id) ? '' : CertificacionesAportes::findOne($this->certificacion_aporte_id)->getNombreJuridica();
         $attributes = [
@@ -185,11 +189,19 @@ class LimitacionesCapitales extends \common\components\BaseActiveRecord
          if($this->afecta){
        
              $attributes['valor_accion'] = ['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Valor accion'],'label'=>'Valor Unitario de las Acciones preferenciales una vez aplicada la Limitación'];
+             if($comun){
              $attributes['valor_accion_comun'] = ['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Valor accion'],'label'=>'Valor Unitario de las Acciones comunes una vez aplicada la Limitación'];
+            
+             }
              $attributes['total_accion'] = ['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Valor accion'],'label'=>'Total Número de Acciones / Participaciones preferenciales'];
+             if($comun){
              $attributes['total_accion_comun'] = ['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Valor accion'],'label'=>'Total Número de Acciones / Participaciones comunes'];
-              $attributes['valor_accion_actual'] = ['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Valor accion'],'label'=>'Valor actual de las Acciones / Participaciones preferenciales'];
+             } 
+             $attributes['valor_accion_actual'] = ['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Valor accion'],'label'=>'Valor actual de las Acciones / Participaciones preferenciales'];
+            if($comun){
              $attributes['valor_accion_comun_actual'] = ['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Valor accion'],'label'=>'Valor actual de las Acciones / Participaciones comunes'];
+             
+             }
              $attributes['total_capital'] = ['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Valor accion'],'label'=>'Total Capital Social una vez aplicada la Limitación'];
         }
         $attributes['fecha_limitacion'] = ['type'=>Form::INPUT_WIDGET, 
@@ -252,19 +264,18 @@ class LimitacionesCapitales extends \common\components\BaseActiveRecord
     public function Asignarcorreccion($correccion){
          if(!is_null($correccion->valor_accion_comun)){
                        
-                       $this->total_accion=$correccion->total_accion;
-                      $this->valor_accion=$correccion->valor_accion;
-                      $this->variacion_valor=0;
-                       $this->valor_accion_comun=$correccion->valor_accion_comun;
-                      $this->variacion_valor_comun=0;
-                       $this->total_accion_comun=$correccion->total_accion_comun;
+                       //$this->total_accion=$correccion->total_accion;
+                      $this->valor_accion_actual=$correccion->valor_accion;
+                    
+                       $this->valor_accion_comun_actual=$correccion->valor_accion_comun;
+
+                       //$this->total_accion_comun=$correccion->total_accion_comun;
                    
                    return true;
                }else{
                   
-                       $this->total_accion=$correccion->total_accion;
-                      $this->valor_accion=$correccion->valor_accion;
-                      $this->variacion_valor=0;
+                       $this->valor_accion_actual=$correccion->valor_accion;
+                    
                    
                  return false; 
                }
@@ -272,19 +283,19 @@ class LimitacionesCapitales extends \common\components\BaseActiveRecord
       public function Asignarlimitacion($limitacion){
          if(!is_null($limitacion->valor_accion_comun)){
                        
-                       $this->total_accion=$limitacion->total_accion;
-                      $this->valor_accion=$limitacion->valor_accion;
-                      $this->variacion_valor=0;
-                       $this->valor_accion_comun=$limitacion->valor_accion_comun;
-                      $this->variacion_valor_comun=0;
-                       $this->total_accion_comun=$limitacion->total_accion_comun;
+                       //$this->total_accion=$limitacion->total_accion;
+                      $this->valor_accion_actual=$limitacion->valor_accion;
+                     
+                       $this->valor_accion_comun_actual=$limitacion->valor_accion_comun;
+                   
+                      // $this->total_accion_comun=$limitacion->total_accion_comun;
                    
                    return true;
                }else{
                   
-                       $this->total_accion=$accion->total_accion;
-                      $this->valor_accion=$accion->valor_accion;
-                      $this->variacion_valor=0;
+                    
+                      $this->valor_accion_actual=$limitacion->valor_accion;
+
                    
                  return false; 
                }
@@ -293,7 +304,7 @@ class LimitacionesCapitales extends \common\components\BaseActiveRecord
        
        $accion = Acciones::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'suscrito'=>true,'actual'=>true]);
        $correccion= CorreccionesMonetarias::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'actual'=>true]);
-       $limitacion= LimitacionesCapitales::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'no_afecta'=>false,'actual'=>true]);
+       $limitacion= LimitacionesCapitales::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'afecta'=>true,'actual'=>true]);
        if(isset($correccion) || isset($limitacion)){
             $documento_accion= ActivosDocumentosRegistrados::findOne($accion->documento_registrado_id);
             if(isset($correccion)){
@@ -346,24 +357,20 @@ class LimitacionesCapitales extends \common\components\BaseActiveRecord
             }
         }
        if(!is_null($accion->numero_comun)){
-
-                      $this->total_accion=$accion->numero_preferencial;
-                      $this->valor_accion=$accion->valor_preferencial;
-                     $this->variacion_valor=0;
-                       $this->valor_accion_comun=$accion->valor_comun;
-                      $this->variacion_valor_comun=0;
-                       $this->total_accion_comun=$accion->numero_comun;
+            $this->valor_accion_actual=$accion->valor_preferencial;
+                     
+                       $this->valor_accion_comun_actual=$accion->valor_comun;
                    
+                
                    return true;
        }else{
-
-                     $this->total_accion=$accion->numero_preferencial;
-                      $this->valor_accion=$accion->valor_preferencial;
-                      $this->variacion_valor=0;
+            $this->valor_accion_comun_actual=$accion->valor_comun;
+            $this->valor_accion_actual=$accion->valor_preferencial;
+            
             
        }
-       
-       return false;
+        return false;
+      
     }
     public function Modificacionactual(){
        
@@ -381,21 +388,29 @@ class LimitacionesCapitales extends \common\components\BaseActiveRecord
        if(isset($registro)){
                $modificacion= ModificacionesActas::findOne(['documento_registrado_id'=>$registro->id]);
                if(isset($modificacion)){
-                   if(!$modificacion->coreccion_monetaria){
+                   if(!$modificacion->limitacion_capital && !$modificacion->limitacion_capital_afectado){
                        return true;
+                   }else{
+                       if($modificacion->limitacion_capital){
+                           $this->afecta=false;
+                       }else{
+                           $this->afecta=true;
+                       }
                    }
-              }else{
-                   return true;
-               }
-           
-          $correccion = CorreccionesMonetarias::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'documento_registrado_id'=>$registro->id]);
-           if(isset($correccion)){
+                $limitacion = LimitacionesCapitales::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'documento_registrado_id'=>$registro->id]);
+                    if(isset($correccion)){
                
-                return true;   
-            }else{
-                $this->documento_registrado_id=$registro->id;
-                return false;
-            }
+                        return true;   
+                    }else{
+                        $this->documento_registrado_id=$registro->id;
+                    }
+                   
+                }else{
+                   return true;
+                }
+
+               
+            
         }else{
             return true;
         }

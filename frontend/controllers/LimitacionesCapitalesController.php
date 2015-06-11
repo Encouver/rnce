@@ -34,6 +34,15 @@ class LimitacionesCapitalesController extends BaseController
     {
         $searchModel = new LimitacionesCapitalesSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $documento=$searchModel->Modificacionactual();
+        if(isset($documento)){
+            $searchModel->documento_registrado_id= $documento->documento_registrado_id;
+          if($documento->limitacion_capital){
+               $searchModel->afecta= false;
+          }else{
+               $searchModel->afecta= true;
+          }
+        }
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -61,7 +70,11 @@ class LimitacionesCapitalesController extends BaseController
     public function actionCreate()
     {
         $model = new LimitacionesCapitales();
-        $model->afecta=true;
+         if($model->existeregistro()){
+            
+            Yii::$app->session->setFlash('error','Usuario posee una limitacion de capital en curso o no ha creado una modificacion');
+            return $this->redirect(['index']);
+        }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);

@@ -34,7 +34,6 @@ class ModificacionesActasController extends BaseController
     {
         $searchModel = new ModificacionesActasSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -89,7 +88,28 @@ class ModificacionesActasController extends BaseController
                    $model->fondo_emergencia=true;
                     break;
                 case "limitacion_capital":
-                    $model->limitacion_capita=true;
+                   
+                    if($model->limitacion_capital_afectado){
+                        Yii::$app->session->setFlash('error','Error solo puede elegir una limitacion de capital');
+                    return $this->render('create', [
+                    'model'=>$model,
+                        ]);
+                    }else{
+                         $model->limitacion_capital=true;
+                    }
+       
+                    break;
+                case "limitacion_capital_afectado":
+                    
+                    if($model->limitacion_capital){
+                        Yii::$app->session->setFlash('error','Error solo puede elegir una limitacion de capital');
+                    return $this->render('create', [
+                    'model'=>$model,
+                        ]);
+                    }else{
+                        $model->limitacion_capital_afectado=true;
+                    }
+       
                     break;
                 case "disminucion_capital":
                      $model->disminucion_capital=true;

@@ -72,10 +72,7 @@ class CorreccionesMonetariasController extends BaseController
             Yii::$app->session->setFlash('error','Usuario posee una correcion monetaria en curso o no ha creado una modificacion');
             return $this->redirect(['index']);
         }
-         if(!$model->Pagocompleto()){
-                Yii::$app->session->setFlash('error','No existe un incremento por correcion monetaria valido, realice el pago de capital');
-                return $this->redirect(['index']);
-            }
+      
         //$model->existecomun();
         
         

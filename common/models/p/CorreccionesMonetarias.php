@@ -220,9 +220,8 @@ class CorreccionesMonetarias extends \common\components\BaseActiveRecord
                    
                    return true;
                }else{
-                  
-                       $this->total_accion=$accion->total_accion;
-                      $this->valor_accion=$accion->valor_accion;
+                  $this->total_accion=$limitacion->total_accion;
+                      $this->valor_accion=$limitacion->valor_accion;
                       $this->variacion_valor=0;
                    
                  return false; 
@@ -232,7 +231,7 @@ class CorreccionesMonetarias extends \common\components\BaseActiveRecord
        
        $accion = Acciones::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'suscrito'=>true,'actual'=>true]);
        $correccion= CorreccionesMonetarias::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'actual'=>true]);
-       $limitacion= LimitacionesCapitales::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'no_afecta'=>false,'actual'=>true]);
+       $limitacion= LimitacionesCapitales::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'afecta'=>true,'actual'=>true]);
        if(isset($correccion) || isset($limitacion)){
             $documento_accion= ActivosDocumentosRegistrados::findOne($accion->documento_registrado_id);
             if(isset($correccion)){
