@@ -174,9 +174,9 @@ class CuentasB2OtrasCuentasPorCobrarE extends \common\components\BaseActiveRecor
         //print_r($empresasR);
         //if(empty($empresasR))
         $empresas = [];
-        foreach ($empresasR as $key => $value) {
-            $empresas = [['id' => $key, 'nombre' => $value->getPersonaJuridica()->nombre]];
-        }
+        /*foreach ($empresasR as $key => $value) {
+            $empresas = [['id' => $key, 'nombre' => $value->personaJuridica()->denominacion]];
+        }*/
 
         return [
                 // primary key column

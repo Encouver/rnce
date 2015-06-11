@@ -71,13 +71,13 @@ class ActivosSysMetodosMedicionController extends BaseController
         }
     }
 
-    public function actionCapas()
+    /*public function actionCapas()
     {
         $model = new ActivosSysMetodosMedicion();
         $model->scenario = 'capas';
 
-        return $this->render('_capas', ['model' => $model]);
-    }
+        return $this->render('capas', ['model' => $model]);
+    }*/
 
     /**
      * Updates an existing ActivosSysMetodosMedicion model.
