@@ -39,8 +39,16 @@ class LimitacionesCapitalesController extends BaseController
             $searchModel->documento_registrado_id= $documento->documento_registrado_id;
           if($documento->limitacion_capital){
                $searchModel->afecta= false;
+               $searchModel->reintegro= false;
           }else{
+              if($documento->limitacion_capital_afectado){
                $searchModel->afecta= true;
+               $searchModel->reintegro= false;
+                }else{
+                    $searchModel->afecta= false;
+               $searchModel->reintegro= true;
+                }
+              
           }
         }
 
@@ -72,7 +80,7 @@ class LimitacionesCapitalesController extends BaseController
         $model = new LimitacionesCapitales();
          if($model->existeregistro()){
             
-            Yii::$app->session->setFlash('error','Usuario posee una limitacion de capital en curso o no ha creado una modificacion');
+            Yii::$app->session->setFlash('error','Usuario posee una limitacion en curso o no ha creado una modificacion');
             return $this->redirect(['index']);
         }
 

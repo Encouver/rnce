@@ -12,7 +12,14 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="limitaciones-capitales-create">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+   <?php 
+   if(!$model->reintegro){
+   echo Html::tag('h1', 'Crear Lmitaciones Capitales');
+   
+   }else{
+       echo Html::tag('h1', 'Crear Reintegro de Perdidas');
+   }
+   ?>
 
     <?= $this->render('_form', [
         'model' => $model,

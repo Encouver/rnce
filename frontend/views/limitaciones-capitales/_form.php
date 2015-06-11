@@ -18,7 +18,9 @@ use kartik\builder\Form;
     'form'=>$form,
     'columns'=>4,
     'attributes'=>$model->getFormAttribs()
-      ]); ?>
+      ]); 
+    
+    print_r($model);?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

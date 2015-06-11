@@ -69,8 +69,9 @@ class LimitacionesCapitales extends \common\components\BaseActiveRecord
     public function rules()
     {
         return [
-            [['afecta', 'fecha_cierre', 'capital_social', 'total_patrimonio', 'porcentaje_descapitalizacion', 'supuesto', 'monto_perdida', 'fecha_limitacion', 'capital_social_actualizado', 'certificacion_aporte_id', 'reintegro', 'fecha_informe', 'contratista_id', 'documento_registrado_id'], 'required'],
+            [['afecta', 'fecha_cierre', 'total_patrimonio', 'porcentaje_descapitalizacion', 'supuesto', 'monto_perdida', 'fecha_limitacion', 'capital_social_actualizado', 'certificacion_aporte_id', 'reintegro', 'fecha_informe', 'contratista_id', 'documento_registrado_id'], 'required'],
             [['capital_legal','valor_accion', 'valor_accion_comun', 'valor_accion_actual', 'valor_accion_comun_actual', 'capital_legal_actual', 'total_capital','capital_legal_actualizado'], 'required','on'=>'afectado'],
+            [['capital_legal_actualizado','saldo_perdida'], 'required','on'=>'reintegro'],
             [['afecta', 'supuesto', 'reintegro', 'sys_status', 'actual'], 'boolean'],
             [['fecha_cierre', 'fecha_limitacion', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el', 'fecha_informe'], 'safe'],
             [['capital_social', 'total_patrimonio', 'porcentaje_descapitalizacion', 'monto_perdida', 'capital_social_actualizado', 'capital_legal', 'saldo_perdida', 'valor_accion', 'valor_accion_comun', 'valor_accion_actual', 'valor_accion_comun_actual', 'capital_legal_actual', 'total_capital','capital_legal_actualizado'], 'number'],
@@ -171,7 +172,7 @@ class LimitacionesCapitales extends \common\components\BaseActiveRecord
             'total_accion'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Valor accion'],'label'=>'Total Accion Preferencial'],
       */
             ];
-        if($this->afecta){
+        if($this->afecta || $this->reintegro){
             $attributes['capital_legal_actualizado'] = ['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Valor accion'],'label'=>'Capital Social Legal'];
          
             
@@ -181,11 +182,19 @@ class LimitacionesCapitales extends \common\components\BaseActiveRecord
          $attributes['porcentaje_descapitalizacion'] = ['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Valor accion'],'label'=>'Porcentaje de descapitalizacion'];
          $attributes['supuesto'] = ['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Valor accion'],'label'=>'Supuesto del Artículo 264 del Código de Comercio'];
         $attributes['monto_perdida'] = ['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Valor accion'],'label'=>'Monto del Déficit o Pérdida Acumulada'];
+        if($this->reintegro){
+            $attributes['saldo_perdida'] = ['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Valor accion'],'label'=>'Saldo del Déficit o Pérdida Acumulada'];
+            
+        }
         if($this->afecta){
             $attributes['capital_legal'] = ['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Valor accion'],'label'=>'Capital Social Legal una vez aplicada la Limitación'];
             
         }
-         $attributes['capital_social'] = ['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Valor accion'],'label'=>'Capital Social Legal una vez aplicada la Limitación'];
+         if(!$this->reintegro){
+          $attributes['capital_social'] = ['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Valor accion'],'label'=>'Capital Social Legal una vez aplicada la Limitación'];
+            
+        }
+         
          if($this->afecta){
        
              $attributes['valor_accion'] = ['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Valor accion'],'label'=>'Valor Unitario de las Acciones preferenciales una vez aplicada la Limitación'];
@@ -202,7 +211,12 @@ class LimitacionesCapitales extends \common\components\BaseActiveRecord
              $attributes['valor_accion_comun_actual'] = ['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Valor accion'],'label'=>'Valor actual de las Acciones / Participaciones comunes'];
              
              }
-             $attributes['total_capital'] = ['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Valor accion'],'label'=>'Total Capital Social una vez aplicada la Limitación'];
+              if(!$this->reintegro){
+          $attributes['total_capital'] = ['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Valor accion'],'label'=>'Total Capital Social una vez aplicada la Limitación'];
+            
+                }
+         
+            
         }
         $attributes['fecha_limitacion'] = ['type'=>Form::INPUT_WIDGET, 
             'widgetClass'=>'\kartik\widgets\DatePicker', 
@@ -388,13 +402,23 @@ class LimitacionesCapitales extends \common\components\BaseActiveRecord
        if(isset($registro)){
                $modificacion= ModificacionesActas::findOne(['documento_registrado_id'=>$registro->id]);
                if(isset($modificacion)){
-                   if(!$modificacion->limitacion_capital && !$modificacion->limitacion_capital_afectado){
+                   if(!$modificacion->limitacion_capital && !$modificacion->limitacion_capital_afectado && !$modificacion->reintegro_perdida){
                        return true;
                    }else{
                        if($modificacion->limitacion_capital){
                            $this->afecta=false;
+                           $this->reintegro=false;
+                           
                        }else{
-                           $this->afecta=true;
+                           if($modificacion->limitacion_capital_afectado){
+                                $this->afecta=true;
+                                $this->reintegro=false;
+                                $this->scenario='afectado';
+                           }else{
+                                $this->afecta=false;
+                                $this->reintegro=true;
+                                $this->scenario='reintegro';
+                           }
                        }
                    }
                 $limitacion = LimitacionesCapitales::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'documento_registrado_id'=>$registro->id]);

@@ -535,3 +535,4 @@ ALTER TABLE limitaciones_capitales
       REFERENCES activos.documentos_registrados (id) MATCH SIMPLE
       ON UPDATE CASCADE ON DELETE NO ACTION;
 
+ALTER TABLE limitaciones_capitales ALTER COLUMN capital_social SET NOT NULL;

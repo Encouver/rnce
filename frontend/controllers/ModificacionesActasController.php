@@ -89,8 +89,8 @@ class ModificacionesActasController extends BaseController
                     break;
                 case "limitacion_capital":
                    
-                    if($model->limitacion_capital_afectado){
-                        Yii::$app->session->setFlash('error','Error solo puede elegir una limitacion de capital');
+                    if($model->limitacion_capital_afectado ||$model->reintegro_perdida){
+                        Yii::$app->session->setFlash('error','Error solo puede elegir una limitacion de capital  o un reintegro de perdida');
                     return $this->render('create', [
                     'model'=>$model,
                         ]);
@@ -101,8 +101,8 @@ class ModificacionesActasController extends BaseController
                     break;
                 case "limitacion_capital_afectado":
                     
-                    if($model->limitacion_capital){
-                        Yii::$app->session->setFlash('error','Error solo puede elegir una limitacion de capital');
+                    if($model->limitacion_capital ||$model->reintegro_perdida){
+                        Yii::$app->session->setFlash('error','Error solo puede elegir una limitacion de capital o un reintegro de perdida');
                     return $this->render('create', [
                     'model'=>$model,
                         ]);
@@ -136,7 +136,16 @@ class ModificacionesActasController extends BaseController
 
                     break;
                 case "reintegro_perdida":
-                     $model->reintegro_perdida=true;
+                   
+                     
+                    if($model->limitacion_capital || $model->limitacion_capital_afectado){
+                        Yii::$app->session->setFlash('error','Error solo puede elegir una limitacion de capital o un reintegro de perdida');
+                    return $this->render('create', [
+                    'model'=>$model,
+                        ]);
+                    }else{
+                         $model->reintegro_perdida=true;
+                    }
                     break;
                 case "limitacion_capital_afectado":
                     $model->limitacion_capital_afectado=true;

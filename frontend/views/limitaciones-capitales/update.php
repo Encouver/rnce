@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 ?>
 <div class="limitaciones-capitales-update">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+   <?= Html::tag(h1, 'Update Lmitaciones Capitales') ?>
 
     <?= $this->render('_form', [
         'model' => $model,
