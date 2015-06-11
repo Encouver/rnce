@@ -422,3 +422,54 @@ ALTER TABLE aportes_capitalizar
       ON UPDATE CASCADE ON DELETE NO ACTION;
 
 
+
+--10 junio 2:00 pm ---
+
+ALTER TABLE correcciones_monetarias DROP COLUMN acta_constitutiva_id;
+ALTER TABLE correcciones_monetarias DROP COLUMN nuevo_valor;
+
+ALTER TABLE correcciones_monetarias ADD COLUMN contratista_id integer;
+ALTER TABLE correcciones_monetarias ALTER COLUMN contratista_id SET NOT NULL;
+COMMENT ON COLUMN correcciones_monetarias.contratista_id IS 'Clave foranea a la tabla contratistas';
+
+ALTER TABLE correcciones_monetarias ADD COLUMN documento_registrado_id integer;
+ALTER TABLE correcciones_monetarias ALTER COLUMN documento_registrado_id SET NOT NULL;
+COMMENT ON COLUMN correcciones_monetarias.documento_registrado_id IS 'Clave foranea a la tabal documentos registrados';
+
+ALTER TABLE correcciones_monetarias ADD COLUMN certificacion_aporte_id integer;
+ALTER TABLE correcciones_monetarias ALTER COLUMN certificacion_aporte_id SET NOT NULL;
+COMMENT ON COLUMN correcciones_monetarias.certificacion_aporte_id IS 'Clave foranea a la tabla certificaciones_aportes';
+
+ALTER TABLE correcciones_monetarias ADD COLUMN fecha_informe date;
+ALTER TABLE correcciones_monetarias ALTER COLUMN fecha_informe SET NOT NULL;
+COMMENT ON COLUMN correcciones_monetarias.fecha_informe IS 'Fehca informe de la certificacion del aporte';
+
+ALTER TABLE correcciones_monetarias ADD COLUMN valor_accion_comun numeric(38,6);
+COMMENT ON COLUMN correcciones_monetarias.valor_accion_comun IS 'Valor de la accion_comun';
+
+ALTER TABLE correcciones_monetarias ADD COLUMN variacion_valor_comun numeric(38,6);
+COMMENT ON COLUMN correcciones_monetarias.variacion_valor_comun IS 'Variacion en el valor de la accion_comun';
+
+ALTER TABLE correcciones_monetarias ADD COLUMN total_accion_comun numeric(38,6);
+COMMENT ON COLUMN correcciones_monetarias.total_accion_comun IS 'Total aciones_comunes';
+
+ALTER TABLE correcciones_monetarias ADD COLUMN actual boolean;
+ALTER TABLE correcciones_monetarias ALTER COLUMN actual SET NOT NULL;
+ALTER TABLE correcciones_monetarias ALTER COLUMN actual SET DEFAULT true;
+COMMENT ON COLUMN correcciones_monetarias.actual IS 'true si es la correccion monetaria actual';
+
+ALTER TABLE correcciones_monetarias
+  ADD CONSTRAINT correcciones_monetarias_certificacion_aporte_id_fkey FOREIGN KEY (certificacion_aporte_id)
+      REFERENCES certificaciones_aportes (id) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE NO ACTION;
+
+ALTER TABLE correcciones_monetarias
+  ADD CONSTRAINT correcciones_monetarias_contratista_id_fkey FOREIGN KEY (contratista_id)
+      REFERENCES contratistas (id) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE NO ACTION;
+
+ALTER TABLE correcciones_monetarias
+  ADD CONSTRAINT correcciones_monetarias_documento_registrado_id_fkey FOREIGN KEY (documento_registrado_id)
+      REFERENCES activos.documentos_registrados (id) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE NO ACTION;
+
