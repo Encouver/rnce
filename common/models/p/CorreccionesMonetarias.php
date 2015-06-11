@@ -5,6 +5,7 @@ use kartik\builder\Form;
 use common\models\a\ActivosDocumentosRegistrados;
 use common\models\p\ModificacionesActas;
 use common\models\p\Acciones;
+use common\models\p\LimitacionesCapitales;
 use common\models\p\ActasConstitutivas;
 use common\models\p\CertificacionesAportes;
 use kartik\widgets\Select2;
@@ -187,52 +188,118 @@ class CorreccionesMonetarias extends \common\components\BaseActiveRecord
         return false;       
        
     }
-     public function Existecomun($actualizar=true){
-       
-       $accion = Acciones::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'suscrito'=>true,'actual'=>true]);
-       $correccion= CorreccionesMonetarias::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'actual'=>true]);
-       
-       if(isset($correccion)){
-           $documento_accion= ActivosDocumentosRegistrados::findOne($accion->documento_registrado_id);
-           $documento_correccion= ActivosDocumentosRegistrados::findOne($correccion->documento_registrado_id);
-           if($documento_correccion->fecha_registro>$documento_accion->fecha_registro){
-               if(!is_null($correccion->valor_accion_comun)){
-                   if($actualizar){
-                       $this->total_accion=$accion->total_accionl;
-                      $this->valor_accion=$accion->valor_accion;
+    public function Asignarcorreccion($correccion){
+         if(!is_null($correccion->valor_accion_comun)){
+                       
+                       $this->total_accion=$correccion->total_accion;
+                      $this->valor_accion=$correccion->valor_accion;
                       $this->variacion_valor=0;
                        $this->valor_accion_comun=$correccion->valor_accion_comun;
                       $this->variacion_valor_comun=0;
                        $this->total_accion_comun=$correccion->total_accion_comun;
-                   }
+                   
                    return true;
                }else{
-                   if($actualizar){
-                       $this->total_accion=$accion->total_accionl;
-                      $this->valor_accion=$accion->valor_accion;
+                  
+                       $this->total_accion=$correccion->total_accion;
+                      $this->valor_accion=$correccion->valor_accion;
                       $this->variacion_valor=0;
-                   }
+                   
                  return false; 
                }
+     }
+      public function Asignarlimitacion($limitacion){
+         if(!is_null($limitacion->valor_accion_comun)){
+                       
+                       $this->total_accion=$limitacion->total_accion;
+                      $this->valor_accion=$limitacion->valor_accion;
+                      $this->variacion_valor=0;
+                       $this->valor_accion_comun=$limitacion->valor_accion_comun;
+                      $this->variacion_valor_comun=0;
+                       $this->total_accion_comun=$limitacion->total_accion_comun;
+                   
+                   return true;
+               }else{
+                  
+                       $this->total_accion=$accion->total_accion;
+                      $this->valor_accion=$accion->valor_accion;
+                      $this->variacion_valor=0;
+                   
+                 return false; 
+               }
+     }
+     public function Existecomun(){
+       
+       $accion = Acciones::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'suscrito'=>true,'actual'=>true]);
+       $correccion= CorreccionesMonetarias::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'actual'=>true]);
+       $limitacion= LimitacionesCapitales::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'no_afecta'=>false,'actual'=>true]);
+       if(isset($correccion) || isset($limitacion)){
+            $documento_accion= ActivosDocumentosRegistrados::findOne($accion->documento_registrado_id);
+            if(isset($correccion)){
+                $documento_correccion= ActivosDocumentosRegistrados::findOne($correccion->documento_registrado_id);
+                if($documento_correccion->fecha_registro>$documento_accion->fecha_registro){
+                    if(isset($limitacion)){
+                        $documento_limitacion= ActivosDocumentosRegistrados::findOne($limitacion->documento_registrado_id);
+                        if($documento_correccion->fecha_registro>$documento_limitacion->fecha_registro){
+                            if($this->Asignarcorreccion($correccion)){
+                                return true;
+                            }else{
+                                return false;
+                            }
+                        }else{
+                            if($this->Asignarlimitacion($limitacion)){
+                                return true;
+                                }else{
+                                  return false;
+                                }
+                            }
+                    }else{
+                        if($this->Asignarcorreccion($correccion)){
+                            return true;
+                        }else{
+                            return false;
+                        }
+                    }
                
-           }
-       }
+                }else{
+                    if(isset($limitacion)){
+                        $documento_limitacion= ActivosDocumentosRegistrados::findOne($limitacion->documento_registrado_id);
+                        if($documento_limitacion->fecha_registro>$documento_accion->fecha_registro){
+                            if($this->Asignarlimitacion($limitacion)){
+                                return true;
+                            }else{
+                                return false;
+                            }
+                        }
+                    }
+                }
+            }else{
+                $documento_limitacion= ActivosDocumentosRegistrados::findOne($limitacion->documento_registrado_id);
+                    if($documento_limitacion->fecha_registro>$documento_accion->fecha_registro){
+                        if($this->Asignarlimitacion($limitacion)){
+                            return true;
+                        }else{
+                            return false;
+                        }
+                    }
+            }
+        }
        if(!is_null($accion->numero_comun)){
-           if($actualizar){
+
                       $this->total_accion=$accion->numero_preferencial;
                       $this->valor_accion=$accion->valor_preferencial;
                      $this->variacion_valor=0;
                        $this->valor_accion_comun=$accion->valor_comun;
                       $this->variacion_valor_comun=0;
                        $this->total_accion_comun=$accion->numero_comun;
-                   }
+                   
                    return true;
        }else{
-           if($actualizar){
+
                      $this->total_accion=$accion->numero_preferencial;
                       $this->valor_accion=$accion->valor_preferencial;
                       $this->variacion_valor=0;
-            }
+            
        }
        
        return false;
@@ -272,4 +339,5 @@ class CorreccionesMonetarias extends \common\components\BaseActiveRecord
             return true;
         }
     }
+    
 }

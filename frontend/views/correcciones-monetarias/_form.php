@@ -20,8 +20,6 @@ use kartik\builder\Form;
     'columns'=>4,
     'attributes'=>$model->getFormAttribs()
       ]); ?>
-
- <?= print_r($model) ?>
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Crear') : Yii::t('app', 'Actualizar'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
@@ -30,7 +28,7 @@ use kartik\builder\Form;
  <?php
 $script = <<< JS
         $( document ).ready(function() {
-        $("#correccionesmonetarias-total_accion_comun").prop('disabled', true);
+        //$("#correccionesmonetarias-total_accion_comun").prop('disabled', true);
        // $("#correccionesmonetarias-total_accion").prop('disabled', true);
         });
 JS;

@@ -162,7 +162,8 @@ class AccionesController extends BaseController
                     $model->actual=true;
                     $model->contratista_id = Yii::$app->user->identity->contratista_id;
                     $paga_acta = new Acciones();
-                    $paga_acta->numero_comun= $model->numero_comun_pagada;
+                    $paga_acta->numero_preferencial= $model->numero_preferencial_pagada;
+                    //$paga_acta->numero_comun= $model->numero_comun_pagada;
                     //$paga_acta->valor_comun= $model->valor_comun;
                     $paga_acta->capital=$model->capital_pagado;
                     $paga_acta->contratista_id=$model->contratista_id;
@@ -310,7 +311,7 @@ class AccionesController extends BaseController
                         }
                     }
                     $pagada_acta->capital=$model->capital_pagado;
-                    $pagada_acta->numero_comun=$model->numero_comun_pagada;
+                    $pagada_acta->numero_preferencial=$model->numero_preferencial_pagada;
                     $pagada_acta->certificacion_aporte_id=$model->certificacion_aporte_id;
                     $pagada_acta->fecha_informe=$model->fecha_informe;
                     $transaction = \Yii::$app->db->beginTransaction();
@@ -420,9 +421,9 @@ class AccionesController extends BaseController
             if($model->tipo_accion=="PRINCIPAL" || $model->tipo_accion=="AUMENTO_CAPITAL"){
                 $pagada_acta = Acciones::findOne(['documento_registrado_id'=>$model->documento_registrado_id,'suscrito'=>false,'tipo_accion'=>$model->tipo_accion]);
                 $model->capital_pagado=$pagada_acta->capital;
-                $model->numero_comun_pagada=$pagada_acta->numero_comun;
+                $model->numero_preferencial_pagada=$pagada_acta->numero_preferencial;
                 if($model->tipo_accion=="AUMENTO_CAPITAL"){
-                    $model->numero_preferencial_pagada=$pagada_acta->numero_preferencial;
+                    $model->numero_comun_pagada=$pagada_acta->numero_comun;
                 }
             }
             return $this->render('update',['model'=>$model]);

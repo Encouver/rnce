@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
    
 
     <?php
-    if(isset($documento)){
+    if(isset($documento) && $documento->aumento_capital){
     echo Html::tag('h1','Aumento de Capital');
        echo GridView::widget([
         'dataProvider' => $dataProvider,

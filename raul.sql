@@ -455,7 +455,7 @@ COMMENT ON COLUMN correcciones_monetarias.total_accion_comun IS 'Total aciones_c
 
 ALTER TABLE correcciones_monetarias ADD COLUMN actual boolean;
 ALTER TABLE correcciones_monetarias ALTER COLUMN actual SET NOT NULL;
-ALTER TABLE correcciones_monetarias ALTER COLUMN actual SET DEFAULT true;
+ALTER TABLE correcciones_monetarias ALTER COLUMN actual SET DEFAULT false;
 COMMENT ON COLUMN correcciones_monetarias.actual IS 'true si es la correccion monetaria actual';
 
 ALTER TABLE correcciones_monetarias
@@ -470,6 +470,68 @@ ALTER TABLE correcciones_monetarias
 
 ALTER TABLE correcciones_monetarias
   ADD CONSTRAINT correcciones_monetarias_documento_registrado_id_fkey FOREIGN KEY (documento_registrado_id)
+      REFERENCES activos.documentos_registrados (id) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE NO ACTION;
+
+
+
+--10 junio 08:45 pm---
+ALTER TABLE limitaciones_capitales DROP COLUMN acta_constitutiva_id;
+ALTER TABLE limitaciones_capitales_afectados DROP COLUMN acta_constitutiva_id;
+ALTER TABLE limitaciones_capitales DROP COLUMN no_afecta;
+
+
+ALTER TABLE limitaciones_capitales ADD COLUMN fecha_informe date;
+ALTER TABLE limitaciones_capitales ALTER COLUMN fecha_informe SET NOT NULL;
+COMMENT ON COLUMN limitaciones_capitales.fecha_informe IS 'referente a la certificacion de aportes';
+
+
+ALTER TABLE limitaciones_capitales ADD COLUMN contratista_id integer;
+ALTER TABLE limitaciones_capitales ALTER COLUMN contratista_id SET NOT NULL;
+COMMENT ON COLUMN limitaciones_capitales.contratista_id IS 'clave foranea a la tabla contratistas';
+
+ALTER TABLE limitaciones_capitales ADD COLUMN documento_registrado_id integer;
+ALTER TABLE limitaciones_capitales ALTER COLUMN documento_registrado_id SET NOT NULL;
+COMMENT ON COLUMN limitaciones_capitales.documento_registrado_id IS 'Clave foranea a la tabla documentos_registrados';
+
+ALTER TABLE limitaciones_capitales ADD COLUMN actual boolean;
+ALTER TABLE limitaciones_capitales ALTER COLUMN actual SET NOT NULL;
+ALTER TABLE limitaciones_capitales ALTER COLUMN actual SET DEFAULT false;
+COMMENT ON COLUMN limitaciones_capitales.actual IS 'true si es la ultima limitacion de capitalque afecta el capital';
+
+ALTER TABLE limitaciones_capitales ADD COLUMN valor_accion numeric(38,6);
+COMMENT ON COLUMN limitaciones_capitales.valor_accion IS 'valor accion';
+
+ALTER TABLE limitaciones_capitales ADD COLUMN valor_accion_comun numeric(38,6);
+COMMENT ON COLUMN limitaciones_capitales.valor_accion_comun IS 'valor accion comun';
+
+ALTER TABLE limitaciones_capitales ADD COLUMN total_accion integer;
+COMMENT ON COLUMN limitaciones_capitales.total_accion IS 'total accion';
+
+ALTER TABLE limitaciones_capitales ADD COLUMN valor_accion_actual numeric(38,6);
+COMMENT ON COLUMN limitaciones_capitales.valor_accion_actual IS 'valor actual de la accion';
+
+ALTER TABLE limitaciones_capitales ADD COLUMN valor_accion_comun_actual numeric(38,6);
+COMMENT ON COLUMN limitaciones_capitales.valor_accion_comun_actual IS 'Valor actual dela accion comun';
+
+
+ALTER TABLE limitaciones_capitales ADD COLUMN capital_legal_actual numeric(38,6);
+COMMENT ON COLUMN limitaciones_capitales.capital_legal_actual IS 'Capital social legal una vez aplicada la limitacion';
+
+ALTER TABLE limitaciones_capitales ADD COLUMN total_capital numeric(38,6);
+COMMENT ON COLUMN limitaciones_capitales.total_capital IS 'total cappital social una vez aplicada la limitacion';
+
+
+ALTER TABLE limitaciones_capitales ADD COLUMN capital_legal_actualizado numeric(38,6);
+COMMENT ON COLUMN limitaciones_capitales.capital_legal_actualizado IS 'Capital legal actualizado';
+
+ALTER TABLE limitaciones_capitales
+  ADD CONSTRAINT limitaciones_capitales_contratistas_id FOREIGN KEY (contratista_id)
+      REFERENCES contratistas (id) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE NO ACTION;
+
+ALTER TABLE limitaciones_capitales
+  ADD CONSTRAINT limitaciones_capitales_documento_registrado_id_fkey FOREIGN KEY (documento_registrado_id)
       REFERENCES activos.documentos_registrados (id) MATCH SIMPLE
       ON UPDATE CASCADE ON DELETE NO ACTION;
 

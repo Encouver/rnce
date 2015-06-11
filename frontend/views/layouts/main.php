@@ -151,6 +151,7 @@ AppAsset::register($this);
                         ['label' => 'Aumento Capital', 'url' => ['/actas-constitutivas/crearaumentocapital']],
                         ['label' => 'Aporte por Capitalizar', 'url' => ['/aportes-capitalizar/index']],
                         ['label' => 'Correcion Monetaria', 'url' => ['/correcciones-monetarias/index']],
+                        ['label' => 'Limitacion de Capital', 'url' => ['/limitaciones-capitales/index']],
                         ['label' => 'Origen Capital', 'url' => ['/origenes-capitales/origen']],
                     ],
                 ],
