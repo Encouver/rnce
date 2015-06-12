@@ -11,25 +11,21 @@ $this->title = Yii::t('app', 'Modificaciones Balances');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="modificaciones-balances-index">
-
-    <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <p>
-        <?= Html::a(Yii::t('app', 'Create Modificaciones Balances'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
-    <?= GridView::widget([
+  
+<?php
+    if(isset($documento) && $documento->modificacion_balance){
+        echo Html::tag('h1', 'Discusión y Aprobación o Modificación de Balances');
+    echo GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+        'summary'=>'',
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+           // ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'acta_constitutiva_id',
             'fecha_cierre',
             'aprobado:boolean',
-            'creado_por',
+            //'creado_por',
             // 'actualizado_por',
             // 'sys_status:boolean',
             // 'sys_creado_el',
@@ -38,8 +34,22 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'contratista_id',
             // 'documento_registrado_id',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn','template'=>'{update}{delete}'],
         ],
-    ]); ?>
+    ]); 
+    if(!$searchModel->existeregistro() && $documento->modificacion_balance){ ?>
+            
+      <p>
+        <?= Html::a(Yii::t('app', 'Agregar Discusión y Aprobación o Modificación de Balances'), ['create'], ['class' => 'btn btn-success']) ?>
+    </p>
+      
+         <?php }  }else{?>
+        
+            <div class="alert-warning alert fade in">
+               
 
+                <h4>No existe ningun procedimiento referente a Discusión y Aprobación o Modificación de Balances activo</h4>
+
+            </div>
+        <?php } ?>
 </div>

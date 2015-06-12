@@ -154,6 +154,7 @@ AppAsset::register($this);
                         ['label' => 'Limitacion de Capital', 'url' => ['/limitaciones-capitales/index']],
                         ['label' => 'Fondo de Emergencia', 'url' => ['/fondos-emergencias/index']],
                         ['label' => 'Decreto de Dividendos en Efectivo ', 'url' => ['/decretos-div-excedentes/index']],
+                        ['label' => 'Discusión y Aprobación o Modificación de Balances', 'url' => ['/modificaciones-balances/index']],
                         ['label' => 'Origen Capital', 'url' => ['/origenes-capitales/origen']],
                     ],
                 ],

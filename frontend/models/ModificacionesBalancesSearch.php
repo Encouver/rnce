@@ -18,7 +18,7 @@ class ModificacionesBalancesSearch extends ModificacionesBalances
     public function rules()
     {
         return [
-            [['id', 'acta_constitutiva_id', 'creado_por', 'actualizado_por', 'contratista_id', 'documento_registrado_id'], 'integer'],
+            [['id','creado_por', 'actualizado_por', 'contratista_id', 'documento_registrado_id'], 'integer'],
             [['fecha_cierre', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['aprobado', 'sys_status'], 'boolean'],
         ];
@@ -58,7 +58,6 @@ class ModificacionesBalancesSearch extends ModificacionesBalances
 
         $query->andFilterWhere([
             'id' => $this->id,
-            'acta_constitutiva_id' => $this->acta_constitutiva_id,
             'fecha_cierre' => $this->fecha_cierre,
             'aprobado' => $this->aprobado,
             'creado_por' => $this->creado_por,

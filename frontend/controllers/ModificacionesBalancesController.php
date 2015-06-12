@@ -33,11 +33,17 @@ class ModificacionesBalancesController extends BaseController
     public function actionIndex()
     {
         $searchModel = new ModificacionesBalancesSearch();
+         $documento=$searchModel->Modificacionactual();
+        if(isset($documento)){
+            $searchModel->documento_registrado_id= $documento->documento_registrado_id;
+          
+        }
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'documento'=>$documento,
         ]);
     }
 
@@ -61,9 +67,14 @@ class ModificacionesBalancesController extends BaseController
     public function actionCreate()
     {
         $model = new ModificacionesBalances();
+         if($model->existeregistro()){
+            
+            Yii::$app->session->setFlash('error','Usuario posee una Discusión y Aprobación o Modificación de Balances en curso o no ha creado una modificacion');
+            return $this->redirect(['index']);
+        }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -82,7 +93,7 @@ class ModificacionesBalancesController extends BaseController
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+             return $this->redirect(['index']);
         } else {
             return $this->render('update', [
                 'model' => $model,
