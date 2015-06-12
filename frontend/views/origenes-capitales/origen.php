@@ -47,7 +47,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]); ?>
        <?php 
-    if(!$searchModel->existeregistro()){ ?>
+    if(!$searchModel->existeregistro() && isset($documento)){ ?>
        <p>
         <?= Html::a(Yii::t('app', 'Agregar Efectivo'), ['create', 'identificador' => 'efectivo'], ['class' => 'btn btn-success']) ?>
        </p>
@@ -99,7 +99,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]); ?>
      <?php 
-    if(!$searchModel->existeregistro()){ ?>
+    if(!$searchModel->existeregistro() && isset($documento)){ ?>
         <p>
         <?= Html::a(Yii::t('app', 'Agregar Efectivo Banco'),['create', 'identificador' => 'banco'], ['class' => 'btn btn-success']) ?>
     </p>
@@ -156,14 +156,18 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]); ?>
      <?php 
-    if(!$searchModel->existeregistro()){ ?>
+    if(!$searchModel->existeregistro() && isset($documento)){ ?>
      <p>
         <?= Html::a(Yii::t('app', 'Agregar Bien'), ['create', 'identificador' => 'bien'], ['class' => 'btn btn-success']) ?>
     </p>
     <?php } ?>
-    <hr />
-    <h3>Cuenta por pagar</h3>
-    <?= GridView::widget([
+
+
+    <?php
+    if(isset($documento) && $documento->pago_capital){
+    echo Html::tag('hr');
+       echo Html::tag('h3','Cuenta por pagar');
+       echo GridView::widget([
         'dataProvider' => $dataProvider_cuentapagar,
         //'filterModel' => $searchModel,
         'columns' => [
@@ -171,6 +175,7 @@ $this->params['breadcrumbs'][] = $this->title;
             
             //'id',
             'tipo_origen',
+            'tipo_cuenta',
             //'bien_id',
             //'numero_transaccion',
             //'banco_contratista_id',
@@ -196,17 +201,18 @@ $this->params['breadcrumbs'][] = $this->title;
 
             ['class' => 'yii\grid\ActionColumn', 'template'=>'{update}{delete}'],
         ],
-    ]); ?>
-     <?php 
+    ]);
     if(!$searchModel->existeregistro()){ ?>
      <p>
-        <?= Html::a(Yii::t('app', 'Agregar Pago accionista'), ['create', 'identificador' => 'cuentapagar'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Agregar cuenta por pagar'), ['create', 'identificador' => 'cuentapagar'], ['class' => 'btn btn-success']) ?>
     </p>
-    <?php } ?>
+    <?php } }?>
     
-    <hr />
-    <h3>Decreto de diviendo en acciones</h3>
-    <?= GridView::widget([
+    <?php
+    if(isset($documento) && ($documento->pago_capital || $documento->aumento_capital)){
+    echo Html::tag('hr');
+       echo Html::tag('h3','Decreto de diviendo en acciones');
+       echo GridView::widget([
         'dataProvider' => $dataProvider_decreto,
         //'filterModel' => $searchModel,
         'columns' => [
@@ -232,12 +238,11 @@ $this->params['breadcrumbs'][] = $this->title;
 
             ['class' => 'yii\grid\ActionColumn', 'template'=>'{update}{delete}'],
         ],
-    ]); ?>
-     <?php 
+    ]); 
     if(!$searchModel->existeregistro()){ ?>
-     <p>
+    <p>
         <?= Html::a(Yii::t('app', 'Agregar Decreto dividiendo en acciones'), ['create', 'identificador' => 'decreto'], ['class' => 'btn btn-success']) ?>
     </p>
-    <?php } ?>
+    <?php } } ?>
     
 </div>

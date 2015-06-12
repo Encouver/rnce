@@ -22,7 +22,7 @@ class OrigenesCapitalesSearch extends OrigenesCapitales
             [['monto', 'saldo_cierre_anterior', 'saldo_corte', 'monto_aumento', 'saldo_aumento', 'valor_acciones', 'saldo_cierre_ajustado'], 'number'],
             [['fecha', 'fecha_corte', 'fecha_aumento', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['sys_status', 'efectivo', 'banco', 'bien', 'cuenta_pagar', 'decreto','principal'], 'boolean'],
-            [['tipo_origen'], 'string'],
+            [['tipo_origen','tipo_cuenta'], 'string'],
         ];
     }
 
@@ -89,6 +89,7 @@ class OrigenesCapitalesSearch extends OrigenesCapitales
             'decreto' => $this->decreto,
             'tipo_origen' => $this->tipo_origen,
             'principal' => $this->principal,
+            'tipo_cuenta' => $this->tipo_cuenta,
         ]);
 
         return $dataProvider;

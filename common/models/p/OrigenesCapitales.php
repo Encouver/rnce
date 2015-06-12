@@ -7,11 +7,13 @@ use common\models\p\ActasConstitutivas;
 use common\models\a\ActivosBienes;
 use common\models\p\Certificados;
 use common\models\p\AportesCapitalizar;
+use common\models\p\FondosEmergencias;
 use common\models\p\Suplementarios;
 use common\models\p\Acciones;
 use kartik\widgets\Select2;
 use kartik\builder\Form;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Url;
 use yii\web\JsExpression;
 use Yii;
 
@@ -72,13 +74,13 @@ class OrigenesCapitales extends \common\components\BaseActiveRecord
         return [
             [['bien_id', 'banco_contratista_id', 'numero_accion', 'contratista_id', 'documento_registrado_id', 'creado_por', 'actualizado_por', 'numero_transaccion'], 'integer'],
             [['contratista_id', 'documento_registrado_id','tipo_origen','principal'], 'required'],
-            [['tipo_origen'], 'string'],
+            [['tipo_origen','tipo_cuenta'], 'string'],
             ['monto', 'validarmonto'],
             ['monto_aumento', 'validarmontoaumento'],
             [['monto','fecha'], 'required', 'on' => 'efectivo'],
             [['monto','banco_contratista_id','numero_transaccion'], 'required', 'on' => 'banco'],
             [['numero_accion','valor_acciones','saldo_cierre_ajustado','fecha_aumento','monto_aumento'], 'required', 'on' => 'decreto'],
-            [['saldo_cierre_anterior','saldo_corte','fecha_corte','monto_aumento', 'saldo_aumento'], 'required', 'on' => 'cuentapagar'],
+            [['saldo_cierre_anterior','saldo_corte','fecha_corte','monto_aumento', 'saldo_aumento','tipo_cuenta'], 'required', 'on' => 'cuentapagar'],
             [['monto','bien_id'], 'required', 'on' => 'bien'],
             [['monto', 'saldo_cierre_anterior', 'saldo_corte', 'monto_aumento', 'saldo_aumento', 'valor_acciones', 'saldo_cierre_ajustado'], 'number'],
             [['fecha', 'fecha_corte', 'fecha_aumento', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
@@ -124,6 +126,7 @@ class OrigenesCapitales extends \common\components\BaseActiveRecord
             'decreto' => Yii::t('app', 'Decreto'),
             'tipo_origen' => Yii::t('app', 'Tipo Origen'),
             'principal' => Yii::t('app', 'Principal'),
+            'tipo_cuenta' => Yii::t('app', 'Tipo Cuenta'),
         ];
     }
     public function validarmonto($attribute){
@@ -154,7 +157,7 @@ class OrigenesCapitales extends \common\components\BaseActiveRecord
           
         }else{
             $acta= ActasConstitutivas::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'actual'=>true]);
-            if($this->tipo_origen!='APORTE_CAPITALIZAR'){
+            if($this->tipo_origen!='APORTE_CAPITALIZAR' && $this->tipo_origen!='FONDO_EMERGENCIA'){
                 $denominacion_comercial= DenominacionesComerciales::findOne($acta->denominacion_comercial_id);
                 if($denominacion_comercial->tipo_denominacion!="COOPERATIVA"){
             
@@ -180,9 +183,13 @@ class OrigenesCapitales extends \common\components\BaseActiveRecord
             
                 }
             }else{
-                $aporte= AportesCapitalizar::findOne(['contratista_id'=>Yii::$app->user->identity->id ,'documento_registrado_id'=>$this->documento_registrado_id]);
-                    if(isset($aporte)){
-                        $monto_pagado = $aporte->monto_aporte;
+                
+                $fondo= FondosEmergencias::findOne(['contratista_id'=>Yii::$app->user->identity->id ,'documento_registrado_id'=>$this->documento_registrado_id]);
+                    if(isset($fondo)){
+                        if(!is_null($fondo->monto_asociados)){
+                             $monto_pagado = $fondo->monto_asociados;
+                        }
+                       
                     }
             }
                   
@@ -201,7 +208,7 @@ class OrigenesCapitales extends \common\components\BaseActiveRecord
     public function validarmontoaumento($attribute){
         
         $monto_pagado=0;
-         if($this->tipo_origen!='APORTE_CAPITALIZAR'){
+         if($this->tipo_origen!='APORTE_CAPITALIZAR'  && $this->tipo_origen!='FONDO_EMERGENCIA'){
             $acta= ActasConstitutivas::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'actual'=>true]);
             $denominacion_comercial= DenominacionesComerciales::findOne($acta->denominacion_comercial_id);
             if($denominacion_comercial->tipo_denominacion!="COOPERATIVA"){
@@ -228,12 +235,20 @@ class OrigenesCapitales extends \common\components\BaseActiveRecord
             
          }
          }else{
-          
+                if($this->tipo_origen=='APORTE_CAPITALIZAR'){
                     $aporte= AportesCapitalizar::findOne(['contratista_id'=>Yii::$app->user->identity->id ,'documento_registrado_id'=>$this->documento_registrado_id]);
                         if(isset($aporte)){
                             $monto_pagado = $aporte->monto_aporte;
                         }
-                
+                }else{
+                     $fondo= FondosEmergencias::findOne(['contratista_id'=>Yii::$app->user->identity->id ,'documento_registrado_id'=>$this->documento_registrado_id]);
+                    if(isset($fondo)){
+                        if(!is_null($fondo->monto_asociados)){
+                             $monto_pagado = $fondo->monto_asociados;
+                        }
+                       
+                    }
+                }
             }
                   
             
@@ -318,13 +333,16 @@ class OrigenesCapitales extends \common\components\BaseActiveRecord
          $modificacion = [];
           $modificaciones= ModificacionesActas::findOne(['documento_registrado_id'=>$this->documento_registrado_id]);
           if(isset($modificaciones)){
-                if($modificaciones->pago_capital && $id!='decreto' && $id!='cuentapagar'){
+                if($modificaciones->pago_capital && $id!='decreto'){
                   $modificacion = array_merge ( $modificacion,[['id' => 'PAGO_CAPITAL', 'name' => 'PAGO DE CAPITAL']] );
                    }
-                if($modificaciones->aporte_capitalizar && $id!='decreto'){
+                if($modificaciones->fondo_emergencia && $id!='decreto'){
+                  $modificacion = array_merge ( $modificacion,[['id' => 'FONDO_EMERGENCIA', 'name' => 'FONDO DE EMERGENCIA']] );
+                }
+                if($modificaciones->aporte_capitalizar && $id!='decreto' && $id!='cuentapagar'){
                   $modificacion = array_merge ( $modificacion,[['id' => 'APORTE_CAPITALIZAR', 'name' => 'APORTE POR CAPITALIZAR']] );
                    }
-                if($modificaciones->aumento_capital && $id!='cuentapagar'){
+                if($modificaciones->aumento_capital){
                   $modificacion = array_merge ( $modificacion,[['id' => 'AUMENTO_CAPITAL', 'name' => 'AUMENTO DE CAPITAL']] );
                    }
           }
@@ -459,6 +477,15 @@ class OrigenesCapitales extends \common\components\BaseActiveRecord
            
             return [
                 'tipo_origen'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>ArrayHelper::map($modificacion, 'id', 'name'),'options'=>['prompt'=>'Seleccione tipo origen']],
+                'tipo_cuenta'=>[
+                'type'=>Form::INPUT_WIDGET, 
+                'widgetClass'=>'\kartik\widgets\DepDrop', 
+                'options'=>['pluginOptions'=>[
+                'depends'=>['origenescapitales-tipo_origen'],
+                'placeholder'=>'Select...',
+                'url'=>Url::to(['origenes-capitales/subcat'])
+                    ]],
+                ],
                 'saldo_cierre_anterior'=>['type'=>Form::INPUT_TEXT,'label'=>'Saldo al cierre del ejericio anterior'],
                 'saldo_corte'=>['type'=>Form::INPUT_TEXT,'label'=>'Saldo al corte'],
                 'fecha_corte'=>[

@@ -3,17 +3,17 @@
 namespace frontend\controllers;
 
 use Yii;
-use common\models\p\AportesCapitalizar;
-use app\models\AportesCapitalizarSearch;
+use common\models\p\FondosEmergencias;
+use app\models\FondosEmergenciasSearch;
 use common\models\p\OrigenesCapitales;
 use common\components\BaseController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * AportesCapitalizarController implements the CRUD actions for AportesCapitalizar model.
+ * FondosEmergenciasController implements the CRUD actions for FondosEmergencias model.
  */
-class AportesCapitalizarController extends BaseController
+class FondosEmergenciasController extends BaseController
 {
     public function behaviors()
     {
@@ -28,13 +28,13 @@ class AportesCapitalizarController extends BaseController
     }
 
     /**
-     * Lists all AportesCapitalizar models.
+     * Lists all FondosEmergencias models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new AportesCapitalizarSearch();
-         $documento=$searchModel->Modificacionactual();
+        $searchModel = new FondosEmergenciasSearch();
+          $documento=$searchModel->Modificacionactual();
         if(isset($documento)){
             $searchModel->documento_registrado_id= $documento->documento_registrado_id;
           
@@ -49,7 +49,7 @@ class AportesCapitalizarController extends BaseController
     }
 
     /**
-     * Displays a single AportesCapitalizar model.
+     * Displays a single FondosEmergencias model.
      * @param integer $id
      * @return mixed
      */
@@ -61,16 +61,16 @@ class AportesCapitalizarController extends BaseController
     }
 
     /**
-     * Creates a new AportesCapitalizar model.
+     * Creates a new FondosEmergencias model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new AportesCapitalizar();
-        if($model->existeregistro()){
+        $model = new FondosEmergencias();
+         if($model->existeregistro()){
             
-            Yii::$app->session->setFlash('error','Usuario posee un aporte por capitalizar en curso o no ha creado una modificacion');
+            Yii::$app->session->setFlash('error','Usuario posee un fondo de emergencia en curso o no ha creado una modificacion');
             return $this->redirect(['index']);
         }
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -83,7 +83,7 @@ class AportesCapitalizarController extends BaseController
     }
 
     /**
-     * Updates an existing AportesCapitalizar model.
+     * Updates an existing FondosEmergencias model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -92,15 +92,15 @@ class AportesCapitalizarController extends BaseController
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post())) {
-            $transaction = \Yii::$app->db->beginTransaction();
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            /*$transaction = \Yii::$app->db->beginTransaction();
                     try {
                         $modelaux= $this->findModel($model->id);
-                        if($modelaux->capital>$model->capital){
-                            $origen_capital= OrigenesCapitales::find()->where(['documento_registrado_id'=>$model->documento_registrado_id,'tipo_origen'=>'APORTE_CAPITALIZAR'])->orderBy('monto')->all();
+                        if(!is_null($modelaux->monto_asociados) && ($modelaux->monto_asociados > $model->monto_asociados)){
+                            $origen_capital= OrigenesCapitales::find()->where(['documento_registrado_id'=>$model->documento_registrado_id,'tipo_origen'=>'FONDO_EMERGENCIA'])->orderBy('monto')->all();
                                 if(isset($origen_capital)){
                                     foreach ($origen_capital as $origen) {
-                                        if($origen->sumarmonto(false)>$model->capital){
+                                        if($origen->sumarmonto(false)>$model->monto_asociados){
                                             if(!$origen->delete()){
                                                 $transaction->rollBack();
                                                 Yii::$app->session->setFlash('error','Error al eliminar el origen de capital');
@@ -122,7 +122,8 @@ class AportesCapitalizarController extends BaseController
                         
                     } catch (Exception $e) {
                          $transaction->rollBack();
-                    }
+                    }*/
+             return $this->redirect(['index']);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -131,22 +132,22 @@ class AportesCapitalizarController extends BaseController
     }
 
     /**
-     * Deletes an existing AportesCapitalizar model.
+     * Deletes an existing FondosEmergencias model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
      */
-    public function actionDelete($id)
+      public function actionDelete($id)
     {
         $model = $this->findModel($id);
         $transaction = \Yii::$app->db->beginTransaction();
         try {
-             $origen_capital= OrigenesCapitales::findAll(['documento_registrado_id'=>$model->documento_registrado_id,'tipo_origen'=>'APORTE_CAPITALIZAR']);
+             $origen_capital= OrigenesCapitales::findAll(['documento_registrado_id'=>$model->documento_registrado_id,'tipo_origen'=>'FONDO_EMERGENCIA']);
             if(isset($origen_capital)){
                 foreach ($origen_capital as $origen) {
                     if(!$origen->delete()){
                         $transaction->rollBack();
-                        Yii::$app->session->setFlash('error','Error al eliminar el origen de capital asociado');
+                        Yii::$app->session->setFlash('error','Error al eliminar Activos aportados');
                         return $this->redirect(['index']);
                          
                         
@@ -156,7 +157,7 @@ class AportesCapitalizarController extends BaseController
             }
             if(!$model->delete()){
                 $transaction->rollBack();
-                Yii::$app->session->setFlash('error','Error al eliminar el aporte');
+                Yii::$app->session->setFlash('error','Error al eliminar el fondo de emergencia');
                 
             }else{
                 $transaction->commit();
@@ -169,15 +170,15 @@ class AportesCapitalizarController extends BaseController
     }
 
     /**
-     * Finds the AportesCapitalizar model based on its primary key value.
+     * Finds the FondosEmergencias model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return AportesCapitalizar the loaded model
+     * @return FondosEmergencias the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = AportesCapitalizar::findOne($id)) !== null) {
+        if (($model = FondosEmergencias::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

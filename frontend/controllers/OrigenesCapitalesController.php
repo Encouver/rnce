@@ -10,6 +10,7 @@ use app\models\OrigenesCapitalesSearch;
 use common\components\BaseController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\Json;
 
 /**
  * OrigenesCapitalesController implements the CRUD actions for OrigenesCapitales model.
@@ -91,6 +92,7 @@ class OrigenesCapitalesController extends BaseController
             'dataProvider_cuentapagar'=> $dataProvider_cuentapagar,
             'dataProvider_decreto'=> $dataProvider_decreto,
             'searchModel'=>$searchModel,
+            'documento'=>$documento
         ]);
     }
 
@@ -106,6 +108,57 @@ class OrigenesCapitalesController extends BaseController
             'model' => $this->findModel($id),
         ]);
     }
+    public function actionSubcat() {
+            $out = [];
+            if (isset($_POST['depdrop_parents'])) {
+                    
+                $parents = $_POST['depdrop_parents'];
+                if ($parents != null) {
+                    $categoria = $parents[0];
+                    switch ($categoria){
+                        case "PAGO_CAPITAL":
+                            $out= [
+                                    ['id' => 'ACCIONISTAS', 'name' => 'ACCIONISTAS'],
+                                ];
+                            break;
+                        case "AUMENTO_CAPITAL":
+                            $out= [
+                                    ['id' => 'ACCIONISTAS', 'name' => 'ACCIONISTAS'],
+                                    ['id' => 'PROVEEDORES', 'name' => 'PROVEEDORES'],
+                                    ['id' => 'EMPLEADOS', 'name' => 'EMPLEADOS'],
+                                    ['id' => 'EMPRESAS RELACIONADAS', 'name' => 'EMPRESAS RELACIONADAS'],
+                                
+                                ];
+                            break;
+                        case "FONDO_EMERGENCIA":
+                            $out= [
+                                    ['id' => 'ASOCIADOS', 'name' => 'ASOCIADOS'],
+                                    
+                                ];
+                            break;
+                     
+                        default:
+                        break;
+                      
+
+                    }
+                    
+                  
+
+            // the getSubCatList function will query the database based on the
+            // cat_id and return an array like below:
+            // [
+            // ['id'=>'<sub-cat-id-1>', 'name'=>'<sub-cat-name1>'],
+            // ['id'=>'<sub-cat_id_2>', 'name'=>'<sub-cat-name2>']
+            // ]
+
+                    return Json::encode(['output'=>$out, 'selected'=>'']);
+                   
+                }
+            }
+        return Json::encode(['output'=>'', 'selected'=>'']);
+    }
+
 
     /**
      * Creates a new OrigenesCapitales model.

@@ -152,6 +152,7 @@ AppAsset::register($this);
                         ['label' => 'Aporte por Capitalizar', 'url' => ['/aportes-capitalizar/index']],
                         ['label' => 'Correcion Monetaria', 'url' => ['/correcciones-monetarias/index']],
                         ['label' => 'Limitacion de Capital', 'url' => ['/limitaciones-capitales/index']],
+                        ['label' => 'Fondo de Emergencia', 'url' => ['/fondos-emergencias/index']],
                         ['label' => 'Origen Capital', 'url' => ['/origenes-capitales/origen']],
                     ],
                 ],

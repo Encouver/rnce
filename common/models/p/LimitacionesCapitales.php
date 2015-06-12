@@ -422,7 +422,7 @@ class LimitacionesCapitales extends \common\components\BaseActiveRecord
                        }
                    }
                 $limitacion = LimitacionesCapitales::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'documento_registrado_id'=>$registro->id]);
-                    if(isset($correccion)){
+                    if(isset($limitacion)){
                
                         return true;   
                     }else{

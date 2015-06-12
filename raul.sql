@@ -536,3 +536,35 @@ ALTER TABLE limitaciones_capitales
       ON UPDATE CASCADE ON DELETE NO ACTION;
 
 ALTER TABLE limitaciones_capitales ALTER COLUMN capital_social SET NOT NULL;
+
+
+----11 junio 06:50 pm---
+ALTER TABLE fondos_emergencias ALTER COLUMN corto_plazo DROP NOT NULL;
+ALTER TABLE fondos_emergencias ALTER COLUMN interes DROP NOT NULL;
+ALTER TABLE fondos_emergencias ALTER COLUMN numero_plazo DROP NOT NULL;
+DROP TABLE limitaciones_capitales_afectados;
+
+ALTER TABLE fondos_emergencias DROP COLUMN acta_constitutiva_id;
+
+ALTER TABLE fondos_emergencias ADD COLUMN contratista_id integer;
+ALTER TABLE fondos_emergencias ALTER COLUMN contratista_id SET NOT NULL;
+COMMENT ON COLUMN fondos_emergencias.contratista_id IS 'clave foranea a la tabla contratistas';
+
+ALTER TABLE fondos_emergencias ADD COLUMN documento_registrado_id integer;
+ALTER TABLE fondos_emergencias ALTER COLUMN documento_registrado_id SET NOT NULL;
+COMMENT ON COLUMN fondos_emergencias.documento_registrado_id IS 'Clave foranea a la tabla documentos_registrados';
+
+ALTER TABLE fondos_emergencias
+  ADD CONSTRAINT fondos_emergencias_contratistas_id FOREIGN KEY (contratista_id)
+      REFERENCES contratistas (id) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE NO ACTION;
+
+ALTER TABLE fondos_emergencias
+  ADD CONSTRAINT fondos_emergencias_documento_registrado_id_fkey FOREIGN KEY (documento_registrado_id)
+      REFERENCES activos.documentos_registrados (id) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE NO ACTION;
+
+create type tipo_cuenta_pagar as enum ('ACCIONISTAS','PROVEEDORES','EMPLEADOS','EMPRESAS RELACIONADAS','ASOCIADOS');
+
+ALTER TABLE origenes_capitales ADD COLUMN tipo_cuenta tipo_cuenta_pagar;
+COMMENT ON COLUMN origenes_capitales.tipo_cuenta IS 'tipo_cuenta puede ser  ACCIONISTAS, PROVEEDORES, EMPLEADOS, EMPRESAS RELACIONADAS, ASOCIADOS';

@@ -1,18 +1,17 @@
 <?php
 
 namespace common\models\p;
-
+use kartik\builder\Form;
+use common\models\a\ActivosDocumentosRegistrados;
+use common\models\p\ModificacionesActas;
+use common\models\p\ActasConstitutivas;
+use kartik\widgets\Select2;
+use yii\web\JsExpression;
 use Yii;
-
 /**
- * This is the model class for table "public.fondos_emergencias".
+ * This is the model class for table "fondos_emergencias".
  *
  * @property integer $id
- * @property integer $acta_constitutiva_id
- * @property boolean $sys_status
- * @property string $sys_creado_el
- * @property string $sys_actualizado_el
- * @property string $sys_finalizado_el
  * @property string $fecha_cierre
  * @property string $saldo_fondo
  * @property string $monto_perdida
@@ -24,8 +23,17 @@ use Yii;
  * @property double $tasa_interes
  * @property string $saldo_fondo_actual
  * @property string $monto_actual
+ * @property integer $creado_por
+ * @property integer $actualizado_por
+ * @property boolean $sys_status
+ * @property string $sys_creado_el
+ * @property string $sys_actualizado_el
+ * @property string $sys_finalizado_el
+ * @property integer $contratista_id
+ * @property integer $documento_registrado_id
  *
- * @property ActasConstitutivas $actaConstitutiva
+ * @property ActivosDocumentosRegistrados $documentoRegistrado
+ * @property Contratistas $contratista
  */
 class FondosEmergencias extends \common\components\BaseActiveRecord
 {
@@ -34,7 +42,7 @@ class FondosEmergencias extends \common\components\BaseActiveRecord
      */
     public static function tableName()
     {
-        return 'public.fondos_emergencias';
+        return 'fondos_emergencias';
     }
 
     /**
@@ -43,12 +51,55 @@ class FondosEmergencias extends \common\components\BaseActiveRecord
     public function rules()
     {
         return [
-            [['acta_constitutiva_id', 'fecha_cierre', 'saldo_fondo', 'monto_perdida', 'monto_utilizado', 'corto_plazo', 'numero_plazo', 'interes', 'saldo_fondo_actual', 'monto_actual'], 'required'],
-            [['acta_constitutiva_id', 'numero_plazo'], 'integer'],
-            [['sys_status', 'corto_plazo', 'interes'], 'boolean'],
-            [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el', 'fecha_cierre'], 'safe'],
-            [['saldo_fondo', 'monto_perdida', 'monto_utilizado', 'monto_asociados', 'tasa_interes', 'saldo_fondo_actual', 'monto_actual'], 'number']
+            [['fecha_cierre', 'saldo_fondo', 'monto_perdida', 'monto_utilizado',  'saldo_fondo_actual', 'monto_actual', 'contratista_id', 'documento_registrado_id'], 'required'],
+            [['fecha_cierre', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
+            [['saldo_fondo', 'monto_perdida', 'monto_utilizado', 'monto_asociados', 'tasa_interes', 'saldo_fondo_actual', 'monto_actual'], 'number'],
+            [['corto_plazo', 'interes', 'sys_status'], 'boolean'],
+             ['monto_asociados', 'required', 'when' => function ($model) {
+                return $model->monto_actual >0;
+            }, 'whenClient' => "function (attribute, value) {
+                return $('#fondosemergencias-monto_actual').val()>0;
+            }"],
+           ['corto_plazo', 'required', 'when' => function ($model) {
+                return $model->monto_actual >0;
+            }, 'whenClient' => "function (attribute, value) {
+                return $('#fondosemergencias-monto_actual').val()>0;
+            }"],
+             ['interes', 'required', 'when' => function ($model) {
+                return $model->monto_actual >0;
+            }, 'whenClient' => "function (attribute, value) {
+                return $('#fondosemergencias-monto_actual').val()>0;
+            }"],
+             ['numero_plazo', 'required', 'when' => function ($model) {
+                return $model->monto_actual >0;
+            }, 'whenClient' => "function (attribute, value) {
+                return $('#fondosemergencias-monto_actual').val()>0;
+            }"],
+            ['tasa_interes', 'required', 'when' => function ($model) {
+                return ($model->monto_actual >0 && $model->interes);
+            }, 'whenClient' => "function (attribute, value) {
+                return ($('#fondosemergencias-monto_actual').val()>0 && $('#fondosemergencias-monto_actual').val()==true);
+            }"],
+            ['monto_actual', 'asignarvalor'],
+            ['interes', 'asignartasa'],
+            [['numero_plazo', 'creado_por', 'actualizado_por', 'contratista_id', 'documento_registrado_id'], 'integer']
         ];
+    }
+    public function Asignarvalor($attribute){
+        if($this->monto_actual<=0){
+          $this->numero_plazo=null;
+          $this->interes=null;
+          $this->tasa_interes=null;
+          $this->corto_plazo=null;
+          $this->monto_asociados=null;
+          
+          }
+    }
+     public function Asignartasa($attribute){
+        if(!$this->interes){
+          $this->tasa_interes=null;
+          
+          }
     }
 
     /**
@@ -58,11 +109,6 @@ class FondosEmergencias extends \common\components\BaseActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'acta_constitutiva_id' => Yii::t('app', 'Acta Constitutiva ID'),
-            'sys_status' => Yii::t('app', 'Sys Status'),
-            'sys_creado_el' => Yii::t('app', 'Sys Creado El'),
-            'sys_actualizado_el' => Yii::t('app', 'Sys Actualizado El'),
-            'sys_finalizado_el' => Yii::t('app', 'Sys Finalizado El'),
             'fecha_cierre' => Yii::t('app', 'Fecha Cierre'),
             'saldo_fondo' => Yii::t('app', 'Saldo Fondo'),
             'monto_perdida' => Yii::t('app', 'Monto Perdida'),
@@ -74,14 +120,105 @@ class FondosEmergencias extends \common\components\BaseActiveRecord
             'tasa_interes' => Yii::t('app', 'Tasa Interes'),
             'saldo_fondo_actual' => Yii::t('app', 'Saldo Fondo Actual'),
             'monto_actual' => Yii::t('app', 'Monto Actual'),
+            'creado_por' => Yii::t('app', 'Creado Por'),
+            'actualizado_por' => Yii::t('app', 'Actualizado Por'),
+            'sys_status' => Yii::t('app', 'Sys Status'),
+            'sys_creado_el' => Yii::t('app', 'Sys Creado El'),
+            'sys_actualizado_el' => Yii::t('app', 'Sys Actualizado El'),
+            'sys_finalizado_el' => Yii::t('app', 'Sys Finalizado El'),
+            'contratista_id' => Yii::t('app', 'Contratista ID'),
+            'documento_registrado_id' => Yii::t('app', 'Documento Registrado ID'),
         ];
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getActaConstitutiva()
+    public function getDocumentoRegistrado()
     {
-        return $this->hasOne(ActasConstitutivas::className(), ['id' => 'acta_constitutiva_id']);
+        return $this->hasOne(ActivosDocumentosRegistrados::className(), ['id' => 'documento_registrado_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getContratista()
+    {
+        return $this->hasOne(Contratistas::className(), ['id' => 'contratista_id']);
+    }
+    public function getFormAttribs() {
+      
+
+   
+        return [
+            
+            'fecha_cierre'=>[
+            'type'=>Form::INPUT_WIDGET, 
+            'widgetClass'=>'\kartik\widgets\DatePicker', 
+            'options'=>['pluginOptions' => [
+                    'autoclose'=>true,
+                    'format' => 'yyyy-mm-dd'
+                ]],
+            
+            ],
+           'saldo_fondo'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Inserte valor'],'label'=>'Saldo del Fondo de Emergencia al Cierre del Ejercicio Económico anterior'],
+          'monto_perdida'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Inserte valor'],'label'=>'Monto del Déficit o Pérdida Acumulada'],
+           'monto_utilizado'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Inserte valor'],'label'=>'Monto utilizado del Fondo de Emergencia'],
+           'saldo_fondo_actual'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Inserte valor'],'label'=>'Saldo del Fondo de Emergencia una vez utilizado'],
+           'monto_actual'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Inserte valor'],'label'=>'Monto del Déficit o Pérdida Acumulada una vez utilizado el Fondo de Emergencia'],
+           'monto_asociados'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Inserte valor'],'label'=>'Monto Aporte de Asociados'],
+          'corto_plazo'=>[
+            'type'=>Form::INPUT_RADIO_LIST, 
+            'items'=>[true=>'Corto Plazo', false=>'Largo Plazo'], 
+            'options'=>['inline'=>true],
+             'label'=>'Plazo'
+            ],
+            'numero_plazo'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Inserte valor'],'label'=>'Tiempo de plazo'],
+             'interes'=>[
+            'type'=>Form::INPUT_RADIO_LIST, 
+            'items'=>[true=>'Si', false=>'No'], 
+            'options'=>['inline'=>true]
+            ],
+            'tasa_interes'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Inserte valor'],'label'=>'Tasa de interes'],
+      
+            ];
+
+    }
+     public function Modificacionactual(){
+       
+       $registro = ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'tipo_documento_id'=>2,'proceso_finalizado'=>false]);      
+       
+       if(isset($registro)){
+         $modificacion= ModificacionesActas::findOne(['documento_registrado_id'=>$registro->id]);  
+       }else{
+           $modificacion= ModificacionesActas::findOne(['documento_registrado_id'=>-100]); 
+       }
+       return $modificacion;
+    }
+    public function Existeregistro(){   
+       $registro = ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'tipo_documento_id'=>2,'proceso_finalizado'=>false]);      
+       if(isset($registro)){
+               $modificacion= ModificacionesActas::findOne(['documento_registrado_id'=>$registro->id]);
+               if(isset($modificacion)){
+                   if(!$modificacion->fondo_emergencia){
+                       return true;
+                   }
+                $fondo = FondosEmergencias::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'documento_registrado_id'=>$registro->id]);
+                    if(isset($fondo)){
+               
+                        return true;   
+                    }else{
+                        $this->documento_registrado_id=$registro->id;
+                    }
+                   
+                }else{
+                   return true;
+                }
+
+               
+            
+        }else{
+            return true;
+        }
     }
 }

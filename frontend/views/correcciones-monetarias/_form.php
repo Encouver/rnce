@@ -28,8 +28,8 @@ use kartik\builder\Form;
  <?php
 $script = <<< JS
         $( document ).ready(function() {
-        //$("#correccionesmonetarias-total_accion_comun").prop('disabled', true);
-       // $("#correccionesmonetarias-total_accion").prop('disabled', true);
+       $("#correccionesmonetarias-total_accion_comun").prop('disabled', true);
+       $("#correccionesmonetarias-total_accion").prop('disabled', true);
         });
 JS;
 $this->registerJs($script);
