@@ -247,7 +247,11 @@ class OrigenesCapitalesController extends BaseController
                         $model->scenario='bien';
                     }else{
                
-               
+                        if($model->cuenta_pagar){
+                        $model->scenario='cuentapagar';
+                        }else{
+                            $model->scenario='decreto';
+                        }
                     }
                     
                 }

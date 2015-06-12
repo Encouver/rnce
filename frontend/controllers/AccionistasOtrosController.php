@@ -150,13 +150,16 @@ class AccionistasOtrosController extends BaseController
         }
     }
     
-     public function actionAccionistasOtrosLista($q = null, $id = null) {
+     public function actionAccionistasOtrosLista($q = null, $id = null,$sucursal=null) {
     $buscar_accionista= "natura.denominacion ILIKE "."'%" . $q ."%' and natura.id=accionista.natural_juridica_id and accionista.junta_directiva=false";   
-       
+      //$buscar_accionista= "natura.denominacion ILIKE "."'%" . $q ."%' and natura.id=accionista.natural_juridica_id and accionista.accionista=true";     
     \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
      $out = ['results' => ['id' => '', 'text' => '']];
     if (!is_null($q)) {
         $query = new \yii\db\Query;
+       if(!is_null($sucursal)){
+                 $buscar_accionista= "natura.denominacion ILIKE "."'%" . $q ."%' and natura.id=accionista.natural_juridica_id and accionista.accionista=true";   
+            }
         
         $query->select("natura.id, natura.denominacion AS text")
             ->from('accionistas_otros as accionista, sys_naturales_juridicas as natura')

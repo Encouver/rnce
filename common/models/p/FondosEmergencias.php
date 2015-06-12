@@ -4,9 +4,6 @@ namespace common\models\p;
 use kartik\builder\Form;
 use common\models\a\ActivosDocumentosRegistrados;
 use common\models\p\ModificacionesActas;
-use common\models\p\ActasConstitutivas;
-use kartik\widgets\Select2;
-use yii\web\JsExpression;
 use Yii;
 /**
  * This is the model class for table "fondos_emergencias".

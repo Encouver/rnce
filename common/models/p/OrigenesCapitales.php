@@ -479,7 +479,7 @@ class OrigenesCapitales extends \common\components\BaseActiveRecord
                 'tipo_origen'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>ArrayHelper::map($modificacion, 'id', 'name'),'options'=>['prompt'=>'Seleccione tipo origen']],
                 'tipo_cuenta'=>[
                 'type'=>Form::INPUT_WIDGET, 
-                'widgetClass'=>'\kartik\widgets\DepDrop', 
+                'widgetClass'=>'\kartik\widgets\DepDrop',
                 'options'=>['pluginOptions'=>[
                 'depends'=>['origenescapitales-tipo_origen'],
                 'placeholder'=>'Select...',

@@ -153,6 +153,7 @@ AppAsset::register($this);
                         ['label' => 'Correcion Monetaria', 'url' => ['/correcciones-monetarias/index']],
                         ['label' => 'Limitacion de Capital', 'url' => ['/limitaciones-capitales/index']],
                         ['label' => 'Fondo de Emergencia', 'url' => ['/fondos-emergencias/index']],
+                        ['label' => 'Decreto de Dividendos en Efectivo ', 'url' => ['/decretos-div-excedentes/index']],
                         ['label' => 'Origen Capital', 'url' => ['/origenes-capitales/origen']],
                     ],
                 ],

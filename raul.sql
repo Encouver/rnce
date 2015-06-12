@@ -568,3 +568,93 @@ create type tipo_cuenta_pagar as enum ('ACCIONISTAS','PROVEEDORES','EMPLEADOS','
 
 ALTER TABLE origenes_capitales ADD COLUMN tipo_cuenta tipo_cuenta_pagar;
 COMMENT ON COLUMN origenes_capitales.tipo_cuenta IS 'tipo_cuenta puede ser  ACCIONISTAS, PROVEEDORES, EMPLEADOS, EMPRESAS RELACIONADAS, ASOCIADOS';
+
+
+
+-- 11 junio 11 :45---
+ALTER TABLE decretos_div_excedentes DROP COLUMN acta_constitutiva_id;
+
+ALTER TABLE decretos_div_excedentes ADD COLUMN contratista_id integer;
+ALTER TABLE decretos_div_excedentes ALTER COLUMN contratista_id SET NOT NULL;
+COMMENT ON COLUMN decretos_div_excedentes.contratista_id IS 'clave foranea a la tabla contratistas';
+
+ALTER TABLE decretos_div_excedentes ADD COLUMN documento_registrado_id integer;
+ALTER TABLE decretos_div_excedentes ALTER COLUMN documento_registrado_id SET NOT NULL;
+COMMENT ON COLUMN decretos_div_excedentes.documento_registrado_id IS 'Clave foranea a la tabla documentos_registrados';
+
+ALTER TABLE decretos_div_excedentes
+  ADD CONSTRAINT decretos_div_excedentes_contratistas_id FOREIGN KEY (contratista_id)
+      REFERENCES contratistas (id) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE NO ACTION;
+
+ALTER TABLE decretos_div_excedentes
+  ADD CONSTRAINT decretos_div_excedentes_documento_registrado_id_fkey FOREIGN KEY (documento_registrado_id)
+      REFERENCES activos.documentos_registrados (id) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE NO ACTION;
+
+create type tipo_pago_accionista as enum('EFECTIVO','CHEQUE','TRANSFERENCIA');
+ALTER TABLE pagos_accionistas_decretos DROP COLUMN cheque;
+ALTER TABLE pagos_accionistas_decretos DROP COLUMN transferencia;
+ALTER TABLE pagos_accionistas_decretos DROP COLUMN efectivo;
+ALTER TABLE pagos_accionistas_decretos DROP COLUMN numero_cheque;
+ALTER TABLE pagos_accionistas_decretos DROP COLUMN numero_transferencia;
+ALTER TABLE pagos_accionistas_decretos DROP COLUMN recibo_pago;
+
+ALTER TABLE pagos_accionistas_decretos ADD COLUMN contratista_id integer;
+ALTER TABLE pagos_accionistas_decretos ALTER COLUMN contratista_id SET NOT NULL;
+COMMENT ON COLUMN pagos_accionistas_decretos.contratista_id IS 'clave foranea a la tabla contratistas';
+
+ALTER TABLE pagos_accionistas_decretos
+  ADD CONSTRAINT pagos_accionistas_decretos_contratistas_id FOREIGN KEY (contratista_id)
+      REFERENCES contratistas (id) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE NO ACTION;
+
+ALTER TABLE pagos_accionistas_decretos ADD COLUMN tipo_pago tipo_pago_accionista;
+ALTER TABLE pagos_accionistas_decretos ALTER COLUMN tipo_pago SET NOT NULL;
+COMMENT ON COLUMN pagos_accionistas_decretos.tipo_pago IS 'tipo_pago puede ser EFECTIVO, TRANSFERENCIA, CHEQUE';
+
+
+ALTER TABLE pagos_accionistas_decretos ADD COLUMN numero character varying(100);
+ALTER TABLE pagos_accionistas_decretos ALTER COLUMN numero SET NOT NULL;
+COMMENT ON COLUMN pagos_accionistas_decretos.numero IS 'numero de cheque, transferencia, recibo';
+
+ALTER TABLE pagos_accionistas_decretos DROP COLUMN accionista_id;
+
+ALTER TABLE pagos_accionistas_decretos ADD COLUMN natural_juridica_id integer;
+ALTER TABLE pagos_accionistas_decretos ALTER COLUMN natural_juridica_id SET NOT NULL;
+COMMENT ON COLUMN pagos_accionistas_decretos.natural_juridica_id IS 'Clave foranea a la tabla sys_naturales_juridicas';
+
+ALTER TABLE pagos_accionistas_decretos ADD COLUMN documento_registrado_id integer;
+ALTER TABLE pagos_accionistas_decretos ALTER COLUMN documento_registrado_id SET NOT NULL;
+COMMENT ON COLUMN pagos_accionistas_decretos.documento_registrado_id IS 'Clave foranea a la tabla documentos registrados del esquema activos';
+
+
+ALTER TABLE pagos_accionistas_decretos
+  ADD CONSTRAINT rpagos_accionistas_decretos_documento_registrado_id_fkey FOREIGN KEY (documento_registrado_id)
+      REFERENCES activos.documentos_registrados (id) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE NO ACTION;
+
+ALTER TABLE pagos_accionistas_decretos
+  ADD CONSTRAINT pagos_accionistas_natural_juridica_id_fkey FOREIGN KEY (natural_juridica_id)
+      REFERENCES sys_naturales_juridicas (id) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE NO ACTION;
+
+ALTER TABLE modificaciones_balances DROP COLUMN acta_constitutiva_id;
+
+ALTER TABLE modificaciones_balances ADD COLUMN contratista_id integer;
+ALTER TABLE modificaciones_balances ALTER COLUMN contratista_id SET NOT NULL;
+COMMENT ON COLUMN modificaciones_balances.contratista_id IS 'clave foranea a la tabla contratistas';
+
+ALTER TABLE modificaciones_balances ADD COLUMN documento_registrado_id integer;
+ALTER TABLE modificaciones_balances ALTER COLUMN documento_registrado_id SET NOT NULL;
+COMMENT ON COLUMN modificaciones_balances.documento_registrado_id IS 'Clave foranea a la tabla documentos_registrados';
+
+ALTER TABLE modificaciones_balances
+  ADD CONSTRAINT modificaciones_balances_contratistas_id FOREIGN KEY (contratista_id)
+      REFERENCES contratistas (id) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE NO ACTION;
+
+ALTER TABLE modificaciones_balances
+  ADD CONSTRAINT modificaciones_balances_documento_registrado_id_fkey FOREIGN KEY (documento_registrado_id)
+      REFERENCES activos.documentos_registrados (id) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE NO ACTION;

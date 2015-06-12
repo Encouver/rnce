@@ -93,10 +93,16 @@ class FondosEmergenciasController extends BaseController
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            /*$transaction = \Yii::$app->db->beginTransaction();
+            $transaction = \Yii::$app->db->beginTransaction();
                     try {
                         $modelaux= $this->findModel($model->id);
-                        if(!is_null($modelaux->monto_asociados) && ($modelaux->monto_asociados > $model->monto_asociados)){
+                         if(is_null($model->monto_asociados)){
+                                        $model->monto_asociados=0;
+                         }
+                          if(is_null($modelaux->monto_asociados)){
+                                        $modelaux->monto_asociados=0;
+                         }
+                        if($modelaux->monto_asociados > $model->monto_asociados){
                             $origen_capital= OrigenesCapitales::find()->where(['documento_registrado_id'=>$model->documento_registrado_id,'tipo_origen'=>'FONDO_EMERGENCIA'])->orderBy('monto')->all();
                                 if(isset($origen_capital)){
                                     foreach ($origen_capital as $origen) {
@@ -111,6 +117,10 @@ class FondosEmergenciasController extends BaseController
                                 }
                         
                         }
+                        if(is_null($model->monto_asociados)){
+                                        $model->monto_asociados=null;
+                         }
+                        
                         if($model->save()){
                              $transaction->commit();
                              Yii::$app->session->setFlash('success','Actualizacion realizada con exito');
@@ -122,7 +132,7 @@ class FondosEmergenciasController extends BaseController
                         
                     } catch (Exception $e) {
                          $transaction->rollBack();
-                    }*/
+                    }
              return $this->redirect(['index']);
         } else {
             return $this->render('update', [
