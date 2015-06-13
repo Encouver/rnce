@@ -155,6 +155,8 @@ AppAsset::register($this);
                         ['label' => 'Fondo de Emergencia', 'url' => ['/fondos-emergencias/index']],
                         ['label' => 'Decreto de Dividendos en Efectivo ', 'url' => ['/decretos-div-excedentes/index']],
                         ['label' => 'Discusión y Aprobación o Modificación de Balances', 'url' => ['/modificaciones-balances/index']],
+                        ['label' => 'Nombramiento del Representante Legal', 'url' => ['/accionistas-otros/representante']],
+                        ['label' => 'Actualizacion de Junta Directiva', 'url' => ['/accionistas-otros/junta']],
                         ['label' => 'Origen Capital', 'url' => ['/origenes-capitales/origen']],
                     ],
                 ],

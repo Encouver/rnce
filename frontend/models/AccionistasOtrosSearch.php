@@ -21,7 +21,7 @@ class AccionistasOtrosSearch extends AccionistasOtros
             [['id', 'contratista_id', 'natural_juridica_id', 'documento_registrado_id', 'empresa_fusionada_id', 'creado_por', 'actualizado_por'], 'integer'],
             [['porcentaje_accionario', 'valor_compra'], 'number'],
             [['fecha', 'repr_legal_vigencia', 'tipo_obligacion', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el', 'tipo_cargo'], 'safe'],
-            [['accionista', 'junta_directiva', 'rep_legal', 'sys_status', 'empresa_relacionada'], 'boolean'],
+            [['accionista', 'junta_directiva', 'rep_legal', 'sys_status', 'empresa_relacionada','actual'], 'boolean'],
         ];
     }
 
@@ -59,7 +59,7 @@ class AccionistasOtrosSearch extends AccionistasOtros
 
         $query->andFilterWhere([
             'id' => $this->id,
-            'contratista_id' => $this->contratista_id,
+            'contratista_id' => Yii::$app->user->identity->contratista_id,
             'natural_juridica_id' => $this->natural_juridica_id,
             'porcentaje_accionario' => $this->porcentaje_accionario,
             'valor_compra' => $this->valor_compra,
@@ -77,10 +77,13 @@ class AccionistasOtrosSearch extends AccionistasOtros
             'sys_actualizado_el' => $this->sys_actualizado_el,
             'sys_finalizado_el' => $this->sys_finalizado_el,
             'empresa_relacionada' => $this->empresa_relacionada,
+            'actual' => $this->actual,
+            'tipo_obligacion'=>$this->tipo_obligacion,
+            'tipo_cargo'=> $this->tipo_cargo
         ]);
 
-        $query->andFilterWhere(['like', 'tipo_obligacion', $this->tipo_obligacion])
-            ->andFilterWhere(['like', 'tipo_cargo', $this->tipo_cargo]);
+       /* $query->andFilterWhere(['like', 'tipo_obligacion', $this->tipo_obligacion])
+            ->andFilterWhere(['like', 'tipo_cargo', $this->tipo_cargo]);*/
 
         return $dataProvider;
     }

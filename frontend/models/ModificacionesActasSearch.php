@@ -88,6 +88,7 @@ class ModificacionesActasSearch extends ModificacionesActas
             'sys_creado_el' => $this->sys_creado_el,
             'sys_actualizado_el' => $this->sys_actualizado_el,
             'sys_finalizado_el' => $this->sys_finalizado_el,
+           
         ]);
 
         return $dataProvider;

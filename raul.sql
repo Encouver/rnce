@@ -658,3 +658,10 @@ ALTER TABLE modificaciones_balances
   ADD CONSTRAINT modificaciones_balances_documento_registrado_id_fkey FOREIGN KEY (documento_registrado_id)
       REFERENCES activos.documentos_registrados (id) MATCH SIMPLE
       ON UPDATE CASCADE ON DELETE NO ACTION;
+
+
+--12 junio 2:30 pm--
+ALTER TABLE accionistas_otros ADD COLUMN actual boolean;
+ALTER TABLE accionistas_otros ALTER COLUMN actual SET NOT NULL;
+ALTER TABLE accionistas_otros ALTER COLUMN actual SET DEFAULT false;
+COMMENT ON COLUMN accionistas_otros.actual IS 'Indica si es accionista, representante, o junta directiva actual';

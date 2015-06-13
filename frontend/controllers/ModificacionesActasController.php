@@ -4,6 +4,8 @@ namespace frontend\controllers;
 
 use Yii;
 use common\models\p\ModificacionesActas;
+use common\models\p\AccionistasOtros;
+use common\models\p\ActasConstitutivas;
 use app\models\ModificacionesActasSearch;
 use common\components\BaseController;
 use yii\web\NotFoundHttpException;
@@ -65,126 +67,176 @@ class ModificacionesActasController extends BaseController
             return $this->redirect(['index']);
                 }
         if(isset($_POST['objeto'])){
-             $valores=$_POST['objeto'];
-            $cantidad= count($valores);
-            if($cantidad<=3){
-                  for ($i = 0; $i < $cantidad; $i++) {
+            
+            $transaction = \Yii::$app->db->beginTransaction();
+            try {
+                $valores=$_POST['objeto'];
+                $cantidad= count($valores);
+                if($cantidad<=3){
+                    for ($i = 0; $i < $cantidad; $i++) {
 
-          switch ($valores[$i]) {
-                case "aumento_capital":
-                    $model->aumento_capital=true;
-                    break;
-                case "aporte_capitalizar":
-                     $model->aporte_capitalizar=true;
-                    break;
-                case "pago_capital":
-                    $model->pago_capital=true;
-                    break;
+                        switch ($valores[$i]) {
+                            case "aumento_capital":
+                                $model->aumento_capital=true;
+                            break;
+                        
+                            case "aporte_capitalizar":
+                                $model->aporte_capitalizar=true;
+                            break;
+                            case "pago_capital":
+                                $model->pago_capital=true;
+                            break;
         
-                case "junta_directiva":
-                    $model->junta_directiva=true;
-                    break;
-                case "fondo_emergencia":
-                   $model->fondo_emergencia=true;
-                    break;
-                case "limitacion_capital":
+                            case "junta_directiva":
+                                
+                                $junta_actual=  AccionistasOtros::findAll(['contratista_id'=>Yii::$app->user->identity->contratista_id,'junta_directiva'=>true,'actual'=>true]);
+                                foreach ($junta_actual as $junta) {
+                                    if(!$junta->rep_legal){
+                                      $junta_directiva = new AccionistasOtros();
+                                      $junta_directiva->scenario='junta';
+                                      $junta_directiva->natural_juridica_id= $junta->natural_juridica_id;
+                                      $junta_directiva->junta_directiva=$junta->junta_directiva;
+                                      $junta_directiva->tipo_cargo=  $junta->tipo_cargo;
+                                      $junta_directiva->tipo_obligacion=  $junta->tipo_obligacion;
+                                      $junta_directiva->documento_registrado_id= $model->documento_registrado_id;
+                                      if(! $junta_directiva->save()){
+                                        $transaction->rollback();
+                                        Yii::$app->session->setFlash('error','Error en la asignacion de la junta directiva');
+                                        return print_r ($junta_directiva->getErrors());
+                                        return $this->redirect(['index']);
+                                    
+                                        }
+                                    }
+                                }
+                               
+                                $model->junta_directiva=true;
+                            break;
+                            case "fondo_emergencia":
+                                $model->fondo_emergencia=true;
+                            break;
+                            case "limitacion_capital":
                    
-                    if($model->limitacion_capital_afectado ||$model->reintegro_perdida){
-                        Yii::$app->session->setFlash('error','Error solo puede elegir una limitacion de capital  o un reintegro de perdida');
-                    return $this->render('create', [
-                    'model'=>$model,
-                        ]);
-                    }else{
-                         $model->limitacion_capital=true;
-                    }
+                                if($model->limitacion_capital_afectado ||$model->reintegro_perdida){
+                                    Yii::$app->session->setFlash('error','Error solo puede elegir una limitacion de capital  o un reintegro de perdida');
+                                    return $this->render('create', [
+                                        'model'=>$model,
+                                    ]);
+                                }else{
+                                    $model->limitacion_capital=true;
+                                }
        
-                    break;
-                case "limitacion_capital_afectado":
+                            break;
+                            case "limitacion_capital_afectado":
                     
-                    if($model->limitacion_capital ||$model->reintegro_perdida){
-                        Yii::$app->session->setFlash('error','Error solo puede elegir una limitacion de capital o un reintegro de perdida');
-                    return $this->render('create', [
-                    'model'=>$model,
-                        ]);
-                    }else{
-                        $model->limitacion_capital_afectado=true;
-                    }
+                                if($model->limitacion_capital ||$model->reintegro_perdida){
+                                    Yii::$app->session->setFlash('error','Error solo puede elegir una limitacion de capital o un reintegro de perdida');
+                                    return $this->render('create', [
+                                        'model'=>$model,
+                                    ]);
+                                }else{
+                                    $model->limitacion_capital_afectado=true;
+                                }
        
-                    break;
-                case "disminucion_capital":
-                     $model->disminucion_capital=true;
+                            break;
+                            case "disminucion_capital":
+                                $model->disminucion_capital=true;
 
-                    break;
-                case "coreccion_monetaria":
-                    $model->coreccion_monetaria=true;
+                            break;
+                            case "coreccion_monetaria":
+                                $model->coreccion_monetaria=true;
 
-                    break;
-                case "razon_social":
-                    $model->razon_social=true;
-                    break;
-                case "modificacion_balance":
-                   $model->modificacion_balance=true;
-                    break;
-                case "decreto_div_excedente":
-                    $model->decreto_div_excedente=true;
-                    break;
-                case "fusion_empresarial":
-                    $model->fusion_empresarial=true;
-                    break;
-                case "venta_accion":
-                   $model->venta_accion=true;
+                            break;
+                            case "razon_social":
+                                $model->razon_social=true;
+                            break;
+                            case "modificacion_balance":
+                                $model->modificacion_balance=true;
+                            break;
+                            case "decreto_div_excedente":
+                                $model->decreto_div_excedente=true;
+                            break;
+                            case "fusion_empresarial":
+                                $model->fusion_empresarial=true;
+                            break;
+                            case "venta_accion":
+                                $model->venta_accion=true;
 
-                    break;
-                case "reintegro_perdida":
+                            break;
+                            case "reintegro_perdida":
                    
                      
-                    if($model->limitacion_capital || $model->limitacion_capital_afectado){
-                        Yii::$app->session->setFlash('error','Error solo puede elegir una limitacion de capital o un reintegro de perdida');
+                                if($model->limitacion_capital || $model->limitacion_capital_afectado){
+                                    Yii::$app->session->setFlash('error','Error solo puede elegir una limitacion de capital o un reintegro de perdida');
+                                    return $this->render('create', [
+                                    'model'=>$model,
+                                    ]);
+                                }else{
+                                    $model->reintegro_perdida=true;
+                                }
+                            break;
+                            case "limitacion_capital_afectado":
+                                $model->limitacion_capital_afectado=true;
+                            break;
+                            case "cierre_ejercicio":
+                                $model->cierre_ejercicio=true;
+                            break;
+                            case "duracion_empresa":
+                                $model->duracion_empresa=true;
+                            break;
+                            case "representante_legal":
+                                
+                                $rep_legal=  AccionistasOtros::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'rep_legal'=>true,'actual'=>true]);
+                                $representante = new AccionistasOtros();
+                                  $representante->scenario='representante';
+                                $representante->natural_juridica_id= $rep_legal->natural_juridica_id;
+                                $representante->rep_legal= $rep_legal->rep_legal;
+                                $representante->repr_legal_vigencia= $rep_legal->repr_legal_vigencia;
+                                $representante->tipo_obligacion= $rep_legal->tipo_obligacion;
+                                $representante->documento_registrado_id= $model->documento_registrado_id;
+                                if(!$representante->save()){
+                                    $transaction->rollback();
+                                    Yii::$app->session->setFlash('error','Error en la asignacion del representante legal');
+                                   // return print_r($representante->getErrors());
+                                    return $this->redirect(['index']);
+                                    
+                                }else{
+                                     $model->representante_legal=true;
+                                }
+                               
+
+                            break;
+                            case "objeto_social":
+                                $model->objeto_social=true;
+                            break;
+                            case "domicilio_fiscal":
+                                $model->domicilio_fiscal=true;
+                                $model->domicilio_principal=true;
+                            break;
+                            case "denominacion_comercial":
+                                $model->denominacion_comercial=true;
+                            break;
+
+                            default:
+                            break;
+                        }
+                    }
+                    
+                    if($model->save()){
+                        $transaction->commit();
+                        Yii::$app->session->setFlash('success','Modificacion acta guardada con exito');
+                        return $this->redirect(['index']);
+                    }
+                
+                }else{
+                    $transaction->rollBack();
+                    Yii::$app->session->setFlash('error','El maximo de modificaciones debe ser 3');
                     return $this->render('create', [
                     'model'=>$model,
-                        ]);
-                    }else{
-                         $model->reintegro_perdida=true;
-                    }
-                    break;
-                case "limitacion_capital_afectado":
-                    $model->limitacion_capital_afectado=true;
-                    break;
-                case "cierre_ejercicio":
-                    $model->cierre_ejercicio=true;
-                    break;
-                case "duracion_empresa":
-                    $model->duracion_empresa=true;
-                    break;
-                case "representante_legal":
-                    $model->representante_legal=true;
-
-                    break;
-                case "objeto_social":
-                    $model->objeto_social=true;
-                    break;
-                case "domicilio_fiscal":
-                    $model->domicilio_fiscal=true;
-                    $model->domicilio_principal=true;
-                    break;
-                case "denominacion_comercial":
-                     $model->denominacion_comercial=true;
-                    break;
-
-                default:
-                    break;
-                    }
+                    ]);
                 }
-                $model->save();
-                 Yii::$app->session->setFlash('success','Modificacion acta guardada con exito');
-                  return $this->redirect(['index']);
-                
-            }else{
-                Yii::$app->session->setFlash('error','El maximo de modificaciones debe ser 3');
-                return $this->render('create', [
-                    'model'=>$model,
-            ]);
-            }
+       } catch (Exception $e) {
+                         $transaction->rollBack();
+        }
             
              
 

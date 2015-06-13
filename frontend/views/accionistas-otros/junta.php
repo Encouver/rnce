@@ -10,33 +10,30 @@ use yii\grid\GridView;
 $this->title = Yii::t('app', 'Accionistas Otros');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="accionistas-otros-index">
+<div class="accionistas-otros-junta">
 
-    <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-   
-
-    <?= GridView::widget([
+  <?php
+    if(isset($documento) && $documento->junta_directiva){
+    echo Html::tag('h1','Actualizacion de la Junta Directiva');
+       echo GridView::widget([
         'dataProvider' => $dataProvider,
         //'filterModel' => $searchModel,
         'summary'=>"",
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+            //['class' => 'yii\grid\SerialColumn'],
 
             //'id',
             [
                 'attribute'=>'natural_juridica_id',
-                'label'=>'Nombre Accionista',
+                'label'=>'Nombre',
                 'value'=>'naturalJuridica.denominacion'
             ],
-            'accionista:boolean',
-            'porcentaje_accionario',
-            'junta_directiva:boolean',
             'tipo_cargo',
-            'rep_legal:boolean',
-            'repr_legal_vigencia',
             'tipo_obligacion',
+            'accionista:boolean',
+            'junta_directiva:boolean',
             
             //'contratista_id',
            // 'natural_juridica_id',
@@ -60,9 +57,21 @@ $this->params['breadcrumbs'][] = $this->title;
 
             ['class' => 'yii\grid\ActionColumn','template'=>'{update}{delete}'],
         ],
-    ]); ?>
-     <p>
-        <?= Html::a(Yii::t('app', 'Create Accionistas Otros'), ['create','id'=>'principal'], ['class' => 'btn btn-success']) ?>
+    ]);
+       if(!$searchModel->existeregistro('junta')){ ?>
+   <p>
+        <?= Html::a(Yii::t('app', 'Agregar Junta DIrectiva'), ['create','id'=>'junta'], ['class' => 'btn btn-success']) ?>
     </p>
+      
+         <?php }  }else{?>
+        
+            <div class="alert-warning alert fade in">
+               
+
+                <h4>No existe ningun procedimiento referente a la Actualizacion de la Junta Directiva activo</h4>
+
+            </div>
+        <?php } ?>
+     
 
 </div>

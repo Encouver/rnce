@@ -33,7 +33,9 @@ $urlJuridica = Url::to(['personas-juridicas/create']);
                 'form'=>$form2,
                 'columns'=>3,
                 'attributes'=>$modelPersona->getformAttribs("basico")
-            ]); ?>
+            ]); 
+           
+            ?>
 
         <!--    <div class="form-group">
                 <?/*= Html::Button(Yii::t('app', 'Enviar'), ['class' => 'btn btn-success', 'id' => 'enviar-documento']) */?>
@@ -81,7 +83,7 @@ $urlJuridica = Url::to(['personas-juridicas/create']);
     'form'=>$form,
     'columns'=>3,
     'attributes'=>$model->getFormAttribs()
-      ]); ?>
+      ]);?>
      <div class="form-group">
          <?= Html::submitButton(Yii::t('app', 'Enviar'), ['class' => 'btn btn-success']) ?> 
     </div>
