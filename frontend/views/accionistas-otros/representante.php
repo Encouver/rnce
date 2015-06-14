@@ -30,12 +30,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label'=>'Nombre',
                 'value'=>'naturalJuridica.denominacion'
             ],
-            'rep_legal:boolean',
             'repr_legal_vigencia',
             'tipo_obligacion',
-            'accionista:boolean',
-            'junta_directiva:boolean',
-            
             //'contratista_id',
            // 'natural_juridica_id',
             //'valor_compra',

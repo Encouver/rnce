@@ -59,47 +59,16 @@ class AccionistasOtros extends \common\components\BaseActiveRecord
         return [
             [['contratista_id', 'natural_juridica_id', 'documento_registrado_id', 'tipo_obligacion'], 'required'],
             [['natural_juridica_id','repr_legal_vigencia','tipo_obligacion'], 'required','on'=>'representante'],
-            [['natural_juridica_id','tipo_cargo','tipo_obligacion'], 'required','on'=>'junta'],
-              [['natural_juridica_id','tipo_obligacion'], 'required','on'=>'principal'],
+            [['tipo_cargo'], 'required','on'=>'junta'],
+            [['porcentaje_accionario'], 'required','on'=>'accionista'],
             [['contratista_id', 'natural_juridica_id', 'documento_registrado_id', 'empresa_fusionada_id', 'creado_por', 'actualizado_por'], 'integer'],
             [['porcentaje_accionario', 'valor_compra'], 'number'],
             [['fecha', 'repr_legal_vigencia', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el','actual'], 'safe'],
             [['accionista', 'junta_directiva', 'rep_legal', 'sys_status', 'empresa_relacionada','actual'], 'boolean'],
             [['tipo_obligacion', 'tipo_cargo'], 'string'],
-            ['accionista', 'compare', 'message' => 'Accionista no puede estar vacio', 'operator'=> '==', 'compareValue'=>true, 'when' => function ($model) {
-                return $model->porcentaje_accionario != '';
-            }, 'whenClient' => "function (attribute, value) {
-                return $('#accionistasotros-porcentaje_accionario').val() !='';
-            }"],
-             ['junta_directiva', 'compare', 'message' => 'Junta directiva no puede estar vacio', 'operator'=> '==', 'compareValue'=>true, 'when' => function ($model) {
-                return $model->tipo_cargo != '';
-            }, 'whenClient' => "function (attribute, value) {
-                return $('#accionistasotros-tipo_cargo').val() !='';
-            }"],
-             ['rep_legal', 'compare', 'message' => 'Representante Legal no puede estar vacio', 'operator'=> '==', 'compareValue'=>true, 'when' => function ($model) {
-                return $model->repr_legal_vigencia != '';
-            }, 'whenClient' => "function (attribute, value) {
-                return $('#accionistasotros-repr_legal_vigencia').val() !='';
-            }"],
-             ['porcentaje_accionario', 'required', 'when' => function ($model) {
-                return $model->accionista == 'true';
-            }, 'whenClient' => "function (attribute, value) {
-                return $('#accionistasotros-accionista').is(':checked');
-            }"],
-              ['tipo_cargo', 'required', 'when' => function ($model) {
-                return $model->junta_directiva == 'true';
-            }, 'whenClient' => "function (attribute, value) {
-                return $('#accionistasotros-junta_directiva').is(':checked');
-            }"],
-           ['repr_legal_vigencia', 'required', 'when' => function ($model) {
-                return $model->rep_legal == 'true';
-            }, 'whenClient' => "function (attribute, value) {
-                return $('#accionistasotros-rep_legal').is(':checked');
-            }"],
- 
-
-            [['rep_legal'],'validarrepresentante'],
+            [['repr_legal_vigencia'],'validarrepresentante'],
             [['tipo_cargo'],'validarcargo'],
+            [['porcentaje_accionario'],'validarporcentaje'],
             [['natural_juridica_id'],'validarnatural'],
            /* ['accionista', 'required', 'when' => function ($model) {
                return $model->porcentaje_accionario != "";
@@ -108,9 +77,38 @@ class AccionistasOtros extends \common\components\BaseActiveRecord
            }"]*/
         ];
     }
+     public function Validarporcentaje($attribute)
+    {
+       $porcentaje_actual= $this->sumarporcentaje()+$this->porcentaje_accionario;
+         if($porcentaje_actual>100){
+               $this->addError($attribute,'Porcentaje excedente');
+          }else{
+              if($this->porcentaje_accionario<=0){
+               $this->addError($attribute,'Porcentaje debe ser mayor a 0');
+                }
+          }
+    }
+     public function Validarnatural($attribute)
+    {   
+        if($this->accionista){
+        $accionista= AccionistasOtros::findOne(['documento_registrado_id'=>$this->documento_registrado_id,'accionista'=>true,'natural_juridica_id'=>$this->natural_juridica_id]);
+        }else{
+            if($this->junta_directiva){
+                $accionista= AccionistasOtros::findOne(['documento_registrado_id'=>$this->documento_registrado_id,'junta_directiva'=>true,'natural_juridica_id'=>$this->natural_juridica_id]);
+            }else{
+                if($this->rep_legal){
+                    $accionista= AccionistasOtros::findOne(['documento_registrado_id'=>$this->documento_registrado_id,'rep_legal'=>true,'natural_juridica_id'=>$this->natural_juridica_id]);
+                } 
+            }
+        }
+        if (isset($accionista) && $accionista->id!=$this->id) {
+            $this->addError($attribute,'Ya existe un registro actual' );
+            
+        }
+    }
     public function Validarrepresentante($attribute)
     {
-        if (AccionistasOtros::find()->where(['documento_registrado_id' => $this->documento_registrado_id, 'rep_legal'=>true])->exists() && $this->rep_legal && AccionistasOtros::findOne(['documento_registrado_id' => $this->documento_registrado_id, 'rep_legal'=>true])->id!=$this->id) {
+        if (AccionistasOtros::find()->where(['documento_registrado_id' => $this->documento_registrado_id, 'rep_legal'=>true])->exists() && AccionistasOtros::findOne(['documento_registrado_id' => $this->documento_registrado_id, 'rep_legal'=>true])->id!=$this->id && $this->accionista!=true) {
             $this->addError($attribute,'Ya existe un representante legal asociado' );
             
         }
@@ -120,9 +118,34 @@ class AccionistasOtros extends \common\components\BaseActiveRecord
          
         if (AccionistasOtros::find()->where(['documento_registrado_id' => $this->documento_registrado_id, 'tipo_cargo'=>$this->tipo_cargo])->exists() && $this->junta_directiva && AccionistasOtros::findOne(['documento_registrado_id' => $this->documento_registrado_id, 'tipo_cargo'=>$this->tipo_cargo])->id!=$this->id) {
             $this->addError($attribute,'Ya existe este cargo asignado' );
+        }else{
+            if($this->naturalJuridica->juridica){
+            $this->addError($attribute,'Las empresas no pueden ser parte de la junta directiva' );
+            }
         }
+        
     }
-     public function Validarnatural($attribute)
+     public function sumarporcentaje($sum=true)
+    {
+       $suma=0;
+       $accionista= AccionistasOtros::findAll(['documento_registrado_id'=>$this->documento_registrado_id,'accionista'=>true]);
+        
+      
+        if(isset($accionista)){
+             foreach ($accionista as $accion) {
+                      $suma=$suma+$accion->porcentaje_accionario;
+            }
+           if(!$this->isNewRecord && $sum){
+             $accion= AccionistasOtros::findOne($this->id);
+               $suma=$suma-$accion->porcentaje_accionario;
+                 
+           }
+        }
+       
+        
+        return $suma;
+    }
+    /* public function Validarnatural($attribute)
     {
          $accion= AccionistasOtros::findOne(['contratista_id' => Yii::$app->user->identity->contratista_id, 'documento_registrado_id'=>$this->documento_registrado_id,'natural_juridica_id'=>$this->natural_juridica_id]);
       if (isset($accion)&& ($this->isNewRecord || $accion->id!=$this->id)) {
@@ -192,7 +215,7 @@ class AccionistasOtros extends \common\components\BaseActiveRecord
            
        }
        
-    }
+    }*/
 
     /**
      * @inheritdoc
@@ -276,7 +299,7 @@ class AccionistasOtros extends \common\components\BaseActiveRecord
          $persona = empty($this->natural_juridica_id) ? '' : SysNaturalesJuridicas::findOne($this->natural_juridica_id)->denominacion;
         $cargos=[ 'PRESIDENTE' => 'PRESIDENTE', 'DIRECTOR' => 'DIRECTOR', 'VOCERO DE LA UNIDAD DE ADMINISTRACION' => 'VOCERO DE LA UNIDAD DE ADMINISTRACION', 'VOCERO DE LA UNIDAD DE GESTION PRODUCTIVA' => 'VOCERO DE LA UNIDAD DE GESTION PRODUCTIVA', 'VOCERO DE LA UNIDAD DE FORMACION' => 'VOCERO DE LA UNIDAD DE FORMACION', 'VOCERO DE LA UNIDAD DE CONTRALORIA SOCIAL' => 'VOCERO DE LA UNIDAD DE CONTRALORIA SOCIAL', 'INSTANCIA DE ADMINISTRACION' => 'INSTANCIA DE ADMINISTRACION', 'INSTANCIA DE CONTROL Y EVALUACION' => 'INSTANCIA DE CONTROL Y EVALUACION', 'INSTANCIA DE EDUCACION' => 'INSTANCIA DE EDUCACION', ];
        $obligacion=[ 'FIRMA CONJUNTA' => 'FIRMA CONJUNTA', 'FIRMA SEPARADA' => 'FIRMA SEPARADA', ];
-        if($this->scenario=='principal'){
+        if($this->scenario=='accionista'){
        return [
         'natural_juridica_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>[
                 'initValueText' => $persona,
@@ -292,21 +315,9 @@ class AccionistasOtros extends \common\components\BaseActiveRecord
                 'templateResult' => new JsExpression('function(natural_juridica_id) { return natural_juridica_id.text; }'),
                 'templateSelection' => new JsExpression('function (natural_juridica_id) { return natural_juridica_id.text; }'),
         ],]],
-        'accionista'=>['type'=>Form::INPUT_CHECKBOX,'hint'=>'Solo si es accionista'],
-        'junta_directiva'=>['type'=>Form::INPUT_CHECKBOX,'hint'=>'Solo si es parte de la junta directiva'],
-        'rep_legal'=>['type'=>Form::INPUT_CHECKBOX,'hint'=>'Solo si es representante legal'],
         'porcentaje_accionario'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Nombre y Apellido']],
-        'junta_directiva'=>['type'=>Form::INPUT_CHECKBOX,'hint'=>'Solo si parte de la junta directiva'],
-        'tipo_cargo'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>$cargos,'options'=>['prompt'=>'Seleccione cargo']],
-        'repr_legal_vigencia'=>[
-                'type'=>Form::INPUT_WIDGET, 
-                'widgetClass'=>'\kartik\widgets\DatePicker', 
-                'options'=>['pluginOptions' => [
-                    'autoclose'=>true,
-                    'format' => 'yyyy-mm-dd'
-                ]],
-                 ],
         'tipo_obligacion'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>$obligacion,'options'=>['prompt'=>'Seleccione obligacion']],
+        'tipo_cargo'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>$cargos,'options'=>['prompt'=>'Seleccione cargo'],'hint'=>'Solo si el accionista forma parte de la junta directiva',],
         'documento_registrado_id'=>['type'=>Form::INPUT_HIDDEN,'label'=>false],
     
            ];
@@ -401,15 +412,10 @@ class AccionistasOtros extends \common\components\BaseActiveRecord
                                 return true;
                             }else{
                                 $this->rep_legal=true;
-                                $this->accionista=false;
-                                $this->junta_directiva=false;
                             }
                       
                         }else{
                             if($modificacion->junta_directiva && $id=='junta'){
-                                
-                                    $this->rep_legal=false;
-                                    $this->accionista=false;
                                     $this->junta_directiva=true;
                                 }else{
                                     return true;
@@ -425,6 +431,25 @@ class AccionistasOtros extends \common\components\BaseActiveRecord
                }
            }else{
                $this->actual=true;
+               switch ($id){
+                    case 'accionista':
+                       $this->accionista=true;
+                    break;
+                    case 'representante':
+                        $representante = AccionistasOtros::findOne(['documento_registrado_id'=>$registro->id,'rep_legal'=>true]);
+                        if(isset($representante)){
+                            return true;
+                        }
+                       $this->rep_legal=true;
+                    break;
+                    case 'junta':
+                       $this->junta_directiva=true;
+                    break;
+                    default:
+                        return true;
+                        break;
+               }
+              
            }
           
                 $this->documento_registrado_id=$registro->id;

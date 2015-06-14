@@ -18,7 +18,7 @@ class ActasConstitutivasSearch extends ActasConstitutivas
     public function rules()
     {
         return [
-            [['id', 'contratista_id', 'documento_registrado_id', 'denominacion_comercial_id', 'duracion_empresa_id', 'objeto_social_id', 'razon_social_id', 'cierre_ejercicio_id', 'creado_por', 'actualizado_por', 'domicilio_fiscal_id', 'domicilio_principal_id', 'modificacion_acta_id'], 'integer'],
+            [['id', 'contratista_id', 'documento_registrado_id', 'denominacion_comercial_id', 'duracion_empresa_id', 'objeto_social_id', 'razon_social_id', 'cierre_ejercicio_id', 'creado_por', 'actualizado_por', 'domicilio_fiscal_id', 'domicilio_principal_id', 'modificacion_acta_id','representante_legal_id'], 'integer'],
             [['sys_status', 'acciones', 'certificados', 'suplementarios', 'actual'], 'boolean'],
             [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['capital_suscrito', 'capital_pagado'], 'number'],
@@ -81,6 +81,7 @@ class ActasConstitutivasSearch extends ActasConstitutivas
             'capital_pagado' => $this->capital_pagado,
             'actual' => $this->actual,
             'modificacion_acta_id' => $this->modificacion_acta_id,
+            'representante_legal_id'=>$this->representante_legal_id,
         ]);
 
         return $dataProvider;

@@ -216,10 +216,12 @@ class ActasConstitutivasController extends BaseController
          $msgDomicilioPrincipal= "Debe agregar domicilio principal";
          $msgRazonSocial= "Debe agregar razon social";
          $msgOrigenCapital= "Debe agregar el origen del capital";
-         $msgAccionistaOtro= "Debe agregar accionistas";
+         $msgAccionista= "Debe agregar accionista";
          $msgComisario="Debe agregar comisarios";
          $msgSucursal= "Si posee sucursales puede agregarlas";
          $msgFondoReserva="Debe agregar fondo reserva";
+         $msgRepresentanteLegal="Debe agregar representante legal";
+         $msgJuntaDirectiva="Debe agregar junta directiva";
         // $msgCertificacionAporte= "Debe agregar certificacion de aportes";
          $msgCapital= "Debe agregar el capital";
          $boton= false;
@@ -276,10 +278,19 @@ class ActasConstitutivasController extends BaseController
           if(isset($certificacion_aporte)){
            $msgCertificacionAporte=null;
          }*/
-         $accionista_otro= AccionistasOtros::findOne(['documento_registrado_id'=>$registro->id]);
-         if(isset($accionista_otro)){
-           $msgAccionistaOtro=null;
-           $accionista_otro= AccionistasOtros::findAll(['documento_registrado_id'=>$registro->id]);
+         $accionista= AccionistasOtros::findOne(['documento_registrado_id'=>$registro->id,'accionista'=>true]);
+         if(isset($accionista)){
+           $msgAccionista=null;
+           $accionista= AccionistasOtros::findAll(['documento_registrado_id'=>$registro->id,'accionista'=>true]);
+         }
+          $junta_directiva= AccionistasOtros::findOne(['documento_registrado_id'=>$registro->id,'junta_directiva'=>true]);
+         if(isset($junta_directiva)){
+           $msgJuntaDirectiva=null;
+           $junta_directiva= AccionistasOtros::findAll(['documento_registrado_id'=>$registro->id,'junta_directiva'=>true]);
+         }
+         $representante_legal= AccionistasOtros::findOne(['documento_registrado_id'=>$registro->id,'rep_legal'=>true]);
+         if(isset($representante_legal)){
+           $msgRepresentanteLegal=null;
          }
          $comisario= ComisariosAuditores::findOne(['documento_registrado_id'=>$registro->id]);
          if(isset($comisario)){
@@ -316,7 +327,7 @@ class ActasConstitutivasController extends BaseController
              if(isset($capital_suscrito)){
               $msgCapital=null;
             }
-            if(isset($fondo_reserva) && isset($comisario) && isset($accionista_otro) && is_null($msgCapital) && isset($domicilio_principal) && isset($domicilio_fiscal) && isset($capital_suscrito) && isset($actividad_economica) && isset($razon_social) && isset($natural_juridica) && isset($registro) && isset($denominacion_comercial) && isset($duracion_empresa) && isset($cierre_ejercicio) && isset($objeto_social)){
+            if(isset($fondo_reserva) && isset($comisario) && isset($accionista)  && isset($junta_directiva)  && isset($representante_legal) && is_null($msgCapital) && isset($domicilio_principal) && isset($domicilio_fiscal) && isset($capital_suscrito) && isset($actividad_economica) && isset($razon_social) && isset($natural_juridica) && isset($registro) && isset($denominacion_comercial) && isset($duracion_empresa) && isset($cierre_ejercicio) && isset($objeto_social)){
                 $boton=true;
             }
              
@@ -338,7 +349,9 @@ class ActasConstitutivasController extends BaseController
                 'origen_capital_banco'=>$origen_capital_banco,
                 'origen_capital_bien'=>$origen_capital_bien,
                 //'certificacion_aporte'=>$certificacion_aporte,
-                'accionista_otro'=>$accionista_otro,
+                'accionista'=>$accionista,
+                'representante_legal'=>$representante_legal,
+                'junta_directiva'=>$junta_directiva,
                 'comisario'=>$comisario,
                 'fondo_reserva'=>$fondo_reserva,
                 'sucursal'=>$sucursal,
@@ -353,12 +366,14 @@ class ActasConstitutivasController extends BaseController
                 'msgDomicilioPrincipal'=>$msgDomicilioPrincipal,
                 'msgRazonSocial'=>$msgRazonSocial,
                 'msgOrigenCapital'=>$msgOrigenCapital,
-                'msgAccionistaOtro'=>$msgAccionistaOtro,
+                'msgAccionista'=>$msgAccionista,
                 'msgComisario'=>$msgComisario,
                 'msgSucursal'=>$msgSucursal,
                 //'msgCertificacionAporte'=>$msgCertificacionAporte,
                 'msgFondoReserva'=>$msgFondoReserva,
                 'msgCapital'=>$msgCapital,
+                'msgRepresentanteLegal'=>$msgRepresentanteLegal,
+                'msgJuntaDirectiva'=>$msgJuntaDirectiva,
                 'boton'=>$boton,
             ]);
          }     
@@ -378,7 +393,9 @@ class ActasConstitutivasController extends BaseController
                 'origen_capital_banco'=>$origen_capital_banco,
                 'origen_capital_bien'=>$origen_capital_bien,
                 //'certificacion_aporte'=>$certificacion_aporte,
-                'accionista_otro'=>$accionista_otro,
+                'accionista'=>$accionista,
+                'representante_legal'=>$representante_legal,
+                'junta_directiva'=>$junta_directiva,
                 'comisario'=>$comisario,
                 'fondo_reserva'=>$fondo_reserva,
                 'sucursal'=>$sucursal,
@@ -393,12 +410,14 @@ class ActasConstitutivasController extends BaseController
                 'msgDomicilioPrincipal'=>$msgDomicilioPrincipal,
                 'msgRazonSocial'=>$msgRazonSocial,
                 'msgOrigenCapital'=>$msgOrigenCapital,
-                'msgAccionistaOtro'=>$msgAccionistaOtro,
+                'msgAccionista'=>$msgAccionista,
                 'msgComisario'=>$msgComisario,
                 'msgSucursal'=>$msgSucursal,
                // 'msgCertificacionAporte'=>$msgCertificacionAporte,
                 'msgFondoReserva'=>$msgFondoReserva,
                 'msgCapital'=>$msgCapital,
+                'msgRepresentanteLegal'=>$msgRepresentanteLegal,
+                'msgJuntaDirectiva'=>$msgJuntaDirectiva,
                 'boton'=>$boton,
             ]);
          }else{
@@ -417,12 +436,14 @@ class ActasConstitutivasController extends BaseController
                 'msgDomicilioPrincipal'=>$msgDomicilioPrincipal,
                 'msgRazonSocial'=>$msgRazonSocial,
                 'msgOrigenCapital'=>$msgOrigenCapital,
-                'msgAccionistaOtro'=>$msgAccionistaOtro,
+                'msgAccionista'=>$msgAccionista,
                 'msgComisario'=>$msgComisario,
                 'msgSucursal'=>$msgSucursal,
                 //'msgCertificacionAporte'=>$msgCertificacionAporte,
                 'msgFondoReserva'=>$msgFondoReserva,
                 'msgCapital'=>$msgCapital,
+                'msgRepresentanteLegal'=>$msgRepresentanteLegal,
+                'msgJuntaDirectiva'=>$msgJuntaDirectiva,
                 'boton'=>$boton,
             ]);
          }

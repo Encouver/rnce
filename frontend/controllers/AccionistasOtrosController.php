@@ -35,17 +35,29 @@ class AccionistasOtrosController extends BaseController
      */
     public function actionIndex()
     {
-        $searchModel = new AccionistasOtrosSearch();
+        $searchModel= new AccionistasOtrosSearch();
         $documento= ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'tipo_documento_id'=>1]);
         if(isset($documento)){
             $searchModel->documento_registrado_id= $documento->id;
         }
-        
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $searchModel->accionista= true;
+        $searchModel->rep_legal= false;
+        $searchModel->junta_directiva=false;
+        $dataProviderAccionista = $searchModel->search(Yii::$app->request->queryParams);
+        $searchModel->accionista= false;
+        $searchModel->rep_legal= false;
+        $searchModel->rep_legal= true;
+        $dataProviderRepresentante = $searchModel->search(Yii::$app->request->queryParams);
+        $searchModel->accionista= false;
+        $searchModel->rep_legal= false;
+        $searchModel->junta_directiva=true;
+        $dataProviderJunta = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'dataProviderAccionista' => $dataProviderAccionista,
+            'dataProviderRepresentante' => $dataProviderRepresentante,
+            'dataProviderJunta' => $dataProviderJunta,
         ]);
     }
     public function actionRepresentante()
@@ -109,17 +121,17 @@ class AccionistasOtrosController extends BaseController
             Yii::$app->session->setFlash('error','Debe existir un acta constitutiva o una modificacion');
             switch ($id){
             
-                case 'principal':
+                case 'accionista':
                      Yii::$app->session->setFlash('error','Debe existir un acta constitutiva');
                      return $this->redirect(['index']);
                 break;
                 case 'representante':
-                    Yii::$app->session->setFlash('error','Representante Legal existente o no existe un proceso de nombramiento de representante legal activo');
-                     return $this->redirect(['representante']);
+                    Yii::$app->session->setFlash('error','Representante Legal existente');
+                     return $this->redirect(['index']);
                 break;
                 case 'junta':
                     Yii::$app->session->setFlash('error','No existe un proceso de Actualizacion de Junta DIrectiva valido');
-                     return $this->redirect(['junta']);
+                    return $this->redirect(['index']);
                 break;
                 default:
                     Yii::$app->session->setFlash('error','Parametro incorrecto');
@@ -131,7 +143,7 @@ class AccionistasOtrosController extends BaseController
        
         switch ($id){
             
-             case 'principal':
+             case 'accionista':
                 $model->scenario=$id;
                  if($model->documentoRegistrado->tipo_documento_id!=1){
                      Yii::$app->session->setFlash('error','Scenario incorrecto');
@@ -152,38 +164,91 @@ class AccionistasOtrosController extends BaseController
             
         
         if ($model->load(Yii::$app->request->post())) {
-            if($model->tipo_cargo==""){
-                $model->tipo_cargo=null;
-            }
-            if($model->accionista==0 && $model->junta_directiva==0 && $model->rep_legal==0){
-                  Yii::$app->session->setFlash('error','Debe ingresar si es contratista, representante legal o junta directiva');
-                 return $this->render('create', [
-                'model' => $model,
-                'modelPersona'=>$modelPersona,
-                'modelJuridica'=>$modelJuridica,
-            ]);
-            }
-            if($model->save()){
-                        if($model->documentoRegistrado->tipo_documento_id==2){
-                             $documento= $model->Modificacionactual();
-                             if($documento->representante_legal){
-                                 return $this->redirect(['representante']); 
-                             }else{
-                                  return $this->redirect(['junta']); 
-                             }
-                        }else{
-                        return $this->redirect(['index']); 
-                        
+             $transaction = \Yii::$app->db->beginTransaction();
+             $exitoso= true;
+                try {
+                         if($model->tipo_cargo==""){
+                             $model->tipo_cargo=null;
+                         }
+                         switch ($id){
+                            case 'accionista':
+                                if($model->tipo_cargo!=null){
+                                    $junta= AccionistasOtros::findOne(['documento_registrado_id' => $model->documento_registrado_id, 'junta_directiva'=>true,'natural_juridica_id'=>$model->natural_juridica_id]);
+                                    if(isset($junta)){
+                                        if(!$junta->delete()){
+                                            $transaction->rollBack();
+                                        }
+                                    }
+                                    $junta= new AccionistasOtros();
+                                    $junta->natural_juridica_id=$model->natural_juridica_id;
+                                    $junta->documento_registrado_id=$model->documento_registrado_id;
+                                    $junta->junta_directiva=true;
+                                    $junta->tipo_cargo=$model->tipo_cargo;
+                                    $junta->tipo_obligacion=$model->tipo_obligacion;
+                                    $junta->actual=true;
+                                    if(!$junta->save()){
+                                        
+                                        $transaction->rollBack();
+                                        
+                                        $model->addError('tipo_cargo','Ya existe este cargo asignado');
+                                        return $this->render('create', [
+                                            'model' => $model,
+                                            'modelPersona'=>$modelPersona,
+                                            'modelJuridica'=>$modelJuridica,
+                                            ]);
+                                    }   
+                                }
+                                $representante= AccionistasOtros::findOne(['documento_registrado_id' => $model->documento_registrado_id, 'rep_legal'=>true,'natural_juridica_id'=>$model->natural_juridica_id]);
+                                if(isset($representante)){
+                                  $model->repr_legal_vigencia=$representante->repr_legal_vigencia;
+                                } 
+                            break;
+                            case 'representante':
+                                $accionista= AccionistasOtros::findOne(['documento_registrado_id' => $model->documento_registrado_id, 'accionista'=>true,'natural_juridica_id'=>$model->natural_juridica_id]);
+                                if(isset($accionista)){
+                                   $accionista->repr_legal_vigencia=$model->repr_legal_vigencia;
+                                   if(!$accionista->save()){
+                                        $transaction->rollBack();
+                                    } 
+                                } 
+                                
+                            break;
+                            case 'junta':
+                                $accionista= AccionistasOtros::findOne(['documento_registrado_id' => $model->documento_registrado_id, 'accionista'=>true,'natural_juridica_id'=>$model->natural_juridica_id]);
+                                if(isset($accionista)){
+                                   $accionista->tipo_cargo=$model->tipo_cargo;
+                                   if(!$accionista->save()){
+                                        $transaction->rollBack();
+                                    } 
+                                }
+                            break;
+                            default:
+                            break;
                         }
-
-            }else{
-                Yii::$app->session->setFlash('error','Error en la carga');
-                 return $this->render('create', [
-                'model' => $model,
-                'modelPersona'=>$modelPersona,
-                'modelJuridica'=>$modelJuridica,
-            ]);
-            }
+                      if($model->save()){
+                          $transaction->commit();
+                          if($model->rep_legal && $model->documentoRegistrado->tipo_documento_id==2){
+                              return $this->redirect(['representante']); 
+                          }else{
+                              if($model->junta_directiva && $model->documentoRegistrado->tipo_documento_id==2){
+                              return $this->redirect(['junta']); 
+                                }else{
+                                     return $this->redirect(['index']); 
+                                }
+                          }
+                          
+                      }else{
+                          $transaction->rollBack();
+                           return $this->render('create', [
+                            'model' => $model,
+                             'modelPersona'=>$modelPersona,
+                            'modelJuridica'=>$modelJuridica,
+                            ]);
+                      }
+                        
+                } catch (Exception $e) {
+                    $transaction->rollBack();
+                }
           
         } else {
             return $this->render('create', [
@@ -214,7 +279,18 @@ class AccionistasOtrosController extends BaseController
                  Yii::$app->session->setFlash('error','El acta constitutiva ya fue creada');
                   return $this->redirect(['index']);
             }else{
-                $model->scenario='principal';
+                if($model->accionista){
+                     $model->scenario='accionista';
+                }else{
+                    if($model->rep_legal){
+                        $model->scenario='representante';
+                    }else{
+                        if($model->junta_directiva){
+                        $model->scenario='junta';
+                        }
+                    }
+                }
+               
             }
             
         }else{
@@ -249,15 +325,15 @@ class AccionistasOtrosController extends BaseController
             }
          
             if($model->save()){
-                if($model->scenario=='representante'){
-                 return $this->redirect(['representante']);
-                }else{
-                   if($model->scenario=='junta'){
-                        return $this->redirect(['junta']);
-                    }else{
-                        return $this->redirect(['index']);
-                    }
-                }
+                if($model->rep_legal && $model->documentoRegistrado->tipo_documento_id==2){
+                              return $this->redirect(['representante']); 
+                          }else{
+                              if($model->junta_directiva && $model->documentoRegistrado->tipo_documento_id==2){
+                              return $this->redirect(['junta']); 
+                                }else{
+                                     return $this->redirect(['index']); 
+                                }
+                          }
             }else{
                 Yii::$app->session->setFlash('error','Error en la carga');
                  return $this->render('update', [
@@ -311,7 +387,30 @@ class AccionistasOtrosController extends BaseController
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+        if($model->rep_legal){
+            $accionista= AccionistasOtros::findOne(['documento_registrado_id'=>$model->documento_registrado_id,'natural_juridica_id'=>$model->natural_juridica_id,'accionista'=>true]);
+            if(isset($accionista)){
+                $accionista->repr_legal_vigencia=null;
+                if($accionista->save()){
+                    $model->delete();
+                }
+            }
+            
+        }else{
+            if($model->junta_directiva){
+            $accionista= AccionistasOtros::findOne(['documento_registrado_id'=>$model->documento_registrado_id,'natural_juridica_id'=>$model->natural_juridica_id,'accionista'=>true]);
+            if(isset($accionista)){
+                $accionista->tipo_cargo=null;
+                if($accionista->save()){
+                    $model->delete();
+                }
+            }
+            
+            }else{
+                $model->delete();
+            }
+        }
 
         return $this->redirect(['index']);
     }

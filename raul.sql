@@ -665,3 +665,14 @@ ALTER TABLE accionistas_otros ADD COLUMN actual boolean;
 ALTER TABLE accionistas_otros ALTER COLUMN actual SET NOT NULL;
 ALTER TABLE accionistas_otros ALTER COLUMN actual SET DEFAULT false;
 COMMENT ON COLUMN accionistas_otros.actual IS 'Indica si es accionista, representante, o junta directiva actual';
+
+
+--13 junio--
+ALTER TABLE actas_constitutivas ADD COLUMN representante_legal_id integer;
+ALTER TABLE actas_constitutivas ALTER COLUMN representante_legal_id SET NOT NULL;
+COMMENT ON COLUMN actas_constitutivas.representante_legal_id IS 'Clave foranea a la tabla accionistas_otros que almacena al representante legal';
+
+ALTER TABLE actas_constitutivas
+  ADD CONSTRAINT actas_constitutivas_representante_id_fkey FOREIGN KEY (representante_legal_id)
+      REFERENCES accionistas_otros (id) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE NO ACTION;

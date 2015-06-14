@@ -187,7 +187,7 @@ class ModificacionesActasController extends BaseController
                                 
                                 $rep_legal=  AccionistasOtros::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'rep_legal'=>true,'actual'=>true]);
                                 $representante = new AccionistasOtros();
-                                  $representante->scenario='representante';
+                                $representante->scenario='representante';
                                 $representante->natural_juridica_id= $rep_legal->natural_juridica_id;
                                 $representante->rep_legal= $rep_legal->rep_legal;
                                 $representante->repr_legal_vigencia= $rep_legal->repr_legal_vigencia;

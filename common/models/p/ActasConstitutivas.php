@@ -92,7 +92,7 @@ class ActasConstitutivas extends \common\components\BaseActiveRecord
     public function rules()
     {
         return [
-            [['contratista_id', 'documento_registrado_id', 'denominacion_comercial_id', 'duracion_empresa_id', 'objeto_social_id', 'razon_social_id', 'cierre_ejercicio_id', 'domicilio_fiscal_id', 'domicilio_principal_id', 'capital_suscrito', 'capital_pagado', 'modificacion_acta_id'], 'required'],
+            [['contratista_id', 'documento_registrado_id', 'denominacion_comercial_id', 'duracion_empresa_id', 'objeto_social_id', 'razon_social_id', 'cierre_ejercicio_id', 'domicilio_fiscal_id', 'domicilio_principal_id', 'capital_suscrito', 'capital_pagado', 'modificacion_acta_id','representante_legal_id'], 'required'],
             [['contratista_id', 'documento_registrado_id', 'denominacion_comercial_id', 'duracion_empresa_id', 'objeto_social_id', 'razon_social_id', 'cierre_ejercicio_id', 'creado_por', 'actualizado_por', 'domicilio_fiscal_id', 'domicilio_principal_id', 'modificacion_acta_id'], 'integer'],
             [['sys_status', 'acciones', 'certificados', 'suplementarios', 'actual'], 'boolean'],
             [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
@@ -129,6 +129,7 @@ class ActasConstitutivas extends \common\components\BaseActiveRecord
             'capital_pagado' => Yii::t('app', 'Capital Pagado'),
             'actual' => Yii::t('app', 'Actual'),
             'modificacion_acta_id' => Yii::t('app', 'Modificacion Acta ID'),
+            'representante_legal_id' => Yii::t('app', 'Representante Legal'),
         ];
     }
 
@@ -370,7 +371,9 @@ class ActasConstitutivas extends \common\components\BaseActiveRecord
          $razon_social= RazonesSociales::findOne(['documento_registrado_id'=>$this->documento_registrado_id]);
          $origen_capital= OrigenesCapitales::findOne(['documento_registrado_id'=>$this->documento_registrado_id]);
         // $certificacion_aporte= CertificacionesAportes::findOne(['documento_registrado_id'=>$this->documento_registrado_id]);
-         $accionista_otro= AccionistasOtros::findAll(['documento_registrado_id'=>$this->documento_registrado_id]);
+        $representante_legal= AccionistasOtros::findOne(['documento_registrado_id'=>$this->documento_registrado_id,'rep_legal'=>true]);
+        $accionista= AccionistasOtros::findAll(['documento_registrado_id'=>$this->documento_registrado_id,'accionista'=>true]);
+        $junta_directiva= AccionistasOtros::findAll(['documento_registrado_id'=>$this->documento_registrado_id,'junta_directiva'=>true]);
          $comisario= ComisariosAuditores::findAll(['documento_registrado_id'=>$this->documento_registrado_id]);
          $fondo_reserva= FondosReservas::findAll(['documento_registrado_id'=>$this->documento_registrado_id]);
          $sucursal= Sucursales::findAll(['documento_registrado_id'=>$this->documento_registrado_id]);
@@ -440,8 +443,16 @@ class ActasConstitutivas extends \common\components\BaseActiveRecord
              $resultado="Debe agregar domicilio fiscal";
                     return $resultado;
         }
-         if(!isset($accionista_otro)){
+         if(!isset($accionista)){
              $resultado="Debe agregar accionistas";
+                    return $resultado;
+        }
+         if(!isset($representante_legal)){
+             $resultado="Debe agregar representante legal";
+                    return $resultado;
+        }
+        if(!isset($junta_directiva)){
+             $resultado="Debe agregar junta directiva";
                     return $resultado;
         }
          if(!isset($fondo_reserva)){
@@ -471,6 +482,7 @@ class ActasConstitutivas extends \common\components\BaseActiveRecord
                      $this->domicilio_fiscal_id= $domicilio_fiscal->id;
                      $this->domicilio_principal_id= $domicilio_principal->id;
                      $this->modificacion_acta_id= $modificacion_acta->id;
+                     $this->representante_legal_id= $representante_legal->id;
                      return $resultado;
                  
     }

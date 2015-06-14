@@ -170,19 +170,44 @@ use yii\helpers\Html;
                 <?php } }?>
             </table>
         <?php }?>
-        <?php if (isset($accionista_otro)){?>
-                <h4><?= Html::a('Accionistas, Representante Legal y Junta Directiva', ['accionistas-otros/index'], ['class' => 'profile-link']) ?></h4>
+        <?php if (isset($accionista)){?>
+                <h4><?= Html::a('Accionistas', ['accionistas-otros/index'], ['class' => 'profile-link']) ?></h4>
                 <table class="table table-bordered">
           
-                    <?php foreach ($accionista_otro as $accionista) {?>
+                    <?php foreach ($accionista as $accion) {?>
       
                         <tr class="success">
-                            <td><b>Nombre: </b><?= $accionista->naturalJuridica->denominacion;?></td>
-                            <td><b>Accionista: </b><?= ($accionista->accionista)?'SI':'NO';?></td>
+                            <td><b>Nombre: </b><?= $accion->naturalJuridica->denominacion;?></td>
+                            <td><b>Porcentaje Accionario: </b><?= $accion->porcentaje_accionario;?></td>
+                            <td><b>Representante Legal: </b><?= (is_null($accion->repr_legal_vigencia))?' NO':'SI';?></td>
+                            <td><b>Junta Directiva: </b><?= (is_null($accion->tipo_cargo))?' NO':'SI';?></td>
              
-                            <td><b>Representante Legal: </b><?= ($accionista->rep_legal)?'SI':'NO';?></td>
-                            <td><b>Junta Directiva: </b><?= ($accionista->junta_directiva)?'SI':'NO';?></td>
-             
+                        </tr>
+   
+                    <?php } ?>
+                </table>
+         <?php  }?>
+        <?php if (isset($representante_legal)){?>
+                <h4><?= Html::a('Representante Legal', ['accionistas-otros/index'], ['class' => 'profile-link']) ?></h4>
+                <table class="table table-bordered">
+          
+      
+                        <tr class="success">
+                            <td><b>Nombre: </b><?= $representante_legal->naturalJuridica->denominacion;?></td>
+                            <td><b>Fecha Vigencia: </b><?= $representante_legal->repr_legal_vigencia;?></td>
+                        </tr>
+   
+                </table>
+         <?php  }?>
+         <?php if (isset($junta_directiva)){?>
+                <h4><?= Html::a('Junta Directiva', ['accionistas-otros/index'], ['class' => 'profile-link']) ?></h4>
+                <table class="table table-bordered">
+          
+                    <?php foreach ($junta_directiva as $junta) {?>
+      
+                        <tr class="success">
+                            <td><b>Nombre: </b><?= $junta->naturalJuridica->denominacion;?></td>
+                            <td><b>Tipo de Cargo: </b><?=  $junta->tipo_cargo;?></td>
                         </tr>
    
                     <?php } ?>
@@ -325,11 +350,27 @@ use yii\helpers\Html;
 
             </div>
         <?php } ?>
-        <?php if (!is_null($msgAccionistaOtro)){?>
+        <?php if (!is_null($msgAccionista)){?>
             <div class="alert-danger alert fade in">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
 
-                 <?= Html::a($msgAccionistaOtro, ['accionistas-otros/index'], ['class' => 'profile-link']) ?></h4>
+                 <?= Html::a($msgAccionista, ['accionistas-otros/index'], ['class' => 'profile-link']) ?></h4>
+
+            </div>
+         <?php } ?>
+         <?php if (!is_null($msgRepresentanteLegal)){?>
+            <div class="alert-danger alert fade in">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+
+                 <?= Html::a($msgRepresentanteLegal, ['accionistas-otros/index'], ['class' => 'profile-link']) ?></h4>
+
+            </div>
+         <?php } ?>
+            <?php if (!is_null($msgJuntaDirectiva)){?>
+            <div class="alert-danger alert fade in">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+
+                 <?= Html::a($msgJuntaDirectiva, ['accionistas-otros/index'], ['class' => 'profile-link']) ?></h4>
 
             </div>
          <?php } ?>
