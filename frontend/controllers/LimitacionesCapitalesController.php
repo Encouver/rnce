@@ -4,6 +4,7 @@ namespace frontend\controllers;
 
 use Yii;
 use common\models\p\LimitacionesCapitales;
+use common\models\p\Acciones;
 use app\models\LimitacionesCapitalesSearch;
 use common\components\BaseController;
 use yii\web\NotFoundHttpException;
@@ -84,8 +85,56 @@ class LimitacionesCapitalesController extends BaseController
             return $this->redirect(['index']);
         }
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            if($model->afecta){
+                $transaction = \Yii::$app->db->beginTransaction();
+                    try {
+                        
+                            if ($model->save()) {
+                                $accion= Acciones::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'tipo_accion'=>'ACTUAL','actual'=>false]);
+                                if(isset($accion)){
+                                    if(!$accion->delete()){
+                                        $transaction->rollBack();
+                                        return print_r($accion->getErrors());
+                                        // Yii::$app->session->setFlash('error','');
+                                        return $this->render('create',['model'=>$model]);
+                                    }
+                                }
+                                $accion= new Acciones();
+                                $accion->numero_preferencial=$model->total_accion;
+                                $accion->numero_comun=$model->total_accion_comun;
+                                $accion->valor_preferencial=$model->valor_accion;
+                                $accion->valor_comun=$model->valor_accion_comun;
+                                 $accion->tipo_accion='ACTUAL';
+                                $accion->suscrito=true;
+                                $accion->capital=$model->total_capital;
+                                $accion->documento_registrado_id=$model->documento_registrado_id;
+                                 $accion->contratista_id=Yii::$app->user->identity->contratista_id;
+                                if ($accion->save(false)) {
+                                    $transaction->commit();
+                                    return $this->redirect(['index']);
+                                }else{
+                                    $transaction->rollBack();
+                                      return print_r($accion->getErrors());
+                                    // Yii::$app->session->setFlash('error','');
+                                    return $this->render('create',['model'=>$model]);
+                                }
+                            }else{
+                                $transaction->rollBack();
+                                 return print_r($model->getErrors());
+                                //Yii::$app->session->setFlash('error','Erroren la carga del capital pagado');
+                                return $this->render('create',['model'=>$model]);
+                            }
+                       
+                        
+                    } catch (Exception $e) {
+                         $transaction->rollBack();
+                    }
+            }else{
+                $model->save();
+            }
+            
+            return $this->redirect(['index']);
         } else {
             return $this->render('create', [
                 'model' => $model,

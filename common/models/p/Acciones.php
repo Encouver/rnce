@@ -52,7 +52,7 @@ class Acciones extends \common\components\BaseActiveRecord
     public function rules()
     {
         return [
-            [['suscrito', 'documento_registrado_id','contratista_id','tipo_accion','certificacion_aporte_id','fecha_informe'], 'required'],
+            [['suscrito', 'documento_registrado_id','contratista_id','tipo_accion'], 'required'],
             [['numero_comun', 'numero_comun_pagada','numero_preferencial','numero_preferencial_pagada', 'documento_registrado_id','contratista_id','certificacion_aporte_id'], 'integer'],
             ['numero_comun_pagada', 'validarnumerocomunpagada'],
             ['numero_preferencial_pagada', 'validarnumeropreferencialpagada'],
@@ -65,9 +65,9 @@ class Acciones extends \common\components\BaseActiveRecord
             [['sys_status', 'suscrito'], 'boolean'],
             [['fecha_informe','sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el','actual'], 'safe'],
             [['tipo_accion'], 'string'],
-            [['capital','numero_preferencial'], 'required', 'on' => 'pago'],
-            [['capital','numero_comun','numero_comun_pagada','numero_preferencial','numero_preferencial_pagada','valor_comun','valor_preferencial'], 'required', 'on' => 'aumento'],
-            [['numero_preferencial', 'valor_preferencial','numero_preferencial_pagada','capital','capital_pagado'], 'required', 'on' => 'principal']
+            [['capital','numero_preferencial','certificacion_aporte_id','fecha_informe'], 'required', 'on' => 'pago'],
+            [['capital','numero_comun','numero_comun_pagada','numero_preferencial','numero_preferencial_pagada','valor_comun','valor_preferencial','certificacion_aporte_id','fecha_informe'], 'required', 'on' => 'aumento'],
+            [['numero_preferencial', 'valor_preferencial','numero_preferencial_pagada','capital','capital_pagado','certificacion_aporte_id','fecha_informe'], 'required', 'on' => 'principal']
             
         ];
     }

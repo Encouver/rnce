@@ -70,8 +70,11 @@ class LimitacionesCapitales extends \common\components\BaseActiveRecord
     {
         return [
             [['afecta', 'fecha_cierre', 'total_patrimonio', 'porcentaje_descapitalizacion', 'supuesto', 'monto_perdida', 'fecha_limitacion', 'capital_social_actualizado', 'certificacion_aporte_id', 'reintegro', 'fecha_informe', 'contratista_id', 'documento_registrado_id'], 'required'],
-            [['capital_legal','valor_accion', 'valor_accion_comun', 'valor_accion_actual', 'valor_accion_comun_actual', 'capital_legal_actual', 'total_capital','capital_legal_actualizado'], 'required','on'=>'afectado'],
+            [['capital_legal','valor_accion',  'valor_accion_actual',  'total_capital','capital_legal_actualizado'], 'required','on'=>'afectado'],
             [['capital_legal_actualizado','saldo_perdida'], 'required','on'=>'reintegro'],
+            [['valor_accion_comun','valor_accion_comun_actual','total_accion_comun'], 'required', 'when' => function ($model) {
+               return $model->existecomun(false);
+            }],
             [['afecta', 'supuesto', 'reintegro', 'sys_status', 'actual'], 'boolean'],
             [['fecha_cierre', 'fecha_limitacion', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el', 'fecha_informe'], 'safe'],
             [['capital_social', 'total_patrimonio', 'porcentaje_descapitalizacion', 'monto_perdida', 'capital_social_actualizado', 'capital_legal', 'saldo_perdida', 'valor_accion', 'valor_accion_comun', 'valor_accion_actual', 'valor_accion_comun_actual', 'capital_legal_actual', 'total_capital','capital_legal_actualizado'], 'number'],
@@ -191,7 +194,7 @@ class LimitacionesCapitales extends \common\components\BaseActiveRecord
             
         }
          if(!$this->reintegro){
-          $attributes['capital_social'] = ['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Valor accion'],'label'=>'Capital Social Legal una vez aplicada la Limitación'];
+          $attributes['capital_social'] = ['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Valor accion'],'label'=>'Capital Legal una vez aplicada la Limitación'];
             
         }
          
@@ -275,117 +278,24 @@ class LimitacionesCapitales extends \common\components\BaseActiveRecord
         return false;       
        
     }
-    public function Asignarcorreccion($correccion){
-         if(!is_null($correccion->valor_accion_comun)){
-                       
-                       //$this->total_accion=$correccion->total_accion;
-                      $this->valor_accion_actual=$correccion->valor_accion;
-                    
-                       $this->valor_accion_comun_actual=$correccion->valor_accion_comun;
-
-                       //$this->total_accion_comun=$correccion->total_accion_comun;
-                   
-                   return true;
-               }else{
-                  
-                       $this->valor_accion_actual=$correccion->valor_accion;
-                    
-                   
-                 return false; 
-               }
-     }
-      public function Asignarlimitacion($limitacion){
-         if(!is_null($limitacion->valor_accion_comun)){
-                       
-                       //$this->total_accion=$limitacion->total_accion;
-                      $this->valor_accion_actual=$limitacion->valor_accion;
-                     
-                       $this->valor_accion_comun_actual=$limitacion->valor_accion_comun;
-                   
-                      // $this->total_accion_comun=$limitacion->total_accion_comun;
-                   
-                   return true;
-               }else{
-                  
-                    
-                      $this->valor_accion_actual=$limitacion->valor_accion;
-
-                   
-                 return false; 
-               }
-     }
-     public function Existecomun(){
+     public function Existecomun($actualizar=true){
        
-       $accion = Acciones::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'suscrito'=>true,'actual'=>true]);
-       $correccion= CorreccionesMonetarias::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'actual'=>true]);
-       $limitacion= LimitacionesCapitales::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'afecta'=>true,'actual'=>true]);
-       if(isset($correccion) || isset($limitacion)){
-            $documento_accion= ActivosDocumentosRegistrados::findOne($accion->documento_registrado_id);
-            if(isset($correccion)){
-                $documento_correccion= ActivosDocumentosRegistrados::findOne($correccion->documento_registrado_id);
-                if($documento_correccion->fecha_registro>$documento_accion->fecha_registro){
-                    if(isset($limitacion)){
-                        $documento_limitacion= ActivosDocumentosRegistrados::findOne($limitacion->documento_registrado_id);
-                        if($documento_correccion->fecha_registro>$documento_limitacion->fecha_registro){
-                            if($this->Asignarcorreccion($correccion)){
-                                return true;
-                            }else{
-                                return false;
-                            }
-                        }else{
-                            if($this->Asignarlimitacion($limitacion)){
-                                return true;
-                                }else{
-                                  return false;
-                                }
-                            }
-                    }else{
-                        if($this->Asignarcorreccion($correccion)){
-                            return true;
-                        }else{
-                            return false;
-                        }
-                    }
-               
-                }else{
-                    if(isset($limitacion)){
-                        $documento_limitacion= ActivosDocumentosRegistrados::findOne($limitacion->documento_registrado_id);
-                        if($documento_limitacion->fecha_registro>$documento_accion->fecha_registro){
-                            if($this->Asignarlimitacion($limitacion)){
-                                return true;
-                            }else{
-                                return false;
-                            }
-                        }
-                    }
-                }
-            }else{
-                $documento_limitacion= ActivosDocumentosRegistrados::findOne($limitacion->documento_registrado_id);
-                    if($documento_limitacion->fecha_registro>$documento_accion->fecha_registro){
-                        if($this->Asignarlimitacion($limitacion)){
-                            return true;
-                        }else{
-                            return false;
-                        }
-                    }
-            }
-        }
-       if(!is_null($accion->numero_comun)){
-            $this->valor_accion_actual=$accion->valor_preferencial;
-                     
-                       $this->valor_accion_comun_actual=$accion->valor_comun;
-                   
-                
-                   return true;
-       }else{
-            $this->valor_accion_comun_actual=$accion->valor_comun;
-            $this->valor_accion_actual=$accion->valor_preferencial;
-            
-            
+       $accion = Acciones::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'suscrito'=>true,'actual'=>true,'suscrito'=>true]);
+       $accion_actual=Acciones::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'suscrito'=>true,'actual'=>false,'tipo_accion'=>'ACTUAL']);
+       if(isset($accion_actual)){
+            $accion =$accion_actual;
        }
-        return false;
-      
-    }
+       if($actualizar){
+                $this->valor_accion_actual=$accion->valor_preferencial;
+                $this->valor_accion_comun_actual=$accion->valor_comun;
+           }
+       if(!is_null($accion->numero_comun)){
+           
+           return true;
+       }
+       return false;
+     }
+       
     public function Modificacionactual(){
        
        $registro = ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'tipo_documento_id'=>2,'proceso_finalizado'=>false]);      

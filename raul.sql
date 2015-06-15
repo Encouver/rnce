@@ -688,3 +688,98 @@ ALTER TABLE modificaciones_actas ADD COLUMN comisario boolean;
 ALTER TABLE modificaciones_actas ALTER COLUMN comisario SET NOT NULL;
 ALTER TABLE modificaciones_actas ALTER COLUMN comisario SET DEFAULT false;
 COMMENT ON COLUMN modificaciones_actas.comisario IS 'Si true se busca informacion en la tabla comisarios_auditores';
+
+
+---15 junio 11:00 am--
+
+ALTER TABLE acciones_disminuidas DROP COLUMN acta_constitutiva_id;
+
+ALTER TABLE acciones_disminuidas ADD COLUMN contratista_id integer;
+ALTER TABLE acciones_disminuidas ALTER COLUMN contratista_id SET NOT NULL;
+COMMENT ON COLUMN acciones_disminuidas.contratista_id IS 'clave foranea a la tabla contratistas';
+
+ALTER TABLE acciones_disminuidas ADD COLUMN documento_registrado_id integer;
+ALTER TABLE acciones_disminuidas ALTER COLUMN documento_registrado_id SET NOT NULL;
+COMMENT ON COLUMN acciones_disminuidas.documento_registrado_id IS 'Clave foranea a la tabla documentos_registrados';
+
+ALTER TABLE acciones_disminuidas
+  ADD CONSTRAINT acciones_disminuidas_contratistas_id FOREIGN KEY (contratista_id)
+      REFERENCES contratistas (id) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE NO ACTION;
+
+ALTER TABLE acciones_disminuidas
+  ADD CONSTRAINT acciones_disminuidas_documento_registrado_id_fkey FOREIGN KEY (documento_registrado_id)
+      REFERENCES activos.documentos_registrados (id) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE NO ACTION;
+
+ALTER TABLE acciones_disminuidas ADD COLUMN actual boolean;
+ALTER TABLE acciones_disminuidas ALTER COLUMN actual SET NOT NULL;
+ALTER TABLE acciones_disminuidas ALTER COLUMN actual SET DEFAULT false;
+COMMENT ON COLUMN acciones_disminuidas.actual IS 'true si es la ultima disminucion de capital que afecta el capital';
+
+
+ALTER TABLE certificados_disminuidos DROP COLUMN acta_constitutiva_id;
+
+ALTER TABLE certificados_disminuidos ADD COLUMN contratista_id integer;
+ALTER TABLE certificados_disminuidos ALTER COLUMN contratista_id SET NOT NULL;
+COMMENT ON COLUMN certificados_disminuidos.contratista_id IS 'clave foranea a la tabla contratistas';
+
+ALTER TABLE certificados_disminuidos ADD COLUMN documento_registrado_id integer;
+ALTER TABLE certificados_disminuidos ALTER COLUMN documento_registrado_id SET NOT NULL;
+COMMENT ON COLUMN certificados_disminuidos.documento_registrado_id IS 'Clave foranea a la tabla documentos_registrados';
+
+ALTER TABLE certificados_disminuidos
+  ADD CONSTRAINT certificados_disminuidos_contratistas_id FOREIGN KEY (contratista_id)
+      REFERENCES contratistas (id) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE NO ACTION;
+
+ALTER TABLE certificados_disminuidos
+  ADD CONSTRAINT certificados_disminuidos_documento_registrado_id_fkey FOREIGN KEY (documento_registrado_id)
+      REFERENCES activos.documentos_registrados (id) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE NO ACTION;
+
+ALTER TABLE certificados_disminuidos ADD COLUMN actual boolean;
+ALTER TABLE certificados_disminuidos ALTER COLUMN actual SET NOT NULL;
+ALTER TABLE certificados_disminuidos ALTER COLUMN actual SET DEFAULT false;
+COMMENT ON COLUMN certificados_disminuidos.actual IS 'true si es la ultima disminucion de capital que afecta el capital';
+
+
+ALTER TABLE suplementarios_disminuidos DROP COLUMN acta_constitutiva_id;
+
+ALTER TABLE suplementarios_disminuidos ADD COLUMN contratista_id integer;
+ALTER TABLE suplementarios_disminuidos ALTER COLUMN contratista_id SET NOT NULL;
+COMMENT ON COLUMN suplementarios_disminuidos.contratista_id IS 'clave foranea a la tabla contratistas';
+
+ALTER TABLE suplementarios_disminuidos ADD COLUMN documento_registrado_id integer;
+ALTER TABLE suplementarios_disminuidos ALTER COLUMN documento_registrado_id SET NOT NULL;
+COMMENT ON COLUMN suplementarios_disminuidos.documento_registrado_id IS 'Clave foranea a la tabla documentos_registrados';
+
+ALTER TABLE suplementarios_disminuidos
+  ADD CONSTRAINT suplementarios_disminuidos_contratistas_id FOREIGN KEY (contratista_id)
+      REFERENCES contratistas (id) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE NO ACTION;
+
+ALTER TABLE suplementarios_disminuidos
+  ADD CONSTRAINT suplementarios_disminuidos_documento_registrado_id_fkey FOREIGN KEY (documento_registrado_id)
+      REFERENCES activos.documentos_registrados (id) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE NO ACTION;
+
+ALTER TYPE tipo_capital ADD VALUE 'ACTUAL' BEFORE 'VENTA_ACCION';
+
+ALTER TABLE suplementarios_disminuidos ADD COLUMN actual boolean;
+ALTER TABLE suplementarios_disminuidos ALTER COLUMN actual SET NOT NULL;
+ALTER TABLE suplementarios_disminuidos ALTER COLUMN actual SET DEFAULT false;
+COMMENT ON COLUMN suplementarios_disminuidos.actual IS 'true si es la ultima disminucion de capital que afecta el capital';
+
+
+ALTER TYPE tipo_capital ADD VALUE 'PREACTUAL' BEFORE 'ACTUAL';
+
+ALTER TABLE acciones ALTER COLUMN fecha_informe Drop NOT NULL;
+
+
+
+
+
+
+
+
