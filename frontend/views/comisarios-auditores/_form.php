@@ -51,8 +51,8 @@ $urlPersona = Url::to(['personas-naturales/create']);
     'model'=>$model,
     'form'=>$form,
     'columns'=>3,
-    'attributes'=>$model->getFormAttribs($model->getScenario())
-      ]); ?>
+    'attributes'=>$model->getFormAttribs($model->scenario)
+      ]);?>
      <div class="form-group">
          <?= Html::submitButton(Yii::t('app', 'Enviar'), ['class' => 'btn btn-success']) ?> 
     </div>

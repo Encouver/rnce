@@ -676,3 +676,15 @@ ALTER TABLE actas_constitutivas
   ADD CONSTRAINT actas_constitutivas_representante_id_fkey FOREIGN KEY (representante_legal_id)
       REFERENCES accionistas_otros (id) MATCH SIMPLE
       ON UPDATE CASCADE ON DELETE NO ACTION;
+
+
+--14 junio--
+
+ALTER TABLE comisarios_auditores ADD COLUMN actual boolean;
+COMMENT ON COLUMN comisarios_auditores.actual IS 'Indica si un comisario es el actual';
+
+
+ALTER TABLE modificaciones_actas ADD COLUMN comisario boolean;
+ALTER TABLE modificaciones_actas ALTER COLUMN comisario SET NOT NULL;
+ALTER TABLE modificaciones_actas ALTER COLUMN comisario SET DEFAULT false;
+COMMENT ON COLUMN modificaciones_actas.comisario IS 'Si true se busca informacion en la tabla comisarios_auditores';

@@ -13,7 +13,7 @@ $data = ['pago_capital'=>'PAGO DE CAPITAL', 'aporte_capitalizar'=>'APORTES POR C
         'venta_accion'=>'VENTA DE ACCION O CUOTA DE PARTICIPACION', 'fusion_empresarial'=>'FUSION_EMPRESARIAL','razon_social'=>'CAMBIO DE NOMBRE O RAZON SOCIAL',
         'decreto_div_excedente'=>'DECRETO DE DIVIENDOS EN EFECTIVO', 'modificacion_balance'=>'DISCUSION Y APROBACION O MODIFICACION DE BALANCE','denominacion_comercial'=>'DENOMINACION COMERCIAL',
         'domicilio_fiscal'=>' CAMBIO DE DOMICILIO','objeto_social'=>'CAMBIO DE OBJETO SOCIAL','cierre_ejercicio'=>'CAMBIO DEL CIERRE DE EJERCICIO ECONOMICO',
-        'representante_legal'=>'NOMBRAMIENTO DEL REPRESENTANTE LEGAL', 'junta_directiva'=>'ACTUALIZACION JUNTA DIRECTIVA','duracion_empresa'=>'PRORROGA DURACION EMPRESA',
+        'representante_legal'=>'NOMBRAMIENTO DEL REPRESENTANTE LEGAL', 'junta_directiva'=>'ACTUALIZACION JUNTA DIRECTIVA','comisario'=>'DESIGNACION DEL COMISARIO','duracion_empresa'=>'PRORROGA DURACION EMPRESA',
     ];
 ?>
 

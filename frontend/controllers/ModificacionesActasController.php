@@ -5,6 +5,7 @@ namespace frontend\controllers;
 use Yii;
 use common\models\p\ModificacionesActas;
 use common\models\p\AccionistasOtros;
+use common\models\p\ComisariosAuditores;
 use common\models\p\ActasConstitutivas;
 use app\models\ModificacionesActasSearch;
 use common\components\BaseController;
@@ -102,7 +103,6 @@ class ModificacionesActasController extends BaseController
                                       if(! $junta_directiva->save()){
                                         $transaction->rollback();
                                         Yii::$app->session->setFlash('error','Error en la asignacion de la junta directiva');
-                                        return print_r ($junta_directiva->getErrors());
                                         return $this->redirect(['index']);
                                     
                                         }
@@ -214,6 +214,32 @@ class ModificacionesActasController extends BaseController
                             break;
                             case "denominacion_comercial":
                                 $model->denominacion_comercial=true;
+                            break;
+                            case "comisario":
+                                $comisario_auditor= ComisariosAuditores::findAll(['contratista_id'=>Yii::$app->user->identity->contratista_id,'comisario'=>true,'actual'=>true]);
+                                foreach ($comisario_auditor as $comisario_actual) {
+                                   
+                                      $comisario = new ComisariosAuditores();
+                                      $comisario->comisario=true;
+                                      $comisario->actual=false;
+                                      $comisario->natural_juridica_id=$comisario_actual->natural_juridica_id;
+                                      $comisario->tipo_profesion=$comisario_actual->tipo_profesion;
+                                      $comisario->colegiatura=$comisario_actual->colegiatura;
+                                      $comisario->fecha_carta=$comisario_actual->fecha_carta;
+                                      $comisario->fecha_vencimiento=$comisario_actual->fecha_vencimiento;
+                                      $comisario->declaracion_jurada=true;
+                                      $comisario->documento_registrado_id= $model->documento_registrado_id;
+                                      if(!$comisario->save()){
+                                        $transaction->rollback();
+                                        Yii::$app->session->setFlash('error','Error en la asignacion del comisario');
+                                        return $this->redirect(['index']);
+                                    
+                                        }
+                                    
+                                }
+                                $model->comisario=true;
+                                
+                               
                             break;
 
                             default:

@@ -5,6 +5,7 @@ use kartik\builder\Form;
 use kartik\widgets\Select2;
 use yii\web\JsExpression;
 use common\models\a\ActivosDocumentosRegistrados;
+use common\models\p\ModificacionesActas;
 use common\models\p\AccionistasOtros;
 use common\models\p\SysNaturalesJuridicas;
 use Yii;
@@ -49,9 +50,12 @@ class ComisariosAuditores extends \common\components\BaseActiveRecord
         return [
             [[ 'contratista_id', 'natural_juridica_id'], 'required'],
             [['fecha_vencimiento','fecha_informe', 'fecha_carta', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
-            [['declaracion_jurada', 'comisario', 'sys_status', 'auditor', 'responsable_contabilidad', 'informe_conversion'], 'boolean'],
+            [['declaracion_jurada', 'comisario', 'sys_status', 'auditor', 'responsable_contabilidad', 'informe_conversion','actual'], 'boolean'],
             [['tipo_profesion'], 'string'],
-            [['tipo_profesion','fecha_carta','fecha_vencimiento','declaracion_jurada'],'required','on'=>'comisario'],
+            [['colegiatura'],'required','on'=>'responsable'],
+            [['colegiatura','fecha_vencimiento','tipo_profesion'],'required','on'=>'auditor'],
+            [['fecha_informe','tipo_profesion'],'required','on'=>'profesional'],
+            [['tipo_profesion','fecha_carta','fecha_vencimiento','declaracion_jurada','actual'],'required','on'=>'comisario'],
             [['documento_registrado_id', 'contratista_id', 'natural_juridica_id'], 'integer'],
             [['colegiatura'], 'string', 'max' => 255],
             [['comisario', 'auditor', 'informe_conversion', 'responsable_contabilidad'],'default','value'=>false],
@@ -65,7 +69,31 @@ class ComisariosAuditores extends \common\components\BaseActiveRecord
             }, 'whenClient' => "function (attribute, value) {
                 return $('#comisariosauditores-tipo_profesion').val() == 'CONTADOR PUBLICO';
             }"],
+            [['natural_juridica_id'],'validarnatural'],
+            [['colegiatura'],'validarcolegiatura'],
         ];
+    }
+    public function Validarnatural($attribute){
+        $accionista= AccionistasOtros::findOne(['natural_juridica_id'=>$this->natural_juridica_id]);
+        if(isset($accionista)){
+             $this->addError($attribute,'El comisario no puede formar parte de los accionista o junta directiva');
+        }else{
+            $comisario_auditor=ComisariosAuditores::findOne(['natural_juridica_id' => $this->natural_juridica_id]);
+            if($this->comisario){
+                $comisario_auditor=ComisariosAuditores::findOne(['natural_juridica_id' => $this->natural_juridica_id,'documento_registrado_id'=>$this->documento_registrado_id]);
+            }
+            if (isset($comisario_auditor) && $comisario_auditor->id!=$this->id) {
+                $this->addError($attribute,'Registro existente' );
+                }
+            
+        }
+       
+    }
+     public function Validarcolegiatura($attribute){
+        if($this->tipo_profesion!='CONTADOR PUBLICO'){
+            $this->colegiatura=null;
+        }
+       
     }
 
     /**
@@ -92,6 +120,7 @@ class ComisariosAuditores extends \common\components\BaseActiveRecord
             'informe_conversion' => Yii::t('app', 'Informe Conversion'),
             'natural_juridica_id' => Yii::t('app', 'Persona Natural'),
             'fecha_informe' => Yii::t('app', 'Fecha Informe'),
+            'actual' => Yii::t('app', 'Actual'),
         ];
     }
     
@@ -101,6 +130,13 @@ class ComisariosAuditores extends \common\components\BaseActiveRecord
     public function getNaturalJuridica()
     {
         return $this->hasOne(SysNaturalesJuridicas::className(), ['id' => 'natural_juridica_id']);
+    }
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDocumentoRegistrado()
+    {
+        return $this->hasOne(ActivosDocumentosRegistrados::className(), ['id' => 'documento_registrado_id']);
     }
     public function getFormAttribs($id) {
         //$data=[ 'NACIONAL' => 'NACIONAL', 'EXTRANJERA' => 'EXTRANJERA', ];
@@ -145,6 +181,7 @@ class ComisariosAuditores extends \common\components\BaseActiveRecord
     ];
         }
         if($id=="auditor"){
+              $this->tipo_profesion='CONTADOR PUBLICO';
              return [
                  'natural_juridica_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>[
                  'initValueText' => $persona,
@@ -160,7 +197,7 @@ class ComisariosAuditores extends \common\components\BaseActiveRecord
                 'templateResult' => new JsExpression('function(natural_juridica_id) { return natural_juridica_id.text; }'),
                 'templateSelection' => new JsExpression('function (natural_juridica_id) { return natural_juridica_id.text; }'),
         ],]],
-         'colegiatura'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Numero de colegiatura']],
+        'colegiatura'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Numero de colegiatura']],
         'fecha_vencimiento'=>[
             'type'=>Form::INPUT_WIDGET, 
             'widgetClass'=>'\kartik\widgets\DatePicker', 
@@ -169,11 +206,12 @@ class ComisariosAuditores extends \common\components\BaseActiveRecord
                     'format' => 'yyyy-mm-dd'
                 ]],
         ],
+        'tipo_profesion'=>['type'=>Form::INPUT_HIDDEN,'label'=>false],
       
       
     ];
         }
-      if('profesional'){
+      if($id=='profesional'){
           
         $profesiones =[ 'CONTADOR PUBLICO' => 'CONTADOR PUBLICO', 'ADMINISTRADOR' => 'ADMINISTRADOR', 'ECONOMISTA' => 'ECONOMISTA', ];
     return [
@@ -204,7 +242,40 @@ class ComisariosAuditores extends \common\components\BaseActiveRecord
         ],
     ];
       }
+      if($id=='responsable'){
+          
+          $this->tipo_profesion='CONTADOR PUBLICO';
+    return [
+        'natural_juridica_id'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>[
+                'initValueText' => $persona,
+                'options'=>[],'pluginOptions' => [
+                'allowClear' => true,
+                'minimumInputLength' => 3,
+                'ajax' => [
+                    'url' => \yii\helpers\Url::to(['sys-naturales-juridicas/naturales-juridicas-lista']),
+                    'dataType' => 'json',
+                    'data' => new JsExpression('function(params) { return {q:params.term}; }')
+                ],
+                'escapeMarkup' => new JsExpression('function (markup) { return markup; }'),
+                'templateResult' => new JsExpression('function(natural_juridica_id) { return natural_juridica_id.text; }'),
+                'templateSelection' => new JsExpression('function (natural_juridica_id) { return natural_juridica_id.text; }'),
+        ],]],
+         'colegiatura'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Numero de colegiatura']],
+         'tipo_profesion'=>['type'=>Form::INPUT_HIDDEN,'label'=>false],
+    ];
+      }
     
+    }
+     public function Modificacionactual(){
+       
+       $registro = ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'tipo_documento_id'=>2,'proceso_finalizado'=>false]);      
+       
+       if(isset($registro)){
+         $modificacion= ModificacionesActas::findOne(['documento_registrado_id'=>$registro->id]);  
+       }else{
+           $modificacion= ModificacionesActas::findOne(['documento_registrado_id'=>-100]); 
+       }
+       return $modificacion;
     }
     public function Existeregistro(){
        $registro = ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'tipo_documento_id'=>1,'proceso_finalizado'=>false]);       
@@ -212,28 +283,41 @@ class ComisariosAuditores extends \common\components\BaseActiveRecord
        if(isset($registro) || isset($registromodificacion)){
            if(isset($registromodificacion)){
                $registro=$registromodificacion;
+                $modificacion= ModificacionesActas::findOne(['documento_registrado_id'=>$registro->id]);
+               if(isset($modificacion)){
+                    if(!$modificacion->comisario && $this->comisario){
+                         return true;
+                    }else{
+                        $this->actual=false;
+                    }
+               }else{
+                   return true;
+               }
            }
-          $comisario_auditor= ComisariosAuditores::findAll(['contratista_id'=>Yii::$app->user->identity->contratista_id,'documento_registrado_id'=>$registro->id,'comisario'=>true]);
-           if(count($comisario_auditor)>=2){
+           if($this->comisario){
+               $comisario_auditor= ComisariosAuditores::findAll(['contratista_id'=>Yii::$app->user->identity->contratista_id,'documento_registrado_id'=>$registro->id,'comisario'=>true]);
+                if(count($comisario_auditor)>=2){
                
                 return true;   
-            }else{
-                if($this->comisario){
+                }else{
                     $this->documento_registrado_id=$registro->id;
+                    if(is_null($this->actual)){
+                        $this->actual=true;
+                    }
+                    return false;
                 }
+           }else{
+               return false;
+           }
+            
+        }else{
+            if($this->comisario){
+            return true;
+            }else{
                 
                 return false;
             }
-        }else{
-            return true;
         }
-    }
-    public function accionista(){
-        $accionista= AccionistasOtros::findOne(['natural_juridica_id'=>$this->natural_juridica_id]);
-        if(isset($accionista)){
-            return true;
-        }
-        return false;
     }
    
    

@@ -19,7 +19,7 @@ class ModificacionesActasSearch extends ModificacionesActas
     {
         return [
             [['id', 'contratista_id', 'documento_registrado_id', 'creado_por', 'actualizado_por'], 'integer'],
-            [['pago_capital', 'aporte_capitalizar', 'aumento_capital', 'coreccion_monetaria', 'disminucion_capital', 'limitacion_capital', 'limitacion_capital_afectado', 'fondo_emergencia', 'reintegro_perdida', 'venta_accion', 'fusion_empresarial', 'decreto_div_excedente', 'modificacion_balance', 'razon_social', 'denominacion_comercial', 'domicilio_fiscal', 'domicilio_principal', 'objeto_social', 'representante_legal', 'junta_directiva', 'duracion_empresa', 'cierre_ejercicio', 'sys_status'], 'boolean'],
+            [['pago_capital', 'aporte_capitalizar', 'aumento_capital', 'coreccion_monetaria', 'disminucion_capital', 'limitacion_capital', 'limitacion_capital_afectado', 'fondo_emergencia', 'reintegro_perdida', 'venta_accion', 'fusion_empresarial', 'decreto_div_excedente', 'modificacion_balance', 'razon_social', 'denominacion_comercial', 'domicilio_fiscal', 'domicilio_principal', 'objeto_social', 'representante_legal', 'junta_directiva', 'duracion_empresa', 'cierre_ejercicio', 'sys_status','comisario'], 'boolean'],
             [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
         ];
     }
@@ -58,7 +58,7 @@ class ModificacionesActasSearch extends ModificacionesActas
 
         $query->andFilterWhere([
             'id' => $this->id,
-            'contratista_id' => $this->contratista_id,
+            'contratista_id' => Yii::$app->user->identity->contratista_id,
             'documento_registrado_id' => $this->documento_registrado_id,
             'pago_capital' => $this->pago_capital,
             'aporte_capitalizar' => $this->aporte_capitalizar,
@@ -82,6 +82,7 @@ class ModificacionesActasSearch extends ModificacionesActas
             'junta_directiva' => $this->junta_directiva,
             'duracion_empresa' => $this->duracion_empresa,
             'cierre_ejercicio' => $this->cierre_ejercicio,
+            'comisario' => $this->comisario,
             'creado_por' => $this->creado_por,
             'actualizado_por' => $this->actualizado_por,
             'sys_status' => $this->sys_status,

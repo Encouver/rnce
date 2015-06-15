@@ -35,10 +35,64 @@ class ComisariosAuditoresController extends BaseController
     public function actionIndex()
     {
         $searchModel = new ComisariosAuditoresSearch();
+        $documento= ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'tipo_documento_id'=>1]);
+        if(isset($documento)){
+            $searchModel->documento_registrado_id= $documento->id;
+        }
         $searchModel->comisario=true;
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+     public function actionComisario()
+    {
+        $searchModel = new ComisariosAuditoresSearch();
+        $documento=$searchModel->Modificacionactual();
+        if(isset($documento)){
+            $searchModel->documento_registrado_id= $documento->documento_registrado_id;
+          
+        }
+        $searchModel->comisario=true;
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $model= new ComisariosAuditores();
+        return $this->render('comisario', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'documento'=>$documento,
+        ]);
+    }
+     public function actionResponsable()
+    {
+        $searchModel = new ComisariosAuditoresSearch();
+        $searchModel->responsable_contabilidad=true;
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('responsable', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+     public function actionAuditor()
+    {
+        $searchModel = new ComisariosAuditoresSearch();
+        $searchModel->auditor=true;
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('auditor', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+     public function actionProfesional()
+    {
+        $searchModel = new ComisariosAuditoresSearch();
+        $searchModel->informe_conversion=true;
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('profesional', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
@@ -75,10 +129,19 @@ class ComisariosAuditoresController extends BaseController
             case "auditor":
                 $model->scenario=$id;
                 $model->auditor=true;
+                $model->comisario=false;
                 break;
             case "profesional":
                 $model->scenario=$id;
                 $model->informe_conversion=true;
+                $model->comisario=false;
+                $model->tipo_profesion='CONTADOR PUBLICO';
+                break;
+              case "responsable":
+                $model->scenario=$id;
+                $model->responsable_contabilidad=true;
+                $model->tipo_profesion='CONTADOR PUBLICO';
+                $model->comisario=false;
                 break;
             default :
                 break;
@@ -88,210 +151,35 @@ class ComisariosAuditoresController extends BaseController
             Yii::$app->session->setFlash('error','Usuario posee el limte de comisarios ó debe crear un documento registrado');
             return $this->redirect(['index']);
           }
-        if ($model->load(Yii::$app->request->post()) && !$model->accionista() && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
     
                 
-          return $this->redirect(['index']);
+            if($model->comisario){
+              if($model->documentoRegistrado->tipo_documento_id==2){
+                   return $this->redirect(['comisario']);
+              }
+               return $this->redirect(['index']);
+           }else{
+               if($model->auditor){
+                    return $this->redirect(['auditor']);
+               }else{
+                   if($model->responsable_contabilidad){
+                       return $this->redirect(['responsable']);
+                   }else{
+                       return $this->redirect(['profesional']);
+                   }
+               }
+                        
+           }
 
         } else {
-            if($model->accionista()){
-                Yii::$app->session->setFlash('error','El comisario no puede formar parte de los accionista o junta directiva');
-           
-            }
             return $this->render('create', [
                 'model' => $model,
                 'modelPersona'=>$modelPersona,
             ]);
         }
     }
-      public function actionCrearresponsable()
-    {
-        $responsable_contabilidad = new ComisariosAuditores();
-         $searchModel = new ComisariosAuditoresSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-       
     
-        return $this->render('responsables_contabilidad', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-            'responsable_contabilidad' => $responsable_contabilidad,
-        ]);
-      
-        
-    }
-     public function actionResponsablecontabilidad(){
-        
-        
-        
-         $responsable_contabilidad = new ComisariosAuditores();
-        $usuario= \common\models\p\User::findOne(Yii::$app->user->identity->id);
-        if ( $responsable_contabilidad->load(Yii::$app->request->post())) {
-            
-             $transaction = \Yii::$app->db->beginTransaction();
-           try {
-          
-            
-            $responsable_contabilidad->contratista_id = $usuario->contratista_id;
-            $responsable_contabilidad->comisario=false;
-            $responsable_contabilidad->auditor=false;
-           $responsable_contabilidad->responsable_contabilidad=true;
-           $responsable_contabilidad->informe_conversion=false;
-          
-               if ( $responsable_contabilidad->save()) {
-           
-
-                               $transaction->commit();
-                               return "Datos guardados con exito";
-                               
-
-
-                   }else{
-                        $transaction->rollBack();
-                       return "Datos no guardados";
-                   }
-             
-             
-           } catch (Exception $e) {
-               $transaction->rollBack();
-           }
-        }
-        
-    }
-    public function actionCrearcontador()
-    {
-        $contador_auditor = new ComisariosAuditores();
-         $searchModel = new ComisariosAuditoresSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-       
-    
-        return $this->render('contadores_auditores', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-            'contador_auditor' => $contador_auditor,
-        ]);
-      
-        
-    }
-    public function actionContadorauditor(){
-        
-       $contador_auditor = new ComisariosAuditores();
-      
-        $usuario= \common\models\p\User::findOne(Yii::$app->user->identity->id);
-        if ( $contador_auditor->load(Yii::$app->request->post())) {
-            
-             $transaction = \Yii::$app->db->beginTransaction();
-             
-           try {
-               $natural_juridica = \common\models\p\SysNaturalesJuridicas::find()->where(['id'=>$contador_auditor->natural_juridica_id])->one();
-           
-               $persona_natural= PersonasNaturales::find()->where(['rif'=>$natural_juridica->rif])->one();
-            if(isset($persona_natural) && $contador_auditor->colegiatura==null){
-                 $transaction->rollBack();
-                return "Debe ingresar el numero de colegido"; 
-            }
-            if($contador_auditor->fecha_vencimiento==null){
-                
-                  $transaction->rollBack();
-                return "Debe ingresar la fecha de vencimineto"; 
-            }
-            $contador_auditor->contratista_id = $usuario->contratista_id;
-            $contador_auditor->comisario=false;
-            $contador_auditor->auditor=true;
-           $contador_auditor->responsable_contabilidad=false;
-           $contador_auditor->informe_conversion=false;
-         
-               if ( $contador_auditor->save()) {
-           
-
-                               $transaction->commit();
-                               return "Datos guardados con exito";
-                               
-
-
-                   }else{
-                        $transaction->rollBack();
-                       return "Datos no guardados";
-                   }
-             
-             
-           } catch (Exception $e) {
-               $transaction->rollBack();
-           }
-        }
-        
-        
-    }
-    
-      public function actionCrearprofesional()
-    {
-        $profesional_informe = new ComisariosAuditores();
-         $searchModel = new ComisariosAuditoresSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-       
-    
-        return $this->render('profesionales_informes', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-            'profesional_informe' => $profesional_informe,
-        ]);
-      
-        
-    }
-    
-    public function actionProfesionalinforme(){
-        
-       $profesional_informe = new ComisariosAuditores();
-      
-        $usuario= \common\models\p\User::findOne(Yii::$app->user->identity->id);
-        if (  $profesional_informe->load(Yii::$app->request->post())) {
-            
-             $transaction = \Yii::$app->db->beginTransaction();
-             
-           try {
-               $natural_juridica = \common\models\p\SysNaturalesJuridicas::find()->where(['id'=> $profesional_informe->natural_juridica_id])->one();
-           
-               $persona_natural= PersonasNaturales::find()->where(['rif'=>$natural_juridica->rif])->one();
-            if(isset($persona_natural) &&  $profesional_informe->colegiatura==null){
-                 $transaction->rollBack();
-                return "Debe ingresar el numero de colegido"; 
-            }
-            if( $profesional_informe->fecha_informe==null){
-                
-                  $transaction->rollBack();
-                return "Debe ingresar la fecha del informe"; 
-            }
-            if( $profesional_informe->tipo_profesion==null){
-                
-                  $transaction->rollBack();
-                return "Debe ingresar el tipo de profesion"; 
-            }
-             $profesional_informe->contratista_id = $usuario->contratista_id;
-             $profesional_informe->comisario=false;
-             $profesional_informe->auditor=false;
-             $profesional_informe->responsable_contabilidad=false;
-             $profesional_informe->informe_conversion=true;
-         
-               if ($profesional_informe->save()) {
-           
-
-                               $transaction->commit();
-                               return "Datos guardados con exito";
-                               
-
-
-                   }else{
-                        $transaction->rollBack();
-                       return "Datos no guardados";
-                   }
-             
-             
-           } catch (Exception $e) {
-               $transaction->rollBack();
-           }
-        }
-        
-        
-    }
     /**
      * Updates an existing ComisariosAuditores model.
      * If update is successful, the browser will be redirected to the 'view' page.
@@ -304,15 +192,40 @@ class ComisariosAuditoresController extends BaseController
         $modelPersona= new PersonasNaturales(['scenario'=>'basico']);
         if($model->comisario){
                $model->scenario='comisario';
+           }else{
+               if($model->auditor){
+                   $model->scenario='auditor';
+               }else{
+                   if($model->responsable_contabilidad){
+                       $model->scenario='responsable';
+                   }else{
+                       $model->scenario='profesional';
+                   }
+               }
+                        
            }
         
-        if ($model->load(Yii::$app->request->post()) && !$model->accionista() && $model->save()) {
-            return $this->redirect(['index']);
-        } else {
-            if($model->accionista()){
-                Yii::$app->session->setFlash('error','El comisario no puede formar parte de los accionista o junta directiva');
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+             if($model->comisario){
+              if($model->documentoRegistrado->tipo_documento_id==2){
+                   return $this->redirect(['comisario']);
+              }
+               return $this->redirect(['index']);
+           }else{
+               if($model->auditor){
+                    return $this->redirect(['auditor']);
+               }else{
+                   if($model->responsable_contabilidad){
+                       return $this->redirect(['responsable']);
+                   }else{
+                       return $this->redirect(['profesional']);
+                   }
+               }
+                        
+           }
            
-            }
+        } else {
+           
             return $this->render('update', [
                 'model' => $model,
                  'modelPersona'=>$modelPersona,
@@ -328,9 +241,32 @@ class ComisariosAuditoresController extends BaseController
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
+        $model= $this->findModel($id);
+        $comisario=$model->comisario;
+       if($comisario){
+           $documento=$model->documentoRegistrado->tipo_documento_id;
+       }
+        $responsable=$model->responsable_contabilidad;
+        $auditor=$model->auditor;
+        $profesional=$model->informe_conversion;
+        $model->delete();
+         if($comisario){
+              if($documento==2){
+                   return $this->redirect(['comisario']);
+              }
+               return $this->redirect(['index']);
+           }else{
+               if($auditor){
+                    return $this->redirect(['auditor']);
+               }else{
+                   if($responsable){
+                       return $this->redirect(['responsable']);
+                   }else{
+                       return $this->redirect(['profesional']);
+                   }
+               }
+                        
+           }
     }
 
     /**

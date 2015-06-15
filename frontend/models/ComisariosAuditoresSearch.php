@@ -20,7 +20,7 @@ class ComisariosAuditoresSearch extends ComisariosAuditores
         return [
             [['id', 'documento_registrado_id', 'contratista_id', 'natural_juridica_id'], 'integer'],
             [['fecha_vencimiento', 'tipo_profesion', 'fecha_carta', 'colegiatura', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
-            [['declaracion_jurada', 'comisario', 'sys_status', 'auditor', 'responsable_contabilidad', 'informe_conversion'], 'boolean'],
+            [['declaracion_jurada', 'comisario', 'sys_status', 'auditor', 'responsable_contabilidad', 'informe_conversion','actual'], 'boolean'],
         ];
     }
 
@@ -73,6 +73,7 @@ class ComisariosAuditoresSearch extends ComisariosAuditores
             'responsable_contabilidad' => $this->responsable_contabilidad,
             'informe_conversion' => $this->informe_conversion,
             'natural_juridica_id' => $this->natural_juridica_id,
+            'actuak' => $this->actual,
         ]);
 
         $query->andFilterWhere(['like', 'tipo_profesion', $this->tipo_profesion])

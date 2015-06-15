@@ -115,6 +115,9 @@ AppAsset::register($this);
                          ['label' => 'Relacion de Contratos', 'url' => ['/relaciones-contratos/index']],
                          ['label' => 'Empresas Relacionadas', 'url' => ['/empresas-relacionadas/index']],
                          ['label' => 'Certificacion Aportes', 'url' => ['/certificaciones-aportes/index']],
+                         ['label' => 'Responsable Contabilidad Interna', 'url' => ['/comisarios-auditores/responsable']],
+                         ['label' => 'Contador Auditor', 'url' => ['/comisarios-auditores/auditor']],
+                         ['label' => 'Profesional Informe de Conversion', 'url' => ['/comisarios-auditores/profesional']],
          
                         
                     ],
@@ -157,6 +160,7 @@ AppAsset::register($this);
                         ['label' => 'Discusión y Aprobación o Modificación de Balances', 'url' => ['/modificaciones-balances/index']],
                         ['label' => 'Nombramiento del Representante Legal', 'url' => ['/accionistas-otros/representante']],
                         ['label' => 'Actualizacion de Junta Directiva', 'url' => ['/accionistas-otros/junta']],
+                        ['label' => 'Designacion del comisario', 'url' => ['/comisarios-auditores/comisario']],
                         ['label' => 'Origen Capital', 'url' => ['/origenes-capitales/origen']],
                     ],
                 ],

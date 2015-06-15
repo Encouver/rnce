@@ -60,7 +60,7 @@ class ModificacionesActas extends \common\components\BaseActiveRecord
         return [
             [['contratista_id', 'documento_registrado_id'], 'required'],
             [['contratista_id', 'documento_registrado_id', 'creado_por', 'actualizado_por'], 'integer'],
-            [['pago_capital', 'aporte_capitalizar', 'aumento_capital', 'coreccion_monetaria', 'disminucion_capital', 'limitacion_capital', 'limitacion_capital_afectado', 'fondo_emergencia', 'reintegro_perdida', 'venta_accion', 'fusion_empresarial', 'decreto_div_excedente', 'modificacion_balance', 'razon_social', 'denominacion_comercial', 'domicilio_fiscal', 'domicilio_principal', 'objeto_social', 'representante_legal', 'junta_directiva', 'duracion_empresa', 'cierre_ejercicio', 'sys_status'], 'boolean'],
+            [['pago_capital', 'aporte_capitalizar', 'aumento_capital', 'coreccion_monetaria', 'disminucion_capital', 'limitacion_capital', 'limitacion_capital_afectado', 'fondo_emergencia', 'reintegro_perdida', 'venta_accion', 'fusion_empresarial', 'decreto_div_excedente', 'modificacion_balance', 'razon_social', 'denominacion_comercial', 'domicilio_fiscal', 'domicilio_principal', 'objeto_social', 'representante_legal', 'junta_directiva', 'duracion_empresa', 'cierre_ejercicio', 'sys_status','comisario'], 'boolean'],
             [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe']
         ];
     }
@@ -102,6 +102,7 @@ class ModificacionesActas extends \common\components\BaseActiveRecord
             'sys_creado_el' => Yii::t('app', 'Sys Creado El'),
             'sys_actualizado_el' => Yii::t('app', 'Sys Actualizado El'),
             'sys_finalizado_el' => Yii::t('app', 'Sys Finalizado El'),
+            'comisario' => Yii::t('app', 'Comisario'),
         ];
     }
 
