@@ -7,6 +7,7 @@ use common\models\p\ModificacionesActas;
 use common\models\p\AccionistasOtros;
 use common\models\p\ComisariosAuditores;
 use common\models\p\ActasConstitutivas;
+use common\models\a\ActivosDocumentosRegistrados;
 use app\models\ModificacionesActasSearch;
 use common\components\BaseController;
 use yii\web\NotFoundHttpException;
@@ -35,11 +36,16 @@ class ModificacionesActasController extends BaseController
      */
     public function actionIndex()
     {
-        $searchModel = new ModificacionesActasSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+       
+        $documento= ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'tipo_documento_id'=>2,'proceso_finalizado'=>false]);
+        if(isset($documento)){
+            $model= ModificacionesActas::findOne(['documento_registrado_id'=>$documento->id]);
+        }else{
+              $model= ModificacionesActas::findOne(['documento_registrado_id'=>-100]);
+        }
+        
         return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'model'=>$model,
         ]);
     }
 
@@ -64,7 +70,7 @@ class ModificacionesActasController extends BaseController
     {
         $model = new ModificacionesActas();
          if($model->existeregistro()){
-            Yii::$app->session->setFlash('error','No existe una modificacion activa');
+            Yii::$app->session->setFlash('error','Ya existe un registro');
             return $this->redirect(['index']);
                 }
         if(isset($_POST['objeto'])){
