@@ -785,6 +785,55 @@ ALTER TABLE suplementarios ALTER COLUMN certificacion_aporte_id DROP NOT NULL;
 ALTER TABLE suplementarios ALTER COLUMN fecha_informe DROP NOT NULL;
 
 
+--17 junio--
+
+ALTER TABLE acciones ADD COLUMN total_venta numeric(38,6);
+COMMENT ON COLUMN acciones.total_venta IS 'Total venta solo para la venta de acciones';
+
+ALTER TABLE certificados ADD COLUMN total_venta numeric(38,6);
+COMMENT ON COLUMN certificados.total_venta IS 'Total venta solo para la venta de certificados';
+
+ALTER TABLE suplementarios ADD COLUMN total_venta numeric(38,6);
+COMMENT ON COLUMN suplementarios.total_venta IS 'Total venta solo para la venta de suplementarios';
+
+ALTER TABLE polizas_contratadas DROP COLUMN sys_pais_id;
+ALTER TABLE polizas_contratadas DROP COLUMN tipo_nacionalidad;
+ ALTER TABLE polizas_contratadas DROP COLUMN numero_identificacion;
+ALTER TABLE polizas_contratadas DROP COLUMN bien_asegurado;
+ALTER TABLE polizas_contratadas DROP COLUMN aseguradora_id;
+
+
+ALTER TABLE polizas_contratadas ADD COLUMN natural_juridica_id integer;
+ALTER TABLE polizas_contratadas ALTER COLUMN natural_juridica_id SET NOT NULL;
+COMMENT ON COLUMN polizas_contratadas.natural_juridica_id IS 'Clave foranea a la tabla sys_naturales_juridicas, se refiere a al entidad aseguradora';
+
+
+ALTER TABLE polizas_contratadas ADD COLUMN bien_id integer;
+ALTER TABLE polizas_contratadas ALTER COLUMN bien_id SET NOT NULL;
+COMMENT ON COLUMN polizas_contratadas.bien_id IS 'Clave foranea a la tabla bienes, se refiere al bien asegurado';
+
+ALTER TABLE polizas_contratadas
+  ADD CONSTRAINT polizas_contratadas_natural_juridica_id_fkey FOREIGN KEY (natural_juridica_id)
+      REFERENCES sys_naturales_juridicas (id) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE NO ACTION;
+
+ALTER TABLE polizas_contratadas
+  ADD CONSTRAINT polizas_contratadas_bien_id_fkey FOREIGN KEY (bien_id)
+      REFERENCES activos.bienes (id) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE NO ACTION;
+ALTER TABLE empresas_fusionadas DROP COLUMN capital_id;
+
+
+DROP TABLE capitales_decretos;
+DROP TABLE capitales_efectivos;
+DROP TABLE capitales_mercancias;
+DROP TABLE capitales_pagar_accionistas;
+DROP TABLE capitales_propiedades;
+DROP TABLE capitales;
+
+DROP TABLE sys_subdenominaciones_comerciales;
+DROP TABLE sys_denominaciones_comerciales;
+
 
 
 

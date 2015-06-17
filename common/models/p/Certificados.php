@@ -77,6 +77,8 @@ class Certificados extends \common\components\BaseActiveRecord
             ['numero_aportacion', 'validarnumeroaportacion'],
             ['numero_rotativo', 'validarnumerorotativo'],
             ['numero_inversion', 'validarnumeroinversion'],
+            ['total_venta', 'validarventa'],
+            [['total_venta','numero_asociacion', 'numero_aportacion', 'numero_rotativo', 'numero_inversion', 'valor_asociacion', 'valor_aportacion', 'valor_rotativo','valor_inversion'], 'required', 'on' => 'venta'],
             [['capital','numero_asociacion', 'numero_aportacion', 'numero_rotativo', 'numero_inversion', 'valor_asociacion', 'valor_aportacion', 'valor_rotativo','valor_inversion','numero_asociacion_pagada', 'numero_aportacion_pagada', 'numero_rotativo_pagada', 'numero_inversion_pagada', 'capital_pagado','certificacion_aporte_id','fecha_informe'], 'required','on'=>'aumento'],
             [['capital','numero_asociacion', 'numero_aportacion', 'numero_rotativo', 'numero_inversion', 'valor_asociacion', 'valor_aportacion', 'valor_rotativo','valor_inversion','numero_asociacion_pagada', 'numero_aportacion_pagada', 'numero_rotativo_pagada', 'numero_inversion_pagada', 'capital_pagado','certificacion_aporte_id','fecha_informe'], 'required','on'=>'principal'],
             [['capital','numero_asociacion', 'numero_aportacion', 'numero_rotativo', 'numero_inversion','certificacion_aporte_id','fecha_informe'], 'required','on'=>'pago'],
@@ -125,6 +127,14 @@ class Certificados extends \common\components\BaseActiveRecord
                   $this->addError($attribute,'Numero de asociaciones pagadas por el valor de asociaciones suscritas sobrepasa el capital pagado');
              }
           }
+        }else{
+            if($this->scenario=='venta'){
+                $certificado= Certificados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'suscrito'=>true,'actual'=>true]);
+                if($this->numero_asociacion>$certificado->numero_asociacion){
+                   $this->addError($attribute,'Numero de certificados sobrepasa el valor valido: '.$certificado->numero_asociacion);
+                }
+            }
+            
         }
 
     }
@@ -139,6 +149,14 @@ class Certificados extends \common\components\BaseActiveRecord
                   $this->addError($attribute,'Numero de aportaciones pagadas por el valor de aportaciones suscritas sobrepasa el capital pagado');
              }
           }
+         }else{
+            if($this->scenario=='venta'){
+                $certificado= Certificados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'suscrito'=>true,'actual'=>true]);
+                if($this->numero_aportacion>$certificado->numero_aportacion){
+                     $this->addError($attribute,'Numero de certificados sobrepasa el valor valido: '.$certificado->numero_aportacion);
+                }
+            }
+            
         }
 
     }
@@ -153,6 +171,14 @@ class Certificados extends \common\components\BaseActiveRecord
                   $this->addError($attribute,'Numero de rotativo pagados por el valor de rotativos suscritos sobrepasa el capital pagado');
              }
           }
+         }else{
+            if($this->scenario=='venta'){
+                $certificado= Certificados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'suscrito'=>true,'actual'=>true]);
+                if($this->numero_rotativo>$certificado->numero_rotativo){
+                     $this->addError($attribute,'Numero de certificados sobrepasa el valor valido: '.$certificado->numero_rotativo);
+                }
+            }
+            
         }
 
     }
@@ -167,6 +193,14 @@ class Certificados extends \common\components\BaseActiveRecord
                   $this->addError($attribute,'Numero de inversion pagados por el valor de inversiones suscritas sobrepasa el capital pagado');
              }
           }
+         }else{
+            if($this->scenario=='venta'){
+                $certificado= Certificados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'suscrito'=>true,'actual'=>true]);
+                if($this->numero_inversion>$certificado->numero_inversion){
+                     $this->addError($attribute,'Numero de certificados sobrepasa el valor valido: '.$certificado->numero_inversion);
+                }
+            }
+            
         }
 
     }
@@ -187,6 +221,14 @@ class Certificados extends \common\components\BaseActiveRecord
              if($this->valor_asociacion*$this->numero_asociacion > $this->capital){
                $this->addError($attribute,'Valor Asociacion pasa el maximo valido');
           } 
+        }else{
+            if($this->scenario=='venta'){
+                $certificado= Certificados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'suscrito'=>true,'actual'=>true]);
+                if($this->valor_asociacion!=$certificado->valor_asociacion){
+                    $this->addError($attribute,'Valor de venta de certificados invalido:'.$this->valor_asociacion.' de '.$certificado->valor_asociacion);
+                }
+            }
+            
         }
         
          
@@ -196,6 +238,14 @@ class Certificados extends \common\components\BaseActiveRecord
              if(($this->valor_asociacion*$this->numero_asociacion)+($this->valor_aportacion*$this->numero_aportacion)> $this->capital){
                $this->addError($attribute,'Valor Inversion pasa el maximo valido');
           } 
+        }else{
+            if($this->scenario=='venta'){
+                $certificado= Certificados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'suscrito'=>true,'actual'=>true]);
+                if($this->valor_aportacion!=$certificado->valor_aportacion){
+                    $this->addError($attribute,'Valor de venta de certificados invalido:'.$this->valor_aportacion.' de '.$certificado->valor_aportacion);
+                }
+            }
+            
         }
          
     }
@@ -204,6 +254,14 @@ class Certificados extends \common\components\BaseActiveRecord
             if(($this->valor_asociacion*$this->numero_asociacion)+($this->valor_aportacion*$this->numero_aportacion) +($this->valor_inversion*$this->numero_inversion) > $this->capital){
                $this->addError($attribute,'Valor Aportacion pasa el maximo valido');
           } 
+        }else{
+            if($this->scenario=='venta'){
+                $certificado= Certificados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'suscrito'=>true,'actual'=>true]);
+                if($this->valor_inversion!=$certificado->valor_inversion){
+                    $this->addError($attribute,'Valor de venta de certificados invalido:'.$this->valor_inversion.' de '.$certificado->valor_inversion);
+                }
+            }
+            
         }
           
     }
@@ -212,6 +270,14 @@ class Certificados extends \common\components\BaseActiveRecord
             if(($this->valor_asociacion*$this->numero_asociacion)+($this->valor_aportacion*$this->numero_aportacion) +($this->valor_inversion*$this->numero_inversion) +($this->valor_rotativo*$this->numero_rotativo)> $this->capital){
                $this->addError($attribute,'Valor Rotativo pasa el maximo valido');
           } 
+        }else{
+            if($this->scenario=='venta'){
+                $certificado= Certificados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'suscrito'=>true,'actual'=>true]);
+                if($this->valor_rotativo!=$certificado->valor_rotativo){
+                    $this->addError($attribute,'Valor de venta de certificados invalido:'.$this->valor_rotativo.' de '.$certificado->valor_rotativo);
+                }
+            }
+            
         }
           
     }
@@ -269,6 +335,13 @@ class Certificados extends \common\components\BaseActiveRecord
           } 
          }
           
+    }
+     public function validarventa($attribute){
+       
+          if(($this->numero_asociacion*$this->valor_asociacion)+($this->numero_aportacion*$this->valor_aportacion)+($this->numero_rotativo*$this->valor_rotativo)+($this->numero_inversion*$this->valor_inversion)!=$this->total_venta){
+               $this->addError($attribute,'Calculo erroneo en el total de venta');
+          }
+        
     }
   
     /**
@@ -415,6 +488,25 @@ class Certificados extends \common\components\BaseActiveRecord
             ];
         
         }
+        if($this->scenario=='venta')
+        {
+            
+
+            return [
+               
+               'numero_asociacion'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Numero de Certificados ']],
+               'valor_asociacion'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Valor']],
+               'numero_aportacion'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Numero de Certificados ']],
+               'valor_aportacion'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Valor']],
+              
+               'numero_inversion'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Numero de Certificados ']],
+               'valor_inversion'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Valor']],
+                'numero_rotativo'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Numero de Certificados ']],
+               'valor_rotativo'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Valor']],
+                'total_venta'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Total venta']],
+            ];
+        
+        }
     }
     public function Pagocompleto(){
        $acta= ActasConstitutivas::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'actual'=>true]);
@@ -465,6 +557,9 @@ class Certificados extends \common\components\BaseActiveRecord
                        return true;
                    }
                     if($this->scenario=='aumento' && !$modificacion->aumento_capital){
+                       return true;
+                   }
+                    if($this->scenario=='venta' && !$modificacion->venta_accion){
                        return true;
                    }
               }else{

@@ -223,12 +223,13 @@ class RelacionesContratosController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
+         $modelJuridica= new PersonasJuridicas();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         } else {
             return $this->render('update', [
                 'model' => $model,
+                'modelJuridica'=>$modelJuridica,
             ]);
         }
     }

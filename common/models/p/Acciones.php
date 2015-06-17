@@ -57,7 +57,9 @@ class Acciones extends \common\components\BaseActiveRecord
             ['numero_comun_pagada', 'validarnumerocomunpagada'],
             ['numero_preferencial_pagada', 'validarnumeropreferencialpagada'],
             ['numero_preferencial', 'validarnumeropreferencial'],
+            ['numero_comun', 'validarnumerocomun'],
             ['capital', 'validarcapital'],
+            ['total_venta', 'validarventa'],
             ['capital_pagado', 'validarcapitalpagado'],
             ['valor_comun', 'validarmaximocomun'],
             ['valor_preferencial', 'validarmaximopreferencial'],
@@ -65,6 +67,10 @@ class Acciones extends \common\components\BaseActiveRecord
             [['sys_status', 'suscrito'], 'boolean'],
             [['fecha_informe','sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el','actual'], 'safe'],
             [['tipo_accion'], 'string'],
+            [['valor_comun','numero_comun'], 'required', 'when' => function ($model) {
+               return $model->existecomun();
+            }],
+            [['total_venta','numero_preferencial','valor_preferencial'], 'required', 'on' => 'venta'],
             [['capital','numero_preferencial','certificacion_aporte_id','fecha_informe'], 'required', 'on' => 'pago'],
             [['capital','numero_comun','numero_comun_pagada','numero_preferencial','numero_preferencial_pagada','valor_comun','valor_preferencial','certificacion_aporte_id','fecha_informe'], 'required', 'on' => 'aumento'],
             [['numero_preferencial', 'valor_preferencial','numero_preferencial_pagada','capital','capital_pagado','certificacion_aporte_id','fecha_informe'], 'required', 'on' => 'principal']
@@ -111,7 +117,27 @@ class Acciones extends \common\components\BaseActiveRecord
                   $this->addError($attribute,'Numero de acciones pagada sobrepasa el valor valido');
              }
           }
+        }else{
+            if($this->scenario=='venta'){
+                $accion= Acciones::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'suscrito'=>true,'actual'=>true]);
+                if($this->numero_preferencial>$accion->numero_preferencial){
+                      $this->addError($attribute,'Numero de acciones invalido:'.$this->numero_preferencial.' de '.$accion->numero_preferencial);
+                }
+            }
+            
         }
+
+    }
+     public function validarnumerocomun($attribute){
+ 
+            if($this->scenario=='venta' && $this->Existecomun()){
+                $accion= Acciones::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'suscrito'=>true,'actual'=>true]);
+                if($this->numero_comun>$accion->numero_comun){
+                      $this->addError($attribute,'Numero de acciones invalido:'.$this->numero_comun.' de '.$accion->numero_comun);
+                }
+            }
+            
+        
 
     }
     public function validarnumeropreferencialpagada($attribute){
@@ -159,6 +185,14 @@ class Acciones extends \common\components\BaseActiveRecord
           if($this->valor_preferencial*$this->numero_preferencial > $this->capital){
                $this->addError($attribute,'Valor accion suscrita invalida');
           }
+        }else{
+            if($this->scenario=='venta'){
+                $accion= Acciones::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'suscrito'=>true,'actual'=>true]);
+                if($this->valor_preferencial!=$accion->valor_preferencial){
+                    $this->addError($attribute,'Valor de venta de acciones invalido:'.$this->valor_preferencial.' de '.$accion->valor_preferencial);
+                }
+            }
+            
         }
     }
     public function validarmaximocomun($attribute){
@@ -166,8 +200,26 @@ class Acciones extends \common\components\BaseActiveRecord
              if(($this->valor_comun*$this->numero_comun)+($this->valor_preferencial*$this->numero_preferencial)> $this->capital){
                $this->addError($attribute,'Valor Comun pasa el maximo valido');
           } 
+        }else{
+            if($this->scenario=='venta' && $this->Existecomun()){
+                $accion= Acciones::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'suscrito'=>true,'actual'=>true]);
+                if($this->valor_comun!=$accion->valor_comun){
+                    $this->addError($attribute,'Valor de venta de acciones invalido:'.$this->valor_comun.' de '.$accion->valor_comun);
+                }
+            }
+            
         }
          
+    }
+     public function validarventa($attribute){
+         $venta=$this->valor_preferencial*$this->numero_preferencial;
+         if($this->Existecomun()){
+             $venta=$venta+($this->valor_comun*$this->numero_comun);
+         }
+          if($venta !=$this->total_venta){
+               $this->addError($attribute,'Calculo erroneo en el total de venta:');
+          }
+        
     }
     
 
@@ -324,6 +376,22 @@ class Acciones extends \common\components\BaseActiveRecord
       
             ];
         }
+        if($this->scenario=='venta'){
+        $attributes= [
+            'numero_preferencial'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Numero de acciones o participaciones'],'label'=>'Numero acciones/participaciones preferenciales'],
+            'valor_preferencial'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Valor'],'label'=>'Valor acciones/participaciones Preferenciales'],
+            
+            ];
+        
+        if($this->Existecomun()){
+             $attributes['numero_comun'] = ['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Valor accion'],'label'=>'Numero accion comun'];
+             $attributes['valor_comun'] = ['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Valor accion'],'label'=>'Valor accion comun'];
+             
+        }
+         $attributes['total_venta'] = ['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Valor accion'],'label'=>'Total venta'];
+        
+         return $attributes;
+        }
     
     }
     public function Pagocompleto(){
@@ -352,6 +420,19 @@ class Acciones extends \common\components\BaseActiveRecord
         return false;       
        
     }
+    public function Existecomun(){
+       
+       $accion = Acciones::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'suscrito'=>true,'actual'=>true]);
+       $accion_actual=Acciones::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'suscrito'=>true,'actual'=>false,'tipo_accion'=>'ACTUAL']);
+       if(isset($accion_actual)){
+            $accion =$accion_actual;
+       }
+       if(isset($accion) && !is_null($accion->numero_comun)){
+           
+           return true;
+       }
+       return false;
+     }
     public function Modificacionactual(){
        
        $registro = ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'tipo_documento_id'=>2,'proceso_finalizado'=>false]);      
@@ -375,6 +456,9 @@ class Acciones extends \common\components\BaseActiveRecord
                        return true;
                    }
                    if($this->scenario=='aumento' && !$modificacion->aumento_capital){
+                       return true;
+                   }
+                    if($this->scenario=='venta' && !$modificacion->venta_accion){
                        return true;
                    }
               }else{

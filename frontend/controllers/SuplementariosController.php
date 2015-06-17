@@ -79,8 +79,25 @@ class SuplementariosController extends BaseController
             'dataProvider' => $dataProvider,
             'documento'=>$documento,
         ]);
+        
     }
-
+     public function actionVentasuplementario()
+    {
+        $searchModel = new SuplementariosSearch();
+        $searchModel->tipo_suplementario="VENTA_ACCION";
+        $documento=$searchModel->Modificacionactual();
+        if(isset($documento)){
+            $searchModel->documento_registrado_id= $documento->documento_registrado_id;
+          
+        }
+      
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        return $this->render('ventasuplementario', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'documento'=>$documento,
+        ]);
+    }
     /**
      * Displays a single Suplementarios model.
      * @param integer $id
@@ -103,18 +120,21 @@ class SuplementariosController extends BaseController
         $model = new Suplementarios();
         switch ($id){
             case 'principal':
-                $model->scenario='principal';
+                $model->scenario=$id;
                 $model->tipo_suplementario='PRINCIPAL';
                 break;
             case 'pago':
-                $model->scenario='pago';
+                $model->scenario=$id;
                 $model->tipo_suplementario='PAGO_CAPITAL';
                 
                 break;
-             case 'aumento':
-                $model->scenario='aumento';
+            case 'aumento':
+                $model->scenario=$id;
                 $model->tipo_suplementario='AUMENTO_CAPITAL';
-                
+                break;
+            case 'venta':
+                $model->scenario=$id;
+                $model->tipo_suplementario='VENTA_ACCION';
                 break;
             default :
                 break;
@@ -139,6 +159,9 @@ class SuplementariosController extends BaseController
                     break;
                 case 'AUMENTO_CAPITAL':
                     return $this->redirect(['aumentocapital']);
+                    break;
+                case 'VENTA_ACCION':
+                    return $this->redirect(['ventasuplementario']);
                     break;
                 default :
                     break;
@@ -252,6 +275,21 @@ class SuplementariosController extends BaseController
                          $transaction->rollBack();
                     }
                 break;
+                case 'VENTA_ACCION':
+                
+                    $model->suscrito=false;
+                    $model->actual=false;
+                    if($model->save()){
+                        Yii::$app->session->setFlash('success','Registro creado con exito');
+                        return $this->redirect(['ventasuplementario']);
+                    }else{
+                        Yii::$app->session->setFlash('error','Error en la venta de suplementarios');
+                        
+                        return $this->render('create',['model'=>$model]);
+                    }
+                
+                
+                break;
             default :
                 break;
             }
@@ -288,6 +326,9 @@ class SuplementariosController extends BaseController
                 }
                 $model->scenario='aumento';
             break;
+            case 'VENTA_ACCION':
+                $model->scenario='venta';
+                break;
             default :
                 break;
          }
@@ -415,6 +456,19 @@ class SuplementariosController extends BaseController
                     }
             
                 break;
+                case 'VENTA_ACCION':
+                    if($model->save()){
+                        Yii::$app->session->setFlash('success','Registro actualizado con exito');
+                        return $this->redirect(['ventasuplementario']);
+                    }else{
+                        Yii::$app->session->setFlash('error','Error en la venta de suplementarios');
+                        
+                        return $this->render('create',['model'=>$model]);
+                    }
+                
+                
+                break;
+               
                 default :
                     break;
             }
@@ -454,6 +508,7 @@ class SuplementariosController extends BaseController
                     }
                 }
             }
+            if($opcion!='VENTA_ACCION'){
              $origen_capital= OrigenesCapitales::findAll(['documento_registrado_id'=>$model->documento_registrado_id,'tipo_origen'=>$model->tipo_suplementario]);
             if(isset($origen_capital)){
                 foreach ($origen_capital as $origen) {
@@ -481,9 +536,10 @@ class SuplementariosController extends BaseController
                     
                 }
             }
+            }
             if(!$model->delete()){
                 $transaction->rollBack();
-                Yii::$app->session->setFlash('error','Error al eliminar el capital');
+                Yii::$app->session->setFlash('error','Error al eliminar');
                 
             }else{
                 $transaction->commit();
@@ -500,6 +556,10 @@ class SuplementariosController extends BaseController
                 case 'AUMENTO_CAPITAL':
                     $model->delete();
                     return $this->redirect(['aumentocapital']);
+                    break;
+                 case 'VENTA_ACCION':
+                    $model->delete();
+                    return $this->redirect(['ventasuplementario']);
                     break;
                 default :
                     break;

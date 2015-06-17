@@ -60,6 +60,8 @@ class Suplementarios extends \common\components\BaseActiveRecord
             ['capital', 'validarcapital'],
             ['capital_pagado', 'validarcapitalpagado'],
             ['valor', 'validarvalor'],
+            ['total_venta', 'validarventa'],
+            [['total_venta','numero','valor'], 'required', 'on' => 'venta'],
             [['capital','numero','fecha_informe','certificacion_aporte_id'], 'required', 'on' => 'pago'],
             [['capital','capital_pagado','numero', 'valor','numero_pagada','fecha_informe','certificacion_aporte_id'], 'required', 'on' => 'aumento'],
             [['capital','capital_pagado','numero', 'valor','numero_pagada','fecha_informe','certificacion_aporte_id'], 'required', 'on' => 'principal'],
@@ -105,6 +107,13 @@ class Suplementarios extends \common\components\BaseActiveRecord
                   $this->addError($attribute,'Numero de certificados suplementarios pagados sobrepasa el valor valido');
              }
           }
+        }else{
+            if($this->scenario=='venta'){
+                $suplementario= Suplementarios::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'suscrito'=>true,'actual'=>true]);
+                if($this->numero>$suplementario->numero){
+                    $this->addError($attribute,'Numero de certificados suplementarios invalido:'.$this->numero.' de '.$suplementario->numero);
+                    }
+            }
         }
 
     }
@@ -128,9 +137,25 @@ class Suplementarios extends \common\components\BaseActiveRecord
           }
     }
     public function validarvalor($attribute){
+        if($this->scenario!='venta'){
           if($this->valor*$this->numero > $this->capital){
                $this->addError($attribute,'Valor certificado suscrito invalida');
-          } 
+          }
+        }else{
+            $suplementario= Suplementarios::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'suscrito'=>true,'actual'=>true]);
+            if($this->valor!=$suplementario->valor){
+                $this->addError($attribute,'Valor de venta de certificados invalido:'.$this->valor.' de '.$suplementario->valor);
+            }
+            
+            
+        }
+    }
+     public function validarventa($attribute){
+       
+          if($this->valor*$this->numero !=$this->total_venta){
+               $this->addError($attribute,'Calculo erroneo en el total de venta:');
+          }
+        
     }
     
 
@@ -159,6 +184,7 @@ class Suplementarios extends \common\components\BaseActiveRecord
             'certificacion_aporte_id'  => Yii::t('app', 'Certificador de aportes'),
             'actual'  => Yii::t('app', 'Actual'),
             'fecha_informe' => Yii::t('app', 'Fecha Informe'),
+            'total_venta' => Yii::t('app', 'Total Venta'),
         ];
     }
 
@@ -261,6 +287,18 @@ class Suplementarios extends \common\components\BaseActiveRecord
             ];
         
         }
+        if($this->scenario=='venta')
+        {
+            
+
+            return [
+            'numero'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Capital Suscrito'],'label'=>'Numero de acciones'],
+            'valor'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Numero de Certificados Suplementarios'],'label'=>'valor'],
+            'total_venta'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Numero de Certificados Suplementarios'],'label'=>'Precio total venta'], 
+           
+            ];
+        
+        }
     }
     public function Pagocompleto(){
        $acta= ActasConstitutivas::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'actual'=>true]);
@@ -311,6 +349,9 @@ class Suplementarios extends \common\components\BaseActiveRecord
                        return true;
                    }
                    if($this->scenario=='aumento' && !$modificacion->aumento_capital){
+                       return true;
+                   }
+                    if($this->scenario=='venta' && !$modificacion->venta_accion){
                        return true;
                    }
               }else{

@@ -82,6 +82,23 @@ class AccionesController extends BaseController
             'documento'=>$documento,
         ]);
     }
+    public function actionVentaaccion()
+    {
+        $searchModel = new AccionesSearch();
+        $searchModel->tipo_accion="VENTA_ACCION";
+        $documento=$searchModel->Modificacionactual();
+        if(isset($documento)){
+            $searchModel->documento_registrado_id= $documento->documento_registrado_id;
+          
+        }
+      
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        return $this->render('ventaaccion', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'documento'=>$documento,
+        ]);
+    }
 
     /**
      * Displays a single Acciones model.
@@ -105,17 +122,22 @@ class AccionesController extends BaseController
         $model = new Acciones();
         switch ($id){
             case 'principal':
-                $model->scenario='principal';
+                $model->scenario=$id;
                 $model->tipo_accion='PRINCIPAL';
                 break;
             case 'pago':
-                $model->scenario='pago';
+                $model->scenario=$id;
                 $model->tipo_accion='PAGO_CAPITAL';
                 
                 break;
             case 'aumento':
-                $model->scenario='aumento';
+                $model->scenario=$id;
                 $model->tipo_accion='AUMENTO_CAPITAL';
+                
+                break;
+             case 'venta':
+                $model->scenario=$id;
+                $model->tipo_accion='VENTA_ACCION';
                 
                 break;
             default :
@@ -141,6 +163,9 @@ class AccionesController extends BaseController
                     break;
                 case 'AUMENTO_CAPITAL':
                     return $this->redirect(['aumentocapital']);
+                    break;
+                case 'VENTA_ACCION':
+                    return $this->redirect(['ventaccion']);
                     break;
                 default :
                     break;
@@ -250,6 +275,19 @@ class AccionesController extends BaseController
                          $transaction->rollBack();
                     }
                 break;
+                case 'VENTA_ACCION':
+                
+                    $model->suscrito=false;
+                    if($model->save()){
+                        Yii::$app->session->setFlash('success','Registro creado con exito');
+                        return $this->redirect(['ventaaccion']);
+                    }else{
+                        Yii::$app->session->setFlash('error','Error en la creacion');
+                        return $this->render('create',['model'=>$model]);
+                    }
+                
+                
+                break;
             default :
                 break;
             }
@@ -287,6 +325,9 @@ class AccionesController extends BaseController
                 }
                 $model->scenario='aumento';
             break;
+            case 'VENTA_ACCION':
+                $model->scenario='venta';
+                break;
             default :
                 break;
          }
@@ -414,6 +455,19 @@ class AccionesController extends BaseController
                     }
             
                 break;
+                case 'VENTA_ACCION':
+                
+                    $model->suscrito=false;
+                    if($model->save()){
+                        Yii::$app->session->setFlash('success','Registro actualizado con exito');
+                        return $this->redirect(['ventaaccion']);
+                    }else{
+                        Yii::$app->session->setFlash('error','Error en la actualizacion');
+                        return $this->render('update',['model'=>$model]);
+                    }
+                
+                
+                break;
                 default :
                     break;
             }
@@ -455,7 +509,8 @@ class AccionesController extends BaseController
                     }
                 }
             }
-             $origen_capital= OrigenesCapitales::findAll(['documento_registrado_id'=>$model->documento_registrado_id,'tipo_origen'=>$model->tipo_accion]);
+            if($opcion!='VENTA_ACCION'){
+            $origen_capital= OrigenesCapitales::findAll(['documento_registrado_id'=>$model->documento_registrado_id,'tipo_origen'=>$model->tipo_accion]);
             if(isset($origen_capital)){
                 foreach ($origen_capital as $origen) {
                     if(!$origen->delete()){
@@ -482,6 +537,7 @@ class AccionesController extends BaseController
                     
                 }
             }
+            }
             if(!$model->delete()){
                 $transaction->rollBack();
                 Yii::$app->session->setFlash('error','Error al eliminar el capital');
@@ -502,6 +558,10 @@ class AccionesController extends BaseController
                                 $model->delete();
                                 return $this->redirect(['aumentocapital']);
                             break;
+                 case 'VENTA_ACCION':
+                    $model->delete();
+                    return $this->redirect(['ventaaccion']);
+                    break;
                 default :
                     break;
                 }

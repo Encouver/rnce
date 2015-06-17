@@ -80,21 +80,43 @@ class CertificadosController extends BaseController
             'documento'=>$documento,
         ]);
     }
+     public function actionVentacertificado()
+    {
+        $searchModel = new CertificadosSearch();
+        $searchModel->tipo_certificado="VENTA_ACCION";
+        $documento=$searchModel->Modificacionactual();
+        if(isset($documento)){
+            $searchModel->documento_registrado_id= $documento->documento_registrado_id;
+          
+        }
+      
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        return $this->render('ventacertificado', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'documento'=>$documento,
+        ]);
+    }
     public function actionCreate($id='principal')
     {
         $model = new Certificados();
         switch ($id){
             case 'principal':
-                $model->scenario='principal';
+                $model->scenario=$id;
                 $model->tipo_certificado='PRINCIPAL';
                 break;
             case 'pago':
-                $model->scenario='pago';
+                $model->scenario=$id;
                 $model->tipo_certificado='PAGO_CAPITAL';
                 break;
             case 'aumento':
-                $model->scenario='aumento';
+                $model->scenario=$id;
                 $model->tipo_certificado='AUMENTO_CAPITAL';
+                
+                break;
+             case 'venta':
+                $model->scenario=$id;
+                $model->tipo_certificado='VENTA_ACCION';
                 
                 break;
                 
@@ -122,6 +144,9 @@ class CertificadosController extends BaseController
                     break;
                 case 'AUMENTO_CAPITAL':
                     return $this->redirect(['aumentocapital']);
+                    break;
+                case 'VENTA_ACCION':
+                    return $this->redirect(['ventacertificado']);
                     break;
                 default :
                     break;
@@ -198,7 +223,7 @@ class CertificadosController extends BaseController
                         Yii::$app->session->setFlash('success','Registro creado con exito');
                         return $this->redirect(['pagocapital']);
                     }else{
-                        Yii::$app->session->setFlash('error','Error en la actualizacion del capital');
+                        Yii::$app->session->setFlash('error','Error en la creacion del capital');
                         return $this->render('create',['model'=>$model]);
                     }
                 
@@ -257,6 +282,19 @@ class CertificadosController extends BaseController
                          $transaction->rollBack();
                     }
                 break;
+                case 'VENTA_ACCION':
+                
+                    $model->suscrito=false;
+                    if($model->save()){
+                        Yii::$app->session->setFlash('success','Registro creado con exito');
+                        return $this->redirect(['ventacertificado']);
+                    }else{
+                        Yii::$app->session->setFlash('error','Error en la creacion');
+                        return $this->render('create',['model'=>$model]);
+                    }
+                
+                
+                break;
             default :
                 break;
             }
@@ -305,6 +343,9 @@ class CertificadosController extends BaseController
                 }
                 $model->scenario='aumento';
             break;
+            case 'VENTA_ACCION':
+                $model->scenario='venta';
+                break;
             default :
                 break;
          }
@@ -446,6 +487,18 @@ class CertificadosController extends BaseController
                          $transaction->rollBack();
                     }
                 break;
+                case 'VENTA_ACCION':
+                
+                    if($model->save()){
+                        Yii::$app->session->setFlash('success','Registro actualizado con exito');
+                        return $this->redirect(['ventacertificado']);
+                    }else{
+                        Yii::$app->session->setFlash('error','Error en la actualizacion');
+                        return $this->render('create',['model'=>$model]);
+                    }
+                
+                
+                break;
                 default :
                     break;
             }
@@ -487,6 +540,7 @@ class CertificadosController extends BaseController
                     }
                 }
             }
+            if($opcion!='VENTA_ACCION'){
              $origen_capital= OrigenesCapitales::findAll(['documento_registrado_id'=>$model->documento_registrado_id,'tipo_origen'=>$model->tipo_certificado]);
             if(isset($origen_capital)){
                 foreach ($origen_capital as $origen) {
@@ -514,9 +568,10 @@ class CertificadosController extends BaseController
                     
                 }
             }
+            }
             if(!$model->delete()){
                 $transaction->rollBack();
-                Yii::$app->session->setFlash('error','Error al eliminar el capital');
+                Yii::$app->session->setFlash('error','Error al eliminar');
                 
             }else{
                 $transaction->commit();
@@ -533,6 +588,10 @@ class CertificadosController extends BaseController
                 case 'AUMENTO_CAPITAL':
                     $model->delete();
                     return $this->redirect(['aumentocapital']);
+                    break;
+                 case 'VENTA_ACCION':
+                    $model->delete();
+                    return $this->redirect(['ventasuplementario']);
                     break;
                 default :
                     break;

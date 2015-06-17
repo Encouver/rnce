@@ -7,6 +7,7 @@ use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAsset;
 use frontend\widgets\Alert;
 
+
 use kartik\nav\NavX;
 
 
@@ -114,6 +115,7 @@ AppAsset::register($this);
                          ['label' => 'Profesional Informe de conversion', 'url' => ['/comisarios-auditores/crearprofesional']],*/
                          ['label' => 'Relacion de Contratos', 'url' => ['/relaciones-contratos/index']],
                          ['label' => 'Empresas Relacionadas', 'url' => ['/empresas-relacionadas/index']],
+                         ['label' => 'Polizas Contratadas', 'url' => ['/polizas-contratadas/index']],
                          ['label' => 'Certificacion Aportes', 'url' => ['/certificaciones-aportes/index']],
                          ['label' => 'Responsable Contabilidad Interna', 'url' => ['/comisarios-auditores/responsable']],
                          ['label' => 'Contador Auditor', 'url' => ['/comisarios-auditores/auditor']],
@@ -154,6 +156,7 @@ AppAsset::register($this);
                         ['label' => 'Aumento Capital', 'url' => ['/actas-constitutivas/crearaumentocapital']],
                         ['label' => 'Disminucion Capital', 'url' => ['/actas-constitutivas/creardisminucion']],
                         ['label' => 'Aporte por Capitalizar', 'url' => ['/aportes-capitalizar/index']],
+                        ['label' => 'Venta de Acciones', 'url' => ['/actas-constitutivas/crearventa']],
                         ['label' => 'Correcion Monetaria', 'url' => ['/correcciones-monetarias/index']],
                         ['label' => 'Limitacion de Capital', 'url' => ['/limitaciones-capitales/index']],
                         ['label' => 'Fondo de Emergencia', 'url' => ['/fondos-emergencias/index']],
@@ -217,7 +220,7 @@ AppAsset::register($this);
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
-        <?= Alert::widget() ?>
+        <?= Alert::widget()?>
         <?php
 
         use kartik\tabs\TabsX;

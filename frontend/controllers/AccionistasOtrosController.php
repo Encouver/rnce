@@ -117,7 +117,7 @@ class AccionistasOtrosController extends BaseController
         $modelJuridica= new PersonasJuridicas();
         
         
-       if($model->existeregistro($id)){
+      if($model->existeregistro($id)){
             Yii::$app->session->setFlash('error','Debe existir un acta constitutiva o una modificacion');
             switch ($id){
             
