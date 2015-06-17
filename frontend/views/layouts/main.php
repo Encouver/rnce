@@ -152,7 +152,7 @@ AppAsset::register($this);
                         ['label' => 'Duracion empresa', 'url' => ['/duraciones-empresas/index']],
                         ['label' => 'Pago Capital', 'url' => ['/actas-constitutivas/crearpagocapital']],
                         ['label' => 'Aumento Capital', 'url' => ['/actas-constitutivas/crearaumentocapital']],
-                        ['label' => 'Disminucion Capital', 'url' => ['/acciones-disminuidas/index']],
+                        ['label' => 'Disminucion Capital', 'url' => ['/actas-constitutivas/creardisminucion']],
                         ['label' => 'Aporte por Capitalizar', 'url' => ['/aportes-capitalizar/index']],
                         ['label' => 'Correcion Monetaria', 'url' => ['/correcciones-monetarias/index']],
                         ['label' => 'Limitacion de Capital', 'url' => ['/limitaciones-capitales/index']],
