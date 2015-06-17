@@ -3,17 +3,17 @@
 namespace frontend\controllers;
 
 use Yii;
-use common\models\p\AccionesDisminuidas;
-use app\models\AccionesDisminuidasSearch;
-use common\models\p\Acciones;
+use common\models\p\CertificadosDisminuidos;
+use app\models\CertificadosDisminuidosSearch;
+use common\models\p\Certificados;
 use common\components\BaseController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * AccionesDisminuidasController implements the CRUD actions for AccionesDisminuidas model.
+ * CertificadosDisminuidosController implements the CRUD actions for CertificadosDisminuidos model.
  */
-class AccionesDisminuidasController extends BaseController
+class CertificadosDisminuidosController extends BaseController
 {
     public function behaviors()
     {
@@ -28,13 +28,13 @@ class AccionesDisminuidasController extends BaseController
     }
 
     /**
-     * Lists all AccionesDisminuidas models.
+     * Lists all CertificadosDisminuidos models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new AccionesDisminuidasSearch();
-          $documento=$searchModel->Modificacionactual();
+        $searchModel = new CertificadosDisminuidosSearch();
+         $documento=$searchModel->Modificacionactual();
         if(isset($documento)){
             $searchModel->documento_registrado_id= $documento->documento_registrado_id;
           
@@ -49,7 +49,7 @@ class AccionesDisminuidasController extends BaseController
     }
 
     /**
-     * Displays a single AccionesDisminuidas model.
+     * Displays a single CertificadosDisminuidos model.
      * @param integer $id
      * @return mixed
      */
@@ -61,14 +61,14 @@ class AccionesDisminuidasController extends BaseController
     }
 
     /**
-     * Creates a new AccionesDisminuidas model.
+     * Creates a new CertificadosDisminuidos model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate($id)
     {
-        $model = new AccionesDisminuidas();
-        
+        $model = new CertificadosDisminuidos();
+         
         if($id=='valor'){
             $model->scenario=$id;
         }else{
@@ -90,34 +90,39 @@ class AccionesDisminuidasController extends BaseController
             return $this->redirect(['index']);
         }
        
+
         if ($model->load(Yii::$app->request->post())) {
-        $transaction = \Yii::$app->db->beginTransaction();
+            $transaction = \Yii::$app->db->beginTransaction();
         try {
             if($model->save()){
             
-            $accion = Acciones::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'suscrito'=>true,'actual'=>true]);
-            $accion_actual=Acciones::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'suscrito'=>true,'actual'=>false,'tipo_accion'=>'ACTUAL']);
-            if(isset($accion_actual)){
-                $accion =$accion_actual;
-            }                   
-            if($accion->tipo_accion=='ACTUAL'){
-                 if(!$accion->delete()){
+            $certificado = Certificados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'suscrito'=>true,'actual'=>true]);
+            $certificado_actual=Certificados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'suscrito'=>true,'actual'=>false,'tipo_certificado'=>'ACTUAL']);
+            if(isset($certificado_actual)){
+                $certificado =$certificado_actual;
+            }                  
+            if($certificado->tipo_certificado=='ACTUAL'){
+                 if(!$certificado->delete()){
                     $transaction->rollBack();
                     // Yii::$app->session->setFlash('error','');
                     return $this->render('create',['model'=>$model]);
                 }
             }
-            $accion= new Acciones();
-            $accion->numero_preferencial=$model->numero_preferencial;
-            $accion->numero_comun=$model->numero_comun;
-            $accion->valor_preferencial=$model->valor_preferencial;
-            $accion->valor_comun=$model->valor_comun;
-            $accion->tipo_accion='ACTUAL';
-            $accion->suscrito=true;
-            $accion->capital=$model->capital_social;
-            $accion->documento_registrado_id=$model->documento_registrado_id;
-            $accion->contratista_id=Yii::$app->user->identity->contratista_id;
-            if ($accion->save(false)) {
+            $certificado= new Certificados();
+            $certificado->numero_asociacion=$model->numero_asociacion;
+            $certificado->numero_aportacion=$model->numero_aportacion;
+            $certificado->numero_rotativo=$model->numero_rotativo;
+            $certificado->numero_inversion=$model->numero_inversion;
+            $certificado->valor_asociacion=$model->valor_asociacion;
+            $certificado->valor_aportacion=$model->valor_aportacion;
+            $certificado->valor_rotativo=$model->valor_rotativo;
+            $certificado->valor_inversion=$model->valor_inversion;
+            $certificado->tipo_certificado='ACTUAL';
+            $certificado->suscrito=true;
+            $certificado->capital=$model->capital_social;
+            $certificado->documento_registrado_id=$model->documento_registrado_id;
+            //$certificado->contratista_id=Yii::$app->user->identity->contratista_id;
+            if ($certificado->save()) {
                 $transaction->commit();
                 return $this->redirect(['index']);
             }else{
@@ -135,7 +140,6 @@ class AccionesDisminuidasController extends BaseController
         } catch (Exception $e) {
              $transaction->rollBack();
         }
-          
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -144,7 +148,7 @@ class AccionesDisminuidasController extends BaseController
     }
 
     /**
-     * Updates an existing AccionesDisminuidas model.
+     * Updates an existing CertificadosDisminuidos model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -154,51 +158,54 @@ class AccionesDisminuidasController extends BaseController
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post())) {
-            $transaction = \Yii::$app->db->beginTransaction();
+                $transaction = \Yii::$app->db->beginTransaction();
         try {
             if($model->save()){
             
-            $accion = Acciones::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'suscrito'=>true,'actual'=>true]);
-            $accion_actual=Acciones::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'suscrito'=>true,'actual'=>false,'tipo_accion'=>'ACTUAL']);
-            if(isset($accion_actual)){
-                $accion =$accion_actual;
-            }                   
-            if($accion->tipo_accion=='ACTUAL'){
-                 if(!$accion->delete()){
+            $certificado = Certificados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'suscrito'=>true,'actual'=>true]);
+            $certificado_actual=Certificados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'suscrito'=>true,'actual'=>false,'tipo_certificado'=>'ACTUAL']);
+            if(isset($certificado_actual)){
+                $certificado =$certificado_actual;
+            }                  
+            if($certificado->tipo_certificado=='ACTUAL'){
+                 if(!$certificado->delete()){
                     $transaction->rollBack();
                     // Yii::$app->session->setFlash('error','');
                     return $this->render('create',['model'=>$model]);
                 }
             }
-            $accion= new Acciones();
-            $accion->numero_preferencial=$model->numero_preferencial;
-            $accion->numero_comun=$model->numero_comun;
-            $accion->valor_preferencial=$model->valor_preferencial;
-            $accion->valor_comun=$model->valor_comun;
-            $accion->tipo_accion='ACTUAL';
-            $accion->suscrito=true;
-            $accion->capital=$model->capital_social;
-            $accion->documento_registrado_id=$model->documento_registrado_id;
-            $accion->contratista_id=Yii::$app->user->identity->contratista_id;
-            if ($accion->save(false)) {
+            $certificado= new Certificados();
+            $certificado->numero_asociacion=$model->numero_asociacion;
+            $certificado->numero_aportacion=$model->numero_aportacion;
+            $certificado->numero_rotativo=$model->numero_rotativo;
+            $certificado->numero_inversion=$model->numero_inversion;
+            $certificado->valor_asociacion=$model->valor_asociacion;
+            $certificado->valor_aportacion=$model->valor_aportacion;
+            $certificado->valor_rotativo=$model->valor_rotativo;
+            $certificado->valor_inversion=$model->valor_inversion;
+            $certificado->tipo_certificado='ACTUAL';
+            $certificado->suscrito=true;
+            $certificado->capital=$model->capital_social;
+            $certificado->documento_registrado_id=$model->documento_registrado_id;
+            //$certificado->contratista_id=Yii::$app->user->identity->contratista_id;
+            if ($certificado->save()) {
                 $transaction->commit();
                 return $this->redirect(['index']);
             }else{
                 $transaction->rollBack();
                 // Yii::$app->session->setFlash('error','');
-                return $this->render('update',['model'=>$model]);
+                return $this->render('create',['model'=>$model]);
             }
             
             }else{
                 $transaction->rollBack();
-                return $this->render('update',['model'=>$model]);
+                return $this->render('create',['model'=>$model]);
             }
             
                 
         } catch (Exception $e) {
              $transaction->rollBack();
         }
-          
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -207,25 +214,24 @@ class AccionesDisminuidasController extends BaseController
     }
 
     /**
-     * Deletes an existing AccionesDisminuidas model.
+     * Deletes an existing CertificadosDisminuidos model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
      */
     public function actionDelete($id)
     {
-        $model=$this->findModel($id);
+         $model=$this->findModel($id);
    
         $transaction = \Yii::$app->db->beginTransaction();
         try {
-        $accion=Acciones::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'suscrito'=>true,'actual'=>false,'tipo_accion'=>'ACTUAL']);
-            if(isset($accion)){
-                if(!$accion->delete()){
+        $certificado=Certificados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'suscrito'=>true,'actual'=>false,'tipo_certificado'=>'ACTUAL']);
+        if(isset($certificado)){
+               if(!$certificado->delete()){
                      $transaction->rollBack();
                     return $this->redirect(['index']);
                 }
-              
-            }    
+        }                  
         if($model->delete()){
            $transaction->commit();
         }else{
@@ -238,15 +244,15 @@ class AccionesDisminuidasController extends BaseController
     }
 
     /**
-     * Finds the AccionesDisminuidas model based on its primary key value.
+     * Finds the CertificadosDisminuidos model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return AccionesDisminuidas the loaded model
+     * @return CertificadosDisminuidos the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = AccionesDisminuidas::findOne($id)) !== null) {
+        if (($model = CertificadosDisminuidos::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

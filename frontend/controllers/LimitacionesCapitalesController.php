@@ -91,11 +91,14 @@ class LimitacionesCapitalesController extends BaseController
                     try {
                         
                             if ($model->save()) {
-                                $accion= Acciones::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'tipo_accion'=>'ACTUAL','actual'=>false]);
-                                if(isset($accion)){
+                                $accion = Acciones::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'suscrito'=>true,'actual'=>true]);
+                                $accion_actual=Acciones::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'suscrito'=>true,'actual'=>false,'tipo_accion'=>'ACTUAL']);
+                                if(isset($accion_actual)){
+                                    $accion =$accion_actual;
+                                }                   
+                                if($accion->tipo_accion=='ACTUAL'){
                                     if(!$accion->delete()){
                                         $transaction->rollBack();
-                                        return print_r($accion->getErrors());
                                         // Yii::$app->session->setFlash('error','');
                                         return $this->render('create',['model'=>$model]);
                                     }

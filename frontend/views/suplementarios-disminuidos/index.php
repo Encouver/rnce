@@ -4,39 +4,34 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\AccionesDisminuidasSearch */
+/* @var $searchModel app\models\SuplementariosDisminuidosSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Acciones Disminuidas');
+$this->title = Yii::t('app', 'Suplementarios Disminuidos');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="acciones-disminuidas-index">
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-<?php
+  <?php
     if(isset($documento) && $documento->disminucion_capital){
     echo Html::tag('h1','Disminucion del Capital');
-       echo  GridView::widget([
+       echo GridView::widget([
         'dataProvider' => $dataProvider,
+           'summary'=>'',
         //'filterModel' => $searchModel,
-        'summary'=>'',
         'columns' => [
            // ['class' => 'yii\grid\SerialColumn'],
 
-            //'id',
+           // 'id',
             'justificacion:ntext',
-            'tipo_disminucion',
-            'valor_comun',
-            'valor_preferencial',
-             'numero_comun',
-             'numero_preferencial',
-            // 'acta_constitutiva_id',
-            // 'valor_comun_actual',
-            // 'valor_preferencial_actual',
-            // 'numero_comun_actual',
-            // 'numero_preferencial_actual',
             'capital_social',
+            'tipo_disminucion',
+            'valor',
+            'numero',
+            // 'valor_actual',
+            // 'numero_actual',
+            // 'capital_social',
             // 'creado_por',
             // 'actualizado_por',
             // 'sys_status:boolean',
@@ -49,7 +44,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
             ['class' => 'yii\grid\ActionColumn','template'=>'{update}{delete}'],
         ],
-    ]);if(!$searchModel->existeregistro() && $documento->disminucion_capital){ ?>
+    ]); 
+       if(!$searchModel->existeregistro() && $documento->disminucion_capital){ ?>
    <p>
         <?= Html::a(Yii::t('app', 'Sobre el valor'), ['create','id'=>'valor'], ['class' => 'btn btn-success']) ?> <?= Html::a(Yii::t('app', 'Sobre el numero'), ['create','id'=>'cantidad'], ['class' => 'btn btn-success']) ?>
     </p>
@@ -63,6 +59,4 @@ $this->params['breadcrumbs'][] = $this->title;
 
             </div>
         <?php } ?>
-   
-
 </div>

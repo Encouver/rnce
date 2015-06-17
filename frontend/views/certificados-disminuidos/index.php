@@ -4,39 +4,47 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\AccionesDisminuidasSearch */
+/* @var $searchModel app\models\CertificadosDisminuidosSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Acciones Disminuidas');
+$this->title = Yii::t('app', 'Certificados Disminuidos');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="acciones-disminuidas-index">
+<div class="certificados-disminuidos-index">
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
 <?php
     if(isset($documento) && $documento->disminucion_capital){
     echo Html::tag('h1','Disminucion del Capital');
-       echo  GridView::widget([
+       echo GridView::widget([
         'dataProvider' => $dataProvider,
+           'summary'=>'',
         //'filterModel' => $searchModel,
-        'summary'=>'',
         'columns' => [
-           // ['class' => 'yii\grid\SerialColumn'],
+            //['class' => 'yii\grid\SerialColumn'],
 
             //'id',
             'justificacion:ntext',
             'tipo_disminucion',
-            'valor_comun',
-            'valor_preferencial',
-             'numero_comun',
-             'numero_preferencial',
-            // 'acta_constitutiva_id',
-            // 'valor_comun_actual',
-            // 'valor_preferencial_actual',
-            // 'numero_comun_actual',
-            // 'numero_preferencial_actual',
             'capital_social',
+            'numero_asociacion',
+            'numero_aportacion',
+            'numero_rotativo',
+            'numero_inversion',
+            'valor_asociacion',
+            'valor_aportacion',
+            'valor_rotativo',
+            'valor_inversion',
+            // 'valor_asociacion_actual',
+            // 'valor_aportacion_actual',
+            // 'valor_rotativo_actual',
+            // 'valor_inversion_actual',
+            // 'numero_asoacion_actual',
+            // 'numero_aportacion_actual',
+            // 'numero_rotativo_actual',
+            // 'numero_inversion_actual',
+            // 'capital_social',
             // 'creado_por',
             // 'actualizado_por',
             // 'sys_status:boolean',
@@ -49,7 +57,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
             ['class' => 'yii\grid\ActionColumn','template'=>'{update}{delete}'],
         ],
-    ]);if(!$searchModel->existeregistro() && $documento->disminucion_capital){ ?>
+    ]);
+       if(!$searchModel->existeregistro() && $documento->disminucion_capital){ ?>
    <p>
         <?= Html::a(Yii::t('app', 'Sobre el valor'), ['create','id'=>'valor'], ['class' => 'btn btn-success']) ?> <?= Html::a(Yii::t('app', 'Sobre el numero'), ['create','id'=>'cantidad'], ['class' => 'btn btn-success']) ?>
     </p>
@@ -63,6 +72,4 @@ $this->params['breadcrumbs'][] = $this->title;
 
             </div>
         <?php } ?>
-   
-
 </div>

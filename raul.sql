@@ -777,6 +777,14 @@ ALTER TYPE tipo_capital ADD VALUE 'PREACTUAL' BEFORE 'ACTUAL';
 ALTER TABLE acciones ALTER COLUMN fecha_informe Drop NOT NULL;
 
 
+---16 junio--
+ALTER TABLE certificados_disminuidos RENAME COLUMN numero_asoacion_actual TO numero_asociacion_actual;
+ALTER TABLE certificados ALTER COLUMN certificacion_aporte_id DROP NOT NULL;
+ALTER TABLE certificados ALTER COLUMN fecha_informe DROP NOT NULL;
+ALTER TABLE suplementarios ALTER COLUMN certificacion_aporte_id DROP NOT NULL;
+ALTER TABLE suplementarios ALTER COLUMN fecha_informe DROP NOT NULL;
+
+
 
 
 

@@ -60,7 +60,6 @@ class Certificados extends \common\components\BaseActiveRecord
     public function rules()
     {
         return [
-            [['documento_registrado_id', 'contratista_id','certificacion_aporte_id','fecha_informe'], 'required'],
             [['numero_asociacion', 'numero_aportacion', 'numero_rotativo', 'numero_inversion','numero_asociacion_pagada', 'numero_aportacion_pagada', 'numero_rotativo_pagada', 'numero_inversion_pagada', 'creado_por', 'actualizado_por', 'documento_registrado_id', 'contratista_id','certificacion_aporte_id'], 'integer'],
             [['valor_asociacion', 'valor_aportacion', 'valor_rotativo', 'valor_inversion','capital','capital_pagado'], 'number'],
             [['tipo_certificado'], 'string'],
@@ -78,9 +77,9 @@ class Certificados extends \common\components\BaseActiveRecord
             ['numero_aportacion', 'validarnumeroaportacion'],
             ['numero_rotativo', 'validarnumerorotativo'],
             ['numero_inversion', 'validarnumeroinversion'],
-            [['capital','numero_asociacion', 'numero_aportacion', 'numero_rotativo', 'numero_inversion', 'valor_asociacion', 'valor_aportacion', 'valor_rotativo','valor_inversion','numero_asociacion_pagada', 'numero_aportacion_pagada', 'numero_rotativo_pagada', 'numero_inversion_pagada', 'capital_pagado'], 'required','on'=>'aumento'],
-            [['capital','numero_asociacion', 'numero_aportacion', 'numero_rotativo', 'numero_inversion', 'valor_asociacion', 'valor_aportacion', 'valor_rotativo','valor_inversion','numero_asociacion_pagada', 'numero_aportacion_pagada', 'numero_rotativo_pagada', 'numero_inversion_pagada', 'capital_pagado'], 'required','on'=>'principal'],
-            [['capital','numero_asociacion', 'numero_aportacion', 'numero_rotativo', 'numero_inversion'], 'required','on'=>'pago'],
+            [['capital','numero_asociacion', 'numero_aportacion', 'numero_rotativo', 'numero_inversion', 'valor_asociacion', 'valor_aportacion', 'valor_rotativo','valor_inversion','numero_asociacion_pagada', 'numero_aportacion_pagada', 'numero_rotativo_pagada', 'numero_inversion_pagada', 'capital_pagado','certificacion_aporte_id','fecha_informe'], 'required','on'=>'aumento'],
+            [['capital','numero_asociacion', 'numero_aportacion', 'numero_rotativo', 'numero_inversion', 'valor_asociacion', 'valor_aportacion', 'valor_rotativo','valor_inversion','numero_asociacion_pagada', 'numero_aportacion_pagada', 'numero_rotativo_pagada', 'numero_inversion_pagada', 'capital_pagado','certificacion_aporte_id','fecha_informe'], 'required','on'=>'principal'],
+            [['capital','numero_asociacion', 'numero_aportacion', 'numero_rotativo', 'numero_inversion','certificacion_aporte_id','fecha_informe'], 'required','on'=>'pago'],
             [['suscrito', 'documento_registrado_id', 'contratista_id'], 'required'],
             [['suscrito', 'sys_status','actual'], 'boolean'],
             [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el','fecha_informe'], 'safe'],

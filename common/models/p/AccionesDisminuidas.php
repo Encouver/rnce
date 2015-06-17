@@ -55,13 +55,42 @@ class AccionesDisminuidas extends \common\components\BaseActiveRecord
         return [
             [['justificacion', 'tipo_disminucion', 'capital_social', 'contratista_id', 'documento_registrado_id'], 'required'],
             [['justificacion', 'tipo_disminucion'], 'string'],
+            [['valor_preferencial_actual', 'valor_preferencial'], 'required','on'=>'valor'],
+            [['numero_preferencial_actual', 'numero_preferencial'], 'required','on'=>'cantidad'],
             [['valor_comun', 'valor_preferencial', 'valor_comun_actual', 'valor_preferencial_actual', 'capital_social'], 'number'],
             [['numero_comun', 'numero_preferencial', 'numero_comun_actual', 'numero_preferencial_actual', 'creado_por', 'actualizado_por', 'contratista_id', 'documento_registrado_id'], 'integer'],
             [['sys_status', 'actual'], 'boolean'],
+            [['capital_social'], 'validarcapital'],
             [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe']
         ];
     }
-   
+    public function validarcapital($attribute){
+        $comun=$this->Existecomun();
+        if($this->scenario=='valor'){
+            $capital=$this->numero_preferencial_actual*$this->valor_preferencial;
+            if($comun){
+               $capital=$capital+($this->numero_comun_actual*$this->valor_comun);
+            }
+        }else{
+            $capital=$this->numero_preferencial*$this->valor_preferencial_actual;
+            if($comun){
+               $capital=$capital+($this->numero_comu*$this->valor_comun_actual);
+            }
+        }
+        if($capital>=$this->capital_social){
+            $this->addError($attribute,'El capital social no refleja una disminucion del capital: '.$capital.' de '.$this->capital_social);
+        }else{
+             if($this->scenario=='valor'){
+                 $this->numero_comun= $this->numero_comun_actual;
+                 $this->numero_preferencial= $this->numero_preferencial_actual;
+             }else{
+                 $this->valor_comun= $this->valor_comun_actual;
+                 $this->valor_preferencial= $this->valor_preferencial_actual;
+             }
+            $this->capital_social=$capital;
+        }
+       
+    }
     /**
      * @inheritdoc
      */
@@ -117,28 +146,56 @@ class AccionesDisminuidas extends \common\components\BaseActiveRecord
     }
     
      public function getFormAttribs() {
-         $this->tipo_disminucion='SOBRE EL VALOR';
+   
          $comun= $this->Existecomun();
           $attributes = [
             'justificacion'=>['type'=>Form::INPUT_TEXTAREA,'options'=>['placeholder'=>'Valor accion'],'label'=>'Justificacion'],
-            'valor_preferencial_actual'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Valor accion'],'label'=>'Valor accion preferencial actual'],
-      
+              
             ];
+            if($this->scenario=='valor'){
+                 $attributes['valor_preferencial_actual'] =['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Valor accion'],'label'=>'Valor accion preferencial actual'];
+              }else{
+                  $attributes['numero_preferencial_actual'] =['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Valor accion'],'label'=>'Numero accion preferencial actual'];
+              }
         if($comun){
-            $attributes['valor_comun_actual'] = ['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Valor accion'],'label'=>'Valor accion comun actual'];
+            if($this->scenario=='valor'){
+                 $attributes['valor_comun_actual'] = ['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Valor accion'],'label'=>'Valor accion comun actual'];
+              }else{
+                  $attributes['numero_comun_actual'] = ['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Valor accion'],'label'=>'Numero accion comun actual'];
+              }
+            
          
             
         }
-        $attributes['valor_preferencial'] = ['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Valor accion'],'label'=>'Valor accion preferencial una vez aplicada la disminucion'];
+         if($this->scenario=='valor'){
+                  $attributes['valor_preferencial'] = ['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Valor accion'],'label'=>'Valor accion preferencial una vez aplicada la disminucion'];
+              }else{
+                  $attributes['numero_preferencial'] = ['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Valor accion'],'label'=>'Numero accion preferencial una vez aplicada la disminucion'];
+              }
+       
          if($comun){
-            $attributes['valor_comun'] = ['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Valor accion'],'label'=>'Valor accion comun una vez aplicada la disminucion'];
+             if($this->scenario=='valor'){
+                $attributes['valor_comun'] = ['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Valor accion'],'label'=>'Valor accion comun una vez aplicada la disminucion'];
+              }else{
+                $attributes['numero_comun'] = ['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Valor accion'],'label'=>'Numero accion comun una vez aplicada la disminucion'];
+              }
+            
          
             
-        }
-        $attributes['numero_comun_actual'] = ['type'=>Form::INPUT_HIDDEN,'label'=>false];
-        $attributes['numero_preferencial_actual'] = ['type'=>Form::INPUT_HIDDEN,'label'=>false];
+            }
+            if($this->scenario=='valor'){
+                $attributes['numero_comun_actual'] = ['type'=>Form::INPUT_HIDDEN,'label'=>false];
+                $attributes['numero_preferencial_actual'] = ['type'=>Form::INPUT_HIDDEN,'label'=>false];
+            }else{
+                $attributes['valor_comun_actual'] = ['type'=>Form::INPUT_HIDDEN,'label'=>false];
+                $attributes['valor_preferencial_actual'] = ['type'=>Form::INPUT_HIDDEN,'label'=>false];
+            }
+        
         $attributes['tipo_disminucion'] = ['type'=>Form::INPUT_HIDDEN,'label'=>false];
+        $attributes['capital_social'] = ['type'=>Form::INPUT_HIDDEN,'label'=>false];
         return $attributes;
+        
+         
      }
      public function Pagocompleto(){
        $acta= ActasConstitutivas::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'actual'=>true]);
@@ -174,10 +231,13 @@ class AccionesDisminuidas extends \common\components\BaseActiveRecord
             $accion =$accion_actual;
        }
        if($actualizar){
+           $this->capital_social=$accion->capital;
                 $this->valor_preferencial_actual=$accion->valor_preferencial;
                 $this->valor_comun_actual=$accion->valor_comun;
                 $this->numero_preferencial_actual=$accion->numero_preferencial;
                 $this->numero_comun_actual=$accion->numero_comun;
+             
+           
            }
        if(!is_null($accion->numero_comun)){
            
@@ -198,45 +258,39 @@ class AccionesDisminuidas extends \common\components\BaseActiveRecord
        return $modificacion;
     }
      public function Existeregistro(){
-       $registro = ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'tipo_documento_id'=>1,'proceso_finalizado'=>false]);       
-       $registromodificacion = ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'tipo_documento_id'=>2,'proceso_finalizado'=>false]);      
-       if(isset($registro) || isset($registromodificacion)){
-           if(isset($registromodificacion)){
-               $registro=$registromodificacion;
-               $modificacion= ModificacionesActas::findOne(['documento_registrado_id'=>$registro->id]);
-               if(isset($modificacion)){
-                   if($this->scenario=='pago' && !$modificacion->pago_capital){
-                       return true;
-                   }
-                   if($this->scenario=='aumento' && !$modificacion->aumento_capital){
-                       return true;
-                   }
-              }else{
-                   return true;
-               }
-           }
-          $accion= Acciones::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'documento_registrado_id'=>$registro->id,'tipo_accion'=>$this->tipo_accion]);
-           if(isset($accion)){
+       $registro = ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'tipo_documento_id'=>2,'proceso_finalizado'=>false]);      
+       if(isset($registro)){
+            $modificacion= ModificacionesActas::findOne(['documento_registrado_id'=>$registro->id]);
+            if(isset($modificacion)){
+                if($modificacion->disminucion_capital){
+                    $disminucion= AccionesDisminuidas::findOne(['documento_registrado_id'=>$registro->id]);
+                    if(isset($disminucion)){
+                        return true;
+                    }
+                    $this->documento_registrado_id=$registro->id;
+                    if($this->scenario=="valor"){
+                        $this->tipo_disminucion= 'SOBRE EL VALOR';
+                    }else{
+                        $this->tipo_disminucion= 'SOBRE EL NUMERO';
+                    }
+                   
+                     return false;
+                }else{
+                    return true;
+                }
                
-                return true;   
-            }else{
-                $this->documento_registrado_id=$registro->id;
-                return false;
+       
             }
-        }else{
-            return true;
         }
+            return true;
+             
     }
      public function Validardenominacion()
     {
-       $registro = ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'tipo_documento_id'=>1,'proceso_finalizado'=>false]);       
-       $registromodificacion = ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'tipo_documento_id'=>2,'proceso_finalizado'=>false]);      
-       if(isset($registro) || isset($registromodificacion)){
-           if(isset($registromodificacion)){
-           $registro=$registromodificacion;
+         $acta= ActasConstitutivas::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'actual'=>true]);
+       if(isset($acta)){
            
-           }
-           $denominacion=  DenominacionesComerciales::findOne(['documento_registrado_id'=>$registro->id]);
+           $denominacion=  DenominacionesComerciales::findOne($acta->denominacion_comercial_id);
            if(isset($denominacion)){
                if($denominacion->tipo_denominacion=="COOPERATIVA"){
                    return false;
@@ -248,4 +302,5 @@ class AccionesDisminuidas extends \common\components\BaseActiveRecord
        }
        return false;
     }
+    
 }

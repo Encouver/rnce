@@ -51,7 +51,7 @@ class Suplementarios extends \common\components\BaseActiveRecord
     public function rules()
     {
         return [
-            [['suscrito', 'documento_registrado_id','contratista_id','tipo_suplementario','certificacion_aporte_id','fecha_informe'], 'required'],
+            [['suscrito', 'documento_registrado_id','contratista_id','tipo_suplementario'], 'required'],
             [['numero','numero_pagada', 'creado_por', 'actualizado_por', 'documento_registrado_id', 'contratista_id','certificacion_aporte_id'], 'integer'],
             [['valor','capital','capital_pagado'], 'number'],
             [['tipo_suplementario'], 'string'],
@@ -60,9 +60,9 @@ class Suplementarios extends \common\components\BaseActiveRecord
             ['capital', 'validarcapital'],
             ['capital_pagado', 'validarcapitalpagado'],
             ['valor', 'validarvalor'],
-            [['capital','numero'], 'required', 'on' => 'pago'],
-            [['capital','capital_pagado','numero', 'valor','numero_pagada'], 'required', 'on' => 'aumento'],
-            [['capital','capital_pagado','numero', 'valor','numero_pagada'], 'required', 'on' => 'principal'],
+            [['capital','numero','fecha_informe','certificacion_aporte_id'], 'required', 'on' => 'pago'],
+            [['capital','capital_pagado','numero', 'valor','numero_pagada','fecha_informe','certificacion_aporte_id'], 'required', 'on' => 'aumento'],
+            [['capital','capital_pagado','numero', 'valor','numero_pagada','fecha_informe','certificacion_aporte_id'], 'required', 'on' => 'principal'],
             [['suscrito', 'documento_registrado_id', 'contratista_id'], 'required'],
             [['suscrito', 'sys_status','actual'], 'boolean'],
             [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el','actual','fecha_informe'], 'safe']

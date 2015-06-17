@@ -3,17 +3,17 @@
 namespace frontend\controllers;
 
 use Yii;
-use common\models\p\AccionesDisminuidas;
-use app\models\AccionesDisminuidasSearch;
-use common\models\p\Acciones;
+use common\models\p\SuplementariosDisminuidos;
+use app\models\SuplementariosDisminuidosSearch;
 use common\components\BaseController;
+use common\models\p\Suplementarios;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * AccionesDisminuidasController implements the CRUD actions for AccionesDisminuidas model.
+ * SuplementariosDisminuidosController implements the CRUD actions for SuplementariosDisminuidos model.
  */
-class AccionesDisminuidasController extends BaseController
+class SuplementariosDisminuidosController extends BaseController
 {
     public function behaviors()
     {
@@ -28,13 +28,13 @@ class AccionesDisminuidasController extends BaseController
     }
 
     /**
-     * Lists all AccionesDisminuidas models.
+     * Lists all SuplementariosDisminuidos models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new AccionesDisminuidasSearch();
-          $documento=$searchModel->Modificacionactual();
+        $searchModel = new SuplementariosDisminuidosSearch();
+         $documento=$searchModel->Modificacionactual();
         if(isset($documento)){
             $searchModel->documento_registrado_id= $documento->documento_registrado_id;
           
@@ -49,7 +49,7 @@ class AccionesDisminuidasController extends BaseController
     }
 
     /**
-     * Displays a single AccionesDisminuidas model.
+     * Displays a single SuplementariosDisminuidos model.
      * @param integer $id
      * @return mixed
      */
@@ -61,14 +61,14 @@ class AccionesDisminuidasController extends BaseController
     }
 
     /**
-     * Creates a new AccionesDisminuidas model.
+     * Creates a new SuplementariosDisminuidos model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate($id)
     {
-        $model = new AccionesDisminuidas();
-        
+        $model = new SuplementariosDisminuidos();
+  
         if($id=='valor'){
             $model->scenario=$id;
         }else{
@@ -90,34 +90,33 @@ class AccionesDisminuidasController extends BaseController
             return $this->redirect(['index']);
         }
        
+
         if ($model->load(Yii::$app->request->post())) {
-        $transaction = \Yii::$app->db->beginTransaction();
+            $transaction = \Yii::$app->db->beginTransaction();
         try {
             if($model->save()){
             
-            $accion = Acciones::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'suscrito'=>true,'actual'=>true]);
-            $accion_actual=Acciones::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'suscrito'=>true,'actual'=>false,'tipo_accion'=>'ACTUAL']);
-            if(isset($accion_actual)){
-                $accion =$accion_actual;
-            }                   
-            if($accion->tipo_accion=='ACTUAL'){
-                 if(!$accion->delete()){
+            $suplementario = Suplementarios::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'suscrito'=>true,'actual'=>true]);
+            $suplementario_actual=Suplementarios::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'suscrito'=>true,'actual'=>false,'tipo_suplementario'=>'ACTUAL']);
+            if(isset( $suplementario_actual)){
+                $suplementario = $suplementario_actual;
+            }                  
+            if($suplementario->tipo_suplementario=='ACTUAL'){
+                 if(!$suplementario->delete()){
                     $transaction->rollBack();
                     // Yii::$app->session->setFlash('error','');
                     return $this->render('create',['model'=>$model]);
                 }
             }
-            $accion= new Acciones();
-            $accion->numero_preferencial=$model->numero_preferencial;
-            $accion->numero_comun=$model->numero_comun;
-            $accion->valor_preferencial=$model->valor_preferencial;
-            $accion->valor_comun=$model->valor_comun;
-            $accion->tipo_accion='ACTUAL';
-            $accion->suscrito=true;
-            $accion->capital=$model->capital_social;
-            $accion->documento_registrado_id=$model->documento_registrado_id;
-            $accion->contratista_id=Yii::$app->user->identity->contratista_id;
-            if ($accion->save(false)) {
+            $suplementario= new Suplementarios();
+            $suplementario->numero=$model->numero;
+            $suplementario->valor=$model->valor;
+            $suplementario->tipo_suplementario='ACTUAL';
+            $suplementario->suscrito=true;
+            $suplementario->capital=$model->capital_social;
+            $suplementario->documento_registrado_id=$model->documento_registrado_id;
+            //$certificado->contratista_id=Yii::$app->user->identity->contratista_id;
+            if ($suplementario->save()) {
                 $transaction->commit();
                 return $this->redirect(['index']);
             }else{
@@ -135,7 +134,6 @@ class AccionesDisminuidasController extends BaseController
         } catch (Exception $e) {
              $transaction->rollBack();
         }
-          
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -144,7 +142,7 @@ class AccionesDisminuidasController extends BaseController
     }
 
     /**
-     * Updates an existing AccionesDisminuidas model.
+     * Updates an existing SuplementariosDisminuidos model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -154,51 +152,48 @@ class AccionesDisminuidasController extends BaseController
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post())) {
-            $transaction = \Yii::$app->db->beginTransaction();
+                $transaction = \Yii::$app->db->beginTransaction();
         try {
             if($model->save()){
             
-            $accion = Acciones::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'suscrito'=>true,'actual'=>true]);
-            $accion_actual=Acciones::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'suscrito'=>true,'actual'=>false,'tipo_accion'=>'ACTUAL']);
-            if(isset($accion_actual)){
-                $accion =$accion_actual;
-            }                   
-            if($accion->tipo_accion=='ACTUAL'){
-                 if(!$accion->delete()){
+            $suplementario = Suplementarios::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'suscrito'=>true,'actual'=>true]);
+            $suplementario_actual=Suplementarios::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'suscrito'=>true,'actual'=>false,'tipo_suplementario'=>'ACTUAL']);
+            if(isset( $suplementario_actual)){
+                $suplementario = $suplementario_actual;
+            }                  
+            if($suplementario->tipo_suplementario=='ACTUAL'){
+                 if(!$suplementario->delete()){
                     $transaction->rollBack();
                     // Yii::$app->session->setFlash('error','');
                     return $this->render('create',['model'=>$model]);
                 }
             }
-            $accion= new Acciones();
-            $accion->numero_preferencial=$model->numero_preferencial;
-            $accion->numero_comun=$model->numero_comun;
-            $accion->valor_preferencial=$model->valor_preferencial;
-            $accion->valor_comun=$model->valor_comun;
-            $accion->tipo_accion='ACTUAL';
-            $accion->suscrito=true;
-            $accion->capital=$model->capital_social;
-            $accion->documento_registrado_id=$model->documento_registrado_id;
-            $accion->contratista_id=Yii::$app->user->identity->contratista_id;
-            if ($accion->save(false)) {
+            $suplementario= new Suplementarios();
+            $suplementario->numero=$model->numero;
+            $suplementario->valor=$model->valor;
+            $suplementario->tipo_suplementario='ACTUAL';
+            $suplementario->suscrito=true;
+            $suplementario->capital=$model->capital_social;
+            $suplementario->documento_registrado_id=$model->documento_registrado_id;
+            //$certificado->contratista_id=Yii::$app->user->identity->contratista_id;
+            if ($suplementario->save()) {
                 $transaction->commit();
                 return $this->redirect(['index']);
             }else{
                 $transaction->rollBack();
                 // Yii::$app->session->setFlash('error','');
-                return $this->render('update',['model'=>$model]);
+                return $this->render('create',['model'=>$model]);
             }
             
             }else{
                 $transaction->rollBack();
-                return $this->render('update',['model'=>$model]);
+                return $this->render('create',['model'=>$model]);
             }
             
                 
         } catch (Exception $e) {
              $transaction->rollBack();
         }
-          
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -207,7 +202,7 @@ class AccionesDisminuidasController extends BaseController
     }
 
     /**
-     * Deletes an existing AccionesDisminuidas model.
+     * Deletes an existing SuplementariosDisminuidos model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -218,14 +213,14 @@ class AccionesDisminuidasController extends BaseController
    
         $transaction = \Yii::$app->db->beginTransaction();
         try {
-        $accion=Acciones::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'suscrito'=>true,'actual'=>false,'tipo_accion'=>'ACTUAL']);
-            if(isset($accion)){
-                if(!$accion->delete()){
+       
+        $suplementario=Suplementarios::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'suscrito'=>true,'actual'=>false,'tipo_suplementario'=>'ACTUAL']);
+        if(isset( $suplementario)){
+                if(!$suplementario->delete()){
                      $transaction->rollBack();
                     return $this->redirect(['index']);
                 }
-              
-            }    
+        }
         if($model->delete()){
            $transaction->commit();
         }else{
@@ -235,18 +230,19 @@ class AccionesDisminuidasController extends BaseController
         } catch (Exception $ex) {
                 $transaction->rollBack();
         }
+        
     }
 
     /**
-     * Finds the AccionesDisminuidas model based on its primary key value.
+     * Finds the SuplementariosDisminuidos model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return AccionesDisminuidas the loaded model
+     * @return SuplementariosDisminuidos the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = AccionesDisminuidas::findOne($id)) !== null) {
+        if (($model = SuplementariosDisminuidos::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
