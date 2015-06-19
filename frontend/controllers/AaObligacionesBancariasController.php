@@ -104,10 +104,10 @@ class AaObligacionesBancariasController extends BaseController
             $total->classname = $model->className();
             $total->valor = "".($model->interes_pagar+$model->importe_deuda);
             $total->id_classname = 1;
-            $total->anho = date('m-Y');
+            //$total->anho = date('m-Y');
 
             if($total->save()) {
-                $model->anho = '05-2015';
+               // $model->anho = '05-2015';
                 $model->total_imp_deu_int =$total->id;
                 //$model->actualizado_por = Yii::$app->user->id;
                 //$model->creado_por = Yii::$app->user->id;
