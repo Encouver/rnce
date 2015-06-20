@@ -66,13 +66,22 @@ class ActivosSysMetodosMedicion extends \common\components\BaseActiveRecord
     public $deterioro_acu;
     public $perdida;
     public $reverso;
+    public $saldo_neto;
+
+    
+
+
+    //
     /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['nombre', 'modelo_id', 'clasificacion_id'], 'required'],
+            [['nombre', 'modelo_id', 'clasificacion_id'], 'required', 'on' => 'base'],
+            [['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'], 'required', 'on' => 'capas'],
+            [['desde','hasta'], 'required', 'on' => 'promedio'],
+            //[['nombre', 'modelo_id', 'clasificacion_id'], 'required'],
             [['modelo_id', 'clasificacion_id', 'creado_por', 'actualizado_por'], 'integer'],
             [['sys_status'], 'boolean'],
             [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],

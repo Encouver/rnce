@@ -2,7 +2,7 @@
 use yii\helpers\Html;
 use kartik\widgets\ActiveForm;
 use kartik\builder\Form;
-use common\models\c\ActivosSysMetodosMedicion;
+use common\models\a\ActivosSysMetodosMedicion;
 
  $sysmetodos = new ActivosSysMetodosMedicion();
  $sysmetodos->scenario = 'capas';

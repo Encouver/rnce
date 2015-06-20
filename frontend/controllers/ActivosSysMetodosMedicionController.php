@@ -98,6 +98,11 @@ class ActivosSysMetodosMedicionController extends BaseController
         }
     }
 
+    public function actionCapas()
+    {
+        
+    }
+
     /**
      * Deletes an existing ActivosSysMetodosMedicion model.
      * If deletion is successful, the browser will be redirected to the 'index' page.

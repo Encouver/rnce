@@ -15,6 +15,12 @@ use webvimark\modules\UserManagement\components\GhostMenu;
 use webvimark\modules\UserManagement\components\GhostHtml;
 use webvimark\modules\UserManagement\components\GhostNav;
 use webvimark\modules\UserManagement\UserManagementModule;
+use common\models\p\ModificacionesActas;
+use common\models\a\ActivosDocumentosRegistrados;
+
+$documentos = ActivosDocumentosRegistrados::find()->where('contratista_id = :contratista and tipo_documento_id = :tipo_documento_id and  proceso_finalizado = :proceso_finalizado', ['contratista'=>Yii::$app->user->identity->contratista_id, 'tipo_documento_id'=>2, 'proceso_finalizado' => false])->one();
+if($documentos)
+    $modificaciones = ModificacionesActas::find()->where('contratista_id = :contratista and documento_registrado_id = :documento_registrado_id', ['contratista'=>Yii::$app->user->identity->contratista_id, 'documento_registrado_id'=> $documentos->id])->one();
 
 /* @var $this \yii\web\View */
 /* @var $content string */
@@ -144,11 +150,15 @@ AppAsset::register($this);
                         ['label' => 'Resumen', 'url' => ['/actas-constitutivas/resumenacta']],
                     ],
                 ],
-                ['label' => 'Modificacion acta',
+            ];
+
+            if($documentos)
+            {
+             $menuItems[] = ['label' => 'Modificacion acta',
                     'items' => [
                         ['label' => 'Registro documento modificado', 'url' => ['/activos-documentos-registrados/index']],
                         ['label' => 'Modificaciones', 'url' => ['/modificaciones-actas/index']],
-                        ['label' => 'Cambio Objeto Social', 'url' => ['objetos-sociales/index']],
+                        ['label' => 'Cambio Objeto Social', 'url' => ['objetos-sociales/index'], 'visible' => ($modificaciones) ? $modificaciones->razon_social : false],
                         ['label' => 'Cambio Domicilio', 'url' => ['domicilios/index']],
                         ['label' => 'Cambio Cierre Ejercicio Econonomico', 'url' => ['/cierres-ejercicios/index']],
                         ['label' => 'Duracion empresa', 'url' => ['/duraciones-empresas/index']],
@@ -167,9 +177,10 @@ AppAsset::register($this);
                         ['label' => 'Designacion del comisario', 'url' => ['/comisarios-auditores/comisario']],
                         ['label' => 'Origen Capital', 'url' => ['/origenes-capitales/origen']],
                     ],
-                ],
+                ];
                 
-            ];
+                
+            }
 
             // Items del menu de usuario
             if (Yii::$app->user->isGuest) {

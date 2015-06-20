@@ -5,7 +5,9 @@ $this->title = 'Registro Nacional de Contratistas -- Inicio';
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Menu;
+
 ?>
+
 <div class="site-index">
     <?php 
 
