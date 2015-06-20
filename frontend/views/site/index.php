@@ -71,7 +71,74 @@ Yii::$app->formatter->locale = 'ru-RU';
 echo Yii::$app->formatter->asDate('2014-01-01'); // output: 1 января 2014 г.*/
 
     ?>
+    <?php
 
+    $begin = new \common\components\MyDateTime( '2012-03-31' );
+    $begin->modify('-1 year +1 day');
+    $end = new \common\components\MyDateTime( '2012-03-31' );
+    $end->modify( '+1 days' );
+
+/*    echo 'Fecha inicio: '.$begin->format('Y-m-d');
+    echo '<br> Fecha Fin: '.$end->format('Y-m-d');
+    echo '<br>';*/
+    $interval = new DateInterval('P1M');
+    $daterange = new DatePeriod($begin, $interval ,$end);
+
+    $atClose = new \common\components\MyDateTime('2015-12-31');
+    $result = $atClose->cycleYear();
+    echo '<br> Fecha inicio: '.$result['start']->format('Y-m-d');
+    echo '<br> Fecha Fin: '.$result['end']->format('Y-m-d');
+    echo '<br>';
+/*    var_dump(date(DATE_RFC3339, $result['start']));
+    echo '<br>';
+    var_dump(date(DATE_RFC3339, $result['end']));*/
+/*    foreach($daterange as $date){
+        echo $date->format("Ymd") . "<br>";
+    }*/
+
+    $mydate = new \common\components\MyDateTime();
+    $mydate->setDate(2015,01,25);
+
+    $result = $mydate->fiscalYear();
+    echo '<br> Fecha inicio: '.$result['start']->format('Y-m-d');
+    echo '<br> Fecha Fin: '.$result['end']->format('Y-m-d');
+    echo '<br>';
+    //var_dump(date(DATE_RFC3339, $result['start']));
+    //var_dump(date(DATE_RFC3339, $result['end']));
+
+
+/*
+
+    if($start > $end){
+        $partialStart2 = ((new DateTime)->format('Y')+1).'-01-01';
+        $partialEnd = ((new DateTime)->format('Y')+1).'-01-15';
+        $start2 = new \common\components\MyDateTime($partialStart2);
+        $end = new \common\components\MyDateTime($partialEnd);
+
+//$interval->
+        $interval = $start2->diff($end);
+        echo '<br>';
+        echo $interval->format('%R%a days');
+        $start->sub($interval);
+        $end->sub($interval);
+        $end->modify('-1 days');
+        $now = new \common\components\MyDateTime();
+        $now->sub($interval);
+
+        if($start >= $now && $now <= $end){
+
+        }
+    }*/
+
+    $result = (new \common\components\MyDateTime())->systemYear();
+
+    echo '<br>';
+    echo 'Fecha de Inicio: '.$result['start']->format('Y-m-d');
+    echo '<br>';
+    echo 'Fecha Final: '.$result['end']->format('Y-m-d');
+
+
+    ?>
     <!-- <div class="jumbotron">
         <h1>Congratulations!</h1>
     
