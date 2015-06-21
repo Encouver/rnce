@@ -18,6 +18,8 @@ use webvimark\modules\UserManagement\UserManagementModule;
 use common\models\p\ModificacionesActas;
 use common\models\a\ActivosDocumentosRegistrados;
 
+$documentos = null;
+if(!Yii::$app->user->isGuest)
 $documentos = ActivosDocumentosRegistrados::find()->where('contratista_id = :contratista and tipo_documento_id = :tipo_documento_id and  proceso_finalizado = :proceso_finalizado', ['contratista'=>Yii::$app->user->identity->contratista_id, 'tipo_documento_id'=>2, 'proceso_finalizado' => false])->one();
 if($documentos)
     $modificaciones = ModificacionesActas::find()->where('contratista_id = :contratista and documento_registrado_id = :documento_registrado_id', ['contratista'=>Yii::$app->user->identity->contratista_id, 'documento_registrado_id'=> $documentos->id])->one();

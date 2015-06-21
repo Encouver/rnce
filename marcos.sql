@@ -1356,3 +1356,111 @@ COMMENT ON COLUMN cuentas.g_otros_activos.sys_finalizado_el IS 'Fecha de "elimin
 
 
 
+
+
+
+-- Table: cuentas.dd1_conciliacion_fiscal_rentas
+
+-- DROP TABLE cuentas.dd1_conciliacion_fiscal_rentas;
+
+CREATE TABLE cuentas.dd1_conciliacion_fiscal_rentas
+(
+  id serial NOT NULL, -- Clave primaria.
+  concepto_id integer NOT NULL, -- Clave foránea  a la tabla sys_conceptos.
+  monto numeric(38,6), -- Monto correspondiente al concepto para el año de carga en curso.
+  contratista_id integer NOT NULL, -- Clave foranea al contratista
+  anho character varying(100) NOT NULL, -- Año contable y mes
+  creado_por integer, -- Clave foranea al usuario
+  actualizado_por integer, -- Clave foranea al usuario
+  sys_status boolean NOT NULL DEFAULT true, -- Estatus interno del sistema
+  sys_creado_el timestamp with time zone DEFAULT now(), -- Fecha de creación del registro.
+  sys_actualizado_el timestamp with time zone DEFAULT now(), -- Fecha de última actualización del registro.
+  sys_finalizado_el timestamp with time zone, -- Fecha de "eliminado" el registro.
+  CONSTRAINT dd1_conciliacion_fiscal_rentas_pkey PRIMARY KEY (id),
+  CONSTRAINT dd1_conciliacion_fiscal_rentas_concepto_id_fkey FOREIGN KEY (concepto_id)
+  REFERENCES cuentas.sys_conceptos (id) MATCH SIMPLE
+  ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT dd1_conciliacion_fiscal_rentas_contratista_id_fkey FOREIGN KEY (contratista_id)
+  REFERENCES contratistas (id) MATCH SIMPLE
+  ON UPDATE CASCADE ON DELETE NO ACTION,
+  CONSTRAINT dd1_conciliacion_fiscal_renta_concepto_id_contratista_id_an_key UNIQUE (concepto_id, contratista_id, anho)
+)
+WITH (
+OIDS=FALSE
+);
+ALTER TABLE cuentas.dd1_conciliacion_fiscal_rentas
+OWNER TO eureka;
+COMMENT ON TABLE cuentas.dd1_conciliacion_fiscal_rentas
+IS 'Cuenta DD1 - Conciliación Fiscal de Rentas.';
+COMMENT ON COLUMN cuentas.dd1_conciliacion_fiscal_rentas.id IS 'Clave primaria.';
+COMMENT ON COLUMN cuentas.dd1_conciliacion_fiscal_rentas.concepto_id IS 'Clave foránea  a la tabla sys_conceptos.';
+COMMENT ON COLUMN cuentas.dd1_conciliacion_fiscal_rentas.monto IS 'Monto correspondiente al concepto para el año de carga en curso.';
+COMMENT ON COLUMN cuentas.dd1_conciliacion_fiscal_rentas.contratista_id IS 'Clave foranea al contratista';
+COMMENT ON COLUMN cuentas.dd1_conciliacion_fiscal_rentas.anho IS 'Año contable y mes';
+COMMENT ON COLUMN cuentas.dd1_conciliacion_fiscal_rentas.creado_por IS 'Clave foranea al usuario';
+COMMENT ON COLUMN cuentas.dd1_conciliacion_fiscal_rentas.actualizado_por IS 'Clave foranea al usuario';
+COMMENT ON COLUMN cuentas.dd1_conciliacion_fiscal_rentas.sys_status IS 'Estatus interno del sistema';
+COMMENT ON COLUMN cuentas.dd1_conciliacion_fiscal_rentas.sys_creado_el IS 'Fecha de creación del registro.';
+COMMENT ON COLUMN cuentas.dd1_conciliacion_fiscal_rentas.sys_actualizado_el IS 'Fecha de última actualización del registro.';
+COMMENT ON COLUMN cuentas.dd1_conciliacion_fiscal_rentas.sys_finalizado_el IS 'Fecha de "eliminado" el registro.';
+
+
+
+
+-- Table: cuentas.dd2_islr_diferido
+
+-- DROP TABLE cuentas.dd2_islr_diferido;
+
+CREATE TABLE cuentas.dd2_islr_diferido
+(
+  id serial NOT NULL, -- Clave primaria.
+  concepto_id integer NOT NULL, -- Clave foránea a la tabla sys_conceptos.
+  base_financiera numeric(38,6) NOT NULL, -- Base financiera.
+  base_fiscal numeric(38,6) NOT NULL, -- Base fiscal.
+  diferencia_temporaria numeric(38,6) NOT NULL, -- Diferencia temporaria.
+  activo_impuesto_diferido numeric(38,6) NOT NULL DEFAULT 0, -- Activo impuesto diferido 15%.
+  pasivo_impuesto_diferido numeric(38,6) NOT NULL DEFAULT 0, -- Pasivo impuesto diferido 15%.
+  contratista_id integer NOT NULL, -- Clave foranea al contratista
+  anho character varying(100) NOT NULL, -- Año contable y mes
+  creado_por integer, -- Clave foranea al usuario
+  actualizado_por integer, -- Clave foranea al usuario
+  sys_status boolean NOT NULL DEFAULT true, -- Estatus interno del sistema
+  sys_creado_el timestamp with time zone DEFAULT now(), -- Fecha de creación del registro.
+  sys_actualizado_el timestamp with time zone DEFAULT now(), -- Fecha de última actualización del registro.
+  sys_finalizado_el timestamp with time zone, -- Fecha de "eliminado" el registro.
+  CONSTRAINT dd2_islr_diferido_pkey PRIMARY KEY (id),
+  CONSTRAINT dd2_islr_diferido_concepto_id_fkey FOREIGN KEY (concepto_id)
+  REFERENCES cuentas.sys_conceptos (id) MATCH SIMPLE
+  ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT dd2_islr_diferido_contratista_id_fkey FOREIGN KEY (contratista_id)
+  REFERENCES contratistas (id) MATCH SIMPLE
+  ON UPDATE CASCADE ON DELETE NO ACTION,
+  CONSTRAINT dd2_islr_diferido_concepto_id_contratista_id_anho_key UNIQUE (concepto_id, contratista_id, anho)
+)
+WITH (
+OIDS=FALSE
+);
+ALTER TABLE cuentas.dd2_islr_diferido
+OWNER TO eureka;
+COMMENT ON TABLE cuentas.dd2_islr_diferido
+IS 'Cuenta DD2 - Impuesto sobre la renta diferido.';
+COMMENT ON COLUMN cuentas.dd2_islr_diferido.id IS 'Clave primaria.';
+COMMENT ON COLUMN cuentas.dd2_islr_diferido.concepto_id IS 'Clave foránea a la tabla sys_conceptos.';
+COMMENT ON COLUMN cuentas.dd2_islr_diferido.base_financiera IS 'Base financiera.';
+COMMENT ON COLUMN cuentas.dd2_islr_diferido.base_fiscal IS 'Base fiscal.';
+COMMENT ON COLUMN cuentas.dd2_islr_diferido.diferencia_temporaria IS 'Diferencia temporaria.';
+COMMENT ON COLUMN cuentas.dd2_islr_diferido.activo_impuesto_diferido IS 'Activo impuesto diferido 15%.';
+COMMENT ON COLUMN cuentas.dd2_islr_diferido.pasivo_impuesto_diferido IS 'Pasivo impuesto diferido 15%.';
+COMMENT ON COLUMN cuentas.dd2_islr_diferido.contratista_id IS 'Clave foranea al contratista';
+COMMENT ON COLUMN cuentas.dd2_islr_diferido.anho IS 'Año contable y mes';
+COMMENT ON COLUMN cuentas.dd2_islr_diferido.creado_por IS 'Clave foranea al usuario';
+COMMENT ON COLUMN cuentas.dd2_islr_diferido.actualizado_por IS 'Clave foranea al usuario';
+COMMENT ON COLUMN cuentas.dd2_islr_diferido.sys_status IS 'Estatus interno del sistema';
+COMMENT ON COLUMN cuentas.dd2_islr_diferido.sys_creado_el IS 'Fecha de creación del registro.';
+COMMENT ON COLUMN cuentas.dd2_islr_diferido.sys_actualizado_el IS 'Fecha de última actualización del registro.';
+COMMENT ON COLUMN cuentas.dd2_islr_diferido.sys_finalizado_el IS 'Fecha de "eliminado" el registro.';
+
+
+
+ALTER TABLE cuentas.dd3_otros_tributos
+ADD UNIQUE (concepto_id, contratista_id, anho);
