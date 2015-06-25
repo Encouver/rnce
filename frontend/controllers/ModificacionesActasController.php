@@ -69,11 +69,13 @@ class ModificacionesActasController extends BaseController
     public function actionCreate()
     {
         $model = new ModificacionesActas();
+        $acciones= $model->Acciones();
          if($model->existeregistro()){
             Yii::$app->session->setFlash('error','Ya existe un registro');
             return $this->redirect(['index']);
                 }
         if(isset($_POST['objeto'])){
+            
             
             $transaction = \Yii::$app->db->beginTransaction();
             try {
@@ -126,6 +128,7 @@ class ModificacionesActasController extends BaseController
                                     Yii::$app->session->setFlash('error','Error solo puede elegir una limitacion de capital  o un reintegro de perdida');
                                     return $this->render('create', [
                                         'model'=>$model,
+                                        'acciones'=>$acciones
                                     ]);
                                 }else{
                                     $model->limitacion_capital=true;
@@ -138,6 +141,7 @@ class ModificacionesActasController extends BaseController
                                     Yii::$app->session->setFlash('error','Error solo puede elegir una limitacion de capital o un reintegro de perdida');
                                     return $this->render('create', [
                                         'model'=>$model,
+                                        'acciones'=>$acciones
                                     ]);
                                 }else{
                                     $model->limitacion_capital_afectado=true;
@@ -175,6 +179,7 @@ class ModificacionesActasController extends BaseController
                                     Yii::$app->session->setFlash('error','Error solo puede elegir una limitacion de capital o un reintegro de perdida');
                                     return $this->render('create', [
                                     'model'=>$model,
+                                    'acciones'=>$acciones
                                     ]);
                                 }else{
                                     $model->reintegro_perdida=true;
@@ -264,6 +269,7 @@ class ModificacionesActasController extends BaseController
                     Yii::$app->session->setFlash('error','El maximo de modificaciones debe ser 3');
                     return $this->render('create', [
                     'model'=>$model,
+                    'acciones'=>$acciones
                     ]);
                 }
        } catch (Exception $e) {
@@ -276,6 +282,7 @@ class ModificacionesActasController extends BaseController
             }else{
                  return $this->render('create', [
                      'model'=>$model,
+                      'acciones'=>$acciones
             ]);
             }
     }

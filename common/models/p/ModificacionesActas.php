@@ -2,6 +2,8 @@
 
 namespace common\models\p;
 use common\models\a\ActivosDocumentosRegistrados;
+use common\models\p\ActasConstitutivas;
+use common\models\p\DenominacionesComerciales;
 use Yii;
 
 /**
@@ -135,5 +137,14 @@ class ModificacionesActas extends \common\components\BaseActiveRecord
         }else{
             return true;
         }
+    }
+    public function Acciones()
+    {
+       $acta = ActasConstitutivas::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'actual'=>true]);       
+       $denominacion= DenominacionesComerciales::findOne($acta->denominacion_comercial_id);
+        if($denominacion->tipo_denominacion=='COOPERATIVA'){
+          return false;
+        }
+        return true;
     }
 }
