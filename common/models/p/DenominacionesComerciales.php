@@ -12,6 +12,7 @@ use common\models\p\Certificados;
 use common\models\p\Suplementarios;
 use common\models\a\ActivosDocumentosRegistrados;
 use common\models\p\PrincipiosContables;
+use common\models\p\ModificacionesActas;
 use Yii;
 
 /**
@@ -168,12 +169,31 @@ class DenominacionesComerciales extends \common\components\BaseActiveRecord
     
 
     }
+     public function Modificacionactual(){
+       
+       $registro = ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'tipo_documento_id'=>2,'proceso_finalizado'=>false]);      
+       
+       if(isset($registro)){
+         $modificacion= ModificacionesActas::findOne(['documento_registrado_id'=>$registro->id]);  
+       }else{
+           $modificacion= ModificacionesActas::findOne(['documento_registrado_id'=>-100]); 
+       }
+       return $modificacion;
+    }
      public function Existeregistro(){
        $registro = ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'tipo_documento_id'=>1,'proceso_finalizado'=>false]);       
        $registromodificacion = ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'tipo_documento_id'=>2,'proceso_finalizado'=>false]);      
        if(isset($registro) || isset($registromodificacion)){
            if(isset($registromodificacion)){
                $registro=$registromodificacion;
+                $modificacion= ModificacionesActas::findOne(['documento_registrado_id'=>$registro->id]);
+               if(isset($modificacion)){
+                   if(!$modificacion->denominacion_comercial){
+                       return true;
+                   }
+               }else{
+                   return true;
+               }
            }
           $denominacion= DenominacionesComerciales::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'documento_registrado_id'=>$registro->id]);
            if(isset($denominacion)){

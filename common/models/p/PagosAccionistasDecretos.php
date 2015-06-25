@@ -65,7 +65,7 @@ class PagosAccionistasDecretos extends \common\components\BaseActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'decreto_div_excedente_id' => Yii::t('app', 'Decreto Div Excedente ID'),
+            'decreto_div_excedente_id' => Yii::t('app', 'Decreto Div Excedente'),
             'monto_cancelado' => Yii::t('app', 'Monto Cancelado'),
             'fecha' => Yii::t('app', 'Fecha'),
             'creado_por' => Yii::t('app', 'Creado Por'),
@@ -77,7 +77,7 @@ class PagosAccionistasDecretos extends \common\components\BaseActiveRecord
             'contratista_id' => Yii::t('app', 'Contratista ID'),
             'tipo_pago' => Yii::t('app', 'Tipo Pago'),
             'numero' => Yii::t('app', 'Numero'),
-            'natural_juridica_id' => Yii::t('app', 'Natural Juridica ID'),
+            'natural_juridica_id' => Yii::t('app', 'Natural Juridica'),
             'documento_registrado_id' => Yii::t('app', 'Documento Registrado'),
         ];
     }

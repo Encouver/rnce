@@ -63,7 +63,7 @@ class BancosContratistas extends \common\components\BaseActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'banco_id' => Yii::t('app', 'Banco'),
-            'contratista_id' => Yii::t('app', 'Contratista ID'),
+            'contratista_id' => Yii::t('app', 'Contratista'),
             'num_cuenta' => Yii::t('app', 'Num Cuenta'),
             'tipo_moneda' => Yii::t('app', 'Tipo Moneda'),
             'tipo_cuenta' => Yii::t('app', 'Tipo Cuenta'),

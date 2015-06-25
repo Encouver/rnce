@@ -109,7 +109,7 @@ class LimitacionesCapitales extends \common\components\BaseActiveRecord
             'sys_actualizado_el' => Yii::t('app', 'Sys Actualizado El'),
             'sys_finalizado_el' => Yii::t('app', 'Sys Finalizado El'),
             'fecha_informe' => Yii::t('app', 'Fecha Informe'),
-            'contratista_id' => Yii::t('app', 'Contratista ID'),
+            'contratista_id' => Yii::t('app', 'Contratista'),
             'documento_registrado_id' => Yii::t('app', 'Documento Registrado ID'),
             'actual' => Yii::t('app', 'Actual'),
             'valor_accion' => Yii::t('app', 'Valor Accion'),

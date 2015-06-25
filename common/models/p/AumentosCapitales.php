@@ -53,7 +53,7 @@ class AumentosCapitales extends \common\components\BaseActiveRecord
             'total_accion' => Yii::t('app', 'Total Accion'),
             'valor_accion' => Yii::t('app', 'Valor Accion'),
             'total_capital' => Yii::t('app', 'Total Capital'),
-            'acta_constitutiva_id' => Yii::t('app', 'Acta Constitutiva ID'),
+            'acta_constitutiva_id' => Yii::t('app', 'Acta Constitutiva'),
             'sys_status' => Yii::t('app', 'Sys Status'),
             'sys_creado_el' => Yii::t('app', 'Sys Creado El'),
             'sys_actualizado_el' => Yii::t('app', 'Sys Actualizado El'),

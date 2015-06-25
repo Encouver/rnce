@@ -34,12 +34,31 @@ class ObjetosSocialesController extends Controller
     public function actionIndex()
     {
         $searchModel = new ObjetosSocialesSearch();
+         $documento= ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'tipo_documento_id'=>1]);
+        if(isset($documento)){
+            $searchModelFiscal->documento_registrado_id= $documento->id;
+        }
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $model = new ObjetosSociales();
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
             'model'=> $model,
+        ]);
+    }
+     public function actionModificacion()
+    {
+        $searchModel = new ObjetosSocialesSearch();
+        $documento=$searchModel->Modificacionactual();
+        if(isset($documento)){
+            $searchModel->documento_registrado_id= $documento->documento_registrado_id;
+          
+        }
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        return $this->render('modificacion', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+          
         ]);
     }
 
@@ -69,8 +88,12 @@ class ObjetosSocialesController extends Controller
             return $this->redirect(['index']);
                 }
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+               
                Yii::$app->session->setFlash('success','Objeto Social guardado con exito');
-                    return $this->redirect(['index']);
+                if($model->documentoRegistrado->tipo_documento_id==2){
+                    return $this->redirect(['modificacion']);
+                }
+               return $this->redirect(['index']);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -89,7 +112,10 @@ class ObjetosSocialesController extends Controller
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
              Yii::$app->session->setFlash('success','Objeto Social actualizado con exito');
-                    return $this->redirect(['index']);
+                if($model->documentoRegistrado->tipo_documento_id==2){
+                    return $this->redirect(['modificacion']);
+                }
+               return $this->redirect(['index']);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -103,9 +129,14 @@ class ObjetosSocialesController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionDelete($id)
+     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+       if($model->documentoRegistrado->tipo_documento_id==2){
+            $model->delete();          
+             return $this->redirect(['modificacion']);
+        }
+         $model->delete();                    
 
         return $this->redirect(['index']);
     }

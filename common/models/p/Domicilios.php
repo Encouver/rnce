@@ -54,13 +54,13 @@ class Domicilios extends \common\components\BaseActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'contratista_id' => Yii::t('app', 'Contratista ID'),
-            'documento_registrado_id' => Yii::t('app', 'Documento Registrado ID'),
+            'documento_registrado_id' => Yii::t('app', 'Documento Registrado'),
             'sys_status' => Yii::t('app', 'Sys Status'),
             'sys_creado_el' => Yii::t('app', 'Sys Creado El'),
             'sys_actualizado_el' => Yii::t('app', 'Sys Actualizado El'),
             'sys_finalizado_el' => Yii::t('app', 'Sys Finalizado El'),
             'fiscal' => Yii::t('app', 'Fiscal'),
-            'direccion_id' => Yii::t('app', 'Direccion ID'),
+            'direccion_id' => Yii::t('app', 'Direccion'),
         ];
     }
 
@@ -93,6 +93,17 @@ class Domicilios extends \common\components\BaseActiveRecord
     public function getDireccion()
     {
         return $this->hasOne(Direcciones::className(), ['id' => 'direccion_id']);
+    }
+      public function Modificacionactual(){
+       
+       $registro = ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'tipo_documento_id'=>2,'proceso_finalizado'=>false]);      
+       
+       if(isset($registro)){
+         $modificacion= ModificacionesActas::findOne(['documento_registrado_id'=>$registro->id]);  
+       }else{
+           $modificacion= ModificacionesActas::findOne(['documento_registrado_id'=>-100]); 
+       }
+       return $modificacion;
     }
     public function Existeregistro(){
        $registro = ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'tipo_documento_id'=>1,'proceso_finalizado'=>false]);       

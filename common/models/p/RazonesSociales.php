@@ -2,6 +2,7 @@
 
 namespace common\models\p;
 use common\models\a\ActivosDocumentosRegistrados;
+use common\models\p\ModificacionesActas;
 use common\models\p\Contratistas;
 use Yii;
 
@@ -54,7 +55,7 @@ class RazonesSociales extends \common\components\BaseActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'contratista_id' => Yii::t('app', 'Contratista ID'),
+            'contratista_id' => Yii::t('app', 'Contratista'),
             'nombre' => Yii::t('app', 'Nombre'),
             'creado_por' => Yii::t('app', 'Creado Por'),
             'actualizado_por' => Yii::t('app', 'Actualizado Por'),
@@ -62,7 +63,7 @@ class RazonesSociales extends \common\components\BaseActiveRecord
             'sys_creado_el' => Yii::t('app', 'Sys Creado El'),
             'sys_actualizado_el' => Yii::t('app', 'Sys Actualizado El'),
             'sys_finalizado_el' => Yii::t('app', 'Sys Finalizado El'),
-            'documento_registrado_id' => Yii::t('app', 'Documento Registrado ID'),
+            'documento_registrado_id' => Yii::t('app', 'Documento Registrado'),
         ];
     }
 
@@ -89,12 +90,31 @@ class RazonesSociales extends \common\components\BaseActiveRecord
     {
         return $this->hasOne(Contratistas::className(), ['id' => 'contratista_id']);
     }
+     public function Modificacionactual(){
+       
+       $registro = ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'tipo_documento_id'=>2,'proceso_finalizado'=>false]);      
+       
+       if(isset($registro)){
+         $modificacion= ModificacionesActas::findOne(['documento_registrado_id'=>$registro->id]);  
+       }else{
+           $modificacion= ModificacionesActas::findOne(['documento_registrado_id'=>-100]); 
+       }
+       return $modificacion;
+    }
      public function Existeregistro(){
        $registro = ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'tipo_documento_id'=>1,'proceso_finalizado'=>false]);       
        $registromodificacion = ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'tipo_documento_id'=>2,'proceso_finalizado'=>false]);      
        if(isset($registro) || isset($registromodificacion)){
            if(isset($registromodificacion)){
                $registro=$registromodificacion;
+                $modificacion= ModificacionesActas::findOne(['documento_registrado_id'=>$registro->id]);
+               if(isset($modificacion)){
+                   if(!$modificacion->razon_social){
+                       return true;
+                   }
+               }else{
+                   return true;
+               }
            }
           $razon= RazonesSociales::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'documento_registrado_id'=>$registro->id]);
            if(isset($razon)){

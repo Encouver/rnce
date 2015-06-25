@@ -73,8 +73,8 @@ class Contratistas extends \common\components\BaseActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'natural_juridica_id' => Yii::t('app', 'Natural Juridica ID'),
-            'estatus_contratista_id' => Yii::t('app', 'Estatus Contratista ID'),
+            'natural_juridica_id' => Yii::t('app', 'Natural Juridica'),
+            'estatus_contratista_id' => Yii::t('app', 'Estatus Contratista'),
             'sigla' => Yii::t('app', 'Sigla'),
             'sys_status' => Yii::t('app', 'Sys Status'),
             'sys_creado_el' => Yii::t('app', 'Sys Creado El'),

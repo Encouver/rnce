@@ -5,7 +5,12 @@ namespace frontend\controllers;
 use Yii;
 use common\models\p\DenominacionesComerciales;
 use common\models\p\Contratistas;
+use common\models\a\ActivosDocumentosRegistrados;
 use common\models\p\SysNaturalesJuridicas;
+use common\models\p\Acciones;
+use common\models\p\Certificados;
+use common\models\p\Suplementarios;
+use common\models\p\OrigenesCapitales;
 use app\models\DenominacionesComercialesSearch;
 use common\components\BaseController;
 use yii\web\NotFoundHttpException;
@@ -35,12 +40,32 @@ class DenominacionesComercialesController extends BaseController
     public function actionIndex()
     {
         $searchModel = new DenominacionesComercialesSearch();
+         $documento= ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'tipo_documento_id'=>1]);
+        if(isset($documento)){
+            $searchModelFiscal->documento_registrado_id= $documento->id;
+        }
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $model= new DenominacionesComerciales();
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
             'model'=>$model,
+        ]);
+    }
+    public function actionModificacion()
+    {
+        $searchModel = new DenominacionesComercialesSearch();
+        $documento=$searchModel->Modificacionactual();
+        if(isset($documento)){
+            $searchModel->documento_registrado_id= $documento->documento_registrado_id;
+          
+        }
+      
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        return $this->render('modificacion', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'documento'=>$documento,
         ]);
     }
 
@@ -180,13 +205,18 @@ class DenominacionesComercialesController extends BaseController
                 if($model->cooperativa_distribuicion==''){
                     $model->cooperativa_distribuicion=null;
                 }
-             
-                $model->asignarprincipio();
+                 if($model->documentoRegistrado->tipo_documento_id==1){
+                 $model->asignarprincipio();
                 $model->tieneotrosdatos();
+                               }
+               
                 if($model->save()){
                     
                     Yii::$app->session->setFlash('success','Denominacion Comercial guardada con exito');
-                    return $this->redirect(['index']);
+                      if($model->documentoRegistrado->tipo_documento_id==2){
+                                   return $this->redirect(['modificacion']);
+                               }
+                                return $this->redirect(['index']);
                 }else{
                     Yii::$app->session->setFlash('error','Error en la carga');
                     return $this->render('create', [
@@ -238,12 +268,17 @@ class DenominacionesComercialesController extends BaseController
                 if($model->cooperativa_distribuicion==''){
                     $model->cooperativa_distribuicion=null;
                 }
-                 $model->asignarprincipio();
+                if($model->documentoRegistrado->tipo_documento_id==2){
+                   $model->asignarprincipio();
                  $model->tieneotrosdatos();
+                               }
 
                 if($model->save()){
                     Yii::$app->session->setFlash('success','Denominacion Comercial Actualizada con exito');
-                    return $this->redirect(['index']);
+                     if($model->documentoRegistrado->tipo_documento_id==2){
+                                   return $this->redirect(['modificacion']);
+                               }
+                                return $this->redirect(['index']);
                 }else{
                     Yii::$app->session->setFlash('error','Error en la carga');
                     return $this->render('create', [
@@ -264,10 +299,67 @@ class DenominacionesComercialesController extends BaseController
      * @return mixed
      */
     public function actionDelete($id)
+            
     {
-        $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
+        $model = $this->findModel($id);
+        if($model->documentoRegistrado->tipo_documento_id==1){
+        $transaction = \Yii::$app->db->beginTransaction();
+        try {
+            if($model->tipo_denominacion!='COOPERATIVA'){
+                $model2 = Acciones::findOne(['documento_registrado_id'=>$model->documento_registrado_id, 'suscrito'=>true]);
+                $model3 = Acciones::findOne(['documento_registrado_id'=>$model->documento_registrado_id, 'suscrito'=>false]);
+                if(isset($model2)){
+                     $origen_capital= OrigenesCapitales::findAll(['documento_registrado_id'=>$model->documento_registrado_id,'tipo_origen'=>$model2->tipo_accion]);
+                }
+                
+            }else{
+                 if($model->tipo_denominacion=='COOPERATIVA' && $model->cooperativa_capital!='SUPLEMENTARIO'){
+                      $model2 = Certificados::findOne(['documento_registrado_id'=>$model->documento_registrado_id,'suscrito'=>true]);
+                      $model3 = Certificados::findOne(['documento_registrado_id'=>$model->documento_registrado_id,'suscrito'=>false]);
+                       if(isset($model2)){
+                            $origen_capital= OrigenesCapitales::findAll(['documento_registrado_id'=>$model->documento_registrado_id,'tipo_origen'=>$model2->tipo_certificado]);
+                        }
+                 }else{
+                        $model2 = Suplementarios::findOne(['documento_registrado_id'=>$model->documento_registrado_id,'suscrito'=>true]);
+                        $model3 = Suplementarios::findOne(['documento_registrado_id'=>$model->documento_registrado_id,'suscrito'=>false]);
+                        if(isset($model2)){
+                            $origen_capital= OrigenesCapitales::findAll(['documento_registrado_id'=>$model->documento_registrado_id,'tipo_origen'=>$model2->tipo_suplementario]);
+                        }
+                 }
+            }
+            
+          
+            if(isset($origen_capital)){
+                foreach ($origen_capital as $origen) {
+                    if(!$origen->delete()){
+                        $transaction->rollBack();
+                        Yii::$app->session->setFlash('error','Error al eliminar el origen de capital asociado');
+                          return $this->redirect(['index']);
+                    }
+                    
+                }
+            }
+            if(!$model2->delete() || !$model3->delete()){
+                    $transaction->rollBack();
+                    Yii::$app->session->setFlash('error','Error al eliminar el capital');
+                    return $this->redirect(['index']);
+                   
+            }
+            if($model->delete()){
+                $transaction->commit();
+                return $this->redirect(['index']);
+            }else{
+                 $transaction->rollBack();
+                    Yii::$app->session->setFlash('error','Error al eliminar la denominacion');
+                    return $this->redirect(['index']);
+            }
+        } catch (Exception $e) {
+            $transaction->rollBack();
+        }
+        }
+        $model->delete();
+         return $this->redirect(['modificacion']);
+  
     }
 
     /**

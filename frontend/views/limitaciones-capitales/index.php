@@ -21,11 +21,12 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+       // 'filterModel' => $searchModel,
+        'summary'=>'',
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+            //['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+            //'id',
             'afecta:boolean',
             'fecha_cierre',
             'capital_social',
@@ -58,7 +59,7 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'capital_legal_actual',
             // 'total_capital',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn', 'template'=>'{update}{delete}'],
         ],
     ]); ?>
 

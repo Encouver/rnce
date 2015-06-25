@@ -4,6 +4,7 @@ namespace frontend\controllers;
 
 use Yii;
 use common\models\p\Domicilios;
+use common\models\a\ActivosDocumentosRegistrados;
 use app\models\DomiciliosSearch;
 use common\models\p\Direcciones;
 use yii\web\Controller;
@@ -35,9 +36,16 @@ class DomiciliosController extends Controller
     {
         $searchModelFiscal = new DomiciliosSearch();
         $searchModelFiscal->fiscal = true;
+          $documento= ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'tipo_documento_id'=>1]);
+        if(isset($documento)){
+            $searchModelFiscal->documento_registrado_id= $documento->id;
+        }
         $dataProviderFiscal = $searchModelFiscal->search(Yii::$app->request->queryParams);
         $searchModelPrincipal = new DomiciliosSearch();
         $searchModelPrincipal->fiscal = false;
+         if(isset($documento)){
+            $searchModelPrincipal->documento_registrado_id= $documento->id;
+        }
         $dataProviderPrincipal = $searchModelPrincipal->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -47,6 +55,34 @@ class DomiciliosController extends Controller
             'dataProviderPrincipal' => $dataProviderPrincipal,
         ]);
     }
+     public function actionModificacion()
+    {
+        $searchModelFiscal = new DomiciliosSearch();
+        $searchModelFiscal->fiscal = true;
+        $documento=$searchModelFiscal->Modificacionactual();
+        if(isset($documento)){
+            $searchModelFiscal->documento_registrado_id= $documento->documento_registrado_id;
+          
+        }
+      
+        $dataProviderFiscal = $searchModelFiscal->search(Yii::$app->request->queryParams);
+        $searchModelPrincipal = new DomiciliosSearch();
+        $searchModelPrincipal->fiscal = false;
+         if(isset($documento)){
+            $searchModelPrincipal->documento_registrado_id= $documento->documento_registrado_id;
+          
+        }
+        $dataProviderPrincipal = $searchModelPrincipal->search(Yii::$app->request->queryParams);
+
+        return $this->render('modificacion', [
+            'searchModelFiscal' => $searchModelFiscal,
+            'dataProviderFiscal' => $dataProviderFiscal,
+            'searchModelPrincipal' => $searchModelPrincipal,
+            'dataProviderPrincipal' => $dataProviderPrincipal,
+            'documento'=>$documento
+        ]);
+    }
+
 
     /**
      * Displays a single Domicilios model.
@@ -98,7 +134,9 @@ class DomiciliosController extends Controller
 
 
                                $transaction->commit();
-                                $flag = true;
+                               if($model->documentoRegistrado->tipo_documento_id==2){
+                                   return $this->redirect(['modificacion']);
+                               }
                                 return $this->redirect(['index']);
                               
 
@@ -155,6 +193,9 @@ class DomiciliosController extends Controller
         }
         if ($model->load(Yii::$app->request->post()) && $direccion->load(Yii::$app->request->post())) {
             if($direccion->save()){
+                 if($model->documentoRegistrado->tipo_documento_id==2){        
+                    return $this->redirect(['modificacion']);
+                }
                   return $this->redirect(['index']);
             }else{
                 Yii::$app->session->setFlash('error', 'Error en la carga de la direccion');
@@ -182,7 +223,12 @@ class DomiciliosController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+       if($model->documentoRegistrado->tipo_documento_id==2){
+            $model->delete();          
+             return $this->redirect(['modificacion']);
+        }
+         $model->delete();                    
 
         return $this->redirect(['index']);
     }

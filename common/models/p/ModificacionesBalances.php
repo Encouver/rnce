@@ -65,7 +65,7 @@ class ModificacionesBalances extends \common\components\BaseActiveRecord
             'sys_actualizado_el' => Yii::t('app', 'Sys Actualizado El'),
             'sys_finalizado_el' => Yii::t('app', 'Sys Finalizado El'),
             'contratista_id' => Yii::t('app', 'Contratista ID'),
-            'documento_registrado_id' => Yii::t('app', 'Documento Registrado ID'),
+            'documento_registrado_id' => Yii::t('app', 'Documento Registrado'),
         ];
     }
 

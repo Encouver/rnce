@@ -47,8 +47,8 @@ class ContratistasContactos extends \common\components\BaseActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'contacto_id' => Yii::t('app', 'Contacto ID'),
-            'contratista_id' => Yii::t('app', 'Contratista ID'),
+            'contacto_id' => Yii::t('app', 'Contacto'),
+            'contratista_id' => Yii::t('app', 'Contratista'),
             'sys_status' => Yii::t('app', 'Sys Status'),
             'sys_creado_el' => Yii::t('app', 'Sys Creado El'),
             'sys_actualizado_el' => Yii::t('app', 'Sys Actualizado El'),

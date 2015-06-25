@@ -91,6 +91,70 @@ $urlJuridica = Url::to(['personas-juridicas/create']);
     </div>
 
     <?php ActiveForm::end(); ?>
+    
+    <?php
+
+$script = <<< JS
+$( document ).ready(function() {
+  
+    
+    $('.field-personasnaturales-sys_pais_id').css('display','none');
+    $('.field-personasnaturales-rif').css('display','none');
+    $('.field-personasnaturales-numero_identificacion').css('display','none');
+        
+    $('#personasnaturales-nacionalidad').click(function(e){
+                if($('#personasnaturales-nacionalidad').val()=='NACIONAL') {
+                     $('.field-personasnaturales-rif').css('display','inherit');
+                     $('.field-personasnaturales-sys_pais_id').css('display','none');
+                     $('.field-personasnaturales-numero_identificacion').css('display','none');
+                     $('#personasnaturales-sys_pais_id').val('');
+                     $('#personasnaturales-numero_identificacion').val('');
+                  
+                }else{
+                        if($('#personasnaturales-nacionalidad').val()=='EXTRANJERA'){
+                        $('.field-personasnaturales-rif').css('display','none');
+                        $('.field-personasnaturales-sys_pais_id').css('display','inherit');
+                        $('.field-personasnaturales-numero_identificacion').css('display','inherit');
+                        $('#personasnaturales-rif').val('');
+            
+                        }
+                     
+                       }
+                
+       
+        });
+        
+         
+    $('.field-personasjuridicas-sys_pais_id').css('display','none');
+    $('.field-personasjuridicas-rif').css('display','none');
+    $('.field-personasjuridicas-numero_identificacion').css('display','none');
+        
+    $('#personasjuridicas-tipo_nacionalidad').click(function(e){
+                if($('#personasjuridicas-tipo_nacionalidad').val()=='NACIONAL') {
+                     $('.field-personasjuridicas-rif').css('display','inherit');
+                     $('.field-personasjuridicas-sys_pais_id').css('display','none');
+                     $('.field-personasjuridicas-numero_identificacion').css('display','none');
+                     $('#personasjuridicas-sys_pais_id').val('');
+                     $('#personasjuridicas-numero_identificacion').val('');
+                  
+                }else{
+                        if($('#personasjuridicas-tipo_nacionalidad').val()=='EXTRANJERA'){
+                        $('.field-personasjuridicas-rif').css('display','none');
+                        $('.field-personasjuridicas-sys_pais_id').css('display','inherit');
+                        $('.field-personasjuridicas-numero_identificacion').css('display','inherit');
+                        $('#personasjuridicas-rif').val('');
+            
+                        }
+                     
+                       }
+                
+       
+        });
+      
+});
+JS;
+$this->registerJs($script);
+?>
 
 
 </div>

@@ -54,10 +54,24 @@ class ActivosDocumentosRegistradosController extends BaseController
     public function actionIndex()
     {
         $searchModel = new ActivosDocumentosRegistradosSearch();
+        $searchModel->tipo_documento_id=1;
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $model= new ActivosDocumentosRegistrados();
         $model->scenario='actas';
         return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'model'=>$model
+        ]);
+    }
+    public function actionModificacion()
+    {
+        $searchModel = new ActivosDocumentosRegistradosSearch();
+        $searchModel->tipo_documento_id=2;
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $model= new ActivosDocumentosRegistrados();
+        $model->scenario='actas';
+        return $this->render('modificacion', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
             'model'=>$model

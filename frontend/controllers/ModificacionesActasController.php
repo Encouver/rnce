@@ -307,7 +307,8 @@ class ModificacionesActasController extends BaseController
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+      $model= $this->findModel($id);
+      $documento= ActivosDocumentosRegistrados::findOne($model->documento_registrado_id)->delete();
 
         return $this->redirect(['index']);
     }

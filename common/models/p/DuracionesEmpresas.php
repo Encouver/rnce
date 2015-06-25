@@ -54,7 +54,7 @@ class DuracionesEmpresas extends \common\components\BaseActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'contratista_id' => Yii::t('app', 'Contratista ID'),
-            'documento_registrado_id' => Yii::t('app', 'Documento Registrado ID'),
+            'documento_registrado_id' => Yii::t('app', 'Documento Registrado'),
             'duracion_anos' => Yii::t('app', 'Duracion'),
             'creado_por' => Yii::t('app', 'Creado Por'),
             'actualizado_por' => Yii::t('app', 'Actualizado Por'),
@@ -87,6 +87,17 @@ class DuracionesEmpresas extends \common\components\BaseActiveRecord
     public function getContratista()
     {
         return $this->hasOne(Contratistas::className(), ['id' => 'contratista_id']);
+    }
+        public function Modificacionactual(){
+       
+       $registro = ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'tipo_documento_id'=>2,'proceso_finalizado'=>false]);      
+       
+       if(isset($registro)){
+         $modificacion= ModificacionesActas::findOne(['documento_registrado_id'=>$registro->id]);  
+       }else{
+           $modificacion= ModificacionesActas::findOne(['documento_registrado_id'=>-100]); 
+       }
+       return $modificacion;
     }
      
      public function Existeregistro(){

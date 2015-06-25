@@ -58,7 +58,7 @@ class PrincipiosContables extends \common\components\BaseActiveRecord
             'id' => Yii::t('app', 'ID'),
             'principio_contable' => Yii::t('app', 'Principio Contable'),
             'codigo_sudeaseg' => Yii::t('app', 'Codigo Sudeaseg'),
-            'contratista_id' => Yii::t('app', 'Contratista ID'),
+            'contratista_id' => Yii::t('app', 'Contratista'),
             'sys_status' => Yii::t('app', 'Sys Status'),
             'sys_creado_el' => Yii::t('app', 'Sys Creado El'),
             'sys_actualizado_el' => Yii::t('app', 'Sys Actualizado El'),

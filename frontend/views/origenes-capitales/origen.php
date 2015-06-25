@@ -209,7 +209,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php } }?>
     
     <?php
-    if(isset($documento) && ($documento->pago_capital || $documento->aumento_capital)){
+    if(isset($documento) && ($documento->aumento_capital)){
     echo Html::tag('hr');
        echo Html::tag('h3','Decreto de diviendo en acciones');
        echo GridView::widget([

@@ -245,6 +245,7 @@ class ActasConstitutivasController extends BaseController
      public function actionResumenacta()
     {
          $registro = ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'tipo_documento_id'=>1]);
+         $acta = ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'tipo_documento_id'=>1,'proceso_finalizado'=>false]);
          $contratista = Contratistas::findOne(['id'=>Yii::$app->user->identity->contratista_id]);
          $natural_juridica = SysNaturalesJuridicas::findOne(['id'=>$contratista->natural_juridica_id]);
          $msgDocumentoRegistrado= "Debe Crear un Documento Registrado";
@@ -369,7 +370,7 @@ class ActasConstitutivasController extends BaseController
              if(isset($capital_suscrito)){
               $msgCapital=null;
             }
-            if(isset($fondo_reserva) && isset($comisario) && isset($accionista)  && isset($junta_directiva)  && isset($representante_legal) && is_null($msgCapital) && isset($domicilio_principal) && isset($domicilio_fiscal) && isset($capital_suscrito) && isset($actividad_economica) && isset($razon_social) && isset($natural_juridica) && isset($registro) && isset($denominacion_comercial) && isset($duracion_empresa) && isset($cierre_ejercicio) && isset($objeto_social)){
+            if(isset($acta) && isset($fondo_reserva) && isset($comisario) && isset($accionista)  && isset($junta_directiva)  && isset($representante_legal) && is_null($msgCapital) && isset($domicilio_principal) && isset($domicilio_fiscal) && isset($capital_suscrito) && isset($actividad_economica) && isset($razon_social) && isset($natural_juridica) && isset($registro) && isset($denominacion_comercial) && isset($duracion_empresa) && isset($cierre_ejercicio) && isset($objeto_social)){
                 $boton=true;
             }
              

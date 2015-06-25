@@ -53,7 +53,7 @@ class ObjetosEmpresas extends \common\components\BaseActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'contratista' => Yii::t('app', 'Contratista'),
-            'contratista_id' => Yii::t('app', 'Contratista ID'),
+            'contratista_id' => Yii::t('app', 'Contratista'),
             'creado_por' => Yii::t('app', 'Creado Por'),
             'actualizado_por' => Yii::t('app', 'Actualizado Por'),
             'sys_status' => Yii::t('app', 'Sys Status'),

@@ -115,9 +115,9 @@ class AccionistasOtros extends \common\components\BaseActiveRecord
     }
      public function Validarcargo($attribute)
     {
-         
-        if (AccionistasOtros::find()->where(['documento_registrado_id' => $this->documento_registrado_id, 'tipo_cargo'=>$this->tipo_cargo])->exists() && $this->junta_directiva && AccionistasOtros::findOne(['documento_registrado_id' => $this->documento_registrado_id, 'tipo_cargo'=>$this->tipo_cargo])->id!=$this->id) {
-            $this->addError($attribute,'Ya existe este cargo asignado' );
+         $accionista=AccionistasOtros::findOne(['documento_registrado_id' => $this->documento_registrado_id, 'tipo_cargo'=>$this->tipo_cargo,'junta_directiva'=>true]);
+        if (isset($accionista) && $accionista->id!=$this->id && !$this->accionista) {
+                $this->addError($attribute,'Ya existe este cargo asignado' );
         }else{
             if($this->naturalJuridica->juridica){
             $this->addError($attribute,'Las empresas no pueden ser parte de la junta directiva' );

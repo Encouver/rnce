@@ -55,7 +55,7 @@ class ContratosFacturas extends \common\components\BaseActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'relacion_contrato_id' => Yii::t('app', 'Relacion Contrato ID'),
+            'relacion_contrato_id' => Yii::t('app', 'Relacion Contrato'),
             'orden_factura' => Yii::t('app', 'Orden Factura'),
             'monto' => Yii::t('app', 'Monto'),
             'creado_por' => Yii::t('app', 'Creado Por'),

@@ -98,7 +98,7 @@ class OrigenesCapitales extends \common\components\BaseActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'bien_id' => Yii::t('app', 'Bien ID'),
-            'banco_contratista_id' => Yii::t('app', 'Banco Contratista ID'),
+            'banco_contratista_id' => Yii::t('app', 'Banco Contratista'),
             'monto' => Yii::t('app', 'Monto'),
             'fecha' => Yii::t('app', 'Fecha'),
             'saldo_cierre_anterior' => Yii::t('app', 'Saldo Cierre Anterior'),
@@ -111,7 +111,7 @@ class OrigenesCapitales extends \common\components\BaseActiveRecord
             'saldo_cierre_ajustado' => Yii::t('app', 'Saldo Cierre Ajustado'),
             'fecha_aumento' => Yii::t('app', 'Fecha Aumento'),
             'contratista_id' => Yii::t('app', 'Contratista ID'),
-            'documento_registrado_id' => Yii::t('app', 'Documento Registrado ID'),
+            'documento_registrado_id' => Yii::t('app', 'Documento Registrado'),
             'creado_por' => Yii::t('app', 'Creado Por'),
             'actualizado_por' => Yii::t('app', 'Actualizado Por'),
             'sys_status' => Yii::t('app', 'Sys Status'),

@@ -19,11 +19,15 @@ use common\models\p\ModificacionesActas;
 use common\models\a\ActivosDocumentosRegistrados;
 
 $documentos = null;
+$acta = null;
+$modificaciones = null;
 if(!Yii::$app->user->isGuest)
+$acta = ActivosDocumentosRegistrados::find()->where('contratista_id = :contratista and tipo_documento_id = :tipo_documento_id and  proceso_finalizado = :proceso_finalizado', ['contratista'=>Yii::$app->user->identity->contratista_id, 'tipo_documento_id'=>1, 'proceso_finalizado' => true])->one();
+if($acta){
 $documentos = ActivosDocumentosRegistrados::find()->where('contratista_id = :contratista and tipo_documento_id = :tipo_documento_id and  proceso_finalizado = :proceso_finalizado', ['contratista'=>Yii::$app->user->identity->contratista_id, 'tipo_documento_id'=>2, 'proceso_finalizado' => false])->one();
 if($documentos)
     $modificaciones = ModificacionesActas::find()->where('contratista_id = :contratista and documento_registrado_id = :documento_registrado_id', ['contratista'=>Yii::$app->user->identity->contratista_id, 'documento_registrado_id'=> $documentos->id])->one();
-
+}
 /* @var $this \yii\web\View */
 /* @var $content string */
 
@@ -134,50 +138,52 @@ AppAsset::register($this);
                 ],
                  ['label' => 'Acta Constitutiva',
                     'items' => [
-                         ['label' => 'Registro documento acta', 'url' => ['/activos-documentos-registrados/index']],
-                        ['label' => 'Razon Social', 'url' => ['/razones-sociales/index']],
-                        ['label' => 'Direcciones', 'url' => ['/domicilios/index']],
-                         ['label' => 'Denominaciones Comerciales', 'url' => ['/denominaciones-comerciales/index']],
-                        ['label' => 'Objeto Social', 'url' => ['/objetos-sociales/index']],
-                        ['label' => 'Cierre ejercicio Econonomico', 'url' => ['/cierres-ejercicios/index']],
-                        ['label' => 'Duracion empresa', 'url' => ['/duraciones-empresas/index']],
-                        ['label' => 'Actividades Economicas', 'url' => ['/actividades-economicas/index']],
-                        ['label' => 'Capital', 'url' => ['/actas-constitutivas/crearcapitalsuscrito']],
-                        ['label' => 'Origen Capital', 'url' => ['/origenes-capitales/index']],
-                       
-                        ['label' => 'Accionistas Representante Legal o Junta Directiva', 'url' => ['/accionistas-otros/index']],
-                        ['label' => 'Comisarios', 'url' => ['/comisarios-auditores/index']],
-                        ['label' => 'Fondos Reservas', 'url' => ['/fondos-reservas/index']],
-                        ['label' => 'Sucursales', 'url' => ['/sucursales/index']],
-                        ['label' => 'Resumen', 'url' => ['/actas-constitutivas/resumenacta']],
+                        ['label' => 'Resumen Acta Constitutiva', 'url' => ['/actas-constitutivas/resumenacta']],
+                        ['label' => '1. Registro Documento', 'url' => ['/activos-documentos-registrados/index']],
+                        ['label' => '2. Razon Social', 'url' => ['/razones-sociales/index']],
+                        ['label' => '3. Objeto Social', 'url' => ['/objetos-sociales/index']],
+                        ['label' => '4. Cierre ejercicio Econonomico', 'url' => ['/cierres-ejercicios/index']],
+                        ['label' => '5. Duracion empresa', 'url' => ['/duraciones-empresas/index']],
+                        ['label' => '6. Actividades Economicas', 'url' => ['/actividades-economicas/index']],
+                        ['label' => '7. Direcciones', 'url' => ['/domicilios/index']],
+                        ['label' => '8. Denominaciones Comerciales', 'url' => ['/denominaciones-comerciales/index']],
+                        ['label' => '9. Capital', 'url' => ['/actas-constitutivas/crearcapitalsuscrito']],
+                        ['label' => '10. Origen Capital', 'url' => ['/origenes-capitales/index']],
+                        ['label' => '11. Accionistas Representante Legal o Junta Directiva', 'url' => ['/accionistas-otros/index']],
+                        ['label' => '12. Comisarios', 'url' => ['/comisarios-auditores/index']],
+                        ['label' => '13. Fondos Reservas', 'url' => ['/fondos-reservas/index']],
+                        ['label' => '14. Sucursales', 'url' => ['/sucursales/index']],
                     ],
                 ],
             ];
 
-            if($documentos)
+            if($acta)
             {
              $menuItems[] = ['label' => 'Modificacion acta',
                     'items' => [
-                        ['label' => 'Registro documento modificado', 'url' => ['/activos-documentos-registrados/index']],
-                        ['label' => 'Modificaciones', 'url' => ['/modificaciones-actas/index']],
-                        ['label' => 'Cambio Objeto Social', 'url' => ['objetos-sociales/index'], 'visible' => ($modificaciones) ? $modificaciones->razon_social : false],
-                        ['label' => 'Cambio Domicilio', 'url' => ['domicilios/index']],
-                        ['label' => 'Cambio Cierre Ejercicio Econonomico', 'url' => ['/cierres-ejercicios/index']],
-                        ['label' => 'Duracion empresa', 'url' => ['/duraciones-empresas/index']],
-                        ['label' => 'Pago Capital', 'url' => ['/actas-constitutivas/crearpagocapital']],
-                        ['label' => 'Aumento Capital', 'url' => ['/actas-constitutivas/crearaumentocapital']],
-                        ['label' => 'Disminucion Capital', 'url' => ['/actas-constitutivas/creardisminucion']],
-                        ['label' => 'Aporte por Capitalizar', 'url' => ['/aportes-capitalizar/index']],
-                        ['label' => 'Venta de Acciones', 'url' => ['/actas-constitutivas/crearventa']],
-                        ['label' => 'Correcion Monetaria', 'url' => ['/correcciones-monetarias/index']],
-                        ['label' => 'Limitacion de Capital', 'url' => ['/limitaciones-capitales/index']],
-                        ['label' => 'Fondo de Emergencia', 'url' => ['/fondos-emergencias/index']],
-                        ['label' => 'Decreto de Dividendos en Efectivo ', 'url' => ['/decretos-div-excedentes/index']],
-                        ['label' => 'Discusión y Aprobación o Modificación de Balances', 'url' => ['/modificaciones-balances/index']],
-                        ['label' => 'Nombramiento del Representante Legal', 'url' => ['/accionistas-otros/representante']],
-                        ['label' => 'Actualizacion de Junta Directiva', 'url' => ['/accionistas-otros/junta']],
-                        ['label' => 'Designacion del comisario', 'url' => ['/comisarios-auditores/comisario']],
-                        ['label' => 'Origen Capital', 'url' => ['/origenes-capitales/origen']],
+                        ['label' => 'Registro documento modificado', 'url' => ['/activos-documentos-registrados/modificacion']],
+                        ['label' => 'Modificaciones', 'url' => ['/modificaciones-actas/index'], 'visible' => ($documentos) ? true : false],
+                        ['label' => 'Cambio Nombre o Razon Social', 'url' => ['razones-sociales/modificacion'], 'visible' => ($modificaciones) ? $modificaciones->razon_social : false],
+                        ['label' => 'Cambio Objeto Social', 'url' => ['objetos-sociales/modificacion'], 'visible' => ($modificaciones) ? $modificaciones->objeto_social : false],
+                        ['label' => 'Cambio Domicilio', 'url' => ['domicilios/modificacion'], 'visible' => ($modificaciones) ? $modificaciones->domicilio_fiscal : false],
+                        ['label' => 'Cambio de Denominacion Comercial', 'url' => ['/denominaciones-comerciales/modificacion'], 'visible' => ($modificaciones) ? $modificaciones->denominacion_comercial : false],
+                        ['label' => 'Cambio Cierre Ejercicio Econonomico', 'url' => ['/cierres-ejercicios/modificacion'], 'visible' => ($modificaciones) ? $modificaciones->cierre_ejercicio: false],
+                        ['label' => 'Duracion empresa', 'url' => ['/duraciones-empresas/modificacion'], 'visible' => ($modificaciones) ? $modificaciones->duracion_empresa : false],
+                        ['label' => 'Pago Capital', 'url' => ['/actas-constitutivas/crearpagocapital'], 'visible' => ($modificaciones) ? $modificaciones->pago_capital : false],
+                        ['label' => 'Aumento Capital', 'url' => ['/actas-constitutivas/crearaumentocapital'], 'visible' => ($modificaciones) ? $modificaciones->aumento_capital : false],
+                        ['label' => 'Disminucion Capital', 'url' => ['/actas-constitutivas/creardisminucion'], 'visible' => ($modificaciones) ? $modificaciones->disminucion_capital : false],
+                        ['label' => 'Aporte por Capitalizar', 'url' => ['/aportes-capitalizar/index'], 'visible' => ($modificaciones) ? $modificaciones->aporte_capitalizar : false],
+                        ['label' => 'Venta de Acciones', 'url' => ['/actas-constitutivas/crearventa'], 'visible' => ($modificaciones) ? $modificaciones->venta_accion : false],
+                        ['label' => 'Correcion Monetaria', 'url' => ['/correcciones-monetarias/index'], 'visible' => ($modificaciones) ? $modificaciones->coreccion_monetaria : false],
+                        ['label' => 'Limitacion de Capital', 'url' => ['/limitaciones-capitales/index'], 'visible' => ($modificaciones) ? $modificaciones->limitacion_capital || $modificaciones->limitacion_capital_afectado: false],
+                        ['label' => 'Reintegro de Perdidas', 'url' => ['/limitaciones-capitales/index'], 'visible' => ($modificaciones) ? $modificaciones->reintegro_perdida : false],
+                        ['label' => 'Fondo de Emergencia', 'url' => ['/fondos-emergencias/index'], 'visible' => ($modificaciones) ? $modificaciones->fondo_emergencia : false],
+                        ['label' => 'Decreto de Dividendos en Efectivo ', 'url' => ['/decretos-div-excedentes/index'], 'visible' => ($modificaciones) ? $modificaciones->decreto_div_excedente : false],
+                        ['label' => 'Discusión y Aprobación o Modificación de Balances', 'url' => ['/modificaciones-balances/index'], 'visible' => ($modificaciones) ? $modificaciones->modificacion_balance : false],
+                        ['label' => 'Nombramiento del Representante Legal', 'url' => ['/accionistas-otros/representante'], 'visible' => ($modificaciones) ? $modificaciones->representante_legal : false],
+                        ['label' => 'Actualizacion de Junta Directiva', 'url' => ['/accionistas-otros/junta'], 'visible' => ($modificaciones) ? $modificaciones->junta_directiva : false],
+                        ['label' => 'Designacion del comisario', 'url' => ['/comisarios-auditores/comisario'], 'visible' => ($modificaciones) ? $modificaciones->comisario : false],
+                        ['label' => 'Origen Capital', 'url' => ['/origenes-capitales/origen'], 'visible' => ($modificaciones) ? $modificaciones->aumento_capital || $modificaciones->pago_capital || $modificaciones->aporte_capitalizar: false],
                     ],
                 ];
                 

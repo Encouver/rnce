@@ -56,8 +56,8 @@ class ObjetosSociales extends \common\components\BaseActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'contratista_id' => Yii::t('app', 'Contratista ID'),
-            'documento_registrado_id' => Yii::t('app', 'Documento Registrado ID'),
+            'contratista_id' => Yii::t('app', 'Contratista'),
+            'documento_registrado_id' => Yii::t('app', 'Documento Registrado'),
             'tipo_objeto' => Yii::t('app', 'Tipo Objeto'),
             'descripcion' => Yii::t('app', 'Objeto Social'),
             'sys_status' => Yii::t('app', 'Sys Status'),
@@ -108,6 +108,17 @@ class ObjetosSociales extends \common\components\BaseActiveRecord
     ];
     }
        
+    }
+     public function Modificacionactual(){
+       
+       $registro = ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'tipo_documento_id'=>2,'proceso_finalizado'=>false]);      
+       
+       if(isset($registro)){
+         $modificacion= ModificacionesActas::findOne(['documento_registrado_id'=>$registro->id]);  
+       }else{
+           $modificacion= ModificacionesActas::findOne(['documento_registrado_id'=>-100]); 
+       }
+       return $modificacion;
     }
     
     public function Existeregistro(){

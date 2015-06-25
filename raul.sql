@@ -835,8 +835,106 @@ DROP TABLE sys_subdenominaciones_comerciales;
 DROP TABLE sys_denominaciones_comerciales;
 
 
+-----21 junio--
+DROP TABLE aumentos_capitales;
+TRUNCATE actas_constitutivas cascade;
+TRUNCATE cierres_ejercicios cascade;
+TRUNCATE suplementarios_disminuidos;
+TRUNCATE suplementarios;
+TRUNCATE acciones;
+TRUNCATE acciones_disminuidas;
+TRUNCATE aportes_capitalizar;
+TRUNCATE comisarios_auditores cascade;
+TRUNCATE decretos_div_excedentes cascade;
+TRUNCATE direcciones cascade;
+TRUNCATE duraciones_empresas cascade;
+TRUNCATE fondos_emergencias;
+TRUNCATE fondos_reservas;
+TRUNCATE modificaciones_actas cascade;
+TRUNCATE modificaciones_balances;
+TRUNCATE objetos_empresas;
+TRUNCATE objetos_sociales cascade;
+TRUNCATE origenes_capitales;
+TRUNCATE pagos_accionistas_decretos;
+TRUNCATE domicilios cascade;
+
+ALTER TABLE domicilios
+  ADD CONSTRAINT domicilios_direcciones_id_fkey FOREIGN KEY (direccion_id)
+      REFERENCES direcciones (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION;
 
 
 
+ALTER TABLE limitaciones_capitales ADD COLUMN total_accion_comun integer;
+COMMENT ON COLUMN limitaciones_capitales.total_accion IS 'total accion comunes';
+
+
+
+ALTER TABLE limitaciones_capitales DROP CONSTRAINT limitaciones_capitales_documento_registrado_id_fkey;
+
+ALTER TABLE limitaciones_capitales
+  ADD CONSTRAINT limitaciones_capitales_documento_registrado_id_fkey FOREIGN KEY (documento_registrado_id)
+      REFERENCES activos.documentos_registrados (id) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+ALTER TABLE correcciones_monetarias DROP CONSTRAINT correcciones_monetarias_documento_registrado_id_fkey;
+
+ALTER TABLE correcciones_monetarias
+  ADD CONSTRAINT correcciones_monetarias_documento_registrado_id_fkey FOREIGN KEY (documento_registrado_id)
+      REFERENCES activos.documentos_registrados (id) MATCH SIMPLE
+       ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+ALTER TABLE modificaciones_balances DROP CONSTRAINT modificaciones_balances_documento_registrado_id_fkey;
+
+ALTER TABLE modificaciones_balances
+  ADD CONSTRAINT modificaciones_balances_documento_registrado_id_fkey FOREIGN KEY (documento_registrado_id)
+      REFERENCES activos.documentos_registrados (id) MATCH SIMPLE
+       ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+ALTER TABLE pagos_accionistas_decretos DROP CONSTRAINT rpagos_accionistas_decretos_documento_registrado_id_fkey;
+
+ALTER TABLE pagos_accionistas_decretos
+  ADD CONSTRAINT rpagos_accionistas_decretos_documento_registrado_id_fkey FOREIGN KEY (documento_registrado_id)
+      REFERENCES activos.documentos_registrados (id) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE CASCADE;
+
+ALTER TABLE suplementarios_disminuidos DROP CONSTRAINT suplementarios_disminuidos_documento_registrado_id_fkey;
+
+ALTER TABLE suplementarios_disminuidos
+  ADD CONSTRAINT suplementarios_disminuidos_documento_registrado_id_fkey FOREIGN KEY (documento_registrado_id)
+      REFERENCES activos.documentos_registrados (id) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE CASCADE;
+
+ALTER TABLE fondos_emergencias DROP CONSTRAINT fondos_emergencias_documento_registrado_id_fkey;
+
+ALTER TABLE fondos_emergencias
+  ADD CONSTRAINT fondos_emergencias_documento_registrado_id_fkey FOREIGN KEY (documento_registrado_id)
+      REFERENCES activos.documentos_registrados (id) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+ALTER TABLE decretos_div_excedentes DROP CONSTRAINT decretos_div_excedentes_documento_registrado_id_fkey;
+
+ALTER TABLE decretos_div_excedentes
+  ADD CONSTRAINT decretos_div_excedentes_documento_registrado_id_fkey FOREIGN KEY (documento_registrado_id)
+      REFERENCES activos.documentos_registrados (id) MATCH SIMPLE
+     ON UPDATE CASCADE ON DELETE CASCADE;
+
+ ALTER TABLE acciones_disminuidas DROP CONSTRAINT acciones_disminuidas_documento_registrado_id_fkey;
+
+ALTER TABLE acciones_disminuidas
+  ADD CONSTRAINT acciones_disminuidas_documento_registrado_id_fkey FOREIGN KEY (documento_registrado_id)
+      REFERENCES activos.documentos_registrados (id) MATCH SIMPLE
+     ON UPDATE CASCADE ON DELETE CASCADE;
+
+ALTER TABLE razones_sociales DROP CONSTRAINT razones_sociales_documento_registrado_id_fkey;
+
+ALTER TABLE razones_sociales
+  ADD CONSTRAINT razones_sociales_documento_registrado_id_fkey FOREIGN KEY (documento_registrado_id)
+      REFERENCES activos.documentos_registrados (id) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE CASCADE;
 
 

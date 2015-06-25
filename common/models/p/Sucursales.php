@@ -52,8 +52,8 @@ class Sucursales extends \common\components\BaseActiveRecord
     public function attributeLabels()
     {
         return [
-            'direccion_id' => Yii::t('app', 'Direccion ID'),
-            'contratista_id' => Yii::t('app', 'Contratista ID'),
+            'direccion_id' => Yii::t('app', 'Direccion'),
+            'contratista_id' => Yii::t('app', 'Contratista'),
             'id' => Yii::t('app', 'ID'),
             'creado_por' => Yii::t('app', 'Creado Por'),
             'actualizado_por' => Yii::t('app', 'Actualizado Por'),
@@ -61,7 +61,7 @@ class Sucursales extends \common\components\BaseActiveRecord
             'sys_creado_el' => Yii::t('app', 'Sys Creado El'),
             'sys_actualizado_el' => Yii::t('app', 'Sys Actualizado El'),
             'sys_finalizado_el' => Yii::t('app', 'Sys Finalizado El'),
-            'natural_juridica_id' => Yii::t('app', 'Natural Juridica ID'),
+            'natural_juridica_id' => Yii::t('app', 'Natural Juridica'),
             'documento_registrado_id' => Yii::t('app', 'Documento Refistrado'),
         ];
     }

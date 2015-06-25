@@ -60,10 +60,10 @@ class ActividadesEconomicas extends \common\components\BaseActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'ppal_caev_id' => Yii::t('app', 'Ppal Caev ID'),
-            'comp1_caev_id' => Yii::t('app', 'Comp1 Caev ID'),
-            'comp2_caev_id' => Yii::t('app', 'Comp2 Caev ID'),
-            'contratista_id' => Yii::t('app', 'Contratista ID'),
+            'ppal_caev_id' => Yii::t('app', 'Actividad Economica Principal'),
+            'comp1_caev_id' => Yii::t('app', 'Actividad Economica Complementaria 1'),
+            'comp2_caev_id' => Yii::t('app', 'Actividad Economica Complementaria 2'),
+            'contratista_id' => Yii::t('app', 'Contratista'),
             'sys_status' => Yii::t('app', 'Sys Status'),
             'sys_creado_el' => Yii::t('app', 'Sys Creado El'),
             'sys_actualizado_el' => Yii::t('app', 'Sys Actualizado El'),
@@ -71,7 +71,7 @@ class ActividadesEconomicas extends \common\components\BaseActiveRecord
             'ppal_experiencia' => Yii::t('app', 'Experiencia principal'),
             'comp1_experiencia' => Yii::t('app', 'Experiencia complementaria 1'),
             'comp2_experiencia' => Yii::t('app', 'Experiencia complementaria 2'),
-            'documento_registrado_id' => Yii::t('app', 'Documento Registrado ID'),
+            'documento_registrado_id' => Yii::t('app', 'Documento Registrado'),
         ];
     }
 

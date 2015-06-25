@@ -73,7 +73,7 @@ class ModificacionesActas extends \common\components\BaseActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'contratista_id' => Yii::t('app', 'Contratista ID'),
-            'documento_registrado_id' => Yii::t('app', 'Documento Registrado ID'),
+            'documento_registrado_id' => Yii::t('app', 'Documento Registrado'),
             'pago_capital' => Yii::t('app', 'Pago Capital'),
             'aporte_capitalizar' => Yii::t('app', 'Aporte Capitalizar'),
             'aumento_capital' => Yii::t('app', 'Aumento Capital'),

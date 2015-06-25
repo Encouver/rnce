@@ -36,8 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?php if($model->objeto_social){?><th>Objeto Social</th> <?php } ?>
                 <?php if($model->duracion_empresa){?><th>Duracion Empresa</th> <?php } ?>
                 <?php if($model->cierre_ejercicio){?><th>Cierre Ejercicio</th> <?php } ?>
-                <?php if($model->domicilio_fiscal){?><th>Domicilio Fiscal</th> <?php } ?>
-                <?php if($model->domicilio_principal){?><th>Domicilio Principal</th> <?php } ?>
+                <?php if($model->domicilio_fiscal){?><th>Domicilio</th> <?php } ?>
                 <?php if($model->representante_legal){?><th>Representante Legal</th> <?php } ?>
                 <?php if($model->junta_directiva){?><th>Junta Directiva</th> <?php } ?>
                 <?php if($model->comisario){?><th>Comisario</th> <?php } ?>
@@ -67,11 +66,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?php if($model->duracion_empresa){?><td>Sí</td><?php } ?>
                 <?php if($model->cierre_ejercicio){?><td>Sí</td> <?php } ?>
                 <?php if($model->domicilio_fiscal){?><td>Sí</td><?php } ?>
-                <?php if($model->domicilio_principal){?><td>Sí</td><?php } ?>
                 <?php if($model->representante_legal){?><td>Sí</td> <?php } ?>
                 <?php if($model->junta_directiva){?><td>Sí</td><?php } ?>
                 <?php if($model->comisario){?><td>Sí</td><?php } ?>
-                <td><?= Html::a('<span class="glyphicon glyphicon-pencil"></span>', ['update', 'id' => $model->id], ['class' => 'profile-link']) ?>
+                <td>
                      <?= Html::a('<span class="glyphicon glyphicon-trash"></span>', ['delete', 'id' => $model->id], [
                     'class' =>'profile-link',
                     'data' => [

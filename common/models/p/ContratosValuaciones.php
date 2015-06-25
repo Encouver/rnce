@@ -55,7 +55,7 @@ class ContratosValuaciones extends \common\components\BaseActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'relacion_contrato_id' => Yii::t('app', 'Relacion Contrato ID'),
+            'relacion_contrato_id' => Yii::t('app', 'Relacion Contrato'),
             'orden_valuacion' => Yii::t('app', 'Orden Valuacion'),
             'monto' => Yii::t('app', 'Monto'),
             'creado_por' => Yii::t('app', 'Creado Por'),

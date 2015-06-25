@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
    <?php
-    if(isset($documento)){
+    if(isset($documento) && $documento->aumento_capital){
     echo Html::tag('h1','Aumento de Capital');
     echo GridView::widget([
         'dataProvider' => $dataProvider,

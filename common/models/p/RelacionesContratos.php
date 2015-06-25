@@ -66,7 +66,7 @@ class RelacionesContratos extends \common\components\BaseActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'contratista_id' => Yii::t('app', 'Contratista ID'),
+            'contratista_id' => Yii::t('app', 'Contratista'),
             'tipo_sector' => Yii::t('app', 'Tipo Sector'),
             'tipo_contrato' => Yii::t('app', 'Tipo Contrato'),
             'nombre_proyecto' => Yii::t('app', 'Nombre Proyecto'),
@@ -80,7 +80,7 @@ class RelacionesContratos extends \common\components\BaseActiveRecord
             'sys_creado_el' => Yii::t('app', 'Sys Creado El'),
             'sys_actualizado_el' => Yii::t('app', 'Sys Actualizado El'),
             'sys_finalizado_el' => Yii::t('app', 'Sys Finalizado El'),
-            'natural_juridica_id' => Yii::t('app', 'Natural Juridica ID'),
+            'natural_juridica_id' => Yii::t('app', 'Natural Juridica'),
         ];
     }
 
