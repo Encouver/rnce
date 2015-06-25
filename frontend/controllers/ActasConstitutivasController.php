@@ -492,6 +492,71 @@ class ActasConstitutivasController extends BaseController
          }
         
     }
+      public function actionResumenmodificacion()
+    {
+         $registro = ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'tipo_documento_id'=>2]);
+        
+         $boton= false;
+         
+         if(isset($registro)){
+             
+         $modificacion= \common\models\p\ModificacionesActas::findOne(['documento_registrado_id'=>$registro->id]);
+         $denominacion_comercial = DenominacionesComerciales::findOne(['documento_registrado_id'=>$registro->id]);
+         $duracion_empresa = DuracionesEmpresas::findOne(['documento_registrado_id'=>$registro->id]);
+          
+         $cierre_ejercicio= CierresEjercicios::findOne(['documento_registrado_id'=>$registro->id]);
+         
+         $objeto_social= ObjetosSociales::findOne(['documento_registrado_id'=>$registro->id]);
+          
+         
+         $domicilio_fiscal= Domicilios::findOne(['documento_registrado_id'=>$registro->id, 'fiscal'=>true]);
+          
+         $domicilio_principal= Domicilios::findOne(['documento_registrado_id'=>$registro->id, 'fiscal'=>false]);
+         
+         $razon_social= RazonesSociales::findOne(['documento_registrado_id'=>$registro->id]);
+       
+       
+          $junta_directiva= AccionistasOtros::findOne(['documento_registrado_id'=>$registro->id,'junta_directiva'=>true]);
+         if(isset($junta_directiva)){
+          
+           $junta_directiva= AccionistasOtros::findAll(['documento_registrado_id'=>$registro->id,'junta_directiva'=>true]);
+         }
+         $representante_legal= AccionistasOtros::findOne(['documento_registrado_id'=>$registro->id,'rep_legal'=>true]);
+        
+         $comisario= ComisariosAuditores::findOne(['documento_registrado_id'=>$registro->id]);
+        
+      
+         
+           
+            if(isset($modificacion) &&isset($comisario) && isset($junta_directiva)  && isset($representante_legal) && is_null($msgCapital) && isset($domicilio_principal) && isset($domicilio_fiscal) && isset($razon_social) && isset($registro) && isset($denominacion_comercial) && isset($duracion_empresa) && isset($cierre_ejercicio) && isset($objeto_social)){
+                $boton=true;
+            }
+           
+          return $this->render('resumenmodificacion', [
+              
+                'registro'=>$registro,
+                'duracion_empresa'=>$duracion_empresa,
+                'denominacion_comercial'=>$denominacion_comercial,
+                'cierre_ejercicio'=>$cierre_ejercicio,
+                'objeto_social'=>$objeto_social,
+                'razon_social'=>$razon_social,
+                'domicilio_fiscal'=>$domicilio_fiscal,
+                'domicilio_principal'=>$domicilio_principal,
+                'representante_legal'=>$representante_legal,
+                'junta_directiva'=>$junta_directiva,
+                'comisario'=>$comisario,
+
+               'modificacion'=>$modificacion,
+                'boton'=>$boton,
+            ]);
+         }else{
+              return $this->render('resumenmodificacion', [
+                'registro'=>$registro,
+                'boton'=>$boton,
+            ]);
+         }
+        
+    }
     /**
      * Updates an existing ActasConstitutivas model.
      * If update is successful, the browser will be redirected to the 'view' page.

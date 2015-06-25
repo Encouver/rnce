@@ -58,6 +58,7 @@ class ObjetosSocialesController extends Controller
         return $this->render('modificacion', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'documento'=>$documento
           
         ]);
     }

@@ -161,6 +161,7 @@ AppAsset::register($this);
             {
              $menuItems[] = ['label' => 'Modificacion acta',
                     'items' => [
+                         ['label' => 'Resumen Modificacion', 'url' => ['/actas-constitutivas/resumenmodificacion']],
                         ['label' => 'Registro documento modificado', 'url' => ['/activos-documentos-registrados/modificacion']],
                         ['label' => 'Modificaciones', 'url' => ['/modificaciones-actas/index'], 'visible' => ($documentos) ? true : false],
                         ['label' => 'Cambio Nombre o Razon Social', 'url' => ['razones-sociales/modificacion'], 'visible' => ($modificaciones) ? $modificaciones->razon_social : false],
