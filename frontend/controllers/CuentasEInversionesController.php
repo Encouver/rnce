@@ -3,6 +3,7 @@
 namespace frontend\controllers;
 
 use common\models\c\CuentasEInversionesInfoAdicional;
+use common\models\c\CuentasETiposMovimientos;
 use Yii;
 use common\models\c\CuentasEInversiones;
 use app\models\CuentasEInversionesSearch;
@@ -65,11 +66,21 @@ class CuentasEInversionesController extends BaseController
 
         $modelInfoAdicional = new CuentasEInversionesInfoAdicional();
 
+        $modelTipoMovimientoAdquisicion = new CuentasETiposMovimientos();
+        $modelTipoMovimientoAdquisicion->movimiento_id = 58;
+
+        $modelTipoMovimientoAdicion = new CuentasETiposMovimientos();
+        $modelTipoMovimientoAdicion->movimiento_id = 59;
+
+        $modelTipoMovimientoRetiro = new CuentasETiposMovimientos();
+        $modelTipoMovimientoRetiro->movimiento_id = 60;
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
-                'model' => $model, 'modelInfoAdicional'=>$modelInfoAdicional
+                'model' => $model, 'modelInfoAdicional'=>$modelInfoAdicional, 'modelTipoMovimientoAdquisicion'=>$modelTipoMovimientoAdquisicion, 'modelTipoMovimientoAdicion'=>$modelTipoMovimientoAdicion,
+                 'modelTipoMovimientoRetiro'=>$modelTipoMovimientoRetiro,
             ]);
         }
     }

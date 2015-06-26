@@ -1464,3 +1464,96 @@ COMMENT ON COLUMN cuentas.dd2_islr_diferido.sys_finalizado_el IS 'Fecha de "elim
 
 ALTER TABLE cuentas.dd3_otros_tributos
 ADD UNIQUE (concepto_id, contratista_id, anho);
+
+
+
+
+
+
+/**************     23/06/2015 *************/
+
+ALTER TABLE cuentas.e_tipos_movimientos
+ADD FOREIGN KEY (motivo_retiro_id) REFERENCES cuentas.sys_conceptos (id) ON UPDATE NO ACTION ON DELETE NO ACTION;
+
+
+
+
+/**************     25/06/2015 *************/
+
+-- Table: cuentas.e_tipos_movimientos
+
+DROP TABLE cuentas.e_tipos_movimientos;
+
+CREATE TABLE cuentas.e_tipos_movimientos
+(
+  id serial NOT NULL, -- Clave primaria
+  e_inversion_id integer NOT NULL, -- Clave foránea a la tabla e_inversiones
+  movimiento_id integer NOT NULL, -- Clave foránea a la tabla sys_conceptos.
+  motivo_retiro_id integer, -- Clave foránea a la tabla sys_conceptos.
+  fecha date NOT NULL, -- Fecha del tipo de movimiento.
+  monto_nominal numeric(38,6) NOT NULL, -- Monto Nominal de Adquisición, Adición o Retiro
+  monto_nominal_ajustado numeric(38,6) NOT NULL, -- Monto Nominal de Adquisición, Adición o Retiro (ajustado)
+  precio_adquisicion numeric(38,6) NOT NULL, -- Precio de Adquisición.
+  gan_per numeric(38,6) NOT NULL, -- Ganacia o perdida.
+  gan_per_ajustada numeric(38,6) NOT NULL, -- Ganancia o perdida (ajustada).
+  creado_por integer, -- Clave foranea al usuario
+  actualizado_por integer, -- Clave foranea al usuario
+  sys_status boolean NOT NULL DEFAULT true, -- Estatus interno del sistema
+  sys_creado_el timestamp with time zone DEFAULT now(), -- Fecha de creación del registro.
+  sys_actualizado_el timestamp with time zone DEFAULT now(), -- Fecha de última actualización del registro.
+  sys_finalizado_el timestamp with time zone, -- Fecha de "eliminado" el registro.
+  CONSTRAINT e_tipos_movimientos_pkey PRIMARY KEY (id),
+  CONSTRAINT e_tipos_movimientos_e_inversion_id_fkey FOREIGN KEY (e_inversion_id)
+  REFERENCES cuentas.e_inversiones (id) MATCH SIMPLE
+  ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT e_tipos_movimientos_motivo_retiro_id_fkey FOREIGN KEY (motivo_retiro_id)
+  REFERENCES cuentas.sys_conceptos (id) MATCH SIMPLE
+  ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT e_tipos_movimientos_movimiento_id_fkey FOREIGN KEY (movimiento_id)
+  REFERENCES cuentas.sys_conceptos (id) MATCH SIMPLE
+  ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT e_tipos_movimientos_e_inversion_id_movimiento_id_key UNIQUE (e_inversion_id, movimiento_id)
+)
+WITH (
+OIDS=FALSE
+);
+ALTER TABLE cuentas.e_tipos_movimientos
+OWNER TO eureka;
+COMMENT ON TABLE cuentas.e_tipos_movimientos
+IS 'Tabla relación para los tipos de movimiento de una inversión';
+COMMENT ON COLUMN cuentas.e_tipos_movimientos.id IS 'Clave primaria';
+COMMENT ON COLUMN cuentas.e_tipos_movimientos.e_inversion_id IS 'Clave foránea a la tabla e_inversiones';
+COMMENT ON COLUMN cuentas.e_tipos_movimientos.movimiento_id IS 'Clave foránea a la tabla sys_conceptos.';
+COMMENT ON COLUMN cuentas.e_tipos_movimientos.motivo_retiro_id IS 'Clave foránea a la tabla sys_conceptos.';
+COMMENT ON COLUMN cuentas.e_tipos_movimientos.fecha IS 'Fecha del tipo de movimiento.';
+COMMENT ON COLUMN cuentas.e_tipos_movimientos.monto_nominal IS 'Monto Nominal de Adquisición, Adición o Retiro';
+COMMENT ON COLUMN cuentas.e_tipos_movimientos.monto_nominal_ajustado IS 'Monto Nominal de Adquisición, Adición o Retiro (ajustado)';
+COMMENT ON COLUMN cuentas.e_tipos_movimientos.creado_por IS 'Clave foranea al usuario';
+COMMENT ON COLUMN cuentas.e_tipos_movimientos.actualizado_por IS 'Clave foranea al usuario';
+COMMENT ON COLUMN cuentas.e_tipos_movimientos.sys_status IS 'Estatus interno del sistema';
+COMMENT ON COLUMN cuentas.e_tipos_movimientos.sys_creado_el IS 'Fecha de creación del registro.';
+COMMENT ON COLUMN cuentas.e_tipos_movimientos.sys_actualizado_el IS 'Fecha de última actualización del registro.';
+COMMENT ON COLUMN cuentas.e_tipos_movimientos.sys_finalizado_el IS 'Fecha de "eliminado" el registro.';
+COMMENT ON COLUMN cuentas.e_tipos_movimientos.precio_adquisicion IS 'Precio de Adquisición.';
+COMMENT ON COLUMN cuentas.e_tipos_movimientos.gan_per IS 'Ganacia o perdida.';
+COMMENT ON COLUMN cuentas.e_tipos_movimientos.gan_per_ajustada IS 'Ganancia o perdida (ajustada).';
+
+
+
+ALTER TABLE cuentas.e_tipos_movimientos
+ALTER COLUMN precio_adquisicion DROP NOT NULL;
+ALTER TABLE cuentas.e_tipos_movimientos
+ALTER COLUMN gan_per DROP NOT NULL;
+ALTER TABLE cuentas.e_tipos_movimientos
+ALTER COLUMN gan_per_ajustada DROP NOT NULL;
+COMMENT ON COLUMN cuentas.e_tipos_movimientos.precio_adquisicion IS 'Precio de Adquisición.';
+COMMENT ON COLUMN cuentas.e_tipos_movimientos.gan_per IS 'Ganacia o perdida.';
+COMMENT ON COLUMN cuentas.e_tipos_movimientos.gan_per_ajustada IS 'Ganancia o perdida (ajustada).';
+
+
+ALTER TABLE cuentas.e_inversiones_info_adicional
+DROP COLUMN precio_adquisicion;
+ALTER TABLE cuentas.e_inversiones_info_adicional
+DROP COLUMN gan_per;
+ALTER TABLE cuentas.e_inversiones_info_adicional
+DROP COLUMN gan_per_ajustada;

@@ -37,6 +37,10 @@ use yii\helpers\ArrayHelper;
  */
 class CuentasEInversiones extends \common\components\BaseActiveRecord
 {
+    public $adquisicion;
+    public $adicion;
+    public $retiro;
+
     /**
      * @inheritdoc
      */
@@ -136,6 +140,9 @@ class CuentasEInversiones extends \common\components\BaseActiveRecord
                 ],]],
             'nombre_instrumento'=>['type'=>Form::INPUT_TEXT,],
             'numero_acc_bon'=>['type'=>Form::INPUT_TEXT],//['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),'options'=>['pluginOptions'=>['prefix'=>'','precision'=>'0'],]],
+            'adquisicion'=>['type'=>Form::INPUT_CHECKBOX,],
+            'adicion'=>['type'=>Form::INPUT_CHECKBOX,],
+            'retiro'=>['type'=>Form::INPUT_CHECKBOX,],
             /*
             'motivo_retiro'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>['VENTA'=>'VENTA','CESION'=>'CESION','DETERIORO'=>'DETERIORO'],'options'=>['multiple'=>false,'onchange'=>'']]],
             'fecha_motivo'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>DatePicker::className(), 'options'=>['options' => ['placeholder' => 'Seleccione fecha ...'],
@@ -152,4 +159,5 @@ class CuentasEInversiones extends \common\components\BaseActiveRecord
 
         ];
     }
+
 }

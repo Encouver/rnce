@@ -14,9 +14,6 @@ use yii\helpers\ArrayHelper;
  * This is the model class for table "cuentas.e_inversiones_info_adicional".
  *
  * @property integer $id
- * @property string $precio_adquisicion
- * @property string $gan_per
- * @property string $gan_per_ajustada
  * @property boolean $prima_descuento
  * @property string $monto_prima_des
  * @property integer $plazo
@@ -60,8 +57,8 @@ class CuentasEInversionesInfoAdicional extends \common\components\BaseActiveReco
     public function rules()
     {
         return [
-            [['precio_adquisicion', 'gan_per', 'gan_per_ajustada', 'prima_descuento', 'cotiza_bolsa_valores', 'gtia_oblig_bancaria', 'sys_metodo_id', 'deterioro'], 'required'],
-            [['precio_adquisicion', 'gan_per', 'gan_per_ajustada', 'monto_prima_des', 'tasa', 'valor_razonable', 'costos_disposicion', 'valor_uso', 'valor_mercado', 'deterioro_acumulado', 'varia_efecto_infla', 'resultado_det_cam_val', 'sdo_cierre_ejer_econ', 'intereses_gen_ejer_econ'], 'number'],
+            [[ 'prima_descuento', 'cotiza_bolsa_valores', 'gtia_oblig_bancaria', 'sys_metodo_id', 'deterioro'], 'required'],
+            [['monto_prima_des', 'tasa', 'valor_razonable', 'costos_disposicion', 'valor_uso', 'valor_mercado', 'deterioro_acumulado', 'varia_efecto_infla', 'resultado_det_cam_val', 'sdo_cierre_ejer_econ', 'intereses_gen_ejer_econ'], 'number'],
             [['prima_descuento', 'cotiza_bolsa_valores', 'gtia_oblig_bancaria', 'deterioro', 'sys_status'], 'boolean'],
             [['plazo', 'sys_metodo_id', 'creado_por', 'actualizado_por'], 'integer'],
             [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe']
@@ -75,9 +72,6 @@ class CuentasEInversionesInfoAdicional extends \common\components\BaseActiveReco
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'precio_adquisicion' => Yii::t('app', 'Precio Adquisicion'),
-            'gan_per' => Yii::t('app', 'Gan Per'),
-            'gan_per_ajustada' => Yii::t('app', 'Ganancia o Perdida Ajustada'),
             'prima_descuento' => Yii::t('app', 'Prima Descuento'),
             'monto_prima_des' => Yii::t('app', 'Monto Prima Descuento'),
             'plazo' => Yii::t('app', 'Plazo'),
@@ -128,8 +122,6 @@ class CuentasEInversionesInfoAdicional extends \common\components\BaseActiveReco
                 'type'=>Form::INPUT_HIDDEN,
                 'columnOptions'=>['hidden'=>true]
             ],
-            //Solo para retiroS
-            'precio_adquisicion'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),'options'=>['pluginOptions'=>['prefix'=>'','precision'=>'0'],]],
 
             //Si tiene prima descuento
             'prima_descuento'=>['type'=>Form::INPUT_CHECKBOX,],
