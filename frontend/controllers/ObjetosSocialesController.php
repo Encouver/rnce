@@ -36,7 +36,7 @@ class ObjetosSocialesController extends Controller
         $searchModel = new ObjetosSocialesSearch();
          $documento= ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'tipo_documento_id'=>1]);
         if(isset($documento)){
-            $searchModelFiscal->documento_registrado_id= $documento->id;
+            $searchModel->documento_registrado_id= $documento->id;
         }
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $model = new ObjetosSociales();
