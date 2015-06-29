@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use kartik\markdown\MarkdownEditor;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\p\NotasRevelatorias */
@@ -13,7 +14,10 @@ use yii\widgets\ActiveForm;
     <?php $form = ActiveForm::begin();?>
 
 
-    <?= $form->field($model, 'nota')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'nota')->widget(
+    MarkdownEditor::classname(), 
+    ['height' => 300, 'encodeLabels' => false]
+    ); ?>
 <?php
 /*
     <?= $form->field($model, 'contratista_id')->textInput() ?>
@@ -21,7 +25,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'usuario_id')->textInput() ?>
 */?>
 
-    <?= $form->field($model, 'estado')->checkbox() ?>
+    <?= $form->field($model, 'nombre')->textInput() ?>
 <?php
 /*
     <?= $form->field($model, 'creado_por')->textInput() ?>

@@ -415,5 +415,24 @@ ALTER TABLE cuentas.sys_conceptos ADD COLUMN tipo character varying(255);
 COMMENT ON COLUMN cuentas.sys_conceptos.tipo IS 'Clasificacion de mayor nivel a los items de las cuentas.';
 
 
+----------------29/06/2015------------
+
+ALTER TABLE notas_revelatorias
+   ADD COLUMN estado character varying(255) NOT NULL;
+COMMENT ON COLUMN notas_revelatorias.estado
+  IS 'Nombre de la nota revelatoria';
+ 
+ALTER TABLE notas_revelatorias RENAME estado  TO nombre;
+
+
+ALTER TABLE notas_revelatorias
+   ADD COLUMN anho character varying(100) NOT NULL;
+COMMENT ON COLUMN notas_revelatorias.anho
+  IS 'Año en el que crea la nota revelatoria';
+  
+ALTER TABLE notas_revelatorias
+  ADD UNIQUE (contratista_id, anho, nombre);
+
+  
 
 

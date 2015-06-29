@@ -19,8 +19,8 @@ class NotasRevelatoriasSearch extends NotasRevelatorias
     {
         return [
             [['id', 'contratista_id', 'usuario_id', 'creado_por', 'actualizado_por'], 'integer'],
-            [['nota', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
-            [['estado', 'sys_status'], 'boolean'],
+            [['nota', 'nombre', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el', 'anho'], 'safe'],
+            [['sys_status'], 'boolean'],
         ];
     }
 
@@ -60,7 +60,7 @@ class NotasRevelatoriasSearch extends NotasRevelatorias
             'id' => $this->id,
             'contratista_id' => $this->contratista_id,
             'usuario_id' => $this->usuario_id,
-            'estado' => $this->estado,
+            'nombre' => $this->nombre,
             'creado_por' => $this->creado_por,
             'actualizado_por' => $this->actualizado_por,
             'sys_status' => $this->sys_status,

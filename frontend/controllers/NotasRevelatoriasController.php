@@ -61,7 +61,7 @@ class NotasRevelatoriasController extends BaseController
     public function actionCreate()
     {
         $model = new NotasRevelatorias();
-        
+        //$model->anho = date("Y");
         $model->usuario_id = Yii::$app->user->identity->id;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -82,7 +82,7 @@ class NotasRevelatoriasController extends BaseController
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
+         //$model->anho = date("Y");
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {

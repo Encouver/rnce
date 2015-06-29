@@ -19,11 +19,11 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'nota') ?>
 
-    <?= $form->field($model, 'contratista_id') ?>
+   
 
     <?= $form->field($model, 'usuario_id') ?>
 
-    <?= $form->field($model, 'estado')->checkbox() ?>
+    <?= $form->field($model, 'nombre')->checkbox() ?>
 
     <?php // echo $form->field($model, 'creado_por') ?>
 

@@ -27,9 +27,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'nota:ntext',
-            'contratista_id',
+            //'contratista_id',
             'usuario_id',
-            'estado:boolean',
+            'nombre',
             // 'creado_por',
             // 'actualizado_por',
             // 'sys_status:boolean',

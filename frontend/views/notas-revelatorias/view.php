@@ -30,15 +30,9 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'nota:ntext',
-            'contratista_id',
+            //'contratista_id',
             'usuario_id',
-            'estado:boolean',
-            'creado_por',
-            'actualizado_por',
-            'sys_status:boolean',
-            'sys_creado_el',
-            'sys_actualizado_el',
-            'sys_finalizado_el',
+            'nombre',
         ],
     ]) ?>
 

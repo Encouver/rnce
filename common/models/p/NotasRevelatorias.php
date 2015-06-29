@@ -38,11 +38,11 @@ class NotasRevelatorias extends \common\components\BaseActiveRecord
     public function rules()
     {
         return [
-            [['nota', 'contratista_id', 'usuario_id'], 'required'],
-            [['nota'], 'string'],
+            [['nota', 'contratista_id', 'usuario_id', 'nombre'], 'required'],
+            [['nota', 'nombre'], 'string'],
             [['contratista_id', 'usuario_id', 'creado_por', 'actualizado_por'], 'integer'],
-            [['estado', 'sys_status'], 'boolean'],
-            [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe']
+            [['sys_status'], 'boolean'],
+            [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el', 'anho'], 'safe']
         ];
     }
 
@@ -56,7 +56,7 @@ class NotasRevelatorias extends \common\components\BaseActiveRecord
             'nota' => Yii::t('app', 'Nota'),
             'contratista_id' => Yii::t('app', 'Contratista ID'),
             'usuario_id' => Yii::t('app', 'Usuario ID'),
-            'estado' => Yii::t('app', '¿Activa?'),
+            'nombre' => Yii::t('app', 'Nombre nota'),
             'creado_por' => Yii::t('app', 'Creado Por'),
             'actualizado_por' => Yii::t('app', 'Actualizado Por'),
             'sys_status' => Yii::t('app', 'Sys Status'),
