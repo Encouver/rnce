@@ -32,7 +32,8 @@ use yii\helpers\Html;
     ]);
 
     ?>
-    <div id="adquisicion-container">
+    <div id="adquisicion-container" hidden="true">
+        <h3>Adquisición</h3>
     <?php
         echo Form::widget([       // 3 column layout
             'model'=>$modelTipoMovimientoAdquisicion,
@@ -43,7 +44,8 @@ use yii\helpers\Html;
         ]);
     ?>
     </div>
-    <div id="adicion-container">
+    <div id="adicion-container" hidden="true">
+        <h3>Adición</h3>
     <?php
         echo Form::widget([       // 3 column layout
             'model'=>$modelTipoMovimientoAdicion,
@@ -54,7 +56,8 @@ use yii\helpers\Html;
         ]);
     ?>
     </div>
-    <div id="retiro-container">
+    <div id="retiro-container" hidden="true">
+        <h3>Retiro</h3>
     <?php
         echo Form::widget([       // 3 column layout
             'model'=>$modelTipoMovimientoRetiro,
@@ -72,105 +75,29 @@ use yii\helpers\Html;
     $script = <<< JS
 
 
-    function datosImportados(){
-            //if($('#activosb   ienes-nacional').is(':checked') ){
-            if($('#cuentaseinversiones-adquisicion').val()==1){
-               $('#adquisicion-container').show();
+    function movimiento(tipoMovimiento, container){
+            if($(tipoMovimiento).is(':checked') ){
+            //if($('#cuentaseinversiones-adquisicion').val()==1){
+               $(container).show();
             }//alert($('#activosbienes-nacional').val());
-            //if(!$('#activosbienes-nacional').is(':checked')){
-             if($('#cuentaseinversiones-adquisicion').val()==0){
-                 $('#adquisicion-container').hide();
+            if(!$(tipoMovimiento).is(':checked')){
+             //if($('#cuentaseinversiones-adquisicion').val()==0){
+                 $(container).hide();
              }
+
     }
-     $('#activosbienes-nacional').change(function(e){
+     $('#cuentaseinversiones-adquisicion').change(function(e){
 
-               datosImportados();
+               movimiento('#cuentaseinversiones-adquisicion','#adquisicion-container');
         });
+     $('#cuentaseinversiones-adicion').change(function(e){
 
-     $('#activosbienes-mejora').change(function(e){
-
-                //if($('#activosbienes-mejora').is(':checked') ){
-                if($('#activosbienes-mejora').val()==1){
-                   $('#mejora-container').show();
-                }//alert($('#activosbienes-nacional').val());
-                //if(!$('#activosbienes-mejora').is(':checked')){
-                if($('#activosbienes-mejora').val()==0){
-                    $('#mejora-container').hide();
-                }
+               movimiento('#cuentaseinversiones-adicion','#adicion-container');
         });
+     $('#cuentaseinversiones-retiro').change(function(e){
 
-        $('#activosbienes-propio').change(function(e){
-
-                //if($('#activosbienes-mejora').is(':checked') ){
-                if($('#activosbienes-propio').val()==1){
-                   $('#arrendamiento-container').hide();
-                }//alert($('#activosbienes-nacional').val());
-                //if(!$('#activosbienes-mejora').is(':checked')){
-                if($('#activosbienes-propio').val()==0){
-                   $('#arrendamiento-container').show();
-                }
+               movimiento('#cuentaseinversiones-retiro','#retiro-container');
         });
-
-    $('#activosbienes-proc_productivo').change(function(e){
-
-                    //if($('#activosbienes-proc_productivo').is(':checked')){
-                    if($('#activosbienes-proc_productivo').val()==1){
-                        $('.field-activosbienes-directo').parent().show();
-                        $('.field-activosbienes-proc_ventas').parent().hide();
-                    }
-                    //if(!$('#activosbienes-proc_productivo').is(':checked')){
-                    if($('#activosbienes-proc_productivo').val()==0/*is(':checked')*/){
-                        $('.field-activosbienes-directo').parent().hide();
-                        $('.field-activosbienes-proc_ventas').parent().show();
-                    }
-            });
-        $('#origen').change(function(e){
-                if($('#origen').val()== 1 || $('#origen').val()==4){
-                    $('.field-activosbienes-fecha_origen').parent().show();
-                    $('.field-activosbienes-nacional').parent().hide();
-                    $('#datos-importacion-container').hide();
-
-                }else if ($('#origen').val()==2) {
-                    $('.field-activosbienes-fecha_origen').parent().hide();
-                    $('.field-activosbienes-nacional').parent().show();
-                    datosImportados();
-                }else
-                {
-                    $('.field-activosbienes-fecha_origen').parent().hide();
-                    $('.field-activosbienes-nacional').parent().hide();
-                }
-        });
-
-        $('#activosarrendamientos-tipo_arrendamiento_id').change(function(e){
-                if($('#activosarrendamientos-tipo_arrendamiento_id').val()== 2){
-                    $('.field-activosarrendamientos-valor_bien_arrendado').parent().show();
-                }else
-                {
-                    $('.field-activosarrendamientos-valor_bien_arrendado').parent().hide();
-                }
-        });
-
-
-
-/*
-     $('#activosbienes-factura').change(function(e){
-
-                if($('#activosbienes-factura').is(':checked')){
-                    $('#factura-container').show();
-                }
-                if(!$('#activosbienes-factura').is(':checked')){
-                    $('#factura-container').hide();
-                }
-        });
-     $('#activosbienes-documento').change(function(e){
-
-                if($('#activosbienes-documento').is(':checked')){
-                    $('#documento-container').show();
-                }
-                if(!$('#activosbienes-documento').is(':checked')){
-                    $('#documento-container').hide();
-                }
-        });*/
 
 
 

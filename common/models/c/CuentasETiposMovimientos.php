@@ -117,7 +117,7 @@ class CuentasETiposMovimientos extends \common\components\BaseActiveRecord
 
             //'e_inversion_id' => ['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(CuentasEInversiones::find()->all(),'id',function($model){ return $model->etiqueta();}),'options'=>['onchange'=>'']]],
             //'movimiento_id' => ['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(CuentasSysConceptos::concepto('e.3'),'id','nombre'),'options'=>['onchange'=>'']]],
-            'motivo_retiro_id' => ['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(CuentasSysConceptos::concepto('e.2'),'id','nombre'),'options'=>['onchange'=>'']]],
+            'motivo_retiro_id' => ['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'columnOptions'=>['hidden'=>($this->movimiento_id==60)?false:true],'options'=>['data'=>ArrayHelper::map(CuentasSysConceptos::concepto('e.2'),'id','nombre'),'options'=>['id'=> uniqid(),'onchange'=>'']]],
             'fecha' => ['type'=>Form::INPUT_WIDGET,'widgetClass'=>DatePicker::className(), 'options'=>['options' => ['placeholder' => 'Seleccione fecha ...'],
             'convertFormat' => true,
             'pluginOptions' => [
@@ -125,11 +125,11 @@ class CuentasETiposMovimientos extends \common\components\BaseActiveRecord
                 //'startDate' => date('d-m-Y h:i A'),//'01-Mar-2014 12:00 AM',
                 'todayHighlight' => true
             ]]],
-            'monto_nominal' => ['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),],
+            'monto_nominal' => ['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),'options'=>['options'=>['id'=>'monto_nominal_'.uniqid(),'hidden'=>true]]],
             //'monto_nominal_ajustado' => ['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),],
 
             //Solo para retiroS
-            'precio_adquisicion'=>$this->movimiento_id==60?['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),/*'options'=>['pluginOptions'=>['prefix'=>'','precision'=>'0'],]*/]:[]
+            'precio_adquisicion'=>['type'=>Form::INPUT_WIDGET,'widgetClass'=>MaskMoney::className(),'columnOptions'=>['hidden'=>($this->movimiento_id==60)?false:true],'options'=>[ 'options'=>['id'=>'precio_adquisicion'.uniqid(),],/* 'pluginOptions'=>['prefix'=>'','precision'=>'0'],*/]]
 
 
         ];
