@@ -64,6 +64,7 @@ use yii\web\JsExpression;
  * @property ActivosMejorasPropiedades[] $activosMejorasPropiedades0
  * @property ActivosMuebles $activosMuebles
  * @property OrigenesCapitales[] $origenesCapitales
+ * @property Etiqueta $etiqueta
  */
 class ActivosBienes extends \common\components\BaseActiveRecord
 {

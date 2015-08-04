@@ -49,7 +49,23 @@ class CuentasETiposMovimientos extends \common\components\BaseActiveRecord
     public function rules()
     {
         return [
-            [['e_inversion_id', 'movimiento_id', 'fecha', 'monto_nominal', 'monto_nominal_ajustado'], 'required'],
+            [['e_inversion_id', 'movimiento_id', 'fecha', 'monto_nominal', 'monto_nominal_ajustado'], 'required', 'when'=> function ($model) {
+                if($this->movimiento_id==60 and $model->einversion->retiro)
+                    return true;
+                if($this->movimiento_id==59 and $model->einversion->adicion)
+                    return true;
+                if($this->movimiento_id==58 and $model->einversion->adquisicion)
+                    return true;
+                return false;
+            }, 'whenClient' => "function (attribute, value) {
+                if($('#cuentasetiposmovimientos-movimiento_id').val() == 58 && $('#cuentaseinversiones-adquisicion').is(':checked'))
+                    return true;
+                if($('#cuentasetiposmovimientos-movimiento_id').val() == 59 && $('#cuentaseinversiones-adicion').is(':checked'))
+                    return true;
+                if($('#cuentasetiposmovimientos-movimiento_id').val() == 60 && $('#cuentaseinversiones-retiro').is(':checked'))
+                    return true;
+                return false;
+            }"],
             [['e_inversion_id', 'movimiento_id', 'motivo_retiro_id', 'creado_por', 'actualizado_por'], 'integer'],
             [['fecha', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['monto_nominal', 'monto_nominal_ajustado', 'precio_adquisicion', 'gan_per', 'gan_per_ajustada'], 'number'],
@@ -113,6 +129,10 @@ class CuentasETiposMovimientos extends \common\components\BaseActiveRecord
             'id'=>[ // primary key attribute
                 'type'=>Form::INPUT_HIDDEN,
                 'columnOptions'=>['hidden'=>true]
+            ],
+            'movimiento_id'=>[ // primary key attribute
+                'type'=>Form::INPUT_HIDDEN,
+                'columnOptions'=>['hidden'=>true,'disabled'=>true]
             ],
 
             //'e_inversion_id' => ['type'=>Form::INPUT_WIDGET,'widgetClass'=>Select2::classname(),'options'=>['data'=>ArrayHelper::map(CuentasEInversiones::find()->all(),'id',function($model){ return $model->etiqueta();}),'options'=>['onchange'=>'']]],
