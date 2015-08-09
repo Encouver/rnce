@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\p\Contratistas */
 
-$this->title = Yii::t('app', 'Crear Contratista Persona Natural');
+$this->title = Yii::t('app', 'Contratista Persona Natural');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Contratistas'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -14,8 +14,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <?= $this->render('_persona_natural', [
-        'persona_natural' => $persona_natural,
+    <?= $this->render('_form', [
+        'model' => $persona_natural,
     ]) ?>
 
 </div>

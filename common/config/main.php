@@ -49,7 +49,8 @@ return [
 		//https://github.com/webvimark/user-management
 	    'user-management' => [
 	        'class' => 'webvimark\modules\UserManagement\UserManagementModule',
-            'useEmailAsLogin'=>true,
+            'useEmailAsLogin'=>false,
+            'rolesAfterRegistration'=>['contratista'],
             'emailConfirmationRequired'=>true,
 	        // Here you can set your handler to czhange layout for any controller or action
 	        // Tip: you can use this event in any module
