@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use common\components\BaseController;
 use Yii;
 use common\models\p\CierresEjercicios;
 use common\models\a\ActivosDocumentosRegistrados;

@@ -12,7 +12,7 @@ use kartik\builder\Form;
 /* @var $searchModel app\models\RelacionesContratosSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Relaciones Contratos');
+$this->title = Yii::t('app', 'Relaciones de Contratos');
 $this->params['breadcrumbs'][] = $this->title;
 $urlFactura = Url::to(['contratos-facturas/create']);
 $urlValuacion = Url::to(['contratos-valuaciones/create']);
@@ -52,15 +52,15 @@ $urlValuacion = Url::to(['contratos-valuaciones/create']);
             // 'sys_finalizado_el',
             // 'natural_juridica_id',
 
-            ['class' => 'yii\grid\ActionColumn','template'=>'{update}{delete}'],
+            ['class' => 'yii\grid\ActionColumn','template'=>'{update}'],
         ],
     ]); ?>
       <p>
-        <?= Html::a(Yii::t('app', 'Create Relaciones Contratos'), ['crearrelacioncontrato'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Agregar Relación de Contratos'), ['crearrelacioncontrato'], ['class' => 'btn btn-success']) ?>
     </p>
     <br />
    
-    <h1>Orden de facturas</h1>
+    <h1>Ordenes de Facturas</h1>
     <?php Pjax::begin(['id'=>'factura-grid']);?>
     <?= GridView::widget([
         'dataProvider' => $dataProviderFactura,
@@ -85,7 +85,7 @@ $urlValuacion = Url::to(['contratos-valuaciones/create']);
             // 'sys_actualizado_el',
             // 'sys_finalizado_el',
 
-            ['class' => 'yii\grid\ActionColumn', 'template'=>'{update}{delete}','controller'=>'contratos-facturas'],
+            ['class' => 'yii\grid\ActionColumn', 'template'=>'{update}','controller'=>'contratos-facturas'],
         ],
     ]); ?>
     <?php Pjax::end(); ?>
@@ -111,7 +111,7 @@ $urlValuacion = Url::to(['contratos-valuaciones/create']);
                 <?/*= Html::Button(Yii::t('app', 'Enviar'), ['class' => 'btn btn-success', 'id' => 'enviar-documento']) */?>
             </div>-->
                 <div class="form-group">
-                    <?= Html::submitButton(Yii::t('app', 'Enviar') , ['class' =>'btn btn-success', 'id' => 'enviar-documento' ]) ?>
+                    <?= Html::submitButton(Yii::t('app', 'Guardar') , ['class' =>'btn btn-success', 'id' => 'enviar-documento' ]) ?>
                 </div>
         <?php ActiveForm::end(); ?>
     <?php Pjax::end();?>
@@ -120,7 +120,7 @@ $urlValuacion = Url::to(['contratos-valuaciones/create']);
 <?php Modal::end();?> 
 <br />
    
-    <h1>Orden de Valuaciones</h1>
+    <h1>Ordenes de Valuaciones</h1>
     <?php Pjax::begin(['id'=>'valuacion-grid']);?>
     <?= GridView::widget([
         'dataProvider' => $dataProviderValuacion,
@@ -145,7 +145,7 @@ $urlValuacion = Url::to(['contratos-valuaciones/create']);
             // 'sys_actualizado_el',
             // 'sys_finalizado_el',
 
-            ['class' => 'yii\grid\ActionColumn', 'template'=>'{update}{delete}','controller'=>'contratos-valuaciones'],
+            ['class' => 'yii\grid\ActionColumn', 'template'=>'{update}','controller'=>'contratos-valuaciones'],
         ],
     ]); ?>
     <?php Pjax::end(); ?>

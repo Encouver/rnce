@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
         //'filterModel' => $searchModel,
         'summary'=>"",
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+            //['class' => 'yii\grid\SerialColumn'],
             'objeto_empresa',
             //'id',
             //'contratista:boolean',
@@ -35,11 +35,11 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'sys_actualizado_el',
             // 'sys_finalizado_el',
             //($searchModel->contratista)?['class' => 'yii\grid\ActionColumn', 'template'=>'{delete}']:['class' => 'yii\grid\ActionColumn', 'template'=>'{delete}{update}']
-           ['class' => 'yii\grid\ActionColumn', 'template'=>'{delete}']
+           ['class' => 'yii\grid\ActionColumn', 'template'=>'{update}']
         ],
     ]); ?>
     <p>
-        <?= Html::a(Yii::t('app', 'Crear Objetos'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Añadir Objetos'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
      <br />
      <br />
@@ -49,7 +49,7 @@ $this->params['breadcrumbs'][] = $this->title;
         //'filterModel' => $searchModelAutorizado,
         'summary'=>'',
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+            //['class' => 'yii\grid\SerialColumn'],
 
             //'id',
             'tipo_objeto',
@@ -88,10 +88,10 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'sys_finalizado_el',
             // 'natural_juridica_id',
 
-            ['class' => 'yii\grid\ActionColumn', 'template'=>'{update}{delete}','controller'=>'objetos-autorizaciones'],
+            ['class' => 'yii\grid\ActionColumn', 'template'=>'{update}','controller'=>'objetos-autorizaciones'],
         ],
     ]); ?>
      <p>
-        <?= Html::a(Yii::t('app', 'Crear Objetos Autorizados'), ['objetos-autorizaciones/create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Añadir Objetos Autorizados'), ['objetos-autorizaciones/create'], ['class' => 'btn btn-success']) ?>
     </p>
 </div>

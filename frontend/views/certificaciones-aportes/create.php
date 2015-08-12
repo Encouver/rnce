@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\p\CertificacionesAportes */
 
-$this->title = Yii::t('app', 'Create Certificaciones Aportes');
+$this->title = Yii::t('app', 'Añadir Certificación de Aportes');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Certificaciones Aportes'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

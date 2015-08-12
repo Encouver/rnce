@@ -57,11 +57,12 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'email_confirmed:email',
             // 'contratista_id',
 
-            ['class' => 'yii\grid\ActionColumn', 'template' => '{update}'],
+            //['class' => 'yii\grid\ActionColumn', 'template' => '{update}'],
         ],
     ]); ?>
-  
+  <?php if(Yii::$app->user->identity->contratista_id == null){ ?>
         <?= Html::a(Yii::t('app', 'Registrar como persona natural'), ['creardatonatural'], ['class' => 'btn btn-success']) ?>
         <?= Html::a(Yii::t('app', 'Registrar como persona jurídica'), ['creardatojuridica'], ['class' => 'btn btn-success']) ?>
+    <?php } ?>
 
 </div>

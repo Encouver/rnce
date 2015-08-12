@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use common\components\BaseController;
 use Yii;
 use common\models\p\ContratistasContactos;
 use common\models\p\PersonasNaturales;
@@ -35,7 +36,9 @@ class ContratistasContactosController extends BaseController
     public function actionIndex()
     {
         $searchModel = new ContratistasContactosSearch();
+        $searchModel->contratista_id = Yii::$app->user->identity->contratista_id;
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->sort = false;
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -63,14 +66,14 @@ class ContratistasContactosController extends BaseController
     public function actionCreate()
     {
         $model = new ContratistasContactos();
-         if($model->existeregistro()){
+        if($model->existeregistro()){
             Yii::$app->session->setFlash('error','Contratista ya posee una persona de contacto');
             return $this->redirect(['index']);
-                }
+        }
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-         
-                return $this->redirect(['index']);
-           
+
+            return $this->redirect(['index']);
+
         } else {
             return $this->render('create', [
                 'model' => $model,

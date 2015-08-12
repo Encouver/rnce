@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use common\components\BaseController;
 use Yii;
 use common\models\p\ActividadesEconomicas;
 use common\models\a\ActivosDocumentosRegistrados;
