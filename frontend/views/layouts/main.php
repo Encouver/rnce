@@ -113,7 +113,7 @@ AppAsset::register($this);
                          ['label' => 'Aqui van las cosas', 'url' => ['#']],
                     ],
                 ],*/
-                ['label' => 'Contratistas',
+                ['label' => 'Contratista',
                     'items' => [
                          //['label' => 'Acordeon', 'url' => ['/contratistas/acordeon']],
                          ['label' => 'Datos basicos', 'url' => ['/contratistas/index']],
