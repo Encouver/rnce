@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\PersonasNaturalesSearch */
+/* @var $model app\models\SysBancosSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="personas-naturales-search">
+<div class="sys-bancos-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
@@ -19,17 +19,27 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'nombre') ?>
 
-    <?= $form->field($model, 'apellido') ?>
-
     <?= $form->field($model, 'rif') ?>
 
-    <?= $form->field($model, 'ci') ?>
+    <?= $form->field($model, 'codigo_sudeban') ?>
+
+    <?= $form->field($model, 'codigo_swift') ?>
+
+    <?php // echo $form->field($model, 'sys_pais_id') ?>
+
+    <?php // echo $form->field($model, 'nacional')->checkbox() ?>
+
+    <?php // echo $form->field($model, 'creado_por') ?>
+
+    <?php // echo $form->field($model, 'actualizado_por') ?>
 
     <?php // echo $form->field($model, 'sys_status')->checkbox() ?>
 
-    <?php // echo $form->field($model, 'sys_fecha') ?>
+    <?php // echo $form->field($model, 'sys_creado_el') ?>
 
-    <?php // echo $form->field($model, 'creado_por') ?>
+    <?php // echo $form->field($model, 'sys_actualizado_el') ?>
+
+    <?php // echo $form->field($model, 'sys_finalizado_el') ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>

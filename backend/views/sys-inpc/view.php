@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\SysInpc */
+/* @var $model common\models\p\SysInpc */
 
 $this->title = $model->id;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Sys Inpcs'), 'url' => ['index']];
@@ -32,8 +32,12 @@ $this->params['breadcrumbs'][] = $this->title;
             'mes',
             'indice',
             'anho',
+            'creado_por',
+            'actualizado_por',
             'sys_status:boolean',
-            'sys_fecha',
+            'sys_creado_el',
+            'sys_actualizado_el',
+            'sys_finalizado_el',
         ],
     ]) ?>
 

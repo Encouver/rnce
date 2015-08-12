@@ -4,13 +4,13 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\SysTiposBienes */
+/* @var $model common\models\p\SysBancos */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Sys Tipos Bienes'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Sys Bancos'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="sys-tipos-bienes-view">
+<div class="sys-bancos-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -30,10 +30,17 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'nombre',
+            'rif',
+            'codigo_sudeban',
+            'codigo_swift',
+            'sys_pais_id',
+            'nacional:boolean',
+            'creado_por',
+            'actualizado_por',
             'sys_status:boolean',
-            'sys_fecha',
-            'descripcion',
-            'sys_clasificacion_bien_id',
+            'sys_creado_el',
+            'sys_actualizado_el',
+            'sys_finalizado_el',
         ],
     ]) ?>
 

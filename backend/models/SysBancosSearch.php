@@ -5,12 +5,12 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\p\SysInpc;
+use common\models\p\SysBancos;
 
 /**
- * SysInpcSearch represents the model behind the search form about `common\models\p\SysInpc`.
+ * SysBancosSearch represents the model behind the search form about `common\models\p\SysBancos`.
  */
-class SysInpcSearch extends SysInpc
+class SysBancosSearch extends SysBancos
 {
     /**
      * @inheritdoc
@@ -18,10 +18,9 @@ class SysInpcSearch extends SysInpc
     public function rules()
     {
         return [
-            [['id', 'mes', 'anho', 'creado_por', 'actualizado_por'], 'integer'],
-            [['indice'], 'number'],
-            [['sys_status'], 'boolean'],
-            [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
+            [['id', 'sys_pais_id', 'creado_por', 'actualizado_por'], 'integer'],
+            [['nombre', 'rif', 'codigo_sudeban', 'codigo_swift', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
+            [['nacional', 'sys_status'], 'boolean'],
         ];
     }
 
@@ -43,7 +42,7 @@ class SysInpcSearch extends SysInpc
      */
     public function search($params)
     {
-        $query = SysInpc::find();
+        $query = SysBancos::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -59,9 +58,8 @@ class SysInpcSearch extends SysInpc
 
         $query->andFilterWhere([
             'id' => $this->id,
-            'mes' => $this->mes,
-            'indice' => $this->indice,
-            'anho' => $this->anho,
+            'sys_pais_id' => $this->sys_pais_id,
+            'nacional' => $this->nacional,
             'creado_por' => $this->creado_por,
             'actualizado_por' => $this->actualizado_por,
             'sys_status' => $this->sys_status,
@@ -69,6 +67,11 @@ class SysInpcSearch extends SysInpc
             'sys_actualizado_el' => $this->sys_actualizado_el,
             'sys_finalizado_el' => $this->sys_finalizado_el,
         ]);
+
+        $query->andFilterWhere(['like', 'nombre', $this->nombre])
+            ->andFilterWhere(['like', 'rif', $this->rif])
+            ->andFilterWhere(['like', 'codigo_sudeban', $this->codigo_sudeban])
+            ->andFilterWhere(['like', 'codigo_swift', $this->codigo_swift]);
 
         return $dataProvider;
     }

@@ -23,9 +23,17 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'anho') ?>
 
-    <?= $form->field($model, 'sys_status')->checkbox() ?>
+    <?= $form->field($model, 'creado_por') ?>
 
-    <?php // echo $form->field($model, 'sys_fecha') ?>
+    <?php // echo $form->field($model, 'actualizado_por') ?>
+
+    <?php // echo $form->field($model, 'sys_status')->checkbox() ?>
+
+    <?php // echo $form->field($model, 'sys_creado_el') ?>
+
+    <?php // echo $form->field($model, 'sys_actualizado_el') ?>
+
+    <?php // echo $form->field($model, 'sys_finalizado_el') ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>

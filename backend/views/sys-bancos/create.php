@@ -4,13 +4,13 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model app\models\SysTipoDocumento */
+/* @var $model common\models\p\SysBancos */
 
-$this->title = 'Create Sys Tipo Documento';
-$this->params['breadcrumbs'][] = ['label' => 'Sys Tipo Documentos', 'url' => ['index']];
+$this->title = Yii::t('app', 'Create Sys Bancos');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Sys Bancos'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="sys-tipo-documento-create">
+<div class="sys-bancos-create">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

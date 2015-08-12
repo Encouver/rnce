@@ -4,15 +4,23 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\p\SysPaises */
+/* @var $model common\models\p\SysBancos */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="sys-paises-form">
+<div class="sys-bancos-form">
 
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'nombre')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'rif')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'codigo_sudeban')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'codigo_swift')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'sys_pais_id')->textInput() ?>
 
     <?= $form->field($model, 'sys_status')->checkbox() ?>
 

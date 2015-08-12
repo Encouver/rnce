@@ -5,12 +5,12 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\p\SysInpc;
+use common\models\p\SysPaises;
 
 /**
- * SysInpcSearch represents the model behind the search form about `common\models\p\SysInpc`.
+ * SysPaisesSearch represents the model behind the search form about `common\models\p\SysPaises`.
  */
-class SysInpcSearch extends SysInpc
+class SysPaisesSearch extends SysPaises
 {
     /**
      * @inheritdoc
@@ -18,10 +18,9 @@ class SysInpcSearch extends SysInpc
     public function rules()
     {
         return [
-            [['id', 'mes', 'anho', 'creado_por', 'actualizado_por'], 'integer'],
-            [['indice'], 'number'],
+            [['id', 'creado_por', 'actualizado_por'], 'integer'],
+            [['nombre', 'sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['sys_status'], 'boolean'],
-            [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
         ];
     }
 
@@ -43,7 +42,7 @@ class SysInpcSearch extends SysInpc
      */
     public function search($params)
     {
-        $query = SysInpc::find();
+        $query = SysPaises::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -59,9 +58,6 @@ class SysInpcSearch extends SysInpc
 
         $query->andFilterWhere([
             'id' => $this->id,
-            'mes' => $this->mes,
-            'indice' => $this->indice,
-            'anho' => $this->anho,
             'creado_por' => $this->creado_por,
             'actualizado_por' => $this->actualizado_por,
             'sys_status' => $this->sys_status,
@@ -69,6 +65,8 @@ class SysInpcSearch extends SysInpc
             'sys_actualizado_el' => $this->sys_actualizado_el,
             'sys_finalizado_el' => $this->sys_finalizado_el,
         ]);
+
+        $query->andFilterWhere(['like', 'nombre', $this->nombre]);
 
         return $dataProvider;
     }

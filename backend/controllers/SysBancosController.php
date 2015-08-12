@@ -3,16 +3,16 @@
 namespace backend\controllers;
 
 use Yii;
-use common\models\p\SysInpc;
-use app\models\SysInpcSearch;
+use common\models\p\SysBancos;
+use app\models\SysBancosSearch;
 use common\components\BaseController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * SysInpcController implements the CRUD actions for SysInpc model.
+ * SysBancosController implements the CRUD actions for SysBancos model.
  */
-class SysInpcController extends BaseController
+class SysBancosController extends BaseController
 {
     public function behaviors()
     {
@@ -27,12 +27,12 @@ class SysInpcController extends BaseController
     }
 
     /**
-     * Lists all SysInpc models.
+     * Lists all SysBancos models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new SysInpcSearch();
+        $searchModel = new SysBancosSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -42,7 +42,7 @@ class SysInpcController extends BaseController
     }
 
     /**
-     * Displays a single SysInpc model.
+     * Displays a single SysBancos model.
      * @param integer $id
      * @return mixed
      */
@@ -54,13 +54,13 @@ class SysInpcController extends BaseController
     }
 
     /**
-     * Creates a new SysInpc model.
+     * Creates a new SysBancos model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new SysInpc();
+        $model = new SysBancos();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -72,7 +72,7 @@ class SysInpcController extends BaseController
     }
 
     /**
-     * Updates an existing SysInpc model.
+     * Updates an existing SysBancos model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -91,7 +91,7 @@ class SysInpcController extends BaseController
     }
 
     /**
-     * Deletes an existing SysInpc model.
+     * Deletes an existing SysBancos model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -104,15 +104,15 @@ class SysInpcController extends BaseController
     }
 
     /**
-     * Finds the SysInpc model based on its primary key value.
+     * Finds the SysBancos model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return SysInpc the loaded model
+     * @return SysBancos the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = SysInpc::findOne($id)) !== null) {
+        if (($model = SysBancos::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

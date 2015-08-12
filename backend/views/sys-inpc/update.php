@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\SysInpc */
+/* @var $model common\models\p\SysInpc */
 
 $this->title = Yii::t('app', 'Update {modelClass}: ', [
     'modelClass' => 'Sys Inpc',
