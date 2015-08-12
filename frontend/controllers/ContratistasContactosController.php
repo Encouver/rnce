@@ -14,7 +14,7 @@ use yii\filters\VerbFilter;
 /**
  * ContratistasContactosController implements the CRUD actions for ContratistasContactos model.
  */
-class ContratistasContactosController extends Controller
+class ContratistasContactosController extends BaseController
 {
     public function behaviors()
     {

@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use common\components\BaseController;
 use Yii;
 use common\models\p\BancosContratistas;
 use common\models\p\Model;
@@ -13,7 +14,7 @@ use yii\filters\VerbFilter;
 /**
  * BancosContratistasController implements the CRUD actions for BancosContratistas model.
  */
-class BancosContratistasController extends Controller
+class BancosContratistasController extends BaseController
 {
     public function behaviors()
     {

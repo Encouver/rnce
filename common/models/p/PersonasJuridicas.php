@@ -44,7 +44,7 @@ class PersonasJuridicas extends \common\components\BaseActiveRecord
     public function rules()
     {
         return [
-            [['razon_social','tipo_nacionalidad','tipo_sector'], 'required'],
+            [['razon_social','tipo_sector'], 'required'],
             [['creado_por'], 'integer'],
             [['sys_status'], 'boolean'],
             [['anho','sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
@@ -137,28 +137,28 @@ class PersonasJuridicas extends \common\components\BaseActiveRecord
     
     public function getFormAttribs() {
         //$data=[ 'NACIONAL' => 'NACIONAL', 'EXTRANJERA' => 'EXTRANJERA', ];
-    if($this->scenario=="conbasico"){
-         return [
-        //'tipo_nacionalidad'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>$data , 'options'=>['placeholder'=>'Enter username...']],
-        
-        'rif'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Introduzca rif'],'hint'=>'Formato J123456789'],
-        'razon_social'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Introduzca razon social']],
-        'tipo_sector'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>[ 'PUBLICO' => 'PUBLICO', 'PRIVADO' => 'PRIVADO', 'MIXTO' => 'MIXTO' ],'options'=>['prompt'=>'Seleccione tipo']],
-        'sigla'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Introduzca sigla']],
-    ];
-    }else{
-    
-        $nacionalidad=[ 'NACIONAL' => 'NACIONAL', 'EXTRANJERA' => 'EXTRANJERA', ];
-         return [             
-        'tipo_nacionalidad'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>$nacionalidad,'options'=>['prompt'=>'Seleccione Pais']],
-        'sys_pais_id'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>ArrayHelper::map(SysPaises::find()->all(),'id','nombre'),'options'=>['prompt'=>'Seleccione Pais']],
-        'numero_identificacion'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Introduzca numero identificacion']],
-        'tipo_sector'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>[ 'PUBLICO' => 'PUBLICO', 'PRIVADO' => 'PRIVADO', 'MIXTO' => 'MIXTO' ],'options'=>['prompt'=>'Seleccione sector']],
-        'razon_social'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Introduzca razon social']],
-        'rif'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Introduzca rif'],'hint'=>'Formato J123456789'],
-        
-    ];
-    }
+        if($this->scenario=="conbasico"){
+             return [
+            //'tipo_nacionalidad'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>$data , 'options'=>['placeholder'=>'Enter username...']],
+
+            'rif'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Introduzca rif'],'hint'=>'Formato J123456789'],
+            'razon_social'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Introduzca razon social']],
+            'tipo_sector'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>[ 'PUBLICO' => 'PUBLICO', 'PRIVADO' => 'PRIVADO', 'MIXTO' => 'MIXTO' ],'options'=>['prompt'=>'Seleccione tipo']],
+            'sigla'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Introduzca sigla']],
+        ];
+        }else{
+
+            $nacionalidad=[ 'NACIONAL' => 'NACIONAL', 'EXTRANJERA' => 'EXTRANJERA', ];
+             return [
+            'tipo_nacionalidad'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>$nacionalidad,'options'=>['prompt'=>'Seleccione Pais']],
+            'sys_pais_id'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>ArrayHelper::map(SysPaises::find()->all(),'id','nombre'),'options'=>['prompt'=>'Seleccione Pais']],
+            'numero_identificacion'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Introduzca numero identificacion']],
+            'tipo_sector'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>[ 'PUBLICO' => 'PUBLICO', 'PRIVADO' => 'PRIVADO', 'MIXTO' => 'MIXTO' ],'options'=>['prompt'=>'Seleccione sector']],
+            'razon_social'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Introduzca razon social']],
+            'rif'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Introduzca rif'],'hint'=>'Formato J123456789'],
+
+        ];
+        }
        
     }
     public function Etiqueta(){

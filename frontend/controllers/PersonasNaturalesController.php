@@ -15,7 +15,7 @@ use yii\filters\VerbFilter;
 /**
  * PersonasNaturalesController implements the CRUD actions for PersonasNaturales model.
  */
-class PersonasNaturalesController extends Controller
+class PersonasNaturalesController extends BaseController
 {
     public function behaviors()
     {

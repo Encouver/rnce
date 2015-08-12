@@ -17,6 +17,7 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
+    'Username' => 'Nombre de usuario',
     'Authorization' => 'Autorización',
     'Captcha' => 'Captcha',
     'Check your E-mail for further instructions' => 'Revisa tu correo electrónico por instruccionesa adicionales',
@@ -30,7 +31,7 @@ return [
     'E-mail is invalid' => 'Correo electrónico es invalido',
     'Forgot password ?' => 'Olvidaste la contraseña ?',
     'Incorrect username or password.' => 'Nombre de usuario o contraseña incorrecto',
-    'Login' => 'Nombre de usuario',
+    'Login' => 'Iniciar sesión',
     'Login has been taken' => 'Usuario ha sido tomado',
     'Password' => 'Contraseña',
     'Password recovery' => 'Recuperar contraseña',

@@ -16,7 +16,7 @@ use yii\helpers\Json;
 /**
  * DireccionesController implements the CRUD actions for Direcciones model.
  */
-class DireccionesController extends Controller
+class DireccionesController extends BaseController
 {
     public function behaviors()
     {

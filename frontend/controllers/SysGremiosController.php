@@ -12,7 +12,7 @@ use yii\filters\VerbFilter;
 /**
  * SysGremiosController implements the CRUD actions for SysGremios model.
  */
-class SysGremiosController extends Controller
+class SysGremiosController extends BaseController
 {
     public function behaviors()
     {

@@ -18,7 +18,7 @@ use common\models\p\PersonasJuridicas;
 /**
  * RelacionesContratosController implements the CRUD actions for RelacionesContratos model.
  */
-class RelacionesContratosController extends Controller
+class RelacionesContratosController extends BaseController
 {
     public function behaviors()
     {

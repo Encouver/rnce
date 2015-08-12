@@ -13,7 +13,7 @@ use yii\filters\VerbFilter;
 /**
  * CierresEjerciciosController implements the CRUD actions for CierresEjercicios model.
  */
-class CierresEjerciciosController extends Controller
+class CierresEjerciciosController extends BaseController
 {
     public function behaviors()
     {

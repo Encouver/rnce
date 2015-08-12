@@ -61,7 +61,7 @@ class PersonasNaturales extends \common\components\BaseActiveRecord
     public function rules()
     {
         return [
-            [['primer_nombre', 'primer_apellido', 'nacionalidad', 'anho'], 'required'],
+            [['primer_nombre', 'primer_apellido', 'anho'], 'required'],
             [['ci', 'sys_pais_id', 'creado_por', 'actualizado_por'], 'integer'],
             [['nacionalidad', 'estado_civil'], 'string'],
             [['sys_status'], 'boolean'],

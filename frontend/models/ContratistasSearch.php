@@ -43,10 +43,28 @@ class ContratistasSearch extends Contratistas
     public function search($params)
     {
         $query = Contratistas::find();
+        //$query->joinWith(['naturalJuridica']);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
+/*
+        // Important: here is how we set up the sorting
+        // The key is the attribute name on our "TourSearch" instance
+        $dataProvider->sort->attributes['rif'] = [
+            // The tables are the ones our relation are configured to
+            // in my case they are prefixed with "tbl_"
+            'asc' => ['sys_naturales_juridicas.rif' => SORT_ASC],
+            'desc' => ['sys_naturales_juridicas.rif' => SORT_DESC],
+        ];
+
+        $dataProvider->sort->attributes['denominacion'] = [
+            // The tables are the ones our relation are configured to
+            // in my case they are prefixed with "tbl_"
+            'asc' => ['sys_naturales_juridicas.denominacion' => SORT_ASC],
+            'desc' => ['sys_naturales_juridicas.denominacion' => SORT_DESC],
+        ];
+*/
 
         $this->load($params);
 

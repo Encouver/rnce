@@ -13,7 +13,7 @@ use yii\filters\VerbFilter;
 /**
  * ActividadesEconomicasController implements the CRUD actions for ActividadesEconomicas model.
  */
-class ActividadesEconomicasController extends Controller
+class ActividadesEconomicasController extends BaseController
 {
     public function behaviors()
     {

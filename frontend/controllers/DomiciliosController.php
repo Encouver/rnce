@@ -14,7 +14,7 @@ use yii\filters\VerbFilter;
 /**
  * DomiciliosController implements the CRUD actions for Domicilios model.
  */
-class DomiciliosController extends Controller
+class DomiciliosController extends BaseController
 {
     public function behaviors()
     {

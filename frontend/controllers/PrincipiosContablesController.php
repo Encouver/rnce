@@ -12,7 +12,7 @@ use yii\filters\VerbFilter;
 /**
  * PrincipiosContablesController implements the CRUD actions for PrincipiosContables model.
  */
-class PrincipiosContablesController extends Controller
+class PrincipiosContablesController extends BaseController
 {
     public function behaviors()
     {

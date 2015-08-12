@@ -13,7 +13,7 @@ use yii\filters\VerbFilter;
 /**
  * ObjetosSocialesController implements the CRUD actions for ObjetosSociales model.
  */
-class ObjetosSocialesController extends Controller
+class ObjetosSocialesController extends BaseController
 {
     public function behaviors()
     {
