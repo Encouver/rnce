@@ -30,13 +30,13 @@ $persona = empty($model->contacto_id) ? '' : \common\models\p\SysNaturalesJuridi
             'data' => new JsExpression('function(params) { return {q:params.term}; }')
         ],
        'escapeMarkup' => new JsExpression('function (markup) { return markup; }'),
-        'templateResult' => new JsExpression('function(contacto_id) { return contacto_id.text; }'),
+       'templateResult' => new JsExpression('function(contacto_id) { return contacto_id.text; }'),
         'templateSelection' => new JsExpression('function (contacto_id) { return contacto_id.text; }'),
     ],
-]);?>
+    ]);?>
    
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Agregar') : Yii::t('app', 'Actualizar'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Guardar') : Yii::t('app', 'Actualizar'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

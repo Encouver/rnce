@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use common\components\BaseController;
 use Yii;
 use common\models\p\ObjetosSociales;
 use common\models\a\ActivosDocumentosRegistrados;

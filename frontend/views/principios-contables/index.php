@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\PrincipiosContablesSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Principios Contables');
+$this->title = Yii::t('app', 'Principio Contable');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="principios-contables-index">
@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'sys_actualizado_el',
             // 'sys_finalizado_el',
 
-            ['class' => 'yii\grid\ActionColumn','template'=>'{update}{delete}'],
+            ['class' => 'yii\grid\ActionColumn','template'=>'{update}'],
         ],
     ]); ?>
      <?php 

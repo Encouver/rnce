@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $model common\models\p\RelacionesContratos */
 
 $this->title = Yii::t('app', 'Update {modelClass}: ', [
-    'modelClass' => 'Relaciones Contratos',
+    'modelClass' => 'Relacione de Contrato',
 ]) . ' ' . $model->id;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Relaciones Contratos'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];

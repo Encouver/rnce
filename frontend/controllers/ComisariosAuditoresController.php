@@ -35,12 +35,16 @@ class ComisariosAuditoresController extends BaseController
     public function actionIndex()
     {
         $searchModel = new ComisariosAuditoresSearch();
+        $searchModel->contratista_id = Yii::$app->user->identity->contratista_id;
         $documento= ActivosDocumentosRegistrados::findOne(['contratista_id'=>Yii::$app->user->identity->contratista_id,'tipo_documento_id'=>1]);
+
+
         if(isset($documento)){
             $searchModel->documento_registrado_id= $documento->id;
         }
         $searchModel->comisario=true;
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->sort = false;
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -68,7 +72,9 @@ class ComisariosAuditoresController extends BaseController
     {
         $searchModel = new ComisariosAuditoresSearch();
         $searchModel->responsable_contabilidad=true;
+        $searchModel->contratista_id = Yii::$app->user->identity->contratista_id;
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->sort = false;
 
         return $this->render('responsable', [
             'searchModel' => $searchModel,
@@ -78,9 +84,10 @@ class ComisariosAuditoresController extends BaseController
      public function actionAuditor()
     {
         $searchModel = new ComisariosAuditoresSearch();
+        $searchModel->contratista_id = Yii::$app->user->identity->contratista_id;
         $searchModel->auditor=true;
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+        $dataProvider->sort = false;
         return $this->render('auditor', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -89,8 +96,10 @@ class ComisariosAuditoresController extends BaseController
      public function actionProfesional()
     {
         $searchModel = new ComisariosAuditoresSearch();
+        $searchModel->contratista_id = Yii::$app->user->identity->contratista_id;
         $searchModel->informe_conversion=true;
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->sort = false;
 
         return $this->render('profesional', [
             'searchModel' => $searchModel,

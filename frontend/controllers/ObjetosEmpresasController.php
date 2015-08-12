@@ -41,9 +41,15 @@ class ObjetosEmpresasController extends BaseController
     {
         $searchModel = new ObjetosEmpresasSearch();
         $searchModel->contratista=true;
+        $searchModel->contratista_id = Yii::$app->user->identity->contratista_id;
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->sort = false;
+
         $searchModelAutorizado = new ObjetosAutorizacionesSearch();
+        $searchModelAutorizado->contratista_id = Yii::$app->user->identity->contratista_id;
         $dataProviderAutorizado = $searchModelAutorizado->search(Yii::$app->request->queryParams);
+        $dataProviderAutorizado->sort = false;
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
