@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\BancosContratistasSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Bancos Contratistas');
+$this->title = Yii::t('app', 'Bancos');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="bancos-contratistas-index">
@@ -45,7 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'sys_actualizado_el',
             // 'sys_finalizado_el',
 
-             ['class' => 'yii\grid\ActionColumn', 'template' => '{update}{delete}'],
+             ['class' => 'yii\grid\ActionColumn', 'template' => '{update}'],
         ],
     ]); ?>
  <p>

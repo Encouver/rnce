@@ -94,7 +94,6 @@ class PersonasNaturalesController extends BaseController
                     $model->sys_pais_id=1;
                     //$model->numero_identificacion=$model->rif;
                     $natural_juridica->rif= $model->rif;
-                
                 }else{
                     
                     $natural_juridica->rif = $model->numero_identificacion;
