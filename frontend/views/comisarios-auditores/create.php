@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\p\ComisariosAuditores */
 
-$this->title = Yii::t('app', 'Aegregar Comisario Auditor');
+$this->title = Yii::t('app', 'Agregar Comisario auditor');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Comisarios Auditores'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
