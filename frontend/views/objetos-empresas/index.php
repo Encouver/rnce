@@ -60,7 +60,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'attribute'=>'domicilio_fabricante_id',
-                'label'=>'Domicilio Fabrcante',
+                'label'=>'Domicilio Fabricante',
                 'value'=>'domicilioFabricante.nombre'
             ],
            // 'domicilio_fabricante_id',

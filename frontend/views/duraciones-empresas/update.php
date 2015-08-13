@@ -6,10 +6,10 @@ use yii\helpers\Html;
 /* @var $model common\models\p\DuracionesEmpresas */
 
 $this->title = Yii::t('app', 'Update {modelClass}: ', [
-    'modelClass' => 'Duraciones Empresas',
-]) . ' ' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Duraciones Empresas'), 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
+    'modelClass' => 'Duración empresa',
+]);
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Duración empresa'), 'url' => ['index']];
+//$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 ?>
 <div class="duraciones-empresas-update">

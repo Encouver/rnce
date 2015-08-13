@@ -51,20 +51,25 @@ class PersonasJuridicas extends \common\components\BaseActiveRecord
             [['tipo_nacionalidad'], 'string'],
             [['rif'],'filter','filter'=>'trim'],
             [['rif'],'filter','filter'=>'strtoupper'],
-            [['rif'],'string','min'=>10,'max'=>10],
-            ['rif', 'match', 'pattern' => '/^[[JGP][0-9]{8}[0-9]$/i','message'=>'Rif no concuerda con el formato'],
-            
+            //[['rif'],'string','min'=>10,'max'=>10],
+            //['rif', 'match', 'pattern' => '/^[[JGP][0-9]{8}[0-9]$/i','message'=>'Rif no concuerda con el formato'],
+            [['numero_identificacion'], 'unique'],
 
             [['tipo_sector'], 'string'],
             [['sigla'], 'string', 'max' => 50],
             [['sigla','rif'],'required','on'=>'conbasico'],
             [['razon_social', 'numero_identificacion'], 'string', 'max' => 255],
             [['rif'], 'unique'],
-
+            [['razon_social'], 'unique'],
             [['rif'], 'required', 'when' => function ($model) {
                 return $model->tipo_nacionalidad == "NACIONAL";
             }, 'whenClient' => "function (attribute, value) {
                 return $('#personasjuridicas-tipo_nacionalidad').val() == 'NACIONAL';
+            }"],
+            [['rif'] , 'match', 'pattern' => '/^[[JGP][0-9]{8}[0-9]$/i', 'message'=>'Rif invalido', 'when' => function ($model) {
+                return $model->tipo_nacionalidad == "NACIONAL";
+            }, 'whenClient' => "function (attribute, value) {
+                return $('#personasnaturales-nacionalidad').val() == 'NACIONAL';
             }"],
             [['sys_pais_id','numero_identificacion'], 'required', 'when' => function ($model) {
                 return $model->tipo_nacionalidad == "EXTRANJERA";

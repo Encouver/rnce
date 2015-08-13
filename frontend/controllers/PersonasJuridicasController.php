@@ -87,51 +87,46 @@ class PersonasJuridicasController extends BaseController
        if ($model->load(Yii::$app->request->post())) {
              $transaction = \Yii::$app->db->beginTransaction();
            try {
+                
                 $natural_juridica= new SysNaturalesJuridicas();
-               if($model->tipo_nacionalidad=='NACIONAL'){
-                $model->sys_pais_id=1;
-                $model->numero_identificacion=null;
+                
+                if($model->tipo_nacionalidad=='NACIONAL'){
+                    $model->sys_pais_id=1;
+                    $model->numero_identificacion=null;
                 }else{
-                $natural_juridica->nacional=false;
-                $model->rif=$model->numero_identificacion;
+                    $natural_juridica->nacional=false;
+                    $model->rif=$model->numero_identificacion;
                 }
-                 $natural_juridica->rif= $model->rif;
+
+                $natural_juridica->rif= $model->rif;
                 $natural_juridica->juridica= true;
                 $natural_juridica->denominacion=$model->razon_social;
-                  if($model->tipo_nacionalidad=='EXTRANJERA'){
-                       $natural_juridica->anho = date('m-Y');
-                      $natural_juridica->contratista_id=Yii::$app->user->identity->contratista_id;
-                      $natural_juridica->save(false);
-                      $model->anho = date('m-Y');
-                      $model->contratista_id=Yii::$app->user->identity->contratista_id;
-                      $model->save(false);
-                      $transaction->commit();
-                             Yii::$app->getSession()->setFlash('success',Yii::t('app',Html::encode('Persona juridica guarda con exito.')));
-                            $model = new PersonasJuridicas();
-                            return $this->renderAjax('create', [
-                                'model' => $model,
-                            ]);
-                  }else {
+                $natural_juridica->anho = date('m-Y');
+                $natural_juridica->contratista_id=Yii::$app->user->identity->contratista_id;
+                $model->anho = date('m-Y');
+                $model->contratista_id=Yii::$app->user->identity->contratista_id;
 
-                if ($natural_juridica->save()) {
-               
-                          if($model->save()){
-                            $transaction->commit();
-                             Yii::$app->getSession()->setFlash('success',Yii::t('app',Html::encode('Persona juridica guarda con exito.')));
-                            $model = new PersonasJuridicas();
-                            return $this->renderAjax('create', [
-                                'model' => $model,
-                            ]);
-                            }
-                    
-                           
-                    }else{
-                          $transaction->rollBack();
-                    return $this->renderAjax('create', [
-                    'model' => $model,]);
-                    }
-                
-           }
+
+                if($model->validate()){
+                      //$natural_juridica->anho = date('m-Y');
+                      //$natural_juridica->contratista_id=Yii::$app->user->identity->contratista_id;
+                      //$natural_juridica->save(false);
+                      //$model->anho = date('m-Y');
+                      //$model->contratista_id=Yii::$app->user->identity->contratista_id;
+                      $natural_juridica->save();
+                      $model->save();
+                      $transaction->commit();
+                      Yii::$app->getSession()->setFlash('success',Yii::t('app',Html::encode('Información cargada con exito.')));
+                      $model = new PersonasJuridicas();
+                      return $this->renderAjax('create', [
+                           'model' => $model,
+                      ]);
+                }else
+
+                return $this->renderAjax('create', [
+                'model' => $model,
+                ]);
+
            }catch (Exception $e) {
                $transaction->rollBack();
            }

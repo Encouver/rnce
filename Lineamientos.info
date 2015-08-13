@@ -34,3 +34,11 @@ Cuaquier llamada en ajax debera ser respondida en json:
 y debe ser parametrizada en forma de arreglo:
 
 Ej: [0=>Cuerpo de la respuesta,1=>exitoso(true or false),2=>'Mensaje de respuesta']
+
+
+*** Mensajes ***
+
+La primera letra en CAPITAL y todo lo demas en minuscula.
+
+Cuando se va a guardar alguna información el mensaje enviado debera ser 
+Información cargada con exito.

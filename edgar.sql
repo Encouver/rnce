@@ -433,6 +433,8 @@ COMMENT ON COLUMN notas_revelatorias.anho
 ALTER TABLE notas_revelatorias
   ADD UNIQUE (contratista_id, anho, nombre);
 
-  
-
+ 
+*******13/08/2015 ******* 
+ALTER TABLE personas_juridicas
+  ADD UNIQUE (razon_social);
 
