@@ -34,6 +34,8 @@ class BancosContratistasController extends BaseController
      */
     public function actionIndex()
     {
+
+
         $searchModel = new BancosContratistasSearch();
         $searchModel->contratista_id = Yii::$app->user->identity->contratista_id;
 

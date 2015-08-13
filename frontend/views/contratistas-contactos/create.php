@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\p\ContratistasContactos */
 
-$this->title = Yii::t('app', 'Persona de Contacto');
+$this->title = Yii::t('app', 'Persona de contacto');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Contratistas Contactos'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -16,6 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= $this->render('_form', [
         'model' => $model,
+        'modelPersona'=>$modelPersona,
     ]) ?>
 
 </div>

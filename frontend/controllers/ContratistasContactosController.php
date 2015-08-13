@@ -66,6 +66,7 @@ class ContratistasContactosController extends BaseController
     public function actionCreate()
     {
         $model = new ContratistasContactos();
+        $modelPersona= new PersonasNaturales(['scenario'=>'basico']);
         if($model->existeregistro()){
             Yii::$app->session->setFlash('error','Contratista ya posee una persona de contacto');
             return $this->redirect(['index']);
@@ -76,7 +77,7 @@ class ContratistasContactosController extends BaseController
 
         } else {
             return $this->render('create', [
-                'model' => $model,
+                'model' => $model, 'modelPersona' => $modelPersona
             ]);
         }
     }
