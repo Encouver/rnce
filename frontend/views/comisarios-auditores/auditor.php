@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\ComisariosAuditoresSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Comisarios Auditores');
+$this->title = Yii::t('app', 'Contadores Auditores');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="comisarios-auditores-index">

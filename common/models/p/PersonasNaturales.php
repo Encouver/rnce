@@ -61,7 +61,7 @@ class PersonasNaturales extends \common\components\BaseActiveRecord
     public function rules()
     {
         return [
-            [['primer_nombre', 'primer_apellido', 'anho'], 'required'],
+            [['primer_nombre', 'estado_civil', 'primer_apellido', 'anho'], 'required'],
             [['ci', 'sys_pais_id', 'creado_por', 'actualizado_por'], 'integer'],
             [['nacionalidad', 'estado_civil'], 'string'],
             [['sys_status'], 'boolean'],
@@ -72,18 +72,25 @@ class PersonasNaturales extends \common\components\BaseActiveRecord
             [['rif','telefono_local','telefono_celular','correo'], 'required', 'on' => 'contacto'],
             [['rif'],'filter','filter'=>'trim'],
             [['rif'],'filter','filter'=>'strtoupper'],
-            [['rif'],'string','min'=>10,'max'=>10],
-            ['rif', 'match', 'pattern' => '/^[[VE][0-9]{8}[0-9]$/i','message'=>'Rif no concuerda con el formato'],
+            //[['rif'],'string','min'=>10,'max'=>10],
             [['telefono_local', 'telefono_celular', 'fax'], 'string', 'max' => 50],
             [['correo'], 'string', 'max' => 150],
             [['anho'], 'string', 'max' => 100],
             [['rif'], 'unique'],
             [['ci'], 'unique'],
+
             [['rif'], 'required', 'when' => function ($model) {
                 return $model->nacionalidad == "NACIONAL";
             }, 'whenClient' => "function (attribute, value) {
                 return $('#personasnaturales-nacionalidad').val() == 'NACIONAL';
             }"],
+            
+            [['rif'] , 'match', 'pattern' => '/^[[VE][0-9]{8}[0-9]$/i', 'message'=>'Rif no concuerda con el formato', 'when' => function ($model) {
+                return $model->nacionalidad == "NACIONAL";
+            }, 'whenClient' => "function (attribute, value) {
+                return $('#personasnaturales-nacionalidad').val() == 'NACIONAL';
+            }"],
+
             [['sys_pais_id','numero_identificacion'], 'required', 'when' => function ($model) {
                 return $model->nacionalidad == "EXTRANJERA";
             }, 'whenClient' => "function (attribute, value) {
@@ -189,9 +196,9 @@ class PersonasNaturales extends \common\components\BaseActiveRecord
             return [
          'nacionalidad'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>$nacionalidad,'options'=>['prompt'=>'Seleccione Nacionalidad']],
          'sys_pais_id'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>ArrayHelper::map(SysPaises::find()->all(),'id','nombre'),'options'=>['prompt'=>'Seleccione Pais']],
-         'rif'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Introduzca rif'],'hint'=>'Formato V123456789'],
+        'rif'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Introduzca rif'],'hint'=>'Formato V123456789'],
         'numero_identificacion'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Introduz numero identificacion']],
-         'primer_nombre'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Introduzca primer nombre']],
+        'primer_nombre'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Introduzca primer nombre']],
         'segundo_nombre'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Introduzca segundo nombre']],
         'primer_apellido'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Introduzca primer apellido']],
         'segundo_apellido'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Introduzca segundo apellido']],
@@ -200,6 +207,7 @@ class PersonasNaturales extends \common\components\BaseActiveRecord
         'telefono_celular'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Introduzca telefono celular']],
             ];
         }
+
         if($this->scenario=="contacto"){
             return [
         'rif'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Enter rif']],
