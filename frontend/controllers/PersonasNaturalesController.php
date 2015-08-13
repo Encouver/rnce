@@ -92,19 +92,19 @@ class PersonasNaturalesController extends BaseController
 
                if($model->nacionalidad=='NACIONAL'){
                     $model->sys_pais_id=1;
-                    $model->numero_identificacion=$model->rif;
-                   
+                    //$model->numero_identificacion=$model->rif;
                     $natural_juridica->rif= $model->rif;
                 
                 }else{
-                    $natural_juridica->rif= $model->numero_identificacion;
+                    
+                    $natural_juridica->rif = $model->numero_identificacion;
                     $natural_juridica->nacional=false;
                     $model->rif = $model->numero_identificacion;
                 }
                 
                 $natural_juridica->juridica= false;
                 $natural_juridica->denominacion=$model->primer_nombre.' '.$model->primer_apellido;
-                //HASTA AQUI FUNCIONA
+                
                 $natural_juridica->anho = date('m-Y');
                 $natural_juridica->contratista_id=Yii::$app->user->identity->contratista_id;
 

@@ -78,6 +78,12 @@ class PersonasNaturales extends \common\components\BaseActiveRecord
             [['anho'], 'string', 'max' => 100],
             [['rif'], 'unique'],
             [['ci'], 'unique'],
+            
+            [['numero_identificacion'], 'unique', 'when' => function ($model) {
+                return $model->nacionalidad == "EXTRANJERA";
+            }, 'whenClient' => "function (attribute, value) {
+                return $('#personasnaturales-nacionalidad').val() == 'EXTRANJERA';
+            }"],
 
             [['rif'], 'required', 'when' => function ($model) {
                 return $model->nacionalidad == "NACIONAL";
