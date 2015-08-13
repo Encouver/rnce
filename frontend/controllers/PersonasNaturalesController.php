@@ -127,7 +127,7 @@ class PersonasNaturalesController extends BaseController
                 }else
                 {
                     $transaction->rollBack();
-                    //Yii::$app->getSession()->setFlash('success',Yii::t('app',Html::encode('Error.')));
+                    Yii::$app->getSession()->setFlash('error',Yii::t('app',Html::encode('Hubo un error en los datos ingresados.')));
                     return $this->renderAjax('create', [
                               'model' => $model,
                     ]);
