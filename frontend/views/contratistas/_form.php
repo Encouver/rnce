@@ -13,7 +13,7 @@ use yii\helpers\Html;
 
 <div class="contratistas-form">
 
-    <?php $form = ActiveForm::begin(['action'=>[$model instanceof PersonasNaturales?'contratistas/creardatonatural':'contratistas/creardatojuridica'],
+    <?php $form = ActiveForm::begin([$model->isNewRecord?'action':'class'=>[$model instanceof PersonasNaturales?'contratistas/creardatonatural':'contratistas/creardatojuridica'],
         'type'=>ActiveForm::TYPE_VERTICAL]); ?>
 
 

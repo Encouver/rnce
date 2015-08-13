@@ -2,6 +2,7 @@
 
 namespace common\models\p;
 
+use common\models\a\ActivosFacturas;
 use Yii;
 
 /**
@@ -19,6 +20,28 @@ use Yii;
  * @property string $sys_actualizado_el
  * @property string $sys_finalizado_el
  * @property string $natural
+ *
+ * @property ActivosFacturas[] $activosFacturas
+ * @property CuentasGOtrosActivos[] $cuentasGOtrosActivos
+ * @property CuentasI1OtrosIngresosOperaciones[] $cuentasI1OtrosIngresosOperaciones
+ * @property AccionistasOtros[] $accionistasOtros
+ * @property CertificacionesAportes[] $certificacionesAportes
+ * @property Clientes[] $clientes
+ * @property Contratistas[] $contratistas
+ * @property ContratistasContactos[] $contratistasContactos
+ * @property EmpresasFusionadas[] $empresasFusionadas
+ * @property EmpresasRelacionadas[] $empresasRelacionadas
+ * @property EmpresasRelacionadas[] $empresasRelacionadas0
+ * @property ObjetosAutorizaciones[] $objetosAutorizaciones
+ * @property PagosAccionistasDecretos[] $pagosAccionistasDecretos
+ * @property PersonasJuridicas $personasJuridicas
+ * @property PersonasNaturales $personasNaturales
+ * @property PersonasJuridicas $personaJuridica
+ * @property PersonasNaturales $personaNatural
+ * @property PolizasContratadas[] $polizasContratadas
+ * @property RelacionesContratos[] $relacionesContratos
+ * @property Sucursales[] $sucursales
+ *
  */
 class SysNaturalesJuridicas extends \common\components\BaseActiveRecord
 {
@@ -69,6 +92,29 @@ class SysNaturalesJuridicas extends \common\components\BaseActiveRecord
             'nacional' => Yii::t('app', 'Nacional'),
         ];
     }
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getActivosFacturas()
+    {
+        return $this->hasMany(ActivosFacturas::className(), ['comprador_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCuentasGOtrosActivos()
+    {
+        return $this->hasMany(CuentasGOtrosActivos::className(), ['proveedor_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCuentasI1OtrosIngresosOperaciones()
+    {
+        return $this->hasMany(CuentasI1OtrosIngresosOperaciones::className(), ['identificacion_id' => 'id']);
+    }
 
     /**
      * @return \yii\db\ActiveQuery
@@ -76,6 +122,14 @@ class SysNaturalesJuridicas extends \common\components\BaseActiveRecord
     public function getAccionistasOtros()
     {
         return $this->hasMany(AccionistasOtros::className(), ['natural_juridica_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCertificacionesAportes()
+    {
+        return $this->hasMany(CertificacionesAportes::className(), ['natural_juridica_id' => 'id']);
     }
 
     /**
@@ -97,6 +151,22 @@ class SysNaturalesJuridicas extends \common\components\BaseActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
+    public function getPersonaJuridica()
+    {
+        return $this->hasOne(PersonasJuridicas::className(), ['rif' => 'rif']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPolizasContratadas()
+    {
+        return $this->hasMany(PolizasContratadas::className(), ['natural_juridica_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getRelacionesContratos()
     {
         return $this->hasMany(RelacionesContratos::className(), ['natural_juridica_id' => 'id']);
@@ -113,9 +183,87 @@ class SysNaturalesJuridicas extends \common\components\BaseActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
+    public function getContratistasContactos()
+    {
+        return $this->hasMany(ContratistasContactos::className(), ['contacto_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getEmpresasFusionadas()
+    {
+        return $this->hasMany(EmpresasFusionadas::className(), ['natural_juridica_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getEmpresasRelacionadas()
+    {
+        return $this->hasMany(EmpresasRelacionadas::className(), ['persona_juridica_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getEmpresasRelacionadas0()
+    {
+        return $this->hasMany(EmpresasRelacionadas::className(), ['persona_contacto_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getObjetosAutorizaciones()
+    {
+        return $this->hasMany(ObjetosAutorizaciones::className(), ['natural_juridica_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPagosAccionistasDecretos()
+    {
+        return $this->hasMany(PagosAccionistasDecretos::className(), ['natural_juridica_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getPersonasNaturales()
     {
         return $this->hasMany(PersonasNaturales::className(), ['rif' => 'rif']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPersonaNatural()
+    {
+        return $this->hasOne(PersonasNaturales::className(), ['rif' => 'rif']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getSucursales()
+    {
+        return $this->hasMany(Sucursales::className(), ['natural_juridica_id' => 'id']);
+    }
+
+    public function esNatural(){
+        if(!$this->juridica)
+            return true;
+        else
+            return false;
+    }
+
+    public function esJuridica(){
+        if($this->juridica)
+            return true;
+        else
+            return false;
     }
 
     public function etiqueta(){

@@ -46,7 +46,7 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'informe_conversion:boolean',
             // 'natural_juridica_id',
 
-            ['class' => 'yii\grid\ActionColumn','template'=>'{update}{delete}'],
+            ['class' => 'yii\grid\ActionColumn','template'=>'{update} {delete}'],
         ],
     ]); ?>
        <?php 
