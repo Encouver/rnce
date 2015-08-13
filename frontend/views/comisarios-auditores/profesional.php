@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
         //'filterModel' => $searchModel,
         'summary'=>'',
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+            //['class' => 'yii\grid\SerialColumn'],
             [
                 'attribute'=>'natural_juridica_id',
                 'label'=>'Nombre comisario',
@@ -46,7 +46,7 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'informe_conversion:boolean',
             // 'natural_juridica_id',
 
-            ['class' => 'yii\grid\ActionColumn','template'=>'{update}{delete}'],
+            ['class' => 'yii\grid\ActionColumn','template'=>'{update} {delete}'],
         ],
     ]); ?>
        <?php 

@@ -57,7 +57,7 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'email_confirmed:email',
             // 'contratista_id',
 
-            //['class' => 'yii\grid\ActionColumn', 'template' => '{update}'],
+            ['class' => 'yii\grid\ActionColumn', 'template' => '{update}'],
         ],
     ]); ?>
   <?php if(Yii::$app->user->identity->contratista_id == null){ ?>

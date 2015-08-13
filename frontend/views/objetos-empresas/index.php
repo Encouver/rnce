@@ -35,7 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'sys_actualizado_el',
             // 'sys_finalizado_el',
             //($searchModel->contratista)?['class' => 'yii\grid\ActionColumn', 'template'=>'{delete}']:['class' => 'yii\grid\ActionColumn', 'template'=>'{delete}{update}']
-           ['class' => 'yii\grid\ActionColumn', 'template'=>'{update}']
+           ['class' => 'yii\grid\ActionColumn', 'template'=>'{delete}']
         ],
     ]); ?>
     <p>
@@ -88,7 +88,7 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'sys_finalizado_el',
             // 'natural_juridica_id',
 
-            ['class' => 'yii\grid\ActionColumn', 'template'=>'{update}','controller'=>'objetos-autorizaciones'],
+            ['class' => 'yii\grid\ActionColumn', 'template'=>'{delete}','controller'=>'objetos-autorizaciones'],
         ],
     ]); ?>
      <p>

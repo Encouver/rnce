@@ -267,7 +267,7 @@ class Contratistas extends \common\components\BaseActiveRecord
 
 
 
-
+/*
         $attributes = [
             // primary key column
             'id'=>[ // primary key attribute
@@ -385,6 +385,6 @@ class Contratistas extends \common\components\BaseActiveRecord
         ],'columnOptions'=>['hidden'=>true,]
         ];//['type'=>Form::INPUT_CHECKBOX,'columnOptions'=>['hidden'=>true,],'options'=>['onchange'=>'']];
 
-        return $attributes;
+        return $attributes;*/
     }
 }

@@ -62,6 +62,7 @@ return [
 	            },
             'on afterRegistration' => function(UserAuthEvent $event) {
                 // Here you can do your own stuff like assign roles, send emails and so on
+                //$event->user->assignRole($event->user->getId(),'contratista');
             },
 	    ],
 		 'gridview' =>  [
