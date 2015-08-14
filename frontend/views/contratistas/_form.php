@@ -25,7 +25,7 @@ use yii\helpers\Html;
             'attributes'=>$model->getFormAttribs()
         ]);
 
-    //echo Html::submitButton('Enviar', ['type'=>'button', 'class'=>'btn btn-primary']);
+       //echo Html::submitButton('Enviar', ['type'=>'button', 'class'=>'btn btn-primary']);
     ?>
 
 <!--

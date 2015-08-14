@@ -91,7 +91,7 @@ class PersonasNaturales extends \common\components\BaseActiveRecord
                 return $('#personasnaturales-nacionalidad').val() == 'NACIONAL';
             }"],
             
-            [['rif'] , 'match', 'pattern' => '/^[[VE][0-9]{8}[0-9]$/i', 'message'=>'Rif no concuerda con el formato', 'when' => function ($model) {
+            [['rif'] , 'match', 'pattern' => '/^[[VE][0-9]{8}[0-9]$/i', 'message'=>'Rif invalido', 'when' => function ($model) {
                 return $model->nacionalidad == "NACIONAL";
             }, 'whenClient' => "function (attribute, value) {
                 return $('#personasnaturales-nacionalidad').val() == 'NACIONAL';

@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\DuracionesEmpresasSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Duraciones Empresas');
+$this->title = Yii::t('app', 'Duración empresa');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="duraciones-empresas-index">

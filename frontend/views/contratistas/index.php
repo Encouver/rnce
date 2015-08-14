@@ -35,12 +35,12 @@ $this->params['breadcrumbs'][] = $this->title;
              [
                 'attribute'=>'tipo_sector',
                 'label'=>'Sector',
-                //'value'=>'tipo_sector'
+                'value'=>'tipo_sector'
                 ],
             [
                 'attribute'=>'sigla',
                 'label'=>'Sigla',
-                //'value'=>'sigla'
+                'value'=>'sigla'
             ],
             //'id',
             //'username',

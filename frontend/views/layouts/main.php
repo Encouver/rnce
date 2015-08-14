@@ -216,7 +216,7 @@ AppAsset::register($this);
                         'items'=>[
                             ['label'=>'Cambiar contraseña', 'url'=>['/user-management/auth/change-own-password']],
                             ['label'=>'Recuperar contraseña', 'url'=>['/user-management/auth/password-recovery']],
-                            ['label'=>'Confirmar E-mail', 'url'=>['/user-management/auth/confirm-email']],
+                            ['label'=>'Añadir correo', 'url'=>['/user-management/auth/confirm-email']],
                         ],
                     ];
 
