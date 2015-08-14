@@ -66,7 +66,7 @@ class PersonasJuridicas extends \common\components\BaseActiveRecord
             }, 'whenClient' => "function (attribute, value) {
                 return $('#personasjuridicas-tipo_nacionalidad').val() == 'NACIONAL';
             }"],
-            [['rif'] , 'match', 'pattern' => '/^[[JGP][0-9]{8}[0-9]$/i', 'message'=>'Rif invalido', 'when' => function ($model) {
+            [['rif'] , 'match', 'pattern' => '/^[[JGPjgp][0-9]{8}[0-9]$/i', 'message'=>'Rif invalido', 'when' => function ($model) {
                 return $model->tipo_nacionalidad == "NACIONAL";
             }, 'whenClient' => "function (attribute, value) {
                 return $('#personasnaturales-nacionalidad').val() == 'NACIONAL';
