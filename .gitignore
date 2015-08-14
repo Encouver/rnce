@@ -17,7 +17,7 @@ Thumbs.db
 
 # composer vendor dir
 /vendor/*
-!/vendor/webvimark
+#!/vendor/webvimark
 /frontend_old
 /runtime
 

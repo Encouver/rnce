@@ -39,6 +39,7 @@ class ModificacionesBalancesController extends BaseController
           
         }
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->sort = false;
 
         return $this->render('index', [
             'searchModel' => $searchModel,
