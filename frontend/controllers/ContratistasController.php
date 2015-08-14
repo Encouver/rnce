@@ -187,6 +187,8 @@ class ContratistasController extends BaseController
 
                         $contratista->estatus_contratista_id = 1;
                         $contratista ->natural_juridica_id = $natural_juridica->id;
+                        $contratista->tipo_sector = $persona_juridica->tipo_sector;
+                        $contratista->sigla = $persona_juridica->sigla;
 
                         if($contratista->save()){
                             if ($usuario= \common\models\p\User::findOne(Yii::$app->user->identity->id)) {
@@ -246,6 +248,8 @@ class ContratistasController extends BaseController
             $modelPersona = $model->naturalJuridica->personaNatural;
         }elseif($model->naturalJuridica->esJuridica()){
             $modelPersona = $model->naturalJuridica->personaJuridica;
+            $modelPersona->sigla = $model->sigla;
+            $modelPersona->tipo_sector = $model->tipo_sector;
         }
 
         if($modelPersona) {

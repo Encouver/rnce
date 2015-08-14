@@ -33,6 +33,7 @@ class PersonasJuridicas extends \common\components\BaseActiveRecord
      */
     public $sigla;
     public $tipo_sector;
+
     public static function tableName()
     {
         return 'public.personas_juridicas';
@@ -57,7 +58,7 @@ class PersonasJuridicas extends \common\components\BaseActiveRecord
 
             [['tipo_sector'], 'string'],
             [['sigla'], 'string', 'max' => 50],
-            [['sigla','rif'],'required','on'=>'conbasico'],
+            [['rif'],'required','on'=>'conbasico'],
             [['razon_social', 'numero_identificacion'], 'string', 'max' => 255],
             [['rif'], 'unique'],
 
