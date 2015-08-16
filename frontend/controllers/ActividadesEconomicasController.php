@@ -36,6 +36,7 @@ class ActividadesEconomicasController extends BaseController
     {
         $searchModel = new ActividadesEconomicasSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->sort = false;
         $model = new ActividadesEconomicas();
         return $this->render('index', [
             'searchModel' => $searchModel,

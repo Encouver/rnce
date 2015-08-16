@@ -37,6 +37,7 @@ class EmpresasRelacionadasController extends BaseController
     {
         $searchModel = new EmpresasRelacionadasSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->sort = false;
 
         return $this->render('index', [
             'searchModel' => $searchModel,

@@ -35,6 +35,7 @@ class PolizasContratadasController extends BaseController
     {
         $searchModel = new PolizasContratadasSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->sort = false;
 
         return $this->render('index', [
             'searchModel' => $searchModel,

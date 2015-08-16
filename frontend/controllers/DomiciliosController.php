@@ -42,13 +42,14 @@ class DomiciliosController extends BaseController
             $searchModelFiscal->documento_registrado_id= $documento->id;
         }
         $dataProviderFiscal = $searchModelFiscal->search(Yii::$app->request->queryParams);
+        $dataProviderFiscal->sort = false;
         $searchModelPrincipal = new DomiciliosSearch();
         $searchModelPrincipal->fiscal = false;
          if(isset($documento)){
             $searchModelPrincipal->documento_registrado_id= $documento->id;
         }
         $dataProviderPrincipal = $searchModelPrincipal->search(Yii::$app->request->queryParams);
-
+        $dataProviderPrincipal->sort = false;
         return $this->render('index', [
             'searchModelFiscal' => $searchModelFiscal,
             'dataProviderFiscal' => $dataProviderFiscal,

@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use common\components\BaseController;
 use Yii;
 use app\models\SysGremios;
 use app\models\SysGremiosSearch;

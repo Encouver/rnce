@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider_efectivo,
         //'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+            //['class' => 'yii\grid\SerialColumn'],
 
             //'id',
             //'tipo_origen',
@@ -59,7 +59,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider_banco,
         //'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+            //['class' => 'yii\grid\SerialColumn'],
              [
                 'attribute' => 'banco_contratista_id',
                 'label' => 'banco',
@@ -111,7 +111,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider_bien,
         //'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+            //['class' => 'yii\grid\SerialColumn'],
              [
                 'attribute' => 'bien_id',
                 'label' => 'Tipo Bien',

@@ -34,6 +34,7 @@ class NombresCajasController extends BaseController
     {
         $searchModel = new NombresCajasSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->sort = false;
 
         return $this->render('index', [
             'searchModel' => $searchModel,
