@@ -116,11 +116,11 @@ AppAsset::register($this);
                 ['label' => 'Contratista',
                     'items' => [
                          //['label' => 'Acordeon', 'url' => ['/contratistas/acordeon']],
-                         ['label' => 'Datos basicos', 'url' => ['/contratistas/index']],
+                         
                          
                         ['label' => 'Bancos', 'url' => ['/bancos-contratistas/index']],
                         ['label' => 'Persona de contacto', 'url' => ['/contratistas-contactos/index']],
-                         ['label' => 'Objeto empresa', 'url' => ['/objetos-empresas/index']],
+                        ['label' => 'Objeto empresa', 'url' => ['/objetos-empresas/index']],
                         ['label' => 'Principio contable', 'url' => ['/principios-contables/index']],
                        /*  ['label' => 'Responsable Contabilidad', 'url' => ['/comisarios-auditores/crearresponsable']],
                          ['label' => 'Contador Auditor', 'url' => ['/comisarios-auditores/crearcontador']],
@@ -217,6 +217,7 @@ AppAsset::register($this);
                             ['label'=>'Cambiar contraseña', 'url'=>['/user-management/auth/change-own-password']],
                             ['label'=>'Recuperar contraseña', 'url'=>['/user-management/auth/password-recovery']],
                             ['label'=>'Añadir correo', 'url'=>['/user-management/auth/confirm-email']],
+                            ['label' => 'Datos basicos', 'url' => ['/contratistas/index']],
                         ],
                     ];
 
