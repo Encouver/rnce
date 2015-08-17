@@ -16,6 +16,15 @@ return [
 					'class' => 'yii\i18n\PhpMessageSource',
 					'basePath' => '@common/messages',
 				],
+                'modules/user-management/*' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'sourceLanguage' => 'en',
+                    'basePath' => '@common/messages',
+                    'fileMap'        => [
+                        'modules/user-management/back' => 'back.php',
+                        'modules/user-management/front' => 'front.php',
+                    ],
+                ],
 		        'frontend*' => [
 		            'class' => 'yii\i18n\PhpMessageSource',
 		            'basePath' => '@common/messages',
@@ -30,6 +39,14 @@ return [
 		],
 		'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
+/*            'transport' => [
+                'class' => 'Swift_SmtpTransport',
+                'host' => 'localhost',
+                'username' => 'username',
+                'password' => 'password',
+                'port' => '587',
+                'encryption' => 'tls',
+            ],*/
         ],
 	    'user' => [
 	        'class' => 'webvimark\modules\UserManagement\components\UserConfig',
