@@ -22,12 +22,17 @@ $documentos = null;
 $acta = null;
 $modificaciones = null;
 if(!Yii::$app->user->isGuest)
-$acta = ActivosDocumentosRegistrados::find()->where('contratista_id = :contratista and tipo_documento_id = :tipo_documento_id and  proceso_finalizado = :proceso_finalizado', ['contratista'=>Yii::$app->user->identity->contratista_id, 'tipo_documento_id'=>1, 'proceso_finalizado' => true])->one();
+    $acta = ActivosDocumentosRegistrados::find()->where('contratista_id = :contratista and tipo_documento_id = :tipo_documento_id and  proceso_finalizado = :proceso_finalizado', ['contratista'=>Yii::$app->user->identity->contratista_id, 'tipo_documento_id'=>1, 'proceso_finalizado' => true])->one();
 if($acta){
-$documentos = ActivosDocumentosRegistrados::find()->where('contratista_id = :contratista and tipo_documento_id = :tipo_documento_id and  proceso_finalizado = :proceso_finalizado', ['contratista'=>Yii::$app->user->identity->contratista_id, 'tipo_documento_id'=>2, 'proceso_finalizado' => false])->one();
-if($documentos)
-    $modificaciones = ModificacionesActas::find()->where('contratista_id = :contratista and documento_registrado_id = :documento_registrado_id', ['contratista'=>Yii::$app->user->identity->contratista_id, 'documento_registrado_id'=> $documentos->id])->one();
+    $documentos = ActivosDocumentosRegistrados::find()->where('contratista_id = :contratista and tipo_documento_id = :tipo_documento_id and  proceso_finalizado = :proceso_finalizado', ['contratista'=>Yii::$app->user->identity->contratista_id, 'tipo_documento_id'=>2, 'proceso_finalizado' => false])->one();
+    if($documentos)
+        $modificaciones = ModificacionesActas::find()->where('contratista_id = :contratista and documento_registrado_id = :documento_registrado_id', ['contratista'=>Yii::$app->user->identity->contratista_id, 'documento_registrado_id'=> $documentos->id])->one();
 }
+$contratista = null;
+if(Yii::$app->user->identity != null)
+    $contratista = Yii::$app->user->identity->contratista_id;
+    //$contratista = \common\models\p\Contratistas::find('id=:contratista_id',[':cotratista_id'=>Yii::$app->user->identity->contratista_id]);
+
 /* @var $this \yii\web\View */
 /* @var $content string */
 
@@ -86,7 +91,7 @@ AppAsset::register($this);
 
 
 
-                    ],
+                    ], 'visible'=>$contratista!=null?true:false
                 ],
                 ['label' => 'Activos',
                     'items' => [
@@ -106,7 +111,7 @@ AppAsset::register($this);
 
                         //['label' => 'Datos', 'url' => ['/activos-avaluos/index']],
                         //['label' => 'Aqui van los otros', 'url' => ['#']],
-                    ],
+                    ], 'visible'=>$contratista!=null?true:  false
                 ],
 /*                ['label' => 'Información general',
                     'items' => [
@@ -115,26 +120,26 @@ AppAsset::register($this);
                 ],*/
                 ['label' => 'Contratista',
                     'items' => [
-                         //['label' => 'Acordeon', 'url' => ['/contratistas/acordeon']],
-                         
-                         
-                        ['label' => 'Bancos', 'url' => ['/bancos-contratistas/index']],
-                        ['label' => 'Persona de contacto', 'url' => ['/contratistas-contactos/index']],
+                        //['label' => 'Acordeon', 'url' => ['/contratistas/acordeon']],
+                        ['label' => 'Datos basicos', 'url' => ['/contratistas/index']],
+
+                        ['label' => 'Persona de contacto', 'url' => ['/contratistas-contactos/index'],],
                         ['label' => 'Objeto empresa', 'url' => ['/objetos-empresas/index']],
+                        ['label' => 'Bancos', 'url' => ['/bancos-contratistas/index']],
                         ['label' => 'Principio contable', 'url' => ['/principios-contables/index']],
-                       /*  ['label' => 'Responsable Contabilidad', 'url' => ['/comisarios-auditores/crearresponsable']],
-                         ['label' => 'Contador Auditor', 'url' => ['/comisarios-auditores/crearcontador']],
-                         ['label' => 'Profesional Informe de conversion', 'url' => ['/comisarios-auditores/crearprofesional']],*/
-                         ['label' => 'Relacion de Contratos', 'url' => ['/relaciones-contratos/index']],
-                         ['label' => 'Empresas Relacionadas', 'url' => ['/empresas-relacionadas/index']],
-                         ['label' => 'Polizas Contratadas', 'url' => ['/polizas-contratadas/index']],
-                         ['label' => 'Certificacion Aportes', 'url' => ['/certificaciones-aportes/index']],
-                         ['label' => 'Responsable Contabilidad Interna', 'url' => ['/comisarios-auditores/responsable']],
-                         ['label' => 'Contador Auditor', 'url' => ['/comisarios-auditores/auditor']],
-                         ['label' => 'Profesional Informe de Conversion', 'url' => ['/comisarios-auditores/profesional']],
-         
-                        
-                    ],
+                        /*  ['label' => 'Responsable Contabilidad', 'url' => ['/comisarios-auditores/crearresponsable']],
+                          ['label' => 'Contador Auditor', 'url' => ['/comisarios-auditores/crearcontador']],
+                          ['label' => 'Profesional Informe de conversion', 'url' => ['/comisarios-auditores/crearprofesional']],*/
+                        ['label' => 'Relacion de Contratos', 'url' => ['/relaciones-contratos/index']],
+                        ['label' => 'Empresas Relacionadas', 'url' => ['/empresas-relacionadas/index']],
+                        ['label' => 'Polizas Contratadas', 'url' => ['/polizas-contratadas/index']],
+                        ['label' => 'Certificacion Aportes', 'url' => ['/certificaciones-aportes/index']],
+                        ['label' => 'Responsable Contabilidad Interna', 'url' => ['/comisarios-auditores/responsable']],
+                        ['label' => 'Contador Auditor', 'url' => ['/comisarios-auditores/auditor']],
+                        ['label' => 'Profesional Informe de Conversion', 'url' => ['/comisarios-auditores/profesional']],
+
+
+                    ], 'visible'=>$contratista!=null?true:false
                 ],
                  ['label' => 'Acta Constitutiva',
                     'items' => [
@@ -153,7 +158,7 @@ AppAsset::register($this);
                         ['label' => '12. Comisarios', 'url' => ['/comisarios-auditores/index']],
                         ['label' => '13. Fondos Reservas', 'url' => ['/fondos-reservas/index']],
                         ['label' => '14. Sucursales', 'url' => ['/sucursales/index']],
-                    ],
+                    ], 'visible'=>$contratista!=null?true:false
                 ],
             ];
 

@@ -51,7 +51,21 @@ return [
 	        'class' => 'webvimark\modules\UserManagement\UserManagementModule',
             'useEmailAsLogin'=>false,
             'rolesAfterRegistration'=>['contratista'],
+            'confirmationTokenExpire'=>3600,
+            'mailerOptions'=>[],
+/*            'commonPermissionName'=>'commonPermission',
+            'registrationFormClass'=>'webvimark\modules\UserManagement\models\forms\RegistrationForm',
             'emailConfirmationRequired'=>true,
+            'registrationRegexp'=>'/^(\w|\d)+$/',
+            'registrationBlackRegexp'=>'/^(.)*admin(.)*$/i',
+            'maxAttempts'=>5,
+            'attemptsTimeout'=>60,
+            'captchaOptions'=>[
+                'class'     => 'yii\captcha\CaptchaAction',
+                'minLength' => 3,
+                'maxLength' => 4,
+                'offset'    => 5
+            ],*/
 	        // Here you can set your handler to czhange layout for any controller or action
 	        // Tip: you can use this event in any module
 	        'on beforeAction'=>function(yii\base\ActionEvent $event) {
