@@ -39,14 +39,15 @@ return [
 		],
 		'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
-/*            'transport' => [
+            'transport' => [
                 'class' => 'Swift_SmtpTransport',
                 'host' => 'localhost',
                 'username' => 'username',
                 'password' => 'password',
-                'port' => '587',
+                'port' => '465',
                 'encryption' => 'tls',
-            ],*/
+                //'localDomain' => '[127.0.0.1]',
+            ],
         ],
 	    'user' => [
 	        'class' => 'webvimark\modules\UserManagement\components\UserConfig',
