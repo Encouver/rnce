@@ -36,7 +36,7 @@ use yii\widgets\Menu;
         ?>
         <!--
 <h1 style="text-align:center;">MÓDULO FINANCIERO</h1>
--->
+
 <?php
 /*
 echo Yii::$app->formatter->asPercent(0.125, 2); // output: 12.50%
@@ -138,7 +138,7 @@ echo Yii::$app->formatter->asDate('2014-01-01'); // output: 1 января 2014 
     echo 'Fecha Final: '.$result['end']->format('Y-m-d');
 
 
-    ?>
+    ?> -->
     <!-- <div class="jumbotron">
         <h1>Congratulations!</h1>
     

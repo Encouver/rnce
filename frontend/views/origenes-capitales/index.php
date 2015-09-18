@@ -62,7 +62,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //['class' => 'yii\grid\SerialColumn'],
              [
                 'attribute' => 'banco_contratista_id',
-                'label' => 'banco',
+                'label' => 'Banco',
                 'value' => 'bancoContratista.banco.nombre',
             ],
             [

@@ -77,7 +77,7 @@ AppAsset::register($this);
                         ['label' => 'II-1 - Gastos operacionales', 'url' => ['cuentas-ii1-gastos-operacionales/index']],
                         ['label' => 'I-2.1 - Declaración de IVA', 'url' => ['cuentas-i2-declaracion-iva/index']],
                         ['label' => 'I-2.2 - Declaración de ISLR', 'url' => ['cuentas-i2-declaracion-islr/index']],
-                        ['label' => 'D-1 - Impuesto sobre la renta pagado por anticipado', 'url' => ['cuentas-d1-islr-pagado-anticipo/index']],
+                        ['label' => 'D-1 - Impuesto sobre la renta pagado por anticipado', 'url' => ['cuentas-d1-imslr-pagado-anticipo/index']],
                         ['label' => 'D-2 - Otros tributos pagados', 'url' => ['cuentas-d2-otros-tributos-pag/index']],
                         ['label' => 'BB-3 - Otras cuentas por pagar', 'url' => ['cuentas-bb2-otras-cuentas-por-pagar/index']],
                         ['label' => 'BB-1 Cuentas por pagar comerciales', 'url' => ['cuenatas-bb1-cuentas-por-pagar-comerciales/index']],
@@ -121,7 +121,7 @@ AppAsset::register($this);
                 ['label' => 'Contratista',
                     'items' => [
                         //['label' => 'Acordeon', 'url' => ['/contratistas/acordeon']],
-                        ['label' => 'Datos basicos', 'url' => ['/contratistas/index']],
+                        //['label' => 'Datos basicos', 'url' => ['/contratistas/index']],
 
                         ['label' => 'Persona de contacto', 'url' => ['/contratistas-contactos/index'],],
                         ['label' => 'Objeto empresa', 'url' => ['/objetos-empresas/index']],
@@ -147,14 +147,16 @@ AppAsset::register($this);
                         ['label' => '1. Registro Documento', 'url' => ['/activos-documentos-registrados/index']],
                         ['label' => '2. Razon Social', 'url' => ['/razones-sociales/index']],
                         ['label' => '3. Objeto Social', 'url' => ['/objetos-sociales/index']],
-                        ['label' => '4. Cierre ejercicio Econonomico', 'url' => ['/cierres-ejercicios/index']],
-                        ['label' => '5. Duracion empresa', 'url' => ['/duraciones-empresas/index']],
-                        ['label' => '6. Actividades Economicas', 'url' => ['/actividades-economicas/index']],
+                        ['label' => '4. Cierre ejercicio Económico', 'url' => ['/cierres-ejercicios/index']],
+                        ['label' => '5. Duración empresa', 'url' => ['/duraciones-empresas/index']],
+                        ['label' => '6. Actividades Económicas', 'url' => ['/actividades-economicas/index']],
                         ['label' => '7. Direcciones', 'url' => ['/domicilios/index']],
                         ['label' => '8. Denominaciones Comerciales', 'url' => ['/denominaciones-comerciales/index']],
+
                         ['label' => '9. Capital', 'url' => ['/actas-constitutivas/crearcapitalsuscrito']],
                         ['label' => '10. Origen Capital', 'url' => ['/origenes-capitales/index']],
-                        ['label' => '11. Accionistas Representante Legal o Junta Directiva', 'url' => ['/accionistas-otros/index']],
+
+                        ['label' => '11. Accionistas Rep. Legal o Junta Directiva', 'url' => ['/accionistas-otros/index']],
                         ['label' => '12. Comisarios', 'url' => ['/comisarios-auditores/index']],
                         ['label' => '13. Fondos Reservas', 'url' => ['/fondos-reservas/index']],
                         ['label' => '14. Sucursales', 'url' => ['/sucursales/index']],
@@ -166,8 +168,8 @@ AppAsset::register($this);
             {
              $menuItems[] = ['label' => 'Modificacion acta',
                     'items' => [
-                         ['label' => 'Resumen Modificacion', 'url' => ['/actas-constitutivas/resumenmodificacion']],
-                        ['label' => 'Registro documento modificado', 'url' => ['/activos-documentos-registrados/modificacion']],
+                        ['label' => 'Resumen Modificacion', 'url' => ['/actas-constitutivas/resumenmodificacion']],
+                        ['label' => 'Registro documento de modificación', 'url' => ['/activos-documentos-registrados/modificacion']],
                         ['label' => 'Modificaciones', 'url' => ['/modificaciones-actas/index'], 'visible' => ($documentos) ? true : false],
                         ['label' => 'Cambio Nombre o Razon Social', 'url' => ['razones-sociales/modificacion'], 'visible' => ($modificaciones) ? $modificaciones->razon_social : false],
                         ['label' => 'Cambio Objeto Social', 'url' => ['objetos-sociales/modificacion'], 'visible' => ($modificaciones) ? $modificaciones->objeto_social : false],
