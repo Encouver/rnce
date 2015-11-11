@@ -225,6 +225,7 @@ AppAsset::register($this);
                             ['label'=>'Recuperar contraseña', 'url'=>['/user-management/auth/password-recovery']],
                             ['label'=>'Añadir correo', 'url'=>['/user-management/auth/confirm-email']],
                             ['label' => 'Datos basicos', 'url' => ['/contratistas/index']],
+                            ['label' => 'Crear usuario Auditor Interno', 'url' => ['/user/crear-auditor']],
                         ],
                     ];
 

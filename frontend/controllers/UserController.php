@@ -118,4 +118,23 @@ class UserController extends BaseController
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+    /**
+     * Creates a new User model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     * @return mixed
+     */
+    public function  actionCrearAuditor(){
+
+        $model = new User();
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            return $this->render('crear-auditor', [
+                'model' => $model,
+            ]);
+        }
+
+    }
 }
