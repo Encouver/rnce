@@ -85,13 +85,13 @@ use yii\helpers\Html;
                 </tr>
                 <tr class="success">
               
-                    <td><b>Actividad Economica principal: </b><?= $actividad_economica->comp1Caev->denominacion;?></td>
+                    <td><b>Actividad Economica complementaria 1: </b><?= $actividad_economica->comp1Caev->denominacion;?></td>
                     <td><b>Experiencia: </b><?= $actividad_economica->comp1_experiencia.' años';?></td>
             
                 </tr>
                 <tr class="success">
               
-                <td><b>Actividad Economica principal: </b><?= $actividad_economica->comp2Caev->denominacion;?></td>
+                <td><b>Actividad Economica complementaria 2: </b><?= $actividad_economica->comp2Caev->denominacion;?></td>
                 <td><b>Experiencia: </b><?= $actividad_economica->comp2_experiencia.' años';?></td>
             
                 </tr>
@@ -178,6 +178,7 @@ use yii\helpers\Html;
       
                         <tr class="success">
                             <td><b>Nombre: </b><?= $accion->naturalJuridica->denominacion;?></td>
+                            <td><b>Cedula: </b><?= $accion->naturalJuridica->rif;?></td>
                             <td><b>Porcentaje Accionario: </b><?= $accion->porcentaje_accionario;?></td>
                             <td><b>Representante Legal: </b><?= (is_null($accion->repr_legal_vigencia))?' NO':'SI';?></td>
                             <td><b>Junta Directiva: </b><?= (is_null($accion->tipo_cargo))?' NO':'SI';?></td>
@@ -194,6 +195,7 @@ use yii\helpers\Html;
       
                         <tr class="success">
                             <td><b>Nombre: </b><?= $representante_legal->naturalJuridica->denominacion;?></td>
+                            <td><b>Cedula: </b><?= $representante_legal->naturalJuridica->rif;?></td>
                             <td><b>Fecha Vigencia: </b><?= $representante_legal->repr_legal_vigencia;?></td>
                         </tr>
    
@@ -207,7 +209,9 @@ use yii\helpers\Html;
       
                         <tr class="success">
                             <td><b>Nombre: </b><?= $junta->naturalJuridica->denominacion;?></td>
+                            <td><b>Cedula: </b><?= $junta->naturalJuridica->rif;?></td>
                             <td><b>Tipo de Cargo: </b><?=  $junta->tipo_cargo;?></td>
+                            
                         </tr>
    
                     <?php } ?>
@@ -221,7 +225,9 @@ use yii\helpers\Html;
       
                         <tr class="success">
                             <td><b>Nombre: </b><?= $com->naturalJuridica->denominacion;?></td>
+                            <td><b>Cedula: </b><?= $com->naturalJuridica->rif;?></td>
                             <td><b>Tipo Profesion: </b><?= $com->tipo_profesion;?></td>
+                            <td><b>Fecha Vencimiento: </b><?= $com->fecha_vencimiento;?></td>
              
                         </tr>
    
