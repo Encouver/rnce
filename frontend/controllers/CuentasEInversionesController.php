@@ -76,6 +76,9 @@ class CuentasEInversionesController extends BaseController
         $modelTipoMovimientoRetiro->movimiento_id = 60;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            if ($modelTipoMovimientoAdquisicion->load(Yii::$app->request->post()) && $modelTipoMovimientoAdicion->load(Yii::$app->request->post()) && $modelTipoMovimientoRetiro->load(Yii::$app->request->post())) {
+                
+            }
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [

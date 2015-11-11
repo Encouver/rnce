@@ -32,18 +32,21 @@ AppAsset::register($this);
                 ],
             ]);
             $menuItems = [
-                //['label' => 'Home', 'url' => ['/site/index']],
-                ['label' => 'Persona natural', 'url' => ['/personas-naturales/create']],
-                ['label' => 'Persona juridica', 'url' => ['/personas-juridicas/create']],
-                ['label' => 'Inpc', 'url' => ['/sys-inpc/create']],
-                ['label' => 'Gremios', 'url' => ['/sys-gremios/create']],
-                 ['label' => 'Bienes',
+                ['label' => 'Bancos', 'url' => ['/sys-bancos/index']],
+                ['label' => 'Paises', 'url' => ['/sys-paises/index']],
+                ['label' => 'Inpc', 'url' => ['/sys-inpc/index']],
+
+                //['label' => 'Persona natural', 'url' => ['/personas-naturales/create']],
+                //['label' => 'Persona juridica', 'url' => ['/personas-juridicas/create']],
+                //['label' => 'Inpc', 'url' => ['/sys-inpc/create']],
+                //['label' => 'Gremios', 'url' => ['/sys-gremios/create']],
+                 /*['label' => 'Bienes',
                     'items' => [
                          ['label' => 'Clasificaciones bienes', 'url' => ['/sys-clasificaciones-bienes/create']],
                          ['label' => 'Tipos bienes', 'url' => ['/sys-tipos-bienes/create']],
                          ['label' => 'Aqui van los otros', 'url' => ['#']],
                     ],
-                ],
+                ],*/
             ];
             if (Yii::$app->user->isGuest) {
                 $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
@@ -73,6 +76,7 @@ AppAsset::register($this);
 use webvimark\modules\UserManagement\components\GhostMenu;
 use webvimark\modules\UserManagement\UserManagementModule;
 
+/*
 echo GhostMenu::widget([
     'encodeLabels'=>false,
     'activateParents'=>true,
@@ -94,6 +98,7 @@ echo GhostMenu::widget([
         ],
     ],
 ]);
+*/
 ?>
     <footer class="footer">
         <div class="container">

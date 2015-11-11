@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use common\components\BaseController;
 use Yii;
 use common\models\p\RelacionesContratos;
 use common\models\p\ContratosFacturas;
@@ -18,7 +19,7 @@ use common\models\p\PersonasJuridicas;
 /**
  * RelacionesContratosController implements the CRUD actions for RelacionesContratos model.
  */
-class RelacionesContratosController extends Controller
+class RelacionesContratosController extends BaseController
 {
     public function behaviors()
     {
@@ -39,13 +40,23 @@ class RelacionesContratosController extends Controller
     public function actionIndex()
     {
         $searchModel = new RelacionesContratosSearch();
+        $searchModel->contratista_id = Yii::$app->user->identity->contratista_id;
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->sort = false;
+
         $searchModelFactura = new ContratosFacturasSearch();
+        //$searchModelFactura->contratista_id = Yii::$app->user->identity->contratista_id;
         $dataProviderFactura = $searchModelFactura->search(Yii::$app->request->queryParams);
+        $dataProviderFactura->sort = false;
+
         $modelcFactura= new ContratosFacturas();
         $searchModelValuacion = new ContratosValuacionesSearch();
+       // $searchModelValuacion->contratista_id = Yii::$app->user->identity->contratista_id != null?Yii::$app->user->identity->contratista_id:0;
         $dataProviderValuacion = $searchModelValuacion->search(Yii::$app->request->queryParams);
+        $dataProviderValuacion->sort = false;
+
         $modelcValuacion= new ContratosValuaciones();
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,

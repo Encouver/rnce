@@ -39,6 +39,7 @@ class DuracionesEmpresasController extends BaseController
             $searchModel->documento_registrado_id= $documento->id;
         }
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->sort = false;
         $model= new DuracionesEmpresas();
         return $this->render('index', [
             'searchModel' => $searchModel,

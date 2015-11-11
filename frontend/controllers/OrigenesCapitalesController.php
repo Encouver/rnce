@@ -38,14 +38,16 @@ class OrigenesCapitalesController extends BaseController
        $searchModel = new OrigenesCapitalesSearch();
          $searchModel->efectivo = true;
         $dataProvider_efectivo = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider_efectivo->sort = false;
         $searchModel->efectivo = false;
         $searchModel->banco = true;
         $dataProvider_banco = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider_banco->sort = false;
         $searchModel->efectivo = false;
         $searchModel->banco = false;
         $searchModel->bien = true;
         $dataProvider_bien = $searchModel->search(Yii::$app->request->queryParams);
-
+        $dataProvider_bien->sort = false;
 
 
         return $this->render('index', [

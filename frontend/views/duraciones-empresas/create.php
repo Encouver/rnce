@@ -6,8 +6,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\p\DuracionesEmpresas */
 
-$this->title = Yii::t('app', 'Create Duraciones Empresas');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Duraciones Empresas'), 'url' => ['index']];
+$this->title = Yii::t('app', 'Create Duración empresa');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Duración empresa'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="duraciones-empresas-create">

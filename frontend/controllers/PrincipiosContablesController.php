@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use common\components\BaseController;
 use Yii;
 use common\models\p\PrincipiosContables;
 use app\models\PrincipiosContablesSearch;
@@ -12,7 +13,7 @@ use yii\filters\VerbFilter;
 /**
  * PrincipiosContablesController implements the CRUD actions for PrincipiosContables model.
  */
-class PrincipiosContablesController extends Controller
+class PrincipiosContablesController extends BaseController
 {
     public function behaviors()
     {
@@ -33,7 +34,10 @@ class PrincipiosContablesController extends Controller
     public function actionIndex()
     {
         $searchModel = new PrincipiosContablesSearch();
+        $searchModel->contratista_id = YII::$app->user->identity->contratista_id;
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->sort = false;
+
         $model = new PrincipiosContables();
         return $this->render('index', [
             'searchModel' => $searchModel,

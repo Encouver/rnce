@@ -4,7 +4,7 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model common\models\SysInpc */
+/* @var $model common\models\p\SysInpc */
 
 $this->title = Yii::t('app', 'Create Sys Inpc');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Sys Inpcs'), 'url' => ['index']];

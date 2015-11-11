@@ -33,6 +33,7 @@ class PersonasJuridicas extends \common\components\BaseActiveRecord
      */
     public $sigla;
     public $tipo_sector;
+
     public static function tableName()
     {
         return 'public.personas_juridicas';
@@ -44,27 +45,32 @@ class PersonasJuridicas extends \common\components\BaseActiveRecord
     public function rules()
     {
         return [
-            [['razon_social','tipo_nacionalidad','tipo_sector'], 'required'],
+            [['razon_social','tipo_sector'], 'required'],
             [['creado_por'], 'integer'],
             [['sys_status'], 'boolean'],
             [['anho','sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
             [['tipo_nacionalidad'], 'string'],
             [['rif'],'filter','filter'=>'trim'],
             [['rif'],'filter','filter'=>'strtoupper'],
-            [['rif'],'string','min'=>10,'max'=>10],
-            ['rif', 'match', 'pattern' => '/^[[JGP][0-9]{8}[0-9]$/i','message'=>'Rif no concuerda con el formato'],
-            
+            //[['rif'],'string','min'=>10,'max'=>10],
+            //['rif', 'match', 'pattern' => '/^[[JGP][0-9]{8}[0-9]$/i','message'=>'Rif no concuerda con el formato'],
+            [['numero_identificacion'], 'unique'],
 
             [['tipo_sector'], 'string'],
             [['sigla'], 'string', 'max' => 50],
-            [['sigla','rif'],'required','on'=>'conbasico'],
+            [['rif'],'required','on'=>'conbasico'],
             [['razon_social', 'numero_identificacion'], 'string', 'max' => 255],
             [['rif'], 'unique'],
-
+            [['razon_social'], 'unique'],
             [['rif'], 'required', 'when' => function ($model) {
                 return $model->tipo_nacionalidad == "NACIONAL";
             }, 'whenClient' => "function (attribute, value) {
                 return $('#personasjuridicas-tipo_nacionalidad').val() == 'NACIONAL';
+            }"],
+            [['rif'] , 'match', 'pattern' => '/^[[JGPjgp][0-9]{8}[0-9]$/i', 'message'=>'Rif invalido', 'when' => function ($model) {
+                return $model->tipo_nacionalidad == "NACIONAL";
+            }, 'whenClient' => "function (attribute, value) {
+                return $('#personasnaturales-nacionalidad').val() == 'NACIONAL';
             }"],
             [['sys_pais_id','numero_identificacion'], 'required', 'when' => function ($model) {
                 return $model->tipo_nacionalidad == "EXTRANJERA";
@@ -137,28 +143,28 @@ class PersonasJuridicas extends \common\components\BaseActiveRecord
     
     public function getFormAttribs() {
         //$data=[ 'NACIONAL' => 'NACIONAL', 'EXTRANJERA' => 'EXTRANJERA', ];
-    if($this->scenario=="conbasico"){
-         return [
-        //'tipo_nacionalidad'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>$data , 'options'=>['placeholder'=>'Enter username...']],
-        
-        'rif'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Introduzca rif'],'hint'=>'Formato J123456789'],
-        'razon_social'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Introduzca razon social']],
-        'tipo_sector'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>[ 'PUBLICO' => 'PUBLICO', 'PRIVADO' => 'PRIVADO', 'MIXTO' => 'MIXTO' ],'options'=>['prompt'=>'Seleccione tipo']],
-        'sigla'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Introduzca sigla']],
-    ];
-    }else{
-    
-        $nacionalidad=[ 'NACIONAL' => 'NACIONAL', 'EXTRANJERA' => 'EXTRANJERA', ];
-         return [             
-        'tipo_nacionalidad'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>$nacionalidad,'options'=>['prompt'=>'Seleccione Pais']],
-        'sys_pais_id'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>ArrayHelper::map(SysPaises::find()->all(),'id','nombre'),'options'=>['prompt'=>'Seleccione Pais']],
-        'numero_identificacion'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Introduzca numero identificacion']],
-        'tipo_sector'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>[ 'PUBLICO' => 'PUBLICO', 'PRIVADO' => 'PRIVADO', 'MIXTO' => 'MIXTO' ],'options'=>['prompt'=>'Seleccione sector']],
-        'razon_social'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Introduzca razon social']],
-        'rif'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Introduzca rif'],'hint'=>'Formato J123456789'],
-        
-    ];
-    }
+        if($this->scenario=="conbasico"){
+             return [
+            //'tipo_nacionalidad'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>$data , 'options'=>['placeholder'=>'Enter username...']],
+
+            'rif'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Introduzca rif'],'hint'=>'Formato J123456789'],
+            'razon_social'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Introduzca razon social']],
+            'tipo_sector'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>[ 'PUBLICO' => 'PUBLICO', 'PRIVADO' => 'PRIVADO', 'MIXTO' => 'MIXTO' ],'options'=>['prompt'=>'Seleccione tipo']],
+            'sigla'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Introduzca sigla']],
+        ];
+        }else{
+
+            $nacionalidad=[ 'NACIONAL' => 'NACIONAL', 'EXTRANJERA' => 'EXTRANJERA', ];
+             return [
+            'tipo_nacionalidad'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>$nacionalidad,'options'=>['prompt'=>'Seleccione Pais']],
+            'sys_pais_id'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>ArrayHelper::map(SysPaises::find()->all(),'id','nombre'),'options'=>['prompt'=>'Seleccione Pais']],
+            'numero_identificacion'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Introduzca numero identificacion']],
+            'tipo_sector'=>['type'=>Form::INPUT_DROPDOWN_LIST,'items'=>[ 'PUBLICO' => 'PUBLICO', 'PRIVADO' => 'PRIVADO', 'MIXTO' => 'MIXTO' ],'options'=>['prompt'=>'Seleccione sector']],
+            'razon_social'=>['type'=>Form::INPUT_TEXT,'options'=>['placeholder'=>'Introduzca razon social']],
+            'rif'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Introduzca rif'],'hint'=>'Formato J123456789'],
+
+        ];
+        }
        
     }
     public function Etiqueta(){

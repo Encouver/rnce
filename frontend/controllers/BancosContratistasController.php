@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use common\components\BaseController;
 use Yii;
 use common\models\p\BancosContratistas;
 use common\models\p\Model;
@@ -13,7 +14,7 @@ use yii\filters\VerbFilter;
 /**
  * BancosContratistasController implements the CRUD actions for BancosContratistas model.
  */
-class BancosContratistasController extends Controller
+class BancosContratistasController extends BaseController
 {
     public function behaviors()
     {
@@ -33,8 +34,13 @@ class BancosContratistasController extends Controller
      */
     public function actionIndex()
     {
+
+
         $searchModel = new BancosContratistasSearch();
+        $searchModel->contratista_id = Yii::$app->user->identity->contratista_id;
+
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->sort = false;
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -66,18 +72,18 @@ class BancosContratistasController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             
             $model->contratista_id=Yii::$app->user->identity->id;
-            if($model->tipo_nacionalidad=="EXTRANJERA"){
-                $model->tipo_moneda=null;
-                $model->tipo_cuenta=null;
-            }
-            if($model->save()){
+            /*if($model->tipo_nacionalidad=="EXTRANJERA"){
+                //$model->tipo_moneda=null;
+                //$model->tipo_cuenta=null;
+            }*/
+            if($model->save())
                  return $this->redirect(['index']);
-            }else{
-                Yii::$app->session->setFlash('error','Error en la carga del banco');
-                return $this->render('create', [
-                'model' => $model,
+            
+            //Yii::$app->session->setFlash('error','Error en la carga del banco');
+            return $this->render('create', [
+              'model' => $model,
             ]);
-            }
+           
            
         } else {
             return $this->render('create', [

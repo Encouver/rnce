@@ -5,10 +5,10 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\SysInpc;
+use common\models\p\SysInpc;
 
 /**
- * SysInpcSearch represents the model behind the search form about `common\models\SysInpc`.
+ * SysInpcSearch represents the model behind the search form about `common\models\p\SysInpc`.
  */
 class SysInpcSearch extends SysInpc
 {
@@ -18,10 +18,10 @@ class SysInpcSearch extends SysInpc
     public function rules()
     {
         return [
-            [['id', 'mes', 'anho'], 'integer'],
+            [['id', 'mes', 'anho', 'creado_por', 'actualizado_por'], 'integer'],
             [['indice'], 'number'],
             [['sys_status'], 'boolean'],
-            [['sys_fecha'], 'safe'],
+            [['sys_creado_el', 'sys_actualizado_el', 'sys_finalizado_el'], 'safe'],
         ];
     }
 
@@ -52,7 +52,7 @@ class SysInpcSearch extends SysInpc
         $this->load($params);
 
         if (!$this->validate()) {
-            // uncomment the following line if you do not want to any records when validation fails
+            // uncomment the following line if you do not want to return any records when validation fails
             // $query->where('0=1');
             return $dataProvider;
         }
@@ -62,8 +62,12 @@ class SysInpcSearch extends SysInpc
             'mes' => $this->mes,
             'indice' => $this->indice,
             'anho' => $this->anho,
+            'creado_por' => $this->creado_por,
+            'actualizado_por' => $this->actualizado_por,
             'sys_status' => $this->sys_status,
-            'sys_fecha' => $this->sys_fecha,
+            'sys_creado_el' => $this->sys_creado_el,
+            'sys_actualizado_el' => $this->sys_actualizado_el,
+            'sys_finalizado_el' => $this->sys_finalizado_el,
         ]);
 
         return $dataProvider;

@@ -48,6 +48,9 @@ class ContratosValuacionesSearch extends ContratosValuaciones
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
+        $query->joinWith(['relacionContrato'], true);
+        //$query->with('relacionContrato');
+
 
         $this->load($params);
 
@@ -60,11 +63,12 @@ class ContratosValuacionesSearch extends ContratosValuaciones
         $query->andFilterWhere([
             'id' => $this->id,
             'relacion_contrato_id' => $this->relacion_contrato_id,
+            'contratista_id' => Yii::$app->user->identity->contratista_id,
             'orden_valuacion' => $this->orden_valuacion,
             'monto' => $this->monto,
             'creado_por' => $this->creado_por,
             'actualizado_por' => $this->actualizado_por,
-            'sys_status' => $this->sys_status,
+            //'sys_status' => $this->sys_status,
             'sys_creado_el' => $this->sys_creado_el,
             'sys_actualizado_el' => $this->sys_actualizado_el,
             'sys_finalizado_el' => $this->sys_finalizado_el,

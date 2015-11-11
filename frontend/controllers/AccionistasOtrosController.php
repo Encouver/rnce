@@ -44,14 +44,19 @@ class AccionistasOtrosController extends BaseController
         $searchModel->rep_legal= false;
         $searchModel->junta_directiva=false;
         $dataProviderAccionista = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProviderAccionista->sort = false;
+
         $searchModel->accionista= false;
         $searchModel->rep_legal= false;
         $searchModel->rep_legal= true;
         $dataProviderRepresentante = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProviderRepresentante->sort = false;
+
         $searchModel->accionista= false;
         $searchModel->rep_legal= false;
         $searchModel->junta_directiva=true;
         $dataProviderJunta = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProviderJunta->sort = false;
 
         return $this->render('index', [
             'searchModel' => $searchModel,

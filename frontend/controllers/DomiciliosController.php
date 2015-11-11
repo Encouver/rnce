@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use common\components\BaseController;
 use Yii;
 use common\models\p\Domicilios;
 use common\models\a\ActivosDocumentosRegistrados;
@@ -14,7 +15,7 @@ use yii\filters\VerbFilter;
 /**
  * DomiciliosController implements the CRUD actions for Domicilios model.
  */
-class DomiciliosController extends Controller
+class DomiciliosController extends BaseController
 {
     public function behaviors()
     {
@@ -41,13 +42,14 @@ class DomiciliosController extends Controller
             $searchModelFiscal->documento_registrado_id= $documento->id;
         }
         $dataProviderFiscal = $searchModelFiscal->search(Yii::$app->request->queryParams);
+        $dataProviderFiscal->sort = false;
         $searchModelPrincipal = new DomiciliosSearch();
         $searchModelPrincipal->fiscal = false;
          if(isset($documento)){
             $searchModelPrincipal->documento_registrado_id= $documento->id;
         }
         $dataProviderPrincipal = $searchModelPrincipal->search(Yii::$app->request->queryParams);
-
+        $dataProviderPrincipal->sort = false;
         return $this->render('index', [
             'searchModelFiscal' => $searchModelFiscal,
             'dataProviderFiscal' => $dataProviderFiscal,

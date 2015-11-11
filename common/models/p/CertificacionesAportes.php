@@ -68,7 +68,7 @@ class CertificacionesAportes extends \common\components\BaseActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'natural_juridica_id' => Yii::t('app', 'Natural Juridica'),
+            'natural_juridica_id' => Yii::t('app', 'Contador'),
             'colegiatura' => Yii::t('app', 'Colegiatura'),
             'tipo_profesion' => Yii::t('app', 'Tipo Profesion'),
             'creado_por' => Yii::t('app', 'Creado Por'),

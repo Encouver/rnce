@@ -56,6 +56,7 @@ class ActivosDocumentosRegistradosController extends BaseController
         $searchModel = new ActivosDocumentosRegistradosSearch();
         $searchModel->tipo_documento_id=1;
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->sort = false;
         $model= new ActivosDocumentosRegistrados();
         $model->scenario='actas';
         return $this->render('index', [

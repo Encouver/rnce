@@ -35,6 +35,8 @@ class LimitacionesCapitalesController extends BaseController
     {
         $searchModel = new LimitacionesCapitalesSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->sort = false;
+
         $documento=$searchModel->Modificacionactual();
         if(isset($documento)){
             $searchModel->documento_registrado_id= $documento->documento_registrado_id;

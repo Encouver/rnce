@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\ContratistasContactosSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Contratistas Contactos');
+$this->title = Yii::t('app', 'Persona de contacto');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="contratistas-contactos-index">
@@ -42,7 +42,7 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'sys_actualizado_el',
             // 'sys_finalizado_el',
 
-            ['class' => 'yii\grid\ActionColumn','template'=>'{delete}'],
+            ['class' => 'yii\grid\ActionColumn','template'=>'{update} {delete}'],
         ],
     ]); ?>
     <?php 

@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use common\components\BaseController;
 use Yii;
 use common\models\p\ActividadesEconomicas;
 use common\models\a\ActivosDocumentosRegistrados;
@@ -13,7 +14,7 @@ use yii\filters\VerbFilter;
 /**
  * ActividadesEconomicasController implements the CRUD actions for ActividadesEconomicas model.
  */
-class ActividadesEconomicasController extends Controller
+class ActividadesEconomicasController extends BaseController
 {
     public function behaviors()
     {
@@ -35,6 +36,7 @@ class ActividadesEconomicasController extends Controller
     {
         $searchModel = new ActividadesEconomicasSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->sort = false;
         $model = new ActividadesEconomicas();
         return $this->render('index', [
             'searchModel' => $searchModel,

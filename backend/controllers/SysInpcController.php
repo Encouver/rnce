@@ -3,7 +3,7 @@
 namespace backend\controllers;
 
 use Yii;
-use common\models\SysInpc;
+use common\models\p\SysInpc;
 use app\models\SysInpcSearch;
 use common\components\BaseController;
 use yii\web\NotFoundHttpException;

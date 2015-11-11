@@ -17,12 +17,15 @@ use kartik\builder\Form;
             echo '<div class="alert alert-' . $key . '">' . $message . '</div>';
         }
     ?>
+    
     <?php echo Form::widget([
                 'model'=>$model,
                 'form'=>$form,
                 'columns'=>3,
                 'attributes'=>$model->getformAttribs()
             ]); ?>
+
+
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>

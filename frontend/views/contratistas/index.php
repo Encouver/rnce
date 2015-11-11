@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\ContratistasSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Contratistas');
+$this->title = Yii::t('app', 'Datos básicos');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="contratistas-index">
@@ -20,27 +20,27 @@ $this->params['breadcrumbs'][] = $this->title;
         //'filterModel' => $searchModel,
         'summary'=>"",
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+           // ['class' => 'yii\grid\SerialColumn'],
             [
-                'attribute'=>'contratista_id',
+                'attribute'=>'denominacion',
                 'label'=>'Nombre contratista',
-                'value'=>'contratista.naturalJuridica.denominacion'
+                'value'=>'naturalJuridica.denominacion'
                 ],
              [
-                'attribute'=>'contratista_id',
+                'attribute'=>'rif',
                 'label'=>'Rif',
-                'value'=>'contratista.naturalJuridica.rif'
+                'value'=>'naturalJuridica.rif'
                 ],
                 
              [
-                'attribute'=>'contratista_id',
+                'attribute'=>'tipo_sector',
                 'label'=>'Sector',
-                'value'=>'contratista.tipo_sector'
+                'value'=>'tipo_sector'
                 ],
             [
-                'attribute'=>'contratista_id',
+                'attribute'=>'sigla',
                 'label'=>'Sigla',
-                'value'=>'contratista.sigla'
+                'value'=>'sigla'
             ],
             //'id',
             //'username',
@@ -57,11 +57,12 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'email_confirmed:email',
             // 'contratista_id',
 
-            ['class' => 'yii\grid\ActionColumn', 'template' => '{update}{delete}'],
+            ['class' => 'yii\grid\ActionColumn', 'template' => '{update}'],
         ],
     ]); ?>
-  
-        <?= Html::a(Yii::t('app', 'Crear como persona natural'), ['creardatonatural'], ['class' => 'btn btn-success']) ?>
-        <?= Html::a(Yii::t('app', 'Crear como persona jurdica'), ['creardatojuridica'], ['class' => 'btn btn-success']) ?>
+  <?php if(Yii::$app->user->identity->contratista_id == null){ ?>
+        <?= Html::a(Yii::t('app', 'Registrar como persona natural'), ['creardatonatural'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Registrar como persona jurídica'), ['creardatojuridica'], ['class' => 'btn btn-success']) ?>
+    <?php } ?>
 
 </div>

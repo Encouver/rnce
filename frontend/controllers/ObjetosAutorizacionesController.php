@@ -34,7 +34,9 @@ class ObjetosAutorizacionesController extends BaseController
     public function actionIndex()
     {
         $searchModel = new ObjetosAutorizacionesSearch();
+        $searchModel->contratista_id = Yii::$app->user->identity->contratista_id;
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->sort = false;
 
         return $this->render('index', [
             'searchModel' => $searchModel,

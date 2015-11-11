@@ -21,12 +21,12 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+        //'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+            //'class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'domicilio_fabricante_id',
+            //'id',
+            'domicilioFabricante.nombre',
             'productos:ntext',
             'marcas:ntext',
             'origen_producto_id',
@@ -46,7 +46,7 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'sys_finalizado_el',
             // 'natural_juridica_id',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn', 'template'=>'{update}'],
         ],
     ]); ?>
 

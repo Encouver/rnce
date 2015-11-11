@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use common\components\BaseController;
 use Yii;
 use app\models\SysGremios;
 use app\models\SysGremiosSearch;
@@ -12,7 +13,7 @@ use yii\filters\VerbFilter;
 /**
  * SysGremiosController implements the CRUD actions for SysGremios model.
  */
-class SysGremiosController extends Controller
+class SysGremiosController extends BaseController
 {
     public function behaviors()
     {

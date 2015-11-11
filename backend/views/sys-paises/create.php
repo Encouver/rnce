@@ -4,10 +4,10 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model app\models\SysPaises */
+/* @var $model common\models\p\SysPaises */
 
-$this->title = 'Create Sys Paises';
-$this->params['breadcrumbs'][] = ['label' => 'Sys Paises', 'url' => ['index']];
+$this->title = Yii::t('app', 'Create Sys Paises');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Sys Paises'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="sys-paises-create">

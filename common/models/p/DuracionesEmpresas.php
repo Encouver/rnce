@@ -55,7 +55,7 @@ class DuracionesEmpresas extends \common\components\BaseActiveRecord
             'id' => Yii::t('app', 'ID'),
             'contratista_id' => Yii::t('app', 'Contratista ID'),
             'documento_registrado_id' => Yii::t('app', 'Documento Registrado'),
-            'duracion_anos' => Yii::t('app', 'Duracion'),
+            'duracion_anos' => Yii::t('app', 'Duración en años'),
             'creado_por' => Yii::t('app', 'Creado Por'),
             'actualizado_por' => Yii::t('app', 'Actualizado Por'),
             'sys_status' => Yii::t('app', 'Sys Status'),

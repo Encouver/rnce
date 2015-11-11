@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use common\components\BaseController;
 use Yii;
 use common\models\p\PersonasNaturales;
 use app\models\PersonasNaturalesSearch;
@@ -15,7 +16,7 @@ use yii\filters\VerbFilter;
 /**
  * PersonasNaturalesController implements the CRUD actions for PersonasNaturales model.
  */
-class PersonasNaturalesController extends Controller
+class PersonasNaturalesController extends BaseController
 {
     public function behaviors()
     {
@@ -82,59 +83,58 @@ class PersonasNaturalesController extends Controller
      */
     public function actionCreate()
     {
-        $model = new PersonasNaturales();
+        $model = new PersonasNaturales(['scenario'=>'basico']);
 
         if ($model->load(Yii::$app->request->post())) {
-             $transaction = \Yii::$app->db->beginTransaction();
+           $transaction = \Yii::$app->db->beginTransaction();
            try {
-                $natural_juridica= new SysNaturalesJuridicas();
+               $natural_juridica= new SysNaturalesJuridicas();
+
                if($model->nacionalidad=='NACIONAL'){
-                $model->sys_pais_id=1;
-                $model->numero_identificacion=null;
-               
-                $natural_juridica->rif= $model->rif;
+                    $model->sys_pais_id=1;
+                    //$model->numero_identificacion=$model->rif;
+                    $natural_juridica->rif= $model->rif;
                 }else{
-                $natural_juridica->rif= $model->numero_identificacion;
-                $natural_juridica->nacional=false;
-                $model->rif=$model->numero_identificacion;
+                    
+                    $natural_juridica->rif = $model->numero_identificacion;
+                    $natural_juridica->nacional=false;
+                    $model->rif = $model->numero_identificacion;
                 }
-                if($model->estado_civil==''){
-                    $model->estado_civil=null;
-                }
+                
                 $natural_juridica->juridica= false;
                 $natural_juridica->denominacion=$model->primer_nombre.' '.$model->primer_apellido;
-                if($model->nacionalidad=='EXTRANJERA'){
-                       $natural_juridica->anho = date('m-Y');
-                      $natural_juridica->contratista_id=Yii::$app->user->identity->contratista_id;
-                      $natural_juridica->save(false);
-                      $model->anho = date('m-Y');
-                      $model->contratista_id=Yii::$app->user->identity->contratista_id;
-                      $model->save(false);
-                      $transaction->commit();
-                             Yii::$app->getSession()->setFlash('success',Yii::t('app',Html::encode('Persona juridica guarda con exito.')));
-                            $model = new PersonasNaturales(['scenario'=>'basico']);
-                            return $this->renderAjax('create', [
-                                'model' => $model,
-                            ]);
-                  }else {
-                        if (!$natural_juridica->save()) {
-                    $transaction->rollBack();
-                    return $this->renderAjax('create', [
-                    'model' => $model,]);
-                        }
                 
-                        if($model->save()){
-                            $transaction->commit();
-                            Yii::$app->getSession()->setFlash('success',Yii::t('app',Html::encode('Persona natural guarda con exito.')));
-                            $model = new PersonasNaturales(['scenario'=>'basico']);
-                            return $this->renderAjax('create', [
-                        'model' => $model,
-                         ]);
+                $natural_juridica->anho = date('m-Y');
+                $natural_juridica->contratista_id=Yii::$app->user->identity->contratista_id;
+
+                $model->anho = date('m-Y');
+                $model->contratista_id=Yii::$app->user->identity->contratista_id;
+
+                //$aux = $natural_juridica->validate();
+
+                if($model->validate())
+                {
+                    $natural_juridica->save();
+                    $model->save();
+                    $transaction->commit();
+                    Yii::$app->getSession()->setFlash('success',Yii::t('app',Html::encode('Información agregada con éxito.')));
+                    $model = new PersonasNaturales(['scenario'=>'basico']);
+                    return $this->renderAjax('create', [
+                              'model' => $model,
+                    ]);
+
+                }else
+                {
+                    $transaction->rollBack();
+                    Yii::$app->getSession()->setFlash('error',Yii::t('app',Html::encode('Hubo un error en los datos ingresados.')));
+                    return $this->renderAjax('create', [
+                              'model' => $model,
+                    ]);
                 }
-                  }
            }catch (Exception $e) {
                $transaction->rollBack();
            }
+
         } else {
              return $this->renderAjax('create', [
                 'model' => $model,

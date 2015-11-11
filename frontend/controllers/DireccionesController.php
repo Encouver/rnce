@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use common\components\BaseController;
 use Yii;
 use common\models\p\Direcciones;
 use common\models\p\SysMunicipios;
@@ -16,7 +17,7 @@ use yii\helpers\Json;
 /**
  * DireccionesController implements the CRUD actions for Direcciones model.
  */
-class DireccionesController extends Controller
+class DireccionesController extends BaseController
 {
     public function behaviors()
     {
@@ -38,6 +39,7 @@ class DireccionesController extends Controller
     {
         $searchModel = new modelsDireccionesSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->sort = false;
 
         return $this->render('index', [
             'searchModel' => $searchModel,

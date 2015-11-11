@@ -35,6 +35,7 @@ class FondosReservasController extends BaseController
     {
         $searchModel = new FondosReservasSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->sort = false;
 
         return $this->render('index', [
             'searchModel' => $searchModel,

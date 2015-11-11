@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use common\components\BaseController;
 use Yii;
 use common\models\p\ObjetosSociales;
 use common\models\a\ActivosDocumentosRegistrados;
@@ -13,7 +14,7 @@ use yii\filters\VerbFilter;
 /**
  * ObjetosSocialesController implements the CRUD actions for ObjetosSociales model.
  */
-class ObjetosSocialesController extends Controller
+class ObjetosSocialesController extends BaseController
 {
     public function behaviors()
     {
@@ -39,6 +40,8 @@ class ObjetosSocialesController extends Controller
             $searchModel->documento_registrado_id= $documento->id;
         }
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->sort = false;
+
         $model = new ObjetosSociales();
         return $this->render('index', [
             'searchModel' => $searchModel,

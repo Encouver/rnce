@@ -42,7 +42,7 @@ class ActivosBienesSearch extends ActivosBienes
      */
     public function search($params)
     {
-        $query = ActivosBienes::find();
+        $query = ActivosBienes::find()->where(['desincorporacion_id'=>null]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -55,7 +55,7 @@ class ActivosBienesSearch extends ActivosBienes
             // $query->where('0=1');
             return $dataProvider;
         }
-
+        $this->desincorporacion_id = null;
         $query->andFilterWhere([
             'id' => $this->id,
             'sys_tipo_bien_id' => $this->sys_tipo_bien_id,
