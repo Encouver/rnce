@@ -26,6 +26,7 @@ use Yii;
  * @property AuthItem[] $itemNames
  * @property Contratistas $contratista
  * @property UserVisitLog[] $userVisitLogs
+ * @property UsuariosContratistas[] $usuariosContratistas
  */
 class User extends \common\components\BaseActiveRecord
 {
@@ -105,5 +106,13 @@ class User extends \common\components\BaseActiveRecord
     public function getUserVisitLogs()
     {
         return $this->hasMany(UserVisitLog::className(), ['user_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUsuariosContratistas()
+    {
+        return $this->hasMany(UsuariosContratistas::className(), ['user_id' => 'id']);
     }
 }
