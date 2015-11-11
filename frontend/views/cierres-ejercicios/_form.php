@@ -19,9 +19,10 @@ use kartik\date\DatePicker;
                             //'inline' => false,
                             // modify template for custom rendering
                             //'template' => '<div class="well well-sm" style="background-color: #fff; width:250px">{input}</div>',
-                            'pluginOptions' => [
-                            'autoclose' => true,
-                            'format' => 'yyyy-mm'
+                                'pluginOptions' => [
+                                    'autoclose' => true,
+                                    'format' => 'dd/mm',
+                             //'showMonthAfterYear' => false,
                                 ]
                                 ]);?>
     <?= $form->field($model, 'documento_registrado_id')->hiddenInput()->label(false) ?>
